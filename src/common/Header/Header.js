@@ -42,6 +42,13 @@ class Header extends Component {
         background: '#c20',
         color: 'white'
       },
+      {
+        name: '더 보기',
+        link: '',
+        img: '/images/more_horiz-white-36dp.svg',
+        background: '#888',
+        color: 'white'
+      },
     ]
   }
 
