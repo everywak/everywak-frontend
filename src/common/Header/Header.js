@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Route, Link } from 'react-router-dom';
 import styled from "styled-components";
 import styles from './Header.scss';
 import classNames from 'classnames/bind';
@@ -30,14 +31,14 @@ class Header extends Component {
       },
       {
         name: '왁물원 인기글',
-        link: '',
+        link: '/bestwakki',
         img: '/images/thumb_up_off_alt-white-36dp.svg',
         background: '#5ac467',
         color: 'white'
       },
       {
         name: '왁튜브 생방송',
-        link: '',
+        link: '/live',
         img: '/images/podcasts-white-36dp.svg',
         background: '#c20',
         color: 'white'
