@@ -83,11 +83,6 @@ class HeaderItemList extends Component {
   }
 }
 
-const HeaderItemButton = styled.a`
-  background-color: ${(props) => props.background};
-  color: ${(props) => props.color};
-`;
-
 class HeaderItem extends Component {
   static defaultProps = {
     info: {
@@ -104,20 +99,22 @@ class HeaderItem extends Component {
       name, link, img, background, color
     } = this.props.info;
 
+    const iconStyle={
+      color: color
+    }
     const iconStyle2={
       backgroundColor: background
     }
     return (
       <li className="listItem">
-        <HeaderItemButton 
+        <a
           href={link} 
-          //background={background}
-          color={color}>
+          style={iconStyle}>
           <div className={cx('icon')} style={iconStyle2} >
             <img src={img} alt={name} />
           </div>
           {name}
-        </HeaderItemButton>
+        </a>
       </li>
     );
   }
