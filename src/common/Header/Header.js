@@ -9,6 +9,7 @@ class Header extends Component {
   state = {
     items: [
       {
+        id: 0,
         name: '우왁굳 트위치',
         link: 'https://www.twitch.tv/woowakgood',
         img: '/images/twitch_logo.svg',
@@ -16,6 +17,7 @@ class Header extends Component {
         color: 'white'
       },
       {
+        id: 1,
         name: '우왁굳 유튜브',
         link: 'https://www.youtube.com/channel/UCBkyj16n2snkRg1BAzpovXQ',
         img: '/images/youtube_logo.png',
@@ -23,6 +25,7 @@ class Header extends Component {
         color: 'white'
       },
       {
+        id: 2,
         name: '왁물원',
         link: 'https://cafe.naver.com/steamindiegame',
         img: '/images/wakki_logo.png',
@@ -30,6 +33,7 @@ class Header extends Component {
         color: 'white'
       },
       {
+        id: 3,
         name: '왁물원 인기글',
         link: '/bestwakki',
         img: '/images/thumb_up_off_alt-white-36dp.svg',
@@ -37,6 +41,7 @@ class Header extends Component {
         color: 'white'
       },
       {
+        id: 4,
         name: '왁튜브 생방송',
         link: '/live',
         img: '/images/podcasts-white-36dp.svg',
@@ -44,6 +49,7 @@ class Header extends Component {
         color: 'white'
       },
       {
+        id: 5,
         name: '더 보기',
         link: '',
         img: '/images/more_horiz-white-36dp.svg',
@@ -71,7 +77,7 @@ class HeaderItemList extends Component {
   render() {
     const { data } = this.props;
     const list = data.map(
-      info => (<HeaderItem info={info} />)
+      info => (<HeaderItem key={info.id} info={info} />)
     );
     return (
       <div className="HeaderItemList">
