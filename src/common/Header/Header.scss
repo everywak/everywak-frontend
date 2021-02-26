@@ -1,4 +1,41 @@
 @import '../common.scss';
 
 .header {
+  background-color: $component-primary-bg-color;
+  outline: solid 1px $component-primary-border-color;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 52px;
+
+  .title {
+    width: 90px;
+    height: 29px;
+
+    img {
+      width: 90px;
+      height: 29px;
+    }
+  }
+
+  .left, 
+  .right {
+    width: 52px;
+    height: 52px;
+
+    button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      width: 52px;
+      height: 52px;
+
+      &:active,
+      &:focus {
+        outline: none;
+        border: none;
+      }
+    }
+  }
 }

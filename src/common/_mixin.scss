@@ -42,6 +42,11 @@
   }
 }
 
+@mixin not-desktop {
+  @media (max-width: #{$tablet-s-width - 1px}) {
+    @content;
+  }
+}
 @mixin desktop {
   @media (min-width: #{$tablet-s-width}) {
     @content;

@@ -1,0 +1,37 @@
+@import '../../common/common.scss';
+
+.FrontPanelList{
+  margin: 0;
+  padding-bottom: 31px;
+
+  .FrontPanel {
+    margin-top: 31px;
+
+    .panelHeader {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 24px;
+  
+      & > a {
+        color: #000;
+        display: inline-flex;
+        margin: 0 16px 21px;
+  
+        .more {
+          color: $primary-color;
+          display: inline-flex;
+          align-items: center;
+          font-size: 14px;
+          line-height: 26px;
+          padding-left: 9px;
+
+          svg {
+            fill: $primary-color;
+            margin-left: 1px;
+            padding-top: 1px;
+          }
+        }
+      }
+    }
+  }
+}

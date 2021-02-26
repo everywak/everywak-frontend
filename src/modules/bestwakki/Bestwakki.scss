@@ -1,0 +1,158 @@
+@import '../../common/common.scss';
+.ArticleList {
+
+  .Article {
+    display: flex;
+    background: white;
+    width: 100%;
+    .txt_area {
+      display: flex;
+      padding: 8px;
+      padding-left: 0px;
+      width: 100%;
+      line-height: 120%;
+      font-size: 14px;
+      color: #000;
+      order: 1;
+  
+      &:link {
+        color: #000;
+        
+        .icon_new_txt{
+          color: #a00;
+          display: none;
+        }
+      }
+      &:visited {
+        color: #777;
+  
+        .icon_new_txt{
+          color: #fff;
+          display: none;
+        }
+      }
+  
+      .board_txt {
+        color: #777;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 12px;
+      }
+      strong.tit {
+        font-weight: 500;
+        height: 100%;
+      }
+      .user_area {
+        color: #777;
+        font-size: 12px;
+        font-weight: 500;
+      }
+    }
+    .thumb_area img {
+        border-radius: 8px;
+    }
+  }
+
+  @include desktop {
+    .Article {
+      min-height: 16px;
+  
+      .txt_area {
+        flex-direction: row;
+        
+        .board_txt {
+          box-sizing: border-box;
+          width: 100px;
+          min-width: 100px;
+        }
+        strong.tit {
+          flex: 1; 
+        }
+        .user_area {
+          width: 260px;
+  
+          span {
+            box-sizing: border-box;
+            display: block;
+            float: left;
+          }
+          .nickname {
+            width: 110px;
+          }
+          .datetime {
+            width: 55px;
+            text-align: center;
+          }
+          .view,
+          .like {
+            width: 40px;
+            text-align: center;
+          }
+        }
+      }
+      .thumb_area {
+        display: none;
+      }
+    }
+  }
+  @include not-desktop {
+    .Article {
+      box-sizing: border-box;
+      min-height: 97px;
+      border: solid 1px $component-primary-border-color;
+      border-bottom: none;
+      padding: 14px 15px 14px;
+  
+      .txt_area {
+        flex-direction: column;
+        padding: 0;
+  
+        .board_txt {
+          padding-bottom: 2px;
+        }
+        strong.tit {
+          line-height: 20px;
+        }
+        .user_area {
+          line-height: 12px;
+          margin-top: 4px;
+  
+          .nickname {
+            margin: 0;
+          }
+  
+          span {
+            margin-left: .5em;
+          }
+  
+          .view::before {
+            content: '\e950';
+            padding-right: 1px;
+            color: #aaa;
+            font-family: 'xeicon';
+          }
+          .like::before {
+            content: '\ea11';
+            padding-right: 1px;
+            color: #aaa;
+            font-family: 'xeicon';
+          }
+          .comment::before {
+            content: '\e9d8';
+            padding-right: 1px;
+            color: #aaa;
+            font-family: 'xeicon';
+          }
+        }
+      }
+      .thumb_area {
+        margin: 2px 0 0;
+        height: 64px;
+        order: 2;
+      }
+    }
+    .Article:last-child {
+      border-bottom: solid 1px $component-primary-border-color;
+    }
+  }
+}

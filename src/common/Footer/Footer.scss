@@ -1,0 +1,10 @@
+@import '../common.scss';
+
+.footer {
+  background-color: $component-primary-bg-color;
+  box-sizing: border-box;
+  font-size: 12px;
+  padding: 24px 16px;
+  text-align: center;
+  width: 100%;
+}
