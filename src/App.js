@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Header from './common/Header/Header.js';
-import BodyContainer from './common/BodyContainer.js';
 
 class App extends Component {
 
   render() {
     return (
         <div className="App">
-          <Header />
-          <BodyContainer />
+          <Router>
+            <Header />
+          </Router>
         </div>
     );
 

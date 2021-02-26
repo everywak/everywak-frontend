@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import styled from "styled-components";
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
@@ -7,13 +7,14 @@ import Live from '../modules/live/Live.js';
 
 class BodyContainer extends Component {
   render() {
+    const style ={
+      height: '100%'
+    }
     return (
-      <Router>
-        <div className="BodyContainer">
+      <Fragment>
           <Route path="/bestwakki" component={Bestwakki} />
           <Route path="/live" component={Live} />
-        </div>
-      </Router>
+      </Fragment>
     );
   }
 }

@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700&display=swap&subset=korean');
-@import url('https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap');
 @import "./variables";
 @import "./mixin";
 
@@ -8,8 +7,4 @@ body, html {
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
-}
-body, #root, .App, .header {
-  height: 100vh;
-  box-sizing: border-box;
 }
