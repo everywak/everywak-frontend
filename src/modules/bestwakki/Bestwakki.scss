@@ -1,6 +1,10 @@
 @import '../../common/common.scss';
 .Bestwakki {
 
+  @include tablet {
+    margin: 0 calc((100% - 431px) / 2);
+  }
+
   .ArticleList {
   
     .Article {

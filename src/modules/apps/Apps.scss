@@ -14,9 +14,17 @@
       margin-left: 16px;
       
 
+      @include tablet {
+        &:first-child {
+          padding-left: calc((100% - 431px) / 2);
+        }
+      }
 
       &:last-child {
         padding-right: 16px;
+        @include tablet {
+          padding-right: calc((100% - 431px) / 2 + 16px);
+        }
       }
       
       .wrapper {

@@ -11,6 +11,9 @@
       font-size: 24px;
       font-weight: 500;
       line-height: 24px;
+      @include tablet {
+        margin: 0 calc((100% - 431px) / 2);
+      }
   
       & > a {
         color: $primary-text-color;
