@@ -128,7 +128,7 @@ class Article extends Component {
         </a>
         <a href={href} class="thumb_area" target="_blank" rel="noreferrer">
           <div class="thumb">
-            <img src={representImage} width="64px" height="64px" alt="썸네일" onerror="this.style.display='none';" referrerPolicy="no-referrer"/>
+            <img src={representImage} width="64px" height="64px" alt="썸네일" onError={i => i.target.style.display = 'none'} referrerPolicy="no-referrer"/>
           </div>
         </a>
       </li>
