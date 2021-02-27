@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 
 import Bestwakki from '../bestwakki/Bestwakki.js';
 import Live from '../live/Live.js';
+import Apps from '../apps/Apps.js';
 import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
@@ -39,7 +40,7 @@ class ArticleList extends Component {
         id: 2,
         title: "여러가지가 있읍니다",
         link: "/apps",
-        component: <Bestwakki />
+        component: <Apps front={true} />
       },
     ]
   }

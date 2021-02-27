@@ -1,0 +1,39 @@
+@import '../../common/common.scss';
+
+.Apps {
+  width: 100%;
+  overflow-x: scroll;
+
+  .appList {
+    display: flex;
+    box-sizing: border-box;
+      
+    .appItem {
+      display: block;
+      box-sizing: border-box;
+      margin-left: 16px;
+      
+
+
+      &:last-child {
+        padding-right: 16px;
+      }
+      
+      .wrapper {
+        background-color: $component-secondary-border-color;
+        border-radius: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        width: 160px;
+        height: 100px;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+}
