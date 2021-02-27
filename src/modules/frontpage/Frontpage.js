@@ -29,15 +29,15 @@ class ArticleList extends Component {
     data: [
       {
         id: 0,
-        title: "왁물원 인기글",
-        link: "/bestwakki",
-        component: <Bestwakki front={true} />
-      },
-      {
-        id: 1,
         title: "우왁굳 생방송",
         link: "/live",
         component: <Live front={true} />
+      },
+      {
+        id: 1,
+        title: "왁물원 인기글",
+        link: "/bestwakki",
+        component: <Bestwakki front={true} />
       },
       {
         id: 2,
