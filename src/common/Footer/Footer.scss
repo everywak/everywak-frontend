@@ -4,7 +4,81 @@
   background-color: $component-primary-bg-color;
   box-sizing: border-box;
   font-size: 12px;
+  font-weight: 400;
   padding: 24px 16px;
   text-align: center;
   width: 100%;
+
+  .btns {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 8px;
+
+    .SnsButton {
+      border-radius: 8px;
+      color: $primary-text-color;
+      display: inline-block;
+      margin: 0 4px;
+      overflow: hidden;
+      width: fit-content;
+      height: 32px;
+      vertical-align: middle;
+      user-select: none;
+  
+      .icon {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        vertical-align: middle;
+  
+        img {
+          display: inline-block;
+          width: 18px;
+          height: auto;
+        }
+      }
+  
+      .label {
+        display: inline-block;
+        box-sizing: border-box;
+        background-color: #fff;
+        font-size: 12px;
+        font-weight: 500;
+        height: 32px;
+        padding: 6px 8px 0 6px;
+        vertical-align: middle;
+      }
+    }
+    .line {
+      background-color: #ccc;
+      display: inline-block;
+      margin: 0 4px;
+      width: 1px;
+      height: 24px;
+      vertical-align: middle;
+    }
+  }
+
+  .links {
+    color: $secondary-text-color;
+    line-height: 12px;
+    margin: 0;
+    padding: 0;
+
+    a {
+      color: inherit;
+    }
+  }
+  .desc {
+    color: $secondary-text-color;
+    margin: 8px auto 4px;
+    line-height: 16px;
+  }
+
+  .copyright {
+    color: #555;
+  }
+
 }
