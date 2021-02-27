@@ -95,13 +95,13 @@ class Article extends Component {
   static defaultProps = {
     data: {
       articleId: "",
-      menuName: "유머, 정보 게시판",
-      subject: "제목 어쩌구저쩌구",
-      nickname: "ㅇㅇㅇㅇ",
-      aheadOfWriteDate: "21.02.27.",
-      readCount: "120",
-      upCount: "330",
-      commentCount: "10",
+      menuName: "",
+      subject: "",
+      nickname: "",
+      aheadOfWriteDate: "",
+      readCount: "0",
+      upCount: "0",
+      commentCount: "0",
       representImage: "",
     }
   };
