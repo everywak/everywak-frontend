@@ -115,20 +115,20 @@ class Article extends Component {
     return (
       <li className="Article">
         <a href={href} className="txt_area" target="_blank" rel="noreferrer">
-          <span class="icon_new_txt">•</span>
-          <span class="board_txt">{menuName}</span>
-          <strong class="tit">{subject}</strong>
+          <span className="icon_new_txt">•</span>
+          <span className="board_txt">{menuName}</span>
+          <strong className="tit">{subject}</strong>
 
-          <div class="user_area">
-            <span class="nickname">{nickname}</span>
-            <span class="datetime">{aheadOfWriteDate}</span>
-            <span class="view">{readCount}</span>
-            <span class="like">{upCount}</span>
-            <span class="comment">{commentCount}</span>
+          <div className="user_area">
+            <span className="nickname">{nickname}</span>
+            <span className="datetime">{aheadOfWriteDate}</span>
+            <span className="view">{readCount}</span>
+            <span className="like">{upCount}</span>
+            <span className="comment">{commentCount}</span>
           </div>
         </a>
-        <a href={href} class="thumb_area" target="_blank" rel="noreferrer">
-          <div class="thumb">
+        <a href={href} className="thumb_area" target="_blank" rel="noreferrer">
+          <div className="thumb">
             <img src={representImage} width="64px" height="64px" alt="썸네일" onError={i => i.target.style.display = 'none'} referrerPolicy="no-referrer"/>
           </div>
         </a>

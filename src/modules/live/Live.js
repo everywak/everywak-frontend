@@ -29,7 +29,7 @@ class WakPlayer extends Component {
     return (
       <div className="WakPlayer">
         <div className="content">
-          <iframe className="stream" src="https://player.twitch.tv/?channel=woowakgood&parent=localhost" frameborder="0" allowfullscreen="true" scrolling="no"/>
+          <iframe className="stream" src="https://player.twitch.tv/?channel=woowakgood&parent=localhost" frameBorder="0" allowFullScreen={true} scrolling="no"/>
         </div>
       </div>
     );

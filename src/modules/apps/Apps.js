@@ -39,7 +39,7 @@ class Apps extends Component {
     const { apps } = this.props;
     const list = apps.map(
       app => (
-        <li className="appItem">
+        <li key={app.id} className="appItem">
           <div className="wrapper">
             <img src={app.img} alt={app.name} onError={i => (i.target.style.display = 'none')} />
           </div>

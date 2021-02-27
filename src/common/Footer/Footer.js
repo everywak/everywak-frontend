@@ -53,8 +53,8 @@ class Footer extends Component {
     const { btns } = this.props;
     const btnList = btns.map(
       btn => (btn.type === 'btn'?
-      <SnsButton info={btn} /> :
-      <span className="line"></span>
+      <SnsButton key={btn.id} info={btn} /> :
+      <span key={btn.id} className="line"></span>
       )
     );
     return (
