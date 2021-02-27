@@ -4,15 +4,14 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 class Bestwakki extends Component {
+  static defaultProps = {
+    front: true
+  };
 
   render() {
-    const style ={
-      background: 'white',
-      height: '100%'
-    }
     
     return (
-      <div className="Bestwakki" style={style}>
+      <div className={cx('Bestwakki', {'front': this.props.front})}>
         <ArticleList />
       </div>
     );

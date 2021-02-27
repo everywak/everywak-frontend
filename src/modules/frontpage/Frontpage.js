@@ -3,6 +3,7 @@ import styles from './Frontpage.scss';
 import classNames from 'classnames/bind';
 
 import Bestwakki from '../bestwakki/Bestwakki.js';
+import Live from '../live/Live.js';
 import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
@@ -16,7 +17,7 @@ class Frontpage extends Component {
     }
     
     return (
-      <div className="Bestwakki" style={style}>
+      <div className="Frontpage" style={style}>
         <ArticleList />
       </div>
     );
@@ -30,13 +31,13 @@ class ArticleList extends Component {
         id: 0,
         title: "왁물원 인기글",
         link: "/bestwakki",
-        component: <Bestwakki />
+        component: <Bestwakki front='true' />
       },
       {
         id: 1,
         title: "우왁굳 생방송",
         link: "/live",
-        component: <Bestwakki />
+        component: <Live front={true} />
       },
       {
         id: 2,
