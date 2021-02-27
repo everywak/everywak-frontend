@@ -12,14 +12,15 @@ class Bestwakki extends Component {
     
     return (
       <div className={cx('Bestwakki', {'front': this.props.front})}>
-        <ArticleList />
+        <ArticleList front={this.props.front} />
+        <div className="more"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="18px" height="18px"><g><path d="M0,0h24v24H0V0z" fill="none"/></g><g><g><g><path d="M12,8c1.1,0,2-0.9,2-2s-0.9-2-2-2s-2,0.9-2,2S10.9,8,12,8z M12,10c-1.1,0-2,0.9-2,2s0.9,2,2,2s2-0.9,2-2S13.1,10,12,10z M12,16c-1.1,0-2,0.9-2,2s0.9,2,2,2s2-0.9,2-2S13.1,16,12,16z"/></g></g></g></svg></div>
       </div>
     );
   }
 }
 
 class ArticleList extends Component {
-  state = {
+  static defaultProps = {
     data: [
       {
         "updatedTimeStamp":"1614355203",
@@ -73,12 +74,13 @@ class ArticleList extends Component {
         "representImage":"https:\/\/cafeptthumb-phinf.pstatic.net\/MjAyMTAyMjZfMTYw\/MDAxNjE0MzI0Mjg2Njg2.sNKQhOUx_-kSEBTC18rhMmEHMdrnFc66lki-6nDllmkg.RErbTUHy6UxwAtjUpXjT8o_hMlmbqhrh067VUhGY6VYg.JPEG\/99b983892094b5c6d2fc3736e15da7d1.jpg?type=f100_100","aheadOfWriteDate":"21.02.26."},{"updatedTimeStamp":"1614355203","articleId":"3071576","writeDateTimestamp":"1614320433","subject":"중국이 지금 한국에게 계속 나대는 이유 + 미국을 이길 수 없는 이유","readCount":"434","upCount":"24","commentCount":"19","menuName":"유머,정보 게시판","nickname":"아카시아","representImage":"https:\/\/cafeptthumb-phinf.pstatic.net\/MjAyMTAyMjZfMjc4\/MDAxNjE0MzIwNDgzNzgy.Oj1Vwc7tq8Y82wgiGRO-kaw5BpuAJF_nuBu2x75FUDYg.vqpou1rnCUHuF8APi7Z2U3zJyO5BXnLe_a9IhXZspeIg.JPEG\/%C1%DF%B1%B9%A3%DF%C0%CE%B1%B81.jpg?type=f100_100",
         "aheadOfWriteDate":"21.02.26."
       }
-    ]
+    ],
+    front: false
   }
 
   render() {
-    const { data } = this.state;
-    const list = data.map(
+    const { data } = this.props;
+    const list = data.slice(0, this.props.front ? Math.min(3, data.length) : data.length).map(
       data => (<Article key={data.articleId} data={data} />)
     );
 

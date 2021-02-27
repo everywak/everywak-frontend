@@ -31,7 +31,7 @@ class ArticleList extends Component {
         id: 0,
         title: "왁물원 인기글",
         link: "/bestwakki",
-        component: <Bestwakki front='true' />
+        component: <Bestwakki front={true} />
       },
       {
         id: 1,
