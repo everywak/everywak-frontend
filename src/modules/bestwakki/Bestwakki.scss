@@ -5,7 +5,6 @@
   
     .Article {
       display: flex;
-      background: white;
       width: 100%;
       .txt_area {
         display: flex;
@@ -180,7 +179,7 @@
     min-height: 32px;
 
     svg {
-      fill: #ccc;
+      fill: $component-secondary-border-color;
     }
   }
 }

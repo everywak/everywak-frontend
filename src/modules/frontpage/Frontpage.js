@@ -11,13 +11,9 @@ const cx = classNames.bind(styles);
 class Frontpage extends Component {
 
   render() {
-    const style ={
-      background: 'white',
-      height: '100%'
-    }
     
     return (
-      <div className="Frontpage" style={style}>
+      <div className="Frontpage">
         <ArticleList />
       </div>
     );
