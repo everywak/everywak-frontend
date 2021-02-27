@@ -14,11 +14,11 @@
         width: 100%;
         line-height: 120%;
         font-size: 14px;
-        color: #000;
+        color: $primary-text-color;
         order: 1;
     
         &:link {
-          color: #000;
+          color: $primary-text-color;
           
           .icon_new_txt{
             color: #a00;
@@ -26,7 +26,7 @@
           }
         }
         &:visited {
-          color: #777;
+          color: $secondary-text-color;
     
           .icon_new_txt{
             color: #fff;
@@ -35,7 +35,7 @@
         }
     
         .board_txt {
-          color: #777;
+          color: $secondary-text-color;
           font-size: 12px;
           font-weight: 500;
           line-height: 12px;
@@ -45,7 +45,7 @@
           height: 100%;
         }
         .user_area {
-          color: #777;
+          color: $secondary-text-color;
           font-size: 12px;
           font-weight: 500;
         }
@@ -136,19 +136,19 @@
             .view::before {
               content: '\e950';
               padding-right: 1px;
-              color: #aaa;
+              color: $secondary-text-color;
               font-family: 'xeicon';
             }
             .like::before {
               content: '\ea11';
               padding-right: 1px;
-              color: #aaa;
+              color: $secondary-text-color;
               font-family: 'xeicon';
             }
             .comment::before {
               content: '\e9d8';
               padding-right: 1px;
-              color: #aaa;
+              color: $secondary-text-color;
               font-family: 'xeicon';
             }
           }

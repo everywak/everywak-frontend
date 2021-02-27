@@ -33,13 +33,13 @@
     display: block;
   }
   .liveSummaryTitle {
-    color: #333;
+    color: $primary-text-color;
     font-size: 20px;
     font-weight: 500;
     line-height: 20px;
   }
   .liveSummaryTime {
-    color: #888;
+    color: $secondary-text-color;
     font-size: 14px;
     font-weight: 400;
     line-height: 14px;
