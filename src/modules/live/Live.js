@@ -14,8 +14,8 @@ class Live extends Component {
       <div className={cx('Live', {'front': this.props.front})}>
         <WakPlayer />
         <div className="liveSummary">
-          <span className="liveSummaryTitle">뭐? 뱅온이라고?</span>
-          <span className="liveSummaryTime">13분 전</span>
+          <span className="liveSummaryTitle">뭐? 뱅온이 없다고?</span>
+          <span className="liveSummaryTime">13일 전</span>
         </div>
       </div>
     );
