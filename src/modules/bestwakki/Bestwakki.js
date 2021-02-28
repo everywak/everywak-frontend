@@ -5,7 +5,7 @@ const cx = classNames.bind(styles);
 
 class Bestwakki extends Component {
   static defaultProps = {
-    front: true
+    front: false
   };
 
   render() {
@@ -71,7 +71,20 @@ class ArticleList extends Component {
         "commentCount":"16",
         "menuName":"유머,정보 게시판",
         "nickname":"우왁굳 동생",
-        "representImage":"https:\/\/cafeptthumb-phinf.pstatic.net\/MjAyMTAyMjZfMTYw\/MDAxNjE0MzI0Mjg2Njg2.sNKQhOUx_-kSEBTC18rhMmEHMdrnFc66lki-6nDllmkg.RErbTUHy6UxwAtjUpXjT8o_hMlmbqhrh067VUhGY6VYg.JPEG\/99b983892094b5c6d2fc3736e15da7d1.jpg?type=f100_100","aheadOfWriteDate":"21.02.26."},{"updatedTimeStamp":"1614355203","articleId":"3071576","writeDateTimestamp":"1614320433","subject":"중국이 지금 한국에게 계속 나대는 이유 + 미국을 이길 수 없는 이유","readCount":"434","upCount":"24","commentCount":"19","menuName":"유머,정보 게시판","nickname":"아카시아","representImage":"https:\/\/cafeptthumb-phinf.pstatic.net\/MjAyMTAyMjZfMjc4\/MDAxNjE0MzIwNDgzNzgy.Oj1Vwc7tq8Y82wgiGRO-kaw5BpuAJF_nuBu2x75FUDYg.vqpou1rnCUHuF8APi7Z2U3zJyO5BXnLe_a9IhXZspeIg.JPEG\/%C1%DF%B1%B9%A3%DF%C0%CE%B1%B81.jpg?type=f100_100",
+        "representImage":"https:\/\/cafeptthumb-phinf.pstatic.net\/MjAyMTAyMjZfMTYw\/MDAxNjE0MzI0Mjg2Njg2.sNKQhOUx_-kSEBTC18rhMmEHMdrnFc66lki-6nDllmkg.RErbTUHy6UxwAtjUpXjT8o_hMlmbqhrh067VUhGY6VYg.JPEG\/99b983892094b5c6d2fc3736e15da7d1.jpg?type=f100_100",
+        "aheadOfWriteDate":"21.02.26."
+      },
+      {
+        "updatedTimeStamp":"1614355203",
+        "articleId":"3071576",
+        "writeDateTimestamp":"1614320433",
+        "subject":"중국이 지금 한국에게 계속 나대는 이유 + 미국을 이길 수 없는 이유",
+        "readCount":"434",
+        "upCount":"24",
+        "commentCount":"19",
+        "menuName":"유머,정보 게시판",
+        "nickname":"아카시아",
+        "representImage":"https:\/\/cafeptthumb-phinf.pstatic.net\/MjAyMTAyMjZfMjc4\/MDAxNjE0MzIwNDgzNzgy.Oj1Vwc7tq8Y82wgiGRO-kaw5BpuAJF_nuBu2x75FUDYg.vqpou1rnCUHuF8APi7Z2U3zJyO5BXnLe_a9IhXZspeIg.JPEG\/%C1%DF%B1%B9%A3%DF%C0%CE%B1%B81.jpg?type=f100_100",
         "aheadOfWriteDate":"21.02.26."
       }
     ],
