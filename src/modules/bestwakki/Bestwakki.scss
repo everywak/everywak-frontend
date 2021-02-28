@@ -92,4 +92,12 @@
       @include ArticleListMobile;
       width: 360px;
       .Article {
+    
+        &:nth-child(4) {
+          display: flex;
+          border-bottom: solid 1px $component-primary-border-color;
+        }
+      }
+    }
+  }
 }
