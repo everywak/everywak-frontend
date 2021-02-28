@@ -1,7 +1,7 @@
 @import '../../common/common.scss';
 
 .FrontPanelList{
-  margin: 0;
+  margin: 0 auto;
   padding-bottom: 31px;
 
   .FrontPanel {
@@ -36,5 +36,15 @@
         }
       }
     }
+  }
+
+  @include desktop {
+    display: grid;
+    grid-template-columns: calc(100% - 360px - 16px) 360px;
+    grid-template-rows: auto auto;
+    column-gap: 16px;
+    box-sizing: border-box;
+    max-width: 1850px;
+    padding: 0 32px 31px;
   }
 }

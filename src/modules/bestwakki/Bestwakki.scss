@@ -1,4 +1,6 @@
 @import '../../common/common.scss';
+@import './ArticleList';
+
 .Bestwakki {
 
   @include tablet {
@@ -59,112 +61,10 @@
     }
   
     @include desktop {
-      .Article {
-        min-height: 16px;
-        border-radius: 8px;
-        transition: background-color ease .1s;
-  
-        &:hover {
-          background-color: rgba(0, 0, 0, .1);
-        }
-    
-        .txt_area {
-          flex-direction: row;
-          
-          .board_txt {
-            box-sizing: border-box;
-            width: 100px;
-            min-width: 100px;
-          }
-          strong.tit {
-            flex: 1; 
-          }
-          .user_area {
-            width: 260px;
-    
-            span {
-              box-sizing: border-box;
-              display: block;
-              float: left;
-            }
-            .nickname {
-              width: 110px;
-            }
-            .datetime {
-              width: 55px;
-              text-align: center;
-            }
-            .view,
-            .like {
-              width: 40px;
-              text-align: center;
-            }
-          }
-        }
-        .thumb_area {
-          display: none;
-        }
-      }
+      @include ArticleListDesktop;
     }
     @include not-desktop {
-      .Article {
-        box-sizing: border-box;
-        min-height: 97px;
-        border: solid 1px $component-primary-border-color;
-        border-bottom: none;
-        padding: 14px 15px 14px;
-    
-        .txt_area {
-          flex-direction: column;
-          padding: 0;
-    
-          .board_txt {
-            padding-bottom: 2px;
-          }
-          strong.tit {
-            line-height: 20px;
-          }
-          .user_area {
-            line-height: 12px;
-            margin-top: 4px;
-    
-            .nickname {
-              margin: 0;
-            }
-    
-            span {
-              margin-left: .5em;
-            }
-    
-            .view::before {
-              content: '\e950';
-              padding-right: 1px;
-              color: $secondary-text-color;
-              font-family: 'xeicon';
-            }
-            .like::before {
-              content: '\ea11';
-              padding-right: 1px;
-              color: $secondary-text-color;
-              font-family: 'xeicon';
-            }
-            .comment::before {
-              content: '\e9d8';
-              padding-right: 1px;
-              color: $secondary-text-color;
-              font-family: 'xeicon';
-            }
-          }
-        }
-        .thumb_area {
-          margin: 2px 0 0;
-          height: 64px;
-          order: 2;
-        }
-      }
-      .Article:last-child {
-        border-bottom: solid 1px $component-primary-border-color;
-      }
+      @include ArticleListMobile;
     }
   }
 
@@ -186,4 +86,10 @@
       fill: $component-secondary-border-color;
     }
   }
+
+  &.front .ArticleList {
+    @include desktop {
+      @include ArticleListMobile;
+      width: 360px;
+      .Article {
 }
