@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import styles from './Bestwakki.scss';
 
 import Dropdown from '../../common/Components/Dropdown';
+import Spinner from '../../common/Components/Spinner';
 import * as service from '../../services/BestApi';
 
 import classNames from 'classnames/bind';
