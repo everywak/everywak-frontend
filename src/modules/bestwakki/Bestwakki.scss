@@ -98,11 +98,14 @@
     @include desktop {
       @include ArticleListMobile;
       width: 360px;
-      .ArticleList .Article {
-    
-        &:nth-child(4) {
-          display: flex;
-          border-bottom: solid 1px $component-primary-border-color;
+      .ArticleList {
+        margin: 0;
+
+        .Article {
+          &:nth-child(4) {
+            display: flex;
+            border-bottom: solid 1px $component-primary-border-color;
+          }
         }
       }
     }

@@ -84,9 +84,11 @@
   .ArticleList {
     margin: 16px 0 31px;
     .Article {
-      min-height: 16px;
       border-radius: 0;
+      min-height: 16px;
+      opacity: 0;
       transition: background-color ease .15s, border-radius ease .15s;
+
   
       &:hover {
         background-color: rgba(0, 0, 0, .1);
@@ -152,9 +154,9 @@
       color: $primary-text-color;
       margin: 31px 0 0;
       padding: 0 0 26px 16px;
-      font-size: 24px;
+      font-size: 28px;
       font-weight: 500;
-      line-height: 24px;
+      line-height: 28px;
     }
     .controlWrapper {
       align-items: center;
@@ -224,13 +226,14 @@
           border: 0;
           background: transparent;
           color: $primary-text-color;
+          flex-grow: 1;
           font-family: inherit;
           font-size: 12px;
           font-weight: 500;
           line-height: 32px;
           padding: 0px 4px 0px 12px;
           vertical-align: middle;
-          flex-grow: 1;
+          width: 84px;
 
           &::placeholder {
             color: $secondary-text-color;
