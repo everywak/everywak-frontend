@@ -1,118 +1,272 @@
 @mixin ArticleListMobile {
-  .Article {
-    box-sizing: border-box;
-    min-height: 97px;
-    border: solid 1px $component-primary-border-color;
-    border-bottom: none;
-    border-radius: 0;
-    padding: 14px 15px 14px;
+  .ArticleList {
+    .Article {
+      box-sizing: border-box;
+      min-height: 97px;
+      border: solid 1px $component-primary-border-color;
+      border-bottom: none;
+      border-radius: 0;
+      padding: 14px 15px 14px;
 
-    &:nth-child(4),
-    &:nth-child(5) {
-      display: none;
+      &:nth-child(5),
+      &:nth-child(6) {
+        display: none;
+      }
+
+      &.listHeader {
+        display: none;
+      }
+
+      .txt_area {
+        flex-direction: column;
+        padding: 0;
+
+        .board_txt {
+          padding-bottom: 2px;
+        }
+        strong.tit {
+          line-height: 20px;
+        }
+        .user_area {
+          line-height: 12px;
+          margin-top: 4px;
+
+          .nickname {
+            margin: 0;
+            width: auto;
+          }
+
+          span {
+            margin-left: .5em;
+            width: auto;
+          }
+
+          .view::before {
+            content: '\e950';
+            padding-right: 1px;
+            color: $secondary-text-color;
+            font-family: 'xeicon';
+          }
+          .like::before {
+            content: '\ea11';
+            padding-right: 1px;
+            color: $secondary-text-color;
+            font-family: 'xeicon';
+          }
+          .comment::before {
+            content: '\e9d8';
+            padding-right: 1px;
+            color: $secondary-text-color;
+            font-family: 'xeicon';
+          }
+        }
+      }
+      .thumb_area {
+        display: block;
+        margin: 2px 0 0;
+        height: 64px;
+        order: 2;
+      }
     }
-
-    .txt_area {
-      flex-direction: column;
-      padding: 0;
-
-      .board_txt {
-        padding-bottom: 2px;
-      }
-      strong.tit {
-        line-height: 20px;
-      }
-      .user_area {
-        line-height: 12px;
-        margin-top: 4px;
-
-        .nickname {
-          margin: 0;
-          width: auto;
-        }
-
-        span {
-          margin-left: .5em;
-          width: auto;
-        }
-
-        .view::before {
-          content: '\e950';
-          padding-right: 1px;
-          color: $secondary-text-color;
-          font-family: 'xeicon';
-        }
-        .like::before {
-          content: '\ea11';
-          padding-right: 1px;
-          color: $secondary-text-color;
-          font-family: 'xeicon';
-        }
-        .comment::before {
-          content: '\e9d8';
-          padding-right: 1px;
-          color: $secondary-text-color;
-          font-family: 'xeicon';
-        }
-      }
-    }
-    .thumb_area {
-      display: block;
-      margin: 2px 0 0;
-      height: 64px;
-      order: 2;
+    .Article:last-child {
+      border-bottom: solid 1px $component-primary-border-color;
     }
   }
-  .Article:last-child {
-    border-bottom: solid 1px $component-primary-border-color;
+  &.front .moduleHeader {
+    display: none;
+  }
+  &:not(.front) .moduleHeader {
+    
   }
 }
 
 @mixin ArticleListDesktop {
-  .Article {
-    min-height: 16px;
-    border-radius: 8px;
-    transition: background-color ease .1s;
-
-    &:hover {
-      background-color: rgba(0, 0, 0, .1);
-    }
-
-    .txt_area {
-      flex-direction: row;
-      
-      .board_txt {
-        box-sizing: border-box;
-        width: 100px;
-        min-width: 100px;
+  .ArticleList {
+    margin: 16px 0 31px;
+    .Article {
+      min-height: 16px;
+      border-radius: 0;
+      transition: background-color ease .15s, border-radius ease .15s;
+  
+      &:hover {
+        background-color: rgba(0, 0, 0, .1);
+        border-radius: 8px;
       }
-      strong.tit {
-        flex: 1; 
+  
+      &.listHeader {
+        cursor: auto;
+        display: flex;
+        border-radius: 0;
+        border-top: solid 1px $component-primary-border-color;
+  
+        &:hover {
+          background-color: transparent;
+        }
       }
-      .user_area {
-        width: 260px;
-
-        span {
+  
+      .txt_area {
+        flex-direction: row;
+        padding: 10px 6px 10px 16px;
+        
+        .board_txt {
           box-sizing: border-box;
-          display: block;
-          float: left;
+          width: 100px;
+          min-width: 100px;
         }
-        .nickname {
-          width: 110px;
+        strong.tit {
+          flex: 1; 
         }
-        .datetime {
-          width: 55px;
-          text-align: center;
-        }
-        .view,
-        .like {
-          width: 40px;
-          text-align: center;
+        .user_area {
+          width: 245px;
+  
+          span {
+            box-sizing: border-box;
+            display: block;
+            float: left;
+          }
+          .nickname {
+            width: 110px;
+          }
+          .datetime {
+            width: 55px;
+            text-align: center;
+          }
+          .view,
+          .like {
+            width: 40px;
+            text-align: center;
+          }
         }
       }
+      .thumb_area {
+        display: none;
+      }
     }
-    .thumb_area {
-      display: none;
+  }
+  &.front .moduleHeader {
+    display: none;
+  }
+  &:not(.front) .moduleHeader {
+
+    h1 {
+      color: $primary-text-color;
+      margin: 31px 0 0;
+      padding: 0 0 26px 16px;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 24px;
+    }
+    .controlWrapper {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .SortList {
+        display: flex;
+        flex-direction: row;
+        margin-left: 8px;
+        position: relative;
+  
+        .sortItem {
+          position: relative;
+  
+          input[type=radio] {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip:rect(0,0,0,0);
+            border: 0;
+  
+            &:checked + label {
+              color: $primary-color;
+            }
+            &:not(:checked) + label:hover {
+              background: rgba(0, 0, 0, .1);
+            }
+          }
+  
+          label {
+            border-radius: 8px;
+            color: $secondary-text-color;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 26px;
+            transition: color ease .15s, background-color ease .3s;
+            padding: 3px 8px 5px;
+          }
+        }
+  
+        .hoverRect {
+          height: 28px;
+          background: #FFFFFF;
+          box-shadow: 0px 0px 6px rgba(0, 0, 0, .25);
+          border-radius: 8px;
+          position: absolute;
+        }
+      }
+
+      .SearchBar {
+        align-items: center;
+        display: flex;
+        border: solid 1px $component-secondary-border-color;
+        border-radius: 8px;
+        box-sizing: border-box;
+        overflow: hidden;
+        width: 250px;
+        height: 32px;
+
+        .inputForm {
+          border: 0;
+          background: transparent;
+          color: $primary-text-color;
+          font-family: inherit;
+          font-size: 12px;
+          font-weight: 500;
+          line-height: 32px;
+          padding: 0px 4px 0px 12px;
+          vertical-align: middle;
+          flex-grow: 1;
+
+          &::placeholder {
+            color: $secondary-text-color;
+            font-size: 12px;
+            font-weight: 500;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        .Dropdown {
+          .dispArea {
+            .currName {
+              color: $primary-color;
+              display: block;
+              min-width: fit-content;
+              width: fit-content;
+            }
+            svg {
+              fill: $primary-color;
+            }
+          }
+        }
+
+        .btnSearch {
+          align-items: center;
+          background: $primary-color;
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          height: 32px;
+          width: 52px;
+        }
+      }
     }
   }
 }

@@ -21,6 +21,11 @@
         font-size: 14px;
         color: $primary-text-color;
         order: 1;
+
+        .icon_new_txt{
+          color: #a00;
+          display: none;
+        }
     
         &:link {
           color: $primary-text-color;
@@ -59,13 +64,12 @@
           border-radius: 8px;
       }
     }
-  
-    @include desktop {
-      @include ArticleListDesktop;
-    }
-    @include not-desktop {
-      @include ArticleListMobile;
-    }
+  }
+  @include desktop {
+    @include ArticleListDesktop;
+  }
+  @include not-desktop {
+    @include ArticleListMobile;
   }
 
   & > .more {
@@ -87,15 +91,52 @@
     }
   }
 
-  &.front .ArticleList {
+  &.front {
     @include desktop {
       @include ArticleListMobile;
       width: 360px;
-      .Article {
+      .ArticleList .Article {
     
         &:nth-child(4) {
           display: flex;
           border-bottom: solid 1px $component-primary-border-color;
+        }
+      }
+    }
+  }
+}
+
+.Bestwakki:not(.front) {
+  @include desktop {
+    margin: 0 calc((100% - 870px) / 2);
+
+    .ArticleList {
+    
+      .Article {
+        border-bottom: solid 1px $component-primary-border-color;
+
+        .txt_area {
+
+          .board_txt {
+            line-height: 15px;
+          }
+
+          .user_area .comment {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  @include not-desktop {
+
+    .ArticleList {
+    
+      .Article {
+
+        &:nth-child(4),
+        &:nth-child(5) {
+          display: flex;
         }
       }
     }
