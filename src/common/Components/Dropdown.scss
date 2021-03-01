@@ -1,0 +1,17 @@
+@import '../common.scss';
+
+.dispArea {
+  cursor: pointer;
+  display: flex;
+  padding: 4px 4px 4px 8px;
+
+  .currName {
+    color: $primary-text-color;
+    font-size: 12px;
+    line-height: 18px;
+  }
+  svg {
+    fill: $primary-text-color;
+  }
+
+}
