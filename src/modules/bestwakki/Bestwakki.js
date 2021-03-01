@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import styles from './Bestwakki.scss';
 
 import Dropdown from '../../common/Components/Dropdown';
+import * as service from '../../services/BestApi';
 
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
@@ -11,6 +12,25 @@ class Bestwakki extends Component {
   static defaultProps = {
     front: false
   };
+
+  state = {
+    list: [],
+    loaded: false
+  };
+
+  fetchArticlesInfo = async ({ reset }) => {
+    const post = await service.getBestArticles();
+    console.log(post);
+    if (post.status === 200) {
+      this.setState({
+        list: post.data.message.result.popularArticleList,
+        loaded: true
+      });
+    }
+  };
+  componentDidMount() {
+    this.fetchArticlesInfo({reset: false});
+  }
 
   render() {
     
@@ -23,7 +43,7 @@ class Bestwakki extends Component {
             <SearchBar />
           </div>
         </div>
-        <ArticleList front={this.props.front} />
+        <ArticleList front={this.props.front} data={this.state.list} loaded={this.state.loaded} />
         <div className="more"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="18px" height="18px"><g><path d="M0,0h24v24H0V0z" fill="none"/></g><g><g><g><path d="M12,8c1.1,0,2-0.9,2-2s-0.9-2-2-2s-2,0.9-2,2S10.9,8,12,8z M12,10c-1.1,0-2,0.9-2,2s0.9,2,2,2s2-0.9,2-2S13.1,10,12,10z M12,16c-1.1,0-2,0.9-2,2s0.9,2,2,2s2-0.9,2-2S13.1,16,12,16z"/></g></g></g></svg></div>
       </div>
     );
@@ -99,7 +119,8 @@ class ArticleList extends Component {
         "aheadOfWriteDate":"21.02.26."
       }
     ],
-    front: false
+    front: false,
+    loaded: false
   }
 
   render() {
@@ -120,6 +141,8 @@ class ArticleList extends Component {
     return (
       <ul className="ArticleList">
         <Article header={true} key={listHeader.articleId} data={listHeader} />
+
+        {this.props.loaded ? null : <Spinner caption="인기글 로딩중..."/>}
         {list}
       </ul>
     );

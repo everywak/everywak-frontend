@@ -10,6 +10,9 @@
   .ArticleList {
   
     .Article {
+      animation-name: fadein;
+      animation-duration: .3s;
+      animation-fill-mode: forwards;
       display: flex;
       width: 100%;
       .txt_area {
