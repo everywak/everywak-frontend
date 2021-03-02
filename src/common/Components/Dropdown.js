@@ -6,28 +6,14 @@ const cx = classNames.bind(styles);
 
 class Dropdown extends Component {
   static defaultProps = {
-    values: [
-      {
-        id: 0,
-        name: '제목',
-        value: 'title',
-      },
-      {
-        id: 1,
-        name: '작성자',
-        value: 'author',
-      },
-      {
-        id: 2,
-        name: '게시판',
-        value: 'board',
-      },
-    ],
-    name: ''
+    values: [],
+    name: '',
+    defaultName: '',
+    defaultValue: '',
   }
   state = {
-    name: '제목',
-    value: 'title',
+    name: this.props.defaultName,
+    value: this.props.defaultValue,
     x1: 0,
     y1: 0,
     x2: 0,
