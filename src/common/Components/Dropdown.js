@@ -21,15 +21,15 @@ class Dropdown extends Component {
     opened: false,
   }
 
-  openDropdownList() {
+  openList() {
     if(!this.state.opened) {
-      this.posDropdownList();
+      this.posList();
       this.setState({
         opened: true
       });
     }
   }
-  closeDropdownList() {
+  closeList() {
     if(this.state.opened) {
       this.setState({
         opened: false
@@ -43,11 +43,11 @@ class Dropdown extends Component {
         name: e.target.dataset.name,
         value: e.target.dataset.value,
       });
-      this.closeDropdownList();
+      this.closeList();
     }
   }
 
-  posDropdownList() {
+  posList() {
     var _this = document.querySelector('.Dropdown[data-name="' + this.props.name + '"]');
     var nameRect = _this.querySelector('.currName').getBoundingClientRect();
     var list = _this.querySelector('.dropdownArea');
@@ -70,12 +70,12 @@ class Dropdown extends Component {
 
   onWindowScroll(e) {
     if (e.state.opened) {
-      e.closeDropdownList();
+      e.closeList();
     }
   }
   onWindowResize(e) {
     if (e.state.opened) {
-      e.closeDropdownList();
+      e.closeList();
     }
   }
 
@@ -117,11 +117,11 @@ class Dropdown extends Component {
     return (
       <div className={cx('Dropdown', {'opened' : opened})} data-name={this.props.name} >
         <input type="hidden" name={this.props.name} value={value} />
-        <div className="dispArea" onClick={e => this.openDropdownList()}>
+        <div className="dispArea" onClick={e => this.openList()}>
           <span className="currName">{name}</span>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
         </div>
-        <div className="closeArea" onClick={e => this.closeDropdownList()}></div>
+        <div className="closeArea" onClick={e => this.closeList()}></div>
         <DropdownArea className="dropdownArea">
           {list}
         </DropdownArea>
