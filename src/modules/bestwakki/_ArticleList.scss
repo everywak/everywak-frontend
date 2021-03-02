@@ -72,11 +72,27 @@
       border-bottom: solid 1px $component-primary-border-color;
     }
   }
-  &.front .moduleHeader {
-    display: none;
-  }
   &:not(.front) .moduleHeader {
-    
+    .controlWrapper {
+      flex-direction: column-reverse;
+
+      .SortList {
+        flex-wrap: wrap;
+        margin-left: 10px;
+
+        .sortItem {
+          position: relative;
+  
+          input[type=radio]:not(:checked) + label:active {
+            background: rgba(0, 0, 0, .1);
+          }
+        }
+      }
+
+      .SearchBar {
+        display: none;
+      }
+    }
   }
 }
 
@@ -145,155 +161,19 @@
       }
     }
   }
-  &.front .moduleHeader {
-    display: none;
-  }
   &:not(.front) .moduleHeader {
 
-    h1 {
-      color: $primary-text-color;
-      margin: 31px 0 0;
-      padding: 0 0 26px 16px;
-      font-size: 28px;
-      font-weight: 500;
-      line-height: 28px;
-    }
     .controlWrapper {
       align-items: center;
-      display: flex;
       flex-direction: row;
       justify-content: space-between;
 
       .SortList {
-        display: flex;
-        flex-direction: row;
         margin-left: 8px;
-        position: relative;
-  
-        .sortItem {
-          position: relative;
-  
-          input[type=radio] {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip:rect(0,0,0,0);
-            border: 0;
-  
-            &:checked + label {
-              color: $primary-color;
-            }
-            &:not(:checked) + label:hover {
-              background: rgba(0, 0, 0, .1);
-            }
-          }
-  
-          label {
-            border-radius: 8px;
-            color: $secondary-text-color;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            line-height: 26px;
-            transition: color ease .15s, background-color ease .3s;
-            padding: 3px 8px 5px;
-          }
-        }
-  
-        .hoverRect {
-          height: 28px;
-          background: #FFFFFF;
-          box-shadow: 0px 0px 6px rgba(0, 0, 0, .25);
-          border-radius: 8px;
-          position: absolute;
-        }
       }
 
       .SearchBar {
-        align-items: center;
         display: flex;
-        border: solid 1px $component-secondary-border-color;
-        border-radius: 8px;
-        box-sizing: border-box;
-        overflow: hidden;
-        width: 250px;
-        height: 32px;
-
-        .inputForm {
-          border: 0;
-          background: transparent;
-          color: $primary-text-color;
-          flex-grow: 1;
-          font-family: inherit;
-          font-size: 12px;
-          font-weight: 500;
-          line-height: 32px;
-          padding: 0px 4px 0px 12px;
-          vertical-align: middle;
-          width: 84px;
-
-          &::placeholder {
-            color: $secondary-text-color;
-            font-size: 12px;
-            font-weight: 500;
-            transition: color ease .3s;
-          }
-
-          &:focus {
-            outline: none;
-
-            &::placeholder {
-              color: transparent;
-              transition: color ease .1s;
-            }
-          }
-        }
-
-        .Dropdown {
-          .dispArea {
-            .currName {
-              color: $primary-color;
-              display: block;
-              min-width: fit-content;
-              width: fit-content;
-            }
-            svg {
-              fill: $primary-color;
-            }
-          }
-        }
-
-        .btnSearch {
-          align-items: center;
-          background: $primary-color;
-          cursor: pointer;
-          display: flex;
-          justify-content: center;
-          height: 32px;
-          width: 52px;
-          transition: background-color ease .3s;
-
-          &:hover {
-            background: $primary-light-color;
-          
-            svg {
-              width: 20px;
-              height: 20px;
-            }
-          }
-          &:active {
-            background: $primary-dark-color;
-          }
-          
-          svg {
-            width: 18px;
-            height: 18px;
-            transition: width ease .3s, height ease .3s;
-          }
-        }
       }
     }
   }
