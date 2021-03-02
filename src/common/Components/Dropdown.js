@@ -52,7 +52,8 @@ class Dropdown extends Component {
     var nameRect = _this.querySelector('.currName').getBoundingClientRect();
     var list = _this.querySelector('.dropdownArea');
     var listRect = list.getBoundingClientRect();
-    var targetRect = list.querySelector('.option[data-value="' + this.state.value + '"] > .name').getBoundingClientRect();
+    var target = list.querySelector('.option[data-value="' + this.state.value + '"] > .name');
+    var targetRect = (target ? target : list).getBoundingClientRect();
     
     var x1 = nameRect.left - (targetRect.left - listRect.left);
     var y1 = nameRect.top - (targetRect.top - listRect.top) + 19;
