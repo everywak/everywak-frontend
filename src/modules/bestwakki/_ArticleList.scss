@@ -239,10 +239,16 @@
             color: $secondary-text-color;
             font-size: 12px;
             font-weight: 500;
+            transition: color ease .3s;
           }
 
           &:focus {
             outline: none;
+
+            &::placeholder {
+              color: transparent;
+              transition: color ease .1s;
+            }
           }
         }
 
@@ -268,6 +274,25 @@
           justify-content: center;
           height: 32px;
           width: 52px;
+          transition: background-color ease .3s;
+
+          &:hover {
+            background: $primary-light-color;
+          
+            svg {
+              width: 20px;
+              height: 20px;
+            }
+          }
+          &:active {
+            background: $primary-dark-color;
+          }
+          
+          svg {
+            width: 18px;
+            height: 18px;
+            transition: width ease .3s, height ease .3s;
+          }
         }
       }
     }
