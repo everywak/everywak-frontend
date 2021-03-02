@@ -32,18 +32,22 @@ class Dropdown extends Component {
     y1: 0,
     x2: 0,
     y2: 0,
-    animDropdownList: null,
     opened: false,
   }
 
-  openDropdown() {
+  openDropdownList() {
     if(!this.state.opened) {
       this.posDropdownList();
-      setTimeout(() => {
-        this.setState({
-          opened: true
-        });
-      }, 300);
+      this.setState({
+        opened: true
+      });
+    }
+  }
+  closeDropdownList() {
+    if(this.state.opened) {
+      this.setState({
+        opened: false
+      });
     }
   }
 
@@ -53,7 +57,7 @@ class Dropdown extends Component {
         name: e.target.dataset.name,
         value: e.target.dataset.value,
       });
-      this.posDropdownList();
+      this.closeDropdownList();
     }
   }
 
@@ -64,37 +68,21 @@ class Dropdown extends Component {
     var listRect = list.getBoundingClientRect();
     var targetRect = list.querySelector('.option[data-value="' + this.state.value + '"] > .name').getBoundingClientRect();
     
-    var x1= nameRect.left - (targetRect.left - listRect.left);
-    var y1= nameRect.top - (targetRect.top - listRect.top) + 19;
-    var x2= nameRect.left - (targetRect.left - listRect.left);
-    var y2= nameRect.top - (targetRect.top - listRect.top) + 3;
+    var x1 = nameRect.left - (targetRect.left - listRect.left);
+    var y1 = nameRect.top - (targetRect.top - listRect.top) + 19;
+    var x2 = nameRect.left - (targetRect.left - listRect.left);
+    var y2 = nameRect.top - (targetRect.top - listRect.top) + 3;
     
     this.setState({
-      x1: nameRect.left - (targetRect.left - listRect.left),
-      y1: nameRect.top - (targetRect.top - listRect.top) + 19,
-      x2: nameRect.left - (targetRect.left - listRect.left),
-      y2: nameRect.top - (targetRect.top - listRect.top) + 3,
-      animDropdownList: keyframes`
-    from {
-      opacity: 0;
-      left: ${x1}px;
-      top: ${y1}px;
-    }
-    to {
-      opacity: 1;
-      left: ${x2}px;
-      top: ${y2}px;
-    }`
+      x1: x1,
+      y1: y1,
+      x2: x2,
+      y2: y2,
     });
-    console.log(`x: ${nameRect.left} y: ${nameRect.top}`);
-  }
-
-  componentDidMount () {
-    //this.posDropdownList();
   }
 
   render() {
-    const { name, value, opened } = this.state;
+    const { x1, y1, x2, y2, name, value, opened } = this.state;
     const { values } = this.props;
     
     const list = values.map(
@@ -105,27 +93,28 @@ class Dropdown extends Component {
         </div>
       )
     );
-
-    const animDropdownList = keyframes`
-    from {
-      opacity: 0;
-      left: ${this.state.x1}px;
-      top: ${this.state.y1}px;
-    }
-    to {
-      opacity: 1;
-      left: ${this.state.x2}px;
-      top: ${this.state.y2}px;
-    }
-    `
+    const animDropdownList = (opened ? 
+      keyframes`
+      from {
+        opacity: 0;
+        left: ${x1}px;
+        top: ${y1}px;
+      }
+      to {
+        opacity: 1;
+        left: ${x2}px;
+        top: ${y2}px;
+      }
+      ` : 
+      null);
     const DropdownArea = styled.div`
-      animation: ${this.state.animDropdownList} .3s 0s 1 ease normal forwards;
+      animation: ${animDropdownList} .3s 0s 1 ease normal forwards;
     `
 
     return (
       <div className={cx('Dropdown', {'opened' : opened})} data-name={this.props.name} >
         <input type="hidden" name={this.props.name} value={value} />
-        <div className="dispArea" onClick={e => this.openDropdown()}>
+        <div className="dispArea" onClick={e => this.openDropdownList()}>
           <span className="currName">{name}</span>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
         </div>

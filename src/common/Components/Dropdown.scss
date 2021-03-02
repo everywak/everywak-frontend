@@ -30,7 +30,8 @@
     /*left: -4px;*/
     z-index: 100;
 
-    display: none;
+    opacity: 0;
+    pointer-events: none;
 
     .option {
       box-sizing: border-box;
@@ -77,6 +78,8 @@
     }
   }
   &.opened .dropdownArea {
-    display: block;
+    
+    opacity: 1;
+    pointer-events: auto;
   }
 }
