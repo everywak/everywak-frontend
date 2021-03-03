@@ -99,6 +99,25 @@
   &.front {
     @include desktop {
       @include ArticleListMobile;
+      .ArticleList {
+        .Article {
+
+          &:nth-child(5) {
+            display: none;
+          }
+        }
+      }
+    }
+    @include not-desktop {
+      .ArticleList {
+        .Article {
+
+          &:nth-child(5),
+          &:nth-child(6) {
+            display: none;
+          }
+        }
+      }
     }
 
     .moduleHeader {
