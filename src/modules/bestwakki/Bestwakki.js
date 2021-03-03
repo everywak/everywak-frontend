@@ -123,6 +123,12 @@ class Article extends Component {
       null : 
       "https://cafe.naver.com/steamindiegame/" + articleId.replace(/[^0-9]/g, '')
     );
+    const thumb_area = 
+    <a href={href} className="thumb_area" target="_blank" rel="noreferrer">
+      <div className="thumb">
+        <img src={representImage} alt="썸네일" onError={i => i.target.style.display = 'none'} referrerPolicy="no-referrer"/>
+      </div>
+    </a>;
     return (
       <li className={cx('Article', {'listHeader': this.props.header})}>
         <a href={href} className="txt_area" target="_blank" rel="noreferrer">
@@ -138,11 +144,7 @@ class Article extends Component {
             <span className="comment">{commentCount}</span>
           </div>
         </a>
-        <a href={href} className="thumb_area" target="_blank" rel="noreferrer">
-          <div className="thumb">
-            <img src={representImage} width="64px" height="64px" alt="썸네일" onError={i => i.target.style.display = 'none'} referrerPolicy="no-referrer"/>
-          </div>
-        </a>
+        {representImage && representImage !== '' ? thumb_area : ''}
       </li>
     );
   }

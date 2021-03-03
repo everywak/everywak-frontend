@@ -68,8 +68,10 @@
       }
     }
   }
-  @include desktop {
-    @include ArticleListDesktop;
+  &:not(.front) {
+    @include desktop {
+      @include ArticleListDesktop;
+    }
   }
   @include not-desktop {
     @include ArticleListMobile;
@@ -97,17 +99,6 @@
   &.front {
     @include desktop {
       @include ArticleListMobile;
-      width: 360px;
-      .ArticleList {
-        margin: 0;
-
-        .Article {
-          &:nth-child(4) {
-            display: flex;
-            border-bottom: solid 1px $component-primary-border-color;
-          }
-        }
-      }
     }
 
     .moduleHeader {

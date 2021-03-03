@@ -66,6 +66,11 @@
         margin: 2px 0 0;
         height: 64px;
         order: 2;
+
+        img {
+          width: 64px;
+          height: 64px;
+        }
       }
     }
     .Article:last-child {
@@ -103,12 +108,14 @@
       border-radius: 0;
       min-height: 16px;
       opacity: 0;
+      position: relative;
       transition: background-color ease .15s, border-radius ease .15s;
 
   
       &:hover {
         background-color: rgba(0, 0, 0, .1);
         border-radius: 8px;
+        z-index: 10;
       }
   
       &.listHeader {
@@ -155,7 +162,27 @@
             text-align: center;
           }
         }
+
+        &:hover + .thumb_area {
+          background-color: #fff;
+          box-shadow: 0px 0px 6px rgba(0, 0, 0, .25);
+          border-radius: 8px;
+          display: block;
+          position: absolute;
+          left: 108px;
+          top: 48px;
+          padding: 8px;
+
+          img {
+            display: block;
+            margin: 0;
+            padding: 0;
+            width: 100px;
+            height: 100px;
+          }
+        }
       }
+      &.listHeader .txt_area:hover + .thumb_area,
       .thumb_area {
         display: none;
       }
