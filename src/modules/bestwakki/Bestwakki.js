@@ -5,6 +5,7 @@ import styles from './Bestwakki.scss';
 import Dropdown from '../../common/Components/Dropdown';
 import Spinner from '../../common/Components/Spinner';
 import * as service from '../../services/BestApi';
+import * as func from '../../common/funtions';
 
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
@@ -20,8 +21,9 @@ class Bestwakki extends Component {
   };
 
   fetchArticlesInfo = async ({ reset }) => {
-    const post = await service.getBestArticles();
-    console.log(post);
+    const { search } = this.props.location || {};
+    const post = await service.getBestArticles(func.getURLParams(search));
+
     if (post.status === 200) {
       this.setState({
         list: post.data.message.result.popularArticleList,
@@ -32,6 +34,11 @@ class Bestwakki extends Component {
   componentDidMount() {
     this.fetchArticlesInfo({reset: false});
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      this.fetchArticlesInfo({reset: false});
+    }
+  }
 
   render() {
     
@@ -40,8 +47,8 @@ class Bestwakki extends Component {
         <div className="moduleHeader">
           <h1>왁물원 인기글</h1>
           <div className="controlWrapper">
-            <SortList />
-            <SearchBar />
+            <SortList history={this.props.history} location={this.props.location} fetchArticlesInfo={this.fetchArticlesInfo} />
+            <SearchBar history={this.props.history} location={this.props.location} />
           </div>
         </div>
         <ArticleList front={this.props.front} data={this.state.list} loaded={this.state.loaded} />
@@ -179,6 +186,7 @@ class SortList extends Component {
         value: "read"
       },
     ],
+    defaultSort: 'time'
   }
   state = {
     sort: '',
@@ -189,8 +197,37 @@ class SortList extends Component {
   };
 
   setSortTarget(val) {
+    this.setState({
+      sort: val
+    });
+    if (this.props.history) {
+      this.addURLParam('/bestwakki', 'orderBy', val);
+    }
     document.getElementById(val).checked = true;
     this.showAnimSortTarget(val);
+  }
+
+  addURLParam(path, key, value) {
+    const { search } = this.props.location || {};
+    const params = func.getURLParams(search);
+    params[key] = value;
+    this.props.history.push({
+      pathname: path,
+      search: func.toURLParams(params)
+    });
+  }
+
+  addURLParams(path, arr) {
+    const { search } = this.props.location || {};
+    const params = func.getURLParams(search);
+    Object.keys(arr).map(
+      key => params[key] = arr[key]
+    );
+    
+    this.props.history.push({
+      pathname: path,
+      search: func.toURLParams(params)
+    });
   }
 
   showAnimSortTarget(val) {
@@ -207,8 +244,15 @@ class SortList extends Component {
   }
 
   componentDidMount () {
-    if (this.state.sort === '')
-      this.setSortTarget('time');
+    if (this.state.sort === '') {
+      var { search } = this.props.location || {};
+      var { orderBy } = func.getURLParams(search);
+      if (!this.props.data.find(e => {return e.value === orderBy})) {
+        orderBy = this.props.defaultSort;
+      }
+      console.log(orderBy);
+      this.setSortTarget(orderBy);
+    }
   }
 
 
@@ -248,6 +292,40 @@ class SortList extends Component {
 
 class SearchBar extends Component {
 
+  search() {
+    if (this.props.history) {
+      this.addURLParams(
+        '/bestwakki', {
+        queryTarget: document.querySelector('input[name=searchTarget]').value,
+        queryTxt: document.querySelector('input[name=queryTxt]').value,
+      }
+      );
+    }
+  }
+
+  addURLParam(path, key, value) {
+    const { search } = this.props.location || {};
+    const params = func.getURLParams(search);
+    params[key] = value;
+    this.props.history.push({
+      pathname: path,
+      search: func.toURLParams(params)
+    });
+  }
+
+  addURLParams(path, arr) {
+    const { search } = this.props.location || {};
+    const params = func.getURLParams(search);
+    Object.keys(arr).map(
+      key => params[key] = arr[key]
+    );
+    
+    this.props.history.push({
+      pathname: path,
+      search: func.toURLParams(params)
+    });
+  }
+
   render() {
     const searchTarget = [
       {
@@ -269,9 +347,9 @@ class SearchBar extends Component {
 
     return (
       <div className="SearchBar" >
-        <input type="text" name="" id="" className="inputForm" placeholder="여기에 검색어 입력" />
+        <input type="text" name="queryTxt" id="" className="inputForm" placeholder="여기에 검색어 입력" />
         <Dropdown className="searchTarget" name="searchTarget" values={searchTarget} defaultName="제목" defaultValue="title" />
-        <div className="btnSearch">
+        <div className="btnSearch" onClick={e => this.search()}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M0 0h24v24H0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
         </div>
       </div>
