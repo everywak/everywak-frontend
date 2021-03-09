@@ -99,22 +99,17 @@
   &.front {
     @include desktop {
       @include ArticleListMobile;
-      .ArticleList {
-        .Article {
-
-          &:nth-child(6) {
-            display: none;
-          }
-        }
-      }
     }
     @include not-desktop {
       .ArticleList {
         .Article {
 
-          &:nth-child(5),
-          &:nth-child(6) {
+          &:nth-child(5) {
             display: none;
+          }
+
+          &:nth-child(4) {
+            border-bottom: solid 1px $component-primary-border-color;
           }
         }
       }
@@ -149,17 +144,6 @@
     }
   }
   @include not-desktop {
-
-    .ArticleList {
-    
-      .Article {
-
-        &:nth-child(4),
-        &:nth-child(5) {
-          display: flex;
-        }
-      }
-    }
   }
   .moduleHeader {
 

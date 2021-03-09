@@ -81,7 +81,7 @@ class ArticleList extends Component {
 
   render() {
     const { data } = this.props;
-    const list = data.slice(0, this.props.front ? Math.min(5, data.length) : data.length).map(
+    const list = data.slice(0, this.props.front ? Math.min(4, data.length) : data.length).map(
       data => (<Article key={data.articleId} data={data} />)
     );
     const listHeader = {
