@@ -56,8 +56,13 @@ export function getBestArticles(data) {
     beginAt: beginAt, 
     endAt: endAt
   };
-  return axios.get('https://everywak.kr/api/bestwakki/WakkiPopularArticleList.wak', {
+  return axios(
+  {
+    method: 'get',
+    url: 'https://everywak.kr/api/bestwakki/WakkiPopularArticleList.wak', 
     params : params,
-    headers:{"Content-Type" : "application/json"}
+    headers: {
+      "Content-Type" : "application/json",
+    }
   });
 }
