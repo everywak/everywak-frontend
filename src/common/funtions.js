@@ -31,10 +31,9 @@ export function getURLParams (url) {
  * @return {Object} 오브젝트
  */
 export function toURLParams (arr) {
-  var encoded = Object.keys(arr).map(
-    key => {
-      return key + '=' + encodeURIComponent(arr[key]);
-    }
+  var encoded = new URLSearchParams();
+  Object.keys(arr).map(
+    key => encoded.append(key, arr[key])
   );
-  return encoded.join('&');
+  return encoded.toString();
 }
