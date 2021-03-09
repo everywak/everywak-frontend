@@ -250,7 +250,6 @@ class SortList extends Component {
       if (!this.props.data.find(e => {return e.value === orderBy})) {
         orderBy = this.props.defaultSort;
       }
-      console.log(orderBy);
       this.setSortTarget(orderBy);
     }
   }
