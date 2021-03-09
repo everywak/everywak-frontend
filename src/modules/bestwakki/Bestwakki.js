@@ -201,33 +201,13 @@ class SortList extends Component {
       sort: val
     });
     if (this.props.history) {
-      this.addURLParam('/bestwakki', 'orderBy', val);
+      addURLParams.bind(this) (
+        '/bestwakki', {
+        orderBy: val
+      });
     }
     document.getElementById(val).checked = true;
     this.showAnimSortTarget(val);
-  }
-
-  addURLParam(path, key, value) {
-    const { search } = this.props.location || {};
-    const params = func.getURLParams(search);
-    params[key] = value;
-    this.props.history.push({
-      pathname: path,
-      search: func.toURLParams(params)
-    });
-  }
-
-  addURLParams(path, arr) {
-    const { search } = this.props.location || {};
-    const params = func.getURLParams(search);
-    Object.keys(arr).map(
-      key => params[key] = arr[key]
-    );
-    
-    this.props.history.push({
-      pathname: path,
-      search: func.toURLParams(params)
-    });
   }
 
   showAnimSortTarget(val) {
@@ -293,36 +273,12 @@ class SearchBar extends Component {
 
   search() {
     if (this.props.history) {
-      this.addURLParams(
+      addURLParams.bind(this) (
         '/bestwakki', {
         queryTarget: document.querySelector('input[name=searchTarget]').value,
         queryTxt: document.querySelector('input[name=queryTxt]').value,
-      }
-      );
+      });
     }
-  }
-
-  addURLParam(path, key, value) {
-    const { search } = this.props.location || {};
-    const params = func.getURLParams(search);
-    params[key] = value;
-    this.props.history.push({
-      pathname: path,
-      search: func.toURLParams(params)
-    });
-  }
-
-  addURLParams(path, arr) {
-    const { search } = this.props.location || {};
-    const params = func.getURLParams(search);
-    Object.keys(arr).map(
-      key => params[key] = arr[key]
-    );
-    
-    this.props.history.push({
-      pathname: path,
-      search: func.toURLParams(params)
-    });
   }
 
   render() {
@@ -354,6 +310,19 @@ class SearchBar extends Component {
       </div>
     );
   }
+}
+
+function addURLParams(path, arr) {
+  const { search } = this.props.location || {};
+  const params = func.getURLParams(search);
+  Object.keys(arr).map(
+    key => params[key] = arr[key]
+  );
+  
+  this.props.history.push({
+    pathname: path,
+    search: func.toURLParams(params)
+  });
 }
 
 export default Bestwakki;
