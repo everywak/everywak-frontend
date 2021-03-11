@@ -78,7 +78,53 @@
   }
 
   & > .more {
-    display: none;
+    width: 100%;
+
+    svg.frontOnly {
+      display: none;
+    }
+    .moreLoad {
+      border-radius: 8px;
+      color: $primary-color;
+      cursor: pointer;
+      display: block;
+      font-size: 14px;
+      margin: 0 auto 16px;
+      padding: 8px 0;
+      text-align: center;
+      width: 100%;
+      transition: background-color ease .3s;
+
+      &:hover {
+        background: rgba(0, 0, 0, .05);
+        @include not-desktop {
+          background: transparent;
+        }
+
+        svg {
+          top: 6px;
+        }
+      }
+
+      &:active {
+        background: rgba(0, 0, 0, .1);
+
+        svg {
+          top: 12px;
+        }
+      }
+
+      svg {
+        display: block;
+        fill: $primary-color;
+        margin: 0 auto;
+        position: relative;
+        top: 0px;
+        left: 0px;
+        transition: top .3s;
+        transition-timing-function: cubic-bezier(0.3, 2, 0.635, 1.005);
+      }
+    }
   }
   &.front > .more {
     box-sizing: border-box;
@@ -87,12 +133,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
     height: 32px;
     min-height: 32px;
 
-    svg {
+    svg.frontOnly {
+      display: block;
       fill: $component-secondary-border-color;
+    }
+    .moreLoad {
+      display: none;
     }
   }
 
