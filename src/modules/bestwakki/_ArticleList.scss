@@ -194,9 +194,69 @@
         margin-left: 8px;
       }
 
-      .SearchBar {
+      .right {
         display: flex;
+        align-items: center;
+        flex-direction: row;
+
+        .DateRange {
+          user-select: none;
+
+          &.all {
+            
+            .dateBtn {
+
+              .dateWrapper {
+                color: $secondary-text-color;
+              }
+            }
+          }
+
+          .dateBtn {
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            padding: 6px 8px;
+            transition: color ease .15s, background-color ease .15s;
+
+            .dateWrapper {
+              color: $secondary-text-color;
+              font-size: 12px;
+              line-height: 12px;
+              transition: inherit;
+            }
+            svg {
+              fill: $secondary-text-color;
+              margin-left: 8px;
+            }
+
+            &:hover {
+              background-color: rgba(0, 0, 0, .1);
+
+              .dateWrapper {
+                color: $primary-color;
+              }
+              svg {
+                fill: $primary-color;
+              }
+            }
+          }
+          .dateList {
+            position: relative;
+            .DatePicker {
+              right: -100px;
+            }
+          }
+        }
+        
+        .SearchBar {
+          display: flex;
+          margin-left: 4px;
+        }
       }
+
     }
   }
 }

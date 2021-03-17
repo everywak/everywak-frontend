@@ -4,6 +4,7 @@ import styles from './Bestwakki.scss';
 
 import Dropdown from '../../common/Components/Dropdown';
 import Spinner from '../../common/Components/Spinner';
+import DatePicker from '../../common/Components/DatePicker';
 import * as service from '../../services/BestApi';
 import * as func from '../../common/funtions';
 
@@ -59,7 +60,10 @@ class Bestwakki extends Component {
           <h1>왁물원 인기글</h1>
           <div className="controlWrapper">
             <SortList history={this.props.history} location={this.props.location} fetchArticlesInfo={this.fetchArticlesInfo} />
-            <SearchBar history={this.props.history} location={this.props.location} />
+            <div className="right">
+              <DateRange />
+              <SearchBar history={this.props.history} location={this.props.location} />
+            </div>
           </div>
         </div>
         <ArticleList front={this.props.front} data={this.state.list} loaded={this.state.loaded} />
@@ -281,6 +285,36 @@ class SortList extends Component {
       <div id="SortList" className="SortList" onChange={event => this.setSortTarget(event.target.value)}>
         <HoverRect className="hoverRect" id="hoverRect" />
         {list}
+      </div>
+    );
+  }
+}
+
+class DateRange extends Component {
+  state = {
+    dateStr: '2015/02/26 - 2021/03/10',
+  }
+
+  setDateStr = (str) => {
+    this.setState({
+      dateStr: str,
+    });
+  }
+
+  render() {
+    const today = new Date();
+
+    return (
+      <div className="DateRange">
+        <div className="dateBtn">
+          <div className="dateWrapper">
+            {this.state.dateStr}
+          </div>
+          <svg viewBox="0 0 24 24" width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+        </div>
+        <div className="dateList">
+          <DatePicker name="queryDate" min={1424876400000} max={new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime()} parent={this} />
+        </div>
       </div>
     );
   }
