@@ -67,6 +67,7 @@ class DatePicker extends Component {
         value: 'all',
       },
     ],
+    opened: false,
   }
   state = {
     cursor: 'start',
@@ -74,12 +75,6 @@ class DatePicker extends Component {
     end: 0,
     preset: 'all',
     scrollFocus: 0,
-  }
-
-  constructor(props) {
-    super(props);
-    this.dateList = this.genMonths(props.min, props.max);
-    this.listDom = React.createRef();
   }
 
   genMonths (start, end) {
@@ -214,20 +209,28 @@ class DatePicker extends Component {
 
   componentDidMount () {
     this.setPreset('all');
-    this.listDom.current.addEventListener('scroll', this.onDateViewWrapperScroll);
-    this.dateList = this.genMonths(this.props.min, this.props.max);
+    if (this.props.opened) {
+      this.dateList = this.genMonths(this.props.min, this.props.max);
+    }
   }
 
   componentDidUpdate (prevProps, prevState) {
+    if (!prevProps.opened && this.props.opened) {
+      this.dateList = this.genMonths(this.props.min, this.props.max);
+      this.setState();
+    }
     if (prevState.start !== this.state.start ||
-      prevState.end !== this.state.end)
-    this.handlerStartEndChanged();
+        prevState.end   !== this.state.end) {
+      this.handlerStartEndChanged();
+    }
   }
 
   render() {
-    const { name, preset } = this.props;
+    const { name, preset, opened } = this.props;
     const { start, end, cursor } = this.state;
-    this.dateList = this.genMonths(this.props.min, this.props.max);
+    if(opened) {
+      this.dateList = this.genMonths(this.props.min, this.props.max);
+    }
     const presetList = preset.map(
       item => 
       (item.type === 'option' ? 
@@ -236,7 +239,7 @@ class DatePicker extends Component {
     );
     
     return (
-      <div className={cx('DatePicker')} data-name={this.props.name} >
+      <div className={cx('DatePicker', {opened: opened})} data-name={this.props.name} >
         <div className="preset">
           {presetList}
         </div>
@@ -258,8 +261,8 @@ class DatePicker extends Component {
             <div className="day"><span>금</span></div>
             <div className="day"><span>토</span></div>
           </div>
-          <div className="dateViewWrapper" ref={this.listDom}>
-            {this.dateList}
+          <div className="dateViewWrapper" onScroll={this.onDateViewWrapperScroll}>
+            {opened ? this.dateList : ''}
           </div>
         </div>
       </div>
