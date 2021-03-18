@@ -97,8 +97,8 @@ class DatePicker extends Component {
       const list = Array.from(
         {length: offsetEndMonth - offsetMonth + 1}, 
         (v, i) => {
-          var year = parseInt((offsetMonth + i) / 12);
-          var month = (offsetMonth + i) % 12 + 1;
+          const year = parseInt((offsetMonth + i) / 12);
+          const month = (offsetMonth + i) % 12 + 1;
           return <DateView key={this.props.name + year + '-' + month} year={year} month={month} parent={this} visible={Math.abs(i - scrollFocus) < 2} />;
       });
       return list;
@@ -330,11 +330,7 @@ class DateView extends Component {
     const list = visible ? this.genDates(year, month) : '';
 
     return (
-      <div 
-        className='DateView' 
-        ref={ref => {
-          this.this = ref;}}
-        >
+      <div className='DateView'>
         <div className={cx('listWrapper', {'inlineHeader': new Date(year, month - 1, 1).getDay() > 2})}>
           {visible ? <div className="header">{year}년 {month}월</div> : ''}
           {list}

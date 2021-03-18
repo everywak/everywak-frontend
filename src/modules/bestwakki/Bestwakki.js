@@ -292,7 +292,7 @@ class SortList extends Component {
 
 class DateRange extends Component {
   state = {
-    dateStr: '2015/02/26 - 2021/03/10',
+    dateStr: '',
   }
 
   setDateStr = (str) => {
