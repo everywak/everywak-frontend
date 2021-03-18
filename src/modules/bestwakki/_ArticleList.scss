@@ -226,6 +226,8 @@
               font-size: 12px;
               line-height: 12px;
               transition: inherit;
+              text-align: right;
+              white-space: nowrap;
             }
             svg {
               fill: $secondary-text-color;
