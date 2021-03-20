@@ -343,13 +343,21 @@ class SearchBar extends Component {
 
   search() {
     if (this.props.history) {
-      const queryTxt = document.querySelector('input[name=queryTxt]');
-      var val = queryTxt.value ? queryTxt.value : queryTxt.dataset.defaultvalue;
+      const queryTxtElement = document.querySelector('input[name=queryTxt]');
+      var queryTxt = queryTxtElement.value ? queryTxtElement.value : queryTxtElement.dataset.defaultvalue;
+
+      const beginAtElement = document.getElementById('queryDate-start');
+      var beginAt = beginAtElement.value;
+
+      const endAtElement = document.getElementById('queryDate-end');
+      var endAt = endAtElement.value;
 
       addURLParams.bind(this) (
         '/bestwakki', {
         queryTarget: document.querySelector('input[name=searchTarget]').value,
-        queryTxt: val,
+        queryTxt: queryTxt,
+        beginAt: beginAt,
+        endAt: endAt,
       });
     }
   }

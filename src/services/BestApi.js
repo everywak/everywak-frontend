@@ -8,8 +8,8 @@ export function getBestArticles(data) {
     perPage: '30',
     queryTarget: 'title', 
     queryTxt: '', 
-    beginAt: '2015-02-26', 
-    endAt: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0,10)
+    beginAt: 1424908800, 
+    endAt: parseInt(Date.now() / 1000)
   }
 
   const ptNum = /[^0-9]/g;
@@ -35,15 +35,11 @@ export function getBestArticles(data) {
 
   const queryTxt = data.queryTxt || _default.queryTxt;
 
-  const beginAt = (
-    data.beginAt && data.beginAt.search(ptDate) === 0 ? 
-    data.beginAt.match(ptDate)[0] : 
-    _default.beginAt
-  );
+  const beginAt = Math.max(data.beginAt, _default.beginAt);
 
   const endAt = (
-    data.endAt && data.endAt.search(ptDate) === 0 ? 
-    data.endAt.match(ptDate)[0] : 
+    data.endAt >= beginAt && data.endAt <= _default.endAt ? 
+    data.endAt : 
     _default.endAt
   );
   

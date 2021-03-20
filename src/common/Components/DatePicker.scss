@@ -90,12 +90,15 @@
       .endDate {
         display: inline;
   
-        input{
+        .datetime {
           border: none;
-          font-size: 14px;
+          cursor: pointer;
+          display: inline-block;
+          font-size: 13px;
+          line-height: 13px;
           font-weight: 500;
-          padding: 6px 0px 6px 8px;
-          width: 80px;
+          padding: 7px 0px 7px 6px;
+          width: 84px;
           transition: color ease .15s;
 
           &:active,

@@ -245,11 +245,13 @@ class DatePicker extends Component {
         </div>
         <div className="range">
           <div className="dateRange">
-            <div className="startDate">
-              <input type="text" className={cx({'selected': cursor === 'start'})} name={name + "-start"} id={name + "-start"} value={this.genDatetime(start)} onFocus={e => (this.setState({cursor: 'start'}))} />
+            <div className="startDate" onClick={e => (this.setState({cursor: 'start'}))} >
+              <div className={cx('datetime', {'selected': cursor === 'start'})} >{this.genDatetime(start)}</div>
+              <input type="hidden" name={name + "-start"} id={name + "-start"} value={parseInt(start / 1000)} />
             </div>부터
-            <div className="endDate">
-              <input type="text" className={cx({'selected': cursor === 'end'})} name={name + "-end"} id={name + "-end"} value={this.genDatetime(end)} onFocus={e => (this.setState({cursor: 'end'}))} />
+            <div className="endDate" onClick={e => (this.setState({cursor: 'end'}))} >
+              <div className={cx('datetime', {'selected': cursor === 'end'})} >{this.genDatetime(end)}</div>
+              <input type="hidden" name={name + "-end"} id={name + "-end"} value={parseInt(end / 1000) + 24*60*60 - 1} />
             </div>까지
           </div>
           <div className="days">
