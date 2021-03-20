@@ -16,7 +16,7 @@ class DatePicker extends Component {
       {
         type: 'option',
         name: '커스텀',
-        value: 'custom',
+        value: 'none',
       },
       {
         type: 'line',
@@ -161,9 +161,9 @@ class DatePicker extends Component {
     } else if (preset === 'thisyear') {
       start = new Date(new Date(max).getFullYear(), 0, 1).getTime();
     }
-    if (preset !== 'custom') {
+    if (preset !== 'custom' && preset !== 'none') {
       this.setDateTimestampAll(start, end);
-    } else {
+    } else if (preset === 'custom') {
       this.setDateTimestampAll(targetStart, targetEnd);
     }
   }
@@ -185,7 +185,7 @@ class DatePicker extends Component {
     const { start, end } = this.state;
     const startDate = new Date(start);
     const endDate = new Date(end);
-    var preset = 'custom';
+    var preset = 'none';
     if (end === max) {
       if (start === min) {
         preset = 'all';
