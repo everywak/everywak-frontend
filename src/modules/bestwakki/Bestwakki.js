@@ -210,7 +210,7 @@ class SortList extends Component {
     defaultSort: 'time'
   }
   state = {
-    sort: '',
+    sort: 'time',
     px: 0,
     x: 0,
     pw: 0,
@@ -218,24 +218,25 @@ class SortList extends Component {
   };
 
   setSortTarget(val) {
+    const prev = this.state.sort;
     this.setState({
       sort: val
     });
-    if (this.props.history) {
+    if (this.props.history && val !== prev) {
       addURLParams.bind(this) (
         '/bestwakki', {
         orderBy: val
       });
     }
     document.getElementById(val).checked = true;
-    this.showAnimSortTarget(val);
   }
 
-  showAnimSortTarget(val) {
-    var parentRect = document.getElementById('SortList').getBoundingClientRect();
-    var currentRect = document.getElementById('hoverRect').getBoundingClientRect();
-    var target = document.querySelector('#' + val + '+ label');
-    var targetRect = target.getBoundingClientRect();
+  showAnimSortTarget(prevVal, targetVal) {
+    const parentRect = document.getElementById('SortList').getBoundingClientRect();
+    const current = document.querySelector('#' + (prevVal ? prevVal : 'time') + '+ label');
+    const target = document.querySelector('#' + targetVal + '+ label');
+    const currentRect = current.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
     this.setState({
       px: currentRect.left - parentRect.left,
       x: targetRect.left - parentRect.left,
@@ -244,14 +245,26 @@ class SortList extends Component {
     });
   }
 
+  onChanged = (val) => {
+    this.showAnimSortTarget(this.state.sort, val);
+    setTimeout(() => {
+      this.setSortTarget(val);
+    }, 300);
+  };
+
   componentDidMount () {
-    if (this.state.sort === '') {
-      var { search } = this.props.location || {};
-      var { orderBy } = func.getURLParams(search);
-      if (!this.props.data.find(e => {return e.value === orderBy})) {
-        orderBy = this.props.defaultSort;
-      }
-      this.setSortTarget(orderBy);
+    var { search } = this.props.location || {};
+    var { orderBy } = func.getURLParams(search);
+    if (!this.props.data.find(e => {return e.value === orderBy})) {
+      orderBy = this.props.defaultSort;
+    }
+    this.showAnimSortTarget(orderBy, orderBy);
+    this.setSortTarget(orderBy);
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (prevState.sort !== this.state.sort) {
+      this.showAnimSortTarget(this.state.sort, this.state.sort);
     }
   }
 
@@ -282,7 +295,7 @@ class SortList extends Component {
     );
 
     return (
-      <div id="SortList" className="SortList" onChange={event => this.setSortTarget(event.target.value)}>
+      <div id="SortList" className="SortList" onChange={event => this.onChanged(event.target.value)}>
         <HoverRect className="hoverRect" id="hoverRect" />
         {list}
       </div>

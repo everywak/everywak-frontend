@@ -214,6 +214,7 @@
   
         .sortItem {
           position: relative;
+          user-select: none;
   
           input[type=radio] {
             position: absolute;
