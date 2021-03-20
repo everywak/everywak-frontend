@@ -8,12 +8,11 @@ class Dropdown extends Component {
   static defaultProps = {
     values: [],
     name: '',
-    defaultName: '',
-    defaultValue: '',
+    value: '',
   }
   state = {
-    name: this.props.defaultName,
-    value: this.props.defaultValue,
+    name: '',
+    value: this.props.value,
     x1: 0,
     y1: 0,
     x2: 0,
@@ -82,6 +81,19 @@ class Dropdown extends Component {
   componentDidMount() {
     window.addEventListener('resize', () => this.onWindowResize(this));
     window.addEventListener('scroll', () => this.onWindowScroll(this));
+    const { value } = this.state;
+    var item;
+    if (value && (item = this.props.values.find(v => (v.value === value)))) {
+      this.setState({
+        name: item.name
+      });
+    } else {
+      const defaultItem = this.props.values.find((v, i, o) => (i === 0));
+      this.setState({
+        name: defaultItem.name,
+        value: defaultItem.value
+      });
+    }
   }
 
   render() {
