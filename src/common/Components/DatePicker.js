@@ -9,6 +9,8 @@ class DatePicker extends Component {
     name: '',
     min: 0,
     max: 0,
+    start: 0,
+    end: 0,
     parent: null,
     preset: [
       {
@@ -141,8 +143,9 @@ class DatePicker extends Component {
     } 
   }
 
-  setPreset = (preset) => {
+  setPreset = (data) => {
     const { min, max } = this.props;
+    const { preset, targetStart, targetEnd } = data;
     const day = 24*60*60*1000;
     var start = min, end = max;
     if (preset === 'today') {
@@ -160,6 +163,8 @@ class DatePicker extends Component {
     }
     if (preset !== 'custom') {
       this.setDateTimestampAll(start, end);
+    } else {
+      this.setDateTimestampAll(targetStart, targetEnd);
     }
   }
 
@@ -208,7 +213,12 @@ class DatePicker extends Component {
   }
 
   componentDidMount () {
-    this.setPreset('all');
+    const { min, max, start, end } = this.props;
+    this.setPreset({
+      preset: 'custom',
+      targetStart: (start !== -1 ? start : min),
+      targetEnd: (end !== -1 ? end : max),
+    });
     if (this.props.opened) {
       this.dateList = this.genMonths(this.props.min, this.props.max);
     }
@@ -285,7 +295,7 @@ class PresetItem extends Component {
     const { name, value, selected, parent, onclick } = this.props;
 
     return (
-      <div className={cx('presetItem', {checked: selected})} id={parent.props.name + '_' + value} onClick={e => onclick(value)}>
+      <div className={cx('presetItem', {checked: selected})} id={parent.props.name + '_' + value} onClick={e => onclick({preset: value})}>
         <div className="marker" />
         <span className="name">{name}</span>
       </div>

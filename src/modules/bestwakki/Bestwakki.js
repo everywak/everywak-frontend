@@ -19,8 +19,17 @@ class Bestwakki extends Component {
   state = {
     list: [],
     loaded: false,
-    page: 1
+    page: 1,
   };
+
+  constructor (props) {
+    super(props);
+
+    const { search } = props.location || {};
+    const params = func.getURLParams(search);
+    this.beginAt = (params.beginAt ? params.beginAt * 1000 : -1);
+    this.endAt = (params.endAt ? params.endAt * 1000 : -1);
+  }
 
   fetchArticlesInfo = async ({ reset }) => {
     this.setState({
@@ -53,6 +62,7 @@ class Bestwakki extends Component {
   }
 
   render() {
+    const today = new Date();
     
     return (
       <div className={cx('Bestwakki', {'front': this.props.front})}>
@@ -61,7 +71,7 @@ class Bestwakki extends Component {
           <div className="controlWrapper">
             <SortList history={this.props.history} location={this.props.location} fetchArticlesInfo={this.fetchArticlesInfo} />
             <div className="right">
-              <DateRange />
+              <DateRange name="queryDate" min={1424876400000} max={new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime()} start={this.beginAt} end={this.endAt} />
               <SearchBar history={this.props.history} location={this.props.location} />
             </div>
           </div>
@@ -304,6 +314,13 @@ class SortList extends Component {
 }
 
 class DateRange extends Component {
+  static defaultProps = {
+    name: '',
+    min: 0,
+    max: 0,
+    start: -1,
+    end: -1,
+  };
   state = {
     dateStr: '',
     opened: false,
@@ -332,8 +349,8 @@ class DateRange extends Component {
   }
 
   render() {
+    const { name, min, max, start, end } = this.props;
     const { opened, dateStr } = this.state;
-    const today = new Date();
 
     return (
       <div className="DateRange">
@@ -345,7 +362,7 @@ class DateRange extends Component {
         </div>
         <div className="closeArea" onClick={e => this.close()}></div>
         <div className="dateList">
-          <DatePicker name="queryDate" min={1424876400000} max={new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime()} parent={this} opened={opened} />
+          <DatePicker name={name} min={min} max={max} start={start} end={end} parent={this} opened={opened} />
         </div>
       </div>
     );
