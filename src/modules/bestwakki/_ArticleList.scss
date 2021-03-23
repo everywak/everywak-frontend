@@ -89,6 +89,7 @@
         }
       }
 
+      .DateRange,
       .SearchBar {
         display: none;
       }
@@ -198,79 +199,8 @@
         display: flex;
         align-items: center;
         flex-direction: row;
-
-        .DateRange {
-          user-select: none;
-
-          &.all {
-            
-            .dateBtn {
-
-              .dateWrapper {
-                color: $secondary-text-color;
-              }
-            }
-          }
-
-          .dateBtn {
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            flex-direction: row;
-            padding: 6px 8px;
-            transition: color ease .15s, background-color ease .15s;
-
-            .dateWrapper {
-              color: $secondary-text-color;
-              font-size: 12px;
-              line-height: 12px;
-              transition: inherit;
-              text-align: right;
-              white-space: nowrap;
-            }
-            svg {
-              fill: $secondary-text-color;
-              margin-left: 8px;
-            }
-
-            &.opened, &:hover {
-              background-color: rgba(0, 0, 0, .1);
-
-              .dateWrapper {
-                color: $primary-color;
-              }
-              svg {
-                fill: $primary-color;
-              }
-            }
-          }
-          .closeArea {
-            opacity: 0;
-            pointer-events: none;
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0);
-            transition: background-color ease .3s;
-            z-index: 99;
-          }
-          .opened + .closeArea {
-            opacity: 1;
-            pointer-events: auto;
-          }
-          .dateList {
-            position: relative;
-            .DatePicker {
-              right: -100px;
-            }
-          }
-        }
         
         .SearchBar {
-          display: flex;
           margin-left: 4px;
         }
       }

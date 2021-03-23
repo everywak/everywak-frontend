@@ -4,7 +4,7 @@
  */
 export function getURLParams (url) {
 
-  var param = new Array();
+  var param = [];
   
   try {
     url = decodeURIComponent(url);
@@ -36,4 +36,18 @@ export function toURLParams (arr) {
     key => encoded.append(key, arr[key])
   );
   return encoded.toString();
+}
+
+
+export function addURLParams (path, arr) {
+  const { search } = this.props.location || {};
+  const params = getURLParams(search);
+  Object.keys(arr).map(
+    key => params[key] = arr[key]
+  );
+  
+  this.props.history.push({
+    pathname: path,
+    search: toURLParams(params)
+  });
 }
