@@ -21,10 +21,11 @@ header.header {
 
   .left, 
   .right {
+    position: relative;
     width: 52px;
     height: 52px;
 
-    button {
+    & > button {
       background-color: transparent;
       border: none;
       cursor: pointer;
