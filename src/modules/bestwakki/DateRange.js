@@ -18,10 +18,15 @@ class DateRange extends Component {
     opened: false,
   }
 
-  setDateStr = (str) => {
+  setDateStr = (start, end) => {
     this.setState({
-      dateStr: str,
+      dateStr: this.genDatetime(start) + ' - ' + this.genDatetime(end),
     });
+  }
+
+  genDatetime (time) {
+    const date = new Date(time);
+    return date.getFullYear() + '. ' + (date.getMonth() + 1) + '. ' + date.getDate() + '.';
   }
 
   open = () => {

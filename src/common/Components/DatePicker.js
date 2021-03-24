@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styled, { keyframes } from "styled-components";
 import styles from './DatePicker.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
@@ -118,7 +117,7 @@ class DatePicker extends Component {
         cursor: 'end'
       });
       if (parent && parent.setDateStr) {
-        parent.setDateStr(this.genDatetime(timestamp) + ' - ' + this.genDatetime(end));
+        parent.setDateStr(timestamp, end);
       } 
     } else if (type === 'end') {
       this.setState({
@@ -126,7 +125,7 @@ class DatePicker extends Component {
         cursor: 'start'
       });
       if (parent && parent.setDateStr) {
-        parent.setDateStr(this.genDatetime(start) + ' - ' + this.genDatetime(timestamp));
+        parent.setDateStr(start, timestamp);
       } 
     }
   }
@@ -139,7 +138,7 @@ class DatePicker extends Component {
     });
     const { parent } = this.props;
     if (parent && parent.setDateStr) {
-      parent.setDateStr(this.genDatetime(start) + ' - ' + this.genDatetime(end));
+      parent.setDateStr(start, end);
     } 
   }
 
