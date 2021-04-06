@@ -5,6 +5,8 @@ import styles from './Bestwakki.scss';
 import Spinner from '../../common/Components/Spinner';
 import SearchBar from './SearchBar';
 import DateRange from './DateRange';
+import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
+import MoreVertRoundedIcon from '@material-ui/icons/MoreVertRounded';
 import * as service from '../../services/BestApi';
 import * as func from '../../common/funtions';
 
@@ -78,10 +80,10 @@ class Bestwakki extends Component {
         </div>
         <ArticleList front={this.props.front} data={this.state.list} loaded={this.state.loaded} />
         <div className="more">
-          <svg className="frontOnly" enable-background="new 0 0 24 24" viewBox="0 0 24 24" width="18px" height="18px"><g><path d="M0,0h24v24H0V0z" fill="none"/></g><g><g><g><path d="M12,8c1.1,0,2-0.9,2-2s-0.9-2-2-2s-2,0.9-2,2S10.9,8,12,8z M12,10c-1.1,0-2,0.9-2,2s0.9,2,2,2s2-0.9,2-2S13.1,10,12,10z M12,16c-1.1,0-2,0.9-2,2s0.9,2,2,2s2-0.9,2-2S13.1,16,12,16z"/></g></g></g></svg>
+          <MoreVertRoundedIcon className="frontOnly" fontSize="small" />
           <div className="moreLoad" onClick={e => this.fetchArticlesInfo({reset: false})}>
             <span>더 보기</span>
-            <svg viewBox="0 0 24 24" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+            <ExpandMoreRoundedIcon fontSize="medium" />
           </div>
         </div>
       </div>
