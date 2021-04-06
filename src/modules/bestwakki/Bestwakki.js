@@ -112,6 +112,28 @@ class ArticleList extends Component {
     loaded: false
   }
 
+  skeleton = 
+    <li className='Article skeleton'>
+      <span className="txt_area">
+        <span className="board_txt"><span className="skeletonItem">ㅇㅇㅇㅇㅇ</span></span>
+        <strong className="tit"><span className="skeletonItem">ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</span></strong>
+        <div className="user_area pc">
+          <span className="nickname"><span className="skeletonItem">ㅇㅇㅇㅇ</span></span>
+          <span className="datetime"><span className="skeletonItem">00:00:00</span></span>
+          <span className="view"><span className="skeletonItem">000</span></span>
+          <span className="like"><span className="skeletonItem">000</span></span>
+          <span className="comment"><span className="skeletonItem">000</span></span>
+        </div>
+        <div className="user_area mobile">
+          <span className="skeletonItem">ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</span>
+        </div>
+      </span>
+      <span className="thumb_area">
+        <div className="thumb skeletonItem">
+        </div>
+      </span>
+    </li>;
+
   render() {
     const { data } = this.props;
     const list = data.slice(0, this.props.front ? Math.min(4, data.length) : data.length).map(
@@ -130,9 +152,8 @@ class ArticleList extends Component {
     return (
       <ul className="ArticleList">
         <Article header={true} key={listHeader.articleId} data={listHeader} />
-
         {list}
-        {this.props.loaded ? null : <Spinner caption="인기글 로딩중..."/>}
+        {!this.props.loaded && <Spinner struct={this.skeleton} structLength={8} />}
       </ul>
     );
   }

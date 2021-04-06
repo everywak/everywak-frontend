@@ -140,7 +140,7 @@
         .user_area {
           width: 245px;
   
-          span {
+          & > span {
             box-sizing: border-box;
             display: block;
             float: left;

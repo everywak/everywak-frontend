@@ -148,6 +148,40 @@
   &.front {
     @include desktop {
       @include ArticleListMobile;
+      .Spinner {
+        .Article {
+
+          &:nth-child(5),
+          &:nth-child(6),
+          &:nth-child(7),
+          &:nth-child(8) {
+            display: none;
+          }
+          .txt_area {
+            .user_area {
+              display: inline-block;
+              line-height: 14px;
+              width: fit-content;
+              &.pc {
+                display: none;
+              }
+              &.mobile {
+                display: inline-block;
+              }
+              & > span {
+                margin-left: 0;
+              }
+            }
+          }
+          .thumb_area {
+            .thumb {
+              border-radius: 8px;
+              width: 64px;
+              height: 64px;
+            }
+          }
+        }
+      }
     }
     @include not-desktop {
       .ArticleList {
@@ -161,11 +195,99 @@
             border-bottom: solid 1px $component-primary-border-color;
           }
         }
+        .Spinner {
+          .Article:nth-child(4),
+          .Article:nth-child(5),
+          .Article:nth-child(6),
+          .Article:nth-child(7),
+          .Article:nth-child(8) {
+            display: none;
+          }
+        }
       }
     }
 
     .moduleHeader {
       display: none;
+    }
+  }
+
+  .Spinner {
+    display: block;
+    height: auto;
+
+    .Article {
+      pointer-events: none;
+      user-select: none;
+
+      .txt_area {
+
+        .board_txt,
+        strong.tit,
+        .nickname {
+          color: transparent;
+        }
+        .board_txt span,
+        strong.tit span {
+          display: inline-block;
+        }
+        .board_txt span {
+          line-height: 14px;
+        }
+        strong.tit span {
+          line-height: 16px;
+        }
+        .user_area {
+          color: transparent;
+          
+          * > span {
+            display: inline-block;
+            line-height: 14px;
+          }
+          .datetime span,
+          .view span,
+          .like span {
+            text-align: center;
+          }
+        }
+      }
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    @include desktop {
+      .Article {
+        .txt_area {
+          .user_area.mobile {
+            display: none;
+          }
+        }
+      }
+    }
+    @include not-desktop {
+      .Article {
+        .txt_area {
+          .user_area {
+            display: inline-block;
+            line-height: 14px;
+            width: fit-content;
+            &.pc {
+              display: none;
+            }
+            & > span {
+              margin-left: 0;
+            }
+          }
+        }
+        .thumb_area {
+          .thumb {
+            border-radius: 8px;
+            width: 64px;
+            height: 64px;
+          }
+        }
+      }
     }
   }
 }
