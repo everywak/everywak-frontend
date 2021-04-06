@@ -81,7 +81,7 @@ class Bestwakki extends Component {
         <ArticleList front={this.props.front} data={this.state.list} loaded={this.state.loaded} />
         <div className="more">
           <MoreVertRoundedIcon className="frontOnly" fontSize="small" />
-          <div className="moreLoad" onClick={e => this.fetchArticlesInfo({reset: false})}>
+          <div className={cx('moreLoad', {hide: !this.state.loaded})} onClick={e => this.fetchArticlesInfo({reset: false})}>
             <span>더 보기</span>
             <ExpandMoreRoundedIcon fontSize="medium" />
           </div>
