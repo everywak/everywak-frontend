@@ -7,6 +7,9 @@ import SearchBar from './SearchBar';
 import DateRange from './DateRange';
 import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
 import MoreVertRoundedIcon from '@material-ui/icons/MoreVertRounded';
+import VisibilityRoundedIcon from '@material-ui/icons/VisibilityRounded';
+import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
+import CommentRoundedIcon from '@material-ui/icons/CommentRounded';
 import * as service from '../../services/BestApi';
 import * as func from '../../common/funtions';
 
@@ -200,9 +203,18 @@ class Article extends Component {
           <div className="user_area">
             <span className="nickname">{nickname}</span>
             <span className="datetime">{aheadOfWriteDate}</span>
-            <span className="view">{readCount}</span>
-            <span className="like">{upCount}</span>
-            <span className="comment">{commentCount}</span>
+            <span className="view">
+              <VisibilityRoundedIcon className="icon" fontSize="small" />
+              {readCount}
+            </span>
+            <span className="like">
+              <FavoriteRoundedIcon className="icon" fontSize="small" />
+              {upCount}
+            </span>
+            <span className="comment">
+              <CommentRoundedIcon className="icon" fontSize="small" />
+              {commentCount}
+            </span>
           </div>
         </a>
         {representImage && representImage !== '' ? thumb_area : ''}

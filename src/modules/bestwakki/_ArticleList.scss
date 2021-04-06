@@ -24,6 +24,8 @@
           margin-right: 6px;
         }
         .user_area {
+          display: flex;
+          flex-direction: row;
           line-height: 12px;
           margin-top: 4px;
 
@@ -37,23 +39,15 @@
             width: auto;
           }
 
-          .view::before {
-            content: '\e950';
-            padding-right: 1px;
-            color: $secondary-text-color;
-            font-family: 'xeicon';
-          }
-          .like::before {
-            content: '\ea11';
-            padding-right: 1px;
-            color: $secondary-text-color;
-            font-family: 'xeicon';
-          }
-          .comment::before {
-            content: '\e9d8';
-            padding-right: 1px;
-            color: $secondary-text-color;
-            font-family: 'xeicon';
+          .view, .like, .comment {
+            display: inline-flex;
+            .icon {
+              display: inline-block;
+              padding-top: 1px;
+              margin-right: 2px;
+              width: 12px;
+              height: 12px;
+            }
           }
         }
       }
@@ -157,6 +151,11 @@
           .like {
             width: 40px;
             text-align: center;
+          }
+          .view, .like, .comment {
+            .icon {
+              display: none;
+            }
           }
         }
 
