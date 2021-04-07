@@ -25,6 +25,7 @@ class Bestwakki extends Component {
     list: [],
     loaded: false,
     page: 1,
+    loadedLength: 1,
   };
 
   constructor (props) {
@@ -46,14 +47,15 @@ class Bestwakki extends Component {
     const post = await service.getBestArticles(params);
 
     if (post.status === 200) {
-      const list = reset ? 
-        post.data.message.result.popularArticleList : 
-        this.state.list.concat(post.data.message.result.popularArticleList);
+      const currList = this.state.list;
+      const loadedList = post.data.message.result.popularArticleList;
+      const list = reset ? loadedList : currList.concat(loadedList);
       
       this.setState({
         list: list,
         loaded: true,
         page: params.page,
+        loadedLength: loadedList.length
       });
     }
   };
@@ -84,7 +86,7 @@ class Bestwakki extends Component {
         <ArticleList front={this.props.front} data={this.state.list} loaded={this.state.loaded} />
         <div className="more">
           <MoreVertRoundedIcon className="frontOnly" fontSize="small" />
-          <div className={cx('moreLoad', {hide: !this.state.loaded})} onClick={e => this.fetchArticlesInfo({reset: false})}>
+          <div className={cx('moreLoad', {hide: !this.state.loaded || !this.state.loadedLength})} onClick={e => this.fetchArticlesInfo({reset: false})}>
             <span>더 보기</span>
             <ExpandMoreRoundedIcon fontSize="medium" />
           </div>
