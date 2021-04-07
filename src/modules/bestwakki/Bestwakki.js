@@ -76,16 +76,18 @@ class Bestwakki extends Component {
     
     return (
       <div className={cx('Bestwakki', {'front': front})}>
-        <div className="moduleHeader">
-          <h1>왁물원 인기글</h1>
-          <div className="controlWrapper">
-            <SortList history={history} location={location} fetchArticlesInfo={this.fetchArticlesInfo} />
-            <div className="right">
-              <DateRange name="queryDate" min={1424876400000} max={new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime()} start={this.beginAt} end={this.endAt} />
-              <SearchBar history={history} location={location} />
+        {!front && 
+          <div className="moduleHeader">
+            <h1>왁물원 인기글</h1>
+            <div className="controlWrapper">
+              <SortList history={history} location={location} fetchArticlesInfo={this.fetchArticlesInfo} />
+              <div className="right">
+                <DateRange name="queryDate" min={1424876400000} max={new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime()} start={this.beginAt} end={this.endAt} />
+                <SearchBar history={history} location={location} />
+              </div>
             </div>
           </div>
-        </div>
+          }
         <ArticleList front={front} data={list} loaded={loaded} />
         <div className="more">
           <MoreVertRoundedIcon className="frontOnly" fontSize="small" />
