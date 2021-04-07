@@ -16,13 +16,13 @@ class Frontpage extends Component {
     
     return (
       <div className="Frontpage">
-        <ArticleList />
+        <FrontPanelList />
       </div>
     );
   }
 }
 
-class ArticleList extends Component {
+class FrontPanelList extends Component {
   static defaultProps = {
     data: [
       {
@@ -49,21 +49,7 @@ class ArticleList extends Component {
   render() {
     const { data } = this.props;
     const list = data.map(
-      data => (
-      <li key={data.id} className="FrontPanel">
-        <div className="panelHeader">
-          <Link to={data.link}>
-            <span className="tit">{data.title}</span>
-            <span className="more">
-              더 보기 <KeyboardArrowRightRoundedIcon fontSize="small"/>
-            </span>
-          </Link>
-        </div>
-        <div className="compContainer">
-          {data.component}
-        </div>
-      </li>
-      )
+      data => <FrontPanel key={data.id} data={data} />
     );
 
     return (
@@ -74,46 +60,33 @@ class ArticleList extends Component {
   }
 }
 
-class Article extends Component {
+class FrontPanel extends Component {
   static defaultProps = {
     data: {
-      articleId: "",
-      menuName: "유머, 정보 게시판",
-      subject: "제목 어쩌구저쩌구",
-      nickname: "ㅇㅇㅇㅇ",
-      aheadOfWriteDate: "21.02.27.",
-      readCount: "120",
-      upCount: "330",
-      commentCount: "10",
-      representImage: "",
+      id: -1,
+      title: "모듈",
+      link: "/",
+      component: null
     }
   };
 
   render() {
     const { 
-      articleId, menuName, subject, nickname, aheadOfWriteDate, readCount, upCount, commentCount, representImage 
+      link, title, component
     } = this.props.data;
-    const href = "https://cafe.naver.com/steamindiegame/" + articleId.replace(/[^0-9]/g, '');
     return (
-      <li className="Article">
-        <a href={href} className="txt_area" target="_blank" rel="noreferrer">
-          <span class="icon_new_txt">•</span>
-          <span class="board_txt">{menuName}</span>
-          <strong class="tit">{subject}</strong>
-
-          <div class="user_area">
-            <span class="nickname">{nickname}</span>
-            <span class="datetime">{aheadOfWriteDate}</span>
-            <span class="view">{readCount}</span>
-            <span class="like">{upCount}</span>
-            <span class="comment">{commentCount}</span>
-          </div>
-        </a>
-        <a href={href} class="thumb_area" target="_blank" rel="noreferrer">
-          <div class="thumb">
-            <img src={representImage} width="64px" height="64px" alt="썸네일" onerror="this.style.display='none';" referrerPolicy="no-referrer"/>
-          </div>
-        </a>
+      <li className="FrontPanel">
+        <div className="panelHeader">
+          <Link to={link}>
+            <span className="tit">{title}</span>
+            <span className="more">
+              더 보기 <KeyboardArrowRightRoundedIcon fontSize="small"/>
+            </span>
+          </Link>
+        </div>
+        <div className="compContainer">
+          {component}
+        </div>
       </li>
     );
   }
