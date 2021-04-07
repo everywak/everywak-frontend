@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import styles from './Bestwakki.scss';
 
 import Spinner from '../../common/Components/Spinner';
+import Button from '../../common/Components/Button';
 import SearchBar from './SearchBar';
 import DateRange from './DateRange';
 import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
@@ -88,10 +89,15 @@ class Bestwakki extends Component {
         <ArticleList front={front} data={list} loaded={loaded} />
         <div className="more">
           <MoreVertRoundedIcon className="frontOnly" fontSize="small" />
-          <div className={cx('moreLoad', {hide: !loaded || !loadedLength})} onClick={e => this.fetchArticlesInfo({reset: false})}>
-            <span>더 보기</span>
-            <ExpandMoreRoundedIcon fontSize="medium" />
-          </div>
+          <Button 
+            className={cx('moreLoad', {hide: !loaded || !loadedLength})} 
+            href="" 
+            size="fillWidth" 
+            label={<span>더 보기<ExpandMoreRoundedIcon fontSize="medium" /></span>} 
+            showLabel={true} 
+            labelSize="14px" 
+            labelBGColor="transparent" 
+            onclick={e => this.fetchArticlesInfo({reset: false})} />
         </div>
       </div>
     );

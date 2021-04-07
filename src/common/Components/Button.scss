@@ -1,0 +1,87 @@
+@import '../common.scss';
+
+.Button {
+  border-radius: 8px;
+  color: $primary-text-color;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 4px;
+  overflow: hidden;
+  position: relative;
+  width: fit-content;
+  height: 32px;
+  vertical-align: middle;
+  user-select: none;
+
+  &.fillWidth {
+    margin: 0;
+    text-align: center;
+    padding: 2px 0 8px;
+    width: 100%;
+    height: auto;
+  }
+  &.fill {
+    width: 100%;
+    height: 100%;
+  }
+  &::after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0);
+    transition: background-color ease .15s;
+  }
+  @include desktop {
+    &:hover::after {
+      content: ' ';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, .1);
+    }
+  }
+  &:active::after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .1);
+  }
+
+  .icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: inherit;
+    vertical-align: middle;
+
+    img {
+      display: inline-block;
+      width: 18px;
+      height: auto;
+    }
+
+    & + .label {
+      background-color: #fff;
+    }
+  }
+
+  .label {
+    display: inline-block;
+    box-sizing: border-box;
+    background-color: $primary-color;
+    font-size: 12px;
+    font-weight: 500;
+    height: inherit;
+    padding: 6px 8px 0 6px;
+    vertical-align: middle;
+  }
+}

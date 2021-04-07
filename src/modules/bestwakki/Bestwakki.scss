@@ -90,7 +90,6 @@
       display: block;
       font-size: 14px;
       margin: 0 auto 16px;
-      padding: 8px 0;
       text-align: center;
       width: 100%;
       transition: background-color ease .3s;
@@ -105,10 +104,7 @@
           top: 6px;
         }
       }
-
       &:active {
-        background: rgba(0, 0, 0, .1);
-
         svg {
           top: 12px;
         }

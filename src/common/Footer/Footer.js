@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Route, Link } from 'react-router-dom';
+
+import Button from '../Components/Button';
+
 import styles from './Footer.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
@@ -53,7 +56,12 @@ class Footer extends Component {
     const { btns } = this.props;
     const btnList = btns.map(
       btn => (btn.type === 'btn'?
-      <SnsButton key={btn.id} info={btn} /> :
+      <Button key={btn.id} 
+        href={btn.href} 
+        iconSrc={btn.img} 
+        iconBGColor={btn.color} 
+        label={btn.label} 
+        showLabel={btn.label} /> :
       <span key={btn.id} className="line"></span>
       )
     );
@@ -65,32 +73,6 @@ class Footer extends Component {
         특정 플랫폼에 귀속되어 있지 않은 개인이 운영하는 사이트입니다.</div>
         <div className="copyright">에브리왁굳 ⓒ 2020-2021. Wei756. All rights reserved.</div>
       </footer>
-    );
-  }
-}
-
-class SnsButton extends Component {
-  static defaultProps = {
-    info: {
-      color: '#0085ff',
-      href: '#',
-      img: '',
-      label: '',
-    }
-  };
-
-  render() {
-    const { color, href, img, label } = this.props.info;
-    const style = {
-      background: color
-    }
-    return (
-      <a className="SnsButton" href={href}>
-        <div className="icon" style={style}>
-          <img src={img} alt=""/>
-        </div>
-        {label !== '' ? <div className="label">{label}</div> : ''}
-      </a>
     );
   }
 }
