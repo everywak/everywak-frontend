@@ -69,24 +69,26 @@ class Bestwakki extends Component {
   }
 
   render() {
+    const { front, history, location } = this.props;
+    const { list, loaded, loadedLength } = this.state;
     const today = new Date();
     
     return (
-      <div className={cx('Bestwakki', {'front': this.props.front})}>
+      <div className={cx('Bestwakki', {'front': front})}>
         <div className="moduleHeader">
           <h1>왁물원 인기글</h1>
           <div className="controlWrapper">
-            <SortList history={this.props.history} location={this.props.location} fetchArticlesInfo={this.fetchArticlesInfo} />
+            <SortList history={history} location={location} fetchArticlesInfo={this.fetchArticlesInfo} />
             <div className="right">
               <DateRange name="queryDate" min={1424876400000} max={new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime()} start={this.beginAt} end={this.endAt} />
-              <SearchBar history={this.props.history} location={this.props.location} />
+              <SearchBar history={history} location={location} />
             </div>
           </div>
         </div>
-        <ArticleList front={this.props.front} data={this.state.list} loaded={this.state.loaded} />
+        <ArticleList front={front} data={list} loaded={loaded} />
         <div className="more">
           <MoreVertRoundedIcon className="frontOnly" fontSize="small" />
-          <div className={cx('moreLoad', {hide: !this.state.loaded || !this.state.loadedLength})} onClick={e => this.fetchArticlesInfo({reset: false})}>
+          <div className={cx('moreLoad', {hide: !loaded || !loadedLength})} onClick={e => this.fetchArticlesInfo({reset: false})}>
             <span>더 보기</span>
             <ExpandMoreRoundedIcon fontSize="medium" />
           </div>
@@ -317,14 +319,15 @@ class SortList extends Component {
 
 
   render() {
+    const { px, pw, x, w } = this.state;
     const animSortTarget = keyframes`
       0% {
-        left: ${this.state.px + 'px'};
-        width: ${this.state.pw + 'px'};
+        left: ${px + 'px'};
+        width: ${pw + 'px'};
       }
       100% {
-        left: ${this.state.x + 'px'};
-        width: ${this.state.w + 'px'};
+        left: ${x + 'px'};
+        width: ${w + 'px'};
       }
     `
     const HoverRect = styled.div`
