@@ -16,6 +16,23 @@ class BestwakkiHeader extends Component {
     opened: false,
   }
 
+  constructor (props) {
+    super(props);
+
+    const { search } = props.location || {};
+    const { beginAt, endAt } = func.getURLParams(search);
+    this.beginAt = (
+      beginAt ? 
+      (func.isDateStr(beginAt) ? new Date(beginAt).getTime() : beginAt * 1000) : 
+      -1
+    );
+    this.endAt = (
+      beginAt ? 
+      (func.isDateStr(endAt) ? new Date(endAt).getTime() : endAt * 1000) : 
+      -1
+    );
+  }
+
   open = () => {
     this.setState({
       opened: true,
@@ -36,6 +53,7 @@ class BestwakkiHeader extends Component {
     const { opened } = this.state;
     const tablet_s_width = 960;
     const today = new Date();
+    const min = 1424876400000, max = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
     
     return (
       <MediaQuery maxWidth={tablet_s_width - 1}>
@@ -50,7 +68,7 @@ class BestwakkiHeader extends Component {
             </div>
             <div className="dialogComp">
               <div className="label">검색 기간</div>
-              <DateRange name="queryDate" min={1424876400000} max={new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime()} start={this.beginAt} end={this.endAt} />
+              <DateRange name="queryDate" min={min} max={max} start={this.beginAt} end={this.endAt} />
             </div>
             <div className="dialogComp">
               <div className="label">검색어</div>

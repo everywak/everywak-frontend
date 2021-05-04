@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import * as func from '../common/funtions';
+
 export function getBestArticles(data) {
 
   const _default = {
@@ -8,7 +10,7 @@ export function getBestArticles(data) {
     perPage: '30',
     queryTarget: 'title', 
     queryTxt: '', 
-    beginAt: 1424908800, 
+    beginAt: 1424876400, 
     endAt: parseInt(Date.now() / 1000)
   }
 
@@ -35,8 +37,18 @@ export function getBestArticles(data) {
 
   const queryTxt = data.queryTxt || _default.queryTxt;
 
-  const beginAt = Math.max(data.beginAt, _default.beginAt);
+  const beginAt = Math.max(
+    (
+      data.beginAt && func.isDateStr(data.beginAt) ? parseInt(new Date(data.beginAt).getTime() / 1000 - 9*60*60) : data.beginAt
+    ), 
+    _default.beginAt
+  );
 
+  data.endAt = (
+    data.endAt && func.isDateStr(data.endAt) ? parseInt(new Date(data.endAt).getTime() / 1000) : data.endAt
+  );
+  console.log(data.beginAt);
+  console.log(data.endAt);
   const endAt = (
     data.endAt >= beginAt && data.endAt <= _default.endAt ? 
     data.endAt : 

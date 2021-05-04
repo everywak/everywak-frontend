@@ -76,18 +76,33 @@
     }
 
     .DateRange {
-      border: solid 1px $component-secondary-border-color;
-      border-radius: 8px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
       width: 100%;
       height: 42px;
 
       .dateBtn {
+        border: solid 1px $component-secondary-border-color;
+        border-radius: 8px;
         box-sizing: border-box;
+        flex: 1;
         height: 100%;
-        padding: 6px 12px 6px 16px;
+        padding: 0;
 
         &:hover {
           background-color: transparent;
+        }
+        input[type=date] {
+          background: transparent;
+          border: none;
+          font-family: 'Noto Sans KR', sans-serif;
+          padding: 6px 12px 6px 16px;
+          width: 100%;
+
+          &:focus {
+            outline: none;
+          }
         }
         .dateWrapper {
           font-size: 14px;
@@ -95,6 +110,10 @@
         svg {
           margin-left: auto;
         }
+      }
+      .dateDivide {
+        color: $secondary-text-color;
+        margin: 0 8px;
       }
       .DatePicker {
         top: auto;

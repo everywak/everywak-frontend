@@ -51,3 +51,11 @@ export function addURLParams (path, arr) {
     search: toURLParams(params)
   });
 }
+
+/** 
+ * @description date가 input[type=date]의 value로 맞는 형태인지 여부를 반환합니다.
+ */
+export function isDateStr (date) {
+  const dateStrRegExp = /([0-9]{4}-[0-9]{2}-[0-9]{2})/;
+  return date.length === 10 && dateStrRegExp.test(date);
+}

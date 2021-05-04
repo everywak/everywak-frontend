@@ -33,9 +33,17 @@ class Bestwakki extends Component {
     super(props);
 
     const { search } = props.location || {};
-    const params = func.getURLParams(search);
-    this.beginAt = (params.beginAt ? params.beginAt * 1000 : -1);
-    this.endAt = (params.endAt ? params.endAt * 1000 : -1);
+    const { beginAt, endAt } = func.getURLParams(search);
+    this.beginAt = (
+      beginAt ? 
+      (func.isDateStr(beginAt) ? new Date(beginAt).getTime() : beginAt * 1000) : 
+      -1
+    );
+    this.endAt = (
+      endAt ? 
+      (func.isDateStr(endAt) ? new Date(endAt).getTime() : endAt * 1000) : 
+      -1
+    );
   }
 
   fetchArticlesInfo = async ({ reset }) => {
@@ -73,6 +81,7 @@ class Bestwakki extends Component {
     const { front, history, location } = this.props;
     const { list, loaded, loadedLength } = this.state;
     const today = new Date();
+    const min = 1424876400000, max = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
     
     return (
       <div className={cx('Bestwakki', {'front': front})}>
@@ -82,7 +91,7 @@ class Bestwakki extends Component {
             <div className="controlWrapper">
               <SortList history={history} location={location} fetchArticlesInfo={this.fetchArticlesInfo} />
               <div className="right">
-                <DateRange name="queryDate" min={1424876400000} max={new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime()} start={this.beginAt} end={this.endAt} />
+                <DateRange name="queryDate" min={min} max={max} start={this.beginAt} end={this.endAt} />
                 <SearchBar history={history} location={location} />
               </div>
             </div>
