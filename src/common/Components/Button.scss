@@ -4,7 +4,8 @@
   border-radius: 8px;
   color: $primary-text-color;
   cursor: pointer;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   margin: 0 4px;
   overflow: hidden;
   position: relative;
@@ -80,8 +81,8 @@
     background-color: $primary-color;
     font-size: 12px;
     font-weight: 500;
-    height: inherit;
-    padding: 6px 8px 0 6px;
+    line-height: 12px;
+    padding: 0 8px 0 6px;
     vertical-align: middle;
   }
 }
