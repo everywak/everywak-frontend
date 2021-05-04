@@ -13,17 +13,22 @@
   height: 40px;
   @include desktop {
     right: 16px;
+    transform: scale(0);
   }
   @include not-desktop {
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scale(0);
   }
   transition: transform ease .35s;
-  transform: scale(0);
   pointer-events: none;
 
   &.show {
-    transform: scale(1);
+    @include desktop {
+      transform: scale(1);
+    }
+    @include not-desktop {
+      transform: translateX(-50%) scale(1);
+    }
     pointer-events: auto;
   }
 
