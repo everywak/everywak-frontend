@@ -14,7 +14,7 @@ class Button extends Component {
     label: '',
     labelSize: '12px',
     labelBGColor: '',
-    onclick: () => {},
+    onclick: null,
   }
 
   sizes = [
@@ -30,7 +30,7 @@ class Button extends Component {
     const btnSize = this.sizes.filter(val => (val === size)).join() || 'medium';
 
     return (
-      <a className={cx("Button", className, btnSize)} href={href} onClick={e=> {e.preventDefault();onclick(e)}}>
+      <a className={cx("Button", className, btnSize)} href={href} onClick={e=> {if (onclick) {e.preventDefault();onclick(e);}}}>
         {iconSrc && 
           (
             typeof iconSrc === 'object' ?
