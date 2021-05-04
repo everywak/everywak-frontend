@@ -15,6 +15,7 @@ import * as service from '../../services/BestApi';
 import * as func from '../../common/funtions';
 
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 class Bestwakki extends Component {
@@ -90,7 +91,7 @@ class Bestwakki extends Component {
       <div className={cx('Bestwakki', {'front': front})}>
         {!front && 
           <div className="moduleHeader">
-            <h1>왁물원 인기글</h1>
+            <Link to="/bestwakki"><h1>왁물원 인기글</h1></Link>
             <div className="controlWrapper">
               <SortList history={history} location={location} fetchArticlesInfo={this.fetchArticlesInfo} />
               <div className="right">

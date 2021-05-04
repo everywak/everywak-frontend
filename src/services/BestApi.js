@@ -47,8 +47,6 @@ export function getBestArticles(data) {
   data.endAt = (
     data.endAt && func.isDateStr(data.endAt) ? parseInt(new Date(data.endAt).getTime() / 1000) : data.endAt
   );
-  console.log(data.beginAt);
-  console.log(data.endAt);
   const endAt = (
     data.endAt >= beginAt && data.endAt <= _default.endAt ? 
     data.endAt : 
