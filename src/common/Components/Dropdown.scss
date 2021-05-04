@@ -111,9 +111,9 @@
       padding: 8px 0;
       position: fixed;
       top: auto !important;
-      left: 16px !important;
+      left: 0px;
       bottom: 0px;
-      width: calc(100% - 32px) !important;
+      width: 100%;
   
       .option {
         cursor: pointer;
@@ -136,7 +136,10 @@
       }
     }
     &.opened .closeArea {
-      background-color: rgba(0, 0, 0, .05);
+      background-color: transparent;
+      top: auto;
+      bottom: 0;
+      height: 100vh;
     }
   }
 }
