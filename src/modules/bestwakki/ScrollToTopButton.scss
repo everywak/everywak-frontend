@@ -9,16 +9,21 @@
   justify-content: center;
   position: absolute;
   top: -60px;
-  left: 50%;
   width: 40px;
   height: 40px;
-  transform: translateX(-50%);
-  transition: opacity ease .35s;
-  opacity: 0;
+  @include desktop {
+    right: 16px;
+  }
+  @include not-desktop {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  transition: transform ease .35s;
+  transform: scale(0);
   pointer-events: none;
 
   &.show {
-    opacity: 1;
+    transform: scale(1);
     pointer-events: auto;
   }
 
