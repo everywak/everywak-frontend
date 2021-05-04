@@ -32,13 +32,13 @@ class Button extends Component {
     return (
       <a className={cx("Button", className, btnSize)} href={href} onClick={e=> {if (onclick) {e.preventDefault();onclick(e);}}}>
         {iconSrc && 
-          (
-            typeof iconSrc === 'object' ?
-            iconSrc :
             <div className="icon" style={{background: iconBGColor}}>
-              <img src={iconSrc} alt={!showLabel && label ? label : ''} />
+              {
+                typeof iconSrc === 'object' ?
+                iconSrc :
+                <img src={iconSrc} alt={!showLabel && label ? label : ''} />
+              }
             </div>
-          )
         }
         {
           iconSrc && typeof iconSrc === 'object' &&
