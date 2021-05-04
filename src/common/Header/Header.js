@@ -14,7 +14,6 @@ class Header extends Component {
         <div className="left"></div>
         <Link to="/" className="title"><img src="/images/everywak_logo.png" alt="Everywak 로고"/></Link>
         <div className="right">
-          <Route path="/bestwakki" component={BestwakkiHeader}/>
           <button className="moreApp"><img src="/images/grid_view-black-18dp.svg" alt="앱 바로가기 메뉴"/></button>
         </div>
       </header>

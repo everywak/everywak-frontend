@@ -16,6 +16,8 @@ import * as func from '../../common/funtions';
 
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
+import BestwakkiBottomNavigator from './BestwakkiBottomNavigator';
+import { Fragment } from 'react';
 const cx = classNames.bind(styles);
 
 class Bestwakki extends Component {
@@ -90,17 +92,20 @@ class Bestwakki extends Component {
     return (
       <div className={cx('Bestwakki', {'front': front})}>
         {!front && 
-          <div className="moduleHeader">
-            <Link to="/bestwakki"><h1>왁물원 인기글</h1></Link>
-            <div className="controlWrapper">
-              <SortList history={history} location={location} fetchArticlesInfo={this.fetchArticlesInfo} />
-              <div className="right">
-                <DateRange name="queryDate" min={min} max={max} start={this.beginAt} end={this.endAt} />
-                <SearchBar history={history} location={location} />
+          <Fragment>
+            <div className="moduleHeader">
+              <Link to="/bestwakki"><h1>왁물원 인기글</h1></Link>
+              <div className="controlWrapper">
+                <SortList history={history} location={location} fetchArticlesInfo={this.fetchArticlesInfo} />
+                <div className="right">
+                  <DateRange name="queryDate" min={min} max={max} start={this.beginAt} end={this.endAt} />
+                  <SearchBar history={history} location={location} />
+                </div>
               </div>
             </div>
-          </div>
-          }
+            <BestwakkiBottomNavigator />
+          </Fragment>
+        }
         <ArticleList front={front} data={list} loaded={loaded} />
         <div className="more">
           <MoreVertRoundedIcon className="frontOnly" fontSize="small" />

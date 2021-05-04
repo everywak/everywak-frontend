@@ -1,0 +1,23 @@
+@import '../../common/common.scss';
+
+.BestwakkiBottomNavigator {
+  background: white;
+  border-top: 1px solid $component-secondary-border-color;
+  bottom: -48px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  height: 48px;
+  z-index: 100;
+  transition: bottom ease .35s;
+
+  &.opened {
+    bottom: 0px;
+  }
+  .left, .right {
+    height: 100%;
+  }
+}
