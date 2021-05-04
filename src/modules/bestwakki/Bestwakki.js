@@ -31,6 +31,9 @@ class Bestwakki extends Component {
 
   constructor (props) {
     super(props);
+    if (!props.front) {
+      document.title = '에브리왁굳 : 왁물원 인기글';
+    }
 
     const { search } = props.location || {};
     const { beginAt, endAt } = func.getURLParams(search);
@@ -222,17 +225,22 @@ class Article extends Component {
           <strong className="tit">{subject}</strong>
 
           <div className="user_area">
-            <span className="nickname">{nickname}</span>
+            <span className="nickname">
+              <i className="blind">작성자</i>{nickname}
+            </span>
             <span className="datetime">{aheadOfWriteDate}</span>
             <span className="view">
+              <i className="blind">조회수</i>
               <VisibilityRoundedIcon className="icon" fontSize="small" />
               {readCount}
             </span>
             <span className="like">
+              <i className="blind">좋아요</i>
               <FavoriteRoundedIcon className="icon" fontSize="small" />
               {upCount}
             </span>
             <span className="comment">
+              <i className="blind">댓글</i>
               <CommentRoundedIcon className="icon" fontSize="small" />
               {commentCount}
             </span>

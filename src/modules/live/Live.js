@@ -8,6 +8,13 @@ class Live extends Component {
     front: false
   };
 
+  constructor (props) {
+    super(props);
+    if (!props.front) {
+      document.title = '에브리왁굳 : 생방송';
+    }
+  };
+
   render() {
     
     return (

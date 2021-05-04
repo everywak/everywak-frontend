@@ -9,6 +9,7 @@ import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
 import * as func from '../../common/funtions';
 
 import classNames from 'classnames/bind';
+import Button from '../../common/Components/Button';
 const cx = classNames.bind(styles);
 
 class BestwakkiHeader extends Component {
@@ -58,9 +59,12 @@ class BestwakkiHeader extends Component {
     return (
       <MediaQuery maxWidth={tablet_s_width - 1}>
         <div className="BestwakkiHeader">
-          <div className={cx('btnSearch', {opened: opened})} onClick={e => this.toggle()}>
-            <SearchRoundedIcon fontSize="medium" />
-          </div>
+          <Button className={cx('btnSearch', {opened: opened})} onclick={e => this.toggle()}
+            iconSrc={<SearchRoundedIcon fontSize="medium" />} 
+            iconBGColor="transparent"
+            label="인기글 검색 패널 열기"
+            href="."
+            showLabel={false} />
           <div className="closeArea" onClick={e => this.close()}></div>
           <div className={cx('search', {opened: opened})}>
             <div className="dialogTitle">

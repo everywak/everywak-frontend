@@ -32,9 +32,17 @@ class Button extends Component {
     return (
       <a className={cx("Button", className, btnSize)} href={href} onClick={e=> {e.preventDefault();onclick(e)}}>
         {iconSrc && 
-          <div className="icon" style={{background: iconBGColor}}>
-            <img src={iconSrc} alt=""/>
-          </div>
+          (
+            typeof iconSrc === 'object' ?
+            iconSrc :
+            <div className="icon" style={{background: iconBGColor}}>
+              <img src={iconSrc} alt={!showLabel && label ? label : ''} />
+            </div>
+          )
+        }
+        {
+          iconSrc && typeof iconSrc === 'object' &&
+          (!showLabel && label ? <i className="blind">{label}</i>  : '')
         }
         {showLabel && label && 
           <div className="label" style={{background: labelBGColor, fontSize: labelSize}}>

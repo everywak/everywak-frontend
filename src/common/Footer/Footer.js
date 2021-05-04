@@ -16,7 +16,8 @@ class Footer extends Component {
         color: '#9147FF',
         href: 'https://twitch.tv/woowakgood',
         img: '/images/twitch_logo.svg',
-        label: '',
+        label: '우왁굳 트위치',
+        showLabel: false,
       },
       {
         id: 1,
@@ -24,7 +25,8 @@ class Footer extends Component {
         color: '#F00',
         href: 'https://www.youtube.com/channel/UCBkyj16n2snkRg1BAzpovXQ',
         img: '/images/youtube_logo.png',
-        label: '',
+        label: '우왁굳 유튜브',
+        showLabel: false,
       },
       {
         id: 2,
@@ -32,7 +34,8 @@ class Footer extends Component {
         color: '#5AC467',
         href: 'https://cafe.naver.com/steamindiegame',
         img: '/images/wakki_logo.png',
-        label: '',
+        label: '왁물원',
+        showLabel: false,
       },
       {
         id: 3,
@@ -49,6 +52,7 @@ class Footer extends Component {
         href: 'https://github.com/wei756',
         img: '/images/github_logo.svg',
         label: '@wei756',
+        showLabel: true,
       },
     ]
   }
@@ -61,7 +65,7 @@ class Footer extends Component {
         iconSrc={btn.img} 
         iconBGColor={btn.color} 
         label={btn.label} 
-        showLabel={btn.label} /> :
+        showLabel={btn.showLabel} /> :
       <span key={btn.id} className="line"></span>
       )
     );

@@ -76,14 +76,14 @@ class FrontPanel extends Component {
     } = this.props.data;
     return (
       <li className="FrontPanel">
-        <div className="panelHeader">
+        <section className="panelHeader">
           <Link to={link}>
             <span className="tit">{title}</span>
             <span className="more">
               더 보기 <KeyboardArrowRightRoundedIcon fontSize="small"/>
             </span>
           </Link>
-        </div>
+        </section>
         <div className="compContainer">
           {component}
         </div>
