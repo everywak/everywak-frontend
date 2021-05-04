@@ -4,17 +4,20 @@ import styles from './BestwakkiBottomNavigator.scss';
 import MediaQuery  from 'react-responsive';
 import _ from 'lodash';
 
-
+import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
+import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import * as func from '../../common/funtions';
 
 import classNames from 'classnames/bind';
 import Button from '../../common/Components/Button';
-import BestwakkiHeader from './BestwakkiHeader';
+import BestwakkiSearchPanel from './BestwakkiSearchPanel';
+import ScrollToTopButton from './ScrollToTopButton';
 const cx = classNames.bind(styles);
 
 class BestwakkiBottomNavigator extends Component {
   state = {
     opened: true,
+    showTop: false,
   }
 
   constructor(props) {
@@ -38,6 +41,20 @@ class BestwakkiBottomNavigator extends Component {
       })
     }
   }
+  showBtnTop = () => {
+    if (!this.state.showTop) {
+      this.setState({
+        showTop: true,
+      })
+    }
+  }
+  hideBtnTop = () => {
+    if (this.state.showTop) {
+      this.setState({
+        showTop: false,
+      })
+    }
+  }
 
   componentDidMount () {
     window.addEventListener('scroll', () => this.scrollHandler());
@@ -48,7 +65,9 @@ class BestwakkiBottomNavigator extends Component {
 
     if (window.scrollY < 50) {
       this.open();
+      this.hideBtnTop();
     } else if (this.prevScrollY > 0) {
+      this.showBtnTop();
       if (this.prevScrollY < window.scrollY) { // scroll down
         this.close();
       } else { // scroll up
@@ -59,18 +78,36 @@ class BestwakkiBottomNavigator extends Component {
   };
 
   render () {
-    const { opened } = this.state;
+    const { opened, showTop } = this.state;
     const tablet_s_width = 960;
     
     return (
-      <MediaQuery maxWidth={tablet_s_width - 1}>
         <nav className={cx('BestwakkiBottomNavigator', {opened: opened})}>
-          <div className="left"></div>
+          <div className="left">
+            <MediaQuery maxWidth={tablet_s_width - 1}>
+              <Button className="goHome"
+                href="/"
+                iconSrc={<HomeRoundedIcon fontSize="medium" />}
+                iconBGColor="transparent" 
+                labelBGColor="transparent"
+                label="홈으로" 
+                labelSize="16px"
+                showLabel={true} />
+            </MediaQuery>
+          </div>
           <div className="right">
-            <BestwakkiHeader />
+            <MediaQuery maxWidth={tablet_s_width - 1}>
+              <BestwakkiSearchPanel />
+            </MediaQuery>
+            <ScrollToTopButton show={showTop} />
+            <Button className="btnSetting"
+              iconSrc={<SettingsRoundedIcon fontSize="medium" />} 
+              iconBGColor="transparent"
+              label="인기글 목록 설정"
+              href="."
+              showLabel={false} />
           </div>
         </nav>
-      </MediaQuery>
     );
   }
 }

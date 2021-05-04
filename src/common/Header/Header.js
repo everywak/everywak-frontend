@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 
-import BestwakkiHeader from '../../modules/bestwakki/BestwakkiHeader';
-
 import styles from './Header.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
