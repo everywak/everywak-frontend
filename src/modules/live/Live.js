@@ -143,11 +143,11 @@ class BroadcastInfo extends Component {
           <a href="https://toon.at/donate/637445810791017450" target="_blank"><img src="https://everywak.kr/live/images/panel-donate2.png" alt="투네이션" /></a>
           <a href="https://cafe.naver.com/steamindiegame" target="_blank"><img src="https://everywak.kr/live/images/panel-wakki.png" alt="우왁끼" /></a>
         </div>
-        <p class="footerTxt">
+        <p className="footerTxt">
           에브리왁굳 우왁굳 생방송 페이지는 YouTube 및 Twitch의 서드파티 사이트로 YouTube 및 Twitch에서 운영하는 사이트가 아닙니다.<br/>
           'YouTube' 및 '유튜브'는 YouTube, LLC의 등록상표이며 'Twitch' 및 '트위치'는 Twitch Interactive, Inc.의 등록상표입니다.<br/>
           &nbsp;<br/>
-          에브리왁굳 © 2020-2021. <a href="https://github.com/wei756" class="copyrighter_site_footer">Wei756</a>. All rights reserved.
+          에브리왁굳 © 2020-2021. <a href="https://github.com/wei756" className="copyrighter_site_footer">Wei756</a>. All rights reserved.
         </p>
       </div>
     );
@@ -172,26 +172,32 @@ class TwitchChat extends Component {
     this.lastWidth = this.state.chatWidth;
     this.newWidth = this.state.chatWidth;
     this.dragged = false;
-    document.addEventListener('mousemove', e => { if (this.dragged) { this.onDragCtrl(e); } });
+    document.addEventListener('mousemove', this.onDragCtrl);
+    document.addEventListener('touchmove', this.onDragCtrl);
     document.addEventListener('mouseup', this.onDragEndCtrl);
+    document.addEventListener('touchend', this.onDragEndCtrl);
   }
 
   setChatWidth = w => { this.setState({chatWidth: w}); }
 
   onDragStartCtrl = e => {
-    this.lastScrollX = e.pageX;
+    const mx = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
+    this.lastScrollX = mx;
     this.lastWidth = this.state.chatWidth;
     this.setDragged(true);
     const ctrOverlay = this.sizeControlOverlay.current;
     ctrOverlay.style.width = this.lastWidth + 'px';
   };
   onDragCtrl = e => {
-    e.preventDefault();
-    const w = Math.max(this.lastWidth - (e.pageX - this.lastScrollX), this.minChatWidth) - this.lastWidth;
-    this.newWidth = this.lastWidth + w;
-    const ctrOverlay = this.sizeControlOverlay.current;
-    ctrOverlay.style.width = this.newWidth + 'px';
-    this.setControllerPos(-8 - w);
+    if (this.dragged) {
+      e.preventDefault();
+      const mx = e.type === 'touchmove' ? e.changedTouches[0].pageX : e.pageX;
+      const w = Math.max(this.lastWidth - (mx - this.lastScrollX), this.minChatWidth) - this.lastWidth;
+      this.newWidth = this.lastWidth + w;
+      const ctrOverlay = this.sizeControlOverlay.current;
+      ctrOverlay.style.width = this.newWidth + 'px';
+      this.setControllerPos(-8 - w);
+    }
   };
   onDragEndCtrl = e => {
     if (this.dragged) {
@@ -204,13 +210,20 @@ class TwitchChat extends Component {
   setDragged = bool => {
     this.dragged = bool;
     const ctrWrapper = this.sizeControlWrapper.current;
+    const ctr = this.sizeController.current;
     if (bool) {
       if (!ctrWrapper.classList.contains('dragged')) {
         ctrWrapper.classList.add('dragged');
       }
+      if (!ctr.classList.contains('focused')) {
+        ctr.classList.add('focused');
+      }
     } else {
       if (ctrWrapper.classList.contains('dragged')) {
         ctrWrapper.classList.remove('dragged');
+      }
+      if (ctr.classList.contains('focused')) {
+        ctr.classList.remove('focused');
       }
     }
   };
@@ -230,7 +243,7 @@ class TwitchChat extends Component {
     return (
       <div className="TwitchChat" style={style}>
         <iframe className="content" src={src} frameBorder="0" />
-        <div className="sizeController" ref={this.sizeController} onMouseDown={this.onDragStartCtrl} ></div>
+        <div className="sizeController" ref={this.sizeController} onMouseDown={this.onDragStartCtrl} onTouchStart={this.onDragStartCtrl} ></div>
         <div className="sizeControlWrapper" ref={this.sizeControlWrapper} >
           <div className="sizeControlOverlay" ref={this.sizeControlOverlay} ></div>
         </div>

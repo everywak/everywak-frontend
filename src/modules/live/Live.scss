@@ -189,7 +189,7 @@
     &:hover {
       background: rgba(0, 0, 0, .1);
     }
-    &:active {
+    &:active, &.focused {
       background: rgba(0, 0, 0, .2);
     }
   }
