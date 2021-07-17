@@ -14,14 +14,16 @@ class Dropdown extends Component {
   state = {
     name: '',
     value: this.props.value,
-    x1: 0,
-    y1: 0,
-    x2: 0,
-    y2: 0,
+    tx: 0,
+    ty: 0,
     opened: false,
   }
 
-  openList() {
+  btnSelect = React.createRef();
+  dropdownArea = React.createRef();
+  selectedItem = React.createRef();
+
+  openList = () => {
     if(!this.state.opened) {
       this.posList();
       this.setState({
@@ -29,7 +31,7 @@ class Dropdown extends Component {
       });
     }
   }
-  closeList() {
+  closeList = () => {
     if(this.state.opened) {
       this.setState({
         opened: false
@@ -37,51 +39,35 @@ class Dropdown extends Component {
     }
   }
 
-  setOption(e) {
-    if(e.target.dataset.value) {
+  setOption = val => {
+    if(val.value) {
       this.setState({
-        name: e.target.dataset.name,
-        value: e.target.dataset.value,
+        name: val.name,
+        value: val.value,
       });
       this.closeList();
     }
   }
 
   posList() {
-    var _this = document.querySelector('.Dropdown[data-name="' + this.props.name + '"]');
-    var nameRect = _this.querySelector('.currName').getBoundingClientRect();
-    var list = _this.querySelector('.dropdownArea');
-    var listRect = list.getBoundingClientRect();
-    var target = list.querySelector('.option[data-value="' + this.state.value + '"] > .name');
-    var targetRect = (target ? target : list).getBoundingClientRect();
+    const nameRect = this.btnSelect.current.getBoundingClientRect();
+    const list = this.dropdownArea.current;
+    const listRect = list.getBoundingClientRect();
+    const target = this.selectedItem.current;
+    const targetRect = (target ? target : list).getBoundingClientRect();
     
-    var x1 = nameRect.left - (targetRect.left - listRect.left);
-    var y1 = nameRect.top - (targetRect.top - listRect.top) + 19;
-    var x2 = nameRect.left - (targetRect.left - listRect.left);
-    var y2 = nameRect.top - (targetRect.top - listRect.top) + 3;
+    const tx = nameRect.left - (targetRect.left - listRect.left);
+    const ty = nameRect.top - (targetRect.top - listRect.top) + 3;
     
     this.setState({
-      x1: x1,
-      y1: y1,
-      x2: x2,
-      y2: y2,
+      tx: tx,
+      ty: ty,
     });
   }
 
-  onWindowScroll(e) {
-    if (e.state.opened) {
-      e.closeList();
-    }
-  }
-  onWindowResize(e) {
-    if (e.state.opened) {
-      e.closeList();
-    }
-  }
-
   componentDidMount() {
-    window.addEventListener('resize', () => this.onWindowResize(this));
-    window.addEventListener('scroll', () => this.onWindowScroll(this));
+    window.addEventListener('resize', this.closeList);
+    window.addEventListener('scroll', this.closeList);
     const { value } = this.state;
     var item;
     if (value && (item = this.props.values.find(v => (v.value === value)))) {
@@ -97,46 +83,48 @@ class Dropdown extends Component {
     }
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.closeList);
+    window.removeEventListener('scroll', this.closeList);
+  }
+
   render() {
-    const { x1, y1, x2, y2, name, value, opened } = this.state;
+    const { tx, ty, name, value, opened } = this.state;
     const { values } = this.props;
     
     const list = values.map(
       val => (
-        <div key={val.id} className={cx("option", {'checked': (value === val.value)})} data-value={val.value} data-name={val.name} onClick={e => this.setOption(e)}>
+        <div 
+          key={val.id} 
+          className={cx("option", {'checked': (value === val.value)})} 
+          data-value={val.value} 
+          data-name={val.name} 
+          onClick={e => this.setOption(val)}
+        >
           <div className="marker" />
-          <span className="name">{val.name}</span>
+          <span className="name" ref={value === val.value && this.selectedItem}>
+            {val.name}
+          </span>
         </div>
       )
     );
-    const animDropdownList = (opened ? 
-      keyframes`
-      from {
-        opacity: 0;
-        left: ${x1}px;
-        top: ${y1}px;
-      }
-      to {
-        opacity: 1;
-        left: ${x2}px;
-        top: ${y2}px;
-      }
-      ` : 
-      null);
+    const tablet_s_width = 960;
     const DropdownArea = styled.div`
-      animation: ${animDropdownList} .3s 0s 1 ease normal forwards;
-    `
+    @media (min-width: ${tablet_s_width + 'px'}) {
+      left: ${tx}px;
+      top: ${ty}px;
+    }`;
 
     return (
-      <div className={cx('Dropdown', {'opened' : opened})} data-name={this.props.name} >
+      <div className={cx('Dropdown', {'opened' : opened})} data-name={this.props.name} ref={this.me} >
         <input type="hidden" name={this.props.name} value={value} />
-        <div className="dispArea" onClick={e => this.openList()}>
-          <span className="currName">{name}</span>
+        <div className="dispArea" onClick={this.openList}>
+          <span className="currName" ref={this.btnSelect}>{name}</span>
           <ExpandMoreRoundedIcon />
         </div>
-        <div className="closeArea" onClick={e => this.closeList()}></div>
-        <DropdownArea className="dropdownArea">
-          {list}
+        <div className="closeArea" onClick={this.closeList}></div>
+        <DropdownArea className="dropdownAreaWrapper" ref={this.dropdownArea}>
+          <div className="dropdownArea">{list}</div>
         </DropdownArea>
       </div>
     );
