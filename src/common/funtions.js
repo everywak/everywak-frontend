@@ -4,23 +4,22 @@
  */
 export function getURLParams (url) {
 
-  var param = [];
+  const param = [];
   
   try {
-    url = decodeURIComponent(url);
+    const params = url.split('?')[1].split('&');
 
-    var params;
-    params = url.substring( url.indexOf('?')+1, url.length ).split("&");
-
-    params.map(
+    params.filter(p => (p.split('=').length === 2)).map(
       p => {
-        if (p.split("=").length === 2)
-          return param[p.split("=")[0]] = p.split("=")[1];
+        const [ k, v ] = p.split('=');
+        param[decodeURIComponent(k)] = decodeURIComponent(v);
       }
     );
 
   } catch(err) {
-    console.error(err);
+    if (err.name !== 'TypeError') { // not included '?'
+      console.error(err);
+    }
   }
   
   return param;
