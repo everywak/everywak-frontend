@@ -57,7 +57,11 @@ class BestwakkiBottomNavigator extends Component {
   }
 
   componentDidMount () {
-    window.addEventListener('scroll', () => this.scrollHandler());
+    window.addEventListener('scroll', this.scrollHandler);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.scrollHandler);
   }
 
   scrollHandler = () => {

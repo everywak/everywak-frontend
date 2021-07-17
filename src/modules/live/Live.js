@@ -45,19 +45,22 @@ class Live extends Component {
     this.setRotation = val => {
       this.setState({rotation: val === TOGGLE ? !this.state.rotation : val});
     }
+    this.setAutoRotation = () => { this.setRotation(window.innerWidth < window.innerHeight ? PORTRAIT : LANDSCAPE); };
   };
 
   componentDidMount() {
 	  if (!this.props.front) {
-      this.setRotation(window.innerWidth < window.innerHeight ? PORTRAIT : LANDSCAPE);
+      this.setAutoRotation();
 
-      window.addEventListener('resize', () => {
-        this.setRotation(window.innerWidth < window.innerHeight ? PORTRAIT : LANDSCAPE);
-      });
+      window.addEventListener('resize', this.setAutoRotation);
     }
     this.setState({
       setRotation: this.setRotation,
     });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.setAutoRotation);
   }
 
   render() {
@@ -176,6 +179,13 @@ class TwitchChat extends Component {
     document.addEventListener('touchmove', this.onDragCtrl);
     document.addEventListener('mouseup', this.onDragEndCtrl);
     document.addEventListener('touchend', this.onDragEndCtrl);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousemove', this.onDragCtrl);
+    document.removeEventListener('touchmove', this.onDragCtrl);
+    document.removeEventListener('mouseup', this.onDragEndCtrl);
+    document.removeEventListener('touchend', this.onDragEndCtrl);
   }
 
   setChatWidth = w => { this.setState({chatWidth: w}); }
