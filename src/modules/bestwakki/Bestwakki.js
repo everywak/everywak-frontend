@@ -40,17 +40,11 @@ class Bestwakki extends Component {
 
     const { search } = props.location || {};
     const { beginAt, endAt } = func.getURLParams(search);
-    this.beginAt = (
-      beginAt ? 
-      (func.isDateStr(beginAt) ? new Date(beginAt).getTime() : beginAt * 1000) : 
-      -1
-    );
-    this.endAt = (
-      endAt ? 
-      (func.isDateStr(endAt) ? new Date(endAt).getTime() : endAt * 1000) : 
-      -1
-    );
+    this.beginAt = beginAt ? this.decodeDateStr(beginAt) : -1;
+    this.endAt   = endAt   ? this.decodeDateStr(endAt)   : -1;
   }
+
+  decodeDateStr = str => (func.isDateStr(str) ? new Date(str).getTime() : str * 1000);
 
   fetchArticlesInfo = async ({ reset }) => {
     this.setState({
@@ -252,7 +246,7 @@ class Article extends Component {
             </span>
           </div>
         </a>
-        {representImage && representImage !== '' ? thumb_area : ''}
+        {representImage ? thumb_area : ''}
       </li>
     );
   }
