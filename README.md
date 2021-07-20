@@ -26,7 +26,8 @@ ReactJS로 구현된 에브리왁굳 프로젝트 소스
 ### `npm start`
 
 개발 모드로 앱이 실행됩니다.\
-[http://localhost:3000](http://localhost:3000)로 접속하면 결과물을 바로 실시간으로 확인할 수 있습니다.
+[http://localhost:3000](http://localhost:3000)로 접속하면 결과물을 바로 확인할 수 있으며 \
+변경 사항이 실시간으로 반영됩니다.
 
 ### `npm run build`
 
