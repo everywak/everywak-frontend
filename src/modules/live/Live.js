@@ -2,27 +2,16 @@ import React, { Component } from 'react';
 import { Fragment } from 'react';
 import styles from './Live.scss';
 
+import { domain, TOGGLE, DARK, LIGHT, LANDSCAPE, PORTRAIT } from '../../common/constants';
 import Footer from '../../common/Footer/Footer.js';
+import Button from '../../common/Components/Button';
+import RemoveRedEyeRoundedIcon from '@material-ui/icons/RemoveRedEyeRounded';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { LiveContext } from './context';
+import TwitchChat from './TwitchChat';
 
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
-
-const domain = 'localhost';//'everywak-ajkkd.run.goorm.io';
-const TOGGLE = -1;
-const PORTRAIT = 0;
-const LANDSCAPE = 1;
-const DARK = 10;
-const WHITE = 11;
-
-const LiveContext = React.createContext({
-  rotation: PORTRAIT,
-  setRotation: () => {},
-  chatStyle: DARK,
-  expandHeader: false,
-  toggleExpandHeader: () => {},
-  expandScreen: false,
-  toggleExpandScreen: () => {},
-});
 
 class Live extends Component {
   static defaultProps = {
@@ -43,7 +32,13 @@ class Live extends Component {
       document.title = '에브리왁굳 : 생방송';
     }
     this.setRotation = val => {
-      this.setState({rotation: val === TOGGLE ? !this.state.rotation : val});
+      const rot = val === TOGGLE ? !this.state.rotation : val;
+      this.setState({rotation: rot});
+      if (rot === PORTRAIT) {
+        document.getElementsByClassName('App')[0].classList.remove('live');
+      } else if (rot === LANDSCAPE) {
+        document.getElementsByClassName('App')[0].classList.add('live');
+      }
     }
     this.setAutoRotation = () => { this.setRotation(window.innerWidth < window.innerHeight ? PORTRAIT : LANDSCAPE); };
   };
@@ -60,6 +55,7 @@ class Live extends Component {
   }
 
   componentWillUnmount() {
+    document.getElementsByClassName('App')[0].classList.remove('live');
     window.removeEventListener('resize', this.setAutoRotation);
   }
 
@@ -115,8 +111,12 @@ class LiveSummary extends Component {
     return (
       <div className="LiveSummary">
         <div className="left">
-          <div className="liveProfile" >
-            <img src="" />
+          <div className="liveProfile">
+            <div className="profileWrapper">
+              <div className="imgWrapper">
+                <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/ebc60c08-721b-4572-8f51-8be7136a0c96-profile_image-300x300.png" alt="" className="profileImg"/>
+              </div>
+            </div>
           </div>
           <div className="liveSummaryWrapper" >
             <span className="liveTitle">뭐? 뱅온이 없다고?</span>
@@ -129,8 +129,84 @@ class LiveSummary extends Component {
           </div>
         </div>
         <div className="right">
-        player time
+          <div className="up">
+            <ViewerCounter viewer={3123} />
+            <StreamTime startedTime={1626760233748} />
+          </div>
+          <div className="down">
+            <Button 
+              className="btnOpenInfo"
+              href="" 
+              iconSrc={<ExpandMoreIcon fontSize="medium" />} 
+              labelBGColor="transparent" 
+              onclick={e => {}} />
+          </div>
         </div>
+      </div>
+    );
+  }
+}
+
+class ViewerCounter extends Component {
+  static defaultProps = {
+    viewer: 0,
+  };
+
+  render() {
+    const formattedViewer = this.props.viewer.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+
+    return (
+      <div className="ViewerCounter">
+        <RemoveRedEyeRoundedIcon  fontSize="small" />
+        <span className="counterWrapper">
+          {formattedViewer}
+        </span>
+      </div>
+    );
+  }
+}
+
+class StreamTime extends Component {
+  static defaultProps = {
+    startedTime: Date.now(),
+  };
+
+  state = {
+    streamSeconds: 0,
+  };
+
+  componentDidMount() {
+    this.loopTimer = setInterval(this.updateTimer, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.loopTimer);
+  }
+
+  updateTimer = () => {
+    const currTime = Date.now();
+    const streamSeconds = parseInt((currTime - this.props.startedTime) / 1000);
+    if (this.state.streamSeconds != streamSeconds) {
+      this.setState({
+        streamSeconds: streamSeconds,
+      });
+    }
+  }
+
+  formatInt = n => {
+    return ('0' + parseInt(n).toString()).slice(-2);
+  }
+
+  render() {
+    const { streamSeconds } = this.state;
+    const hours = parseInt(streamSeconds / 3600);
+    const minutes = parseInt(streamSeconds / 60) % 60;
+    const seconds = streamSeconds % 60;
+    const formattedTime = `${hours}:${this.formatInt(minutes)}:${this.formatInt(seconds)}`;
+
+    return (
+      <div className="StreamTime">
+        {formattedTime}
       </div>
     );
   }
@@ -152,111 +228,6 @@ class BroadcastInfo extends Component {
           &nbsp;<br/>
           에브리왁굳 © 2020-2021. <a href="https://github.com/wei756" className="copyrighter_site_footer">Wei756</a>. All rights reserved.
         </p>
-      </div>
-    );
-  }
-}
-
-class TwitchChat extends Component {
-
-  static contextType = LiveContext;
-  sizeController = React.createRef();
-  sizeControlWrapper = React.createRef();
-  sizeControlOverlay = React.createRef();
-
-  state = {
-    chatWidth: 320,
-  }
-
-  minChatWidth = 180;
-
-  componentDidMount() {
-    this.lastScrollX = 0;
-    this.lastWidth = this.state.chatWidth;
-    this.newWidth = this.state.chatWidth;
-    this.dragged = false;
-    document.addEventListener('mousemove', this.onDragCtrl);
-    document.addEventListener('touchmove', this.onDragCtrl);
-    document.addEventListener('mouseup', this.onDragEndCtrl);
-    document.addEventListener('touchend', this.onDragEndCtrl);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('mousemove', this.onDragCtrl);
-    document.removeEventListener('touchmove', this.onDragCtrl);
-    document.removeEventListener('mouseup', this.onDragEndCtrl);
-    document.removeEventListener('touchend', this.onDragEndCtrl);
-  }
-
-  setChatWidth = w => { this.setState({chatWidth: w}); }
-
-  onDragStartCtrl = e => {
-    const mx = e.type === 'touchstart' ? e.touches[0].pageX : e.pageX;
-    this.lastScrollX = mx;
-    this.lastWidth = this.state.chatWidth;
-    this.setDragged(true);
-    const ctrOverlay = this.sizeControlOverlay.current;
-    ctrOverlay.style.width = this.lastWidth + 'px';
-  };
-  onDragCtrl = e => {
-    if (this.dragged) {
-      e.preventDefault();
-      const mx = e.type === 'touchmove' ? e.changedTouches[0].pageX : e.pageX;
-      const w = Math.max(this.lastWidth - (mx - this.lastScrollX), this.minChatWidth) - this.lastWidth;
-      this.newWidth = this.lastWidth + w;
-      const ctrOverlay = this.sizeControlOverlay.current;
-      ctrOverlay.style.width = this.newWidth + 'px';
-      this.setControllerPos(-8 - w);
-    }
-  };
-  onDragEndCtrl = e => {
-    if (this.dragged) {
-      this.setChatWidth(this.newWidth);
-      this.setControllerPos(false);
-      this.setDragged(false);
-    }
-  };
-
-  setDragged = bool => {
-    this.dragged = bool;
-    const ctrWrapper = this.sizeControlWrapper.current;
-    const ctr = this.sizeController.current;
-    if (bool) {
-      if (!ctrWrapper.classList.contains('dragged')) {
-        ctrWrapper.classList.add('dragged');
-      }
-      if (!ctr.classList.contains('focused')) {
-        ctr.classList.add('focused');
-      }
-    } else {
-      if (ctrWrapper.classList.contains('dragged')) {
-        ctrWrapper.classList.remove('dragged');
-      }
-      if (ctr.classList.contains('focused')) {
-        ctr.classList.remove('focused');
-      }
-    }
-  };
-  
-  setControllerPos = l => {
-    const ctr = this.sizeController.current;
-    ctr.style.left = l ? l + 'px' : '';
-  };
-
-  render() {
-    const { chatStyle, rotation } = this.context;
-    const src = `https://www.twitch.tv/embed/woowakgood/chat?parent=${domain}${chatStyle === 'DARK' ? '&darkpopout' : ''}`;
-    const style = rotation === LANDSCAPE ? { // landscape only
-      width: `${this.state.chatWidth}px`
-    } : {};
-
-    return (
-      <div className="TwitchChat" style={style}>
-        <iframe className="content" src={src} frameBorder="0" />
-        <div className="sizeController" ref={this.sizeController} onMouseDown={this.onDragStartCtrl} onTouchStart={this.onDragStartCtrl} ></div>
-        <div className="sizeControlWrapper" ref={this.sizeControlWrapper} >
-          <div className="sizeControlOverlay" ref={this.sizeControlOverlay} ></div>
-        </div>
       </div>
     );
   }

@@ -3,9 +3,21 @@
 .Live + .footer {
   display: none;
 }
+@include desktop {
+  .Live:not(.front) {
+    height: calc(100vh - #{$header-height});
+  }
+}
+@include not-desktop {
+  .Live.portrait:not(.front) {
+    height: calc(100vh - #{$header-height});
+  }
+  .Live.landscape:not(.front) {
+    height: 100vh;
+  }
+}
 .Live:not(.front) {
   width: 100%;
-  height: calc(100vh - #{$header-height});
   display: grid;
   display: -ms-grid;
   &.landscape {
@@ -15,20 +27,88 @@
     -ms-grid-rows: 100%;
     grid-template-areas:
     "live chat";
-
   }
   &.portrait {
     grid-template-columns: 100%;
-    grid-template-rows: calc(100vw / 16 * 9) 1fr;
+    grid-template-rows: auto 1fr;
     -ms-grid-columns: 100%;
-    -ms-grid-rows: auto auto;
+    -ms-grid-rows: auto 1fr;
     grid-template-areas:
     "live"
     "chat";
   }
+
+  
+  @include desktop {
+    .LiveSummary {
+      padding: 14px 23px;
+
+      .right {
+        .down {
+          display: none;
+        }
+      }
+    }
+  }
+  @include not-desktop {
+    .LiveSummary {
+      padding: 10px 8px;
+
+      .left {
+        padding-left: 6px;
+
+        .liveProfile {
+          margin-right: 10px;
+    
+          .profileWrapper .imgWrapper {
+            width: 56px;
+            height: 56px;
+          }
+        }
+        .liveSummaryWrapper {
+          .liveTitle {
+            font-size: 16px;
+            line-height: 16px;
+          }
+          .livePresented {
+            font-size: 12px;
+            line-height: 12px;
+            margin-top: 6px;
+          }
+        }
+      }
+      .right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        .up {
+          padding: 7px 6px 0 0;
+        }
+        .down {
+          .btnOpenInfo {
+            height: 24px;
+            margin: 0;
+            
+            .icon {
+              width: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include not-desktop {
+  .App.live header.header {
+    display: none;
+  }
 }
 
 .playerWrapper {
+  background: $component-primary-bg-color;
   grid-area: live;
   overflow-y: scroll;
   -ms-overflow-style: none;
@@ -39,26 +119,35 @@
   }
   
   .BroadcastInfo {
-    padding: 24px 0;
     
     .panelContainer {
-      padding: 0 8px;
+      padding: 16px 24px 24px;
       
       a img {
         max-width: 100%;
       }
     }
     .footerTxt {
-      color: #888;
+      color: $secondary-text-color;
       font-size: 14px;
-      padding: 16px 16px 72px;
       font-weight: 400;
+      margin: 0;
+      padding: 12px 24px 72px;
+
+      a {
+        color: $primary-text-color;
+        font-weight: 500;
+      }
     }
   }
   
   .Live.portrait & .footer {
     display: none;
   }
+}
+.Live.portrait .playerWrapper {
+  height: calc(100vw / 16 * 9);
+  overflow: hidden;
 }
 .WakPlayer {
   background-color: $twitch-color;
@@ -89,12 +178,15 @@
   }
 }
 .LiveSummary {
-  border: solid 1px $component-primary-border-color;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: top;
-  padding: 15px 16px 20px;
+
+  .Live.front & {
+    border: solid 1px $component-primary-border-color;
+    padding: 15px 16px 20px;
+  }
   
   .left {
     display: flex;
@@ -102,27 +194,53 @@
     align-items: top;
     
     .liveProfile {
-      
-      img {
-        width: 64px;
-        height: 64px;
+      border: solid 2px $twitch-color;
+      border-radius: 50%;
+      margin-right: 15px;
+
+      .profileWrapper {
+        border: solid 2px $component-primary-border-color;
+        border-radius: 50%;
         
-        .Live.front & {
-          display: none;
+        .imgWrapper {
+          border-radius: 50%;
+          width: 64px;
+          height: 64px;
+          overflow: hidden;
+
+          .profileImg {
+            width: 100%;
+          }
         }
+      }
+
+      .Live.front & {
+        display: none;
       }
     }
     
     .liveSummaryWrapper {
+      padding-top: 6px;
+
+      .Live.front & {
+        padding-top: 0;
+      }
+
       & > span {
         display: block;
       }
       
       .liveTitle {
         color: $primary-text-color;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 500;
-        line-height: 20px;
+        line-height: 18px;
+
+        .Live.front & {
+          font-size: 20px;
+          line-height: 20px;
+          margin-top: 0;
+        }
       }
       .liveDateTime {
         color: $secondary-text-color;
@@ -136,9 +254,9 @@
         }
       }
       .livePresented {
-        color: $secondary-text-color;
+        color: $primary-text-color;
         font-size: 14px;
-        font-weight: 400;
+        font-weight: 500;
         line-height: 14px;
         margin-top: 8px;
 
@@ -150,76 +268,53 @@
   }
   
   .right {
+
+
     .Live.front & {
       display: none;
     }
-    
-    
+
+    .up {
+      display: flex;
+      flex-direction: row;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 14px;
+      padding: 8px 1px 0 0;
+
+      .ViewerCounter {
+        display: inline-flex;
+        flex-direction: row;
+        color: $emphasis-text-color;
+  
+        svg {
+          margin-right: 4px;
+          width: 14px;
+          height: 14px;
+        }
+        .counterWrapper {
+          display: inline-block;
+        }
+      }
+      .StreamTime {
+        color: $secondary-text-color;
+        display: inline-block;
+        margin-left: 12px;
+      }
+    }
+
   }
 }
+
 .TwitchChat {
   grid-area: chat;
-  width: 100%;
-  height: 100%;
-  position: relative;
   
   .Live.landscape & {
     width: 320px;
   }
-  
-  .content {
-    width: 100%;
-    height: 100%;
-  }
-  
   .sizeController {
-    cursor: ew-resize;
-    position: absolute;
-    top: 0;
-    left: -8px;
-    background: transparent;
-    width: 16px;
-    height: 100%;
-    transition: background ease .15s;
-    
     .Live.portrait & {
       display: none;
-    }
-    
-    &:hover {
-      background: rgba(0, 0, 0, .1);
-    }
-    &:active, &.focused {
-      background: rgba(0, 0, 0, .2);
-    }
-  }
-  
-  .sizeControlWrapper {
-    background: transparent;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100vw;
-    height: 100%;
-    pointer-events: none;
-    
-    .sizeControlOverlay {
-      background: $primary-color;
-      position: absolute;
-      top: 0;
-      right: 0;
-      height: 100%;
-      opacity: 0;
-      transition: opacity ease .15s;
-    }
-    
-    &.dragged {
-      cursor: ew-resize;
-      pointer-events: auto;
-      
-      .sizeControlOverlay {
-        opacity: .3;
-      }
     }
   }
 }

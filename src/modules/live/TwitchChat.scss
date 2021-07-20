@@ -1,0 +1,59 @@
+@import '../../common/common.scss';
+
+.TwitchChat {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    
+    .content {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .sizeController {
+      cursor: ew-resize;
+      position: absolute;
+      top: 0;
+      left: -8px;
+      background: transparent;
+      width: 16px;
+      height: 100%;
+      transition: background ease .15s;
+      
+      &:hover {
+        background: rgba(0, 0, 0, .1);
+      }
+      &:active, &.focused {
+        background: rgba(0, 0, 0, .2);
+      }
+    }
+    
+    .sizeControlWrapper {
+      background: transparent;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100vw;
+      height: 100%;
+      pointer-events: none;
+      
+      .sizeControlOverlay {
+        background: $primary-color;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        opacity: 0;
+        transition: opacity ease .15s;
+      }
+      
+      &.dragged {
+        cursor: ew-resize;
+        pointer-events: auto;
+        
+        .sizeControlOverlay {
+          opacity: .3;
+        }
+      }
+    }
+  }
