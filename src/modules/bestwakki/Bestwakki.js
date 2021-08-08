@@ -46,27 +46,27 @@ class Bestwakki extends Component {
 
   decodeDateStr = str => (func.isDateStr(str) ? new Date(str).getTime() : str * 1000);
 
-  fetchArticlesInfo = async ({ reset }) => {
+  fetchArticlesInfo = ({ reset }) => {
     this.setState({
       loaded: false,
     });
     const { search } = this.props.location || {};
     const params = func.getURLParams(search);
     params.page = reset ? 1 : this.state.page + 1;
-    const post = await service.getBestArticles(params);
-
-    if (post.status === 200) {
-      const currList = this.state.list;
-      const loadedList = post.data.message.result.popularArticleList;
-      const list = reset ? loadedList : currList.concat(loadedList);
-      
-      this.setState({
-        list: list,
-        loaded: true,
-        page: params.page,
-        loadedLength: loadedList.length
-      });
-    }
+    service.getBestArticles(params)
+    .then(data => {
+        const currList = this.state.list;
+        const loadedList = data.message.result.popularArticleList;
+        const list = reset ? loadedList : currList.concat(loadedList);
+        
+        this.setState({
+          list: list,
+          loaded: true,
+          page: params.page,
+          loadedLength: loadedList.length
+        });
+      })
+    .catch(console.error);
   };
   componentDidMount() {
     this.fetchArticlesInfo({reset: true});

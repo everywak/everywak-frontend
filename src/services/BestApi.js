@@ -2,6 +2,9 @@ import axios from 'axios';
 
 import * as func from '../common/funtions';
 
+const api = axios.create({
+  baseURL: 'https://api.everywak.kr',
+})
 export function getBestArticles(data) {
 
   const _default = {
@@ -62,13 +65,15 @@ export function getBestArticles(data) {
     beginAt: beginAt, 
     endAt: endAt
   };
-  return axios(
-  {
-    method: 'get',
-    url: 'https://everywak.kr/api/bestwakki/WakkiPopularArticleList.wak', 
-    params : params,
+  let options = {
+    method: 'GET',
+    mode: 'cors',
+    params: params, 
     headers: {
-      "Content-Type" : "application/json",
+      'Accept': 'application/json',
+      'Content-Type': 'application/json;charset=UTF-8'
     }
-  });
+  };
+  
+  return api('/bestwakki/WakkiPopularArticles', options).then(res => res.data);
 }
