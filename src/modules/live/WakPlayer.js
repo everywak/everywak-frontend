@@ -295,7 +295,7 @@ class WakPlayerOverlay extends Component {
       '360p': '360p',
       '160p': '160p',
     }
-    const videoQualityList = qualities.map(q => <li className="item vq" data-vq={q.name.replace(' (source)', '')} onClick={e => this.setQuality(q.name)}>{qualityList[q.name] || q.name}</li>);
+    const videoQualityList = qualities.map(q => <li className="item vq" data-vq={q.name.indexOf('(source)') === -1 ? q.name : 'chunked'} onClick={e => this.setQuality(e.currentTarget.dataset.vq)}>{qualityList[q.name] || q.name}</li>);
 
     return (
       <div className={cx('WakPlayerOverlay', 'overlayArea', {opened: playerOverlay === OPENED || playerOverlay === EXPANDED || volPressed || settingPanel !== 'CLOSED'})} 
