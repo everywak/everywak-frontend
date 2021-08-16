@@ -398,7 +398,14 @@ class TwitchChatClient extends Component {
               {cList}
             </ul>
             <div className="twitchChatBottom">
-              <textarea className="twitchChatInput" ref={this.chatInput}></textarea>
+              <textarea 
+                className="twitchChatInput" 
+                ref={this.chatInput} 
+                onKeyPress={e => {if(e.charCode == 13) { e.preventDefault(); this.sendChat() } }}
+                onChange={e => {
+                  e.target.style.height = '0px';
+                  e.target.style.height = (e.target.scrollHeight + 4) + 'px';
+                }} />
               <div className="twitchChatInputFooter">
                 <div className="twitchChatSettingWrapper">&nbsp;</div>
                 <button className="twitchChatBtnSend" onClick={this.sendChat}>채팅</button>
