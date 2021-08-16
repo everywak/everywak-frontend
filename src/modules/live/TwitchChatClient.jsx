@@ -10,13 +10,8 @@ const cx = classNames.bind(styles);
 
 const cookies = new Cookies();
 
-const setCookie = (name, value, option) => {
-  return cookies.set(name, value, { ...option })
-}
-
-const getCookie = name => {
-  return cookies.get(name)
-}
+const setCookie = (name, value, option) => cookies.set(name, value, { ...option })
+const getCookie = name => cookies.get(name)
 
 class TwitchChatClient extends Component {
 
@@ -243,11 +238,7 @@ class TwitchChatClient extends Component {
    * @param {String} msg
    */
   receiveChat = ({ tag, id, msg }) => {
-    const tags = {};
-    tag.substr(1).split(';').map(t => {
-      const [k, v] = t.split('=');
-      tags[k] = v;
-    });
+    const tags = this.parseTag(tag);
     
     const emotes = this.parseEmote(tags.emotes);
 
@@ -280,6 +271,20 @@ class TwitchChatClient extends Component {
     this.setState({
       chatList: [...chatList, chat].slice(Math.max(chatList.length + 1 - chatItemMaximumLength, 0)),
     });
+  }
+
+  /**
+   * Parse tags ftom '@tag=value;tag=value'
+   * 
+   * @return {Object} tags
+   */
+  parseTag = tag => {
+    const tags = {};
+    tag.substr(1).split(';').map(t => {
+      const [k, v] = t.split('=');
+      tags[k] = v;
+    });
+    return tags;
   }
 
   /**
