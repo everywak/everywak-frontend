@@ -8,6 +8,9 @@ body, html {
   padding: 0;
   -webkit-tap-highlight-color: transparent;
 }
+textarea, input[type=text] {
+  font-family: 'Noto Sans KR', sans-serif;
+}
 a {
   text-decoration: none;
 }
