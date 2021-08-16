@@ -149,11 +149,6 @@ class TwitchChatClient extends Component {
     });
     if (process.env.NODE_ENV == 'development') { console.log('Twitch IRC WebSocket has sended a message.'); console.log(res); }
 
-    if (e.data === 'PING :tmi.twitch.tv') {
-      this.sendMessage('PONG :tmi.twitch.tv');
-      return;
-    }
-
     res.map(data => {
       switch(this.IRCStatus) {
         case TwitchChatClient.CONNECTED:
@@ -182,6 +177,9 @@ class TwitchChatClient extends Component {
           break;
         case TwitchChatClient.JOINED:
           this.handleChatMessage(data);
+          if (data[0] === 'PING') {
+            this.sendMessage('PONG :tmi.twitch.tv');
+          }
           break;
       }
     });
