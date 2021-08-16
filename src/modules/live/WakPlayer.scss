@@ -1,0 +1,275 @@
+@import '../../common/common.scss';
+
+
+.Live.landscape:not(.front) {
+  @include desktop {
+    .WakPlayer {
+      max-height: calc(100vh - #{$header-height} - 128px);
+    }
+  }
+  @include not-desktop {
+    .WakPlayer {
+      max-height: 100vh;
+      &::before {
+        padding-top: 100vh;
+      }
+
+      .overlayArea.opened .controller {
+        padding-bottom: 84px;
+      }
+    }
+  }
+}
+.WakPlayer {
+  background-color: $twitch-color;
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+
+  &::before {
+    content: "";
+    display: block;
+    padding-top: calc(100% / 16 * 9);
+  }
+
+  .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    .stream {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .overlayArea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    .stream {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+.overlayArea {
+  pointer-events: none;
+  &.opened .controller {
+    opacity: 1;
+  }
+  
+  .controller {
+    background: linear-gradient(0deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,0) 18%, rgba(0,0,0,0) 100%);
+    background-position-y: bottom;
+    color: #eee;
+    display: flex;
+    flex-direction: column-reverse;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity ease .2s, padding ease .3s;
+    pointer-events: all;
+
+    .top,
+    .center,
+    .bottom {
+      margin: 0;
+      width: 100%;
+    }
+    .center {
+      text-align: center;
+    }
+    .bottom {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 8px 10px;
+    }
+    .bottomLeft,
+    .bottomRight {
+      display: flex;
+      flex-direction: row;
+      height: 28px;
+      position: relative;
+    }
+
+    .ctlBtn {
+      background-color: rgba(255, 255, 255, .0);
+      border-radius: 4px;
+      display: inline-block;
+      padding: 2px;
+      width: 24px;
+      height: 24px;
+      -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+      user-select: none;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, .3);
+        cursor: pointer;
+      }
+      &:active {
+        background-color: rgba(255, 255, 255, .5);
+        cursor: pointer;
+      }
+      &.playpause {
+        .play {
+          display: none;
+        }
+        &.paused .play {
+          display: block;
+        }
+        &.paused .pause {
+          display: none;
+        }
+      }
+      &.volume {
+        .mute,
+        .small,
+        .big {
+          display: none;
+        }
+        &.mute .mute,
+        &.small .small,
+        &.big .big {
+          display: block;
+        }
+      }
+    }
+    
+    .ctlBtn.volume:hover + .volSlider {
+      opacity: 1;
+    }
+    .volSlider {
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity ease .2s;
+      position: relative;
+      width: 116px;
+      height: 28px;
+      -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+                      user-select: none;
+      &:hover,
+      &.pressed {
+        opacity: 1;
+      }
+      .sliderBg {
+        background: rgba(255, 255, 255, .5);
+        cursor: pointer;
+        position: absolute;
+        top: 13px;
+        left: 0;
+        width: 116px;
+        height: 2px;
+        -webkit-tap-highlight-color: transparent;
+              -webkit-touch-callout: none;
+                        user-select: none;
+      }
+      .sliderBar {
+        background: #fff;
+        cursor: pointer;
+        position: absolute;
+        top: 13px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        -webkit-tap-highlight-color: transparent;
+              -webkit-touch-callout: none;
+                        user-select: none;
+      }
+      .sliderBtn {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0px 0px 2px #000;
+        cursor: pointer;
+        position: absolute;
+        top: 6px;
+        left: 0;
+        width: 16px;
+        height: 16px;
+        -webkit-tap-highlight-color: transparent;
+              -webkit-touch-callout: none;
+                        user-select: none;
+      }
+    }
+    
+    .popup {
+      display: none;
+      background-color: #222224;
+      border-radius: 4px;
+      color: #eee;
+      width: 160px;
+      box-sizing: border-box;
+      padding: 4px 0;
+
+      &.opened {
+        display: block;
+      }
+      &.settingPopup,
+      &.videoQualityPopup {
+        position: absolute;
+        bottom: 28px;
+        left: -132px;
+      }
+      & > .itemList {
+        display: block;
+        list-style:none;
+        margin: 0;
+        padding: 0px 0;
+        width: 100%;
+        box-sizing: border-box;
+
+        .item {
+          background-color: rgba(255, 255, 255, 0);
+          cursor: pointer;
+          font-size: 13px;
+          font-weight: 400;
+          margin: 0;
+          padding: 10px 20px;
+          width: 100%;
+          box-sizing: border-box;
+          transition: background ease .1s;
+          -webkit-tap-highlight-color: transparent;
+
+          &:hover {
+            background-color: rgba(255, 255, 255, .1);
+          }
+          .subText {
+            color: rgba(255, 255, 255, .6);
+            font-size: 13px;
+            font-weight: 500;
+            position: absolute;
+            right: 20px;
+          }
+        }
+      }
+      &.videoQualityPopup .item.vq.selected {
+        background-color: rgba(255, 255, 255, .5);
+      }
+    }
+
+  }
+}
+
+.ctlBtn.expand .svgContract {
+  display: none;
+}
+body.expand .ctlBtn.expand {
+  .svgExpand {
+    display: none;
+  }
+  .svgContract {
+    display: block;
+  }
+}

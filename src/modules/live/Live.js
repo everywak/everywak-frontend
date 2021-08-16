@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { Fragment } from 'react';
 import styles from './Live.scss';
 
-import { domain, TOGGLE, DARK, LIGHT, LANDSCAPE, PORTRAIT } from '../../common/constants';
+import { domain, TOGGLE, CLOSED, OPENED, EXPANDED, DARK, LIGHT, LANDSCAPE, PORTRAIT } from '../../common/constants';
 import Footer from '../../common/Footer/Footer.js';
 import Button from '../../common/Components/Button';
 import RemoveRedEyeRoundedIcon from '@material-ui/icons/RemoveRedEyeRounded';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
+import ExpandLessRoundedIcon from '@material-ui/icons/ExpandLessRounded';
 import { LiveContext } from './context';
 import TwitchChat from './TwitchChat';
+import WakPlayer from './WakPlayer';
 
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
@@ -24,6 +26,8 @@ class Live extends Component {
     chatStyle: DARK,
     expandHeader: false,
     expandScreen: false,
+    playerOverlay: CLOSED,
+    setPlayerOverlay: () => {},
   };
 
   constructor (props) {
@@ -41,6 +45,11 @@ class Live extends Component {
       }
     }
     this.setAutoRotation = () => { this.setRotation(window.innerWidth < window.innerHeight ? PORTRAIT : LANDSCAPE); };
+    this.setPlayerOverlay = val => {
+      this.setState({
+        playerOverlay: val === TOGGLE ? !this.state.playerOverlay : val,
+      });
+    };
   };
 
   componentDidMount() {
@@ -51,7 +60,17 @@ class Live extends Component {
     }
     this.setState({
       setRotation: this.setRotation,
+      setPlayerOverlay: this.setPlayerOverlay,
     });
+    this.forceUpdate();
+    setTimeout(() => {
+      this.setAutoRotation();
+    }, 1);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.rotation !== nextState.rotation || 
+          this.state.playerOverlay !== nextState.playerOverlay;
   }
 
   componentWillUnmount() {
@@ -72,13 +91,13 @@ class Live extends Component {
               <LiveSummary />
             </Fragment> :
             <Fragment>
-              <div className="playerWrapper">
+              <div className={cx('playerWrapper', {opened: this.state.playerOverlay === OPENED, expanded: this.state.playerOverlay === EXPANDED})}>
                 <WakPlayer key="wakplayer" />
                 <LiveSummary />
                 <BroadcastInfo />
                 <Footer />
               </div>
-              <TwitchChat />
+              <TwitchChat location={this.props.location} history={this.props.history} />
             </Fragment>
           }
         </div>
@@ -87,29 +106,16 @@ class Live extends Component {
   }
 }
 
-class WakPlayer extends Component {
-
-  render() {
-	const src = `https://player.twitch.tv/?channel=woowakgood&parent=${domain}`;
-
-    return (
-      <div className="WakPlayer">
-        <div className="content">
-          <iframe className="stream" src={src} frameBorder="0" allowFullScreen={true} scrolling="no"/>
-        </div>
-      </div>
-    );
-  }
-}
-
 class LiveSummary extends Component {
+  static contextType = LiveContext;
 
   render() {
     const channelName = '우왁굳';
     const broadcastName = 'Twitch';
+    const { playerOverlay, setPlayerOverlay } = this.context;
 
     return (
-      <div className="LiveSummary">
+      <div className={cx('LiveSummary', {opened: playerOverlay === OPENED, expanded: playerOverlay === EXPANDED})}>
         <div className="left">
           <div className="liveProfile">
             <div className="profileWrapper">
@@ -137,9 +143,13 @@ class LiveSummary extends Component {
             <Button 
               className="btnOpenInfo"
               href="" 
-              iconSrc={<ExpandMoreIcon fontSize="medium" />} 
+              iconSrc={
+                playerOverlay === EXPANDED ? 
+                <ExpandLessRoundedIcon fontSize="medium" /> : 
+                <ExpandMoreRoundedIcon fontSize="medium" />
+              } 
               labelBGColor="transparent" 
-              onclick={e => {}} />
+              onclick={e => setPlayerOverlay(playerOverlay === EXPANDED ? CLOSED : EXPANDED)} />
           </div>
         </div>
       </div>
