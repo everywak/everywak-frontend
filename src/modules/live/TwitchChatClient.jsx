@@ -47,6 +47,9 @@ class TwitchChatClient extends Component {
 
     this.IRCStatus  = TwitchChatClient.CLOSED;
 
+    this.selfInfo = '';
+    this.lastMessage = '';
+
     this.twitchChatList = React.createRef();
     this.chatInput      = React.createRef();
   }
@@ -191,12 +194,22 @@ class TwitchChatClient extends Component {
   };
 
   handleChatMessage = data => {
+    if (process.env.NODE_ENV == 'development') { console.log(data); }
     switch(data[2]) {
       case 'PRIVMSG':
-        if (process.env.NODE_ENV == 'development') { console.log(data); }
-        
         this.receiveChat({tag: data[0], id: data[1], msg: data[3].split(':').length > 1 ? data[3].split(':')[1] : data[3]});
         break;
+      case 'USERSTATE':
+        this.updateSelfInfo(data);
+        break;
+    }
+  }
+
+  updateSelfInfo = data => {
+    this.selfInfo = data[0];
+    
+    if (this.lastMessage) {
+      this.receiveChat({tag: this.selfInfo + ';id=my-chat-' + (Math.random() * 9999999), id: data[3] + '!', msg: this.lastMessage});
     }
   }
 
@@ -222,6 +235,7 @@ class TwitchChatClient extends Component {
   sendChat = e => {
     if (this.chatInput.current && this.IRCStatus === TwitchChatClient.JOINED) {
       const str = this.chatInput.current.value;
+      this.lastMessage = str;
       this.sendMessage(`PRIVMSG #${this.props.channelName} :${str}`);
       this.chatInput.current.value = '';
     }
