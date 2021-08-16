@@ -57,3 +57,17 @@
       }
     }
   }
+
+@include not-desktop {
+  .Live.portrait .TwitchChat {
+    height: calc(100vh - (100vw / 16 * 9) - 52px);
+    transition: height ease .3s;
+  }
+  .Live.portrait .playerWrapper.opened + .TwitchChat {
+    height: calc(100vh - (100vw / 16 * 9 + 84px) - 52px);
+  }
+  .Live.portrait .playerWrapper.expanded + .TwitchChat {
+    height: 0px;
+  }
+
+}

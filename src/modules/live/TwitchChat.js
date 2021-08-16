@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { domain, LANDSCAPE } from '../../common/constants';
 import { LiveContext } from './context';
 
+import TwitchChatClient from './TwitchChatClient';
+
 import styles from './TwitchChat.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
@@ -100,7 +102,13 @@ class TwitchChat extends Component {
       width: `${this.state.chatWidth}px`
     } : {};
     return (<div className="TwitchChat" style={style}>
-      <iframe className="content" src={src} frameBorder="0" />
+      <TwitchChatClient 
+        clientId="" 
+        channelName=""
+        redirectUrl=""
+        location={this.props.location}
+        history={this.props.history}
+      />
       <div className="sizeController" ref={this.sizeController} onMouseDown={this.onDragStartCtrl} onTouchStart={this.onDragStartCtrl}></div>
       <div className="sizeControlWrapper" ref={this.sizeControlWrapper}>
         <div className="sizeControlOverlay" ref={this.sizeControlOverlay}></div>

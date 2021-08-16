@@ -15,6 +15,7 @@
     "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-app-polyfill": "^2.0.0",
+    "react-cookie": "^4.1.1",
     "react-dom": "^17.0.1",
     "react-responsive": "^8.2.0",
     "react-router-dom": "^5.2.0",
