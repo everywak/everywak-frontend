@@ -57,6 +57,9 @@ class SearchBar extends Component {
       this.queryTxt.current.value = params.queryTxt;
     }
   }
+  shouldComponentUpdate(nextProps, nextState) {
+    return false;
+  }
 
   render() {
     const searchTarget = [
