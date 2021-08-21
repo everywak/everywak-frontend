@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 import { Cookies } from 'react-cookie';
 
 import Spinner from '../../common/Components/Spinner';
+import InsertEmoticonRoundedIcon from '@material-ui/icons/InsertEmoticonRounded';
+import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
+
+import TwitchApi from '../../services/TwitchApi';
 
 import styles from './TwitchChatClient.scss';
 import classNames from 'classnames/bind';
@@ -49,6 +53,9 @@ class TwitchChatClient extends Component {
 
     this.selfInfo = '';
     this.lastMessage = '';
+
+    this.badges = {};
+    this.emoteSets = [];
 
     this.twitchChatList = React.createRef();
     this.chatInput      = React.createRef();
@@ -152,7 +159,7 @@ class TwitchChatClient extends Component {
     });
     if (process.env.NODE_ENV == 'development') { console.log('Twitch IRC WebSocket has sended a message.'); console.log(res); }
 
-    res.map(data => {
+    res.map(async data => {
       switch(this.IRCStatus) {
         case TwitchChatClient.CONNECTED:
           if (data[2] === '* :Login authentication failed') {
@@ -176,6 +183,33 @@ class TwitchChatClient extends Component {
               oauthState: TwitchChatClient.LOGINED,
             });
             console.log('Channel chat joined.');
+            const twitchApi = new TwitchApi({
+              clientId: this.props.clientId,
+              token: this.getClientOAuth(),
+            });
+            const user = await twitchApi.getUsers(this.props.channelName);
+            const badgesChannel = await twitchApi.getChannelChatBadges(user[0].id);
+            const badgesGlobal = await twitchApi.getGlobalChatBadges();
+            badgesGlobal.map(b => {
+              b.versions.map(bg => {
+                this.badges[b.set_id + '/' + bg.id] = {
+                  id: b.set_id + '/' + bg.id,
+                  image_url_1x: bg.image_url_1x,
+                  image_url_2x: bg.image_url_2x,
+                  image_url_4x: bg.image_url_4x,
+                }
+              });
+            });
+            badgesChannel.map(b => {
+              b.versions.map(bg => {
+                this.badges[b.set_id + '/' + bg.id] = {
+                  image_url_1x: bg.image_url_1x,
+                  image_url_2x: bg.image_url_2x,
+                  image_url_4x: bg.image_url_4x,
+                }
+              });
+            });
+
           }
           break;
         case TwitchChatClient.JOINED:
@@ -205,11 +239,16 @@ class TwitchChatClient extends Component {
     }
   }
 
+  /**
+   * Update my chat profile.
+   * 
+   * @param {Array} data
+   */
   updateSelfInfo = data => {
     this.selfInfo = data[0];
     
     if (this.lastMessage) {
-      this.receiveChat({tag: this.selfInfo + ';id=my-chat-' + (Math.random() * 9999999), id: data[3] + '!', msg: this.lastMessage});
+      this.receiveChat({tag: this.selfInfo + ';id=my-chat-' + (Math.random() * 9999999), id: data[3] + '!', msg: this.lastMessage, mine: true});
     }
   }
 
@@ -249,19 +288,46 @@ class TwitchChatClient extends Component {
    * @param {String} id
    * @param {String} msg
    */
-  receiveChat = ({ tag, id, msg }) => {
+  receiveChat = async ({ tag, id, msg, mine = false }) => {
     const tags = this.parseTag(tag);
     
-    const emotes = this.parseEmote(tags.emotes);
+    const badges    = this.parseBadge(tags.badges);
+    const emotes    = this.parseEmote(tags.emotes);
+    const emoteSets = this.parseEmoteSets(tags['emote-sets']);
 
-    const content = this.replaceEmote(msg, emotes);
+    if (emoteSets.length > 0 && this.emoteSets.length === 0 && mine) {
+      const twitchApi = new TwitchApi({
+        clientId: this.props.clientId,
+        token: this.getClientOAuth(),
+      });
+      const emoteSetsData = await twitchApi.getEmoteSets(emoteSets);
+      this.emoteSets = emoteSetsData;
+    }
+
+    this.emoteSets.map(ems => {
+      if(msg.indexOf(ems.name) != -1) {
+        emotes.push({
+          id: ems.id, 
+          pos: [[msg.indexOf(ems.name), msg.indexOf(ems.name) + ems.name.length - 1]],
+        });
+      }
+    })
+
+    const content     = this.replaceEmote(msg, emotes);
     const displayName = tags['display-name'];
     const userID      = id.substr(1, id.indexOf('!') - 1);
     const color       = tags.color;
+    const badgeList   = badges.map(bg => {
+      if (bg) {
+        return <TwitchChatBadge key={bg.id} src_1x={bg.image_url_1x} src_2x={bg.image_url_2x} src_3x={bg.image_url_4x} />;
+      }
+    }
+    );
 
     const chat = {
       profile: <span className="chatProfileWrapper" style={{color: color}}>
-        <span className="nickname">{displayName}</span>{displayName != userID ? `(${userID})` : ''}
+        {badgeList}
+        <span className="nickname">{displayName}</span><span className="userid">{displayName != userID ? `(${userID})` : ''}</span>
       </span>,
       content: content,
       rawContent: msg,
@@ -319,6 +385,35 @@ class TwitchChatClient extends Component {
       });
     });
     return emotes;
+  }
+
+  /**
+   * Parse emote sets from tag data
+   * 
+   * @return {Array} emote sets data
+   */
+  parseEmoteSets = data => {
+    if (!data) { return []; }
+    
+    // parse emote sets data
+    return data.replace(';', '').split(',');
+  }
+
+  /**
+   * Parse badge info from tag data
+   * 
+   * @return {Array} badge data
+   */
+  parseBadge = data => {
+    const badges = [];
+
+    if (!data) { return badges; }
+    
+    // parse badge data
+    data.split(',').map(bg => { // badge/id,badge/id,badge/id
+      badges.push(this.badges[bg]);
+    });
+    return badges;
   }
 
   /**
@@ -381,7 +476,8 @@ class TwitchChatClient extends Component {
     const { chatList, oauthState } = this.state;
     const cList = chatList.map(c => 
       <li key={c.key} className="twitchChatItem">
-        <span className="chatProfile">{c.profile}: </span>
+        <span className="chatProfile">{c.profile}</span>
+        <span>: </span>
         <span className="chatContent">{c.content}</span>
     </li>
     );
@@ -398,6 +494,7 @@ class TwitchChatClient extends Component {
               {cList}
             </ul>
             <div className="twitchChatBottom">
+              <div className="twitchChatInputWrapper">
               <textarea 
                 className="twitchChatInput" 
                 ref={this.chatInput} 
@@ -406,9 +503,18 @@ class TwitchChatClient extends Component {
                   e.target.style.height = '0px';
                   e.target.style.height = (e.target.scrollHeight + 4) + 'px';
                 }} />
+                <button className="twitchChatButton twitchChatBtnEmote">
+                  <InsertEmoticonRoundedIcon fontSize="small" />
+                </button>
+              </div>
               <div className="twitchChatInputFooter">
-                <div className="twitchChatSettingWrapper">&nbsp;</div>
-                <button className="twitchChatBtnSend" onClick={this.sendChat}>채팅</button>
+                <div className="inputFooterLeftWrapper">&nbsp;</div>
+                <div className="inputFooterRightWrapper">
+                  <button className="twitchChatButton twitchChatBtnSetting">
+                    <SettingsRoundedIcon fontSize="small" />
+                  </button>
+                  <button className="twitchChatButton twitchChatBtnSend" onClick={this.sendChat}>채팅</button>
+                </div>
               </div>
             </div>
           </React.Fragment> :
@@ -417,7 +523,7 @@ class TwitchChatClient extends Component {
               oauthState == TwitchChatClient.LOGOUTED ?
               <React.Fragment>
                 <span className="loginTitle">트위치로 로그인해주세요.</span>
-                <a className="btnLoginTwitch" href={`https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=chat:edit chat:read channel:read:predictions`}>로그인</a>
+                <a className="twitchChatButton btnLoginTwitch" href={`https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=chat:edit chat:read channel:read:predictions`}>로그인</a>
               </React.Fragment> :
               <React.Fragment>
                 <Spinner caption="채팅방 접속중..." />
@@ -443,7 +549,29 @@ class TwitchChatEmote extends Component {
       <span className='TwitchChatEmote'>
         <img 
           src={`https://static-cdn.jtvnw.net/emoticons/v2/${emoteId}/default/light/1.0`} 
-          srcset={`https://static-cdn.jtvnw.net/emoticons/v2/${emoteId}/default/light/2.0 2x https://static-cdn.jtvnw.net/emoticons/v2/${emoteId}/default/light/3.0 3x`} 
+          srcSet={`https://static-cdn.jtvnw.net/emoticons/v2/${emoteId}/default/light/1.0 1x, https://static-cdn.jtvnw.net/emoticons/v2/${emoteId}/default/light/2.0 2x, https://static-cdn.jtvnw.net/emoticons/v2/${emoteId}/default/light/3.0 3x`} 
+        />
+      </span>
+    );
+  }
+}
+
+class TwitchChatBadge extends Component {
+
+  static defaultProps = {
+    src_1x: '',
+    src_2x: '',
+    src_4x: '',
+  };
+
+  render() {
+    const { src_1x, src_2x, src_4x } = this.props;
+
+    return (
+      <span className='TwitchChatBadge'>
+        <img 
+          src={src_1x} 
+          srcSet={`${src_1x} 1x, ${src_2x} 2x, ${src_4x} 3x`} 
         />
       </span>
     );
