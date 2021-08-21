@@ -1,10 +1,14 @@
 # Everywak
 
-ReactJS로 구현된 에브리왁굳 프로젝트 소스
+ReactJS로 구현된 에브리왁굳 프론트엔드 소스
 
 ## 에브리왁굳이란?
 
 [에브리왁굳](https://everywak.kr/)은 스트리머 [우왁굳](https://twitch.tv/woowakgood)과 관련된 컨텐츠를 제공하는 팬사이트입니다. 
+
+![메인 스크린샷](./screenshots/everywak_main.png)
+
+<br />
 
 ## 주요 컨텐츠
 
@@ -17,7 +21,7 @@ ReactJS로 구현된 에브리왁굳 프로젝트 소스
 
 유튜브 풀업로드 채널에서 진행되는 생방송도 트위치 채팅창과 함께 시청할 수 있습니다.
 
-<br>
+ <br>
 
 ## 빌드 관련 명령어 
 
@@ -38,6 +42,13 @@ ReactJS로 구현된 에브리왁굳 프로젝트 소스
 
 - 원작자의 동의 없이 에브리왁굳과 혼동을 줄 수 있는 웹사이트를 운영할 목적으로 본 프로젝트의 소스를 활용하는 경우 
 - 상업적인 목적으로 사용하는 경우 
+
+## 오픈소스 라이센스
+
+- [React](https://github.com/facebook/react): The MIT License Copyright © Facebook, Inc.
+- [axios](https://github.com/axios/axios): The MIT License Copyright © 2014-present Matt Zabriskie
+- [Material UI](https://github.com/mui-org/material-ui): The MIT License Copyright © 2014 Call-Em-All
+- [Node-SASS](https://github.com/sass/node-sass): The MIT License Copyright © 2013-2016 Andrew Nesbitt
 
 ## 주석
 
