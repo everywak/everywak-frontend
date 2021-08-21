@@ -101,7 +101,7 @@ class BestwakkiBottomNavigator extends Component {
           </div>
           <div className="right">
             <MediaQuery maxWidth={tablet_s_width - 1}>
-              <BestwakkiSearchPanel />
+              <BestwakkiSearchPanel history={this.props.history} />
             </MediaQuery>
             <ScrollToTopButton show={showTop} />
             <Button className="btnSetting"

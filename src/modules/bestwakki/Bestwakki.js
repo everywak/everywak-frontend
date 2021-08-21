@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled, { keyframes } from "styled-components";
+import MediaQuery  from 'react-responsive';
 import styles from './Bestwakki.scss';
 
 import Spinner from '../../common/Components/Spinner';
@@ -82,6 +83,7 @@ class Bestwakki extends Component {
     const { list, loaded, loadedLength } = this.state;
     const today = new Date();
     const min = 1424876400000, max = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
+    const tablet_s_width = 960;
     
     return (
       <div className={cx('Bestwakki', {'front': front})}>
@@ -92,12 +94,14 @@ class Bestwakki extends Component {
               <div className="controlWrapper">
                 <SortList history={history} location={location} fetchArticlesInfo={this.fetchArticlesInfo} />
                 <div className="right">
-                  <DateRange name="queryDate" min={min} max={max} start={this.beginAt} end={this.endAt} />
-                  <SearchBar history={history} location={location} />
+                  <MediaQuery minWidth={tablet_s_width}>
+                    <DateRange name="queryDate" min={min} max={max} start={this.beginAt} end={this.endAt} />
+                    <SearchBar history={history} location={location} />
+                  </MediaQuery>
                 </div>
               </div>
             </div>
-            <BestwakkiBottomNavigator />
+            <BestwakkiBottomNavigator history={this.props.history} />
           </Fragment>
         }
         <ArticleList front={front} data={list} loaded={loaded} />
