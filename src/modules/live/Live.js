@@ -8,6 +8,9 @@ import Button from '../../common/Components/Button';
 import RemoveRedEyeRoundedIcon from '@material-ui/icons/RemoveRedEyeRounded';
 import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
 import ExpandLessRoundedIcon from '@material-ui/icons/ExpandLessRounded';
+
+import * as service from '../../services/LiveWakApi';
+
 import { LiveContext } from './context';
 import TwitchChat from './TwitchChat';
 import WakPlayer from './WakPlayer';
@@ -38,10 +41,13 @@ class Live extends Component {
     this.setRotation = val => {
       const rot = val === TOGGLE ? !this.state.rotation : val;
       this.setState({rotation: rot});
-      if (rot === PORTRAIT) {
-        document.getElementsByClassName('App')[0].classList.remove('live');
-      } else if (rot === LANDSCAPE) {
-        document.getElementsByClassName('App')[0].classList.add('live');
+      const app = document.getElementsByClassName('App')[0];
+      if (app) {
+        if (rot === PORTRAIT) {
+          app.classList.remove('live');
+        } else if (rot === LANDSCAPE) {
+          app.classList.add('live');
+        }
       }
     }
     this.setAutoRotation = () => { this.setRotation(window.innerWidth < window.innerHeight ? PORTRAIT : LANDSCAPE); };
@@ -109,10 +115,56 @@ class Live extends Component {
 class LiveSummary extends Component {
   static contextType = LiveContext;
 
+  state = {
+    broadcaster: 'NONE',
+    title: '방송 중이 아닙니다.',
+    viewerCount: 0,
+    startedTime: 0,
+    startedTimeString: '',
+  };
+
+  componentDidMount() {
+    this.loadLiveInfo();
+    this.loopLiveInfo = setInterval(this.loadLiveInfo, 30 * 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.loopLiveInfo);
+  }
+
+  loadLiveInfo = async () => {
+    const info = await service.getBroadcastInfo();
+
+    switch(info.broadcaster) {
+      case 'TWITCH':
+        const {
+          broadcaster, title, viewerCount, startedTime,
+        } = info;
+
+        this.setState({
+          broadcaster: broadcaster,
+          title: title,
+          viewerCount: parseInt(viewerCount),
+          startedTime: new Date(startedTime).getTime(),
+          startedTimeString: new Date(startedTime),
+        });
+        break;
+      default:
+        this.setState({
+          broadcaster: 'NONE',
+          title: '방송 중이 아닙니다.',
+          viewerCount: 0,
+          startedTime: 0,
+          startedTimeString: '',
+        });
+    }
+  }
+
   render() {
-    const channelName = '우왁굳';
-    const broadcastName = 'Twitch';
     const { playerOverlay, setPlayerOverlay } = this.context;
+    const { broadcaster, title, viewerCount, startedTime, startedTimeString } = this.state;
+    const channelName = '우왁굳';
+    const broadcastName = broadcaster.charAt(0) + broadcaster.slice(1).toLowerCase();
 
     return (
       <div className={cx('LiveSummary', {opened: playerOverlay === OPENED, expanded: playerOverlay === EXPANDED})}>
@@ -125,9 +177,9 @@ class LiveSummary extends Component {
             </div>
           </div>
           <div className="liveSummaryWrapper" >
-            <span className="liveTitle">뭐? 뱅온이 없다고?</span>
-            <span className="liveDateTime">13일 전</span>
-            <span className="livePresented">
+            <span className="liveTitle">{title}</span>
+            <span className="liveDateTime">{startedTimeString}</span>
+            <span className={cx('livePresented', {hide: broadcastName == 'None'})}>
               <span className="channelName">{channelName}</span>
               &nbsp;on&nbsp;
               <span className="broadcastName">{broadcastName}</span>
@@ -136,8 +188,8 @@ class LiveSummary extends Component {
         </div>
         <div className="right">
           <div className="up">
-            <ViewerCounter viewer={3123} />
-            <StreamTime startedTime={1626760233748} />
+            <ViewerCounter viewer={viewerCount} />
+            <StreamTime startedTime={startedTime} />
           </div>
           <div className="down">
             <Button 
@@ -215,7 +267,7 @@ class StreamTime extends Component {
     const formattedTime = `${hours}:${this.formatInt(minutes)}:${this.formatInt(seconds)}`;
 
     return (
-      <div className="StreamTime">
+      <div className={cx('StreamTime', {hide: this.props.startedTime == 0})}>
         {formattedTime}
       </div>
     );
