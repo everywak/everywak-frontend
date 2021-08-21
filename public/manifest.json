@@ -20,6 +20,20 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#fafafa",
+  "background_color": "#ffffff",
+  "shortcuts": [
+    {
+      "name": "왁물원 인기글",
+      "short_name": "인기글",
+      "description": "",
+      "url": "/bestwakki"
+    },
+    {
+      "name": "생방송",
+      "short_name": "생방송",
+      "description": "",
+      "url": "/live"
+    }
+  ]
 }
