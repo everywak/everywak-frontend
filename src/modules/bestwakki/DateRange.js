@@ -72,6 +72,19 @@ class DateRange extends Component {
     })
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    const should = nextProps.name  != this.props.name || 
+                   nextProps.min   != this.props.min || 
+                   nextProps.max   != this.props.max || 
+                   nextProps.start != this.props.start || 
+                   nextProps.end   != this.props.end || 
+                   nextState.dateStr != this.state.dateStr || 
+                   nextState.opened  != this.state.opened || 
+                   nextState.start   != this.state.start || 
+                   nextState.end     != this.state.end;
+    return should;
+  }
+
   render() {
     const { name, min, max} = this.props;
     const { start, end } = this.state;
