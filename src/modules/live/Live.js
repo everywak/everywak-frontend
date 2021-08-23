@@ -9,6 +9,7 @@ import RemoveRedEyeRoundedIcon from '@material-ui/icons/RemoveRedEyeRounded';
 import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
 import ExpandLessRoundedIcon from '@material-ui/icons/ExpandLessRounded';
 
+import * as func from '../../common/funtions';
 import * as service from '../../services/LiveWakApi';
 
 import { LiveContext } from './context';
@@ -146,7 +147,7 @@ class LiveSummary extends Component {
           title: title,
           viewerCount: parseInt(viewerCount),
           startedTime: new Date(startedTime).getTime(),
-          startedTimeString: new Date(startedTime),
+          startedTimeString: func.formatDateTimeString(new Date(startedTime)),
         });
         break;
       default:
