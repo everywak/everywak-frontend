@@ -44,6 +44,7 @@ class TwitchChatClient extends Component {
     oauthState: TwitchChatClient.LOGOUTED,
     chatList: [],
     chatItemMaximumLength: 50,
+    openedEmotePicker: false,
   };
 
   constructor(props) {
@@ -123,13 +124,6 @@ class TwitchChatClient extends Component {
    * Return the client's OAuth token.
    */
   getClientOAuth = () => this.state.oauth
-
-  /**
-   * Open Twitch login page.
-   */
-  loginTwitch = () => {
-
-  }
 
   /**
    * Set IRC status
@@ -483,6 +477,43 @@ class TwitchChatClient extends Component {
     }
   }
 
+  /**
+   * Open EmotePicker
+   */
+  openEmotePicker = () => {
+    this.setState({
+      openedEmotePicker: true,
+    });
+  }
+
+  /**
+   * Close EmotePicker
+   */
+  closeEmotePicker = () => {
+    this.setState({
+      openedEmotePicker: false,
+    });
+  }
+
+  /**
+   * Toggle EmotePicker
+   */
+  toggleEmotePicker = () => {
+    this.setState({
+      openedEmotePicker: !this.state.openedEmotePicker,
+    });
+  }
+
+  /**
+   * Put emote name into chatbox
+   * @see TwitchChatClient.chatInput
+   */
+  appendToChatBox = str => {
+    if (this.chatInput.current) {
+      this.chatInput.current.value += str;
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.chatList != this.state.chatList) { // if a new chat exists
       setTimeout(this.scrollToBottom, 100);
@@ -498,7 +529,7 @@ class TwitchChatClient extends Component {
 
   render() {
     const { clientId, redirectUri } = this.props;
-    const { chatList, oauthState } = this.state;
+    const { chatList, oauthState, openedEmotePicker } = this.state;
     const cList = chatList.map(c => 
       <li key={c.key} className="twitchChatItem">
         <span className="chatProfile">{c.profile}</span>
@@ -526,9 +557,9 @@ class TwitchChatClient extends Component {
                 onKeyPress={e => {if(e.charCode == 13) { e.preventDefault(); this.sendChat() } }}
                 onChange={e => {
                   e.target.style.height = '0px';
-                  e.target.style.height = (e.target.scrollHeight + 4) + 'px';
+                    e.target.style.height = `${e.target.scrollHeight + 4}px`;
                 }} />
-                <button className="twitchChatButton twitchChatBtnEmote">
+                <button className="twitchChatButton twitchChatBtnEmote" onClick={e => this.toggleEmotePicker()}>
                   <InsertEmoticonRoundedIcon fontSize="small" />
                 </button>
               </div>
@@ -541,6 +572,7 @@ class TwitchChatClient extends Component {
                   <button className="twitchChatButton twitchChatBtnSend" onClick={this.sendChat}>채팅</button>
                 </div>
               </div>
+              {openedEmotePicker && <TwitchChatEmotePicker emotes={this.emoteSets} twitchApi={this.getTwitchApi()} appendToChatBox={this.appendToChatBox} />}
             </div>
           </React.Fragment> :
           <div className="twitchChatLogin">
@@ -564,14 +596,23 @@ class TwitchChatClient extends Component {
 class TwitchChatEmote extends Component {
 
   static defaultProps = {
+    emote: null,
     emoteId: '0',
+    onclick: null,
   };
+
+  onClick = e => {
+    const { onclick, emote } = this.props;
+    if (onclick) {
+      onclick(emote.name + ' ');
+    }
+  }
 
   render() {
     const { emoteId } = this.props;
 
     return (
-      <span className='TwitchChatEmote'>
+      <span className='TwitchChatEmote' onClick={this.onClick}>
         <img 
           src={`https://static-cdn.jtvnw.net/emoticons/v2/${emoteId}/default/light/1.0`} 
           srcSet={`https://static-cdn.jtvnw.net/emoticons/v2/${emoteId}/default/light/1.0 1x, https://static-cdn.jtvnw.net/emoticons/v2/${emoteId}/default/light/2.0 2x, https://static-cdn.jtvnw.net/emoticons/v2/${emoteId}/default/light/3.0 3x`} 
@@ -599,6 +640,108 @@ class TwitchChatBadge extends Component {
           srcSet={`${src_1x} 1x, ${src_2x} 2x, ${src_4x} 3x`} 
         />
       </span>
+    );
+  }
+}
+
+class TwitchChatEmotePicker extends Component {
+
+  static defaultProps = {
+    emotes: [
+      {
+        id: "emotesv2_031bf329c21040a897d55ef471da3dd3",
+        name: "Jebasted",
+        images:
+        {
+          url_1x: "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_031bf329c21040a897d55ef471da3dd3/static/light/1.0",
+          url_2x: "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_031bf329c21040a897d55ef471da3dd3/static/light/2.0",
+          url_4x: "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_031bf329c21040a897d55ef471da3dd3/static/light/3.0",
+        },
+        emote_type: "globals",
+        emote_set_id: "0",
+        owner_id: "0",
+        format: ["static"],
+        scale: ["1.0","2.0","3.0"],
+        theme_mode: ["light","dark"],
+      },
+    ],
+    twitchApi: null,
+    appendToChatBox: null,
+  };
+
+  state = {
+    recents: [
+      {
+        id: "245",
+        name: "ResidentSleeper",
+      },
+    ]
+  }
+
+  constructor() {
+    super();
+
+    this.groupedEmotes = {};
+  }
+
+  groupEmotes = emotes => {
+    const grouped = {};
+
+    grouped.recents = {
+      name: 'Recent used',
+      emotes: this.state.recents,
+    }
+
+    for(let emote of emotes) {
+
+      // generate new emote set
+      if (!grouped[emote.emote_set_id]) {
+        grouped[emote.emote_set_id] = {
+          name: emote.emote_set_id,
+          emotes: [],
+        }
+      }
+      const emoteSet = grouped[emote.emote_set_id];
+
+      emoteSet.emotes.push(emote);
+    }
+
+    return grouped;
+  }
+
+  render() {
+    const { emotes, appendToChatBox } = this.props;
+    this.groupedEmotes = this.groupEmotes(emotes);
+    const emoteList = 
+      Object.entries(this.groupedEmotes).reverse().map(([emoteSetId, emoteSet]) => <TwitchChatEmoteSet emoteSet={emoteSet} appendToChatBox={appendToChatBox} />);
+
+    return (
+      <div className='TwitchChatEmotePicker'>
+        {emoteList}
+      </div>
+    );
+  }
+}
+
+class TwitchChatEmoteSet extends Component {
+  static defaultProps = {
+    emoteSet: {
+      name: 'EmoteSet',
+      emotes: [],
+    },
+    appendToChatBox: null,
+  }
+
+  render() {
+    const { emoteSet, appendToChatBox } = this.props;
+
+    return (
+    <div className="TwitchChatEmoteSet">
+      <div className="emoteSetName">{emoteSet.name}</div>
+      <div className="emoteList">
+        {emoteSet.emotes.map(em => <TwitchChatEmote key={`emote_${em.id}`} emoteId={em.id} emote={em} onclick={appendToChatBox} />)}
+      </div>
+    </div>
     );
   }
 }
