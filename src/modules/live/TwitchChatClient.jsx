@@ -57,6 +57,8 @@ class TwitchChatClient extends Component {
     this.badges = {};
     this.emoteSets = [];
 
+    this.twitchApi = null;
+
     this.twitchChatList = React.createRef();
     this.chatInput      = React.createRef();
   }
