@@ -310,21 +310,16 @@ class TwitchChatClient extends Component {
     const emotes    = this.parseEmote(tags.emotes);
     const emoteSets = this.parseEmoteSets(tags['emote-sets']);
 
-    if (emoteSets.length > 0 && this.emoteSets.length === 0 && mine) {
-      const twitchApi = new TwitchApi({
-        clientId: this.props.clientId,
-        token: this.getClientOAuth(),
-      });
-      const emoteSetsData = await twitchApi.getEmoteSets(emoteSets);
-      this.emoteSets = emoteSetsData;
-    }
-
     this.emoteSets.map(ems => {
-      if(msg.indexOf(ems.name) != -1) {
+      for(let i = 0; i < msg.length; i++) {
+        const pos = msg.indexOf(ems.name, i);
+        if(pos != -1) {
         emotes.push({
           id: ems.id, 
-          pos: [[msg.indexOf(ems.name), msg.indexOf(ems.name) + ems.name.length - 1]],
+            pos: [[pos, pos + ems.name.length - 1]],
         });
+          i += pos + ems.name.length - 1;
+      }
       }
     })
 
