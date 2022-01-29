@@ -2,45 +2,28 @@
 
 .Apps {
   width: 100%;
-  overflow-x: scroll;
 
   .appList {
-    display: flex;
     box-sizing: border-box;
-      
-    .appItem {
-      display: block;
-      box-sizing: border-box;
-      margin-left: 16px;
-      
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    .AppListItem {
+      width: calc(50% - 16px);
+    }
+  }
 
-      @include tablet {
-        &:first-child {
-          padding-left: calc((100% - 431px) / 2);
-        }
-      }
-
-      &:last-child {
-        padding-right: 16px;
-        @include tablet {
-          padding-right: calc((100% - 431px) / 2 + 16px);
-        }
-      }
-      
-      .wrapper {
-        background-color: $component-secondary-border-color;
-        border-radius: 16px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        width: 160px;
-        height: 100px;
-
-        img {
-          width: 100%;
-          height: auto;
-        }
+  &.singleColumn {
+    .appList .AppListItem {
+      width: 100%;
+    }
+  }
+  
+  @include not-desktop {
+    .appList {
+      .AppListItem {
+        width: 100%;
       }
     }
   }
