@@ -72,6 +72,22 @@ class TwitchChatClient extends Component {
   }
 
   /**
+   * Initialize Twitch API Adapter.
+   * @see TwitchApi
+   * @returns {TwitchApi}
+   */
+  getTwitchApi = () => {
+    if (!this.twitchApi && this.props.clientId && this.getClientOAuth()) {
+      this.twitchApi = new TwitchApi({
+        clientId: this.props.clientId,
+        token: this.getClientOAuth(),
+      });
+    }
+
+    return this.twitchApi;
+  }
+
+  /**
    * Create a WebSocket to communicate with Twitch Chat Server.
    */
   connectTwitchIRC = () => {
@@ -183,10 +199,7 @@ class TwitchChatClient extends Component {
               oauthState: TwitchChatClient.LOGINED,
             });
             console.log('Channel chat joined.');
-            const twitchApi = new TwitchApi({
-              clientId: this.props.clientId,
-              token: this.getClientOAuth(),
-            });
+            const twitchApi = this.getTwitchApi();
             const user = await twitchApi.getUsers(this.props.channelName);
             const badgesChannel = await twitchApi.getChannelChatBadges(user[0].id);
             const badgesGlobal = await twitchApi.getGlobalChatBadges();
