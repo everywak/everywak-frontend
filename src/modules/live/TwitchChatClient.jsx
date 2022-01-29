@@ -259,9 +259,12 @@ class TwitchChatClient extends Component {
    * 
    * @param {Array} data
    */
-  updateSelfInfo = data => {
+  updateSelfInfo = async data => {
     this.selfInfo = data[0];
     
+    const tags = this.parseTag(this.selfInfo);
+    await this.updateEmoteSet(tags['emote-sets']);
+
     if (this.lastMessage) {
       this.receiveChat({tag: this.selfInfo + ';id=my-chat-' + (Math.random() * 9999999), id: data[3] + '!', msg: this.lastMessage, mine: true});
     }
@@ -308,7 +311,6 @@ class TwitchChatClient extends Component {
     
     const badges    = this.parseBadge(tags.badges);
     const emotes    = this.parseEmote(tags.emotes);
-    const emoteSets = this.parseEmoteSets(tags['emote-sets']);
 
     this.emoteSets.map(ems => {
       for(let i = 0; i < msg.length; i++) {
@@ -346,6 +348,19 @@ class TwitchChatClient extends Component {
 
     // append chat to list
     this.appendToChatList(chat);
+  }
+
+  /**
+   * Parse and save emoteSets that can be used in this chat.
+   */
+  updateEmoteSet = async emoteSetsRaw => {
+    const emoteSets = this.parseEmoteSets(emoteSetsRaw);
+
+    if (emoteSets.length > 0 && this.emoteSets.length === 0) {
+      const twitchApi = this.getTwitchApi();
+      const emoteSetsData = await twitchApi.getEmoteSets(emoteSets);
+      this.emoteSets = emoteSetsData;
+    }
   }
 
   /**
