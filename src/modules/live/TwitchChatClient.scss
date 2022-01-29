@@ -32,6 +32,20 @@
     height: 100%;
     padding: 8px 0;
 
+    &::-webkit-scrollbar {
+      width: 8px;
+      padding: 2px 0;
+    }
+    &::-webkit-scrollbar-button {
+      display: none;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #aaa;
+      background-clip: padding-box;
+      border: 2px solid transparent;
+      border-radius: 4px;
+    }
+
     .twitchChatItem {
       font-size: 14px;
       font-weight: 400;
