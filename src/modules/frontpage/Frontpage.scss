@@ -5,7 +5,6 @@
   padding-bottom: 31px;
 
   .FrontPanel {
-    margin-top: 31px;
 
     &:nth-child(3),
     &:nth-child(4) {
@@ -29,34 +28,8 @@
     }
 
     .panelHeader {
-      font-size: 24px;
-      font-weight: 500;
-      line-height: 24px;
       @include tablet {
         margin: 0 calc((100% - 431px) / 2);
-      }
-  
-      & > a {
-        color: $primary-text-color;
-        display: inline-flex;
-        margin: 0 16px 21px;
-  
-        .more {
-          color: $primary-color;
-          display: inline-flex;
-          align-items: center;
-          font-size: 14px;
-          line-height: 26px;
-          padding-left: 9px;
-
-          svg {
-            fill: $primary-color;
-            margin-left: 1px;
-            padding-top: 1px;
-            width: 18px;
-            height: 18px;
-          }
-        }
       }
     }
   }

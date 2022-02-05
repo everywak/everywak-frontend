@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import styles from './Frontpage.scss';
-import classNames from 'classnames/bind';
 
+import FrontPanel from './FrontPanel';
 import Bestwakki from '../bestwakki/Bestwakki.js';
 import Live from '../live/Live.js';
 import Apps from '../apps/Apps.js';
 import Etcs from '../apps/Etcs.js';
-import KeyboardArrowRightRoundedIcon from '@material-ui/icons/KeyboardArrowRightRounded';
 import { Link } from 'react-router-dom';
 
+import styles from './Frontpage.scss';
+import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 class Frontpage extends Component {
@@ -65,45 +65,6 @@ class FrontPanelList extends Component {
       <ul className="FrontPanelList">
         {list}
       </ul>
-    );
-  }
-}
-
-class FrontPanel extends Component {
-  static defaultProps = {
-    data: {
-      id: 'front_default',
-      title: "모듈",
-      link: "/",
-      moreable: true,
-      component: null
-    }
-  };
-
-  render() {
-    const { 
-      link, title, component, moreable
-    } = this.props.data;
-    return (
-      <li className="FrontPanel">
-        <section className="panelHeader">
-          {
-            moreable ?
-            <Link to={link}>
-              <span className="tit">{title}</span>
-              <span className="more">
-                더 보기 <KeyboardArrowRightRoundedIcon fontSize="small"/>
-              </span>
-            </Link> :
-            <a>
-              <span className="tit">{title}</span>
-            </a>
-          }
-        </section>
-        <div className="compContainer">
-          {component}
-        </div>
-      </li>
     );
   }
 }
