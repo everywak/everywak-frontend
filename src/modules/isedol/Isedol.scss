@@ -1,0 +1,115 @@
+@import '../../common/common.scss';
+
+.Isedol {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, .02) 337px, transparent 338px);
+  box-sizing: border-box;
+  padding: 48px 72px 58px;
+  width: 100%;
+  @include mobile {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .02) 377px, transparent 378px);
+    padding-top: 30px;
+    padding: 30px 16px 48px;
+  }
+
+  .contentWrapper {
+    @include desktop {
+      margin: 0 auto;
+      max-width: 1080px;
+    }
+
+    section.liveSection {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding-bottom: 48px;
+      width: 100%;
+      height: fit-content;
+      @include mobile {
+        flex-direction: column;
+        padding-bottom: 24px;
+      }
+
+      .logoArea {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: fit-content;
+        height: fit-content;
+        @include mobile {
+          flex-direction: row;
+        }
+
+        img.logoImg {
+          width: 216px;
+          height: 180px;
+          @include mobile {
+            width: 192px;
+            height: 160px;
+          }
+        }
+        ul.social {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          margin: 12px 0 0;
+          @include mobile {
+            flex-direction: column;
+            margin: 0 0 0 12px;
+          }
+
+          li.socialItem {
+            background: #f001;
+            border-radius: 50%;
+            margin: 0 6px;
+            overflow: hidden;
+            width: 48px;
+            height: 48px;
+            @include mobile {
+              margin: 6px 0;
+              width: 38px;
+              height: 38px;
+            }
+          }
+        }
+      }
+      .liveList {
+        display: grid;
+        @include desktop {
+          grid-template-columns: repeat(3, 200px);
+          grid-template-rows: repeat(2, 112.5px);
+          gap: 16px;
+          width: 632px;
+          height: 241px;
+          margin: 0 0 0 95px;
+        }
+        @include tablet {
+          grid-template-columns: repeat(2, 120px);
+          grid-template-rows: repeat(3, 67.5px);
+          gap: 16px;
+          width: 256px;
+          height: 234.5px;
+          margin: 0 0 0 95px;
+        }
+        @include mobile {
+          grid-template-columns: repeat(3, 113px);
+          grid-template-rows: repeat(2, 63.56px);
+          gap: 12px;
+          width: 363px;
+          height: 139.13px;
+          margin: 24px 0 0;
+        }
+      }
+    }
+
+    .FrontPanel {
+      margin-top: 58px;
+    }
+  }
+}
+@include desktop {
+}
+@include not-desktop {
+}

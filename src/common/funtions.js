@@ -66,11 +66,11 @@ export function isDateStr (date) {
  */
 export function formatDateTimeString(date) {
   const today = new Date();
-  const diffTime = today.getTime() - date.getTime();
+  const diffTime = (today.getTime() - date.getTime()) / 1000;
 
-  if      (diffTime <               180 * 1000) { return '방금 전'; }
-  else if (diffTime <          100 * 60 * 1000) { return parseInt(diffTime / 1000 / 60) + '분 전'; }
-  else if (diffTime <      24 * 60 * 60 * 1000) { return parseInt(diffTime / 1000 / 60 / 60) + '시간 전'; }
-  else if (diffTime < 60 * 24 * 60 * 60 * 1000) { return parseInt(diffTime / 1000 / 60 / 60 / 24) + '일 전'; }
-  else                                          { return '오래 전'; }
+  if      (diffTime <               180) { return '방금 전'; }
+  else if (diffTime <          100 * 60) { return parseInt(diffTime / 60) + '분 전'; }
+  else if (diffTime <      24 * 60 * 60) { return parseInt(diffTime / 60 / 60) + '시간 전'; }
+  else if (diffTime < 60 * 24 * 60 * 60) { return parseInt(diffTime / 60 / 60 / 24) + '일 전'; }
+  else                                   { return parseInt(diffTime / 60 / 60 / 24 / 30) + '달 전'; }
 }
