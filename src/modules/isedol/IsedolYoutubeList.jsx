@@ -42,7 +42,7 @@ class IsedolYoutubeList extends Component {
             thumbnail: thumbnail.url,
             title: item.title,
             datetime: item.publishedAt * 1000,
-            formattedDateTime: func.formatDateTimeString(item.publishedAt * 1000),
+            formattedDateTime: func.formatDateTimeString(new Date(item.publishedAt * 1000)),
             author: item.nickname,
             authorProfileImg: '',
           });
