@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import { Waktaverse } from '../../common/constants';
 import * as func from '../../common/funtions';
 import * as service from '../../services/Isedol';
 
@@ -34,6 +35,7 @@ class IsedolClipList extends Component {
     if (videoList) {
       this.setState({
         list: videoList.map(item => {
+          const target = Waktaverse.find(mb => mb.login_name == item.twitchId);
           const thumbnails = JSON.parse(item.thumbnails);
           const thumbnail = thumbnails.high || thumbnails.medium || thumbnails.default || {url: ''};
           return({
@@ -44,7 +46,7 @@ class IsedolClipList extends Component {
             datetime: item.publishedAt * 1000,
             formattedDateTime: func.formatDateTimeString(new Date(item.publishedAt * 1000)),
             author: item.nickname,
-            authorProfileImg: '',
+            authorProfileImg: target.profileImg.replace('{size}', '240'),
           });
         })
       })
