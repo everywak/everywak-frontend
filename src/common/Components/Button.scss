@@ -76,11 +76,15 @@
   }
 
   .label {
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     box-sizing: border-box;
     background-color: $primary-color;
     font-size: 12px;
     font-weight: 500;
+    height: 100%;
     line-height: 12px;
     padding: 0 8px 0 6px;
     vertical-align: middle;
