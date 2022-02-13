@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import { Waktaverse } from '../../common/constants';
 import * as func from '../../common/funtions';
 import * as service from '../../services/Isedol';
-
-import Button from '../../common/Components/Button';
-import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
 
 import VideoList from './VideoList';
 
@@ -16,11 +12,11 @@ const cx = classNames.bind(styles);
 
 class IsedolYoutubeList extends Component {
   static defaultProps = {
-    href: '',
   };
 
   state = {
-    list: [],
+    itemList: [],
+    defaultShowCount: 8,
   };
 
   constructor (props) {
@@ -34,7 +30,7 @@ class IsedolYoutubeList extends Component {
     
     if (videoList) {
       this.setState({
-        list: videoList.map(item => {
+        itemList: videoList.map(item => {
           const target = Waktaverse.find(mb => mb.login_name == item.twitchId);
           const thumbnails = JSON.parse(item.thumbnails);
           const thumbnail = thumbnails.high || thumbnails.medium || thumbnails.default || {url: ''};
@@ -65,11 +61,11 @@ class IsedolYoutubeList extends Component {
   }
 
   render() {
-    const { href } = this.props;
-    const { list } = this.state;
+    const {  } = this.props;
+    const { itemList, defaultShowCount } = this.state;
     
     return (
-      <VideoList list={list} />
+      <VideoList list={itemList} defaultShowCount={defaultShowCount} />
     );
   }
 }
