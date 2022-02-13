@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styled, { css } from 'styled-components';
 
 import styles from './CircleImg.scss';
 import classNames from 'classnames/bind';
@@ -14,10 +15,15 @@ class CircleImg extends Component {
   
   render() {
     const { src, alt, objectFit, padding } = this.props;
+    
+    const Image = styled.img`
+      object-fit: ${['fill', 'contain', 'cover', 'none', 'scale-down'].includes(objectFit) ? objectFit : 'cover'};
+      padding: ${padding}px;
+    `;
 
     return (
       <div className="CircleImg" {...this.props}>
-          <img src={src} alt={alt} onError={e => {e.target.src = '/images/blank.png'}} style={{objectFit: objectFit, padding: `${padding}px`}} />
+          <Image src={src} alt={alt} onError={e => {e.target.src = '/images/blank.png'}} />
       </div>
     );
   }

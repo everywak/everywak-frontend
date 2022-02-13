@@ -6,6 +6,7 @@ import LivePreview from './LivePreview';
 import FrontPanel from '../frontpage/FrontPanel';
 import IsedolYoutubeList from './IsedolYoutubeList';
 import IsedolClipList from './IsedolClipList';
+import IsedolMemberList from './IsedolMemberList';
 
 import styles from './Isedol.scss';
 import classNames from 'classnames/bind';
@@ -72,6 +73,10 @@ class Isedol extends Component {
               moreable: false,
               component: <IsedolClipList />,
             }} />
+          </section>
+          <div className="memberLine"></div>
+          <section className="memberSection">
+            <IsedolMemberList />
           </section>
         </div>
       </div>

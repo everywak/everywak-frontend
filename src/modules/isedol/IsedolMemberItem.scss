@@ -1,0 +1,51 @@
+@import '../../common/common.scss';
+
+.IsedolMemberItem {
+  width: fit-content;
+  height: fit-content;
+
+  .profileCircle {
+    border-radius: 50%;
+    width: 128px;
+    height: 128px;
+
+    .CircleImg {
+      width: 100%;
+    }
+  }
+
+  ul.social {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 16px;
+    width: 100%;
+
+    li.IsedolMemberSocialItem {
+      width: 38px;
+      height: 38px;
+
+      &.twitch a.link {
+        background: $twitch-color;
+      }
+      &.youtube a.link {
+        background: $youtube-color;
+      }
+      &.instagram a.link {
+        background: $instagram-color;
+      }
+
+      a.link {
+        background: #f003;
+        border-radius: 50%;
+        display: block;
+        width: 100%;
+        height: 100%;
+        
+        .CircleImg {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
