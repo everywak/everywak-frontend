@@ -37,6 +37,7 @@
     height: 100%;
 
     &::after {
+      border-radius: var(--borderRadius);
       content: ' ';
       position: absolute;
       left: 0;
