@@ -15,17 +15,20 @@ class AppListItem extends Component {
   render() {
     const { title, description, thumbnail, href } = this.props;
 
+    const content = <React.Fragment>
+      <div className="thumbWrapper">
+        <img className="thumb" src={thumbnail} alt={title} onError={e => (e.target.style.display = 'none')} />
+      </div>
+      <div className="descWrapper">
+        <div className="title">{title}</div>
+        <div className="description">{description}</div>
+      </div>
+    </React.Fragment>;
 
     return (
-      <Link to={href} className="AppListItem">
-        <div className="thumbWrapper">
-          <img className="thumb" src={thumbnail} alt={title} onError={e => (e.target.style.display = 'none')} />
-        </div>
-        <div className="descWrapper">
-          <div className="title">{title}</div>
-          <div className="description">{description}</div>
-        </div>
-      </Link> 
+      href.slice(0, 4) == 'http' ? 
+      <a href={href} className="AppListItem">{content}</a> :
+      <Link to={href} className="AppListItem">{content}</Link> 
     );
   }
 }
