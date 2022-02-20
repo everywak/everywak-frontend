@@ -1,7 +1,7 @@
 @import '../../common/common.scss';
 
 .AppListItem {
-  border-radius: 8px;
+  border-radius: 12px;
   color: inherit;
   display: flex;
   flex-direction: row;
@@ -13,22 +13,21 @@
   }
   
   .thumbWrapper{
-    background-color: $component-secondary-border-color;
-    border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 72px;
     min-width: 72px;
     height: 72px;
-    overflow: hidden;
     
-    img.thumb {
-      width: 100%;
-      height: auto;
-
-      &[alt] {
-        display: none;
+    .AppListItemIcon {
+      --width: 72px;
+      --height: 72px;
+      @include mobile {
+        --width: 64px;
+        --height: 64px;
+        --iconWidth: 32px;
+        --iconHeight: 32px;
       }
     }
   }
