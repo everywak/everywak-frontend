@@ -162,7 +162,7 @@ class TwitchChatClient extends Component {
     clearInterval(this.loopPingPong);
 
     if (this.state.oauth !== '') { // retry login now,2,4,8 secs..
-      setTimeout(this.connectTwitchIRC, Math.pow(2, this.connRetries++));
+      setTimeout(this.connectTwitchIRC, Math.pow(2, this.connRetries++) * 1000);
     }
   };
 
