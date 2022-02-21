@@ -51,6 +51,7 @@ class TwitchChatClient extends Component {
     super(props);
 
     this.IRCStatus  = TwitchChatClient.CLOSED;
+    this.connRetries = 0;
 
     this.selfInfo = '';
     this.lastMessage = '';
@@ -159,6 +160,10 @@ class TwitchChatClient extends Component {
 
     this.setIRCStatus(TwitchChatClient.CLOSED);
     clearInterval(this.loopPingPong);
+
+    if (this.state.oauth !== '') { // retry login now,2,4,8 secs..
+      setTimeout(this.connectTwitchIRC, Math.pow(2, this.connRetries++));
+    }
   };
 
   onMessage = e => {
@@ -194,6 +199,7 @@ class TwitchChatClient extends Component {
             this.setState({
               oauthState: TwitchChatClient.LOGINED,
             });
+            this.connRetries = 0; // reset retry count
             console.log('Channel chat joined.');
             const twitchApi = this.getTwitchApi();
             const user = await twitchApi.getUsers(this.props.channelName);
