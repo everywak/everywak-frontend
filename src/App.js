@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import styled from "styled-components";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+import ScrollToTop from './common/ScrollToTop';
+
 import Header from './common/Header/Header';
 import Footer from './common/Footer/Footer';
 import Frontpage from './modules/frontpage/Frontpage';
@@ -15,6 +17,7 @@ class App extends Component {
     return (
         <div className="App">
           <Router>
+            <ScrollToTop />
             <Header />
             <Route exact path="/" component={Frontpage}/>
             <Route path="/bestwakki" component={Bestwakki}/>
