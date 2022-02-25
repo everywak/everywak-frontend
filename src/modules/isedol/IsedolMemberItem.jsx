@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import CircleImg from '../../common/Components/CircleImg';
@@ -7,61 +7,45 @@ import styles from './IsedolMemberItem.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-class IsedolMemberItem extends Component {
-  static defaultProps = {
-    name: '멤버이름',
-    profileImg: '',
-    social: {
-      twitch: '',
-      youtube: '',
-      instagram: '',
-    },
-  };
+/**
+ * 이세돌 멤버 프로필 아이콘
+ * 
+ * @param {*} props 
+ */
+function IsedolMemberItem({ name, profileImg, social }) {
 
-  state = {
-  };
-
-  constructor (props) {
-    super(props);
-  };
-
-  componentDidMount() {
-    console.log(this.props)
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
-  }
-
-  componentWillUnmount() {
-  }
-
-  render() {
-    const { name, profileImg, social } = this.props;
-    const {  } = this.state;
-    
-    return (
-      <li className={cx('IsedolMemberItem')}>
-        <div className="profileCircle">
-          <CircleImg src={profileImg} alt={`${name} 프로필 이미지`} />
-        </div>
-        <ul className="social">
-          <IsedolMemberSocialItem type='twitch' socialId={social.twitch} />
-          <IsedolMemberSocialItem type='youtube' socialId={social.youtube} />
-          <IsedolMemberSocialItem type='instagram' socialId={social.instagram} />
-        </ul>
-      </li>
-    );
-  }
+  return (
+    <li className={cx('IsedolMemberItem')}>
+      <div className="profileCircle">
+        <CircleImg src={profileImg} alt={`${name} 프로필 이미지`} />
+      </div>
+      <ul className="social">
+        <IsedolMemberSocialItem type='twitch' socialId={social.twitch} />
+        <IsedolMemberSocialItem type='youtube' socialId={social.youtube} />
+        <IsedolMemberSocialItem type='instagram' socialId={social.instagram} />
+      </ul>
+    </li>
+  );
+  
 }
+IsedolMemberItem.defaultProps = {
+  name: '멤버이름',
+  profileImg: '',
+  social: {
+    twitch: '',
+    youtube: '',
+    instagram: '',
+  },
+};
 
-class IsedolMemberSocialItem extends Component {
-  static defaultProps = {
-    type: '',
-    socialId: '',
-  };
+/**
+ * 프로필 아이콘 밑에 붙는 유튜브/트위치/인스타 링크 버튼
+ * 
+ * @param {Object} props 
+ */
+function IsedolMemberSocialItem({ type, socialId }) {
 
-  static socialType = {
+  const socialType = {
     twitch: {
       bg: '/images/twitch_logo.svg',
       url: 'https://twitch.tv/{id}',
@@ -76,29 +60,26 @@ class IsedolMemberSocialItem extends Component {
     },
   }
 
-  render() {
-    const { type, socialId } = this.props;
-    const { url, bg } = IsedolMemberSocialItem.socialType[type];
-    const href = url.replace('{id}', socialId);
+  const { url, bg } = socialType[type];
+  const href = url.replace('{id}', socialId);
 
-    const className = {
-      twitch: type == 'twitch',
-      youtube: type == 'youtube',
-      instagram: type == 'instagram',
-    };
-    
-    return (
-      <li className={cx('IsedolMemberSocialItem', className)}>
-        <a href={href} className="link">
-          <CircleImg 
-            src={bg} 
-            alt={`${type} logo`} 
-            objectFit="contain" 
-            padding={8} />
-        </a>
-      </li>
-    );
-  }
+  const className = {
+    twitch: type == 'twitch',
+    youtube: type == 'youtube',
+    instagram: type == 'instagram',
+  };
+  
+  return (
+    <li className={cx('IsedolMemberSocialItem', className)}>
+      <a href={href} className="link">
+        <CircleImg 
+          src={bg} 
+          alt={`${type} logo`} 
+          objectFit="contain" 
+          padding={8} />
+      </a>
+    </li>
+  );
 }
   
 export default IsedolMemberItem;
