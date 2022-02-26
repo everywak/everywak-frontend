@@ -13,7 +13,7 @@ function VideoItem(props) {
     <li className={cx('VideoItem')}>
       <a href={href} target="_blank">
         <div className="previewWrapper">
-          <img className="previewImg" src={'/images/blank.png'} alt="썸네일" onError={e => {e.target.src = '/images/blank.png'}} />
+          <img className="previewImg" src={thumbnail} alt="썸네일" onError={e => {e.target.src = '/images/blank.png'}} />
         </div>
         <div className="infoArea">
           <div className="profileCircle">
