@@ -1,0 +1,194 @@
+@import '../../../common/common.scss';
+@import './ArticleList';
+
+.ArticleList {
+
+  .Article {
+    animation-name: fadein;
+    animation-duration: .3s;
+    animation-fill-mode: forwards;
+    display: flex;
+    width: 100%;
+    .txt_area {
+      display: flex;
+      padding: 8px;
+      padding-left: 0px;
+      width: 100%;
+      line-height: 120%;
+      font-size: 14px;
+      color: $primary-text-color;
+      order: 1;
+
+      .icon_new_txt{
+        color: #a00;
+        display: none;
+      }
+  
+      &:link {
+        color: $primary-text-color;
+        
+        .icon_new_txt{
+          color: #a00;
+          display: none;
+        }
+      }
+      &:visited {
+        color: $secondary-text-color;
+  
+        .icon_new_txt{
+          color: #fff;
+          display: none;
+        }
+      }
+  
+      .board_txt {
+        color: $secondary-text-color;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 12px;
+      }
+      strong.tit {
+        font-weight: 500;
+        height: 100%;
+      }
+      .user_area {
+        color: $secondary-text-color;
+        font-size: 12px;
+        font-weight: 500;
+      }
+    }
+    .thumb_area img {
+        border-radius: 8px;
+    }
+  }
+}
+
+.ArticleList.resDesktop {
+  @include ArticleListDesktop;
+}
+.ArticleList.resMobile {
+  @include ArticleListMobile;
+}
+.ArticleList.resAuto {
+  @include desktop {
+    @include ArticleListDesktop;
+  }
+  @include not-desktop {
+    @include ArticleListMobile;
+  }
+}
+
+.pagination {
+  padding-top: 16px;
+  width: 100%;
+
+  .MoreArticleButton {
+    border-radius: 8px;
+    color: $primary-color;
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    margin: 0 auto 16px;
+    padding-top: 12px;
+    text-align: center;
+    width: 100%;
+    transition: background-color ease .3s;
+
+    &:hover {
+      background: rgba(0, 0, 0, .05);
+      @include not-desktop {
+        background: transparent;
+      }
+
+      svg {
+        top: 6px;
+      }
+    }
+    &:active {
+      svg {
+        top: 12px;
+      }
+    }
+
+    svg {
+      display: block;
+      fill: $primary-color;
+      margin: 0 auto;
+      position: relative;
+      top: 0px;
+      left: 0px;
+      transition: top .3s;
+      transition-timing-function: cubic-bezier(0.3, 2, 0.635, 1.005);
+    }
+  }
+}
+
+.ArticleList .Spinner {
+  display: block;
+  height: auto;
+
+  .Article {
+    pointer-events: none;
+    user-select: none;
+
+    .txt_area {
+      @include desktop {
+        height: 16px;
+      }
+
+      .board_txt,
+      strong.tit,
+      .nickname {
+        color: transparent;
+      }
+      .board_txt span,
+      strong.tit span {
+        display: inline-block;
+      }
+      .board_txt span {
+        line-height: 14px;
+      }
+      strong.tit span {
+        line-height: 16px;
+      }
+      .user_area {
+        color: transparent;
+        display: inline-block;
+        line-height: 14px;
+        width: fit-content;
+        
+        @include desktop {
+          &.mobile { display: none; }
+        }
+        @include not-desktop {
+          &.pc { display: none; }
+        }
+        span {
+          display: inline-block;
+          line-height: 14px;
+          @include desktop {
+            line-height: 16px;
+          }
+          margin-left: 0;
+        }
+        .datetime, .view, .like {
+          span {
+            text-align: center;
+          }
+        }
+      }
+    }
+    &:hover {
+      background-color: transparent;
+    }
+
+    .thumb_area {
+      .thumb {
+        border-radius: 8px;
+        width: 64px;
+        height: 64px;
+      }
+    }
+  }
+
+}

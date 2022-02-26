@@ -1,318 +1,11 @@
 @import '../../common/common.scss';
-@import './ArticleList';
 
 .Bestwakki {
 
   @include tablet {
     margin: 0 calc((100% - 431px) / 2);
   }
-
-  .ArticleList {
   
-    .Article {
-      animation-name: fadein;
-      animation-duration: .3s;
-      animation-fill-mode: forwards;
-      display: flex;
-      width: 100%;
-      .txt_area {
-        display: flex;
-        padding: 8px;
-        padding-left: 0px;
-        width: 100%;
-        line-height: 120%;
-        font-size: 14px;
-        color: $primary-text-color;
-        order: 1;
-
-        .icon_new_txt{
-          color: #a00;
-          display: none;
-        }
-    
-        &:link {
-          color: $primary-text-color;
-          
-          .icon_new_txt{
-            color: #a00;
-            display: none;
-          }
-        }
-        &:visited {
-          color: $secondary-text-color;
-    
-          .icon_new_txt{
-            color: #fff;
-            display: none;
-          }
-        }
-    
-        .board_txt {
-          color: $secondary-text-color;
-          font-size: 12px;
-          font-weight: 500;
-          line-height: 12px;
-        }
-        strong.tit {
-          font-weight: 500;
-          height: 100%;
-        }
-        .user_area {
-          color: $secondary-text-color;
-          font-size: 12px;
-          font-weight: 500;
-        }
-      }
-      .thumb_area img {
-          border-radius: 8px;
-      }
-    }
-  }
-  &:not(.front) {
-    @include desktop {
-      @include ArticleListDesktop;
-    }
-  }
-  @include not-desktop {
-    @include ArticleListMobile;
-  }
-
-  & > .more {
-    width: 100%;
-
-    svg.frontOnly {
-      display: none;
-    }
-    .moreLoad {
-      border-radius: 8px;
-      color: $primary-color;
-      cursor: pointer;
-      display: block;
-      font-size: 14px;
-      margin: 0 auto 16px;
-      padding-top: 12px;
-      text-align: center;
-      width: 100%;
-      transition: background-color ease .3s;
-
-      &:hover {
-        background: rgba(0, 0, 0, .05);
-        @include not-desktop {
-          background: transparent;
-        }
-
-        svg {
-          top: 6px;
-        }
-      }
-      &:active {
-        svg {
-          top: 12px;
-        }
-      }
-
-      svg {
-        display: block;
-        fill: $primary-color;
-        margin: 0 auto;
-        position: relative;
-        top: 0px;
-        left: 0px;
-        transition: top .3s;
-        transition-timing-function: cubic-bezier(0.3, 2, 0.635, 1.005);
-      }
-    }
-  }
-  &.front > .more {
-    box-sizing: border-box;
-    border: solid 1px $component-primary-border-color;
-    border-top: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 32px;
-    min-height: 32px;
-
-    svg.frontOnly {
-      display: block;
-      fill: $component-secondary-border-color;
-    }
-    .moreLoad {
-      display: none;
-    }
-  }
-
-  &.front {
-    @include desktop {
-      @include ArticleListMobile;
-      .Spinner {
-        .Article {
-
-          &:nth-child(5),
-          &:nth-child(6),
-          &:nth-child(7),
-          &:nth-child(8) {
-            display: none;
-          }
-          .txt_area {
-            .user_area {
-              display: inline-block;
-              line-height: 14px;
-              width: fit-content;
-              &.pc {
-                display: none;
-              }
-              &.mobile {
-                display: inline-block;
-              }
-              & > span {
-                margin-left: 0;
-              }
-            }
-          }
-          .thumb_area {
-            .thumb {
-              border-radius: 8px;
-              width: 64px;
-              height: 64px;
-            }
-          }
-        }
-      }
-    }
-    @include not-desktop {
-      .ArticleList {
-        .Article {
-
-          &:nth-child(5) {
-            display: none;
-          }
-
-          &:nth-child(4) {
-            border-bottom: solid 1px $component-primary-border-color;
-          }
-        }
-        .Spinner {
-          .Article:nth-child(4),
-          .Article:nth-child(5),
-          .Article:nth-child(6),
-          .Article:nth-child(7),
-          .Article:nth-child(8) {
-            display: none;
-          }
-        }
-      }
-    }
-
-    .moduleHeader {
-      display: none;
-    }
-  }
-
-  .Spinner {
-    display: block;
-    height: auto;
-
-    .Article {
-      pointer-events: none;
-      user-select: none;
-
-      .txt_area {
-
-        .board_txt,
-        strong.tit,
-        .nickname {
-          color: transparent;
-        }
-        .board_txt span,
-        strong.tit span {
-          display: inline-block;
-        }
-        .board_txt span {
-          line-height: 14px;
-        }
-        strong.tit span {
-          line-height: 16px;
-        }
-        .user_area {
-          color: transparent;
-          
-          * > span {
-            display: inline-block;
-            line-height: 14px;
-          }
-          .datetime span,
-          .view span,
-          .like span {
-            text-align: center;
-          }
-        }
-      }
-      &:hover {
-        background-color: transparent;
-      }
-    }
-
-    @include desktop {
-      .Article {
-        .txt_area {
-          .user_area.mobile {
-            display: none;
-          }
-        }
-      }
-    }
-    @include not-desktop {
-      .Article {
-        .txt_area {
-          .user_area {
-            display: inline-block;
-            line-height: 14px;
-            width: fit-content;
-            &.pc {
-              display: none;
-            }
-            & > span {
-              margin-left: 0;
-            }
-          }
-        }
-        .thumb_area {
-          .thumb {
-            border-radius: 8px;
-            width: 64px;
-            height: 64px;
-          }
-        }
-      }
-    }
-  }
-}
-
-.Bestwakki:not(.front) {
-  @include desktop {
-    margin: 0 calc((100% - 870px) / 2);
-
-    .ArticleList {
-    
-      .Article {
-        border-bottom: solid 1px $component-primary-border-color;
-
-        .txt_area {
-
-          .board_txt {
-            line-height: 15px;
-          }
-
-          .user_area .comment {
-            display: none;
-          }
-        }
-      }
-    }
-  }
-  @include not-desktop {
-  }
   .moduleHeader {
 
     h1 {
@@ -374,5 +67,64 @@
         }
       }
     }
+  }
+
+  .more {
+    box-sizing: border-box;
+    border: solid 1px $component-primary-border-color;
+    border-top: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    min-height: 32px;
+
+    svg.frontOnly {
+      display: block;
+      fill: $component-secondary-border-color;
+    }
+  }
+
+  .moduleHeader {
+    .controlWrapper {
+      @include not-desktop {
+        flex-direction: column-reverse;
+      }
+      @include desktop {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .SortList {
+        margin-left: 8px;
+        @include not-desktop {
+          flex-wrap: wrap;
+          margin-left: 10px;
+
+          .sortItem {
+            position: relative;
+    
+            input[type=radio]:not(:checked) + label:active {
+              background: rgba(0, 0, 0, .1);
+            }
+          }
+        }
+      }
+      .right {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        
+        .SearchBar {
+          margin-left: 4px;
+        }
+      }
+    }
+  }
+}
+
+.Bestwakki:not(.front) {
+  @include desktop {
+    margin: 0 calc((100% - 870px) / 2);
   }
 }
