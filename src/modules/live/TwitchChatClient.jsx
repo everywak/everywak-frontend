@@ -161,7 +161,7 @@ class TwitchChatClient extends Component {
     this.setIRCStatus(TwitchChatClient.CLOSED);
     clearInterval(this.loopPingPong);
 
-    if (this.state.oauth !== '') { // retry login now,2,4,8 secs..
+    if (this.state.oauth != undefined && this.state.oauth != '') { // retry login now,2,4,8 secs..
       setTimeout(this.connectTwitchIRC, Math.pow(2, this.connRetries++) * 1000);
     }
   };
