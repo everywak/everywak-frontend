@@ -18,7 +18,7 @@ function ScrollToTopButton({show = false}) {
   }
 
   return (
-    <Button className={cx('ScrollToTopButton', {show: this.props.show})}
+    <Button className={cx('ScrollToTopButton', {show: show})}
       iconSrc={<KeyboardArrowUpRoundedIcon fontSize="small" />} 
       iconBGColor="white"
       label="맨 위로"
