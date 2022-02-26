@@ -122,138 +122,99 @@ class Bestwakki extends Component {
   }
 }
 
-class ArticleList extends Component {
-  static defaultProps = {
-    data: [
-      {
-        "updatedTimeStamp":"",
-        "articleId":"",
-        "writeDateTimestamp":"",
-        "subject":"",
-        "readCount":"",
-        "upCount":"",
-        "commentCount":"",
-        "menuName":"",
-        "nickname":"",
-        "representImage":"",
-        "aheadOfWriteDate":""
-      },
-    ],
-    front: false,
-    loaded: false
-  }
+/**
+ * @param {{data: Array<Article>, front: boolean, loaded: boolean}} props 
+ */
+function ArticleList({data, front = false, loaded = false}) {
 
-  skeleton = 
-    <li className='Article skeleton'>
-      <span className="txt_area">
-        <span className="board_txt"><span className="skeletonItem">ㅇㅇㅇㅇㅇ</span></span>
-        <strong className="tit"><span className="skeletonItem">ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</span></strong>
-        <div className="user_area pc">
-          <span className="nickname"><span className="skeletonItem">ㅇㅇㅇㅇ</span></span>
-          <span className="datetime"><span className="skeletonItem">00:00:00</span></span>
-          <span className="view"><span className="skeletonItem">000</span></span>
-          <span className="like"><span className="skeletonItem">000</span></span>
-          <span className="comment"><span className="skeletonItem">000</span></span>
-        </div>
-        <div className="user_area mobile">
-          <span className="skeletonItem">ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</span>
-        </div>
-      </span>
-      <span className="thumb_area">
-        <div className="thumb skeletonItem">
-        </div>
-      </span>
-    </li>;
+  const skeleton = 
+  <li className='Article skeleton'>
+    <span className="txt_area">
+      <span className="board_txt"><span className="skeletonItem">ㅇㅇㅇㅇㅇ</span></span>
+      <strong className="tit"><span className="skeletonItem">ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</span></strong>
+      <div className="user_area pc">
+        <span className="nickname"><span className="skeletonItem">ㅇㅇㅇㅇ</span></span>
+        <span className="datetime"><span className="skeletonItem">00:00:00</span></span>
+        <span className="view"><span className="skeletonItem">000</span></span>
+        <span className="like"><span className="skeletonItem">000</span></span>
+        <span className="comment"><span className="skeletonItem">000</span></span>
+      </div>
+      <div className="user_area mobile">
+        <span className="skeletonItem">ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</span>
+      </div>
+    </span>
+    <span className="thumb_area">
+      <div className="thumb skeletonItem">
+      </div>
+    </span>
+  </li>;
 
-  render() {
-    const { data } = this.props;
-    const list = data.slice(0, this.props.front ? Math.min(4, data.length) : data.length).map(
-      data => (<Article key={data.articleId} data={data} />)
-    );
-    const listHeader = {
-      "articleId":"-1",
-      "subject":"제목",
-      "readCount":"조회",
-      "upCount":"좋아요",
-      "menuName":"게시판",
-      "nickname":"작성자",
-      "aheadOfWriteDate":"작성일"
-    };
+  const list = data.slice(0, front ? Math.min(4, data.length) : data.length).map(
+    data => (<Article key={`articleItem${data.articleId}`} {...data} />)
+  );
 
-    return (
-      <ul className="ArticleList">
-        <Article header={true} key={listHeader.articleId} data={listHeader} />
-        {list}
-        {!this.props.loaded && <Spinner struct={this.skeleton} structLength={8} />}
-      </ul>
-    );
-  }
+  return (
+    <ul className="ArticleList">
+      <Article header={true} key={`articleItemHeader`} />
+      {list}
+      {!loaded && <Spinner struct={skeleton} structLength={8} />}
+    </ul>
+  );
 }
 
-class Article extends Component {
-  static defaultProps = {
-    data: {
-      articleId: "",
-      menuName: "",
-      subject: "",
-      nickname: "",
-      aheadOfWriteDate: "",
-      readCount: "0",
-      upCount: "0",
-      commentCount: "0",
-      representImage: "",
-    },
-    header: false
-  };
+function Article({ 
+  articleId = '-1',
+  menuName = '게시판',
+  subject = '제목',
+  nickname = '작성자',
+  aheadOfWriteDate = '작성일',
+  readCount = '조회',
+  upCount = '좋아요',
+  commentCount = '',
+  representImage = '', 
+  header = false }) {
 
-  render() {
-    const { 
-      articleId, menuName, subject, nickname, aheadOfWriteDate, readCount, upCount, commentCount, representImage 
-    } = this.props.data;
-    const href = (
-      this.props.header ? 
-      null : 
-      "https://cafe.naver.com/steamindiegame/" + articleId.replace(/[^0-9]/g, '')
-    );
-    const thumb_area = 
-    <a href={href} className="thumb_area" target="_blank" rel="noreferrer">
-      <div className="thumb">
-        <img src={representImage} alt="썸네일" onError={i => i.target.style.display = 'none'} referrerPolicy="no-referrer"/>
-      </div>
-    </a>;
-    return (
-      <li className={cx('Article', {'listHeader': this.props.header})}>
-        <a href={href} className="txt_area" target="_blank" rel="noreferrer">
-          <span className="icon_new_txt">•</span>
-          <span className="board_txt">{menuName}</span>
-          <strong className="tit">{subject}</strong>
+  const href = (
+    !header && 'https://cafe.naver.com/steamindiegame/' + articleId.replace(/[^0-9]/g, '')
+  );
+  const thumb_area = 
+  <a href={href} className="thumb_area" target="_blank" rel="noreferrer">
+    <div className="thumb">
+      <img src={representImage} alt="썸네일" onError={i => i.target.style.display = 'none'} referrerPolicy="no-referrer"/>
+    </div>
+  </a>;
+  return (
+    <li className={cx('Article', {'listHeader': header})}>
+      <a href={href} className="txt_area" target="_blank" rel="noreferrer">
+        <span className="icon_new_txt">•</span>
+        <span className="board_txt">{menuName}</span>
+        <strong className="tit">{subject}</strong>
 
-          <div className="user_area">
-            <span className="nickname">
-              <i className="blind">작성자</i>{nickname}
-            </span>
-            <span className="datetime">{aheadOfWriteDate}</span>
-            <span className="view">
-              <i className="blind">조회수</i>
-              <VisibilityRoundedIcon className="icon" fontSize="small" />
-              {readCount}
-            </span>
-            <span className="like">
-              <i className="blind">좋아요</i>
-              <FavoriteRoundedIcon className="icon" fontSize="small" />
-              {upCount}
-            </span>
-            <span className="comment">
-              <i className="blind">댓글</i>
-              <CommentRoundedIcon className="icon" fontSize="small" />
-              {commentCount}
-            </span>
-          </div>
-        </a>
-        {representImage ? thumb_area : ''}
-      </li>
-    );
-  }
+        <div className="user_area">
+          <span className="nickname">
+            <i className="blind">작성자</i>{nickname}
+          </span>
+          <span className="datetime">{aheadOfWriteDate}</span>
+          <span className="view">
+            <i className="blind">조회수</i>
+            <VisibilityRoundedIcon className="icon" fontSize="small" />
+            {readCount}
+          </span>
+          <span className="like">
+            <i className="blind">좋아요</i>
+            <FavoriteRoundedIcon className="icon" fontSize="small" />
+            {upCount}
+          </span>
+          <span className="comment">
+            <i className="blind">댓글</i>
+            <CommentRoundedIcon className="icon" fontSize="small" />
+            {commentCount}
+          </span>
+        </div>
+      </a>
+      {representImage && thumb_area}
+    </li>
+  );
 }
 
 class SortList extends Component {
