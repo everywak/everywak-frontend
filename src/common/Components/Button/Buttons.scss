@@ -1,0 +1,43 @@
+@import '../../common.scss';
+
+.BasicButton {
+  border: none;
+  border-radius: 8px;
+  color: $primary-text-color;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  margin: 0 4px;
+  overflow: hidden;
+  position: relative;
+  width: fit-content;
+  height: 32px;
+  vertical-align: middle;
+  user-select: none;
+
+  &::after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0);
+    transition: background-color ease .15s;
+  }
+  @include desktop {
+    &:hover::after {
+      background: rgba(255, 255, 255, .1);
+    }
+  }
+  &:active::after {
+    background: rgba(0, 0, 0, .1);
+  }
+
+  &.CircleImgButton {
+    border-radius: 50%;
+    padding: 0;
+    width: fit-content;
+    height: fit-content;
+  }
+}
