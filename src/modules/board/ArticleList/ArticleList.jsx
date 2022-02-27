@@ -84,7 +84,6 @@ function ArticleList({data, front = false, loaded = false, pagination = 'more', 
  * @param {{hide: boolean, onClick: function}} props 
  */
 function MoreArticleButton({hide, onClick}) {
-  console.log('updated!');
   return (
     <Button 
       className={cx('MoreArticleButton', {hide: hide})} 

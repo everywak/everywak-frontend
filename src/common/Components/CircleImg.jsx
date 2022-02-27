@@ -24,7 +24,6 @@ function CircleImg(props) {
     padding = 0,
     ...rest
   } = props;
-  console.log(cx('CircleImg', className))
 
   return (
     <div className={cx('CircleImg', className)} {...rest}>
