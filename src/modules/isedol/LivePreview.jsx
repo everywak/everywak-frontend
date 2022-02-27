@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import * as service from '../../services/LiveWakApi';
 import Spinner from '../../common/Components/Spinner';
+import CircleImg from '../../common/Components/CircleImg';
+
+import * as service from '../../services/LiveWakApi';
 
 import styles from './LivePreview.scss';
 import classNames from 'classnames/bind';
@@ -69,9 +71,7 @@ class LivePreview extends Component {
         <Link to="/">
           <img className="previewImg" src={previewImgUrl} alt="생방송 썸네일" onError={e => {e.target.src = '/images/blank.png'}} />
           <div className="profileCircle">
-            <div className="innerCircle">
-              <img src={profileImgUrl} alt="채널 프로필 이미지" className="profileImg" onError={e => {e.target.src = '/images/blank.png'}} />
-            </div>
+            <CircleImg className="innerCircle" src={profileImgUrl} alt="채널 프로필 이미지" />
           </div>
           <Spinner />
         </Link>

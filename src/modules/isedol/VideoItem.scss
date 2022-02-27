@@ -60,21 +60,11 @@
 
     .profileCircle {
       background: rgba(0, 0, 0, .1);
-      border-radius: 50%;
-      box-sizing: border-box;
       margin: 12px 8px 10px;
       opacity: 1;
-      overflow: hidden;
       width: var(--profileCircleSize);
-      min-width: var(--profileCircleSize);
-      height: var(--profileCircleSize);
       transition: opacity ease .15s;
       transition-delay: .3s;
-  
-      img.profileImg {
-        width: 100%;
-        height: auto;
-      }
     }
 
     .descArea {

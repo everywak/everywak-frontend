@@ -1,5 +1,6 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+
+import CircleImg from '../../common/Components/CircleImg';
 
 import styles from './VideoItem.scss';
 import classNames from 'classnames/bind';
@@ -16,9 +17,7 @@ function VideoItem(props) {
           <img className="previewImg" src={thumbnail} alt="썸네일" onError={e => {e.target.src = '/images/blank.png'}} />
         </div>
         <div className="infoArea">
-          <div className="profileCircle">
-              <img src={authorProfileImg} alt="채널 프로필 이미지" className="profileImg" onError={e => {e.target.src = '/images/blank.png'}} />
-          </div>
+          <CircleImg className="profileCircle" src={authorProfileImg} alt="채널 프로필 이미지" />
           <div className="descArea">
             <div className="title">{title}</div>
             <div className="uploadedTime">{formattedDateTime}</div>
