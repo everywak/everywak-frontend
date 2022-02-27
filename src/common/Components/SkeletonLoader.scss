@@ -1,0 +1,32 @@
+@import '../common.scss';
+
+.SkeletonLoader {
+  background-color: transparent;
+  color: transparent;
+  pointer-events: none;
+
+  .skeleton {
+    .skeletonItem {
+      border-radius: 4px;
+      overflow: hidden;
+      background-repeat: repeat-x;
+      background-image: linear-gradient(
+          100deg,
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, .5) 50%,
+          rgba(255, 255, 255, 0) 80%
+        ), linear-gradient(rgba(0, 0, 0, .07) 64px, transparent 0);
+      background-size: 200px 70px, 200px 300px;
+      background-position: 0 0, 200px 0;
+      animation: loading .5s linear infinite;
+    }
+  }
+}
+
+@keyframes loading {
+  to {
+    background-position:
+      200px 0,
+      200px 0;
+  }
+}

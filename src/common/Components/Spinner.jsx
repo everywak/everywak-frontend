@@ -4,20 +4,16 @@ const cx = classNames.bind(styles);
 
 /**
  * 
- * @param {{caption: String, struct: JSX.Element, structLength: Number}} props 
+ * @param {{caption?: String}} props 
  */
-function Spinner({caption = '', struct, structLength = 3}) {
-
-  const spin = 
-  <div className="spinnerWrapper">
-    <img src="/images/spinner.svg" className="spinnerAnim" alt="" />
-    <div className="caption">{caption}</div>
-  </div>;
-  const structs = [...Array(structLength).keys()].map(i => (struct));
+function Spinner({caption = ''}) {
 
   return (
     <div className="Spinner">
-      {struct ? structs : spin}
+      <div className="spinnerWrapper">
+        <img src="/images/spinner.svg" className="spinnerAnim" alt="" />
+        <div className="caption">{caption}</div>
+      </div>
     </div>
   );
 
