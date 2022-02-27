@@ -1,5 +1,3 @@
-import React, { Component } from 'react';
-import styled from "styled-components";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import ScrollToTop from './common/ScrollToTop';
@@ -11,24 +9,19 @@ import Bestwakki from './modules/bestwakki/Bestwakki';
 import Live from './modules/live/Live';
 import Isedol from './modules/isedol/Isedol';
 
-class App extends Component {
+export default function App(props) {
 
-  render() {
-    return (
-        <div className="App">
-          <Router>
-            <ScrollToTop />
-            <Header />
-            <Route exact path="/" component={Frontpage}/>
-            <Route path="/bestwakki" component={Bestwakki}/>
-            <Route path="/live" component={Live}/>
-            <Route path="/isedol" component={Isedol}/>
-            <Footer />
-          </Router>
-        </div>
-    );
-
-  }
+  return (
+    <div className="App">
+      <Router>
+        <ScrollToTop />
+        <Header />
+        <Route exact path="/" component={Frontpage}/>
+        <Route path="/bestwakki" component={Bestwakki}/>
+        <Route path="/live" component={Live}/>
+        <Route path="/isedol" component={Isedol}/>
+        <Footer />
+      </Router>
+    </div>
+  );
 }
-
-export default App;
