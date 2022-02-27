@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import styled, { keyframes } from "styled-components";
 import MediaQuery  from 'react-responsive';
 
-import Spinner from '../../../common/Components/Spinner';
+import SkeletonLoader from '../../../common/Components/SkeletonLoader';
 import Button from '../../../common/Components/Button';
 import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
 import VisibilityRoundedIcon from '@material-ui/icons/VisibilityRounded';
@@ -64,7 +64,7 @@ function ArticleList({data, front = false, loaded = false, pagination = 'more', 
       <ul className={cx('ArticleList', responsiveLayoutMode)}>
         <Article header={true} key={`articleItemHeader`} />
         {list}
-        {!loaded && <Spinner struct={skeleton} structLength={front ? 4 : 8} />}
+        {!loaded && <SkeletonLoader skeleton={skeleton} length={front ? 4 : 8} />}
         {
           pagination != 'none' &&
           <div className="pagination">
