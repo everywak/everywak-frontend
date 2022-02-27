@@ -76,7 +76,7 @@ function IsedolMemberSocialItem({ type, socialId }) {
           src={bg} 
           alt={`${type} logo`} 
           objectFit="contain" 
-          padding={8} />
+          padding="8px" />
       </a>
     </li>
   );

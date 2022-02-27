@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 
 const Image = styled.img`
 object-fit: ${props => (['fill', 'contain', 'cover', 'none', 'scale-down'].includes(props.objectFit) ? props.objectFit : 'cover')};
-padding: ${props => props.padding}px;
+padding: ${props => props.padding};
 `;
 
 /**

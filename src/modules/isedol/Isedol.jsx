@@ -27,10 +27,10 @@ function Isedol() {
                 <CircleImgButton src="/images/waktube_logo_2x.jpg" background="white" href={'https://www.youtube.com/user/woowakgood'} alt="왁튜브" />
               </li>
               <li className="socialItem waktaverse">
-                <CircleImgButton src="/images/wakent_logo_2x.png" padding="2" background="black" href={'https://www.youtube.com/c/welshcorgimessi'} alt="왁타버스 유튜브 채널" />
+                <CircleImgButton src="/images/wakent_logo_2x.png" padding="2px" background="black" href={'https://www.youtube.com/c/welshcorgimessi'} alt="왁타버스 유튜브 채널" />
               </li>
               <li className="socialItem wakmulwon">
-                <CircleImgButton src="/images/wakki_logo_2x.png" padding="11" background="#5ac467" href={'https://cafe.naver.com/steamindiegame'} alt="왁물원" />
+                <CircleImgButton src="/images/wakki_logo_2x.png" padding="11px" background="#5ac467" href={'https://cafe.naver.com/steamindiegame'} alt="왁물원" />
               </li>
             </ul>
           </div>
