@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 
+import styles from './Buttons.scss';
 import classNames from 'classnames/bind';
-const cx = classNames;
+const cx = classNames.bind(styles);
 
 /**
  * 링크 버튼
