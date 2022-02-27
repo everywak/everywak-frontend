@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import CircleImg from '../../common/Components/CircleImg';
+import CircleImgButton from '../../common/Components/Button/CircleImgButton';
 
 import styles from './IsedolMemberItem.scss';
 import classNames from 'classnames/bind';
@@ -71,13 +72,13 @@ function IsedolMemberSocialItem({ type, socialId }) {
   
   return (
     <li className={cx('IsedolMemberSocialItem', className)}>
-      <a href={href} className="link">
-        <CircleImg 
-          src={bg} 
-          alt={`${type} logo`} 
-          objectFit="contain" 
-          padding="8px" />
-      </a>
+      <CircleImgButton 
+        className="link"
+        href={href} 
+        src={bg} 
+        alt={`${type} logo`} 
+        objectFit="contain" 
+        padding="8px" />
     </li>
   );
 }
