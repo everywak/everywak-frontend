@@ -1,5 +1,6 @@
 /** 
  * @description URL 파라미터를 반환합니다.
+ * 
  * @return {Array} 파라미터
  */
 export function getURLParams (url) {
@@ -27,6 +28,7 @@ export function getURLParams (url) {
 
 /** 
  * @description Object를 URL Prarameter String으로 변환하여 반환합니다.
+ * 
  * @return {Object} 오브젝트
  */
 export function toURLParams (arr) {
@@ -73,4 +75,13 @@ export function formatDateTimeString(date) {
   else if (diffTime <      24 * 60 * 60) { return parseInt(diffTime / 60 / 60) + '시간 전'; }
   else if (diffTime < 60 * 24 * 60 * 60) { return parseInt(diffTime / 60 / 60 / 24) + '일 전'; }
   else                                   { return parseInt(diffTime / 60 / 60 / 24 / 30) + '달 전'; }
+}
+
+/** 
+ * @description 브라우저 제목을 변경합니다.
+ * 
+ * @param {string} title 오브젝트
+ */
+export function setBrowserTitle (title) {
+  document.title = `에브리왁굳 : ${title}`;
 }

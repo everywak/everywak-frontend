@@ -37,7 +37,7 @@ class Live extends Component {
   constructor (props) {
     super(props);
     if (!props.front) {
-      document.title = '에브리왁굳 : 생방송';
+      func.setBrowserTitle('생방송');
     }
     this.setRotation = val => {
       const rot = val === TOGGLE ? !this.state.rotation : val;

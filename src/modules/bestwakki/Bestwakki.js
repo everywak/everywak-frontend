@@ -31,7 +31,7 @@ class Bestwakki extends Component {
   constructor (props) {
     super(props);
     if (!props.front) {
-      document.title = '에브리왁굳 : 왁물원 인기글';
+      func.setBrowserTitle('왁물원 인기글');
     }
 
     const { search } = props.location || {};

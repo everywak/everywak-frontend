@@ -4,12 +4,14 @@ import Live from '../live/Live.js';
 import Apps from '../apps/Apps.js';
 import Etcs from '../apps/Etcs.js';
 
+import * as func from '../../common/funtions';
+
 import styles from './Frontpage.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 function Frontpage() {
-  document.title = '에브리왁굳 : 메인';
+  func.setBrowserTitle('메인');
   
   return (
     <div className="Frontpage">
