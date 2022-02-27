@@ -43,6 +43,10 @@
     padding: 0;
     width: fit-content;
     height: fit-content;
+    
+    &::after {
+      border-radius: 50%;
+    }
 
     .CircleImg {
       width: 100%;
