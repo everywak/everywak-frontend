@@ -23,7 +23,7 @@ function Isedol() {
             <img className="logoImg" src="/images/isedol/isedol_logo.png" alt="이세계 아이돌 로고"/>
             <ul className="social">
               <li className="socialItem waktube">
-                <CircleImgButton src="/images/waktube_logo_2x.png" background="white" href={'https://www.youtube.com/user/woowakgood'} alt="왁튜브" />
+                <CircleImgButton src="/images/waktube_logo_2x.jpg" background="white" href={'https://www.youtube.com/user/woowakgood'} alt="왁튜브" />
               </li>
               <li className="socialItem waktaverse">
                 <CircleImgButton src="/images/wakent_logo_2x.png" padding="2" background="black" href={'https://www.youtube.com/c/welshcorgimessi'} alt="왁타버스 유튜브 채널" />
