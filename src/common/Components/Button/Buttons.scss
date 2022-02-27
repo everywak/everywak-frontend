@@ -1,21 +1,25 @@
 @import '../../common.scss';
 
 .BasicButton {
+  background: $primary-color;
   border: none;
   border-radius: 8px;
-  color: $primary-text-color;
+  color: $dark-primary-text-color;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
   margin: 0 4px;
-  overflow: hidden;
+  padding: 6px 8px;
   position: relative;
   width: fit-content;
-  height: 32px;
   vertical-align: middle;
   user-select: none;
 
   &::after {
+    border-radius: 8px;
     content: ' ';
     position: absolute;
     top: 0;

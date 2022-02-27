@@ -1,6 +1,4 @@
-import { useHistory } from 'react-router';
-
-import BasicButton from './BasicButton';
+import { Link } from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 const cx = classNames;
@@ -19,22 +17,25 @@ const cx = classNames;
  */
 function LinkButton(props) {
 
-  const { push } = useHistory();
-
   const {
     to, 
     href,
     target,
     className, 
     onClick, 
+    background, 
     children, 
     ...rest
   } = props;
 
   return (
-    <BasicButton className={cx("Link", className)} {...rest} onClick={e => { (onClick && onClick(e));(to && push(to));(href && window.open(href, target || '_blank')) }}>
+    href ?
+    <a href={href} target={target || '_blank'} className={cx("BasicButton", "Link", className)} onClick={onClick} style={{background: background}} {...rest}>
       {children}
-    </BasicButton>
+    </a> :
+    <Link to={to} className={cx("BasicButton", "Link", className)} onClick={onClick} style={{background: background}} {...rest}>
+      {children}
+    </Link>
   );
 }
 
