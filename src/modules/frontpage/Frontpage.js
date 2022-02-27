@@ -14,6 +14,7 @@ const cx = classNames.bind(styles);
 class Frontpage extends Component {
 
   render() {
+    document.title = '에브리왁굳 : 메인';
     
     return (
       <div className="Frontpage">

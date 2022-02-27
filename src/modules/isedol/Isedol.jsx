@@ -14,6 +14,7 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 function Isedol() {
+  document.title = '에브리왁굳 : 이세계 아이돌';
   
   return (
     <div className={cx('Isedol')}>
