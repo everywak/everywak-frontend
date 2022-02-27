@@ -88,11 +88,11 @@ class Apps extends Component {
   };
 
   render() {
-    const { apps, columns } = this.props;
+    const { front, apps, columns } = this.props;
     const list = apps.map(app => <AppListItem {...app} />);
     
     return (
-      <div className={cx('Apps', {'front': this.props.front}, {'singleColumn': this.props.columns === 1})}>
+      <div className={cx('Apps', {'front': front}, {'singleColumn': columns === 1})}>
         <ul className="appList">
           {list}
         </ul>
