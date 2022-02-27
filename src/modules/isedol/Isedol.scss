@@ -63,6 +63,7 @@
           li.socialItem {
             background: #f001;
             border-radius: 50%;
+            box-sizing: border-box;
             margin: 0 6px;
             overflow: hidden;
             width: 48px;
@@ -71,6 +72,11 @@
               margin: 6px 0;
               width: 38px;
               height: 38px;
+            }
+
+            .CircleImgButton {
+              margin: 0;
+              width: 100%;
             }
           }
         }

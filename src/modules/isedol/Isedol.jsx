@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import * as func from '../../common/funtions';
 
+import CircleImgButton from '../../common/Components/Button/CircleImgButton';
 import LivePreview from './LivePreview';
 import FrontPanel from '../frontpage/FrontPanel';
 import IsedolYoutubeList from './IsedolYoutubeList';
@@ -21,9 +22,15 @@ function Isedol() {
           <div className="logoArea">
             <img className="logoImg" src="/images/isedol/isedol_logo.png" alt="이세계 아이돌 로고"/>
             <ul className="social">
-              <li className="socialItem waktube"></li>
-              <li className="socialItem waktaverse"></li>
-              <li className="socialItem wakmulwon"></li>
+              <li className="socialItem waktube">
+                <CircleImgButton src="/images/waktube_logo_2x.png" background="white" href={'https://www.youtube.com/user/woowakgood'} alt="왁튜브" />
+              </li>
+              <li className="socialItem waktaverse">
+                <CircleImgButton src="/images/wakent_logo_2x.png" padding="2" background="black" href={'https://www.youtube.com/c/welshcorgimessi'} alt="왁타버스 유튜브 채널" />
+              </li>
+              <li className="socialItem wakmulwon">
+                <CircleImgButton src="/images/wakki_logo_2x.png" padding="11" background="#5ac467" href={'https://cafe.naver.com/steamindiegame'} alt="왁물원" />
+              </li>
             </ul>
           </div>
           <IsedolLiveList />
