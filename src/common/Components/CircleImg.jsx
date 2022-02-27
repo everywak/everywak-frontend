@@ -17,12 +17,17 @@ padding: ${props => props.padding};
  */
 function CircleImg(props) {
   const {
-    className, src, alt, objectFit = 'cover', padding = 0
+    className, 
+    src, 
+    alt, 
+    objectFit = 'cover', 
+    padding = 0,
+    ...rest
   } = props;
-  
+  console.log(cx('CircleImg', className))
 
   return (
-    <div className={cx('CircleImg', className)} {...props}>
+    <div className={cx('CircleImg', className)} {...rest}>
         <Image src={src} alt={alt} objectFit={objectFit} padding={padding} onError={e => {e.target.src = '/images/blank.png'}} />
     </div>
   );
