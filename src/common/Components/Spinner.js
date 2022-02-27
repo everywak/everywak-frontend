@@ -10,7 +10,7 @@ function Spinner({caption = '', struct, structLength = 3}) {
 
   const spin = 
   <div className="spinnerWrapper">
-    <img src="images/spinner.svg" className="spinnerAnim" alt="" />
+    <img src="/images/spinner.svg" className="spinnerAnim" alt="" />
     <div className="caption">{caption}</div>
   </div>;
   const structs = [...Array(structLength).keys()].map(i => (struct));
