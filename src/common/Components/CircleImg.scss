@@ -4,7 +4,12 @@
   overflow: hidden;
   position: relative;
   width: 128px;
-  padding-top: 100%;
+
+  &::after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
   
   img {
     box-sizing: border-box;
