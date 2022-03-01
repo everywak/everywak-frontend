@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+
+import TransparentButton from './Button/TransparentButton';
+
+import NavigateBeforeRoundedIcon from '@material-ui/icons/NavigateBeforeRounded';
+import NavigateNextRoundedIcon from '@material-ui/icons/NavigateNextRounded';
+
 import styles from './DatePicker.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
@@ -75,35 +81,38 @@ class DatePicker extends Component {
     start: 0,
     end: 0,
     preset: 'all',
-    scrollFocus: 0,
+    currYear: new Date().getFullYear(),
+    currMonth: new Date().getMonth(),
   }
 
-  genMonths (start, end) {
-    const { scrollFocus } = this.state;
-    if (!(!start && !end) && start <= end) {
-      const startDate = new Date(start);
-      const endDate = new Date(end);
-      const startYear = startDate.getFullYear(),
-            startMonth = startDate.getMonth(),
-            endYear = endDate.getFullYear(),
-            endMonth = endDate.getMonth();
+  showYearMonth = (year, month) => {
+    const {
+      currYear, currMonth
+    } = this.state;
 
-      const offsetMonth = startYear * 12 + startMonth;
-      const offsetEndMonth = endYear * 12 + endMonth;
-      const list = Array.from(
-        {length: offsetEndMonth - offsetMonth + 1}, 
-        (v, i) => {
-          const year = parseInt((offsetMonth + i) / 12);
-          const month = (offsetMonth + i) % 12 + 1;
-          return <DateView key={this.props.name + year + '-' + month} year={year} month={month} parent={this} visible={Math.abs(i - scrollFocus) < 2} />;
+    const targetMonth = new Date(year, month, 1);
+    const actualYear = targetMonth.getFullYear();
+    const actualMonth = targetMonth.getMonth();
+
+    if (actualYear !== currYear || actualMonth !== currMonth) {
+      this.setState({
+        currYear: actualYear,
+        currMonth: actualMonth,
       });
-      return list;
     }
   }
 
-  genDatetime (time) {
-    const date = new Date(time);
-    return date.getFullYear() + '. ' + (date.getMonth() + 1) + '. ' + date.getDate() + '.';
+  showNextMonth = () => {
+    this.showYearMonth(this.state.currYear, this.state.currMonth + 1);
+  }
+
+  showPrevMonth = () => {
+    this.showYearMonth(this.state.currYear, this.state.currMonth - 1);
+  }
+
+  genDatetime (timestamp) {
+    const date = new Date(timestamp);
+    return `${date.getFullYear()}. ${date.getMonth() + 1}. ${date.getDate()}.`;
   }
 
   setDateTimestamp = (type, timestamp) => {
@@ -167,17 +176,6 @@ class DatePicker extends Component {
     }
   }
 
-  onDateViewWrapperScroll = e => {
-    const dateViewHeight = 30 * 6 + 15;
-    const scrollTop = parseInt(e.target.scrollTop / dateViewHeight);
-    
-    if(this.state.scrollFocus !== scrollTop) {
-      this.setState({
-        scrollFocus: scrollTop
-      });
-    }
-  }
-
   handlerStartEndChanged = () => {
     const day = 24*60*60*1000;
     const { min, max } = this.props;
@@ -211,6 +209,8 @@ class DatePicker extends Component {
     }
   }
 
+  onClickDate = timestamp => this.setDateTimestamp('cursor', timestamp)
+
   componentDidMount () {
     const { min, max, start, end } = this.props;
     this.setPreset({
@@ -218,16 +218,9 @@ class DatePicker extends Component {
       targetStart: (start !== -1 ? start : min),
       targetEnd: (end !== -1 ? end : max),
     });
-    if (this.props.opened) {
-      this.dateList = this.genMonths(this.props.min, this.props.max);
-    }
   }
 
   componentDidUpdate (prevProps, prevState) {
-    if (!prevProps.opened && this.props.opened) {
-      this.dateList = this.genMonths(this.props.min, this.props.max);
-      this.setState();
-    }
     if (prevState.start !== this.state.start ||
         prevState.end   !== this.state.end) {
       this.handlerStartEndChanged();
@@ -235,15 +228,12 @@ class DatePicker extends Component {
   }
 
   render() {
-    const { name, preset, opened } = this.props;
-    const { start, end, cursor } = this.state;
-    if(opened) {
-      this.dateList = this.genMonths(this.props.min, this.props.max);
-    }
+    const { name, preset, opened, min, max } = this.props;
+    const { start, end, cursor, currYear, currMonth } = this.state;
     const presetList = preset.map(
       item => 
       (item.type === 'option' ? 
-      <PresetItem key={name + item.value} value={item.value} name={item.name} selected={this.state.preset === item.value} onclick={this.setPreset} parent={this} /> : 
+      <PresetItem key={name + item.value} value={item.value} name={item.name} selected={this.state.preset === item.value} onclick={this.setPreset} /> : 
       <div className="presetLine"/>)
     );
     
@@ -263,17 +253,31 @@ class DatePicker extends Component {
               <input type="hidden" name={name + "-end"} id={name + "-end"} value={parseInt(end / 1000) + 24*60*60 - 1} />
             </div>까지
           </div>
+          <div className="monthController">
+            <div className="currentYearMonth">
+              <span className="currYear">{currYear}</span>년&nbsp;
+              <span className="currMonth">{currMonth + 1}</span>월
+            </div>
+            <div className="changeBtnArea">
+              <TransparentButton onClick={this.showPrevMonth}><NavigateBeforeRoundedIcon fontSize="small" /></TransparentButton>
+              <TransparentButton onClick={this.showNextMonth}><NavigateNextRoundedIcon fontSize="small" /></TransparentButton>
+            </div>
+          </div>
           <div className="days">
-            <div className="day"><span>일</span></div>
-            <div className="day"><span>월</span></div>
-            <div className="day"><span>화</span></div>
-            <div className="day"><span>수</span></div>
-            <div className="day"><span>목</span></div>
-            <div className="day"><span>금</span></div>
-            <div className="day"><span>토</span></div>
+            <div className="day">일</div>
+            <div className="day">월</div>
+            <div className="day">화</div>
+            <div className="day">수</div>
+            <div className="day">목</div>
+            <div className="day">금</div>
+            <div className="day">토</div>
           </div>
-          <div className="dateViewWrapper" onScroll={this.onDateViewWrapperScroll}>
-            {opened ? this.dateList : ''}
+          <div className="dateViewWrapper">
+            <DateView 
+              year={currYear} 
+              month={currMonth} 
+              min={min} max={max} start={start} end={end} 
+              onClickDate={this.onClickDate} />
           </div>
         </div>
       </div>
@@ -281,105 +285,83 @@ class DatePicker extends Component {
   }
 }
 
-class PresetItem extends Component {
-  static defaultProps = {
-    name: '',
-    value: '',
-    selected: false,
-    parent: null,
-    onclick: null,
-  }
+/**
+ * 프리셋 아이템
+ * 
+ * @param {{ name: string, value: string, selected: boolean, onclick: function }} props 
+ */
+function PresetItem({ name, value, selected = false, onclick }) {
 
-  render() {
-    const { name, value, selected, parent, onclick } = this.props;
-
-    return (
-      <div className={cx('presetItem', {checked: selected})} id={parent.props.name + '_' + value} onClick={e => onclick({preset: value})}>
-        <div className="marker" />
-        <span className="name">{name}</span>
-      </div>
-    );
-  }
+  return (
+    <div className={cx('presetItem', {checked: selected})} onClick={e => onclick({preset: value})}>
+      <div className="marker" />
+      <span className="name">{name}</span>
+    </div>
+  );
 }
 
-class DateView extends Component {
-  static defaultProps = {
-    name: '',
-    year: 2021,
-    month: 4,
-    parent: null,
-    visible: true,
-  }
-  state = {
-  }
+/**
+ * 월을 표시합니다.
+ * 
+ * @param {{
+ * year: number, 
+ * month: number, 
+ * min: number, 
+ * max: number, 
+ * start: number, 
+ * end: number, 
+ * onClickDate: function }} props 
+ */
+function DateView({ year, month, min, max, start, end, onClickDate }) {
 
-  genDates (year, month) {
-    const { parent } = this.props;
-    const { min, max, name } = parent.props;
-    const { start, end } = parent.state;
-    const startDay = new Date(year, month - 1, 1).getDay();
-    const lastDate = new Date(year, month, 0).getDate();
-    const offset = (startDay > 2) * 3;
-    const list = Array.from(
-      {length: startDay + lastDate - offset}, 
-      (v, i) => {
-        const date = new Date(year, month - 1, 1 - startDay + i + offset);
-        const datetime = date.getTime();
-        return <DateItem 
-          key={name + datetime}
-          date={date.getDate()} 
-          datetime={datetime} 
-          currMonth={date.getMonth() === month - 1} 
-          enabled={min <= datetime && max >= datetime} 
-          checkType={start <= datetime && end >= datetime ? (datetime === start) * 1 + (datetime === end) * 2 : -1}
-          parent={parent} 
-          />
-    });
+  const firstDay = new Date(year, month, 1).getDay();
+  const lastDay = new Date(year, month + 1, 0).getDay();
+  const lastDate = new Date(year, month + 1, 0).getDate();
 
-    return list;
-  }
+  const list = Array.from(
+    {length: firstDay + lastDate + 6 - lastDay}, 
+    (v, i) => {
+      const date = new Date(year, month, 1 - firstDay + i);
+      const datetime = date.getTime();
+      return <DateItem 
+        key={'dateitem' + datetime}
+        dateString={date.getDate()} 
+        datetime={datetime} 
+        currMonth={date.getMonth() === month} 
+        enabled={min <= datetime && max >= datetime} 
+        checkType={start <= datetime && end >= datetime ? (datetime === start) * 1 + (datetime === end) * 2 : -1}
+        onClick={onClickDate} 
+        />
+  });
 
-  render() {
-    const { year, month, visible } = this.props;
-    const list = visible ? this.genDates(year, month) : '';
-
-    return (
-      <div className='DateView'>
-        <div className={cx('listWrapper', {'inlineHeader': new Date(year, month - 1, 1).getDay() > 2})}>
-          {visible ? <div className="header">{year}년 {month}월</div> : ''}
-          {list}
-        </div>
+  return (
+    <div className='DateView'>
+      <div className={cx('listWrapper')}>
+        {list}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-class DateItem extends Component {
-  static defaultProps = {
-    date: 1,
-    datetime: 0,
-    enabled: true,
-    parent: null,
-    checkType: -1,
-  }
-  state = {
-  }
+/**
+ * 날짜를 표시합니다.
+ * 
+ * @param {{dateString: string, datetime: number, currMonth: boolean, enabled: boolean, checkType: number, onClick: function}} props 
+ */
+function DateItem({dateString, datetime, currMonth, enabled = true, checkType = -1, onClick}) {
 
-  checkThis () {
-    const { parent, datetime } = this.props;
-    const { setDateTimestamp } = parent;
-    setDateTimestamp('cursor', datetime);
-  }
+  const checkTypeClassName = {
+    checked: checkType > -1, 
+    start: checkType === 1, 
+    end: checkType === 2, 
+    this: checkType === 3
+  };
 
-  render() {
-    const { date, currMonth, enabled, checkType } = this.props;
-
-    return (
-      <div className={cx('DateItem', {'dummy': !currMonth}, {'disabled': !enabled}, {'checked': checkType > -1}, {'start': checkType === 1}, {'end': checkType === 2}, {'this': checkType === 3})} onClick={e => enabled ? this.checkThis() : null}>
-        <span>{date ? date : ''}</span>
-      </div>
-    );
-  }
+  return (
+    <div className={cx('DateItem', {dummy: !currMonth, disabled: !enabled}, checkTypeClassName)} onClick={e => enabled && onClick(datetime)}>
+      <span>{dateString}</span>
+    </div>
+  );
 }
 
 export default DatePicker;

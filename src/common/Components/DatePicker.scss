@@ -111,54 +111,57 @@
       }
     }
 
-    .days {
-      border-bottom: 1px solid $component-secondary-border-color;
+    .monthController {
       display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7px 0 16px;
+
+      .currentYearMonth {
+        font-size: 14px;
+  
+        .currYear {
+  
+        }
+        .currMonth {
+  
+        }
+      }
+  
+      .changeBtnArea {
+        .BasicButton {
+          border-radius: 50%;
+          padding: 2px;
+          &::after {
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+
+    .days {
+      box-sizing: border-box;
+      display: flex;
+      padding: 0 7px;
       width: 100%;
       height: $itemHeight;
 
       .day {
-        width: $itemWidth;
+        color: $secondary-text-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: calc(100% / 7);
         height: $itemHeight;
-
-        & > span {
-          color: $secondary-text-color;
-          display: block;
-          font-size: 14px;
-          line-height: 14px;
-          margin: calc((#{$itemWidth} - 16px) / 2) calc((#{$itemHeight} - 16px) / 2);
-          padding: 0;
-          width: 16px;
-          height: 16px;
-          text-align: center;
-        }
+        font-size: 14px;
       }
     }
     .dateViewWrapper {
-      height: 220px;
-      overflow-y: scroll;
-
-      &::-webkit-scrollbar {
-        background-color: transparent;
-        width: 16px;
-
-        &:hover {
-          background-color: $component-primary-border-color;
-        }
-      }
-      &::-webkit-scrollbar-thumb {
-        background-clip: padding-box;
-        background-color: $component-secondary-border-color;
-        border: 2px solid transparent;
-        border-top: 1px;
-        border-bottom: 1px;
-        border-radius: 6px;
-        transition: background-color ease .15s;
-
-        &:hover {
-          background-color: $primary-color;
-        }
-      }
+      box-sizing: border-box;
+      height: 180px;
+      padding: 0 7px;
+      
       .DateView {
         height: calc(#{$itemHeight} * 6);
         margin: 1px 0 15px;
@@ -180,9 +183,6 @@
             width: calc(#{$itemWidth} * 7);
             height: $itemHeight;
             box-sizing: border-box;
-          }
-          &.inlineHeader .header {
-            width: calc(#{$itemWidth} * 3);
           }
 
           .DateItem {
@@ -207,6 +207,7 @@
               text-align: center;
               pointer-events: none;
             }
+            &.dummy.checked,
             &.checked {
 
               &::before {
@@ -235,7 +236,6 @@
                 border-radius: 8px;
                 border: 1px solid $component-secondary-border-color;
               }
-              &.dummy::before,
               &.disabled::before {
                 background-color: transparent;
                 border: none;
@@ -269,11 +269,18 @@
                 z-index: 2;
               }
             }
-            &.disabled > span {
-              color: $component-secondary-border-color;
+            &.disabled {
+              cursor: auto;
+            }
+            &.disabled:hover::after {
+              display: none;
+            }
+            &.disabled > span,
+            &.dummy.disabled > span {
+              color: $component-primary-border-color;
             }
             &.dummy > span {
-              color: transparent;
+              color: $component-secondary-border-color;
             }
           }
         }
@@ -291,5 +298,4 @@
     opacity: 1;
     transform: translateY(0px);
   }
-
 }
