@@ -17,6 +17,11 @@
   width: fit-content;
   vertical-align: middle;
   user-select: none;
+  
+  &.Transparent {
+    background: transparent;
+    color: $primary-color;
+  }
 
   &::after {
     border-radius: 8px;
@@ -33,9 +38,15 @@
     &:hover::after {
       background: rgba(255, 255, 255, .1);
     }
+    &.Transparent:hover::after {
+      background: rgba(0, 0, 0, .1);
+    }
   }
   &:active::after {
     background: rgba(0, 0, 0, .1);
+  }
+  &.Transparent:active::after {
+    background: rgba(0, 0, 0, .2);
   }
 
   &.CircleImgButton {
