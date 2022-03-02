@@ -103,9 +103,9 @@ class TwitchChat extends Component {
     } : {};
     return (<div className="TwitchChat" style={style}>
       <TwitchChatClient 
-        clientId="" 
-        channelName=""
-        redirectUrl=""
+        clientId={process.env.REACT_APP_TWITCH_CLIENT_ID} 
+        channelName={process.env.REACT_APP_TWITCH_CHANNEL_NAME} 
+        redirectUri={`https://${domain}/live`}
         location={this.props.location}
         history={this.props.history}
       />

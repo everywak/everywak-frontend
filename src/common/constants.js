@@ -1,5 +1,5 @@
 
-export const domain = process.env.NODE_ENV == 'development' ? '118.34.185.100' : 'dev.everywak.kr';
+export const domain = process.env.REACT_APP_DOMAIN;
 export const TOGGLE = -1;
 export const PORTRAIT = 0;
 export const LANDSCAPE = 1;
