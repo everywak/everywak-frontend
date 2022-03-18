@@ -49,6 +49,36 @@
       width: 100%;
       height: 100%;
     }
+
+    .viewCount,
+    .duration {
+      background: #000a;
+      border-radius: 4px;
+      color: #f0f0f0;
+      display: block;
+      font-size: 12px;
+      line-height: 1em;
+      padding: 2px 4px 3px;
+      position:  absolute;
+      bottom: 6px;
+      @include mobile {
+        bottom: 4px;
+      }
+    }
+
+    .viewCount {
+      left: 8px;
+      @include mobile {
+        display: none;
+        left: 4px;
+      }
+    }
+    .duration {
+      right: 8px;
+      @include mobile {
+        right: 4px;
+      }
+    }
   }
 
   .infoArea {

@@ -42,6 +42,8 @@ class IsedolYoutubeList extends Component {
             datetime: item.publishedAt * 1000,
             formattedDateTime: func.formatDateTimeString(new Date(item.publishedAt * 1000)),
             author: item.nickname,
+            duration: item.duration,
+            viewCount: item.viewCount,
             authorProfileImg: target.profileImg.replace('{size}', '240'),
           });
         })
