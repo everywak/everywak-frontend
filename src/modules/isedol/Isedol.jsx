@@ -48,7 +48,7 @@ function Isedol() {
         <section className="clipSection">
           <FrontPanel data={{
             id: 'isedolpanel_clip',
-            title: "이세돌 생방송 클립",
+            title: "이세돌 주간 핫클립",
             link: "/isedol/clip",
             moreable: false,
             component: <IsedolClipList />,
