@@ -114,7 +114,7 @@ class WakPlayer extends Component {
       nextState.volume !== this.state.volume ||
       nextState.muted !== this.state.muted;
   }
-  
+
   render() {
     const { broadcaster, player, playerState, qualities, volume, muted } = this.state;
 
@@ -298,7 +298,7 @@ class WakPlayerOverlay extends Component {
     const videoQualityList = qualities.map(q => <li className="item vq" data-vq={q.name.indexOf('(source)') === -1 ? q.name : 'chunked'} onClick={e => this.setQuality(e.currentTarget.dataset.vq)}>{qualityList[q.name] || q.name}</li>);
 
     return (
-      <div className={cx('WakPlayerOverlay', 'overlayArea', {opened: playerOverlay === OPENED || playerOverlay === EXPANDED || volPressed || settingPanel !== 'CLOSED'})} 
+      <div className={cx('WakPlayerOverlay', 'overlayArea', {opened: (playerOverlay === OPENED || playerOverlay === EXPANDED || volPressed || settingPanel !== 'CLOSED')})} 
         onMouseMove={this.openOverlay} 
         onMouseLeave={this.closeOverlay} >
         <div className="controller" onTouchEnd={this.onTouch}>
