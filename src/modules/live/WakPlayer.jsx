@@ -286,6 +286,7 @@ class WakPlayerOverlay extends Component {
 
     const qualityList = {
       'Auto': '자동',
+      'chunked': '원본 화질',
       '1080p60 (source)': '1080p60 (원본)',
       '1080p60': '1080p60',
       '720p60': '720p60',
