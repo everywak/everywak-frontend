@@ -134,74 +134,11 @@
         }
       }
       &.volume {
-        .mute,
-        .small,
-        .big {
-          display: none;
-        }
-        &.mute .mute,
-        &.small .small,
-        &.big .big {
-          display: block;
-        }
       }
     }
     
-    .ctlBtn.volume:hover + .volSlider {
+    .ctlBtn.volume:hover + .WakPlayerVolumeBar {
       opacity: 1;
-    }
-    .volSlider {
-      cursor: pointer;
-      opacity: 0;
-      transition: opacity ease .2s;
-      position: relative;
-      width: 116px;
-      height: 28px;
-      -webkit-tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
-                      user-select: none;
-      &:hover,
-      &.pressed {
-        opacity: 1;
-      }
-      .sliderBg {
-        background: rgba(255, 255, 255, .5);
-        cursor: pointer;
-        position: absolute;
-        top: 13px;
-        left: 0;
-        width: 116px;
-        height: 2px;
-        -webkit-tap-highlight-color: transparent;
-              -webkit-touch-callout: none;
-                        user-select: none;
-      }
-      .sliderBar {
-        background: #fff;
-        cursor: pointer;
-        position: absolute;
-        top: 13px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        -webkit-tap-highlight-color: transparent;
-              -webkit-touch-callout: none;
-                        user-select: none;
-      }
-      .sliderBtn {
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0px 0px 2px #000;
-        cursor: pointer;
-        position: absolute;
-        top: 6px;
-        left: 0;
-        width: 16px;
-        height: 16px;
-        -webkit-tap-highlight-color: transparent;
-              -webkit-touch-callout: none;
-                        user-select: none;
-      }
     }
     
     .popup {
