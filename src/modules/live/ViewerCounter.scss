@@ -1,0 +1,16 @@
+@import '../../common/common.scss';
+
+.ViewerCounter {
+  display: inline-flex;
+  flex-direction: row;
+  color: $emphasis-text-color;
+
+  svg {
+    margin-right: 4px;
+    width: 14px;
+    height: 14px;
+  }
+  .counterWrapper {
+    display: inline-block;
+  }
+}

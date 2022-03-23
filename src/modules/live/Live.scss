@@ -289,26 +289,6 @@
       font-weight: 500;
       line-height: 14px;
       padding: 8px 1px 0 0;
-
-      .ViewerCounter {
-        display: inline-flex;
-        flex-direction: row;
-        color: $emphasis-text-color;
-  
-        svg {
-          margin-right: 4px;
-          width: 14px;
-          height: 14px;
-        }
-        .counterWrapper {
-          display: inline-block;
-        }
-      }
-      .StreamTime {
-        color: $secondary-text-color;
-        display: inline-block;
-        margin-left: 12px;
-      }
     }
 
   }

@@ -5,7 +5,6 @@ import styles from './Live.scss';
 import { domain, TOGGLE, CLOSED, OPENED, EXPANDED, DARK, LIGHT, LANDSCAPE, PORTRAIT } from '../../common/constants';
 import Footer from '../../common/Footer/Footer.js';
 import Button from '../../common/Components/Button';
-import RemoveRedEyeRoundedIcon from '@material-ui/icons/RemoveRedEyeRounded';
 import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
 import ExpandLessRoundedIcon from '@material-ui/icons/ExpandLessRounded';
 
@@ -15,6 +14,8 @@ import * as service from '../../services/LiveWakApi';
 import { LiveContext } from './context';
 import TwitchChat from './TwitchChat';
 import WakPlayer from './WakPlayer';
+import StreamTimer from './StreamTimer';
+import ViewerCounter from './ViewerCounter';
 
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
@@ -190,7 +191,7 @@ class LiveSummary extends Component {
         <div className="right">
           <div className="up">
             <ViewerCounter viewer={viewerCount} />
-            <StreamTime startedTime={startedTime} />
+            <StreamTimer startedTime={startedTime} />
           </div>
           <div className="down">
             <Button 
@@ -210,90 +211,22 @@ class LiveSummary extends Component {
   }
 }
 
-class ViewerCounter extends Component {
-  static defaultProps = {
-    viewer: 0,
-  };
-
-  render() {
-    const formattedViewer = this.props.viewer.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
-
-    return (
-      <div className="ViewerCounter">
-        <RemoveRedEyeRoundedIcon  fontSize="small" />
-        <span className="counterWrapper">
-          {formattedViewer}
-        </span>
-      </div>
-    );
-  }
-}
-
-class StreamTime extends Component {
-  static defaultProps = {
-    startedTime: Date.now(),
-  };
-
-  state = {
-    streamSeconds: 0,
-  };
-
-  componentDidMount() {
-    this.loopTimer = setInterval(this.updateTimer, 1000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.loopTimer);
-  }
-
-  updateTimer = () => {
-    const currTime = Date.now();
-    const streamSeconds = parseInt((currTime - this.props.startedTime) / 1000);
-    if (this.state.streamSeconds != streamSeconds) {
-      this.setState({
-        streamSeconds: streamSeconds,
-      });
-    }
-  }
-
-  formatInt = n => {
-    return ('0' + parseInt(n).toString()).slice(-2);
-  }
-
-  render() {
-    const { streamSeconds } = this.state;
-    const hours = parseInt(streamSeconds / 3600);
-    const minutes = parseInt(streamSeconds / 60) % 60;
-    const seconds = streamSeconds % 60;
-    const formattedTime = `${hours}:${this.formatInt(minutes)}:${this.formatInt(seconds)}`;
-
-    return (
-      <div className={cx('StreamTime', {hide: this.props.startedTime == 0})}>
-        {formattedTime}
-      </div>
-    );
-  }
-}
-
-class BroadcastInfo extends Component {
+function BroadcastInfo() {
   
-  render() {
-
-    return (
-      <div className="BroadcastInfo">
-        <div className="panelContainer">
-          <a href="https://toon.at/donate/637445810791017450" target="_blank"><img src="https://everywak.kr/live/images/panel-donate2.png" alt="투네이션" /></a>
-          <a href="https://cafe.naver.com/steamindiegame" target="_blank"><img src="https://everywak.kr/live/images/panel-wakki.png" alt="우왁끼" /></a>
-        </div>
-        <p className="footerTxt">
-          에브리왁굳 우왁굳 생방송 페이지는 YouTube 및 Twitch의 서드파티 사이트로 YouTube 및 Twitch에서 운영하는 사이트가 아닙니다.<br/>
-          'YouTube' 및 '유튜브'는 YouTube, LLC의 등록상표이며 'Twitch' 및 '트위치'는 Twitch Interactive, Inc.의 등록상표입니다.<br/>
-          &nbsp;<br/>
-          에브리왁굳 © 2020-2021. <a href="https://github.com/wei756" className="copyrighter_site_footer">Wei756</a>. All rights reserved.
-        </p>
+  return (
+    <div className="BroadcastInfo">
+      <div className="panelContainer">
+        <a href="https://toon.at/donate/637445810791017450" target="_blank"><img src="https://everywak.kr/live/images/panel-donate2.png" alt="투네이션" /></a>
+        <a href="https://cafe.naver.com/steamindiegame" target="_blank"><img src="https://everywak.kr/live/images/panel-wakki.png" alt="우왁끼" /></a>
       </div>
-    );
-  }
+      <p className="footerTxt">
+        에브리왁굳 우왁굳 생방송 페이지는 YouTube 및 Twitch의 서드파티 사이트로 YouTube 및 Twitch에서 운영하는 사이트가 아닙니다.<br/>
+        'YouTube' 및 '유튜브'는 YouTube, LLC의 등록상표이며 'Twitch' 및 '트위치'는 Twitch Interactive, Inc.의 등록상표입니다.<br/>
+        &nbsp;<br/>
+        에브리왁굳 © 2020-2022. <a href="https://github.com/wei756" className="copyrighter_site_footer">Wei756</a>. All rights reserved.
+      </p>
+    </div>
+  );
 }
 
 export default Live;
