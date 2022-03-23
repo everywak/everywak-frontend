@@ -1,8 +1,8 @@
 import FrontPanel from './FrontPanel';
-import Bestwakki from '../bestwakki/Bestwakki.js';
-import Live from '../live/Live.js';
-import Apps from '../apps/Apps.js';
-import Etcs from '../apps/Etcs.js';
+import Bestwakki from '../bestwakki/Bestwakki';
+import Live from '../live/Live';
+import Apps from '../apps/Apps';
+import Etcs from '../apps/Etcs';
 
 import * as func from '../../common/funtions';
 
