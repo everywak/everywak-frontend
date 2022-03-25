@@ -5,6 +5,8 @@ import { Cookies } from 'react-cookie';
 import Spinner from '../../common/Components/Spinner';
 import InsertEmoticonRoundedIcon from '@material-ui/icons/InsertEmoticonRounded';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
+import BasicButton from '../../common/Components/Button/BasicButton';
+import TransparentButton from '../../common/Components/Button/TransparentButton';
 
 import TwitchApi from '../../services/TwitchApi';
 
@@ -565,17 +567,17 @@ class TwitchChatClient extends Component {
                   e.target.style.height = '0px';
                     e.target.style.height = `${e.target.scrollHeight + 4}px`;
                 }} />
-                <button className="twitchChatButton twitchChatBtnEmote" onClick={e => this.toggleEmotePicker()}>
+                <TransparentButton className="twitchChatBtnEmote" onClick={e => this.toggleEmotePicker()}>
                   <InsertEmoticonRoundedIcon fontSize="small" />
-                </button>
+                </TransparentButton>
               </div>
               <div className="twitchChatInputFooter">
                 <div className="inputFooterLeftWrapper">&nbsp;</div>
                 <div className="inputFooterRightWrapper">
-                  <button className="twitchChatButton twitchChatBtnSetting">
+                  <TransparentButton className="twitchChatBtnSetting">
                     <SettingsRoundedIcon fontSize="small" />
-                  </button>
-                  <button className="twitchChatButton twitchChatBtnSend" onClick={this.sendChat}>채팅</button>
+                  </TransparentButton>
+                  <BasicButton className="twitchChatBtnSend" onClick={this.sendChat}>채팅</BasicButton>
                 </div>
               </div>
               {openedEmotePicker && <TwitchChatEmotePicker emotes={this.emoteSets} twitchApi={this.getTwitchApi()} appendToChatBox={this.appendToChatBox} />}

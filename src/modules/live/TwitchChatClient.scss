@@ -110,22 +110,11 @@
         }
       }
       .twitchChatBtnEmote {
-        background: $component-primary-border-color;
         color: $secondary-text-color;
-        justify-content: center;
         position: absolute;
-        right: 6px;
-        bottom: 6px;
-        padding: 0;
-        width: 28px;
-        height: 28px;
-
-        &:hover {
-          filter: brightness(0.9);
-        }
-        &:active {
-          filter: brightness(0.8);
-        }
+        right: 2px;
+        bottom: 2px;
+        padding: 4px;
       }
     }
 
@@ -148,24 +137,13 @@
         flex-direction: row;
 
         .twitchChatBtnSetting {
-          background: transparent;
           color: $secondary-text-color;
-          margin-right: 4px;
-
-          &:hover {
-            background: rgba(0, 0, 0, .1);
-            filter: none;
-          }
-          &:active {
-            background: rgba(0, 0, 0, .2);
-            filter: none;
-          }
-          
+          margin: 0 4px;
+          padding: 1px 6px;
         }
         .twitchChatBtnSend {
-          font-size: 14px;
-          font-weight: 500;
-          padding: 0 10px;
+          margin: 0;
+          padding: 6px 11px;
         }
       }
     }
