@@ -1,220 +1,90 @@
-import React, { Component } from 'react';
-import { Fragment } from 'react';
-import styles from './Live.scss';
+import React, { useEffect, useState, useRef } from 'react';
 
-import { domain, TOGGLE, CLOSED, OPENED, EXPANDED, DARK, LIGHT, LANDSCAPE, PORTRAIT } from '../../common/constants';
 import Footer from '../../common/Footer/Footer.js';
-import Button from '../../common/Components/Button';
-import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
-import ExpandLessRoundedIcon from '@material-ui/icons/ExpandLessRounded';
 
-import * as func from '../../common/funtions';
-import * as service from '../../services/LiveWakApi';
-
-import { LiveContext } from './context';
+import LiveSummary from './LiveSummary';
 import TwitchChat from './TwitchChat';
 import WakPlayer from './WakPlayer';
-import StreamTimer from './StreamTimer';
-import ViewerCounter from './ViewerCounter';
 
+import * as func from '../../common/funtions';
+
+import styles from './Live.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-class Live extends Component {
-  static defaultProps = {
-    front: false
-  };
+export default function Live ({front = false, location, history}) {
 
-  state = {
-    rotation: PORTRAIT,
-    setRotation: () => {},
-    chatStyle: DARK,
-    expandHeader: false,
-    expandScreen: false,
-    playerOverlay: CLOSED,
-    setPlayerOverlay: () => {},
-  };
+  const [opened, setOpened] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
-  constructor (props) {
-    super(props);
-    if (!props.front) {
+  // 브라우저 제목 설정
+  useEffect(() => {
+    if (!front) {
       func.setBrowserTitle('생방송');
+      document.getElementsByClassName('App')[0].classList.add('live');
     }
-    this.setRotation = val => {
-      const rot = val === TOGGLE ? !this.state.rotation : val;
-      this.setState({rotation: rot});
-      const app = document.getElementsByClassName('App')[0];
-      if (app) {
-        if (rot === PORTRAIT) {
-          app.classList.remove('live');
-        } else if (rot === LANDSCAPE) {
-          app.classList.add('live');
-        }
-      }
+
+    return () => {
+      document.getElementsByClassName('App')[0].classList.remove('live');
     }
-    this.setAutoRotation = () => { this.setRotation(window.innerWidth < window.innerHeight ? PORTRAIT : LANDSCAPE); };
-    this.setPlayerOverlay = val => {
-      this.setState({
-        playerOverlay: val === TOGGLE ? !this.state.playerOverlay : val,
-      });
-    };
-  };
+  }, []);
 
-  componentDidMount() {
-	  if (!this.props.front) {
-      this.setAutoRotation();
+  const refPlayerWrapper = useRef(null);
 
-      window.addEventListener('resize', this.setAutoRotation);
+  useEffect(() => {
+    if (!expanded) {
+      refPlayerWrapper.current && refPlayerWrapper.current.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
     }
-    this.setState({
-      setRotation: this.setRotation,
-      setPlayerOverlay: this.setPlayerOverlay,
-    });
-    this.forceUpdate();
-    setTimeout(() => {
-      this.setAutoRotation();
-    }, 1);
-  }
+  }, [expanded]);
+  
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.state.rotation !== nextState.rotation || 
-          this.state.playerOverlay !== nextState.playerOverlay;
-  }
-
-  componentWillUnmount() {
-    document.getElementsByClassName('App')[0].classList.remove('live');
-    window.removeEventListener('resize', this.setAutoRotation);
-  }
-
-  render() {
-    const { front } = this.props;
-    const { rotation } = this.state;
-    
-    return (
-      <LiveContext.Provider value={this.state} >
-        <div className={cx('Live', {'front': this.props.front}, {'landscape': rotation == LANDSCAPE}, {'portrait': rotation == PORTRAIT})}>
-          {front ?
-            <Fragment>
-              <WakPlayer key="wakplayer" />
-              <LiveSummary />
-            </Fragment> :
-            <Fragment>
-              <div className={cx('playerWrapper', {opened: this.state.playerOverlay === OPENED, expanded: this.state.playerOverlay === EXPANDED})}>
-                <WakPlayer key="wakplayer" />
-                <LiveSummary />
-                <BroadcastInfo />
-                <Footer />
-              </div>
-              <TwitchChat location={this.props.location} history={this.props.history} />
-            </Fragment>
-          }
-        </div>
-      </LiveContext.Provider>
-    );
-  }
-}
-
-class LiveSummary extends Component {
-  static contextType = LiveContext;
-
-  state = {
-    broadcaster: 'NONE',
-    title: '방송 중이 아닙니다.',
-    viewerCount: 0,
-    startedTime: 0,
-    startedTimeString: '',
-  };
-
-  componentDidMount() {
-    this.loadLiveInfo();
-    this.loopLiveInfo = setInterval(this.loadLiveInfo, 30 * 1000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.loopLiveInfo);
-  }
-
-  loadLiveInfo = async () => {
-    const info = await service.getBroadcastInfo();
-
-    switch(info.broadcaster) {
-      case 'TWITCH':
-        const {
-          broadcaster, title, viewerCount, startedTime,
-        } = info;
-
-        this.setState({
-          broadcaster: broadcaster,
-          title: title,
-          viewerCount: parseInt(viewerCount),
-          startedTime: new Date(startedTime).getTime(),
-          startedTimeString: func.formatDateTimeString(new Date(startedTime)),
-        });
-        break;
-      default:
-        this.setState({
-          broadcaster: 'NONE',
-          title: '방송 중이 아닙니다.',
-          viewerCount: 0,
-          startedTime: 0,
-          startedTimeString: '',
-        });
+  function onChangeOverlayStateHandler({expanded, opened}) {
+    if (opened !== undefined) {
+      setOpened(opened);
     }
+    if (expanded !== undefined) {
+      setExpanded(expanded);
+    }
+    console.log('expand', expanded, 'opened', opened);
   }
 
-  render() {
-    const { playerOverlay, setPlayerOverlay } = this.context;
-    const { broadcaster, title, viewerCount, startedTime, startedTimeString } = this.state;
-    const channelName = '우왁굳';
-    const broadcastName = broadcaster.charAt(0) + broadcaster.slice(1).toLowerCase();
-
-    return (
-      <div className={cx('LiveSummary', {opened: playerOverlay === OPENED, expanded: playerOverlay === EXPANDED})}>
-        <div className="left">
-          <div className="liveProfile">
-            <div className="profileWrapper">
-              <div className="imgWrapper">
-                <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/ebc60c08-721b-4572-8f51-8be7136a0c96-profile_image-300x300.png" alt="" className="profileImg"/>
-              </div>
-            </div>
-          </div>
-          <div className="liveSummaryWrapper" >
-            <span className="liveTitle">{title}</span>
-            <span className="liveDateTime">{startedTimeString}</span>
-            <span className={cx('livePresented', {hide: broadcastName == 'None'})}>
-              <span className="channelName">{channelName}</span>
-              &nbsp;on&nbsp;
-              <span className="broadcastName">{broadcastName}</span>
-            </span>
-          </div>
-        </div>
-        <div className="right">
-          <div className="up">
-            <ViewerCounter viewer={viewerCount} />
-            <StreamTimer startedTime={startedTime} />
-          </div>
-          <div className="down">
-            <Button 
-              className="btnOpenInfo"
-              href="" 
-              iconSrc={
-                playerOverlay === EXPANDED ? 
-                <ExpandLessRoundedIcon fontSize="medium" /> : 
-                <ExpandMoreRoundedIcon fontSize="medium" />
-              } 
-              labelBGColor="transparent" 
-              onclick={e => setPlayerOverlay(playerOverlay === EXPANDED ? CLOSED : EXPANDED)} />
-          </div>
-        </div>
+  return (// process.env.REACT_APP_TWITCH_CHANNEL_NAME
+    front ?
+    <LiveFront /> :
+    <div className={cx('Live')}>
+      <div className={cx('playerWrapper', {opened: opened, expanded: expanded})} ref={refPlayerWrapper}>
+        <WakPlayer key="wakplayer" channelId="woowakgood" onChangeOverlayState={onChangeOverlayStateHandler} /> 
+        <LiveSummary expanded={expanded} onChangeOverlayState={onChangeOverlayStateHandler} />
+        <BroadcasterPanel />
+        <Footer />
       </div>
-    );
-  }
+      <TwitchChat location={location} history={history} />
+    </div>
+  )
 }
 
-function BroadcastInfo() {
+/**
+ * FrontPage에 표시되는 생방송 컴포넌트
+ */
+function LiveFront() {
+  return (
+    <div className={cx('Live', 'front')}>
+      <WakPlayer key="wakplayer" channelId="woowakgood" />
+      <LiveSummary style="simple" />
+    </div>
+  );
+}
+
+/**
+ * 후원 배너 등 각종 패널들
+ */
+function BroadcasterPanel() {
   
   return (
-    <div className="BroadcastInfo">
+    <div className="BroadcasterPanel">
       <div className="panelContainer">
         <a href="https://toon.at/donate/637445810791017450" target="_blank"><img src="https://everywak.kr/live/images/panel-donate2.png" alt="투네이션" /></a>
         <a href="https://cafe.naver.com/steamindiegame" target="_blank"><img src="https://everywak.kr/live/images/panel-wakki.png" alt="우왁끼" /></a>
@@ -228,5 +98,3 @@ function BroadcastInfo() {
     </div>
   );
 }
-
-export default Live;

@@ -1,7 +1,11 @@
 @import '../../common/common.scss';
 
 .TwitchChat {
+    --chatWidth: 320px;
     width: 100%;
+    @media (orientation: landscape) {
+      width: var(--chatWidth);
+    }
     height: 100%;
     position: relative;
     

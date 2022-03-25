@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import WakPlayerVolumeBar from './WakPlayer/WakPlayerVolumeBar';
 
-import { domain, TOGGLE, CLOSED, OPENED, EXPANDED, DARK, LIGHT, LANDSCAPE, PORTRAIT } from '../../common/constants';
+import { domain } from '../../common/constants';
 
 import { TwitchPlayer } from 'react-twitch-embed';
 import { LiveContext } from './context';
@@ -12,9 +12,11 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 class WakPlayer extends Component {
-  static STOP = 0;
-  static PAUSE = 1;
-  static PLAYING = 2;
+
+  static defaultProps = {
+    channelId: '',
+    onChangeOverlayState: ({expanded, opened}) => {},
+  }
 
   state = {
     broadcaster: 'none',
@@ -82,19 +84,24 @@ class WakPlayer extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.broadcaster !== this.state.broadcaster && 
-      nextState.broadcaster === 'twitch') {
-      this.embed = <TwitchPlayer className="stream" channel="woowakgood" parent={[domain]} 
-                      width="100%" height="100%" hideControls={true} muted={false} 
+    if (nextState.broadcaster === 'twitch' &&
+      (nextState.broadcaster !== this.state.broadcaster || 
+      nextProps.channelId !== this.props.channelId)) {
+      this.embed = <TwitchPlayer className="stream" channel={this.props.channelId} parent={[domain]} 
+                      width="100%" height="100%" hideControls={true} muted={true} 
                       onReady={this.onTwitchReady} onPlay={this.onTwitchPlay} onPlaying={this.onTwitchPlaying} onPause={this.onTwitchPause} 
                       onOnline={this.onTwitchOnline} onOffline={this.onTwitchOffline} />
     }
     return nextState.broadcaster !== this.state.broadcaster || 
       nextState.player !== this.state.player || 
-      nextState.onlineState !== this.state.onlineState;
+      nextState.onlineState !== this.state.onlineState ||
+      nextProps.channelId !== this.props.channelId;
   }
 
   render() {
+    const {
+      onChangeOverlayState
+    } = this.props;
     const {
       broadcaster, player, onlineState, 
     } = this.state;
@@ -103,7 +110,7 @@ class WakPlayer extends Component {
       <div className="WakPlayer">
         <div className="content">
           {this.embed}
-          <WakPlayerOverlay broadcaster={broadcaster} player={player} playerContext={this.playerContext} />
+          <WakPlayerOverlay broadcaster={broadcaster} player={player} playerContext={this.playerContext} onChangeOverlayState={onChangeOverlayState} />
         </div>
       </div>
     );
@@ -117,6 +124,7 @@ class WakPlayerOverlay extends Component {
     broadcaster: 'none',
     player: null,
     playerContext: null,
+    onChangeOverlayState: ({opened, expanded}) => {},
   };
 
   state = {
@@ -126,6 +134,7 @@ class WakPlayerOverlay extends Component {
     quality: 'Auto', 
     volume: 50,
     muted: false,
+    opened: false,
     expanded: false,
   };
   
@@ -146,6 +155,9 @@ class WakPlayerOverlay extends Component {
     }
   }
 
+  /**
+   * 마우스 호버 후 자동 오버레이 숨김 구현을 위한 루프
+   */
   loopOverlayLife = () => {
     if (this.overlayLife > 0 && this.overlayLife - 50 <= 0) {
       this.close();
@@ -153,36 +165,81 @@ class WakPlayerOverlay extends Component {
     this.overlayLife = this.state.settingPanel === 'CLOSED' ? Math.max(this.overlayLife - 50, 0) : 100;
   }
 
+  /**
+   * 오버레이를 표시합니다.
+   */
   open = () => {
-    if (this.context.playerOverlay == CLOSED) {
-      this.context.setPlayerOverlay(OPENED);
+    if (!this.state.opened) {
+      this.setState({
+        opened: true,
+      });
     }
     this.overlayLife = 3000;
   }
+  /**
+   * 오버레이를 숨깁니다.
+   */
   close = () => {
-    if (this.context.playerOverlay != CLOSED) {
-      this.context.setPlayerOverlay(CLOSED);
+    if (this.state.opened) {
+      this.setState({
+        opened: false,
+      });
     }
     this.overlayLife = 0;
   }
 
+  onChangeOverlayState = () => {
+    const {
+      opened, expanded
+    } = this.state;
+    this.props.onChangeOverlayState && 
+    this.props.onChangeOverlayState({
+      opened: opened,
+      expanded: expanded,
+    });
+  }
+
+  /**
+   * 스트림을 재생합니다.
+   */
   play = () => {
-    if (this.props.broadcaster !== 'none' && this.props.player) {
-      this.props.player.play();
+    const {
+      broadcaster, player,
+    } = this.props;
+
+    if (broadcaster !== 'none' && player) {
+      player.play();
     }
   }
+  /**
+   * 스트림을 일시정지합니다.
+   */
   pause = () => {
-    if (this.props.broadcaster !== 'none' && this.props.player) {
-      this.props.player.pause();
+    const {
+      broadcaster, player,
+    } = this.props;
+
+    if (broadcaster !== 'none' && player) {
+      player.pause();
     }
   }
+  /**
+   * 스트림을 새로고침합니다.
+   */
   refresh = () => {
-    if (this.props.broadcaster !== 'none' && this.props.player) {
-      this.props.player.pause();
-      this.props.player.play();
+    const {
+      broadcaster, player,
+    } = this.props;
+
+    if (broadcaster !== 'none' && player) {
+      player.pause();
+      player.play();
     }
   }
 
+  /**
+   * 스트림 화질 목록을 불러옵니다.
+   */
   getQualities = () => {
     if (this.props.player) {
       this.setState({
@@ -191,6 +248,11 @@ class WakPlayerOverlay extends Component {
       console.log(this.props.player.getQualities());
     }
   }
+  /**
+   * 스트림 화질을 설정합니다.
+   * 
+   * @param {string} val
+   */
   setQuality = val => {
     if (this.props.player) {
       this.props.player.setQuality(val);
@@ -201,15 +263,18 @@ class WakPlayerOverlay extends Component {
     this.setSettingPanel('MAIN');
   }
 
+  /**
+   * 플레이어 터치 시 이벤트를 핸들링합니다.
+   */
   onTouch = e => {
     if (!(e.target == e.currentTarget || e.target.className === 'bottom')) {return;}
-    const touchedState = this.context.playerOverlay;
+    const touchedState = this.state.opened;
     setTimeout(() => {
-      if (touchedState !== this.context.playerOverlay) {return;}
+      if (touchedState !== this.state.opened) {return;}
 
-      if (this.context.playerOverlay == CLOSED) {
+      if (!this.state.opened) {
         this.open();
-      } else if (this.context.playerOverlay == OPENED && this.state.settingPanel == 'CLOSED') {
+      } else if (this.state.opened && this.state.settingPanel == 'CLOSED') {
         this.close();
       }
     }, 200);
@@ -220,7 +285,9 @@ class WakPlayerOverlay extends Component {
   }
   
   /**
-   * @param {number} val
+   * 스트림의 볼륨을 설정합니다.
+   * 
+   * @param {number} val 0~100 사이 정수
    */
   setVolume = val => {
     const newVolume = parseInt(val);
@@ -232,6 +299,8 @@ class WakPlayerOverlay extends Component {
   }
   
   /**
+   * 스트림을 음소거합니다.
+   * 
    * @param {boolean} newMuted
    */
   setMuted = newMuted => {
@@ -242,6 +311,11 @@ class WakPlayerOverlay extends Component {
     }
   }
   
+  /**
+   * 스트림의 음소거 상태를 전환합니다.
+   * 
+   * @param {boolean} newMuted
+   */
   toggleMuted = () => {
     this.setState({
       muted: !this.state.muted
@@ -264,23 +338,33 @@ class WakPlayerOverlay extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.volume !== this.state.volume) {
-      if (this.props.player) {
-        this.props.player.setVolume(this.state.volume / 100);
+    const {
+      player
+    } = this.props;
+
+    if (player) {
+      if (prevState.volume !== this.state.volume) { // 볼륨 변화 처리 
+        player.setVolume(this.state.volume / 100);
+      }
+      if (prevState.muted !== this.state.muted) { // 음소거 변화 처리
+        player.setMuted(this.state.muted);
+      }
+      if (prevProps.player !== this.props.player) { // player ready
+        this.setState({
+          qualities: player.getQualities(),
+          volume: parseInt(player.getVolume() * 100),
+          muted: player.getMuted(),
+        });
       }
     }
-    if (prevState.muted !== this.state.muted) {
-      if (this.props.player) {
-        this.props.player.setMuted(this.state.muted);
-      }
+
+    // 오버레이 상태 변경 감지
+    if (prevState.opened !== this.state.opened ||
+      prevState.expanded !== this.state.expanded) {
+        
+      this.onChangeOverlayState();
     }
-    if (prevProps.player !== this.props.player && this.props.player) { // player ready
-      this.setState({
-        qualities: this.props.player.getQualities(),
-        volume: parseInt(this.props.player.getVolume() * 100),
-        muted: this.props.player.getMuted(),
-      });
-    }
+
   }
 
   componentWillUnmount() {
@@ -288,9 +372,10 @@ class WakPlayerOverlay extends Component {
   }
 
   render() {
-    const { playerOverlay } = this.context;
     const {  } = this.props;
-    const { volPressed, settingPanel, quality, qualities, volume, muted, playerState } = this.state;
+    const {
+      volPressed, settingPanel, quality, qualities, volume, muted, playerState, opened, expanded,
+    } = this.state;
 
     const qualityList = {
       'Auto': '자동',
@@ -307,7 +392,7 @@ class WakPlayerOverlay extends Component {
     const videoQualityList = qualities.map(q => <li className="item vq" data-vq={q.name.indexOf('(source)') === -1 ? q.name : 'chunked'} onClick={e => this.setQuality(e.currentTarget.dataset.vq)}>{qualityList[q.name] || q.name}</li>);
 
     return (
-      <div className={cx('WakPlayerOverlay', 'overlayArea', {opened: (playerOverlay === OPENED || playerOverlay === EXPANDED || volPressed || settingPanel !== 'CLOSED')})} 
+      <div className={cx('WakPlayerOverlay', 'overlayArea', {opened: (opened || expanded || volPressed || settingPanel !== 'CLOSED')})} 
         onMouseMove={this.open} 
         onMouseLeave={this.close} >
         <div className="controller" onTouchEnd={this.onTouch}>

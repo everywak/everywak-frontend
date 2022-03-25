@@ -1,0 +1,173 @@
+@import '../../common/common.scss';
+
+.Live:not(.front) {
+
+  .LiveSummary {
+    @include desktop {
+      padding: 14px 23px;
+
+      .right {
+        .down {
+          display: none;
+        }
+      }
+    }
+    @include not-desktop {
+      padding: 10px 8px;
+
+      .left {
+        padding-left: 6px;
+
+        .liveProfile {
+          margin-right: 10px;
+    
+          .profileWrapper .profileImg {
+            width: 56px;
+          }
+        }
+        .liveSummaryWrapper {
+          .liveTitle {
+            font-size: 16px;
+            line-height: 16px;
+          }
+          .livePresented {
+            font-size: 12px;
+            line-height: 12px;
+            margin-top: 6px;
+          }
+        }
+      }
+      .right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        .up {
+          padding: 7px 6px 0 0;
+        }
+        .down {
+          .btnOpenInfo {
+            height: 24px;
+            margin: 0;
+            
+            .icon {
+              width: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @include not-desktop {
+    .playerWrapper {
+      &.expanded {
+        .LiveSummary {
+          position: sticky;
+          top: 0;
+        }
+      }
+
+      .LiveSummary {
+        background: inherit;
+        position: relative;
+        top: 0;
+        transition: top ease .3s;
+      }
+    }
+    &.landscape .playerWrapper.opened .LiveSummary {
+      top: -84px;
+    }
+  }
+}
+.LiveSummary {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: top;
+
+  &.simple {
+    border: solid 1px $component-primary-border-color;
+    padding: 15px 16px 20px;
+
+    .liveSummaryWrapper {
+      padding-top: 0;
+
+      & > span {
+        display: block;
+      }
+      
+      .liveTitle {
+        color: $primary-text-color;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 20px;
+        margin-top: 0;
+      }
+      .liveDateTime {
+        color: $secondary-text-color;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 14px;
+        margin-top: 8px;
+      }
+    }
+  }
+  
+  .left {
+    display: flex;
+    flex-direction: row;
+    align-items: top;
+    
+    .liveProfile {
+      border: solid 2px $twitch-color;
+      border-radius: 50%;
+      margin-right: 15px;
+      height: fit-content;
+
+      .profileWrapper {
+        border: solid 2px $component-primary-border-color;
+        border-radius: 50%;
+        
+        .profileImg {
+          display: block;
+          width: 64px;
+        }
+      }
+    }
+    
+    .liveSummaryWrapper {
+      padding-top: 6px;
+
+      & > span {
+        display: block;
+      }
+      
+      .liveTitle {
+        color: $primary-text-color;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 18px;
+      }
+      .livePresented {
+        color: $primary-text-color;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 14px;
+        margin-top: 8px;
+      }
+    }
+  }
+  
+  .right {
+    .up {
+      display: flex;
+      flex-direction: row;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 14px;
+      padding: 8px 1px 0 0;
+    }
+  }
+}

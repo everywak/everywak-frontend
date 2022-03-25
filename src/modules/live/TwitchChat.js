@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { domain, LANDSCAPE } from '../../common/constants';
+import { domain } from '../../common/constants';
 import { LiveContext } from './context';
 
 import TwitchChatClient from './TwitchChatClient';
@@ -96,12 +96,8 @@ class TwitchChat extends Component {
   };
 
   render() {
-    const { chatStyle, rotation } = this.context;
-    const src = `https://www.twitch.tv/embed/woowakgood/chat?parent=${domain}${chatStyle === 'DARK' ? '&darkpopout' : ''}`;
-    const style = rotation === LANDSCAPE ? {
-      width: `${this.state.chatWidth}px`
-    } : {};
-    return (<div className="TwitchChat" style={style}>
+
+    return (<div className="TwitchChat" style={{'--chatWidth': `${this.state.chatWidth}px`}}>
       <TwitchChatClient 
         clientId={process.env.REACT_APP_TWITCH_CLIENT_ID} 
         channelName={process.env.REACT_APP_TWITCH_CHANNEL_NAME} 

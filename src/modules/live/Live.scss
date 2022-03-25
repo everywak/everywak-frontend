@@ -3,32 +3,24 @@
 .Live + .footer {
   display: none;
 }
-@include desktop {
-  .Live:not(.front) {
+.Live:not(.front) {
+  @include desktop {
     height: calc(100vh - #{$header-height});
   }
-}
-@include not-desktop {
-  .Live.portrait:not(.front) {
-    height: calc(100vh - #{$header-height});
-  }
-  .Live.landscape:not(.front) {
-    height: 100vh;
+  @include not-desktop {
+    @media (orientation: portrait) {
+      height: calc(100vh - #{$header-height});
+    }
+    @media (orientation: landscape) {
+      height: 100vh;
+    }
   }
 }
 .Live:not(.front) {
   width: 100%;
   display: grid;
   display: -ms-grid;
-  &.landscape {
-    grid-template-columns: 1fr auto;
-    grid-template-rows: 100%;
-    -ms-grid-columns: 1fr auto;
-    -ms-grid-rows: 100%;
-    grid-template-areas:
-    "live chat";
-  }
-  &.portrait {
+  @media (orientation: portrait) {
     grid-template-columns: 100%;
     grid-template-rows: auto 1fr;
     -ms-grid-columns: 100%;
@@ -37,73 +29,22 @@
     "live"
     "chat";
   }
-
-  
-  @include desktop {
-    .LiveSummary {
-      padding: 14px 23px;
-
-      .right {
-        .down {
-          display: none;
-        }
-      }
-    }
-  }
-  @include not-desktop {
-    .LiveSummary {
-      padding: 10px 8px;
-
-      .left {
-        padding-left: 6px;
-
-        .liveProfile {
-          margin-right: 10px;
-    
-          .profileWrapper .imgWrapper {
-            width: 56px;
-            height: 56px;
-          }
-        }
-        .liveSummaryWrapper {
-          .liveTitle {
-            font-size: 16px;
-            line-height: 16px;
-          }
-          .livePresented {
-            font-size: 12px;
-            line-height: 12px;
-            margin-top: 6px;
-          }
-        }
-      }
-      .right {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: flex-end;
-
-        .up {
-          padding: 7px 6px 0 0;
-        }
-        .down {
-          .btnOpenInfo {
-            height: 24px;
-            margin: 0;
-            
-            .icon {
-              width: 24px;
-            }
-          }
-        }
-      }
-    }
+  @media (orientation: landscape) {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 100%;
+    -ms-grid-columns: 1fr auto;
+    -ms-grid-rows: 100%;
+    grid-template-areas:
+    "live chat";
   }
 }
 
 @include not-desktop {
-  .App.live header.header {
-    display: none;
+  
+  @media (orientation: landscape) {
+    .App.live header.header {
+      display: none;
+    }
   }
   
   .Live:not(.front) {
@@ -117,43 +58,46 @@
         .WakPlayer {
           height: 0px;
         }
-        .LiveSummary {
-          position: sticky;
-          top: 0;
+      }
+      @media (orientation: landscape) {
+        &.opened .LiveSummary {
+          top: -84px;
         }
       }
-
-      .LiveSummary {
-        background: inherit;
-        position: relative;
-        top: 0;
-        transition: top ease .3s;
+      @media (orientation: portrait) {
+        &.opened {
+          height: calc(100vw / 16 * 9 + 84px);
+        }
+        &.expanded {
+          height: calc(100vh - 52px);
+        }
       }
     }
-
-    &.landscape .playerWrapper.opened .LiveSummary {
-      top: -84px;
-    }
-    &.portrait .playerWrapper.opened {
-      height: calc(100vw / 16 * 9 + 84px);
-    }
-    &.portrait .playerWrapper.expanded {
-      height: calc(100vh - 52px);
-    }
+    
   }
 }
-.playerWrapper {
+.Live:not(.front) .playerWrapper {
   background: $component-primary-bg-color;
   grid-area: live;
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
   
+  @media (orientation: portrait) {
+    height: calc(100vw / 16 * 9);
+    overflow: hidden;
+    transition: height ease .3s;
+
+    .footer {
+      display: none;
+    }
+  }
+  
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
   }
   
-  .BroadcastInfo {
+  .BroadcasterPanel {
     
     .panelContainer {
       padding: 16px 24px 24px;
@@ -175,133 +119,13 @@
       }
     }
   }
-  
-  .Live.portrait & .footer {
-    display: none;
-  }
-}
-.Live.portrait .playerWrapper {
-  height: calc(100vw / 16 * 9);
-  overflow: hidden;
-  transition: height ease .3s;
-}
-.LiveSummary {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: top;
-
-  .Live.front & {
-    border: solid 1px $component-primary-border-color;
-    padding: 15px 16px 20px;
-  }
-  
-  .left {
-    display: flex;
-    flex-direction: row;
-    align-items: top;
-    
-    .liveProfile {
-      border: solid 2px $twitch-color;
-      border-radius: 50%;
-      margin-right: 15px;
-
-      .profileWrapper {
-        border: solid 2px $component-primary-border-color;
-        border-radius: 50%;
-        
-        .imgWrapper {
-          border-radius: 50%;
-          width: 64px;
-          height: 64px;
-          overflow: hidden;
-
-          .profileImg {
-            width: 100%;
-          }
-        }
-      }
-
-      .Live.front & {
-        display: none;
-      }
-    }
-    
-    .liveSummaryWrapper {
-      padding-top: 6px;
-
-      .Live.front & {
-        padding-top: 0;
-      }
-
-      & > span {
-        display: block;
-      }
-      
-      .liveTitle {
-        color: $primary-text-color;
-        font-size: 18px;
-        font-weight: 500;
-        line-height: 18px;
-
-        .Live.front & {
-          font-size: 20px;
-          line-height: 20px;
-          margin-top: 0;
-        }
-      }
-      .liveDateTime {
-        color: $secondary-text-color;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 14px;
-        margin-top: 8px;
-
-        .Live:not(.front) & {
-          display: none;
-        }
-      }
-      .livePresented {
-        color: $primary-text-color;
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 14px;
-        margin-top: 8px;
-
-        .Live.front & {
-          display: none;
-        }
-      }
-    }
-  }
-  
-  .right {
-
-
-    .Live.front & {
-      display: none;
-    }
-
-    .up {
-      display: flex;
-      flex-direction: row;
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 14px;
-      padding: 8px 1px 0 0;
-    }
-
-  }
 }
 
 .TwitchChat {
   grid-area: chat;
   
-  .Live.landscape & {
-    width: 320px;
-  }
   .sizeController {
-    .Live.portrait & {
+    @media (orientation: portrait) {
       display: none;
     }
   }

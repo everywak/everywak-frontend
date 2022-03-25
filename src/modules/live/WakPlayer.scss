@@ -1,21 +1,24 @@
 @import '../../common/common.scss';
 
 
-.Live.landscape:not(.front) {
-  @include desktop {
-    .WakPlayer {
-      max-height: calc(100vh - #{$header-height} - 128px);
-    }
-  }
-  @include not-desktop {
-    .WakPlayer {
-      max-height: 100vh;
-      &::before {
-        padding-top: 100vh;
+@media (orientation: landscape) {
+  .Live:not(.front) {
+    @include desktop {
+      .WakPlayer {
+        max-height: calc(100vh - #{$header-height} - 128px);
       }
-
-      .overlayArea.opened .controller {
-        padding-bottom: 84px;
+    }
+    @include not-desktop {
+      .WakPlayer {
+        height: 100vh;
+        transition: height ease .3s;
+        &::before {
+          padding-top: 100vh;
+        }
+  
+        .overlayArea.opened .controller {
+          padding-bottom: 84px;
+        }
       }
     }
   }
@@ -139,6 +142,12 @@
     
     .ctlBtn.volume:hover + .WakPlayerVolumeBar {
       opacity: 1;
+    }
+    @include not-desktop {
+      .WakPlayerVolumeBar,
+      .ctlBtn.expand {
+        display: none;
+      }
     }
     
     .popup {
