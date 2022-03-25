@@ -22,13 +22,11 @@ export default function StreamTimer({startedTime = Date.now()}) {
     return () => {
       clearInterval(loopTimer);
     }
-  }, []);
-
-  const formattedTime = formatTimeString(seconds);
+  }, [startedTime]);
 
   return (
     <div className={cx('StreamTimer', {hide: startedTime == 0})}>
-      {formattedTime}
+      {formatTimeString(seconds)}
     </div>
   );
 }
