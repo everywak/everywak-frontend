@@ -28,6 +28,24 @@
     grid-template-areas:
     "live"
     "chat";
+    
+    .playerWrapper {
+      .WakPlayer {
+        height: calc(100vw / 16 * 9);
+      }
+      &.opened {
+        --wrapperPortraitHeight: calc(100vw / 16 * 9 + 84px);
+      }
+      &.expanded {
+        --wrapperPortraitHeight: calc(100vh - #{$header-height});
+      }
+      @include desktop {
+        --wrapperPortraitHeight: calc(100vw / 16 * 9 + 100px);
+        &.opened {
+          --wrapperPortraitHeight: calc(100vw / 16 * 9 + 100px);
+        }
+      }
+    }
   }
   @media (orientation: landscape) {
     grid-template-columns: 1fr auto;
@@ -50,8 +68,10 @@
   .Live:not(.front) {
     .playerWrapper {
       height: 100vh;
-      overflow: hidden;
       overflow-y: hidden;
+      .WakPlayer {
+        transition: height ease .3s;
+      }
       &.expanded {
         overflow-y: scroll;
   
@@ -64,14 +84,6 @@
           top: -84px;
         }
       }
-      @media (orientation: portrait) {
-        &.opened {
-          height: calc(100vw / 16 * 9 + 84px);
-        }
-        &.expanded {
-          height: calc(100vh - 52px);
-        }
-      }
     }
     
   }
@@ -79,12 +91,15 @@
 .Live:not(.front) .playerWrapper {
   background: $component-primary-bg-color;
   grid-area: live;
-  overflow-y: scroll;
+  @include desktop {
+    overflow-y: scroll;
+  }
   -ms-overflow-style: none;
   scrollbar-width: none;
   
   @media (orientation: portrait) {
-    height: calc(100vw / 16 * 9);
+    --wrapperPortraitHeight: calc(100vw / 16 * 9);
+    height: var(--wrapperPortraitHeight);
     overflow: hidden;
     transition: height ease .3s;
 
@@ -123,6 +138,18 @@
 
 .TwitchChat {
   grid-area: chat;
+  @media (orientation: portrait) {
+    --wrapperPortraitHeight: calc(100vw / 16 * 9);
+    max-height: calc(100vh - #{$header-height} - var(--wrapperPortraitHeight));
+    
+    .opened + & {
+      --wrapperPortraitHeight: calc(100vw / 16 * 9 + 84px);
+    }
+    .expanded + & {
+      --wrapperPortraitHeight: calc(100vh - #{$header-height});
+    }
+    transition: max-height ease .3s;
+  }
   
   .sizeController {
     @media (orientation: portrait) {
