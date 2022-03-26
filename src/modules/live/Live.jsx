@@ -48,7 +48,6 @@ export default function Live ({front = false, location, history}) {
     if (expanded !== undefined) {
       setExpanded(expanded);
     }
-    console.log('expand', expanded, 'opened', opened);
   }
 
   return (// process.env.REACT_APP_TWITCH_CHANNEL_NAME
