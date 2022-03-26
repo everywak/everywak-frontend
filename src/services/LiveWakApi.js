@@ -7,7 +7,7 @@ const api = axios.create({
 })
 export async function getBroadcastInfo() {
   try {
-    const res = await api('/live/LiveWakInfo');
+    const res = await api(`/live/LiveWakInfo?salt=${parseInt(Date.now() / 1000 / 30)}`);
     const { message } = res.data;
   
     if (message && message.status == 200) {
