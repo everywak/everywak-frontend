@@ -479,7 +479,7 @@ class TwitchChatClient extends Component {
     const element = this.twitchChatList.current;
     if (element) {
       element.scrollTo({
-        behavior: 'smooth',
+        //behavior: 'smooth',
         top: element.scrollHeight,
       });
     }
@@ -587,8 +587,8 @@ class TwitchChatClient extends Component {
             {
               oauthState == TwitchChatClient.LOGOUTED ?
               <React.Fragment>
-                <span className="loginTitle">트위치로 로그인해주세요.</span>
-                <a className="twitchChatButton btnLoginTwitch" href={`https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=chat:edit chat:read channel:read:predictions`}>로그인</a>
+                <span className="loginTitle">로그인하여 팬치들과 함께 해요.</span>
+                <a className="twitchChatButton btnLoginTwitch" href={`https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=chat:edit chat:read channel:read:predictions`}>Twitch로 로그인</a>
               </React.Fragment> :
               <React.Fragment>
                 <Spinner caption="채팅방 접속중..." />
