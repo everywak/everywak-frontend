@@ -101,7 +101,7 @@ class TwitchChat extends Component {
       <TwitchChatClient 
         clientId={process.env.REACT_APP_TWITCH_CLIENT_ID} 
         channelName={process.env.REACT_APP_TWITCH_CHANNEL_NAME} 
-        redirectUri={`https://${domain}/live`}
+        redirectUri={`https://${domain}${this.props.location.pathname}`}
         location={this.props.location}
         history={this.props.history}
       />

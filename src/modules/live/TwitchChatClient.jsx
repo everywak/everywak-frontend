@@ -78,7 +78,7 @@ class TwitchChatClient extends PureComponent {
     this.loadClientOAuth(token);
     
     this.props.history.push({
-      pathname: '/live',
+      pathname: this.props.location.pathname,
       hash: ''
     });
   }
