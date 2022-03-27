@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component, useState, useEffect, useRef, PureComponent } from 'react';
 
 import { Cookies } from 'react-cookie';
 
@@ -20,7 +20,7 @@ const cookies = new Cookies();
 const setCookie = (name, value, option) => cookies.set(name, value, { ...option })
 const getCookie = name => cookies.get(name)
 
-class TwitchChatClient extends Component {
+class TwitchChatClient extends PureComponent {
 
   static LIGHT      = 100;
   static DARK       = 101;
@@ -46,7 +46,13 @@ class TwitchChatClient extends Component {
     oauth: '',
     oauthState: TwitchChatClient.LOGOUTED,
     chatList: [],
-    chatItemMaximumLength: 50,
+    chatOptions: {
+      onlyModerator: false,
+      onlySubscriber: false,
+      maxShowLength: 30,
+      blacklist: [],
+      whitelist: [],
+    },
     openedEmotePicker: false,
   };
 
@@ -64,7 +70,6 @@ class TwitchChatClient extends Component {
 
     this.twitchApi = null;
 
-    this.twitchChatList = React.createRef();
     this.chatInput      = React.createRef();
   }
 
@@ -340,6 +345,8 @@ class TwitchChatClient extends Component {
     );
 
     const chat = {
+      tags: tags,
+      userId: userID,
       profile: <span className="chatProfileWrapper" style={{color: color}}>
         {badgeList}
         <span className="nickname">{displayName}</span><span className="userid">{displayName != userID ? `(${userID})` : ''}</span>
@@ -374,9 +381,9 @@ class TwitchChatClient extends Component {
    * @param {Object} chat A chat to append
    */
   appendToChatList = chat => {
-    const { chatList, chatItemMaximumLength } = this.state;
+    const { chatList, } = this.state;
     this.setState({
-      chatList: [...chatList, chat].slice(Math.max(chatList.length + 1 - chatItemMaximumLength, 0)),
+      chatList: [...chatList, chat],
     });
   }
 
@@ -475,19 +482,6 @@ class TwitchChatClient extends Component {
   }
 
   /**
-   * Scroll chatList to bottom.
-   */
-  scrollToBottom = () => {
-    const element = this.twitchChatList.current;
-    if (element) {
-      element.scrollTo({
-        //behavior: 'smooth',
-        top: element.scrollHeight,
-      });
-    }
-  }
-
-  /**
    * Open EmotePicker
    */
   openEmotePicker = () => {
@@ -544,14 +538,7 @@ class TwitchChatClient extends Component {
 
   render() {
     const { clientId, redirectUri } = this.props;
-    const { chatList, oauthState, openedEmotePicker } = this.state;
-    const cList = chatList.map(c => 
-      <li key={c.key} className="twitchChatItem">
-        <span className="chatProfile">{c.profile}</span>
-        <span>: </span>
-        <span className="chatContent">{c.content}</span>
-    </li>
-    );
+    const { chatList, chatOptions, oauthState, openedEmotePicker } = this.state;
 
     return (
       <div className="TwitchChatClient content">
@@ -561,9 +548,7 @@ class TwitchChatClient extends Component {
             <header className="twitchChatHeader">
               채팅
             </header>
-            <ul className="twitchChatList" ref={this.twitchChatList}>
-              {cList}
-            </ul>
+            <TwitchChatList chatList={chatList} options={chatOptions} />
             <div className="twitchChatBottom">
               <div className="twitchChatInputWrapper">
               <textarea 
@@ -606,6 +591,71 @@ class TwitchChatClient extends Component {
       </div>
     );
   }
+}
+
+function TwitchChatList({
+  chatList = [], 
+  options = {},
+}) {
+
+  const refList = useRef();
+  useEffect(() => {
+    scrollToBottom();
+  }, [chatList]);
+
+  /**
+   * Scroll chatList to bottom.
+   */
+  function scrollToBottom() {
+    const element = refList.current;
+    if (element) {
+      element.scrollTo({
+        //behavior: 'smooth',
+        top: element.scrollHeight,
+      });
+    }
+  }
+
+  const _options = Object.assign({
+    onlyModerator: false,
+    onlySubscriber: false,
+    maxShowLength: 30,
+    blacklist: [],
+    whitelist: [],
+  }, options);
+
+  function filterChatList(list, opt) {
+    let filteredChatList = list;
+    if(opt.whitelist.length > 0) {
+      filteredChatList = filteredChatList.filter(item => opt.whitelist.includes(item.userId));
+    }
+    if(opt.blacklist.length > 0) {
+      filteredChatList = filteredChatList.filter(item => !opt.blacklist.includes(item.userId));
+    }
+    if(opt.onlyModerator) {
+      filteredChatList = filteredChatList.filter(item => item.tags.mod == '1' || opt.whitelist.includes(item.userId));
+    }
+    if(opt.onlySubscriber) {
+      filteredChatList = filteredChatList.filter(item => item.tags.subscriber == '1');
+    }
+
+    return filteredChatList.slice(Math.max(filteredChatList.length + 1 - opt.maxShowLength, 0));
+  }
+
+  const filteredChatList = filterChatList(chatList, _options);
+  const cList = filteredChatList.map(c => 
+    <li key={c.key} className="twitchChatItem">
+      <span className="chatProfile">{c.profile}</span>
+      <span>: </span>
+      <span className="chatContent">{c.content}</span>
+  </li>
+  );
+
+  return (
+    <ul className="TwitchChatList" ref={refList}>
+      {cList}
+    </ul>
+  )
 }
 
 class TwitchChatEmote extends Component {
