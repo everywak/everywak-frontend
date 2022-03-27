@@ -246,13 +246,11 @@ class TwitchChatClient extends Component {
 
   handleChatMessage = data => {
     if (process.env.NODE_ENV == 'development') { console.log(data); }
-    switch(data[2]) {
-      case 'PRIVMSG':
+
+    if (data[2] == 'PRIVMSG') {
         this.receiveChat({tag: data[0], id: data[1], msg: data[3].split(':').length > 1 ? data[3].split(':')[1] : data[3]});
-        break;
-      case 'USERSTATE':
+    } else if (data[2] && data[2].match(/^USERSTATE/)) {
         this.updateSelfInfo(data);
-        break;
     }
   }
 
@@ -362,6 +360,7 @@ class TwitchChatClient extends Component {
       const twitchApi = this.getTwitchApi();
       const emoteSetsData = await twitchApi.getEmoteSets(emoteSets);
       this.emoteSets = emoteSetsData;
+      this.forceUpdate();
     }
   }
 
@@ -580,7 +579,7 @@ class TwitchChatClient extends Component {
                   <BasicButton className="twitchChatBtnSend" onClick={this.sendChat}>채팅</BasicButton>
                 </div>
               </div>
-              {openedEmotePicker && <TwitchChatEmotePicker emotes={this.emoteSets} twitchApi={this.getTwitchApi()} appendToChatBox={this.appendToChatBox} />}
+              {openedEmotePicker && <TwitchChatEmotePicker emotes={this.emoteSets} twitchApi={this.getTwitchApi} appendToChatBox={this.appendToChatBox} />}
             </div>
           </React.Fragment> :
           <div className="twitchChatLogin">
