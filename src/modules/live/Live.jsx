@@ -50,13 +50,15 @@ export default function Live ({front = false, location, history}) {
     }
   }
 
-  return (// process.env.REACT_APP_TWITCH_CHANNEL_NAME
+  const channelId = 'woowakgood'; // process.env.REACT_APP_TWITCH_CHANNEL_NAME
+
+  return (
     front ?
     <LiveFront /> :
     <div className={cx('Live')}>
       <div className={cx('playerWrapper', {opened: opened, expanded: expanded})} ref={refPlayerWrapper}>
-        <WakPlayer key="wakplayer" channelId="woowakgood" onChangeOverlayState={onChangeOverlayStateHandler} /> 
-        <LiveSummary expanded={expanded} onChangeOverlayState={onChangeOverlayStateHandler} />
+        <WakPlayer key="wakplayer" channelId={channelId} onChangeOverlayState={onChangeOverlayStateHandler} /> 
+        <LiveSummary channelId={channelId} expanded={expanded} onChangeOverlayState={onChangeOverlayStateHandler} />
         <BroadcasterPanel />
         <Footer />
       </div>

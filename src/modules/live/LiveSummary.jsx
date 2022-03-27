@@ -15,10 +15,12 @@ import styles from './LiveSummary.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-export default function LiveSummary({style = 'normal', expanded, onChangeOverlayState}) {
+export default function LiveSummary({channelId = 'woowakgood', style = 'normal', expanded, onChangeOverlayState}) {
 
   const liveOffline = {
     broadcaster: 'NONE',
+    nickname: '',
+    profileImg: '',
     title: '방송 중이 아닙니다.',
     viewerCount: 0,
     startedTime: 0,
@@ -35,17 +37,24 @@ export default function LiveSummary({style = 'normal', expanded, onChangeOverlay
   }, []);
 
   async function updateLiveInfo() {
-    const info = await service.getBroadcastInfo();
+
+    // 생방송 정보 로드
+    const lives = await service.getWaktaverseBroadcastInfo();
+    const info = lives.find(live => live.login_name === channelId);
+
+    // 프로필 이미지 로드
+    const memberProfiles = await service.getWaktaverseInfo();
+    const memberProfile = memberProfiles.find(member => member.login === channelId);
+    info.profileImg = memberProfile.profile_image_url;
 
     switch(info.broadcaster) {
       case 'TWITCH':
         const {
-          broadcaster, title, viewerCount, startedTime,
+          broadcaster, nickname, profileImg, title, viewerCount, startedTime,
         } = info;
 
         const newLiveInfo = {
-          broadcaster: broadcaster,
-          title: title,
+          broadcaster, nickname, profileImg, title,
           viewerCount: parseInt(viewerCount),
           startedTime: new Date(startedTime).getTime(),
           seed: Math.random(),
@@ -57,10 +66,10 @@ export default function LiveSummary({style = 'normal', expanded, onChangeOverlay
     }
   }
 
-  const { broadcaster, title, viewerCount, startedTime } = liveInfo;
+  const { broadcaster, nickname, profileImg, title, viewerCount, startedTime } = liveInfo;
 
   const startedTimeString = startedTime !== 0 ? func.formatDateTimeString(new Date(startedTime)) : '';
-  const channelName = '우왁굳';
+  const channelName = nickname;
   const broadcastName = broadcaster.charAt(0) + broadcaster.slice(1).toLowerCase();
 
   return (
@@ -75,7 +84,7 @@ export default function LiveSummary({style = 'normal', expanded, onChangeOverlay
       <div className="left">
         <div className="liveProfile">
           <div className="profileWrapper">
-            <CircleImg src="https://static-cdn.jtvnw.net/jtv_user_pictures/ebc60c08-721b-4572-8f51-8be7136a0c96-profile_image-300x300.png" alt="" className="profileImg" />
+            <CircleImg src={profileImg} alt="" className="profileImg" />
           </div>
         </div>
         <div className="liveSummaryWrapper" >
