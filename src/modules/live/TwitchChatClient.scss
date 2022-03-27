@@ -177,7 +177,23 @@
       }
 
       .TwitchChatEmoteSet {
+        padding: 8px 0;
+        border-bottom: 1px solid $component-secondary-border-color;
 
+        .emoteSetName {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+          font-size: 14px;
+          margin-left: 6px;
+          margin-bottom: 4px;
+
+          .CircleImg {
+            width: 32px;
+            margin-right: 8px;
+          }
+        }
         .emoteList {
           display: flex;
           flex-direction: row;

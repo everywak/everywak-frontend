@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 
 import { Cookies } from 'react-cookie';
 
@@ -7,6 +7,7 @@ import InsertEmoticonRoundedIcon from '@material-ui/icons/InsertEmoticonRounded'
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import BasicButton from '../../common/Components/Button/BasicButton';
 import TransparentButton from '../../common/Components/Button/TransparentButton';
+import CircleImg from '../../common/Components/CircleImg';
 
 import TwitchApi from '../../services/TwitchApi';
 
@@ -651,53 +652,43 @@ class TwitchChatBadge extends Component {
   }
 }
 
-class TwitchChatEmotePicker extends Component {
+/**
+ * @typedef TwitchChatEmoteItem
+ * @property {string} id
+ * @property {string} name
+ * @property {{
+ * url_1x: string,
+ * url_2x: string,
+ * url_4x: string,
+ * }} images
+ * @property {string} emote_type
+ * @property {string} emote_set_id
+ * @property {string} owner_id
+ * @property {string[]} format
+ * @property {string[]} scale
+ * @property {string[]} theme_mode
+ */
 
-  static defaultProps = {
-    emotes: [
-      {
-        id: "emotesv2_031bf329c21040a897d55ef471da3dd3",
-        name: "Jebasted",
-        images:
-        {
-          url_1x: "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_031bf329c21040a897d55ef471da3dd3/static/light/1.0",
-          url_2x: "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_031bf329c21040a897d55ef471da3dd3/static/light/2.0",
-          url_4x: "https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_031bf329c21040a897d55ef471da3dd3/static/light/3.0",
-        },
-        emote_type: "globals",
-        emote_set_id: "0",
-        owner_id: "0",
-        format: ["static"],
-        scale: ["1.0","2.0","3.0"],
-        theme_mode: ["light","dark"],
-      },
-    ],
-    twitchApi: null,
-    appendToChatBox: null,
-  };
+/**
+ * 
+ * @param {{emotes: TwitchChatEmoteItem[], twitchApi: TwitchApi, appendToChatBox: function}} props 
+ */
+function TwitchChatEmotePicker ({emotes, twitchApi, appendToChatBox}) {
 
-  state = {
-    recents: [
+  const [recents, setRecents] = useState([
       {
         id: "245",
         name: "ResidentSleeper",
       },
-    ]
-  }
+  ]);
+  const [groupedEmotes, setGroupedEmotes] = useState({});
 
-  constructor() {
-    super();
+  useEffect(() => {
+    groupEmotes(emotes);
+  }, [emotes]);
 
-    this.groupedEmotes = {};
-  }
-
-  groupEmotes = emotes => {
+  function groupEmotes(emotes) {
     const grouped = {};
-
-    grouped.recents = {
-      name: 'Recent used',
-      emotes: this.state.recents,
-    }
 
     for(let emote of emotes) {
 
@@ -705,6 +696,7 @@ class TwitchChatEmotePicker extends Component {
       if (!grouped[emote.emote_set_id]) {
         grouped[emote.emote_set_id] = {
           name: emote.emote_set_id,
+          owner_id: emote.owner_id,
           emotes: [],
         }
       }
@@ -713,14 +705,21 @@ class TwitchChatEmotePicker extends Component {
       emoteSet.emotes.push(emote);
     }
 
-    return grouped;
+    setGroupedEmotes(grouped);
   }
 
-  render() {
-    const { emotes, appendToChatBox } = this.props;
-    this.groupedEmotes = this.groupEmotes(emotes);
     const emoteList = 
-      Object.entries(this.groupedEmotes).reverse().map(([emoteSetId, emoteSet]) => <TwitchChatEmoteSet emoteSet={emoteSet} appendToChatBox={appendToChatBox} />);
+    [
+      [
+        'recents', 
+        {
+          name: '자주 사용',
+          owner_id: 'recents',
+          emotes: recents,
+        }
+      ], 
+      ...Object.entries(groupedEmotes).reverse()
+    ].map(([emoteSetId, emoteSet]) => <TwitchChatEmoteSet emoteSet={emoteSet} twitchApi={twitchApi} appendToChatBox={appendToChatBox} />);
 
     return (
       <div className='TwitchChatEmotePicker'>
@@ -728,23 +727,88 @@ class TwitchChatEmotePicker extends Component {
       </div>
     );
   }
-}
 
 class TwitchChatEmoteSet extends Component {
   static defaultProps = {
     emoteSet: {
       name: 'EmoteSet',
+      owner_id: '0',
       emotes: [],
     },
     appendToChatBox: null,
+    twitchApi: null,
+  }
+
+  state = {
+    iconImg: '',
+    name: '',
+  }
+
+  getEmoteSetName = async () => {
+    if (this.props.emoteSet.owner_id  === '0') {
+      this.setState({
+        name: '글로벌',
+      });
+      return;
+    }
+    if (this.props.emoteSet.owner_id  === 'recents') {
+      this.setState({
+        name: '자주 사용하는 이모티콘',
+      });
+      return;
+    }
+
+    /**
+     * @type {TwitchApi}
+     */
+    const twitchApi = this.props.twitchApi();
+    const emoteOwnerData = await twitchApi.getChannelInfo(this.props.emoteSet.owner_id);
+
+    if (emoteOwnerData.length === 0) {
+      this.setState({
+        name: '알 수 없음',
+      });
+      return;
+    }
+
+    const emoteSetName = emoteOwnerData[0].broadcaster_name;
+    const emoteOwnerProfile = await twitchApi.getUsers(emoteOwnerData[0].broadcaster_login);
+    
+    console.log(emoteSetName)
+    if (emoteOwnerProfile.length > 0) {
+      this.setState({
+        name: emoteSetName,
+        iconImg: emoteOwnerProfile[0].profile_image_url,
+      });
+    } else {
+      this.setState({
+        name: emoteSetName,
+        iconImg: '',
+      });
+    }
+  }
+
+  componentDidMount() {
+    this.getEmoteSetName();
   }
 
   render() {
-    const { emoteSet, appendToChatBox } = this.props;
+    const { 
+      emoteSet, appendToChatBox 
+    } = this.props;
+    const {
+      name, iconImg
+    } = this.state;
 
     return (
     <div className="TwitchChatEmoteSet">
-      <div className="emoteSetName">{emoteSet.name}</div>
+      <div className="emoteSetName">
+        {
+          iconImg !== '' &&
+          <CircleImg src={iconImg} />
+        }
+        {name}
+      </div>
       <div className="emoteList">
         {emoteSet.emotes.map(em => <TwitchChatEmote key={`emote_${em.id}`} emoteId={em.id} emote={em} onclick={appendToChatBox} />)}
       </div>
