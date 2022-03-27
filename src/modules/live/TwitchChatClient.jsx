@@ -302,7 +302,7 @@ class TwitchChatClient extends PureComponent {
       const str = this.chatInput.current.value;
       this.sendMessage(`PRIVMSG #${this.props.channelName} :${str}`);
       this.chatInput.current.value = '';
-      this.receiveChat({tag: this.selfInfo + ';id=my-chat-' + (Math.random() * 9999999), id: `:${this.userLoginId}!`, msg: str, mine: true});
+      str != '' && this.receiveChat({tag: this.selfInfo + ';id=my-chat-' + (Math.random() * 9999999), id: `:${this.userLoginId}!`, msg: str, mine: true});
     }
   }
 
