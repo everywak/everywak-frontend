@@ -6,6 +6,40 @@ const api = axios.create({
   baseURL: 'https://api.everywak.kr',
 })
 
+const apiCache = [];
+function loadCache({route, salt}) {
+  return apiCache.find(cache => cache.route === route && cache.salt === salt && cache.data);
+}
+async function requestApi({route, salt, forceUpdate = false}) {
+  if (!forceUpdate) {
+    const cache = loadCache({route, salt});
+    if (cache) { return cache.data; }
+  }
+
+  try {
+    const res = await api(`${route}?salt=${salt}`);
+    const { message } = res.data;
+  
+    if (message) {
+      const cache = loadCache({route, salt});
+      const fetchedData = message;
+      if (cache) { // 기존 캐시가 있으면 
+        cache.data = fetchedData; // 강제 갱신
+      } else {
+        apiCache.push({ // 새 캐시 생성
+          route, salt,
+          data: fetchedData,
+        });
+      }
+      return fetchedData;
+    } else {
+      return null;
+    }
+  } catch(e) {
+    throw e;
+  }
+}
+
 /**
  * @typedef WakLiveInfoItem
  * @property {'TWITCH'|'YOUTUBE'|'NONE'} broadcaster
@@ -19,8 +53,7 @@ const api = axios.create({
  */
 export async function getBroadcastInfo() {
   try {
-    const res = await api(`/live/LiveWakInfo?salt=${parseInt(Date.now() / 1000 / 30)}`);
-    const { message } = res.data;
+    const message = await requestApi({route: '/live/LiveWakInfo', salt: geneSalt()});
   
     if (message && message.status == 200) {
       return message.result;
@@ -51,8 +84,7 @@ export async function getBroadcastInfo() {
  */
 export async function getWaktaverseBroadcastInfo() {
   try {
-    const res = await api('/live/WaktaverseLiveInfo');
-    const { message } = res.data;
+    const message = await requestApi({route: '/live/WaktaverseLiveInfo', salt: geneSalt()});
 
     if (message && message.status == 200) {
       return message.result;
@@ -82,8 +114,7 @@ export async function getWaktaverseBroadcastInfo() {
  */
 export async function getWaktaverseInfo() {
   try {
-    const res = await api('/live/WaktaverseInfo');
-    const { message } = res.data;
+    const message = await requestApi({route: '/live/WaktaverseInfo', salt: geneSalt()});
 
     if (message && message.status == 200) {
       return message.result;
@@ -94,4 +125,8 @@ export async function getWaktaverseInfo() {
     console.log(e);
     return [];
   }
+}
+
+function geneSalt() {
+  return parseInt(Date.now() / 1000 / 30);
 }
