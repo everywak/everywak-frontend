@@ -537,6 +537,11 @@ class TwitchChatClient extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.sendMessage(`PART #${this.props.channelName}`);
+    this.twitchIRC.close();
+  }
+
   render() {
     const { clientId, redirectUri } = this.props;
     const { chatList, oauthState, openedEmotePicker } = this.state;
