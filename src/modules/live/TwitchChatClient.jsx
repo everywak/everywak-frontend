@@ -57,7 +57,7 @@ class TwitchChatClient extends Component {
     this.connRetries = 0;
 
     this.selfInfo = '';
-    this.lastMessage = '';
+    this.userLoginId = '';
 
     this.badges = {};
     this.emoteSets = [];
@@ -202,10 +202,14 @@ class TwitchChatClient extends Component {
             this.setState({
               oauthState: TwitchChatClient.LOGINED,
             });
-            this.connRetries = 0; // reset retry count
+
+            // reset retry count
+            this.connRetries = 0; 
+
             console.log('Channel chat joined.');
             const twitchApi = this.getTwitchApi();
             const user = await twitchApi.getUsers(this.props.channelName);
+            // load chat's bagdes
             const badgesChannel = await twitchApi.getChannelChatBadges(user[0].id);
             const badgesGlobal = await twitchApi.getGlobalChatBadges();
             badgesGlobal.map(b => {
@@ -228,6 +232,8 @@ class TwitchChatClient extends Component {
               });
             });
 
+            // set my login id
+            this.userLoginId = data[0].substr(1, data[0].indexOf('!') - 1);
           }
           break;
         case TwitchChatClient.JOINED:
@@ -265,10 +271,6 @@ class TwitchChatClient extends Component {
     
     const tags = this.parseTag(this.selfInfo);
     await this.updateEmoteSet(tags['emote-sets']);
-
-    if (this.lastMessage) {
-      this.receiveChat({tag: this.selfInfo + ';id=my-chat-' + (Math.random() * 9999999), id: data[3] + '!', msg: this.lastMessage, mine: true});
-    }
   }
 
   /**
@@ -293,9 +295,9 @@ class TwitchChatClient extends Component {
   sendChat = e => {
     if (this.chatInput.current && this.IRCStatus === TwitchChatClient.JOINED) {
       const str = this.chatInput.current.value;
-      this.lastMessage = str;
       this.sendMessage(`PRIVMSG #${this.props.channelName} :${str}`);
       this.chatInput.current.value = '';
+      this.receiveChat({tag: this.selfInfo + ';id=my-chat-' + (Math.random() * 9999999), id: `:${this.userLoginId}!`, msg: str, mine: true});
     }
   }
 
