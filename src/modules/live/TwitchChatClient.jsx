@@ -582,7 +582,7 @@ class TwitchChatClient extends Component {
                   <BasicButton className="twitchChatBtnSend" onClick={this.sendChat}>채팅</BasicButton>
                 </div>
               </div>
-              {openedEmotePicker && <TwitchChatEmotePicker emotes={this.emoteSets} twitchApi={this.getTwitchApi} appendToChatBox={this.appendToChatBox} />}
+              {openedEmotePicker && <TwitchChatEmotePicker emotes={this.emoteSets} twitchApi={this.getTwitchApi()} appendToChatBox={this.appendToChatBox} />}
             </div>
           </React.Fragment> :
           <div className="twitchChatLogin">
@@ -730,45 +730,50 @@ function TwitchChatEmotePicker ({emotes, twitchApi, appendToChatBox}) {
     );
   }
 
-class TwitchChatEmoteSet extends Component {
-  static defaultProps = {
-    emoteSet: {
-      name: 'EmoteSet',
-      owner_id: '0',
-      emotes: [],
-    },
-    appendToChatBox: null,
-    twitchApi: null,
-  }
+/**
+ * @typedef EmoteSetItem
+ * @property {string} name
+ * @property {string} owner_id
+ * @property {TwitchChatEmoteItem[]} emotes
+ */
+/**
+ * 
+ * @param {{emoteSet: EmoteSetItem, twitchApi: TwitchApi, appendToChatBox: function}} props 
+ */
+function TwitchChatEmoteSet({emoteSet, twitchApi, appendToChatBox}) {
 
-  state = {
+  const [emoteSetInfo, setEmoteSetInfo] = useState({
     iconImg: '',
     name: '',
-  }
+  });
 
-  getEmoteSetName = async () => {
-    if (this.props.emoteSet.owner_id  === '0') {
-      this.setState({
+
+  useEffect(() => {
+    getEmoteSetName();
+  }, [emoteSet]);
+
+  async function getEmoteSetName () {
+    if (emoteSet.owner_id  === '0') {
+      setEmoteSetInfo({
+        iconImg: '',
         name: '글로벌',
       });
       return;
     }
-    if (this.props.emoteSet.owner_id  === 'recents') {
-      this.setState({
+    if (emoteSet.owner_id  === 'recents') {
+      setEmoteSetInfo({
+        iconImg: '',
         name: '자주 사용하는 이모티콘',
       });
       return;
     }
 
-    /**
-     * @type {TwitchApi}
-     */
-    const twitchApi = this.props.twitchApi();
-    const emoteOwnerData = await twitchApi.getChannelInfo(this.props.emoteSet.owner_id);
+    const emoteOwnerData = await twitchApi.getChannelInfo(emoteSet.owner_id);
 
     if (emoteOwnerData.length === 0) {
-      this.setState({
-        name: '알 수 없음',
+      setEmoteSetInfo({
+        iconImg: '',
+        name: '알 수 없는 이모티콘',
       });
       return;
     }
@@ -776,47 +781,29 @@ class TwitchChatEmoteSet extends Component {
     const emoteSetName = emoteOwnerData[0].broadcaster_name;
     const emoteOwnerProfile = await twitchApi.getUsers(emoteOwnerData[0].broadcaster_login);
     
-    console.log(emoteSetName)
-    if (emoteOwnerProfile.length > 0) {
-      this.setState({
+    setEmoteSetInfo({
         name: emoteSetName,
-        iconImg: emoteOwnerProfile[0].profile_image_url,
-      });
-    } else {
-      this.setState({
-        name: emoteSetName,
-        iconImg: '',
+      iconImg: emoteOwnerProfile.length > 0 ? emoteOwnerProfile[0].profile_image_url : '',
       });
     }
-  }
 
-  componentDidMount() {
-    this.getEmoteSetName();
-  }
-
-  render() {
-    const { 
-      emoteSet, appendToChatBox 
-    } = this.props;
-    const {
-      name, iconImg
-    } = this.state;
+  const emoteList = emoteSet.emotes
+    .map(em => <TwitchChatEmote key={`emote_${em.id}`} emoteId={em.id} emote={em} onclick={appendToChatBox} />);
 
     return (
     <div className="TwitchChatEmoteSet">
       <div className="emoteSetName">
         {
-          iconImg !== '' &&
-          <CircleImg src={iconImg} />
+        emoteSetInfo.iconImg !== '' &&
+        <CircleImg src={emoteSetInfo.iconImg} />
         }
-        {name}
+      {emoteSetInfo.name}
       </div>
       <div className="emoteList">
-        {emoteSet.emotes.map(em => <TwitchChatEmote key={`emote_${em.id}`} emoteId={em.id} emote={em} onclick={appendToChatBox} />)}
+      {emoteList}
       </div>
     </div>
     );
   }
-}
 
 export default TwitchChatClient;
