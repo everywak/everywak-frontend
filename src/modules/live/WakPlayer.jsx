@@ -5,7 +5,6 @@ import WakPlayerVolumeBar from './WakPlayer/WakPlayerVolumeBar';
 import { domain } from '../../common/constants';
 
 import { TwitchPlayer } from 'react-twitch-embed';
-import { LiveContext } from './context';
 
 import styles from './WakPlayer.scss';
 import classNames from 'classnames/bind';
@@ -118,7 +117,6 @@ class WakPlayer extends Component {
 }
 
 class WakPlayerOverlay extends Component {
-  static contextType = LiveContext;
 
   static defaultProps = {
     broadcaster: 'none',

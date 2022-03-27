@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { domain } from '../../common/constants';
-import { LiveContext } from './context';
 
 import TwitchChatClient from './TwitchChatClient';
 
@@ -9,7 +8,6 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 class TwitchChat extends Component {
-  static contextType = LiveContext;
 
   sizeController = React.createRef();
   sizeControlWrapper = React.createRef();
