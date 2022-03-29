@@ -14,7 +14,9 @@ class WakPlayer extends Component {
 
   static defaultProps = {
     channelId: '',
+    overlayStyle: 'normal',
     onChangeOverlayState: ({expanded, opened}) => {},
+    onClickOverlay: e => {},
   }
 
   state = {
@@ -94,12 +96,13 @@ class WakPlayer extends Component {
     return nextState.broadcaster !== this.state.broadcaster || 
       nextState.player !== this.state.player || 
       nextState.onlineState !== this.state.onlineState ||
+      nextProps.overlayStyle !== this.props.overlayStyle ||
       nextProps.channelId !== this.props.channelId;
   }
 
   render() {
     const {
-      onChangeOverlayState
+      onChangeOverlayState, overlayStyle, onClickOverlay
     } = this.props;
     const {
       broadcaster, player, onlineState, 
@@ -109,7 +112,13 @@ class WakPlayer extends Component {
       <div className="WakPlayer">
         <div className="content">
           {this.embed}
-          <WakPlayerOverlay broadcaster={broadcaster} player={player} playerContext={this.playerContext} onChangeOverlayState={onChangeOverlayState} />
+          <WakPlayerOverlay 
+            broadcaster={broadcaster} 
+            player={player} 
+            playerContext={this.playerContext} 
+            overlayStyle={overlayStyle} 
+            onChangeOverlayState={onChangeOverlayState}
+            onClickOverlay={onClickOverlay} />
         </div>
       </div>
     );
@@ -122,7 +131,9 @@ class WakPlayerOverlay extends Component {
     broadcaster: 'none',
     player: null,
     playerContext: null,
+    overlayStyle: 'normal',
     onChangeOverlayState: ({opened, expanded}) => {},
+    onClickOverlay: e => {},
   };
 
   state = {
@@ -374,7 +385,9 @@ class WakPlayerOverlay extends Component {
   }
 
   render() {
-    const {  } = this.props;
+    const { 
+      overlayStyle, onClickOverlay
+    } = this.props;
     const {
       volPressed, settingPanel, quality, qualities, volume, muted, playerState, opened, expanded,
     } = this.state;
@@ -394,10 +407,10 @@ class WakPlayerOverlay extends Component {
     const videoQualityList = qualities.map(q => <li className="item vq" data-vq={q.name.indexOf('(source)') === -1 ? q.name : 'chunked'} onClick={e => this.setQuality(e.currentTarget.dataset.vq)}>{qualityList[q.name] || q.name}</li>);
 
     return (
-      <div className={cx('WakPlayerOverlay', 'overlayArea', {opened: (opened || expanded || volPressed || settingPanel !== 'CLOSED')})} 
+      <div className={cx('WakPlayerOverlay', 'overlayArea', {opened: (opened || expanded || volPressed || settingPanel !== 'CLOSED'), styleVolumeOnly: overlayStyle === 'volumeOnly'})} 
         onMouseMove={this.open} 
         onMouseLeave={this.close} >
-        <div className="controller" onTouchEnd={this.onTouch}>
+        <div className="controller" onTouchEnd={this.onTouch} onClick={onClickOverlay}>
           <div className="bottom">
             <div className="bottomLeft">
               <span className={cx('ctlBtn', 'playpause', {paused: !(playerState === 'PLAYING' || playerState === 'PLAY')})} onClick={e => {playerState === 'PLAYING' ? this.pause() : this.play()}}>
