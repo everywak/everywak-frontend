@@ -279,6 +279,9 @@ class WakPlayerOverlay extends Component {
   }
 
   onChangeVolumeHandler = val => {
+    if (this.state.muted) {
+      this.setMuted(false);
+    }
     this.setVolume(val);
   }
   
@@ -303,6 +306,9 @@ class WakPlayerOverlay extends Component {
    */
   setMuted = newMuted => {
     if (this.state.muted !== newMuted) {
+      if (newMuted == true && this.state.volume === 0) {
+        this.setVolume(10);
+      }
       this.setState({
         muted: newMuted
       });
@@ -315,9 +321,7 @@ class WakPlayerOverlay extends Component {
    * @param {boolean} newMuted
    */
   toggleMuted = () => {
-    this.setState({
-      muted: !this.state.muted
-    });
+    this.setMuted(!this.state.muted);
   }
 
   setSettingPanel = panel => {
