@@ -86,7 +86,7 @@ class WakPlayer extends Component {
     if (nextState.broadcaster === 'twitch' &&
       (nextState.broadcaster !== this.state.broadcaster || 
       nextProps.channelId !== this.props.channelId)) {
-      this.embed = <TwitchPlayer className="stream" channel={this.props.channelId} parent={[domain]} 
+      this.embed = <TwitchPlayer id={`streamembed_${this.props.channelId}`} className="stream" channel={this.props.channelId} parent={[domain]} 
                       width="100%" height="100%" hideControls={true} muted={true} 
                       onReady={this.onTwitchReady} onPlay={this.onTwitchPlay} onPlaying={this.onTwitchPlaying} onPause={this.onTwitchPause} 
                       onOnline={this.onTwitchOnline} onOffline={this.onTwitchOffline} />
