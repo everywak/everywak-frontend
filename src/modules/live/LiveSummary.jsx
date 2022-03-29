@@ -46,38 +46,41 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
 
   async function updateLiveInfo() {
 
-    // 생방송 정보 로드
-    const lives = await service.getWaktaverseBroadcastInfo();
-    const info = lives.find(live => live.login_name === channelId);
+    // 프로필 로드
+    const memberProfiles = await service.getWaktaverseInfo();
+    const memberProfile = memberProfiles.find(member => member.login === channelId);
 
     // Client/Api 오프라인 예외 처리
-    if (!info) {
+    if (!memberProfile) {
       setLiveInfo(liveOfflineByApiDown);
       return;
     }
 
-    // 프로필 이미지 로드
-    const memberProfiles = await service.getWaktaverseInfo();
-    const memberProfile = memberProfiles.find(member => member.login === channelId);
-    info.profileImg = memberProfile.profile_image_url;
+    const updatedLiveInfo = {
+      broadcaster: 'NONE',
+      nickname: memberProfile.display_name,
+      profileImg: memberProfile.profile_image_url,
+      title: '방송 중이 아닙니다.',
+      viewerCount: 0,
+      startedTime: 0,
+    };
 
-    switch(info.broadcaster) {
-      case 'TWITCH':
-        const {
-          broadcaster, nickname, profileImg, title, viewerCount, startedTime,
-        } = info;
+    // 생방송 정보 로드
+    const lives = await service.getWaktaverseBroadcastInfo();
+    const fetchedInfo = lives.find(live => live.login_name === channelId);
 
-        const newLiveInfo = {
-          broadcaster, nickname, profileImg, title,
-          viewerCount: parseInt(viewerCount),
-          startedTime: new Date(startedTime).getTime(),
-          seed: Math.random(),
-        };
-        setLiveInfo(newLiveInfo);
-        break;
-      default:
-        setLiveInfo(liveOffline);
+    if (fetchedInfo) { // 뱅온
+
+      // 생방송 정보 삽입
+      Object.assign(updatedLiveInfo, {
+        broadcaster, title,
+        viewerCount: parseInt(viewerCount),
+        startedTime: new Date(startedTime).getTime(),
+        seed: Math.random(),
+      });
     }
+    
+    setLiveInfo(updatedLiveInfo);
   }
 
   const { broadcaster, nickname, profileImg, title, viewerCount, startedTime } = liveInfo;
