@@ -1,0 +1,249 @@
+@import '../../common/common.scss';
+
+header.header {
+  z-index: 1000;
+}
+.WithLive + .footer {
+  display: none;
+}
+@include not-desktop {
+  @media (orientation: landscape) {
+    .App.live header.header {
+      display: none;
+    }
+  }
+}
+.WithLive {
+  height: calc(100vh - #{$header-height});
+  @include not-desktop {
+    @media (orientation: landscape) {
+      height: 100vh;
+    }
+  }
+  width: 100%;
+  display: grid;
+  display: -ms-grid;
+  @media (orientation: portrait) {
+    grid-template-columns: 100%;
+    grid-template-rows: auto calc(100vw / 7 / 16 * 9) 1fr;
+    grid-template-areas:
+    "live"
+    "side"
+    "chat";
+    
+    .playerWrapper {
+      .FloatingTarget {
+        height: calc(100vw / 16 * 9);
+      }
+      &.opened {
+        --wrapperPortraitHeight: calc(100vw / 16 * 9 + 84px);
+      }
+      &.expanded {
+        --wrapperPortraitHeight: calc(100vh - #{$header-height});
+      }
+      @include desktop {
+        --wrapperPortraitHeight: calc(100vw / 16 * 9 + 100px);
+        &.opened {
+          --wrapperPortraitHeight: calc(100vw / 16 * 9 + 100px);
+        }
+      }
+    }
+  }
+  @media (orientation: landscape) {
+    @include desktop {
+      grid-template-columns: 1fr calc((100vh - #{$header-height}) / 7 / 9 * 16) auto;
+    }
+    @include not-desktop {
+      grid-template-columns: 1fr calc(100vh / 7 / 9 * 16) auto;
+    }
+    grid-template-rows: 100%;
+    grid-template-areas:
+    "live side chat";
+  }
+
+  @include not-desktop {
+    .playerWrapper {
+      height: 100vh;
+      overflow-y: hidden;
+      .FloatingTarget {
+        transition: height ease .3s;
+      }
+      &.expanded {
+        overflow-y: scroll;
+  
+        .FloatingTarget {
+          height: 0px;
+        }
+      }
+      @media (orientation: landscape) {
+        &.opened .LiveSummary {
+          top: -84px;
+        }
+      }
+    }
+    
+  }
+
+  .playerWrapper {
+    background: $component-primary-bg-color;
+    grid-area: live;
+    @include desktop {
+      overflow-y: scroll;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    
+    @media (orientation: portrait) {
+      --wrapperPortraitHeight: calc(100vw / 16 * 9);
+      height: var(--wrapperPortraitHeight);
+      overflow: hidden;
+      transition: height ease .3s;
+
+      .footer {
+        display: none;
+      }
+    }
+    
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera*/
+    }
+    
+    .BroadcasterPanel {
+      
+      .panelContainer {
+        padding: 16px 24px 24px;
+        
+        a img {
+          max-width: 100%;
+        }
+      }
+      .footerTxt {
+        color: $secondary-text-color;
+        font-size: 14px;
+        font-weight: 400;
+        margin: 0;
+        padding: 12px 24px 72px;
+
+        a {
+          color: $primary-text-color;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  .SidePlayerList {
+    grid-area: side;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    @media (orientation: portrait) {
+      flex-direction: row;
+      .FloatingTarget {
+        width: calc(100vw / 7);
+      }
+    }
+  }
+
+  .FloatingTarget {
+    --nickname: '';
+    background-color: black;
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+  
+    &::before {
+      content: "";
+      display: block;
+      padding-top: calc(100% / 16 * 9);
+    }
+  }
+
+  .playerWrapper {
+    .FloatingTarget {
+      @media (orientation: landscape) {
+        @include desktop {
+          max-height: calc(100vh - #{$header-height} - 128px);
+          &::before {
+            padding-top: 100vh;
+          }
+        }
+        @include not-desktop {
+          max-height: 100vh;
+          &::before {
+            padding-top: 100vh;
+          }
+        }
+      }
+    }
+    
+    @media (orientation: landscape) {
+      @include not-desktop {
+        .LiveSummary,
+        .BroadcasterPanel,
+        footer.fooet {
+          z-index: 1000;
+        }
+      }
+    }
+  }
+
+  .FloatingWakPlayer {
+    --name: '';
+    position: absolute;
+    transition: 
+      left ease .15s, 
+      top ease .15s, 
+      width ease .15s, 
+      height ease .15s;
+
+    &.isSide:hover::after {
+      opacity: 1;
+    }
+
+    &.isSide::after {
+      color: $dark-primary-text-color;
+      content:var(--name);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity ease .15s;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .WakPlayer {
+      height: 100%;
+    }
+  }
+}
+
+.TwitchChat {
+  grid-area: chat;
+  @media (orientation: portrait) {
+    --wrapperPortraitHeight: calc(100vw / 16 * 9 + (100vw / 7 / 16 * 9));
+    max-height: calc(100vh - #{$header-height} - var(--wrapperPortraitHeight));
+    
+    .opened + & {
+      --wrapperPortraitHeight: calc(100vw / 16 * 9 + (100vw / 7 / 16 * 9) + 84px);
+    }
+    .expanded + & {
+      --wrapperPortraitHeight: calc(100vh - #{$header-height});
+    }
+    transition: max-height ease .3s;
+  }
+  
+  .sizeController,
+  .sizeControlWrapper .sizeControlOverlay {
+    z-index: 1000;
+    @media (orientation: portrait) {
+      display: none;
+    }
+  }
+}

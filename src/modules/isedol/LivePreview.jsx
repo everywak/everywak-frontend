@@ -63,12 +63,12 @@ class LivePreview extends Component {
   }
 
   render() {
-    const {  } = this.props;
+    const { channelId } = this.props;
     const { loaded, live, previewImgUrl, profileImgUrl } = this.state;
     
     return (
       <li className={cx('LivePreview', {loading: !loaded}, {off: !live})}>
-        <Link to="/">
+        <Link to={`/withlive/isedol?main=${channelId}`}>
           <img className="previewImg" src={previewImgUrl} alt="생방송 썸네일" onError={e => {e.target.src = '/images/blank.png'}} />
           <div className="profileCircle">
             <CircleImg className="innerCircle" src={profileImgUrl} alt="채널 프로필 이미지" />

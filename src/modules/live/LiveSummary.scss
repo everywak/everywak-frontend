@@ -1,6 +1,7 @@
 @import '../../common/common.scss';
 
-.Live:not(.front) {
+.Live:not(.front),
+.WithLive {
 
   .LiveSummary {
     @include desktop {

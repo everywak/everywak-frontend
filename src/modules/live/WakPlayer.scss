@@ -22,6 +22,21 @@
       }
     }
   }
+  .WithLive {
+    @include desktop {
+      .WakPlayer {
+        max-height: calc(100vh - #{$header-height} - 128px);
+      }
+    }
+    @include not-desktop {
+      .WakPlayer {
+  
+        .WakPlayerOverlay.opened .controller {
+          padding-bottom: 84px;
+        }
+      }
+    }
+  }
 }
 .WakPlayer {
   background-color: $twitch-color;
@@ -33,6 +48,7 @@
     content: "";
     display: block;
     padding-top: calc(100% / 16 * 9);
+    pointer-events: none;
   }
 
   .content {
@@ -68,6 +84,11 @@
       .bottomLeft .sync,
       .bottomRight {
         display: none;
+      }
+      @media (orientation: portrait) {
+        .bottomLeft {
+          display: none;
+        }
       }
     }
   }
