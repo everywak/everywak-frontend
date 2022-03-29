@@ -42,7 +42,7 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
     const loopUpdateLiveInfo = setInterval(updateLiveInfo, 30 * 1000);
 
     return () => clearInterval(loopUpdateLiveInfo);
-  }, []);
+  }, [channelId]);
 
   async function updateLiveInfo() {
 
@@ -73,9 +73,10 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
 
       // 생방송 정보 삽입
       Object.assign(updatedLiveInfo, {
-        broadcaster, title,
-        viewerCount: parseInt(viewerCount),
-        startedTime: new Date(startedTime).getTime(),
+        broadcaster: fetchedInfo.broadcaster, 
+        title: fetchedInfo.title,
+        viewerCount: parseInt(fetchedInfo.viewerCount),
+        startedTime: new Date(fetchedInfo.startedTime).getTime(),
         seed: Math.random(),
       });
     }
