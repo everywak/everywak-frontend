@@ -345,6 +345,7 @@ class TwitchChatClient extends PureComponent {
     );
 
     const chat = {
+      type: 'USERCHAT',
       tags: tags,
       userId: userID,
       profile: <span className="chatProfileWrapper" style={{color: color}}>
@@ -358,6 +359,18 @@ class TwitchChatClient extends PureComponent {
 
     // append chat to list
     this.appendToChatList(chat);
+  }
+
+  appendSystemMessage = ({id, msg}) => {
+    
+    const message = {
+      type: 'SYSMSG',
+      key: id,
+      content: msg,
+    };
+
+    // append chat to list
+    this.appendToChatList(message);
   }
 
   /**
@@ -627,16 +640,16 @@ function TwitchChatList({
   function filterChatList(list, opt) {
     let filteredChatList = list;
     if(opt.whitelist.length > 0) {
-      filteredChatList = filteredChatList.filter(item => opt.whitelist.includes(item.userId));
+      filteredChatList = filteredChatList.filter(item => item.type === 'SYSMSG' || opt.whitelist.includes(item.userId));
     }
     if(opt.blacklist.length > 0) {
-      filteredChatList = filteredChatList.filter(item => !opt.blacklist.includes(item.userId));
+      filteredChatList = filteredChatList.filter(item => item.type === 'SYSMSG' || !opt.blacklist.includes(item.userId));
     }
     if(opt.onlyModerator) {
-      filteredChatList = filteredChatList.filter(item => item.tags.mod == '1' || opt.whitelist.includes(item.userId));
+      filteredChatList = filteredChatList.filter(item => item.type === 'SYSMSG' || item.tags.mod == '1' || opt.whitelist.includes(item.userId));
     }
     if(opt.onlySubscriber) {
-      filteredChatList = filteredChatList.filter(item => item.tags.subscriber == '1');
+      filteredChatList = filteredChatList.filter(item => item.type === 'SYSMSG' || item.tags.subscriber == '1');
     }
 
     return filteredChatList.slice(Math.max(filteredChatList.length + 1 - opt.maxShowLength, 0));
@@ -644,9 +657,13 @@ function TwitchChatList({
 
   const filteredChatList = filterChatList(chatList, _options);
   const cList = filteredChatList.map(c => 
+    c.type === 'USERCHAT' ? 
     <li key={c.key} className="twitchChatItem">
       <span className="chatProfile">{c.profile}</span>
       <span>: </span>
+      <span className="chatContent">{c.content}</span>
+    </li> :
+    <li key={c.key} className="twitchChatItem sysMessage">
       <span className="chatContent">{c.content}</span>
   </li>
   );
