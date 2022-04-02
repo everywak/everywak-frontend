@@ -6,6 +6,10 @@ const api = axios.create({
   baseURL: 'https://api.everywak.kr',
 });
 
+const apiCache = [];
+function loadCache({route, params, salt}) {
+  return apiCache.find(cache => cache.route === route && JSON.stringify(cache.params) === JSON.stringify(params) && cache.salt === salt && cache.data);
+}
 /**
  * API 서버 요청을 보냅니다.
  * 
@@ -14,7 +18,12 @@ const api = axios.create({
  * @param {'GET'|'POST'} method 
  * @returns {{status: number, result?: object, error?: {msg: string, data: object}}}
  */
-async function requestApi(uri, params, method = 'GET') {
+async function requestApi(uri, params, method = 'GET', forceUpdate = false) {
+
+  if (!forceUpdate) {
+    const cache = loadCache({route: uri, params, salt: 0});
+    if (cache) { return cache.data; }
+  }
 
   const options = {
     method: method,
@@ -29,10 +38,20 @@ async function requestApi(uri, params, method = 'GET') {
   try {
     const response = await api(uri, options);
 
-    return {
+    const cache = loadCache({route: uri, params, salt: 0});
+    const fetchedData = {
       status: 200,
       result: response.data.message.result
     };
+    if (cache) { // 기존 캐시가 있으면 
+      cache.data = fetchedData; // 강제 갱신
+    } else {
+      apiCache.push({ // 새 캐시 생성
+        route: uri, params, salt: 0, 
+        data: fetchedData,
+      });
+    }
+    return fetchedData;
 
   } catch(error) {
     if (error.response) {
@@ -115,7 +134,7 @@ function filterPopularArticlesParams(query) {
     queryTarget: 'title', 
     queryTxt: '', 
     beginAt: 1424876400, 
-    endAt: parseInt(Date.now() / 1000)
+    endAt: parseInt(Date.now() / 1000 / 300) * 300
   }
 
   const ptNum = /[^0-9]/g;
