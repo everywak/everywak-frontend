@@ -183,7 +183,7 @@ function FloatingWakPlayer({channelId, name, target, onClick, onChangeOverlaySta
   };
 
   useEffect(() => {
-    const loop = setInterval(checkChangedPosition, 10);
+    const loop = setInterval(checkChangedPosition, 50);
 
     return () => {
       clearInterval(loop);
