@@ -40,6 +40,7 @@ class TwitchChatClient extends PureComponent {
     channelName: '',
     redirectUri: '',
     colorTheme: TwitchChatClient.LIGHT,
+    maxChatCount: 1000,
   };
 
   state = {
@@ -405,7 +406,10 @@ class TwitchChatClient extends PureComponent {
   appendToChatList = chat => {
     const { chatList, } = this.state;
     this.setState({
-      chatList: [...chatList, chat],
+      chatList: [
+        ...chatList, 
+        chat
+      ].slice(-this.props.maxChatCount),
     });
   }
 
