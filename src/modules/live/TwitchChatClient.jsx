@@ -211,7 +211,10 @@ class TwitchChatClient extends PureComponent {
             // reset retry count
             this.connRetries = 0; 
 
-            console.log('Channel chat joined.');
+            this.appendSystemMessage({
+              key: `joinedChannel:${Date.now()}`,
+              msg: `${data[2].slice(1)} 채팅방 입장`
+            })
             const twitchApi = this.getTwitchApi();
             const user = await twitchApi.getUsers(this.props.channelName);
             // load chat's bagdes
@@ -263,7 +266,12 @@ class TwitchChatClient extends PureComponent {
         this.receiveChat({tag: data[0], id: data[1], msg: data[3].split(':').length > 1 ? data[3].split(':')[1] : data[3]});
     } else if (data[2] && data[2].match(/^USERSTATE/)) {
         this.updateSelfInfo(data);
+    } else if ('PART' === data[1]) {
+      const { loginName } = data[0].match(/:(?<loginName>[\w\d-_]+)!\k<loginName>@\k<loginName>\.tmi\.twitch\.tv/).groups;
+      if (this.userLoginId === loginName) { // is me
+        this.setIRCStatus(TwitchChatClient.AUTHORIZED);
     }
+  }
   }
 
   /**
@@ -335,7 +343,7 @@ class TwitchChatClient extends PureComponent {
 
     const content     = this.replaceEmote(msg, emotes);
     const displayName = tags['display-name'];
-    const userID      = id.substr(1, id.indexOf('!') - 1);
+    const userID      = id.match(/:(?<loginName>[\w\d-_]+)!\k<loginName>@\k<loginName>\.tmi\.twitch\.tv/).groups.loginName;
     const color       = tags.color;
     const badgeList   = badges.map(bg => {
       if (bg) {
@@ -542,6 +550,12 @@ class TwitchChatClient extends PureComponent {
         this.state.oauthState === TwitchChatClient.LOGINING) {
       this.connectTwitchIRC();
     }
+    if (prevProps.channelName != this.props.channelName &&
+        this.IRCStatus === TwitchChatClient.JOINED) {
+      this.sendMessage(`PART #${prevProps.channelName}`);
+      this.sendMessage(`JOIN #${this.props.channelName}`);
+    }
+    
   }
 
   componentWillUnmount() {
