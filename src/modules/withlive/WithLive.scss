@@ -197,25 +197,43 @@ header.header {
       width ease .15s, 
       height ease .15s;
 
-    &.isSide:hover::after {
-      opacity: 1;
-    }
+    &.isSide {
 
-    &.isSide::after {
-      color: $dark-primary-text-color;
-      content:var(--name);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity ease .15s;
-      user-select: none;
-      pointer-events: none;
+      &:hover::after {
+        opacity: 1;
+      }
+  
+      &::after {
+        color: $dark-primary-text-color;
+        content:var(--name);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity ease .15s;
+        user-select: none;
+        pointer-events: none;
+      }
+    
+      .WakPlayer {
+        .controller {
+          @include not-desktop {
+            @media (orientation: portrait) {
+              .bottom {
+                display: none;
+              }
+            }
+            @media (orientation: landscape) {
+              padding-bottom: 0;
+            }
+          }
+        }
+      }
     }
 
     .WakPlayer {
