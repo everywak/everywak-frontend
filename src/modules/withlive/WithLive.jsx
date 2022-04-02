@@ -115,7 +115,7 @@ export default function WithLive ({front = false, location, history}) {
   function setMainPlayer(id) {
     const newMain = liveList.find(live => live.id === id); // 가운데로 올 플레이어
     const oldMain = liveList.find(live => live.pos === 0); // 가운데에 있던 플레이어
-    if (newMain && oldMain !== newMain) {
+    if (newMain && oldMain && oldMain !== newMain) {
       const newMainPos = newMain.pos;
       newMain.pos = 0;
       oldMain.pos = newMainPos;
@@ -188,7 +188,7 @@ function FloatingWakPlayer({channelId, name, target, onClick, onChangeOverlaySta
     return () => {
       clearInterval(loop);
     }
-  }, [])
+  }, [target])
 
   useEffect(updatePosition, [target]);
 
