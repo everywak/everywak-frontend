@@ -9,6 +9,10 @@ const cx = classNames.bind(styles);
 
 class TwitchChat extends Component {
 
+  static defaultProps = {
+    channelId: process.env.REACT_APP_TWITCH_CHANNEL_NAME,
+  }
+
   sizeController = React.createRef();
   sizeControlWrapper = React.createRef();
   sizeControlOverlay = React.createRef();
@@ -98,7 +102,7 @@ class TwitchChat extends Component {
     return (<div className="TwitchChat" style={{'--chatWidth': `${this.state.chatWidth}px`}}>
       <TwitchChatClient 
         clientId={process.env.REACT_APP_TWITCH_CLIENT_ID} 
-        channelName={process.env.REACT_APP_TWITCH_CHANNEL_NAME} 
+        channelName={this.props.channelId} 
         redirectUri={`https://${domain}${this.props.location.pathname}`}
         location={this.props.location}
         history={this.props.history}
