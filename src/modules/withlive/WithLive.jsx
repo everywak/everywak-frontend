@@ -139,20 +139,20 @@ export default function WithLive ({front = false, location, history}) {
   );
 
 
-  const summaryChannelId = liveList.find(live => live.pos === 0).id;
+  const mainChannelId = liveList.find(live => live.pos === 0).id;
 
   return (
     <div className={cx('WithLive')}>
       <div className={cx('playerWrapper', {opened: opened, expanded: expanded})} ref={refPlayerWrapper}>
         {floatingTargetMain}
-        <LiveSummary channelId={summaryChannelId} expanded={expanded} onChangeOverlayState={onChangeOverlayStateHandler} />
+        <LiveSummary channelId={mainChannelId} expanded={expanded} onChangeOverlayState={onChangeOverlayStateHandler} />
         <BroadcasterPanel />
         <Footer />
       </div>
       <ul className={cx('SidePlayerList')}>
         {floatingTargetSideList}
       </ul>
-      <TwitchChat location={location} history={history} />
+      <TwitchChat channelId={mainChannelId} location={location} history={history} />
       <div className="wakPlayerList">
         {livePlayerList}
       </div>
