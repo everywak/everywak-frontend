@@ -80,6 +80,14 @@
 
       .TwitchChatEmote {
         vertical-align: middle;
+
+        @include not-desktop {
+          
+          img {
+            width: 20px;
+            height: 20px;
+          }
+        }
       }
       .TwitchChatBadge {
         vertical-align: middle;

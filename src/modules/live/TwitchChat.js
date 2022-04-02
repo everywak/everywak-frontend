@@ -99,7 +99,8 @@ class TwitchChat extends Component {
 
   render() {
 
-    return (<div className="TwitchChat" style={{'--chatWidth': `${this.state.chatWidth}px`}}>
+    return (
+    <div className={cx('TwitchChat', {small: this.state.chatWidth < 220})} style={{'--chatWidth': `${this.state.chatWidth}px`}}>
       <TwitchChatClient 
         clientId={process.env.REACT_APP_TWITCH_CLIENT_ID} 
         channelName={this.props.channelId} 
@@ -111,7 +112,8 @@ class TwitchChat extends Component {
       <div className="sizeControlWrapper" ref={this.sizeControlWrapper}>
         <div className="sizeControlOverlay" ref={this.sizeControlOverlay}></div>
       </div>
-    </div>);
+    </div>
+    );
   }
 }
 

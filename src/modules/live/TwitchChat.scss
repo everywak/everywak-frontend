@@ -13,6 +13,40 @@
       width: 100%;
       height: 100%;
     }
+
+    &.small {
+      
+      .TwitchChatClient .TwitchChatList {
+        padding: 8px 0;
+
+        .twitchChatItem {
+          font-size: 12px;
+          padding: 4px 4px 4px 8px;
+
+          &.sysMessage {
+            border-radius: 8px;
+            margin: 4px;
+            padding: 5px 16px;
+          }
+
+          .chatProfile {
+
+            .nickname {
+            }
+            .userid {
+              font-weight: 400;
+              font-size: 10px;
+              margin-inline-start: 2px;
+            }
+          }
+
+          .TwitchChatBadge img {
+            width: 14px;
+            height: 14px;
+          }
+        }
+      }
+    }
     
     .sizeController {
       cursor: ew-resize;
