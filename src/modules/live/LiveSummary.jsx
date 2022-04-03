@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import TransparentButton from '../../common/Components/Button/TransparentButton';
 import CircleImg from '../../common/Components/CircleImg';
@@ -24,6 +24,7 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
     title: '방송 중이 아닙니다.',
     viewerCount: 0,
     startedTime: 0,
+    updatedTimeStamp: 0,
   };
   const liveOfflineByApiDown = {
     broadcaster: 'NONE',
@@ -32,19 +33,14 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
     title: '네트워크 상태를 확인해주세요.',
     viewerCount: 0,
     startedTime: 0,
+    updatedTimeStamp: 0,
   };
 
   const [liveInfo, setLiveInfo] = useState(liveOffline);
 
-  useEffect(() => {
-    updateLiveInfo();
+  const updateLiveInfo = useCallback(async () => {
 
-    const loopUpdateLiveInfo = setInterval(updateLiveInfo, 30 * 1000);
-
-    return () => clearInterval(loopUpdateLiveInfo);
-  }, [channelId]);
-
-  async function updateLiveInfo() {
+    const updatedTimeStamp = Date.now();
 
     // 프로필 로드
     const memberProfiles = await service.getWaktaverseInfo();
@@ -63,6 +59,7 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
       title: '방송 중이 아닙니다.',
       viewerCount: 0,
       startedTime: 0,
+      updatedTimeStamp, 
     };
 
     // 생방송 정보 로드
@@ -80,9 +77,18 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
         seed: Math.random(),
       });
     }
-    
-    setLiveInfo(updatedLiveInfo);
-  }
+    if (liveInfo.updatedTimeStamp < updatedLiveInfo.updatedTimeStamp) {
+      setLiveInfo(updatedLiveInfo);
+    }
+  }, [channelId]);
+
+  useEffect(() => {
+    updateLiveInfo();
+
+    const loopUpdateLiveInfo = setInterval(updateLiveInfo, 30 * 1000);
+
+    return () => clearInterval(loopUpdateLiveInfo);
+  }, [updateLiveInfo]);
 
   const { broadcaster, nickname, profileImg, title, viewerCount, startedTime } = liveInfo;
 
