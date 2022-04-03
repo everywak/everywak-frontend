@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
 import Footer from '../../common/Footer/Footer.js';
@@ -8,10 +8,25 @@ import TwitchChat from '../live/TwitchChat';
 import WakPlayer from '../live/WakPlayer';
 
 import * as func from '../../common/funtions';
+import * as service from '../../services/LiveWakApi';
+
+import ReactGA from 'react-ga';
+import GAEvents from '../../common/GAEvents';
 
 import styles from './WithLive.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
+
+const isedolStreams = [
+  'woowakgood',
+  'gosegugosegu',
+  'lilpaaaaaa',
+  'viichan6',
+  'vo_ine',
+  'cotton__123',
+  'jingburger',
+  '111roentgenium',
+];
 
 export default function WithLive ({front = false, location, history}) {
 
@@ -25,56 +40,12 @@ export default function WithLive ({front = false, location, history}) {
       pos: 0,
       volume: 1, 
     }, 
-    {
-      name: '고세구',
-      id: 'gosegugosegu',
-      pos: 1,
-      volume: .5, 
-    }, 
-    {
-      name: '릴파',
-      id: 'lilpaaaaaa',
-      pos: 2,
-      volume: .5, 
-    },
-    {
-      name: '비챤',
-      id: 'viichan6',
-      pos: 3,
-      volume: .5, 
-    },
-    {
-      name: '아이네',
-      id: 'vo_ine',
-      pos: 4,
-      volume: .5, 
-    },
-    {
-      name: '주르르',
-      id: 'cotton__123',
-      pos: 5,
-      volume: .5, 
-    },
-    {
-      name: '징버거',
-      id: 'jingburger',
-      pos: 6,
-      volume: .5, 
-    },
-    {
-      name: '뢴트게늄',
-      id: '111roentgenium',
-      pos: 7,
-      volume: .5, 
-    },
   ])
 
   // 브라우저 제목 설정
   useEffect(() => {
-    if (!front) {
-      func.setBrowserTitle('왁타버스 같이보기');
-      document.getElementsByClassName('App')[0].classList.add('live');
-    }
+    func.setBrowserTitle('왁타버스 같이보기');
+    document.getElementsByClassName('App')[0].classList.add('live');
 
     return () => {
       document.getElementsByClassName('App')[0].classList.remove('live');
@@ -84,12 +55,62 @@ export default function WithLive ({front = false, location, history}) {
   const { search } = useLocation();
   const { group } = useParams();
   useEffect(() => {
-    const members = (new URLSearchParams(search).get('members') || '').split(',');
-    const channelId = new URLSearchParams(search).get('main');
-    if (channelId) {
-      setTimeout(() => {setMainPlayer(channelId)}, 1);
+    setStreams();
+  }, []);
+
+  async function setStreams() {
+    const waktaverseInfo = await service.getWaktaverseInfo();
+    const waktaverseLiveInfo = await service.getWaktaverseBroadcastInfo();
+
+    const customMembers = (new URLSearchParams(search).get('members') || '').split(',');
+    const members = (
+      group === 'isedol' ? 
+      isedolStreams : 
+      customMembers.length > 0 && customMembers[0] !== '' ?
+      customMembers :
+      waktaverseLiveInfo.map(live => live.login_name)
+    ).slice(0, 8);
+    
+    if (members.length > 0 && members[0] !== '') {
+
+      const streams = members.map((id, i) => ({
+        name: waktaverseInfo.find(member => member.login === id).display_name,
+        id,
+        pos: i,
+        volume: 1,
+      }));
+
+      // 메인으로 올 스트림 설정
+      const channelId = new URLSearchParams(search).get('main');
+      if (channelId) {
+        const newMain = streams.find(live => live.id === channelId); // 가운데로 올 플레이어
+        const oldMain = streams.find(live => live.pos === 0); // 가운데에 있던 플레이어
+        if (newMain && oldMain && oldMain !== newMain) {
+          const newMainPos = newMain.pos;
+          newMain.pos = 0;
+          oldMain.pos = newMainPos;
+        }
+      }
+      
+      setLiveList(streams);
+    }
+  }
+
+  // GA 집계 누락 방지용 이벤트
+  useEffect(() => {
+    const loopEventGAWatching = setInterval(eventGAWatching, 30 * 1000);
+
+    return () => {
+      clearInterval(loopEventGAWatching);
     }
   }, []);
+  
+  function eventGAWatching() {
+    ReactGA.event({
+      category: GAEvents.Category.withlive,
+      action: GAEvents.Action.withlive.watching,
+    });
+  }
 
   const refPlayerWrapper = useRef(null);
 
@@ -112,7 +133,7 @@ export default function WithLive ({front = false, location, history}) {
     }
   }
 
-  function setMainPlayer(id) {
+  const setMainPlayer = useCallback(id => {
     const newMain = liveList.find(live => live.id === id); // 가운데로 올 플레이어
     const oldMain = liveList.find(live => live.pos === 0); // 가운데에 있던 플레이어
     if (newMain && oldMain && oldMain !== newMain) {
@@ -121,17 +142,17 @@ export default function WithLive ({front = false, location, history}) {
       oldMain.pos = newMainPos;
       setLiveList([...liveList]);
     }
-  }
+  }, [liveList]);
 
   // 실제 플레이어 embed 리스트
-  const livePlayerList = liveList.map(live => 
+  const livePlayerList = useMemo(() => liveList.map(live => 
     <FloatingWakPlayer 
       channelId={live.id} 
       name={live.name} 
       target={`target_${live.pos}`} 
       onClick={setMainPlayer}
       onChangeOverlayState={onChangeOverlayStateHandler} />
-  )
+  ), [liveList, setMainPlayer]);
 
   // 플레이어가 위치하는 div 리스트
   const [floatingTargetMain, ...floatingTargetSideList] = Array(8).fill(0).map((_, i) =>
@@ -190,7 +211,7 @@ function FloatingWakPlayer({channelId, name, target, onClick, onChangeOverlaySta
     }
   }, [target])
 
-  useEffect(updatePosition, [target]);
+  useEffect(updatePosition, [target, onClick]);
 
   function checkChangedPosition() {
     const newRect = document.getElementsByClassName(target)[0].getBoundingClientRect();
@@ -229,7 +250,7 @@ function FloatingWakPlayer({channelId, name, target, onClick, onChangeOverlaySta
         key={`wakplayer_${channelId}`} 
         channelId={channelId} 
         overlayStyle={target === 'target_0' ? 'normal' : 'volumeOnly'} 
-        onClickOverlay={e => {console.log(e.target.className);e.target.className === 'controller' && onClick(channelId)}}
+        onClickOverlay={e => {e.target.className === 'controller' && onClick(channelId)}}
         onChangeOverlayState={e => target === 'target_0' && onChangeOverlayState(e)} />
     </div>
   );
