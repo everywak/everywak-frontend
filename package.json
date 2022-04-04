@@ -11,7 +11,7 @@
     "axios": "^0.21.4",
     "classnames": "^2.2.6",
     "lodash": "^4.17.21",
-    "node-sass": "^5.0.0",
+    "node-sass": "npm:sass@^1.49.11",
     "react": "^17.0.1",
     "react-cookie": "^4.1.1",
     "react-dom": "^17.0.1",
@@ -21,6 +21,7 @@
     "react-scripts": "4.0.2",
     "react-transition-group": "^4.4.1",
     "react-twitch-embed": "^2.1.0",
+    "sass": "^1.49.11",
     "styled-components": "^5.2.1",
     "web-vitals": "^1.1.0"
   },
