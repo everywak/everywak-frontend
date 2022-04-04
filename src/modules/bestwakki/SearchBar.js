@@ -13,14 +13,20 @@ class SearchBar extends Component {
     onsearch: () => {}
   };
 
+  state = {
+    searchTarget: 'title',
+  }
+
   constructor(props) {
     super(props);
 
     this.queryTxt = React.createRef();
     const { search } = props.location || {};
     const params = func.getURLParams(search);
-    if (params.queryTarget) {
-      this.queryTargetValue = params.queryTarget;
+    if (params.queryTarget && ['title', 'author', 'board'].includes(params.queryTarget)) {
+      this.setState({
+        searchTarget: params.queryTarget,
+      })
     }
   }
 
@@ -37,7 +43,7 @@ class SearchBar extends Component {
 
       func.addURLParams.bind(this) (
         '/bestwakki', {
-        queryTarget: document.querySelector('input[name=searchTarget]').value,
+        queryTarget: this.state.searchTarget,
         queryTxt: queryTxt,
         beginAt: beginAt,
         endAt: endAt,
@@ -56,9 +62,6 @@ class SearchBar extends Component {
     if (this.queryTxt && this.queryTxt.current && params.queryTxt) {
       this.queryTxt.current.value = params.queryTxt;
     }
-  }
-  shouldComponentUpdate(nextProps, nextState) {
-    return false;
   }
 
   render() {
@@ -87,7 +90,7 @@ class SearchBar extends Component {
     return (
       <div className="SearchBar" >
         <input type="text" name="queryTxt" id="queryTxt" className="inputForm" onKeyUp={e => {if (e.keyCode === 13) {this.onSearch()}}} ref={this.queryTxt} placeholder={"'" + phTxt + "' 검색해 보기"} />
-        <Dropdown className="searchTarget" name="searchTarget" values={searchTarget} value={this.queryTargetValue} />
+        <Dropdown className="searchTarget" name="searchTarget" options={searchTarget} value={this.state.searchTarget} onChange={val => this.setState({searchTarget: val})} />
         <div className="btnSearch" onClick={e => this.onSearch()}>
             <SearchRoundedIcon fontSize="medium" style={{ color: "white" }} />
         </div>
