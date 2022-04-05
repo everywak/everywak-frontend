@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useCallback, useState, useEffect, useRef } from 'react';
 
 import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
 
@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
  * 
  * @param {{options: [{name: string, value: any}], value: any, onChange: function}} props 
  */
-function Dropdown({ options = [], value, onChange = val => {}}) {
+function Dropdown({ options = [], name, value, onChange = val => {}}) {
   
   const [opened, setOpened] = useState(false);
   const [dropdownAreaPos, setDropdownAreaPos] = useState({x: 0, y: 0});
@@ -20,10 +20,15 @@ function Dropdown({ options = [], value, onChange = val => {}}) {
   const dropdownArea = useRef();
   const selectedItem = useRef();
 
-  function setOption(val) {
+  const setOption = useCallback((val) => {
     close();
-    onChange(val);
-  }
+    onChange({
+      target: {
+        value: val,
+        name,
+      }
+    });
+  }, [name]);
 
   function posList() {
     const nameRect = btnSelect.current.getBoundingClientRect();
