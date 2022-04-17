@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import styled, { keyframes } from "styled-components";
-import styles from './BestwakkiSearchPanel.scss';
-import MediaQuery  from 'react-responsive';
 
+import Button from '../../common/Components/Button';
 import DateRange from './DateRange';
 import SearchBar from './SearchBar';
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
 import * as func from '../../common/funtions';
 
+import styles from './BestwakkiSearchPanel.scss';
 import classNames from 'classnames/bind';
-import Button from '../../common/Components/Button';
 const cx = classNames.bind(styles);
 
 class BestwakkiSearchPanel extends Component {
@@ -52,14 +50,13 @@ class BestwakkiSearchPanel extends Component {
 
   render () {
     const { opened } = this.state;
-    const tablet_s_width = 960;
     const today = new Date();
     const min = 1424876400000, max = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
     
     return (
       <div className="BestwakkiSearchPanel">
         <Button className={cx('btnSearch', {opened: opened})} onclick={e => this.toggle()}
-          iconSrc={<SearchRoundedIcon fontSize="medium" />} 
+          iconSrc={<SearchRoundedIcon />} 
           iconBGColor="transparent"
           label="인기글 검색 패널 열기"
           href="."

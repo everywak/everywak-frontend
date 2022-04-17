@@ -89,7 +89,7 @@ function MoreArticleButton({hide, onClick}) {
       className={cx('MoreArticleButton', {hide: hide})} 
       href="" 
       size="fillWidth" 
-      label={<span>더 보기<ExpandMoreRoundedIcon fontSize="medium" /></span>} 
+      label={<span>더 보기<ExpandMoreRoundedIcon /></span>} 
       showLabel={true} 
       labelSize="14px" 
       labelBGColor="transparent" 
@@ -125,7 +125,7 @@ function Article({
   header = false }) {
 
   const href = (
-    !header && 'https://cafe.naver.com/steamindiegame/' + articleId.replace(/[^0-9]/g, '')
+    !header ? 'https://cafe.naver.com/steamindiegame/' + articleId.replace(/[^0-9]/g, '') : ''
   );
   const thumb_area = 
   <a href={href} className="thumb_area" target="_blank" rel="noreferrer">

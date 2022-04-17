@@ -105,7 +105,7 @@ class BestwakkiBottomNavigator extends Component {
             </MediaQuery>
             <ScrollToTopButton show={showTop} />
             <Button className="btnSetting"
-              iconSrc={<SettingsRoundedIcon fontSize="medium" />} 
+              iconSrc={<SettingsRoundedIcon />} 
               iconBGColor="transparent"
               label="인기글 목록 설정"
               href="."

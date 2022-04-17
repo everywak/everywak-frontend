@@ -131,8 +131,8 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
             onClick={e => onChangeOverlayState({expanded: !expanded})}>
             {
               expanded ? 
-              <ExpandMoreRoundedIcon fontSize="medium" /> : 
-              <ExpandLessRoundedIcon fontSize="medium" />
+              <ExpandMoreRoundedIcon /> : 
+              <ExpandLessRoundedIcon />
             } 
           </TransparentButton>
         </div>

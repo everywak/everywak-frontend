@@ -72,7 +72,7 @@ class VideoList extends Component {
               className={cx('moreLoad')} 
               href="" 
               size="fillWidth" 
-              label={<ExpandMoreRoundedIcon fontSize="medium" />} 
+              label={<ExpandMoreRoundedIcon />} 
               showLabel={true} 
               labelSize="14px" 
               labelBGColor="transparent" 
