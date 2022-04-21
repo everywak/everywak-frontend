@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import DatePicker from '../../common/Components/DatePicker';
 import DateRangeRoundedIcon from '@material-ui/icons/DateRangeRounded';
 import MediaQuery  from 'react-responsive';
@@ -7,13 +7,14 @@ import styles from './DateRange.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-class DateRange extends Component {
+class DateRange extends PureComponent {
   static defaultProps = {
     name: '',
     min: 0,
     max: 0,
     start: -1,
     end: -1,
+    onChange: val => {},
   };
   state = {
     dateStr: '',
@@ -61,6 +62,27 @@ class DateRange extends Component {
     });
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.start !== this.state.start ||
+      prevState.end !== this.state.end) {
+      this.setDateStr(this.state.start, this.state.end);
+    }
+    if (prevProps.start !== this.props.start ||
+      prevProps.end !== this.props.end) {
+        console.log(`${this.genDatetime(this.props.start)} - ${this.genDatetime(this.props.end)}`)
+      this.setDateStr(this.props.start, this.props.end);
+      this.setState({
+        start: (this.props.start !== -1 ? this.props.start : this.props.min),
+        end: (this.props.end !== -1 ? this.props.end : this.props.max),
+      });
+    }
+  }
+
+  onChange = e => {
+    this.setState(e);
+    this.props.onChange(e);
+  }
+
   onChangeStart = e => {
     this.setState({
       start: new Date(e.target.value).getTime(),
@@ -72,21 +94,8 @@ class DateRange extends Component {
     })
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const should = nextProps.name  != this.props.name || 
-                   nextProps.min   != this.props.min || 
-                   nextProps.max   != this.props.max || 
-                   nextProps.start != this.props.start || 
-                   nextProps.end   != this.props.end || 
-                   nextState.dateStr != this.state.dateStr || 
-                   nextState.opened  != this.state.opened || 
-                   nextState.start   != this.state.start || 
-                   nextState.end     != this.state.end;
-    return should;
-  }
-
   render() {
-    const { name, min, max} = this.props;
+    const { name, min, max } = this.props;
     const { start, end } = this.state;
     const { opened, dateStr } = this.state;
     const tablet_s_width = 960;
@@ -102,7 +111,7 @@ class DateRange extends Component {
         </div>
         <div className="closeArea" onClick={e => this.close()}></div>
         <div className="dateList">
-          <DatePicker name={name} min={min} max={max} start={start} end={end} parent={this} opened={opened} />
+          <DatePicker name={name} min={min} max={max} start={start} end={end} onChange={e => this.onChange(e)} opened={opened} />
         </div>
         </MediaQuery>
         <MediaQuery maxWidth={tablet_s_width - 1}>

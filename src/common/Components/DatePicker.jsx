@@ -16,7 +16,7 @@ class DatePicker extends Component {
     max: 0,
     start: 0,
     end: 0,
-    parent: null,
+    onChange: val => {},
     preset: [
       {
         type: 'option',
@@ -117,7 +117,6 @@ class DatePicker extends Component {
 
   setDateTimestamp = (type, timestamp) => {
     const { start, end } = this.state;
-    const { parent } = this.props;
     type = type === 'start' || type === 'end' ? type : this.state.cursor;
     if (type === 'start') {
       this.setState({
@@ -125,17 +124,11 @@ class DatePicker extends Component {
         end: Math.max(this.state.end, timestamp),
         cursor: 'end'
       });
-      if (parent && parent.setDateStr) {
-        parent.setDateStr(timestamp, end);
-      } 
     } else if (type === 'end') {
       this.setState({
         end: timestamp,
         cursor: 'start'
       });
-      if (parent && parent.setDateStr) {
-        parent.setDateStr(start, timestamp);
-      } 
     }
   }
 
@@ -145,10 +138,6 @@ class DatePicker extends Component {
       end: end,
       cursor: 'start'
     });
-    const { parent } = this.props;
-    if (parent && parent.setDateStr) {
-      parent.setDateStr(start, end);
-    } 
   }
 
   setPreset = (data) => {
@@ -207,6 +196,8 @@ class DatePicker extends Component {
         preset: preset
       });
     }
+    
+    this.props.onChange({ start, end });
   }
 
   onClickDate = timestamp => this.setDateTimestamp('cursor', timestamp)
@@ -231,10 +222,10 @@ class DatePicker extends Component {
     const { name, preset, opened, min, max } = this.props;
     const { start, end, cursor, currYear, currMonth } = this.state;
     const presetList = preset.map(
-      item => 
+      (item, i) => 
       (item.type === 'option' ? 
       <PresetItem key={name + item.value} value={item.value} name={item.name} selected={this.state.preset === item.value} onclick={this.setPreset} /> : 
-      <div className="presetLine"/>)
+      <div key={name + 'line' + i} className="presetLine"/>)
     );
     
     return (
