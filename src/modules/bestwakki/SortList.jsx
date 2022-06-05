@@ -54,7 +54,6 @@ function SortList({name, value, onChange}) {
   const showAnimSortTarget = useCallback(() => {
     if (!refThis.current || !refPrevItem.current || !refSelectedItem.current) { return; }
 
-    console.log(prevValue, value)
     const parentRect = refThis.current.getBoundingClientRect();
     const currentRect = refPrevItem.current.getBoundingClientRect();
     const targetRect = refSelectedItem.current.getBoundingClientRect();
