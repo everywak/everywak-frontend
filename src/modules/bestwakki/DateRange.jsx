@@ -7,21 +7,34 @@ import styles from './DateRange.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
+const RANGE_MAX = -1;
+
 class DateRange extends PureComponent {
   static defaultProps = {
     name: '',
     min: 0,
     max: 0,
-    start: -1,
-    end: -1,
+    start: RANGE_MAX,
+    end: RANGE_MAX,
     onChange: val => {},
   };
   state = {
     opened: false,
-    start: -1,
-    end: -1,
+    start: RANGE_MAX,
+    end: RANGE_MAX,
   }
 
+  getRealRange = (val, type = 'start') => {
+    const { min, max } = this.props;
+    return val !== RANGE_MAX ? 
+      val : 
+      (type === 'start' ? min : max);
+  }
+  getDatetimeString = () => {
+    const { min, max } = this.props;
+    const { start, end } = this.state;
+    return `${this.genDatetime(this.getRealRange(start, 'start'))} - ${this.genDatetime(this.getRealRange(end, 'end'))}`;
+  }
   genDatetime (time) {
     const date = new Date(time);
     return `${date.getFullYear()}. ${(date.getMonth() + 1)}. ${date.getDate()}.`;
@@ -48,10 +61,10 @@ class DateRange extends PureComponent {
   }
 
   componentDidMount () {
-    const { min, max, start, end } = this.props;
+    const { start, end } = this.props;
     this.setState({
-      start: (start !== -1 ? start : min),
-      end: (end !== -1 ? end : max),
+      start: start,
+      end: end,
     });
   }
 
@@ -65,20 +78,50 @@ class DateRange extends PureComponent {
     }
   }
 
+  /**
+   * DatePicker의 값이 바뀌었을 때 이벤트핸들러
+   * 
+   * @param {{start: number, end: number}} e 
+   */
   onChange = e => {
-    this.setState(e);
-    this.props.onChange(e);
+    const { min, max } = this.props;
+    const val = {
+      start: e.start !== min ? e.start : -1, 
+      end: e.end !== max ? e.end : -1,
+    };
+    this.setState(val);
+    this.props.onChange(val);
   }
 
+  /**
+   * 모바일 전용
+   * 
+   * @param {object} e 
+   */
   onChangeStart = e => {
-    this.setState({
-      start: new Date(e.target.value).getTime(),
-    })
+    const { min, max } = this.props;
+    const val = new Date(e.target.value).getTime();
+    const newState = {
+      start: val !== min ? val : -1,
+      end: this.state.end,
+    };
+    this.setState(newState)
+    this.props.onChange(newState);
   }
+  /**
+   * 모바일 전용
+   * 
+   * @param {object} e 
+   */
   onChangeEnd = e => {
-    this.setState({
-      end: new Date(e.target.value).getTime(),
-    })
+    const { min, max } = this.props;
+    const val = new Date(e.target.value).getTime();
+    const newState = {
+      start: this.state.start,
+      end: val !== max ? val : -1,
+    };
+    this.setState(newState)
+    this.props.onChange(newState);
   }
 
   render() {
@@ -90,24 +133,24 @@ class DateRange extends PureComponent {
     return (
       <div className="DateRange">
         <MediaQuery minWidth={tablet_s_width}>
-        <div className={cx('dateBtn', {opened: opened})} onClick={e => this.toggle()}>
+        <div className={cx('dateBtn', {opened: opened})} onClick={this.toggle}>
           <div className="dateWrapper">
-            {`${this.genDatetime(start !== -1 ? start : min)} - ${this.genDatetime(end !== -1 ? end : max)}`}
+            {this.getDatetimeString()}
           </div>
           <DateRangeRoundedIcon fontSize="small" />
         </div>
-        <div className="closeArea" onClick={e => this.close()}></div>
+        <div className="closeArea" onClick={this.close}></div>
         <div className="dateList">
-          <DatePicker name={name} min={min} max={max} start={start} end={end} onChange={e => this.onChange(e)} opened={opened} />
+          <DatePicker name={name} min={min} max={max} start={this.getRealRange(start, 'start')} end={this.getRealRange(end, 'end')} onChange={this.onChange} opened={opened} />
         </div>
         </MediaQuery>
         <MediaQuery maxWidth={tablet_s_width - 1}>
         <div className="dateBtn">
-          <input type="date" name={name + "-start"} id={name + "-start"} value={this.genDatetimeInput(start)} onChange={this.onChangeStart} />
+          <input type="date" name={name + "-start"} id={name + "-start"} min={this.genDatetimeInput(min)} value={this.genDatetimeInput(this.getRealRange(start, 'start'))} onChange={this.onChangeStart} />
         </div>
         <span className="dateDivide">-</span>
         <div className="dateBtn">
-          <input type="date" name={name + "-end"} id={name + "-end"} value={this.genDatetimeInput(end + 24*60*60 - 1)} onChange={this.onChangeEnd} />
+          <input type="date" name={name + "-end"} id={name + "-end"} max={this.genDatetimeInput(max)} value={this.genDatetimeInput(this.getRealRange(end, 'end') + 24*60*60 - 1)} onChange={this.onChangeEnd} />
         </div>
         </MediaQuery>
       </div>

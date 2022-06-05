@@ -187,7 +187,7 @@ function Bestwakki({front = false}) {
               </div>
             </div>
           </div>
-          <BestwakkiBottomNavigator history={history} />
+          <BestwakkiBottomNavigator history={history} searchFilter={searchFilter} onChangeDateRangeHandler={onChangeDateRangeHandler} updateSearchFilter={updateSearchFilter} />
         </Fragment>
       }
       <ArticleList 

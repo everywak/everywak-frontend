@@ -15,6 +15,13 @@ import ScrollToTopButton from './ScrollToTopButton';
 const cx = classNames.bind(styles);
 
 class BestwakkiBottomNavigator extends Component {
+
+  static defaultProps = {
+    searchFilter: null, 
+    onChangeDateRangeHandler: e => {},
+    updateSearchFilter: e => {},
+  }
+
   state = {
     opened: true,
     showTop: false,
@@ -82,6 +89,7 @@ class BestwakkiBottomNavigator extends Component {
   };
 
   render () {
+    const { searchFilter, onChangeDateRangeHandler, updateSearchFilter } = this.props;
     const { opened, showTop } = this.state;
     const tablet_s_width = 960;
     
@@ -101,7 +109,7 @@ class BestwakkiBottomNavigator extends Component {
           </div>
           <div className="right">
             <MediaQuery maxWidth={tablet_s_width - 1}>
-              <BestwakkiSearchPanel history={this.props.history} />
+              <BestwakkiSearchPanel searchFilter={searchFilter} onChangeDateRangeHandler={onChangeDateRangeHandler} updateSearchFilter={updateSearchFilter} />
             </MediaQuery>
             <ScrollToTopButton show={showTop} />
             <Button className="btnSetting"

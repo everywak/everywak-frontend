@@ -199,8 +199,8 @@ class DatePicker extends Component {
     }
     
     this.props.onChange({
-      start: start !== min ? start : -1, 
-      end: end !== max ? end : -1,
+      start: start,
+      end: end,
     });
   }
 
