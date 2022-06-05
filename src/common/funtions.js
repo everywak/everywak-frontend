@@ -1,26 +1,16 @@
 /** 
  * @description URL 파라미터를 반환합니다.
  * 
- * @return {Array} 파라미터
+ * @return {Object} 파라미터
  */
 export function getURLParams (url) {
 
-  const param = [];
+  const param = {};
   
-  try {
-    const params = url.split('?')[1].split('&');
+  const params = new URLSearchParams(url);
 
-    params.filter(p => (p.split('=').length === 2)).map(
-      p => {
-        const [ k, v ] = p.split('=');
-        param[decodeURIComponent(k)] = decodeURIComponent(v);
-      }
-    );
-
-  } catch(err) {
-    if (err.name !== 'TypeError') { // not included '?'
-      console.error(err);
-    }
+  for (let key of params.keys()) {
+    param[key] = params.get(key);
   }
   
   return param;
@@ -31,26 +21,32 @@ export function getURLParams (url) {
  * 
  * @return {Object} 오브젝트
  */
-export function toURLParams (arr) {
-  var encoded = new URLSearchParams();
-  Object.keys(arr).map(
-    key => encoded.append(key, arr[key])
-  );
-  return encoded.toString();
+export function toURLParams (params) {
+  return new URLSearchParams(params).toString();
 }
 
-
-export function addURLParams ({location, history, path, query}) {
-  const { search } = location || {};
-  const params = getURLParams(search);
-  Object.keys(query).map(
-    key => params[key] = query[key]
-  );
-  
+/** 
+ * @description URL Prarameter를 query로 설정합니다.
+ * 
+ * @return {Object} 오브젝트
+ */
+export function setURLParams ({history, path, query}) {
   history.push({
     pathname: path,
-    search: toURLParams(params)
+    search: toURLParams(query)
   });
+}
+
+/** 
+ * @description URL Prarameter에 query를 추가합니다.
+ * 
+ * @return {Object} 오브젝트
+ */
+export function addURLParams ({location, history, path, query}) {
+  const { search } = location || {};
+  const params = {...getURLParams(search), ...query};
+
+  setURLParams({history, path, query: params});
 }
 
 /** 
