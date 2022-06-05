@@ -121,11 +121,12 @@ class DatePicker extends Component {
     if (type === 'start') {
       this.setState({
         start: timestamp,
-        end: Math.max(this.state.end, timestamp),
+        end: Math.max(end, timestamp),
         cursor: 'end'
       });
     } else if (type === 'end') {
       this.setState({
+        start: Math.min(start, timestamp),
         end: timestamp,
         cursor: 'start'
       });
