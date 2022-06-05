@@ -30,7 +30,7 @@ function getRecommendKeyword() {
  * onSearch: function
  * }} props 
  */
-function SearchBar({ defaultValue = {searchTarget: 'title', keyword: 'a'}, onSearch = () => {} }) {
+function SearchBar({ defaultValue = {searchTarget: 'title', keyword: ''}, onSearch = () => {} }) {
 
   const [value, onChange, reset] = useInputs(defaultValue);
   const [recommendKeyword, setRecommendKeyword] = useState('');
