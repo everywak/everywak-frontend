@@ -140,7 +140,7 @@ function Bestwakki({front = false}) {
     }
     
     if (!front) {
-      func.addURLParams({
+      func.setURLParams({
         history: history,
         location: location || {},
         path: '/bestwakki', 
