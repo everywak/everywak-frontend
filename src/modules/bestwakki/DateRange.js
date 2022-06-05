@@ -17,16 +17,9 @@ class DateRange extends PureComponent {
     onChange: val => {},
   };
   state = {
-    dateStr: '',
     opened: false,
     start: -1,
     end: -1,
-  }
-
-  setDateStr = (start, end) => {
-    this.setState({
-      dateStr: `${this.genDatetime(start)} - ${this.genDatetime(end)}`,
-    });
   }
 
   genDatetime (time) {
@@ -63,17 +56,11 @@ class DateRange extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.start !== this.state.start ||
-      prevState.end !== this.state.end) {
-      this.setDateStr(this.state.start, this.state.end);
-    }
     if (prevProps.start !== this.props.start ||
       prevProps.end !== this.props.end) {
-        console.log(`${this.genDatetime(this.props.start)} - ${this.genDatetime(this.props.end)}`)
-      this.setDateStr(this.props.start, this.props.end);
       this.setState({
-        start: (this.props.start !== -1 ? this.props.start : this.props.min),
-        end: (this.props.end !== -1 ? this.props.end : this.props.max),
+        start: this.props.start,
+        end: this.props.end,
       });
     }
   }
@@ -97,7 +84,7 @@ class DateRange extends PureComponent {
   render() {
     const { name, min, max } = this.props;
     const { start, end } = this.state;
-    const { opened, dateStr } = this.state;
+    const { opened } = this.state;
     const tablet_s_width = 960;
 
     return (
@@ -105,7 +92,7 @@ class DateRange extends PureComponent {
         <MediaQuery minWidth={tablet_s_width}>
         <div className={cx('dateBtn', {opened: opened})} onClick={e => this.toggle()}>
           <div className="dateWrapper">
-            {dateStr}
+            {`${this.genDatetime(start !== -1 ? start : min)} - ${this.genDatetime(end !== -1 ? end : max)}`}
           </div>
           <DateRangeRoundedIcon fontSize="small" />
         </div>

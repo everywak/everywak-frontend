@@ -14,26 +14,16 @@
     position: relative;
     user-select: none;
 
-    input[type=radio] {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip:rect(0,0,0,0);
-      border: 0;
 
-      &:checked + label {
-        color: $primary-color;
-      }
-      &:not(:checked) + label:hover,
-      &:not(:checked) + label:active {
-        background: rgba(0, 0, 0, .1);
-      }
+    &.selected > span {
+      color: $primary-color;
+    }
+    &:not(.selected) > span:hover,
+    &:not(.selected) > span:active {
+      background: rgba(0, 0, 0, .1);
     }
 
-    label {
+    & > span {
       border-radius: 8px;
       color: $secondary-text-color;
       cursor: pointer;

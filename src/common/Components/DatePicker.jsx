@@ -197,7 +197,10 @@ class DatePicker extends Component {
       });
     }
     
-    this.props.onChange({ start, end });
+    this.props.onChange({
+      start: start !== min ? start : -1, 
+      end: end !== max ? end : -1,
+    });
   }
 
   onClickDate = timestamp => this.setDateTimestamp('cursor', timestamp)
@@ -212,6 +215,13 @@ class DatePicker extends Component {
   }
 
   componentDidUpdate (prevProps, prevState) {
+    if (prevProps.start !== this.props.start ||
+        prevProps.end   !== this.props.end) {
+      this.setState({
+        start: this.props.start !== -1 ? this.props.start : this.props.min,
+        end: this.props.end !== -1 ? this.props.end : this.props.max,
+      })
+    }
     if (prevState.start !== this.state.start ||
         prevState.end   !== this.state.end) {
       this.handlerStartEndChanged();

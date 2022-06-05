@@ -40,14 +40,14 @@ export function toURLParams (arr) {
 }
 
 
-export function addURLParams (path, arr) {
-  const { search } = this.props.location || {};
+export function addURLParams ({location, history, path, query}) {
+  const { search } = location || {};
   const params = getURLParams(search);
-  Object.keys(arr).map(
-    key => params[key] = arr[key]
+  Object.keys(query).map(
+    key => params[key] = query[key]
   );
   
-  this.props.history.push({
+  history.push({
     pathname: path,
     search: toURLParams(params)
   });
