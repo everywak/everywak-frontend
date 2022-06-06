@@ -155,9 +155,8 @@ class WakPlayerOverlay extends Component {
   }
 
   onNotified = e => {
-    console.log(e)
+    if (process.env.NODE_ENV == 'development') { console.log(e); }
     if (e.type == 'CHANGE_PLAYERSTATE' && e.value !== this.state.playerState) {
-      console.log(e.value)
       this.setState({
         playerState: e.value
       });
