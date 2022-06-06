@@ -12,6 +12,14 @@ import styles from './Live.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
+function addClassLive() {
+  if (document.querySelector('.App')) {
+    document.querySelector('.App').classList.add('live');
+  } else {
+    setTimeout(addClassLive, 100);
+  }
+}
+
 export default function Live ({front = false, location, history}) {
 
   const [opened, setOpened] = useState(false);
@@ -21,11 +29,11 @@ export default function Live ({front = false, location, history}) {
   useEffect(() => {
     if (!front) {
       func.setBrowserTitle('생방송');
-      document.getElementsByClassName('App')[0].classList.add('live');
+      addClassLive();
     }
 
     return () => {
-      document.getElementsByClassName('App')[0].classList.remove('live');
+      document.querySelector('.App') && document.querySelector('.App').classList.remove('live');
     }
   }, []);
 

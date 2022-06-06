@@ -28,6 +28,14 @@ const isedolStreams = [
   '111roentgenium',
 ];
 
+function addClassLive() {
+  if (document.querySelector('.App')) {
+    document.querySelector('.App').classList.add('live');
+  } else {
+    setTimeout(addClassLive, 100);
+  }
+}
+
 export default function WithLive ({front = false, location, history}) {
 
   const [opened, setOpened] = useState(false);
@@ -45,10 +53,10 @@ export default function WithLive ({front = false, location, history}) {
   // 브라우저 제목 설정
   useEffect(() => {
     func.setBrowserTitle('왁타버스 같이보기');
-    document.getElementsByClassName('App')[0].classList.add('live');
+    addClassLive();
 
     return () => {
-      document.getElementsByClassName('App')[0].classList.remove('live');
+      document.querySelector('.App') && document.querySelector('.App').classList.remove('live');
     }
   }, []);
 
