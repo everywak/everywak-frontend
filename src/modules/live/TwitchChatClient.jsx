@@ -278,7 +278,6 @@ function TwitchChatList({
     return badgeList.map(badge => <TwitchChatBadge key={badge.id} src_1x={badge.src_1x} src_2x={badge.src_2x} src_3x={badge.src_2x} />);
   }
   function geneContent(content) {
-    console.log(content)
     return content.map(item => typeof item === 'string' ? item : <TwitchChatEmote emoteId={item.emoteId} />);
   }
 
