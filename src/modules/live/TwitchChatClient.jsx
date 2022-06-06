@@ -9,6 +9,7 @@ import BasicButton from '../../common/Components/Button/BasicButton';
 import TransparentButton from '../../common/Components/Button/TransparentButton';
 import CircleImg from '../../common/Components/CircleImg';
 
+import * as func from '../../common/funtions';
 import TwitchApi from '../../services/TwitchApi';
 
 import styles from './TwitchChatClient.scss';
@@ -75,13 +76,16 @@ class TwitchChatClient extends PureComponent {
   }
 
   componentDidMount() {
-    const token = new URLSearchParams(this.props.location.hash.replace('#', '')).get('access_token');
+    const { location, history } = this.props;
+    const token = new URLSearchParams(location.hash.replace('#', '')).get('access_token');
     this.loadClientOAuth(token);
     
-    this.props.history.push({
-      pathname: this.props.location.pathname,
-      hash: ''
-    });
+    const { search, pathname } = location || {};
+    func.setURLParams({
+      history: history,
+      pathname,
+      query: func.getURLParams(search),
+    })
   }
 
   /**
@@ -264,15 +268,15 @@ class TwitchChatClient extends PureComponent {
     if (process.env.NODE_ENV == 'development') { console.log(data); }
 
     if (data[2] == 'PRIVMSG') {
-        this.receiveChat({tag: data[0], id: data[1], msg: data[3].split(':').length > 1 ? data[3].split(':')[1] : data[3]});
+      this.receiveChat({tag: data[0], id: data[1], msg: data[3].split(':').length > 1 ? data[3].split(':')[1] : data[3]});
     } else if (data[2] && data[2].match(/^USERSTATE/)) {
-        this.updateSelfInfo(data);
+      this.updateSelfInfo(data);
     } else if ('PART' === data[1]) {
       const { loginName } = data[0].match(/:(?<loginName>[\w\d-_]+)!\k<loginName>@\k<loginName>\.tmi\.twitch\.tv/).groups;
       if (this.userLoginId === loginName) { // is me
         this.setIRCStatus(TwitchChatClient.AUTHORIZED);
+      }
     }
-  }
   }
 
   /**
@@ -334,12 +338,12 @@ class TwitchChatClient extends PureComponent {
       for(let i = 0; i < msg.length; i++) {
         const pos = msg.indexOf(ems.name, i);
         if(pos != -1) {
-        emotes.push({
-          id: ems.id, 
+          emotes.push({
+            id: ems.id, 
             pos: [[pos, pos + ems.name.length - 1]],
-        });
+          });
           i += pos + ems.name.length - 1;
-      }
+        }
       }
     })
 
@@ -583,14 +587,14 @@ class TwitchChatClient extends PureComponent {
             <TwitchChatList chatList={chatList} options={chatOptions} />
             <div className="twitchChatBottom">
               <div className="twitchChatInputWrapper">
-              <textarea 
-                className="twitchChatInput" 
-                ref={this.chatInput} 
-                onKeyPress={e => {if(e.charCode == 13) { e.preventDefault(); this.sendChat() } }}
-                onChange={e => {
-                  e.target.style.height = '0px';
+                <textarea 
+                  className="twitchChatInput" 
+                  ref={this.chatInput} 
+                  onKeyPress={e => {if(e.charCode == 13) { e.preventDefault(); this.sendChat() } }}
+                  onChange={e => {
+                    e.target.style.height = '0px';
                     e.target.style.height = `${e.target.scrollHeight + 4}px`;
-                }} />
+                  }} />
                 <TransparentButton className="twitchChatBtnEmote" onClick={e => this.toggleEmotePicker()}>
                   <InsertEmoticonRoundedIcon fontSize="small" />
                 </TransparentButton>
@@ -684,7 +688,7 @@ function TwitchChatList({
     </li> :
     <li key={c.key} className="twitchChatItem sysMessage">
       <span className="chatContent">{c.content}</span>
-  </li>
+    </li>
   );
 
   return (
@@ -769,10 +773,10 @@ class TwitchChatBadge extends Component {
 function TwitchChatEmotePicker ({emotes, twitchApi, appendToChatBox}) {
 
   const [recents, setRecents] = useState([
-      {
-        id: "245",
-        name: "ResidentSleeper",
-      },
+    {
+      id: "245",
+      name: "ResidentSleeper",
+    },
   ]);
   const [groupedEmotes, setGroupedEmotes] = useState({});
 
@@ -801,7 +805,7 @@ function TwitchChatEmotePicker ({emotes, twitchApi, appendToChatBox}) {
     setGroupedEmotes(grouped);
   }
 
-    const emoteList = 
+  const emoteList = 
     [
       [
         'recents', 
@@ -814,12 +818,12 @@ function TwitchChatEmotePicker ({emotes, twitchApi, appendToChatBox}) {
       ...Object.entries(groupedEmotes).reverse()
     ].map(([emoteSetId, emoteSet]) => <TwitchChatEmoteSet emoteSet={emoteSet} twitchApi={twitchApi} appendToChatBox={appendToChatBox} />);
 
-    return (
-      <div className='TwitchChatEmotePicker'>
-        {emoteList}
-      </div>
-    );
-  }
+  return (
+    <div className='TwitchChatEmotePicker'>
+      {emoteList}
+    </div>
+  );
+}
 
 /**
  * @typedef EmoteSetItem
@@ -873,28 +877,28 @@ function TwitchChatEmoteSet({emoteSet, twitchApi, appendToChatBox}) {
     const emoteOwnerProfile = await twitchApi.getUsers(emoteOwnerData[0].broadcaster_login);
     
     setEmoteSetInfo({
-        name: emoteSetName,
+      name: emoteSetName,
       iconImg: emoteOwnerProfile.length > 0 ? emoteOwnerProfile[0].profile_image_url : '',
-      });
-    }
+    });
+  }
 
   const emoteList = emoteSet.emotes
     .map(em => <TwitchChatEmote key={`emote_${em.id}`} emoteId={em.id} emote={em} onclick={appendToChatBox} />);
 
-    return (
-    <div className="TwitchChatEmoteSet">
-      <div className="emoteSetName">
-        {
+  return (
+  <div className="TwitchChatEmoteSet">
+    <div className="emoteSetName">
+      {
         emoteSetInfo.iconImg !== '' &&
         <CircleImg src={emoteSetInfo.iconImg} />
-        }
+      }
       {emoteSetInfo.name}
-      </div>
-      <div className="emoteList">
-      {emoteList}
-      </div>
     </div>
-    );
-  }
+    <div className="emoteList">
+      {emoteList}
+    </div>
+  </div>
+  );
+}
 
 export default TwitchChatClient;

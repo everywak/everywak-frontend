@@ -27,8 +27,6 @@ export function toURLParams (params) {
 
 /** 
  * @description URL Prarameter를 query로 설정합니다.
- * 
- * @return {Object} 오브젝트
  */
 export function setURLParams ({history, path, query}) {
   history.push({
@@ -39,8 +37,6 @@ export function setURLParams ({history, path, query}) {
 
 /** 
  * @description URL Prarameter에 query를 추가합니다.
- * 
- * @return {Object} 오브젝트
  */
 export function addURLParams ({location, history, path, query}) {
   const { search } = location || {};
