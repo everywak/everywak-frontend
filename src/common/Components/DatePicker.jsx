@@ -16,7 +16,7 @@ class DatePicker extends Component {
     max: 0,
     start: 0,
     end: 0,
-    parent: null,
+    onChange: val => {},
     preset: [
       {
         type: 'option',
@@ -117,25 +117,19 @@ class DatePicker extends Component {
 
   setDateTimestamp = (type, timestamp) => {
     const { start, end } = this.state;
-    const { parent } = this.props;
     type = type === 'start' || type === 'end' ? type : this.state.cursor;
     if (type === 'start') {
       this.setState({
         start: timestamp,
-        end: Math.max(this.state.end, timestamp),
+        end: Math.max(end, timestamp),
         cursor: 'end'
       });
-      if (parent && parent.setDateStr) {
-        parent.setDateStr(timestamp, end);
-      } 
     } else if (type === 'end') {
       this.setState({
+        start: Math.min(start, timestamp),
         end: timestamp,
         cursor: 'start'
       });
-      if (parent && parent.setDateStr) {
-        parent.setDateStr(start, timestamp);
-      } 
     }
   }
 
@@ -145,10 +139,6 @@ class DatePicker extends Component {
       end: end,
       cursor: 'start'
     });
-    const { parent } = this.props;
-    if (parent && parent.setDateStr) {
-      parent.setDateStr(start, end);
-    } 
   }
 
   setPreset = (data) => {
@@ -207,6 +197,11 @@ class DatePicker extends Component {
         preset: preset
       });
     }
+    
+    this.props.onChange({
+      start: start,
+      end: end,
+    });
   }
 
   onClickDate = timestamp => this.setDateTimestamp('cursor', timestamp)
@@ -221,6 +216,13 @@ class DatePicker extends Component {
   }
 
   componentDidUpdate (prevProps, prevState) {
+    if (prevProps.start !== this.props.start ||
+        prevProps.end   !== this.props.end) {
+      this.setState({
+        start: this.props.start !== -1 ? this.props.start : this.props.min,
+        end: this.props.end !== -1 ? this.props.end : this.props.max,
+      })
+    }
     if (prevState.start !== this.state.start ||
         prevState.end   !== this.state.end) {
       this.handlerStartEndChanged();
@@ -231,10 +233,10 @@ class DatePicker extends Component {
     const { name, preset, opened, min, max } = this.props;
     const { start, end, cursor, currYear, currMonth } = this.state;
     const presetList = preset.map(
-      item => 
+      (item, i) => 
       (item.type === 'option' ? 
       <PresetItem key={name + item.value} value={item.value} name={item.name} selected={this.state.preset === item.value} onclick={this.setPreset} /> : 
-      <div className="presetLine"/>)
+      <div key={name + 'line' + i} className="presetLine"/>)
     );
     
     return (

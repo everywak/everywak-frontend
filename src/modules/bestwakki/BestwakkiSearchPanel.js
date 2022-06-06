@@ -11,25 +11,19 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 class BestwakkiSearchPanel extends Component {
+
+  static defaultProps = {
+    searchFilter: null, 
+    onChangeDateRangeHandler: e => {},
+    updateSearchFilter: e => {},
+  }
+
   state = {
     opened: false,
   }
 
   constructor (props) {
     super(props);
-
-    const { search } = props.location || {};
-    const { beginAt, endAt } = func.getURLParams(search);
-    this.beginAt = (
-      beginAt ? 
-      (func.isDateStr(beginAt) ? new Date(beginAt).getTime() : beginAt * 1000) : 
-      -1
-    );
-    this.endAt = (
-      beginAt ? 
-      (func.isDateStr(endAt) ? new Date(endAt).getTime() : endAt * 1000) : 
-      -1
-    );
   }
 
   open = () => {
@@ -49,33 +43,34 @@ class BestwakkiSearchPanel extends Component {
   }
 
   render () {
+    const { searchFilter, onChangeDateRangeHandler, updateSearchFilter } = this.props;
     const { opened } = this.state;
     const today = new Date();
     const min = 1424876400000, max = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
     
     return (
       <div className="BestwakkiSearchPanel">
-        <Button className={cx('btnSearch', {opened: opened})} onclick={e => this.toggle()}
+        <Button className={cx('btnSearch', {opened: opened})} onclick={this.toggle}
           iconSrc={<SearchRoundedIcon />} 
           iconBGColor="transparent"
           label="인기글 검색 패널 열기"
           href="."
           showLabel={false} />
-        <div className="closeArea" onClick={e => this.close()}></div>
+        <div className="closeArea" onClick={this.close}></div>
         <div className={cx('search', {opened: opened})}>
           <div className="dialogTitle">
             인기글 검색
           </div>
           <div className="dialogComp">
             <div className="label">검색 기간</div>
-            <DateRange name="queryDate" min={min} max={max} start={this.beginAt} end={this.endAt} />
+            <DateRange name="queryDate" min={min} max={max} start={searchFilter.beginAt} end={searchFilter.endAt} onChange={onChangeDateRangeHandler} />
           </div>
           <div className="dialogComp">
             <div className="label">검색어</div>
-            <SearchBar history={this.props.history} location={this.props.location} onsearch={e => this.close()} />
+            <SearchBar defaultValue={searchFilter} onSearch={e => { updateSearchFilter(e);this.close() }} />
           </div>
           <div className="btnWrapper">
-            <button className="SnsButton secondary" onClick={e => this.close()}>
+            <button className="SnsButton secondary" onClick={this.close}>
               <div className="label">닫기</div>
             </button>
           </div>

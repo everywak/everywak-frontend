@@ -89,6 +89,7 @@
       border-radius: 0;
       border-top: solid 1px $component-primary-border-color;
       text-align: center;
+      pointer-events: none;
 
       &:hover {
         background-color: transparent;

@@ -131,8 +131,8 @@ function filterPopularArticlesParams(query) {
     orderBy: 'time', 
     page: '1', 
     perPage: '30',
-    queryTarget: 'title', 
-    queryTxt: '', 
+    searchTarget: 'title', 
+    keyword: '', 
     beginAt: 1424876400, 
     endAt: parseInt(Date.now() / 1000 / 300) * 300
   }
@@ -159,23 +159,23 @@ function filterPopularArticlesParams(query) {
     5), 999);
   
   // 검색 타겟
-  const queryTargets = ['title', 'author', 'board'];
-  const queryTarget = queryTargets.includes(query.queryTarget) ? query.queryTarget : _default.queryTarget;
+  const searchTargets = ['title', 'author', 'board'];
+  const searchTarget = searchTargets.includes(query.searchTarget) ? query.searchTarget : _default.searchTarget;
 
   // 검색어
-  const queryTxt = query.queryTxt || _default.queryTxt;
+  const keyword = query.keyword || _default.keyword;
 
   // 시작 날짜
   const beginAt = Math.max(
     (
-      query.beginAt && func.isDateStr(query.beginAt) ? parseInt(new Date(query.beginAt).getTime() / 1000 - 9*60*60) : query.beginAt
+      query.beginAt && func.isDateStr(query.beginAt) ? parseInt(new Date(query.beginAt).getTime() / 1000 - 9*60*60) : parseInt(query.beginAt / 1000)
     ), 
     _default.beginAt
   );
 
   // 끝 날짜
   query.endAt = (
-    query.endAt && func.isDateStr(query.endAt) ? parseInt(new Date(query.endAt).getTime() / 1000) : query.endAt
+    query.endAt && func.isDateStr(query.endAt) ? parseInt(new Date(query.endAt).getTime() / 1000) : parseInt(query.endAt / 1000) + 24*60*60 - 1
   );
   const endAt = (
     query.endAt >= beginAt && query.endAt <= _default.endAt ? 
@@ -187,8 +187,8 @@ function filterPopularArticlesParams(query) {
     orderBy: orderBy, 
     page: page, 
     perPage: perPage,
-    queryTarget: queryTarget, 
-    queryTxt: queryTxt, 
+    queryTarget: searchTarget, 
+    queryTxt: keyword, 
     beginAt: beginAt, 
     endAt: endAt
   };
