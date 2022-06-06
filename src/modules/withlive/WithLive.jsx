@@ -54,9 +54,11 @@ export default function WithLive ({front = false, location, history}) {
   useEffect(() => {
     func.setBrowserTitle('왁타버스 같이보기');
     addClassLive();
+    document.querySelector('body').style.overflowY = 'hidden';
 
     return () => {
       document.querySelector('.App') && document.querySelector('.App').classList.remove('live');
+      document.querySelector('body').style.overflowY = 'auto';
     }
   }, []);
 
