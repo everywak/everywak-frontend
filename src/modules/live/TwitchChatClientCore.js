@@ -138,7 +138,7 @@ class TwitchChatClientCore {
     const oldChannel = this.channelName;
     this.channelName = newChannel;
     if (oldChannel !== newChannel) {
-      if (this.IRCStatus === TwitchChatClientCore.JOINED) { // rejoin
+      if (this.IRCState === TwitchChatClientCore.JOINED) { // rejoin
         this.sendMessage(`PART #${oldChannel}`);
         this.sendMessage(`JOIN #${newChannel}`);
       }
