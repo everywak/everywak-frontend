@@ -180,7 +180,7 @@ export default function WithLive ({front = false, location, history}) {
         <BroadcasterPanel />
         <Footer />
       </div>
-      <ul className={cx('SidePlayerList')}>
+      <ul className={cx('SidePlayerList', {opened: opened, expanded: expanded})}>
         {floatingTargetSideList}
       </ul>
       <TwitchChat channelId={mainChannelId} location={location} history={history} />

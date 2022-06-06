@@ -248,26 +248,36 @@ header.header {
   }
 }
 
-.TwitchChat {
-  grid-area: chat;
+.WithLive {
   @media (orientation: portrait) {
-    --wrapperPortraitHeight: calc(100vw / 16 * 9 + (100vw / 7 / 16 * 9));
-    max-height: calc(100vh - #{$header-height} - var(--wrapperPortraitHeight));
-    
-    .opened + & {
+    .opened + .TwitchChat {
       --wrapperPortraitHeight: calc(100vw / 16 * 9 + (100vw / 7 / 16 * 9) + 84px);
     }
-    .expanded + & {
+    .expanded + .TwitchChat {
       --wrapperPortraitHeight: calc(100vh - #{$header-height});
     }
-    transition: max-height ease .3s;
   }
-  
-  .sizeController,
-  .sizeControlWrapper .sizeControlOverlay {
-    z-index: 1000;
+  .TwitchChat {
+    grid-area: chat;
     @media (orientation: portrait) {
-      display: none;
+      --wrapperPortraitHeight: calc(100vw / 16 * 9 + (100vw / 7 / 16 * 9));
+      max-height: calc(100vh - #{$header-height} - var(--wrapperPortraitHeight));
+      
+      .opened + & {
+        --wrapperPortraitHeight: calc(100vw / 16 * 9 + (100vw / 7 / 16 * 9) + 84px);
+      }
+      .expanded + & {
+        --wrapperPortraitHeight: calc(100vh - #{$header-height});
+      }
+      transition: max-height ease .3s;
+    }
+    
+    .sizeController,
+    .sizeControlWrapper .sizeControlOverlay {
+      z-index: 1000;
+      @media (orientation: portrait) {
+        display: none;
+      }
     }
   }
 }
