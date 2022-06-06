@@ -39,7 +39,7 @@
   }
 }
 .WakPlayer {
-  background-color: $twitch-color;
+  background: none;
   box-sizing: border-box;
   position: relative;
   width: 100%;
@@ -79,7 +79,7 @@
 
   &.styleVolumeOnly {
     .controller {
-      background: #0003;
+      background: #0005;
       .bottomLeft .playpause,
       .bottomLeft .sync,
       .bottomRight {
@@ -212,7 +212,7 @@
           padding: 10px 20px;
           width: 100%;
           box-sizing: border-box;
-          transition: background ease .1s;
+          transition: background-color ease .1s;
           -webkit-tap-highlight-color: transparent;
 
           &:hover {
