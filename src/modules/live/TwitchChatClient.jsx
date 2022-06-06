@@ -32,7 +32,7 @@ class TwitchChatClient extends PureComponent {
     chatOptions: {
       onlyModerator: false,
       onlySubscriber: false,
-      maxShowLength: 30,
+      maxShowLength: 70,
       blacklist: [],
       whitelist: [],
     },
@@ -216,6 +216,8 @@ class TwitchChatClient extends PureComponent {
   }
 }
 
+let ignoreNextScroll = 0;
+
 function TwitchChatList({
   chatList = [], 
   options = {},
@@ -223,8 +225,10 @@ function TwitchChatList({
 
   const refList = useRef();
   useEffect(() => {
-    scrollToBottom();
-  }, [chatList]);
+    if (autoScroll) {
+      setTimeout(scrollToBottom, 50);
+    }
+  }, [chatList, autoScroll]);
 
   /**
    * Scroll chatList to bottom.
@@ -232,6 +236,7 @@ function TwitchChatList({
   function scrollToBottom() {
     const element = refList.current;
     if (element) {
+      ignoreNextScroll = 5;
       element.scrollTo({
         //behavior: 'smooth',
         top: element.scrollHeight,
@@ -239,10 +244,31 @@ function TwitchChatList({
     }
   }
 
+  const [autoScroll, setAutoScroll] = useState(true);
+
+  useEffect(() => {
+
+    const onScroll = e => {
+      if (!ignoreNextScroll) {
+        const isScrollEnd = e.target.scrollHeight === e.target.scrollTop + e.target.clientHeight;
+        if (!autoScroll && isScrollEnd) {
+          setAutoScroll(true);
+        } else {
+          setAutoScroll(false);
+        }
+      } else {
+        ignoreNextScroll = Math.max(ignoreNextScroll - 1, 0);
+      }
+    }
+    refList.current && refList.current.addEventListener('scroll', onScroll);
+
+    return () => refList.current && refList.current.removeEventListener('scroll', onScroll);
+  }, [refList.current, autoScroll]);
+
   const _options = Object.assign({
     onlyModerator: false,
     onlySubscriber: false,
-    maxShowLength: 30,
+    maxShowLength: 70,
     blacklist: [],
     whitelist: [],
   }, options);
@@ -295,9 +321,12 @@ function TwitchChatList({
   );
 
   return (
-    <ul className="TwitchChatList" ref={refList}>
-      {cList}
-    </ul>
+    <div className="TwitchChatList">
+      <ul className="TwitchChatListWrapper" ref={refList}>
+        {cList}
+      </ul>
+      {!autoScroll && <BasicButton className="twitchChatScrollToBottom" onClick={e => setAutoScroll(true)}>여기를 눌러 자동 스크롤</BasicButton>}
+    </div>
   )
 }
 

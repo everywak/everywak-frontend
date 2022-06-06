@@ -28,71 +28,89 @@
   .TwitchChatList {
     box-sizing: border-box;
     margin: 0;
-    overflow-y: scroll;
     height: 100%;
-    padding: 8px 0;
+    padding: 0;
+    position: relative;
+    overflow-y: hidden;
 
-    &::-webkit-scrollbar {
-      width: 8px;
-      padding: 2px 0;
-    }
-    &::-webkit-scrollbar-button {
-      display: none;
-    }
-    &::-webkit-scrollbar-thumb {
-      background: #aaa;
-      background-clip: padding-box;
-      border: 2px solid transparent;
-      border-radius: 4px;
-    }
+    .TwitchChatListWrapper {
+      box-sizing: border-box;
+      margin: 0;
+      overflow-y: scroll;
+      height: 100%;
+      padding: 8px 0;
 
-    .twitchChatItem {
-      font-size: 14px;
-      font-weight: 400;
-      padding: 5px 16px;
-      vertical-align: middle;
+      &::-webkit-scrollbar {
+        width: 8px;
+        padding: 2px 0;
+      }
+      &::-webkit-scrollbar-button {
+        display: none;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: #aaa;
+        background-clip: padding-box;
+        border: 2px solid transparent;
+        border-radius: 4px;
+      }
 
-      &.sysMessage {
-        background: $component-primary-border-color;
-        border-radius: 8px;
-        box-sizing: border-box;
-        color: $secondary-text-color;
-        margin: 4px;
+      .twitchChatItem {
+        font-size: 14px;
+        font-weight: 400;
         padding: 5px 16px;
-        text-align: center;
-      }
-
-      & > span {
-        vertical-align: middle;;
-      }
-
-      .chatProfile {
-
-        .nickname {
-          font-weight: 500;
-        }
-        .userid {
-          font-weight: 400;
-          font-size: 12px;
-          margin-inline-start: 2px;
-        }
-      }
-
-      .TwitchChatEmote {
         vertical-align: middle;
 
-        @include not-desktop {
-          
-          img {
-            width: 20px;
-            height: 20px;
+        &.sysMessage {
+          background: $component-primary-border-color;
+          border-radius: 8px;
+          box-sizing: border-box;
+          color: $secondary-text-color;
+          margin: 4px;
+          padding: 5px 16px;
+          text-align: center;
+        }
+
+        & > span {
+          vertical-align: middle;;
+        }
+
+        .chatProfile {
+
+          .nickname {
+            font-weight: 500;
+          }
+          .userid {
+            font-weight: 400;
+            font-size: 12px;
+            margin-inline-start: 2px;
           }
         }
+
+        .TwitchChatEmote {
+          vertical-align: middle;
+
+          @include not-desktop {
+            
+            img {
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+        .TwitchChatBadge {
+          vertical-align: middle;
+          margin-inline-end: 2px;
+        }
       }
-      .TwitchChatBadge {
-        vertical-align: middle;
-        margin-inline-end: 2px;
-      }
+    }
+
+    .twitchChatScrollToBottom {
+      background: #000a;
+      position: absolute;
+      bottom: 8px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
     }
   }
   .twitchChatBottom {
