@@ -211,8 +211,26 @@ function FloatingWakPlayer({channelId, name, target, onClick, onChangeOverlaySta
     height: 0,
   };
 
+  // 플레이어 전환에 따른 위치 이동시에만 트랜지션 활성화되게 
+  const [transitionLife, setTransitionLife] = useState(0);
+
+  const reduceTransitionLife = useCallback(() => {
+    if (transitionLife > 0) {
+      setTransitionLife(Math.max(transitionLife - 50, 0));
+    }
+  }, [transitionLife]);
+
+  useEffect(() => {
+    const loop = setInterval(reduceTransitionLife, 50);
+
+    return () => {
+      clearInterval(loop);
+    }
+  }, [reduceTransitionLife]);
+
   useEffect(() => {
     const loop = setInterval(checkChangedPosition, 50);
+    setTransitionLife(200);
 
     return () => {
       clearInterval(loop);
@@ -253,7 +271,7 @@ function FloatingWakPlayer({channelId, name, target, onClick, onChangeOverlaySta
   }
   
   return (
-    <div className={cx('FloatingWakPlayer', {isSide: target !== 'target_0'})} style={style}>
+    <div className={cx('FloatingWakPlayer', {isSide: target !== 'target_0', isMoving: transitionLife > 0})} style={style}>
       <WakPlayer 
         key={`wakplayer_${channelId}`} 
         channelId={channelId} 

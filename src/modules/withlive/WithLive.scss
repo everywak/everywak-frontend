@@ -191,11 +191,17 @@ header.header {
   .FloatingWakPlayer {
     --name: '';
     position: absolute;
+
+    transition: 
+      width ease .15s, 
+      height ease .15s;
+    &.isMoving {
     transition: 
       left ease .15s, 
       top ease .15s, 
       width ease .15s, 
       height ease .15s;
+    }
 
     &.isSide {
 
