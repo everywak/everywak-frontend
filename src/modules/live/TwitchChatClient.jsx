@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useRef, PureComponent } from 'react';
+import React, { Component, useCallback, useState, useEffect, useRef, PureComponent } from 'react';
 
 import TwitchChatClientCore from './TwitchChatClientCore';
 import Spinner from '../../common/Components/Spinner';
@@ -216,8 +216,6 @@ class TwitchChatClient extends PureComponent {
   }
 }
 
-let ignoreNextScroll = 0;
-
 function TwitchChatList({
   chatList = [], 
   options = {},
@@ -226,44 +224,42 @@ function TwitchChatList({
   const refList = useRef();
   useEffect(() => {
     if (autoScroll) {
-      setTimeout(scrollToBottom, 50);
+      scrollToBottom();
     }
   }, [chatList, autoScroll]);
 
   /**
    * Scroll chatList to bottom.
    */
-  function scrollToBottom() {
+  const scrollToBottom = useCallback(() => {
     const element = refList.current;
-    if (element) {
-      ignoreNextScroll = 5;
+    if (element, element.scrollTop < -3) {
       element.scrollTo({
         //behavior: 'smooth',
         top: element.scrollHeight,
       });
     }
-  }
+  }, [autoScroll]);
 
   const [autoScroll, setAutoScroll] = useState(true);
 
-  useEffect(() => {
-
-    const onScroll = e => {
-      if (!ignoreNextScroll) {
-        const isScrollEnd = e.target.scrollHeight === e.target.scrollTop + e.target.clientHeight;
-        if (!autoScroll && isScrollEnd) {
-          setAutoScroll(true);
-        } else {
-          setAutoScroll(false);
-        }
-      } else {
-        ignoreNextScroll = Math.max(ignoreNextScroll - 1, 0);
-      }
+  /**
+   * Handle auto scroll
+   */
+  const onScroll = useCallback(e => {
+    const isScrollEnd = e.target.scrollTop > -4;
+    if (isScrollEnd) {
+      setAutoScroll(true);
+      scrollToBottom();
+    } else if (autoScroll) {
+      setAutoScroll(false);
     }
+  }, [refList.current, autoScroll]);
+  useEffect(() => {
     refList.current && refList.current.addEventListener('scroll', onScroll);
 
     return () => refList.current && refList.current.removeEventListener('scroll', onScroll);
-  }, [refList.current, autoScroll]);
+  }, [onScroll]);
 
   const _options = Object.assign({
     onlyModerator: false,
@@ -318,14 +314,14 @@ function TwitchChatList({
     <li key={c.key} className="twitchChatItem sysMessage">
       <span className="chatContent">{c.content}</span>
     </li>
-  );
+  ).reverse();
 
   return (
     <div className="TwitchChatList">
       <ul className="TwitchChatListWrapper" ref={refList}>
         {cList}
       </ul>
-      {!autoScroll && <BasicButton className="twitchChatScrollToBottom" onClick={e => setAutoScroll(true)}>여기를 눌러 자동 스크롤</BasicButton>}
+      {!autoScroll && <BasicButton className="twitchChatScrollToBottom" onClick={e => { setAutoScroll(true);scrollToBottom() }}>여기를 눌러 자동 스크롤</BasicButton>}
     </div>
   )
 }
