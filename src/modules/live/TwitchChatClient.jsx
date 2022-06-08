@@ -107,6 +107,7 @@ class TwitchChatClient extends PureComponent {
       const str = this.chatInput.current.value;
       if (this.chatCore.sendChat(str)) {
         this.chatInput.current.value = '';
+        this.updateChatBoxHeight();
       }
     }
   }
@@ -143,8 +144,18 @@ class TwitchChatClient extends PureComponent {
    * @see TwitchChatClient.chatInput
    */
   appendToChatBox = str => {
-    if (this.chatInput.current) {
-      this.chatInput.current.value += str;
+    const element = this.chatInput.current;
+    if (element) {
+      element.value += str;
+      this.updateChatBoxHeight();
+    }
+  }
+
+  updateChatBoxHeight = () => {
+    const element = this.chatInput.current;
+    if (element) {
+      element.style.height = '0px';
+      element.style.height = `${element.scrollHeight + 4}px`;
     }
   }
 
