@@ -197,64 +197,80 @@
     }
 
     .TwitchChatEmotePicker {
-      background: white;
-      border-radius: 8px;
       box-sizing: border-box;
-      box-shadow: 0px 0px 6px rgba(0, 0, 0, .25);
-      overflow: hidden;
-      overflow-y: scroll;
-      padding: 8px;
       position: absolute;
       width: calc(100% - 16px);
-      max-height: 200px;
+      height: 200px;
       left: 8px;
       bottom: calc(100% + 8px);
-      /*animation: animFadeIn .3s 0s 1 ease normal forwards;*/
 
-      &::-webkit-scrollbar {
-        width: 8px;
-      }
-      &::-webkit-scrollbar-button {
-        display: none;
-      }
-      &::-webkit-scrollbar-thumb {
-        background: #f0f0f0;
-        background-clip: padding-box;
-        border: 2px solid transparent;
-        border-radius: 4px;
+      .TwitchChatEmotePickerDim {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        z-index: 999;
       }
 
-      .TwitchChatEmoteSet {
-        padding: 8px 0;
-        border-bottom: 1px solid $component-secondary-border-color;
+      .TwitchChatEmotePickerContent {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0px 0px 6px rgba(0, 0, 0, .25);
+        height: 100%;
+        overflow: hidden;
+        overflow-y: scroll;
+        position: relative;
+        padding: 8px;
+        z-index: 1000;
+        /*animation: animFadeIn .3s 0s 1 ease normal forwards;*/
 
-        .emoteSetName {
-          display: flex;
-          flex-direction: row;
-          justify-content: flex-start;
-          align-items: center;
-          font-size: 14px;
-          margin-left: 6px;
-          margin-bottom: 4px;
-
-          .CircleImg {
-            width: 32px;
-            margin-right: 8px;
-          }
+        &::-webkit-scrollbar {
+          width: 8px;
         }
-        .emoteList {
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
+        &::-webkit-scrollbar-button {
+          display: none;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: #f0f0f0;
+          background-clip: padding-box;
+          border: 2px solid transparent;
+          border-radius: 4px;
+        }
 
-          .TwitchChatEmote {
-            cursor: pointer;
+        .TwitchChatEmoteSet {
+          padding: 8px 0;
+          border-bottom: 1px solid $component-secondary-border-color;
+
+          .emoteSetName {
             display: flex;
-            justify-content: center;
+            flex-direction: row;
+            justify-content: flex-start;
             align-items: center;
-            margin: 6px;
-            width: 28px;
-            height: 28px;
+            font-size: 14px;
+            margin-left: 6px;
+            margin-bottom: 4px;
+
+            .CircleImg {
+              width: 32px;
+              margin-right: 8px;
+            }
+          }
+          .emoteList {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            .TwitchChatEmote {
+              cursor: pointer;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin: 6px;
+              width: 28px;
+              height: 28px;
+            }
           }
         }
       }

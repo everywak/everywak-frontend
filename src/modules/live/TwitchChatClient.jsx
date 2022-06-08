@@ -206,7 +206,7 @@ class TwitchChatClient extends PureComponent {
                   <BasicButton className="twitchChatBtnSend" onClick={this.sendChat}>채팅</BasicButton>
                 </div>
               </div>
-              {openedEmotePicker && <TwitchChatEmotePicker emotes={emoteSets} getTwitchApi={this.chatCore.getTwitchApi} appendToChatBox={this.appendToChatBox} />}
+              {openedEmotePicker && <TwitchChatEmotePicker emotes={emoteSets} getTwitchApi={this.chatCore.getTwitchApi} appendToChatBox={this.appendToChatBox} setOnModal={this.closeEmotePicker} />}
             </div>
           </React.Fragment> :
           <div className="twitchChatLogin">
@@ -429,9 +429,9 @@ class TwitchChatBadge extends Component {
 
 /**
  * 
- * @param {{emotes: TwitchChatEmoteItem[], getTwitchApi: function, appendToChatBox: function}} props 
+ * @param {{emotes: TwitchChatEmoteItem[], getTwitchApi: function, appendToChatBox: function, setOnModal: (state: boolean) => void}} props 
  */
-function TwitchChatEmotePicker ({emotes, getTwitchApi, appendToChatBox}) {
+function TwitchChatEmotePicker ({emotes, getTwitchApi, appendToChatBox, setOnModal}) {
 
   const [recents, setRecents] = useState([
     {
@@ -481,7 +481,10 @@ function TwitchChatEmotePicker ({emotes, getTwitchApi, appendToChatBox}) {
 
   return (
     <div className='TwitchChatEmotePicker'>
-      {emoteList}
+      <div className="TwitchChatEmotePickerDim" onClick={e => setOnModal(false)}/>
+      <div className="TwitchChatEmotePickerContent">
+        {emoteList}
+      </div>
     </div>
   );
 }
