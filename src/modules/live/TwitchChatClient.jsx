@@ -1,4 +1,4 @@
-import React, { Component, useCallback, useState, useEffect, useRef, PureComponent } from 'react';
+import React, { Component, useCallback, useState, useEffect, useMemo, useRef, PureComponent } from 'react';
 
 import TwitchChatClientCore from './TwitchChatClientCore';
 import Spinner from '../../common/Components/Spinner';
@@ -287,6 +287,42 @@ function TwitchChatList({
     return filteredChatList.slice(Math.max(filteredChatList.length + 1 - opt.maxShowLength, 0));
   }
 
+  const filteredChatList = filterChatList(chatList, _options);
+  const cList = filteredChatList.map(chat => 
+    chat.type === 'USERCHAT' ? 
+    <TwitchChatUserChat chatItem={chat} /> :
+    <li key={chat.key} className="twitchChatItem sysMessage">
+      <span className="chatContent">{chat.content}</span>
+    </li>
+  ).reverse();
+
+  return (
+    <div className="TwitchChatList">
+      <ul className="TwitchChatListWrapper" ref={refList}>
+        {cList}
+      </ul>
+      {!autoScroll && <BasicButton className="twitchChatScrollToBottom" onClick={e => { setAutoScroll(true);scrollToBottom() }}>여기를 눌러 자동 스크롤</BasicButton>}
+    </div>
+  )
+}
+/**
+ * @typedef TwitchChatItemData
+ * @property {'USERCHAT'|'SYSMSG'} type
+ * @property {object} tags
+ * @property {string} userID
+ * @property {{
+ * color: string, badges: array, displayName: string, userID: string
+ * }} profile
+ * @property {array} content
+ * @property {string} rawContent
+ * @property {string} key
+ */
+/**
+ * Twitch chat item
+ * @param {{chatItem: TwitchChatItemData}} props 
+ */
+const TwitchChatUserChat = React.memo(({chatItem}) => {
+
   function geneProfile({ color, badges, displayName, userID }) {
     return (
     <span className="chatProfileWrapper" style={{color: color}}>
@@ -303,28 +339,14 @@ function TwitchChatList({
     return content.map(item => typeof item === 'string' ? item : <TwitchChatEmote emoteId={item.emoteId} />);
   }
 
-  const filteredChatList = filterChatList(chatList, _options);
-  const cList = filteredChatList.map(c => 
-    c.type === 'USERCHAT' ? 
-    <li key={c.key} className="twitchChatItem">
-      <span className="chatProfile">{geneProfile(c.profile)}</span>
-      <span>: </span>
-      <span className="chatContent">{geneContent(c.content)}</span>
-    </li> :
-    <li key={c.key} className="twitchChatItem sysMessage">
-      <span className="chatContent">{c.content}</span>
-    </li>
-  ).reverse();
-
   return (
-    <div className="TwitchChatList">
-      <ul className="TwitchChatListWrapper" ref={refList}>
-        {cList}
-      </ul>
-      {!autoScroll && <BasicButton className="twitchChatScrollToBottom" onClick={e => { setAutoScroll(true);scrollToBottom() }}>여기를 눌러 자동 스크롤</BasicButton>}
-    </div>
-  )
-}
+    <li key={chatItem.key} className="twitchChatItem">
+      <span className="chatProfile">{useMemo(() => geneProfile(chatItem.profile), [chatItem])}</span>
+      <span>: </span>
+      <span className="chatContent">{geneContent(chatItem.content)}</span>
+    </li>
+  );
+});
 
 class TwitchChatEmote extends Component {
 

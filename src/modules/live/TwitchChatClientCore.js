@@ -8,6 +8,19 @@ const cookies = new Cookies();
 const setCookie = (name, value, option) => cookies.set(name, value, { ...option })
 const getCookie = name => cookies.get(name)
 
+/**
+ * @typedef TwitchChatItemData
+ * @property {'USERCHAT'|'SYSMSG'} type
+ * @property {object} tags
+ * @property {string} userID
+ * @property {{
+ * color: string, badges: array, displayName: string, userID: string
+ * }} profile
+ * @property {array} content
+ * @property {string} rawContent
+ * @property {string} key
+ */
+
 class TwitchChatClientCore {
   
   static CLOSED     = 0;
@@ -28,6 +41,9 @@ class TwitchChatClientCore {
     this.channelName = channelName || '';
     
     this.maxChatCount = 1000;
+    /**
+     * @type {TwitchChatItemData[]}
+     */
     this.chatList = [];
 
     this.oauth = '';
@@ -410,7 +426,7 @@ class TwitchChatClientCore {
    * Append chatItem to chatList.
    * 
    * @see TwitchChatClientCore.receiveChat
-   * @param {Object} chat A chat to append
+   * @param {TwitchChatItemData} chat A chat to append
    */
   appendToChatList = chat => {
     this.chatList = [...this.chatList, chat].slice(-this.maxChatCount);
