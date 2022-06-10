@@ -122,11 +122,6 @@ export const Waktaverse = [
     role: 'gomem',
   },
   {
-    name: '김치만두번영택사스가',
-    login_name: 'cman0327',
-    role: 'gomem',
-  },
-  {
     name: '해루석',
     login_name: 'rusuk_',
     role: 'gomem',
@@ -174,6 +169,21 @@ export const Waktaverse = [
   {
     name: '비즈니스 킴',
     login_name: 'businesskim111',
+    role: 'gomem',
+  },
+  {
+    name: '카르나르 융터르',
+    login_name: 'carnarjungtur',
+    role: 'gomem',
+  },
+  {
+    name: '프리터',
+    login_name: 'freeter1999',
+    role: 'gomem',
+  },
+  {
+    name: '김치만두번영택사스가',
+    login_name: 'cman0327',
     role: 'ghost',
   },
   {
@@ -189,16 +199,6 @@ export const Waktaverse = [
   {
     name: '곽춘식',
     login_name: 'realchunshik',
-    role: 'ghost',
-  },
-  {
-    name: '개냥이',
-    login_name: 'dogcat0926',
-    role: 'ghost',
-  },
-  {
-    name: '길햇님송OI',
-    login_name: 's2unsongi_s2_tm',
     role: 'ghost',
   },
   {
