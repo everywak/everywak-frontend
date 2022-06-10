@@ -247,7 +247,7 @@ function TwitchChatList({
     if (element, element.scrollTop < -3) {
       element.scrollTo({
         //behavior: 'smooth',
-        top: element.scrollHeight,
+        top: 0,
       });
     }
   }, [autoScroll]);
@@ -301,7 +301,7 @@ function TwitchChatList({
   const filteredChatList = filterChatList(chatList, _options);
   const cList = filteredChatList.map(chat => 
     chat.type === 'USERCHAT' ? 
-    <TwitchChatUserChat chatItem={chat} /> :
+    <TwitchChatUserChat key={chat.key} chatItem={chat} /> :
     <li key={chat.key} className="twitchChatItem sysMessage">
       <span className="chatContent">{chat.content}</span>
     </li>
@@ -351,7 +351,7 @@ const TwitchChatUserChat = React.memo(({chatItem}) => {
   }
 
   return (
-    <li key={chatItem.key} className="twitchChatItem">
+    <li className="twitchChatItem">
       <span className="chatProfile">{useMemo(() => geneProfile(chatItem.profile), [chatItem])}</span>
       <span>: </span>
       <span className="chatContent">{geneContent(chatItem.content)}</span>
