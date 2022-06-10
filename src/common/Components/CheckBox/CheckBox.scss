@@ -1,0 +1,56 @@
+@import '../../common.scss';
+
+.CheckBox {
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: $primary-text-color;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 10px;
+  position: relative;
+  width: 100%;
+  vertical-align: middle;
+  user-select: none;
+
+  &.on {
+    .indicator {
+      background: var(--accentColor, $primary-color);
+      border-color: var(--accentColor, $primary-color);
+  
+      .marker {
+        left: 9px;
+      }
+    }
+  }
+  
+  .label {
+    flex-grow: 1;
+    text-align: left;
+  }
+  .indicator {
+    box-sizing: border-box;
+    width: 26px;
+    height: 16px;
+    border-radius: 8px;
+    border: #0003 solid 1px;
+    transition: background-color ease .15s;
+
+    .marker {
+      background: #fafafa;
+      border-radius: 50%;
+      box-sizing: border-box;
+      box-shadow: 0 0 2px 1px #0008;
+      width: 16px;
+      height: 16px;
+      position: relative;
+      left: -1px;
+      top: -1px;
+      transition: left ease .15s;
+    }
+  }
+}
