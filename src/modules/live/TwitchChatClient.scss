@@ -4,8 +4,13 @@
   overflow: hidden;
   display: grid;
   grid-template-rows: auto 1fr auto;
+  grid-template-areas: 
+    'header'
+    'chat'
+    'bottom';
   width: 100%;
   height: 100%;
+  position: relative;
 
   .twitchChatHeader {
     box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);
@@ -125,6 +130,17 @@
       }
     }
   }
+  .TwitchChatList.filteredChatList {
+    background: white;
+    border-bottom: 1px solid $component-secondary-border-color;
+    box-shadow: 0px 2px 8px 0px #0003;
+    grid-area: chat;
+    position: absolute;
+    top: 1px;
+    width: 100%;
+    height: 30%;
+  }
+
   .twitchChatBottom {
     box-shadow: 0 0 4px 1px rgba(0, 0, 0, .1);
     box-sizing: border-box;
@@ -197,12 +213,13 @@
     }
 
     .TwitchChatEmotePicker {
+      --margin: 8px;
       box-sizing: border-box;
       position: absolute;
-      width: calc(100% - 16px);
+      width: calc(100% - (var(--margin) * 2));
       height: 200px;
-      left: 8px;
-      bottom: calc(100% + 8px);
+      left: var(--margin);
+      bottom: calc(100% + var(--margin));
 
       .TwitchChatEmotePickerDim {
         position: fixed;
@@ -272,6 +289,60 @@
               height: 28px;
             }
           }
+        }
+      }
+    }
+
+    .TwitchChatSettingPanel {
+      --margin: 8px;
+      box-sizing: border-box;
+      position: absolute;
+      width: calc(100% - (var(--margin) * 2));
+      left: var(--margin);
+      bottom: calc(100% + var(--margin));
+
+      .TwitchChatSettingPanelDim {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        z-index: 999;
+      }
+
+      .TwitchChatSettingPanelContent {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0px 0px 6px rgba(0, 0, 0, .25);
+        height: 100%;
+        position: relative;
+        padding: 8px;
+        z-index: 1000;
+
+        & > header {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin-bottom: 8px;
+
+          .dummy {
+            width: 28px;
+          }
+          .title {
+            color: $primary-text-color;
+            flex-grow: 1;
+            font-size: 15px;
+            font-weight: 500;
+            text-align: center;
+          }
+          .twitchChatBtnClose {
+            padding: 4px;
+          }
+        }
+
+        .CheckBox {
+          width: 100%;
         }
       }
     }

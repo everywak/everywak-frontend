@@ -1,18 +1,25 @@
 import React, { Component, useCallback, useState, useEffect, useMemo, useRef, PureComponent } from 'react';
 
+import useInputs from '../../hooks/useInputs';
+
 import TwitchChatClientCore from './TwitchChatClientCore';
 import Spinner from '../../common/Components/Spinner';
 import InsertEmoticonRoundedIcon from '@material-ui/icons/InsertEmoticonRounded';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
+import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import BasicButton from '../../common/Components/Button/BasicButton';
 import TransparentButton from '../../common/Components/Button/TransparentButton';
 import CircleImg from '../../common/Components/CircleImg';
+import CheckBox from '../../common/Components/CheckBox/CheckBox';
 
 import * as func from '../../common/funtions';
+import { Waktaverse } from '../../common/constants';
 
 import styles from './TwitchChatClient.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
+
+const waktaverseLoginNames = Waktaverse.map(member => member.login_name);
 
 class TwitchChatClient extends PureComponent {
 
@@ -30,6 +37,7 @@ class TwitchChatClient extends PureComponent {
     oauthState: TwitchChatClientCore.LOGOUTED,
     chatList: [],
     chatOptions: {
+      showFilteredChatView: false,
       onlyModerator: false,
       onlySubscriber: false,
       maxShowLength: 70,
@@ -37,6 +45,7 @@ class TwitchChatClient extends PureComponent {
       whitelist: [],
     },
     openedEmotePicker: false,
+    onSettingPanel: false,
   };
 
   constructor(props) {
@@ -139,6 +148,21 @@ class TwitchChatClient extends PureComponent {
     });
   }
 
+  setOnSettingPanel = state => {
+    this.setState({
+      onSettingPanel: state,
+    });
+  }
+
+  setChatOptions = options => {
+    this.setState({
+      chatOptions: {
+        ...this.state.chatOptions,
+        ...options,
+      }
+    })
+  }
+
   /**
    * Put emote name into chatbox
    * @see TwitchChatClient.chatInput
@@ -172,7 +196,7 @@ class TwitchChatClient extends PureComponent {
 
   render() {
     const { clientId, redirectUri } = this.props;
-    const { chatList, chatOptions, oauthState, emoteSets, openedEmotePicker } = this.state;
+    const { chatList, chatOptions, oauthState, emoteSets, openedEmotePicker, onSettingPanel } = this.state;
 
     return (
       <div className="TwitchChatClient content">
@@ -182,7 +206,8 @@ class TwitchChatClient extends PureComponent {
             <header className="twitchChatHeader">
               채팅
             </header>
-            <TwitchChatList chatList={chatList} options={chatOptions} />
+            <TwitchChatList chatList={chatList} options={{...chatOptions}} />
+            {chatOptions.showFilteredChatView && <TwitchChatList className='filteredChatList' chatList={chatList} options={{whitelist: waktaverseLoginNames}} />}
             <div className="twitchChatBottom">
               <div className="twitchChatInputWrapper">
                 <textarea 
@@ -200,13 +225,14 @@ class TwitchChatClient extends PureComponent {
               <div className="twitchChatInputFooter">
                 <div className="inputFooterLeftWrapper">&nbsp;</div>
                 <div className="inputFooterRightWrapper">
-                  <TransparentButton className="twitchChatBtnSetting">
+                  <TransparentButton className="twitchChatBtnSetting" onClick={e => this.setOnSettingPanel(!onSettingPanel)}>
                     <SettingsRoundedIcon fontSize="small" />
                   </TransparentButton>
                   <BasicButton className="twitchChatBtnSend" onClick={this.sendChat}>채팅</BasicButton>
                 </div>
               </div>
               {openedEmotePicker && <TwitchChatEmotePicker emotes={emoteSets} getTwitchApi={this.chatCore.getTwitchApi} appendToChatBox={this.appendToChatBox} setOnModal={this.closeEmotePicker} />}
+              {onSettingPanel && <TwitchChatSettingPanel setOnModal={this.setOnSettingPanel} chatOptions={chatOptions} onChange={this.setChatOptions} />}
             </div>
           </React.Fragment> :
           <div className="twitchChatLogin">
@@ -227,7 +253,20 @@ class TwitchChatClient extends PureComponent {
   }
 }
 
+/**
+ * @typedef TwitchChatListOptions
+ * @property {boolean} onlyModerator
+ * @property {boolean} onlySubscriber
+ * @property {number} maxShowLength
+ * @property {string[]} blacklist
+ * @property {string[]} whitelist
+ */
+/**
+ * 
+ * @param {{className?: string, chatList: array, options: TwitchChatListOptions}} props 
+ */
 function TwitchChatList({
+  className,
   chatList = [], 
   options = {},
 }) {
@@ -272,13 +311,14 @@ function TwitchChatList({
     return () => refList.current && refList.current.removeEventListener('scroll', onScroll);
   }, [onScroll]);
 
-  const _options = Object.assign({
+  const _options = {
     onlyModerator: false,
     onlySubscriber: false,
     maxShowLength: 70,
     blacklist: [],
     whitelist: [],
-  }, options);
+    ...options
+  };
 
   function filterChatList(list, opt) {
     let filteredChatList = list;
@@ -308,7 +348,7 @@ function TwitchChatList({
   ).reverse();
 
   return (
-    <div className="TwitchChatList">
+    <div className={cx('TwitchChatList', className)}>
       <ul className="TwitchChatListWrapper" ref={refList}>
         {cList}
       </ul>
@@ -358,6 +398,58 @@ const TwitchChatUserChat = React.memo(({chatItem}) => {
     </li>
   );
 });
+
+/**
+ * @typedef TwitchChatOptions
+ * @property {boolean} showFilteredChatView
+ * @property {boolean} onlyModerator
+ * @property {boolean} onlySubscriber
+ * @property {number} maxShowLength
+ * @property {string[]} blacklist
+ * @property {string[]} whitelist
+ */
+/**
+ * 채팅 설정 패널
+ * 
+ * @param {{chatOptions: TwitchChatOptions, onChange: (options: TwitchChatOptions) => void, setOnModal: (state: boolean) => void}} props 
+ */
+function TwitchChatSettingPanel({ chatOptions, onChange, setOnModal, }) {
+
+  const [$chatOptions, $onChange] = useInputs({
+    showFilteredChatView: chatOptions.showFilteredChatView,
+    onlyModerator: chatOptions.onlyModerator,
+    onlySubscriber: chatOptions.onlySubscriber,
+    maxShowLength: chatOptions.maxShowLength,
+  });
+
+  useEffect(() => {
+    if (chatOptions.showFilteredChatView != $chatOptions.showFilteredChatView ||
+      chatOptions.onlyModerator != $chatOptions.onlyModerator ||
+      chatOptions.onlySubscriber != $chatOptions.onlySubscriber ||
+      chatOptions.maxShowLength !== $chatOptions.maxShowLength
+    ) {
+      onChange($chatOptions);
+    }
+  }, [$chatOptions]);
+
+  return (
+    <div className='TwitchChatSettingPanel'>
+      <div className="TwitchChatSettingPanelDim" onClick={e => setOnModal(false)}/>
+      <div className="TwitchChatSettingPanelContent">
+        <header>
+          <div className="dummy"></div>
+          <span className='title'>채팅창 설정</span>
+          <TransparentButton className='twitchChatBtnClose' onClick={e => setOnModal(false)}>
+            <CloseRoundedIcon fontSize='small' />
+          </TransparentButton>
+        </header>
+        <CheckBox label="구독자 채팅만 보기" name='onlySubscriber' value={$chatOptions.onlySubscriber} onChange={$onChange} />
+        <CheckBox label="매니저 채팅만 보기" name='onlyModerator' value={$chatOptions.onlyModerator} onChange={$onChange} />
+        <CheckBox label="왁타버스 멤버 채팅창 표시" name='showFilteredChatView' value={$chatOptions.showFilteredChatView} onChange={$onChange} />
+      </div>
+    </div>
+  );
+}
 
 class TwitchChatEmote extends Component {
 
