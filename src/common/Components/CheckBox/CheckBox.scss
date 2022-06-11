@@ -44,13 +44,44 @@
       background: #fafafa;
       border-radius: 50%;
       box-sizing: border-box;
-      box-shadow: 0 0 2px 1px #0008;
+      box-shadow: 0 0 2px 1px #0003;
       width: 16px;
       height: 16px;
       position: relative;
       left: -1px;
       top: -1px;
       transition: left ease .15s;
+    }
+  }
+
+  @include not-desktop {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 16px 12px;
+    transition: background-color ease .1s;
+
+    &:active {
+      background: rgba(0, 0, 0, .05);
+    }
+    
+    &.on {
+      .indicator .marker {
+        left: 10px;
+      }
+    }
+    
+    .indicator {
+      background: #0001;
+      border: transparent solid 1px;
+      width: 28px;
+  
+      .marker {
+        box-shadow: 0 0 2px 1px #0003;
+        width: 18px;
+        height: 18px;
+        left: -2px;
+        top: -2px;
+      }
     }
   }
 }
