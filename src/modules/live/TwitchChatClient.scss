@@ -139,6 +139,9 @@
     top: 1px;
     width: 100%;
     height: 30%;
+    @include not-desktop {
+      height: 45%;
+    }
   }
 
   .twitchChatBottom {
@@ -149,6 +152,14 @@
     padding: 12px 8px;
     width: 100%;
     position: relative;
+    @include not-desktop {
+      flex-direction: row;
+      align-items: flex-end;
+
+      .twitchChatInputWrapper {
+        flex-grow: 1;
+      }
+    }
 
     .twitchChatInputWrapper {
       position: relative;
@@ -179,6 +190,15 @@
         right: 2px;
         bottom: 2px;
         padding: 4px;
+      }
+    }
+
+    .twitchChatBtnSettingMobile {
+      padding: 6px;
+      margin-right: 0;
+      
+      @include desktop {
+        display: none;
       }
     }
 

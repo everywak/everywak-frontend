@@ -7,6 +7,7 @@ import Spinner from '../../common/Components/Spinner';
 import InsertEmoticonRoundedIcon from '@material-ui/icons/InsertEmoticonRounded';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import BasicButton from '../../common/Components/Button/BasicButton';
 import TransparentButton from '../../common/Components/Button/TransparentButton';
 import CircleImg from '../../common/Components/CircleImg';
@@ -222,6 +223,9 @@ class TwitchChatClient extends PureComponent {
                   <InsertEmoticonRoundedIcon fontSize="small" />
                 </TransparentButton>
               </div>
+              <TransparentButton className="twitchChatBtnSettingMobile" onClick={e => this.setOnSettingPanel(!onSettingPanel)}>
+                <MoreVertIcon fontSize="small" />
+              </TransparentButton>
               <div className="twitchChatInputFooter">
                 <div className="inputFooterLeftWrapper">&nbsp;</div>
                 <div className="inputFooterRightWrapper">
