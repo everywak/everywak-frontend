@@ -1,3 +1,5 @@
+import React from 'react';
+
 import LinkButton from './LinkButton';
 import CircleImg from '../CircleImg';
 

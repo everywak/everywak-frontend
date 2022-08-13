@@ -1,3 +1,5 @@
+import React from 'react';
+
 import FrontPanel from './FrontPanel';
 import Bestwakki from '../bestwakki/Bestwakki';
 import Live from '../live/Live';

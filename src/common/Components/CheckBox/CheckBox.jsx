@@ -1,3 +1,5 @@
+import React from 'react';
+
 import styles from './CheckBox.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
