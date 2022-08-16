@@ -1,0 +1,44 @@
+@import '../../common.scss';
+
+.TextInput {
+  align-items: center;
+  border: solid 1px $component-secondary-border-color;
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+  overflow: hidden;
+  padding: 0;
+  width: 250px;
+  height: fit-content;
+
+  input {
+    background: transparent;
+    border: 0;
+    box-sizing: border-box;
+    color: $primary-text-color;
+    display: flex;
+    flex-grow: 1;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 9px 15px;
+    vertical-align: middle;
+    width: 100%;
+
+    &::placeholder {
+      color: $secondary-text-color;
+      font-size: inherit;
+      font-weight: 500;
+      transition: color ease .3s;
+    }
+
+    &:focus {
+      outline: none;
+
+      &::placeholder {
+        color: transparent;
+        transition: color ease .1s;
+      }
+    }
+  }
+}
