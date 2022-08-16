@@ -3,7 +3,7 @@
 header.header {
   z-index: 1000;
 }
-.WithLive + .footer {
+.WithLive + footer.footer {
   display: none;
 }
 @include not-desktop {
@@ -99,7 +99,7 @@ header.header {
       overflow: hidden;
       transition: height ease .3s;
 
-      .footer {
+      footer.footer {
         display: none;
       }
     }

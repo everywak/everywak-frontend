@@ -1,6 +1,6 @@
 @import '../../common/common.scss';
 
-.Live + .footer {
+.Live + footer.footer {
   display: none;
 }
 .Live:not(.front) {
@@ -103,7 +103,7 @@
     overflow: hidden;
     transition: height ease .3s;
 
-    .footer {
+    footer.footer {
       display: none;
     }
   }
