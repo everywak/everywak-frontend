@@ -8,14 +8,19 @@
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  gap: 8px;
   font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 400;
   font-size: 14px;
-  font-weight: 500;
+  line-height: 1em;
   padding: 6px 10px;
   position: relative;
-  width: 100%;
   vertical-align: middle;
   user-select: none;
+
+  &.fillContainer {
+    width: 100%;
+  }
 
   &.on {
     .indicator {
@@ -23,7 +28,7 @@
       border-color: var(--accentColor, $primary-color);
   
       .marker {
-        left: 9px;
+        left: 10px;
       }
     }
   }
@@ -34,7 +39,7 @@
   }
   .indicator {
     box-sizing: border-box;
-    width: 26px;
+    width: 28px;
     height: 16px;
     border-radius: 8px;
     border: #0003 solid 1px;
@@ -45,11 +50,11 @@
       border-radius: 50%;
       box-sizing: border-box;
       box-shadow: 0 0 2px 1px #0003;
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
       position: relative;
-      left: -1px;
-      top: -1px;
+      left: -2px;
+      top: -2px;
       transition: left ease .15s;
     }
   }
@@ -73,14 +78,9 @@
     .indicator {
       background: #0001;
       border: transparent solid 1px;
-      width: 28px;
   
       .marker {
         box-shadow: 0 0 2px 1px #0003;
-        width: 18px;
-        height: 18px;
-        left: -2px;
-        top: -2px;
       }
     }
   }

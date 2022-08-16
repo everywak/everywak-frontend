@@ -7,7 +7,14 @@ const cx = classNames.bind(styles);
 /**
  * 체크박스
  * 
- * @param {{className?: string, name: string, value: boolean, onChange?: ({target: {name: string, value: boolean}}) => void, accentColor: string, label?: JSX.Element|String}} props 
+ * @param {{
+ * className?: string, 
+ * name: string, 
+ * value: boolean, 
+ * onChange?: ({target: {name: string, value: boolean}}) => void, 
+ * accentColor: string, 
+ * label?: JSX.Element|String
+ * fillContainer: boolean}} props 
  */
 function CheckBox(props) {
   
@@ -18,11 +25,12 @@ function CheckBox(props) {
     onChange, 
     accentColor,
     label, 
+    fillContainer = false,
     ...rest
   } = props;
 
   return (
-    <button className={cx("CheckBox", className, {on: value})} onClick={e => onChange({target: {name, value: !value}})} {...rest} style={{'--accentColor': accentColor}}>
+    <button className={cx("CheckBox", className, {on: value, fillContainer})} onClick={e => onChange({target: {name, value: !value}})} {...rest} style={{'--accentColor': accentColor}}>
       <div className="label">{label}</div>
       <div className="indicator">
         <div className="marker"></div>
