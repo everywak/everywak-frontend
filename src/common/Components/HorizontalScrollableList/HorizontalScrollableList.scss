@@ -1,0 +1,45 @@
+@import '../../common.scss';
+
+.HorizontalScrollableList {
+  --controlWidth: 64px;
+  --backgroundColor: #ffffff;
+  --backgroundTransparentColor: #ffffff;
+  position: relative;
+
+  .listWrapper {
+    overflow-x: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .btnControl {
+    border-radius: 0;
+    color: $primary-text-color;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: var(--controlWidth);
+    height: 100%;
+    opacity: 1;
+    transition: opacity ease .3s;
+
+    &::after {
+      display: none;
+    }
+
+    &.hideBtn {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+  .btnScrollLeft {
+    background: linear-gradient(to right, var(--backgroundColor), var(--backgroundTransparentColor));
+    left: 0;
+  }
+  .btnScrollRight {
+    background: linear-gradient(to left, var(--backgroundColor), var(--backgroundTransparentColor));
+    right: 0;
+  }
+}
