@@ -21,7 +21,7 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 1em;
-    transition: background ease .15s;
+    transition: background ease .15s, color ease .15s;
 
     &.selected {
       background: $primary-color;
