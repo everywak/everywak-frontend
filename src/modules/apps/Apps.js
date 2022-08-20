@@ -4,6 +4,7 @@ import AppListItem from './AppListItem';
 
 import LiveTvRoundedIcon from '@material-ui/icons/LiveTvRounded';
 import StarRoundedIcon from '@material-ui/icons/StarRounded';
+import MenuBookRoundedIcon from '@material-ui/icons/MenuBookRounded';
 import ViewCarouselRoundedIcon from '@material-ui/icons/ViewCarouselRounded';
 import EmojiEventsRoundedIcon from '@material-ui/icons/EmojiEventsRounded';
 import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
@@ -43,6 +44,14 @@ class Apps extends Component {
         icon: <StarRoundedIcon />,
         themeColor: '#F2499A',
         href: '/isedol',
+      },
+      {
+        key: 'apps_waktoon',
+        title: '왁타버스 웹툰',
+        description: '이세돌, 고정멤버 웹툰 모아보기',
+        icon: <MenuBookRoundedIcon />,
+        themeColor: '#10CBa1',
+        href: '/waktoon',
       },
       {
         key: 'apps_waktaverselive',

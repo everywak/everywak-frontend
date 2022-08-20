@@ -1,0 +1,109 @@
+@import '../../../common/common.scss';
+
+.AllWaktoons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 64px;
+  margin: 0;
+  gap: 32px;
+
+  section.content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0px;
+    gap: 24px;
+    width: 1200px;
+
+    & > header {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+      padding: 48px 0px 32px;
+      gap: 8px;
+      align-self: stretch;
+
+      .btnBack {
+        align-items: center;
+        color: $primary-color;
+        display: flex;
+        flex-direction: row;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1em;
+  
+        svg {
+          display: inline-block;
+          margin: 1px;
+        }
+      }
+      .title {
+        color: $primary-text-color;
+        font-weight: 500;
+        font-size: 36px;
+        line-height: 1em;
+        margin: 0;
+      }
+      .desc {
+        color: $secondary-text-color;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 1em;
+      }
+    }
+
+    .listHeader {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0px;
+      align-self: stretch;
+
+      .filterWrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0px 8px;
+        gap: 16px;
+
+        .sortItemWrapper {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding: 0px;
+          gap: 8px;
+        }
+      }
+      .BasicSearchBar {
+        width: 320px;
+      }
+    }
+    
+    .waktoonEpisodeListWrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      align-self: stretch;
+      gap: 24px;
+
+      .PageSelect {
+
+      }
+    }
+    .footer {
+      color: $secondary-text-color;
+      font-size: 14px;
+      text-align: right;
+    }
+  }
+}
+
+@include desktop {
+}
+@include not-desktop {
+}

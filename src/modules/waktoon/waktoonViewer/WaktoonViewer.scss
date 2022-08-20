@@ -1,0 +1,451 @@
+@import '../../../common/common.scss';
+
+.WaktoonViewer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 64px;
+  margin: 0;
+  gap: 32px;
+
+  .headerWrapper {
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, .02);
+    padding: 48px 0 32px;
+    width: 100%;
+
+    & > header {
+      display: flex;
+      flex-direction: column;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 16px 0;
+  
+      & > .btnBackToPage {
+        align-items: center;
+        color: $primary-color;
+        display: flex;
+        flex-direction: row;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1em;
+  
+        svg {
+          display: inline-block;
+          margin: 1px;
+        }
+      }
+
+      .infoWrapper {
+        align-items: flex-end;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+
+        .WaktoonInfo { /* dummy */ }
+
+        .statList {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          padding: 0px;
+          gap: 16px;
+          
+          .StatCounter { /* dummy */ }
+
+          .line {
+            background: rgba(0, 0, 0, 0.1);
+            width: 1px;
+            height: 64px;
+          }
+        }
+      }
+  
+    }
+  }
+
+  section.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 24px;
+    width: 1200px;
+
+    .waktoonEpisodeListHeader {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0px;
+      
+      align-self: stretch;
+
+      .sortArea {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0px;
+        gap: 16px;
+
+        .btnViewFirst {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          margin: 0;
+          padding: 12px 16px;
+          gap: 10px;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 16px;
+        }
+
+        .BasicSelect {
+          background: transparent;
+          border: none;
+        }
+      }
+
+      .SearchBar {
+        .Dropdown {
+          display: none;
+        }
+        .inputForm::placeholder {
+          color: transparent;
+        }
+      }
+    }
+
+    .WaktoonEpisodeList {
+      box-sizing: border-box;
+      padding: 0 12px;
+      width: 100%;
+
+      .SkeletonLoader {
+        display: flex;
+        flex-direction: row;
+        gap: 8px 5.1px;
+      }
+
+      .infoArea .descArea {
+        .skeletonItem {
+          color: transparent;
+        }
+      }
+    }
+
+    .WaktoonEpisodeSlider {
+      box-sizing: border-box;
+      width: 100%;
+    }
+  }
+}
+
+.WaktoonInfo {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  --coverWidth: 170px;
+  --coverHeight: 220px;
+
+  .thumbnailWrapper {
+    background-color: #d9d9d9;
+    border-radius: 8px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    position: relative;
+    width: var(--coverWidth);
+    height: var(--coverHeight);
+
+    & > .BasicImage {
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .infoArea {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0;
+    gap: 12px;
+
+    .summary {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      .ended {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 1em;
+        color: $secondary-text-color;
+      }
+      h1.title {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 36px;
+        line-height: 1em;
+        margin: 0;
+
+        .btnEdit {
+          background: transparent;
+          color: $secondary-text-color;
+          width: 36px;
+          height: 36px;
+          margin: 0;
+          margin-top: 4px;
+          padding: 0;
+        }
+      }
+      .authorArea {
+        align-items: center;
+        color: $primary-middle-text-color;
+        display: flex;
+        flex-direction: row;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 1em;
+        gap: 4px;
+
+        a.author {
+          align-items: center;
+          color: inherit;
+          display: flex;
+          flex-direction: row;
+          gap: 8px;
+
+          .authorProfile {
+            background: #D9D9D9;
+            width: 36px;
+          }
+          .authorNickname {
+          }
+        }
+
+        .btnMoreWaktoon {
+          color: $secondary-text-color;
+        }
+      }
+    }
+    .description {
+      color: $primary-middle-text-color;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 1.6em;
+      width: 600px;
+    }
+  }
+
+  &.skeleton {
+
+    .skeletonItem {
+      color: transparent;
+
+      &.description {
+        line-height: 1em;
+      }
+      
+      &.authorProfileSkeleton {
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+      }
+    }
+    .skeletonItem.last {
+      width: fit-content;
+    }
+  }
+}
+
+.StatCounter, .CounterButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+
+  &.view .icon { color: #00AC30; }
+  &.up .icon { color: #D30000; }
+  &.comment .icon { color: #0064AC; }
+
+  .icon {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+
+    svg {
+      position: relative;
+      top: 1px;
+    }
+  }
+
+  .label {
+    color: $primary-middle-text-color;
+    font-family: 'Noto Sans KR';
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1em;
+  }
+}
+
+.CounterButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  &:hover, &:active {
+    background: transparent;
+  }
+
+  .icon {
+    background: rgba(0, 0, 0, .05);
+    border: none;
+    transition: background ease .15s;
+  }
+  &:hover .icon {
+    background: rgba(0, 0, 0, .1);
+  }
+  &:active .icon {
+    background: rgba(0, 0, 0, .2);
+  }
+}
+
+.WaktoonEpisodeSlider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 24px;
+
+
+  .sliderHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    padding: 0px;
+
+    .btnBackToList {
+
+    }
+    .CheckBox {
+      width: fit-content;
+    }
+  }
+
+  .slider {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 36px;
+
+    .WaktoonEpisodeViewItem {
+
+    }
+  }
+}
+
+.WaktoonEpisodeViewItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 16px;
+
+  &.side {
+    opacity: .5;
+    padding: 0px 0px 40px;
+
+    .CoverImg {
+      width: 240px;
+      height: 312px;
+    }
+    .caption {
+      display: none;
+    }
+  }
+
+  .title {
+    color: $primary-text-color;
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1em;
+  }
+  .CoverImg {
+    width: 280px;
+    height: 360px;
+  }
+  .caption {
+    color: $secondary-text-color;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1em;
+    
+  }
+}
+
+.CoverImg {
+  background: rgba(0, 0, 0, .1);
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.35);
+  opacity: 1;
+  overflow: hidden;
+  position: relative;
+  width: var(--width);
+  min-width: var(--width);
+  height: var(--height);
+  max-height: var(--height);
+  transition: opacity ease .15s, box-shadow ease .15s;
+  transition-delay: opacity 1s;
+
+  &:hover{
+    box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.35);
+  }
+
+  & > img.img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  & > .overlayWrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@include desktop {
+}
+@include not-desktop {
+}

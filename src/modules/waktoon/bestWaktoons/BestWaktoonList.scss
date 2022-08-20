@@ -1,0 +1,14 @@
+@import '../../../common/common.scss';
+
+.WaktoonList.BestWaktoonList {
+  width: 100%;
+
+  ul.itemList {
+    padding: 0;
+    gap: 24px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

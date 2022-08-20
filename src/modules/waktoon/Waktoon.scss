@@ -1,0 +1,206 @@
+@import '../../common/common.scss';
+
+.Waktoon {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 64px;
+  margin: 0;
+  gap: 32px;
+
+  .headerWrapper {
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, .02);
+    padding: 48px 0 32px;
+    width: 100%;
+
+    .headerContainer {
+      display: flex;
+      flex-direction: column;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 48px;
+
+      & > header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        h1.title {
+          color: $primary-text-color;
+          font-weight: 500;
+          font-size: 36px;
+          line-height: 1em;
+          margin: 0;
+
+          .beta {
+            color: #4ddf8a;
+            font-size: 24px;
+            font-style: italic;
+          }
+        }
+
+        aside.category {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding: 0px;
+          gap: 32px;
+
+          ul.categoryList {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 24px;
+
+            li {
+              a {
+                color: $primary-text-color;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 1em;
+                transition: color ease .15s;
+
+                &:hover {
+                  color: $primary-color;
+                }
+              }
+            }
+          }
+          .btnLogin {
+            background: $button-secondary-bg-color;
+            color: $button-secondary-text-color;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 10px 12px;
+            gap: 8px;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 16px;
+          }
+        }
+      }
+      
+      section.highlight {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 24px;
+        width: 100%;
+        
+        .intro {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 8px 0px;
+          gap: 12px;
+          width: 240px;
+
+          h2.title {
+            color: $primary-text-color;
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 1em;
+            margin: 0;
+          }
+          .description {
+            color: $primary-middle-text-color;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 1.6em;
+          }
+          .btnMoreBest {
+            color: $primary-color;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 1em;
+            padding: 4px 0;
+          }
+        }
+        .waktoonBestListWrapper {
+          flex-grow: 1;
+          width: calc(100% - 240px - 24px);
+
+          .WaktoonBestList {
+            width: 100%;
+
+            ul.itemList {
+            }
+          }
+        }
+      }
+  
+    }
+  }
+
+  .sectionWrapper {
+    --width: 1200px;
+    display: grid;
+    grid-template-columns: calc(var(--width) - 320px - 32px) 320px;
+    grid-template-rows: auto;
+    grid-template-areas: 'main side';
+    gap: 32px;
+    max-width: var(--width);
+
+    .FrontPanel {
+      margin-top: 0;
+
+      .panelHeader > a {
+        margin: 0 8px 24px;
+      }
+    }
+
+    section.main {
+      padding-top: 10px;
+    }
+    section.side {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 32px;
+
+      .BasicSearchBar {
+        width: 100%;
+      }
+      .FrontPanel {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.EverywakLoginArea {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .userInfoWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+
+    .CircleImg {
+      width: 44px;
+      background: #d9d9d9;
+      border-radius: 50%;
+    }
+    .nickname {
+      font-size: 16px;
+    }
+  }
+}
+@include desktop {
+}
+@include not-desktop {
+}

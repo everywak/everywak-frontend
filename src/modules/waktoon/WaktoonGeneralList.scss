@@ -1,0 +1,12 @@
+@import '../../common/common.scss';
+
+.WaktoonList.WaktoonGeneralList {
+
+  ul.itemList {
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+    padding-bottom: 8px;
+    padding-top: 16px;
+    justify-content: space-between;
+  }
+}

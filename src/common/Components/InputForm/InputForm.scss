@@ -1,0 +1,55 @@
+@import '../../common.scss';
+
+.InputForm {
+  --nameWidth: 100px;
+  --formWidth: 400px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 16px;
+
+  .name {
+    color: $primary-text-color;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 14px 0px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1em;
+    width: var(--nameWidth);
+  }
+  .formWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+    width: var(--formWidth);
+
+    .inputWrapper {
+      width: 100%;
+
+      .TextInput {
+        width: 100%;
+      }
+      .BasicSelect {
+        margin: 2px 0;
+      }
+    }
+    .description {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      align-self: stretch;
+      padding: 0px 16px;
+      gap: 10px;
+      color: $secondary-text-color;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.5em;
+    }
+  }
+}

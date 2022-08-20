@@ -1,0 +1,229 @@
+@import '../../../common/common.scss';
+
+.WaktoonEditor {
+  --contentWidth: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 64px;
+  margin: 0;
+  gap: 32px;
+
+  .headerWrapper {
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, .02);
+    padding: 48px 0 32px;
+    width: 100%;
+
+    & > header {
+      display: flex;
+      flex-direction: column;
+      max-width: var(--contentWidth);
+      margin: 0 auto;
+      gap: 16px 0;
+  
+      & > .btnBackToPage {
+        align-items: center;
+        color: $primary-color;
+        display: flex;
+        flex-direction: row;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1em;
+  
+        svg {
+          display: inline-block;
+          margin: 1px;
+        }
+      }
+
+      .infoWrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px;
+        gap: 16px;
+
+        h1.subject {
+          color: $primary-text-color;
+          font-weight: 500;
+          font-size: 36px;
+          line-height: 1em;
+          margin: 0;
+        }
+
+        .actionList {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          padding: 0px;
+          gap: 8px;
+
+          .BasicButton {
+            margin: 0;
+            padding: 12px 16px;
+            gap: 10px;
+            font-weight: 500;
+            color: $dark-primary-text-color;
+            font-size: 18px;
+            line-height: 1em;
+          }
+        }
+      }
+  
+    }
+  }
+
+  .editorFormWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 24px;
+    max-width: var(--contentWidth);
+
+    .WaktoonEditorForm { /* dummy */ }
+
+    .waktoonEpisodeListWrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 24px;
+
+      .episodeListHeader {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        align-self: stretch;
+        padding: 0px 8px 0 24px;
+        gap: 4px;
+
+        .titleArea {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          padding: 0px;
+          gap: 8px;
+
+          .title {
+            color: $primary-text-color;
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 1em;
+            margin: 0;
+          }
+          .description {
+            color: $secondary-text-color;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 1em;
+          }
+        }
+        .BasicButton {
+
+        }
+      }
+      .WaktoonEpisodeList {
+        width: 100%;
+        padding: 0 12px;
+        box-sizing: border-box;
+      }
+    }
+  }
+}
+
+.WaktoonEditorForm {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 20px;
+
+  .thumbnailArea {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 0px;
+    gap: 12px;
+
+    .thumbnailWrapper {
+      background: #f0f0f0;
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.35);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      width: 255px;
+      height: 330px;
+  
+      & > .BasicImage {
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    
+    .thumbnailFooter {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0px 6px 8px;
+      gap: 10px;
+      width: 100%;
+
+      .thumbnailTxt {
+        color: $primary-text-color;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 1em;
+      }
+      .btnList {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0px;
+        gap: 0;
+
+        .BasicButton {
+          color: $primary-text-color;
+          margin: 0;
+          padding: 6px;
+          transition: color ease .15s;
+
+          &:hover {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+
+  .inputFormArea {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 0px;
+    gap: 24px;
+
+    .InputForm {
+      --nameWidth: 130px;
+      --formWidth: 480px;
+    }
+  }
+}
+
+@include desktop {
+}
+@include not-desktop {
+}

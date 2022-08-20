@@ -1,0 +1,14 @@
+@import '../../../common/common.scss';
+
+.WaktoonList.WaktoonEpisodeList {
+
+  ul.itemList {
+    padding-bottom: 8px;
+    padding-top: 0;
+    gap: 8px 5.1px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

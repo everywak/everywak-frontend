@@ -13,12 +13,17 @@ $primary-light-color: #1b91ff;
 $primary-dark-color: #0077e7;
 $component-primary-bg-color: #fafafa;
 $component-primary-border-color: #f0f0f0;
+$component-secondary-bg-color: #f0f0f0;
 $component-secondary-border-color: #ccc;
 
 $primary-text-color: #333;
+$primary-middle-text-color: #555;
 $secondary-text-color: #888;
 $dark-primary-text-color: #f0f0f0;
 $dark-secondary-text-color: #aaa;
+
+$button-secondary-bg-color: #f0f0f0;
+$button-secondary-text-color: $primary-middle-text-color;
 
 $twitch-color: #9147ff;
 $youtube-color: #f00;

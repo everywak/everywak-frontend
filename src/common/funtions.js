@@ -77,3 +77,23 @@ export function formatDateTimeString(date) {
 export function setBrowserTitle (title) {
   document.title = `에브리왁굳 : ${title}`;
 }
+
+/** 
+ * @description 랜덤 문자열을 생성합니다.
+ * 
+ * @param {number} length 문자열 길이
+ * @returns {string}
+ */
+export function getRandomString (length = 16) {
+  const char = '0123456789abcdefghijklmnopqrstuvwxyz';
+  return Array(length).fill(0).map(v => char[parseInt(Math.random() * (char.length - 1))]).join('');
+}
+
+/**
+ * 지정한 url로 이동합니다.
+ * 
+ * @param {string} url
+ */
+export function redirectTo(url) {
+  window.location = url;
+}

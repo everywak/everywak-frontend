@@ -1,0 +1,10 @@
+@import '../../common/common.scss';
+
+.WaktoonList.WaktoonBestList {
+
+  ul.itemList {
+    flex-wrap: nowrap;
+    padding-bottom: 8px;
+    padding-top: 0;
+  }
+}
