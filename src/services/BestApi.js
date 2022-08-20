@@ -96,15 +96,15 @@ export async function getPopularArticles(query) {
   // api 요청
   const output = await requestApi('/bestwakki/WakkiPopularArticles', filteredParams);
 
-  if (output.status == 200) {
+  if (output.status === 200) {
     return output;
   } else {
-    if (output.error.msg == '내부 서버 오류') {
+    if (output.error.msg === '내부 서버 오류') {
       return {
         status: output.status,
         msg: '알 수 없는 오류가 발생하였습니다.',
       };
-    } else if (output.error.msg == 'API 서버 연결 실패') {
+    } else if (output.error.msg === 'API 서버 연결 실패') {
       return {
         status: output.status,
         msg: 'API 서버 또는 사용자의 네트워크가 오프라인 상태입니다.',
