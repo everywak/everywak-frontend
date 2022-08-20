@@ -9,14 +9,18 @@
     .skeletonItem {
       border-radius: 4px;
       overflow: hidden;
-      background-repeat: repeat-x;
+      background-repeat: repeat;
       background-image: linear-gradient(
-          100deg,
-          rgba(255, 255, 255, 0),
+          125deg,
+          rgba(255, 255, 255, .5) 0%,
+          rgba(255, 255, 255, 0) 20%,
+          rgba(255, 255, 255, 0) 30%,
           rgba(255, 255, 255, .5) 50%,
-          rgba(255, 255, 255, 0) 80%
-        ), linear-gradient(rgba(0, 0, 0, .07) 64px, transparent 0);
-      background-size: 200px 70px, 200px 300px;
+          rgba(255, 255, 255, 0) 70%,
+          rgba(255, 255, 255, 0) 80%,
+          rgba(255, 255, 255, .5) 100%
+        ), linear-gradient(rgba(0, 0, 0, .05) 100%, transparent 0);
+      background-size: 200px 300px, 200px 300px;
       background-position: 0 0, 200px 0;
       animation: loading .5s linear infinite;
     }
