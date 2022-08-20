@@ -243,7 +243,7 @@ class TwitchChatClient extends PureComponent {
             {
               oauthState == TwitchChatClientCore.LOGOUTED ?
               <React.Fragment>
-                <span className="loginTitle">로그인하여 팬치들과 함께 해요.</span>
+                <span className="loginTitle">로그인해서 팬치들과 함께 해요.</span>
                 <a className="twitchChatButton btnLoginTwitch" href={`https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=chat:edit chat:read channel:read:predictions`}>Twitch로 로그인</a>
               </React.Fragment> :
               <React.Fragment>
@@ -447,9 +447,9 @@ function TwitchChatSettingPanel({ chatOptions, onChange, setOnModal, }) {
             <CloseRoundedIcon fontSize='small' />
           </TransparentButton>
         </header>
-        <CheckBox label="구독자 채팅만 보기" name='onlySubscriber' value={$chatOptions.onlySubscriber} onChange={$onChange} />
-        <CheckBox label="매니저 채팅만 보기" name='onlyModerator' value={$chatOptions.onlyModerator} onChange={$onChange} />
-        <CheckBox label="왁타버스 멤버 채팅창 표시" name='showFilteredChatView' value={$chatOptions.showFilteredChatView} onChange={$onChange} />
+        <CheckBox label="구독자 채팅만 보기" name='onlySubscriber' value={$chatOptions.onlySubscriber} onChange={$onChange} fillContainer />
+        <CheckBox label="매니저 채팅만 보기" name='onlyModerator' value={$chatOptions.onlyModerator} onChange={$onChange} fillContainer />
+        <CheckBox label="왁타버스 멤버 채팅창 표시" name='showFilteredChatView' value={$chatOptions.showFilteredChatView} onChange={$onChange} fillContainer />
       </div>
     </div>
   );
