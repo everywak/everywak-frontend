@@ -1,0 +1,88 @@
+@import '../../common.scss';
+
+.BasicSearchBar {
+  align-items: center;
+  border: solid 1px $component-secondary-border-color;
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+  overflow: hidden;
+  padding-left: 8px;
+  width: 250px;
+  height: fit-content;
+
+  .Dropdown {
+    min-width: fit-content;
+
+    .dispArea {
+      padding: 8px;
+      min-width: fit-content;
+      width: fit-content;
+
+      .currName {
+        color: $primary-color;
+        display: block;
+        font-size: 14px;
+        min-width: fit-content;
+        width: fit-content;
+      }
+      svg {
+        fill: $primary-color;
+      }
+    }
+    
+    .dropdownAreaWrapper .dropdownArea .option .name {
+      font-size: 14px;
+    }
+  }
+
+  .Dropdown + .inputForm {
+    padding-left: 0;
+  }
+
+  .inputForm {
+    background: transparent;
+    border: 0;
+    box-sizing: border-box;
+    color: $primary-text-color;
+    display: flex;
+    flex-grow: 1;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 11px 4px 11px 8px;
+    vertical-align: middle;
+    width: 100%;
+
+    &::placeholder {
+      color: $secondary-text-color;
+      font-size: inherit;
+      font-weight: 500;
+      transition: color ease .3s;
+    }
+
+    &:focus {
+      outline: none;
+
+      &::placeholder {
+        color: transparent;
+        transition: color ease .1s;
+      }
+    }
+  }
+
+  .btnSearch {
+    height: 100%;
+    margin: 0;
+    padding: 11px;
+
+    &::after {
+      display: none;
+    }
+
+    svg {
+      color: $primary-color;
+      transition: width ease .3s, height ease .3s;
+    }
+  }
+}
