@@ -1,0 +1,19 @@
+@import '../../common.scss';
+
+.BottomNavigationBar { 
+  --accentColor: $primary-color;
+  background: $component-primary-bg-color;
+  border: 1px solid $component-primary-border-color;
+  box-sizing: border-box;
+  padding: 0px 16px;
+  width: 100%;
+  bottom: -64px;
+  left: 0;
+  position: fixed;
+  z-index: 100;
+  transition: bottom ease 0.35s;
+
+  &.isOpened {
+    bottom: 0px;
+  }
+}

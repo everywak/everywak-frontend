@@ -1,0 +1,56 @@
+@import '../../common.scss';
+
+ul.BottomNavigationItemList {
+  --itemLength: 4;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  max-width: calc(96px * var(--itemLength));
+
+  & > .navigationItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 24px 10px;
+    gap: 4px;
+
+    &.selected {
+
+      .icon {
+        color: var(--accentColor);
+        svg {
+          color: var(--accentColor);
+        }
+      }
+      .label {
+        color: var(--accentColor);
+      }
+    }
+
+    .icon {
+      background: transparent;
+      border-radius: 50%;
+      color: $primary-text-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 24px;
+      height: 24px;
+
+      svg {
+        color: $primary-text-color;
+      }
+    }
+    .label {
+      color: $primary-text-color;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 1em;
+    }
+  }
+}

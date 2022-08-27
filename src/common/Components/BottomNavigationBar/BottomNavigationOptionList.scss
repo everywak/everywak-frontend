@@ -1,0 +1,13 @@
+@import '../../common.scss';
+
+ul.BottomNavigationOptionList {
+
+  li.navigationItem {
+
+    .icon {
+      background: transparent;
+    }
+    .label {
+    }
+  }
+}
