@@ -118,9 +118,11 @@ const skeletonLarge =
         <div className={cx('rankAmount', 'new')}><span className="skeletonItem">aaa</span></div>
         <div className="titleWrapper">
           <div className="title"><span className="skeletonItem">asdfasdfasdfasdfasdf</span><div className="author skeletonItem">asdfasdf</div></div>
-          <div className="changedAmount skeletonItem">asdfasdf</div>
-          <div className="changedAmount skeletonItem">asdfasdf</div>
-          <div className="changedAmount skeletonItem">asdfasdf</div>
+          <div className="changedAmountArea skeletonItem">
+            <div className="changedAmount">asdfasdf</div>
+            <div className="changedAmount">asdfasdf</div>
+            <div className="changedAmount">asdfasdf</div>
+          </div>
         </div>
       </div>
     </div>

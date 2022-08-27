@@ -143,20 +143,27 @@
             margin-top: 4px;
           }
         }
-        .changedAmount {
-          color: $secondary-text-color;
+        .changedAmountArea {
           display: flex;
           flex-direction: row;
-          justify-content: flex-start;
-          align-items: center;
-          font-size: 16px;
-          font-weight: 400;
-          line-height: 1em;
-          width: 68px;
-          gap: 4px;
-  
-          svg {
+          gap: 16px;
+          width: fit-content;
+
+          .changedAmount {
+            color: $secondary-text-color;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
             font-size: 16px;
+            font-weight: 400;
+            line-height: 1em;
+            width: 68px;
+            gap: 4px;
+    
+            svg {
+              font-size: 16px;
+            }
           }
         }
       }

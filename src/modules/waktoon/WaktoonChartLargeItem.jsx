@@ -56,15 +56,18 @@ function WaktoonChartLargeItem(props) {
             <div className="titleWrapper">
               <div className="title">
                 {title}{false && episodeNumber && ` ${episodeNumber}화`}
-                <div className="author">{author}</div></div>
-              <div className="changedAmount">
-                <FavoriteRoundedIcon fontSize="small" />{upCountChanged}+
+                <div className="author">{author}</div>
               </div>
-              <div className="changedAmount">
-                <VisibilityRoundedIcon fontSize="small" />{viewCountChanged}+
-              </div>
-              <div className="changedAmount">
-                <CommentRoundedIcon fontSize="small" />{commentCountChanged}+
+              <div className="changedAmountArea">
+                <div className="changedAmount">
+                  <FavoriteRoundedIcon fontSize="small" />{upCountChanged}+
+                </div>
+                <div className="changedAmount">
+                  <VisibilityRoundedIcon fontSize="small" />{viewCountChanged}+
+                </div>
+                <div className="changedAmount">
+                  <CommentRoundedIcon fontSize="small" />{commentCountChanged}+
+                </div>
               </div>
             </div>
           </div>
