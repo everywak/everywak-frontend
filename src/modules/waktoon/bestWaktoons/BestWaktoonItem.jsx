@@ -27,7 +27,10 @@ function BestWaktoonItem(props) {
 
   return (
     <li className={cx('BestWaktoonItem')}>
-      <Link to={`/waktoon/${toonId}`} className="itemHeader" onClick={e => onClick && onClick(e)}>
+      <Link to={`/waktoon/${toonId}`} 
+        className="itemHeader" 
+        title={title}
+        onClick={e => onClick && onClick(e)}>
         <div className="waktoonInfo">
           <div className="thumbnailWrapper">
             <BasicImage src={thumbnail} alt={title + ' 표지'} noReferrer />

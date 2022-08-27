@@ -23,8 +23,9 @@ function WaktoonChartItem(props) {
   } = props;
 
   return (
-    <li className={cx('WaktoonChartItem')}>
-      <Link to={`/waktoon/episode/${toonId}`} onClick={e => onClick && onClick(e)} target="_blank">
+      <Link to={`/waktoon/episode/${toonId}`} 
+        title={title}
+        onClick={e => onClick && onClick(e)} target="_blank">
         <div className="rankArea">
           <div className="rank">{rank}</div>
         </div>

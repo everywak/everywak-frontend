@@ -18,7 +18,10 @@ function WaktoonItem(props) {
 
   return (
     <li className={cx('WaktoonItem', size)}>
-      <Link to={(type == 'waktoon' ? '/waktoon/' : '/waktoon/episode/') + toonId } target={(type == 'waktoon' ? '_self' : '_blank')} onClick={e => onClick && onClick(e)}>
+      <Link to={(type == 'waktoon' ? '/waktoon/' : '/waktoon/episode/') + toonId } 
+        target={(type == 'waktoon' ? '_self' : '_blank')} 
+        title={title}
+        onClick={e => onClick && onClick(e)}>
         <div className="previewWrapper">
           <BasicImage className="previewImg" src={process.env.NODE_ENV !== 'development' && thumbnail} alt="썸네일" noReferrer />
           <span className="episodeNumber">{episodeNumber && episodeNumber != 'single' ? `${episodeNumber}화` : '단편'}</span>

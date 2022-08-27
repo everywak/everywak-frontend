@@ -27,7 +27,9 @@ function WaktoonChartLargeItem(props) {
 
   return (
     <li className={cx('WaktoonChartLargeItem')}>
-      <Link to={`/waktoon/episode/${toonId}`} onClick={e => onClick && onClick(e)}>
+      <Link to={`/waktoon/episode/${toonId}`} 
+        title={title}
+        onClick={e => onClick && onClick(e)}>
         <div className="rankArea">
           <div className="rank">{rank}</div>
         </div>
