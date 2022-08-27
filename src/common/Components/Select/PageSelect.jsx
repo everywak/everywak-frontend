@@ -1,10 +1,10 @@
 import React from 'react';
 
 import BasicButton from '../Button/BasicButton';
-import NavigateBeforeRoundedIcon from '@material-ui/icons/NavigateBeforeRounded';
-import NavigateNextRoundedIcon from '@material-ui/icons/NavigateNextRounded';
-import FirstPageRoundedIcon from '@material-ui/icons/FirstPageRounded';
-import LastPageRoundedIcon from '@material-ui/icons/LastPageRounded';
+import NavigateBeforeRoundedIcon from '@mui/icons-material/NavigateBeforeRounded';
+import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
+import FirstPageRoundedIcon from '@mui/icons-material/FirstPageRounded';
+import LastPageRoundedIcon from '@mui/icons-material/LastPageRounded';
 
 //import * as func from '../../funtions';
 

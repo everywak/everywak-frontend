@@ -4,10 +4,10 @@ import MediaQuery  from 'react-responsive';
 
 import SkeletonLoader from '../../../common/Components/SkeletonLoader';
 import Button from '../../../common/Components/Button';
-import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
-import VisibilityRoundedIcon from '@material-ui/icons/VisibilityRounded';
-import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
-import CommentRoundedIcon from '@material-ui/icons/CommentRounded';
+import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
+import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
+import CommentRoundedIcon from '@mui/icons-material/CommentRounded';
 
 import styles from './ArticleList.scss';
 import classNames from 'classnames/bind';

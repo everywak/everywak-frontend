@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 
 import AppListItem from './AppListItem';
 
-import LiveTvRoundedIcon from '@material-ui/icons/LiveTvRounded';
-import StarRoundedIcon from '@material-ui/icons/StarRounded';
-import MenuBookRoundedIcon from '@material-ui/icons/MenuBookRounded';
-import ViewCarouselRoundedIcon from '@material-ui/icons/ViewCarouselRounded';
-import EmojiEventsRoundedIcon from '@material-ui/icons/EmojiEventsRounded';
-import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
-import MoreHorizRoundedIcon from '@material-ui/icons/MoreHorizRounded';
+import LiveTvRoundedIcon from '@mui/icons-material/LiveTvRounded';
+import StarRoundedIcon from '@mui/icons-material/StarRounded';
+import MenuBookRoundedIcon from '@mui/icons-material/MenuBookRounded';
+import ViewCarouselRoundedIcon from '@mui/icons-material/ViewCarouselRounded';
+import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded';
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
+import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 
 import styles from './Apps.scss';
 import classNames from 'classnames/bind';

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import Dropdown from '../Dropdown';
 import TransparentButton from '../Button/TransparentButton';
-import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
 //import * as func from '../../funtions';
 

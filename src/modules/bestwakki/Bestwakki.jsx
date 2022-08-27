@@ -6,7 +6,7 @@ import ArticleList from '../board/ArticleList/ArticleList';
 import SearchBar from './SearchBar';
 import SortList from './SortList';
 import DateRange from './DateRange';
-import MoreVertRoundedIcon from '@material-ui/icons/MoreVertRounded';
+import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import BestwakkiBottomNavigator from './BestwakkiBottomNavigator';
 
 import * as service from '../../services/BestApi';

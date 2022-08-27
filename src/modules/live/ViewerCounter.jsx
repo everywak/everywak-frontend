@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import RemoveRedEyeRoundedIcon from '@material-ui/icons/RemoveRedEyeRounded';
+import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 
 import styles from './ViewerCounter.scss';
 

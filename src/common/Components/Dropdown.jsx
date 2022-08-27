@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 
-import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
+import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 
 import styles from './Dropdown.scss';
 import classNames from 'classnames/bind';

@@ -1,8 +1,10 @@
+import React from 'react';
+
 import Apps from './Apps';
 
-import NotificationsRoundedIcon from '@material-ui/icons/NotificationsRounded';
-import EventNoteRoundedIcon from '@material-ui/icons/EventNoteRounded';
-import FlagRoundedIcon from '@material-ui/icons/FlagRounded';
+import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
+import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded';
+import FlagRoundedIcon from '@mui/icons-material/FlagRounded';
 
 class Etcs extends Apps {
   static defaultProps = {

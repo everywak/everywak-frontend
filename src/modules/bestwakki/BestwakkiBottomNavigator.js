@@ -4,8 +4,8 @@ import styles from './BestwakkiBottomNavigator.scss';
 import MediaQuery  from 'react-responsive';
 import _ from 'lodash';
 
-import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
-import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import * as func from '../../common/funtions';
 
 import classNames from 'classnames/bind';

@@ -4,10 +4,10 @@ import useInputs from '../../hooks/useInputs';
 
 import TwitchChatClientCore from './TwitchChatClientCore';
 import Spinner from '../../common/Components/Spinner';
-import InsertEmoticonRoundedIcon from '@material-ui/icons/InsertEmoticonRounded';
-import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
-import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import InsertEmoticonRoundedIcon from '@mui/icons-material/InsertEmoticonRounded';
+import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import BasicButton from '../../common/Components/Button/BasicButton';
 import TransparentButton from '../../common/Components/Button/TransparentButton';
 import CircleImg from '../../common/Components/CircleImg';

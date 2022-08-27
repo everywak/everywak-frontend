@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 
 import BasicImage from '../../common/Components/Image/BasicImage';
 
-import KeyboardArrowUpRoundedIcon from '@material-ui/icons/KeyboardArrowUpRounded';
-import KeyboardArrowDownRoundedIcon from '@material-ui/icons/KeyboardArrowDownRounded';
-import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
-import VisibilityRoundedIcon from '@material-ui/icons/VisibilityRounded';
-import ArrowUpwardRoundedIcon from '@material-ui/icons/ArrowUpwardRounded';
-import RemoveRoundedIcon from '@material-ui/icons/RemoveRounded';
+import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
+import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
+import ArrowUpwardRoundedIcon from '@mui/icons-material/ArrowUpwardRounded';
+import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 
 import styles from './WaktoonChartItem.scss';
 import classNames from 'classnames/bind';

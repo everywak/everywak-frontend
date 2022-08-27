@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 import TransparentButton from '../../common/Components/Button/TransparentButton';
 import CircleImg from '../../common/Components/CircleImg';
-import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
-import ExpandLessRoundedIcon from '@material-ui/icons/ExpandLessRounded';
+import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
+import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 
 import * as func from '../../common/funtions';
 import * as service from '../../services/LiveWakApi';

@@ -12,10 +12,10 @@ import BasicImage from '../../../common/Components/Image/BasicImage';
 
 import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar';
 
-import KeyboardArrowLeftRoundedIcon from '@material-ui/icons/KeyboardArrowLeftRounded';
-import FileUploadRoundedIcon from '@material-ui/icons/CloudUploadRounded';
-import PhotoLibraryRoundedIcon from '@material-ui/icons/PhotoLibraryRounded';
-import RefreshRoundedIcon from '@material-ui/icons/RefreshRounded';
+import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
+import FileUploadRoundedIcon from '@mui/icons-material/CloudUploadRounded';
+import PhotoLibraryRoundedIcon from '@mui/icons-material/PhotoLibraryRounded';
+import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
 
 
 import * as func from '../../../common/funtions';

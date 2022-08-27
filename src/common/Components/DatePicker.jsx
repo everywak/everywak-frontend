@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import TransparentButton from './Button/TransparentButton';
 
-import NavigateBeforeRoundedIcon from '@material-ui/icons/NavigateBeforeRounded';
-import NavigateNextRoundedIcon from '@material-ui/icons/NavigateNextRounded';
+import NavigateBeforeRoundedIcon from '@mui/icons-material/NavigateBeforeRounded';
+import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
 
 import styles from './DatePicker.scss';
 import classNames from 'classnames/bind';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import KeyboardArrowRightRoundedIcon from '@material-ui/icons/KeyboardArrowRightRounded';
+import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
 import { Link } from 'react-router-dom';
 
 import styles from './FrontPanel.scss';

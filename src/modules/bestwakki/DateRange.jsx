@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import DatePicker from '../../common/Components/DatePicker';
-import DateRangeRoundedIcon from '@material-ui/icons/DateRangeRounded';
+import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
 import MediaQuery  from 'react-responsive';
 import styles from './DateRange.scss';
 

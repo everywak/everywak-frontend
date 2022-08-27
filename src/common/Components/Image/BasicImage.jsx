@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import BrokenImageRoundedIcon from '@material-ui/icons/BrokenImageRounded';
+import BrokenImageRoundedIcon from '@mui/icons-material/BrokenImageRounded';
 
 import * as func from '../../funtions';
 

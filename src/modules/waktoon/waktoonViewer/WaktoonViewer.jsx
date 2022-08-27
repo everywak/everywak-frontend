@@ -10,17 +10,17 @@ import CircleImg from '../../../common/Components/CircleImg';
 import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar';
 import BasicSelect from '../../../common/Components/Select/BasicSelect';
 
-import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
-import KeyboardArrowLeftRoundedIcon from '@material-ui/icons/KeyboardArrowLeftRounded';
-import KeyboardArrowUpRoundedIcon from '@material-ui/icons/KeyboardArrowUpRounded';
-import VisibilityRoundedIcon from '@material-ui/icons/VisibilityRounded';
-import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
-import CommentRoundedIcon from '@material-ui/icons/CommentRounded';
-import StarRoundedIcon from '@material-ui/icons/StarRounded';
-import StarOutlineRoundedIcon from '@material-ui/icons/StarOutlineRounded';
-import NotificationsNoneRoundedIcon from '@material-ui/icons/NotificationsNoneRounded';
-import NotificationsActiveRoundedIcon from '@material-ui/icons/NotificationsActiveRounded';
-import MenuBookRoundedIcon from '@material-ui/icons/MenuBookRounded';
+import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
+import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
+import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
+import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
+import CommentRoundedIcon from '@mui/icons-material/CommentRounded';
+import StarRoundedIcon from '@mui/icons-material/StarRounded';
+import StarOutlineRoundedIcon from '@mui/icons-material/StarOutlineRounded';
+import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
+import NotificationsActiveRoundedIcon from '@mui/icons-material/NotificationsActiveRounded';
+import MenuBookRoundedIcon from '@mui/icons-material/MenuBookRounded';
 
 import * as func from '../../../common/funtions';
 import * as service from '../../../services/Waktoon';

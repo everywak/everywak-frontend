@@ -1,8 +1,8 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import KeyboardArrowRightRoundedIcon from '@material-ui/icons/KeyboardArrowRightRounded';
-import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
+import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 
 import CircleImg from '../../common/Components/CircleImg';
 //import BasicButton from '../../common/Components/Button/BasicButton';

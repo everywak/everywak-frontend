@@ -10,7 +10,7 @@ import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar'
 import BasicSelect from '../../../common/Components/Select/BasicSelect';
 import PageSelect from '../../../common/Components/Select/PageSelect';
 
-import KeyboardArrowLeftRoundedIcon from '@material-ui/icons/KeyboardArrowLeftRounded';
+import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
 
 import * as func from '../../../common/funtions';
 import * as service from '../../../services/Waktoon';

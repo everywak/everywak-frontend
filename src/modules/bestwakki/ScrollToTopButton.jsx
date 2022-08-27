@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './ScrollToTopButton.scss';
 
-import KeyboardArrowUpRoundedIcon from '@material-ui/icons/KeyboardArrowUpRounded';
+import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
 
 import Button from '../../common/Components/Button';
 import classNames from 'classnames/bind';

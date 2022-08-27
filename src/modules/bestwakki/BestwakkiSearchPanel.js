@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Button from '../../common/Components/Button';
 import DateRange from './DateRange';
 import SearchBar from './SearchBar';
-import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import * as func from '../../common/funtions';
 
 import styles from './BestwakkiSearchPanel.scss';
