@@ -13,6 +13,7 @@ import * as service from '../../../services/Waktoon';
 import useInputs from '../../../hooks/useInputs';
 
 import BestWaktoonList from './BestWaktoonList';
+import WaktoonEpisodeList from '../waktoonViewer/WaktoonEpisodeList';
 
 import styles from './BestWaktoons.scss';
 import classNames from 'classnames/bind';
@@ -20,7 +21,10 @@ const cx = classNames.bind(styles);
 
 export default function BestWaktoons({location, history}) {
 
-  const defaultShowCount = 12;
+  const defaultShowCount = {
+    series: 12,
+    episode: 24,
+  };
   const [maxPage, setMaxPage] = useState(1);
 
   const [searchTarget, onChange, reset] = useInputs({
@@ -34,7 +38,7 @@ export default function BestWaktoons({location, history}) {
   });
 
   function onChangeList({ pagination }) {
-    setMaxPage(Math.ceil(pagination.length / defaultShowCount));
+    setMaxPage(Math.ceil(pagination.length / defaultShowCount[searchTarget.viewType]));
   }
 
   useEffect(() => {
@@ -61,14 +65,18 @@ export default function BestWaktoons({location, history}) {
           <div className="filterWrapper">
             <div className="sortItemWrapper">
               분류
-              <BasicSelect options={[{name: '시리즈', value: 'series'}, {name: '단편작', value: 'episode'}]} name="viewType" value={searchTarget.viewType} onChange={onChange} />
+              <BasicSelect options={[{name: '시리즈', value: 'series'}, {name: '단편작', value: 'episode'}]} name="viewType" value={searchTarget.viewType} onChange={e => (onChange(e), onChange({target: {name: 'perPage', value: defaultShowCount[e.target.value]}}))} />
               정렬 기준
               <BasicSelect options={[{name: '최신순', value: 'time'}, {name: '좋아요순', value: 'up'}, {name: '조회수순', value: 'view'}, {name: '댓글순', value: 'comment'}]} name="orderBy" value={searchTarget.orderBy} onChange={onChange} />
             </div>
           </div>
         </div>
         <div className="waktoonEpisodeListWrapper">
-          <BestWaktoonList defaultShowCount={defaultShowCount} searchOptions={searchTarget} onChange={onChangeList} />
+          {
+            searchTarget.viewType === 'series' ?
+            <BestWaktoonList defaultShowCount={defaultShowCount[searchTarget.viewType]} searchOptions={searchTarget} onChange={onChangeList} /> :
+            <WaktoonEpisodeList defaultShowCount={defaultShowCount[searchTarget.viewType]} searchOptions={searchTarget} onChange={onChangeList} />
+          }
           <PageSelect name="page" max={maxPage} maxLength={10} value={searchTarget.page} onChange={onChange} />
         </div>
         <div className="footer">
