@@ -98,4 +98,91 @@
 @include desktop {
 }
 @include not-desktop {
+  .WaktoonChart {
+  
+    section.content {
+      width: 100%;
+  
+      & > header {
+        padding: 24px 16px 16px;
+        gap: 4px;
+  
+        .btnBack {
+          font-size: 14px;
+    
+          /* svg { } */
+        }
+        .title {
+          font-size: 24px;
+        }
+        .desc {
+          font-size: 16px;
+        }
+      }
+  
+      .listHeader {
+        display: none;
+      }
+      
+      .waktoonChartListWrapper {
+        align-self: stretch;
+        
+        .WaktoonChartLargeItem {
+          padding: 0;
+
+          & > a {
+            padding: 8px 12px;
+            gap: 12px;
+
+            .rankArea {
+              margin-right: 0;
+
+              .rank {
+                font-size: 14px;
+              }
+            }
+            .previewWrapper {
+              --width: 64px;
+              --height: 84px;
+            }
+            .infoArea {
+              width: 0;
+              flex-grow: 1;
+
+              .descArea {
+                flex-direction: row-reverse;
+
+                .rankAmount {
+                  width: 48px;
+                }
+                .titleWrapper {
+                  flex-direction: column;
+                  flex-grow: 1;
+                  justify-content: space-between;
+                  width: 0;
+
+                  .title, .author {
+                    font-size: 14px;
+                  }
+                  .changedAmountArea {
+                    gap: 0px;
+
+                    .changedAmount {
+                      font-size: 12px;
+                      width: 64px;
+                    }
+                  }
+                }
+              }
+              
+            }
+          }
+        }
+      }
+      .footer {
+        font-size: 12px;
+        padding: 16px;
+      }
+    }
+  }
 }
