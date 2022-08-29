@@ -48,9 +48,12 @@ function WaktoonEpisodeList({ uuid }) {
   const [itemList, setItemList] = useState([]);
   const defaultShowCount = 50;
 
-  useEffect(async () => {
-    const episodeList = await updateWaktoonEpisodeList(uuid);
-    setItemList(episodeList);
+  useEffect(() => {
+    async function fetch() {
+      const episodeList = await updateWaktoonEpisodeList(uuid);
+      setItemList(episodeList);
+    }
+    fetch();
   }, []);
 
   return (

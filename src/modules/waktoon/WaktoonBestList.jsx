@@ -64,9 +64,12 @@ function WaktoonBestList(props) {
   const [itemList, setItemList] = useState([]);
   const defaultShowCount = 10;
 
-  useEffect(async () => {
-    const episodeList = await updateWaktoonList();
-    setItemList(episodeList);
+  useEffect(() => {
+    async function fetch() {
+      const episodeList = await updateWaktoonList();
+      setItemList(episodeList);
+    }
+    fetch();
   }, []);
 
   return (

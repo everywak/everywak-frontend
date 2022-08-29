@@ -33,12 +33,15 @@ export default function WaktoonEditor({location, history}) {
 
   const { toonId } = useParams();
 
-  useEffect(async () => {
-    const res = await service.getWaktoons({ queryTarget: 'uuid', queryTxt: toonId });
-    const {
-      waktoonList
-    } = res.result;
-    setTarget(waktoonList ? waktoonList[0] : ({}));
+  useEffect(() => {
+    async function fetch() {
+      const res = await service.getWaktoons({ queryTarget: 'uuid', queryTxt: toonId });
+      const {
+        waktoonList
+      } = res.result;
+      setTarget(waktoonList ? waktoonList[0] : ({}));
+    }
+    fetch();
   }, [toonId])
 
   return (

@@ -117,22 +117,25 @@ function WaktoonInfo({ waktoon }) {
     ended: '완결'
   }
 
-  useEffect(async () => {
-    const resUserInfo = await userService.getWhoAmI();
-    console.log(resUserInfo)
-    if (resUserInfo.status === 200) {
-      if (resUserInfo.result.logined && resUserInfo.result.joined) {
-        setLoginInfo(loginInfo => ({
-          logined: true,
-          userInfo: resUserInfo.result.userInfo,
-        }));
-      } else {
-        setLoginInfo(loginInfo => ({
-          logined: false,
-          userInfo: null,
-        }));
+  useEffect(() => {
+    async function fetch() {
+      const resUserInfo = await userService.getWhoAmI();
+      console.log(resUserInfo)
+      if (resUserInfo.status === 200) {
+        if (resUserInfo.result.logined && resUserInfo.result.joined) {
+          setLoginInfo(loginInfo => ({
+            logined: true,
+            userInfo: resUserInfo.result.userInfo,
+          }));
+        } else {
+          setLoginInfo(loginInfo => ({
+            logined: false,
+            userInfo: null,
+          }));
+        }
       }
     }
+    fetch();
   }, []);
 
   return !waktoon.isLoading && waktoon ? (

@@ -3,7 +3,11 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import SuspenseFallback from './common/SuspenseFallback/SuspenseFallback';
 import App from './App';
-ReactDOM.render(
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root')
+);
+root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Suspense fallback={<SuspenseFallback />}>
