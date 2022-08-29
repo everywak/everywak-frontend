@@ -1,26 +1,28 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import useGAPageTracking from './common/GAPageTracking';
 import ScrollToTop from './common/ScrollToTop';
+
+import NotFoundPage  from './modules/notfoundpage/NotFoundPage';
 
 import Header from './common/Header/Header';
 import Footer from './common/Footer/Footer';
 import Frontpage from './modules/frontpage/Frontpage';
 import Bestwakki from './modules/bestwakki/Bestwakki';
 import Live from './modules/live/Live';
-import WithLive from './modules/withlive/WithLive';
 
-import Waktoon from './modules/waktoon/Waktoon';
-import WaktoonEpisodeViewer from './modules/waktoon/waktoonEpisodeViewer/WaktoonEpisodeViewer';
-import WaktoonViewer from './modules/waktoon/waktoonViewer/WaktoonViewer';
-import WaktoonEditor from './modules/waktoon/waktoonEditor/WaktoonEditor';
-import WaktoonChart from './modules/waktoon/waktoonChart/WaktoonChart';
-import AllWaktoons from './modules/waktoon/allWaktoons/AllWaktoons';
-import BestWaktoons from './modules/waktoon/bestWaktoons/BestWaktoons';
+const WithLive = lazy(() => import('./modules/withlive/WithLive'));
 
-import Isedol from './modules/isedol/Isedol';
-import NotFoundPage from './modules/notfoundpage/NotFoundPage';
+const Waktoon = lazy(() => import('./modules/waktoon/Waktoon'));
+const WaktoonEpisodeViewer = lazy(() => import('./modules/waktoon/waktoonEpisodeViewer/WaktoonEpisodeViewer'));
+const WaktoonViewer = lazy(() => import('./modules/waktoon/waktoonViewer/WaktoonViewer'));
+const WaktoonEditor = lazy(() => import('./modules/waktoon/waktoonEditor/WaktoonEditor'));
+const WaktoonChart = lazy(() => import('./modules/waktoon/waktoonChart/WaktoonChart'));
+const AllWaktoons = lazy(() => import('./modules/waktoon/allWaktoons/AllWaktoons'));
+const BestWaktoons = lazy(() => import('./modules/waktoon/bestWaktoons/BestWaktoons'));
+
+const Isedol = lazy(() => import('./modules/isedol/Isedol'));
 
 export default function App(props) {
 
