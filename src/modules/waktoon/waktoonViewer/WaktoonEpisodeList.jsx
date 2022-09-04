@@ -4,7 +4,7 @@ import * as func from '../../../common/funtions';
 import * as service from '../../../services/Waktoon';
 
 import WaktoonList from '../WaktoonList';
-import { WaktoonEpisodeItem } from '../WaktoonItem';
+import { WaktoonItem, WaktoonEpisodeItem } from '../WaktoonItem';
 
 //import GAEvents from '../../../common/GAEvents';
 
@@ -47,7 +47,7 @@ async function updateWaktoonEpisodeList(query) {
   }
 }
 
-function WaktoonEpisodeList({ toonTitle, uuid, defaultShowCount = 50, searchOptions, onChange = () => {} }) {
+function WaktoonEpisodeList({ toonTitle, uuid, viewType = 'item', defaultShowCount = 50, searchOptions, onChange = () => {} }) {
   const [itemList, setItemList] = useState([]);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ function WaktoonEpisodeList({ toonTitle, uuid, defaultShowCount = 50, searchOpti
       setItemList(
         episodeList
         .filter(item => item.title.includes(searchOptions.keyword))
-        .map(item => (item.title = toonTitle ? item.title.replace(toonTitle, '') : item.title, item))
+        .map(item => (item.title = toonTitle ? item.title.replace(toonTitle, '').trim() : item.title, item))
       );
     }
     async function fetchWithoutParent({ searchOptions }) {
@@ -86,8 +86,8 @@ function WaktoonEpisodeList({ toonTitle, uuid, defaultShowCount = 50, searchOpti
 
   return (
     <WaktoonList 
-      className="WaktoonEpisodeList"
-      ItemComponent={WaktoonEpisodeItem}
+      className={cx('WaktoonEpisodeList', {list: viewType === 'list', item: viewType === 'item'})} 
+      ItemComponent={viewType === 'list' ? WaktoonEpisodeItem : WaktoonItem} 
       list={itemList} 
       defaultShowCount={defaultShowCount} 
       maximumShowCount={1}

@@ -11,4 +11,12 @@
       display: none;
     }
   }
+
+  &.list {
+    
+    ul.itemList {
+      flex-direction: column;
+      flex-wrap: nowrap;
+    }
+  }
 }

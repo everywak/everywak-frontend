@@ -235,7 +235,7 @@ function WaktoonEpisodeListWrapper({ target }) {
           <SkeletonLoader skeleton={episodeItemSkeleton} length={8} />
         </ul>
       </div> :
-      <WaktoonEpisodeList toonTitle={target.title} uuid={target.uuid} searchOptions={searchOptions} onChange={() => {}} />
+      <WaktoonEpisodeList viewType="list" toonTitle={target.title} uuid={target.uuid} searchOptions={searchOptions} onChange={() => {}} />
     }
   </>);
 }
