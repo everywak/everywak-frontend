@@ -19,10 +19,11 @@ const SECONDS_OF_DAY = 24 * 60 * 60;
 function WaktoonChartItem(props) {
 
   const {
-    toonId, thumbnail, title, author, rank, rankAmount, upCountChanged, viewCountChanged, episodeNumber, onClick
+    toonId, thumbnail, title, author, rank, rankAmount, upCountChanged, viewCountChanged, episodeNumber, onClick, highlight
   } = props;
 
   return (
+    <li className={cx('WaktoonChartItem', {highlight: highlight})}>
       <Link to={`/waktoon/episode/${toonId}`} 
         title={title}
         onClick={e => onClick && onClick(e)} target="_blank">

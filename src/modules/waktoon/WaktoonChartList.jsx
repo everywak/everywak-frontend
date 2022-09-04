@@ -157,6 +157,7 @@ function WaktoonChartList({type, defaultShowCount = 8, size = 'default', orderBy
       list={filteredItemList} 
       defaultShowCount={defaultShowCount} 
       maximumShowCount={defaultShowCount}
+      useSlide
       gaEventOnClickMore={{
         //category: GAEvents.Category.isedol,
         //action: GAEvents.Action.isedol.moreClip,

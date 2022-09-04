@@ -5,17 +5,24 @@
   padding: 2px 4px 0;
   transition: box-shadow ease .15s;
 
-  --width: 128px;
-  --height: 164px;
-  
-  &.big {
-    --width: 170px;
-    --height: 220px;
+  @include desktop {
+    --width: 128px;
+    --height: 164px;
+  }
+  @include not-desktop {
+    --width: 123px;
+    --height: 156px;
   }
   
-  &.episode {
-    --width: 134px;
-    --height: 170px;
+  &.big {
+    @include desktop {
+      --width: 170px;
+      --height: 220px;
+    }
+    @include not-desktop {
+      --width: 140px;
+      --height: 180px;
+    }
   }
   
   & > a {
@@ -146,13 +153,51 @@
       }
     }
   }
+  
+  &.episode {
+    --width: 64px;
+    --height: 84px;
 
-  &.episode .infoArea .descArea {
-    .author {
-      display: none;
+    & > a {
+      flex-direction: row;
+      gap: 16px;
     }
-    .publishedTime {
-      display: inline;
+    
+    .previewWrapper {
+      &:hover{
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.35);
+      }
+      .BasicImage .errorIcon svg {
+        font-size: 28px;
+      }
+  
+      .episodeNumber {
+        display: none;
+      }
+    }
+
+    .infoArea {
+      flex-grow: 1;
+      width: 0;
+
+      .descArea {
+        flex-direction: row;
+        flex-grow: 1;
+        justify-content: space-between;
+        width: 0;
+
+        .title {
+          flex-grow: 1;
+          width: 0;
+        }
+        .author {
+          display: none;
+        }
+        .publishedTime {
+          display: inline;
+          width: fit-content;
+        }
+      }
     }
   }
 

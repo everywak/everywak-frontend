@@ -20,6 +20,7 @@ function WaktoonList({
   defaultShowCount = 8, 
   perPageCount = 8, 
   maximumShowCount = 30, 
+  useSlide = false,
   moreTarget = '', 
   onMore = () => {}, 
   gaEventOnClickMore = () => {}, 
@@ -27,6 +28,14 @@ function WaktoonList({
 }) {
 
   const [showCount, setShowCount] = useState(defaultShowCount);
+
+  const [mobileCursor, setMobileCursor] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setMobileCursor(prevValue => (prevValue + 1) % defaultShowCount);
+    }, 8000);
+  }, [mobileCursor]);
 
   useEffect(() => {
     setShowCount(defaultShowCount);
@@ -47,10 +56,10 @@ function WaktoonList({
     setShowCount(prevValue => prevValue + perPageCount);
   }, [setShowCount]);
 
-  const itemList = list.slice(0, showCount).map(item => <ItemComponent key={item.key} onClick={onClickItem} {...item} />);
+  const itemList = list.slice(0, showCount).map((item, i) => <ItemComponent key={item.key} highlight={i === mobileCursor} onClick={onClickItem} {...item} />);
   
   return (
-    <div className={cx('WaktoonList', className)}>
+    <div className={cx('WaktoonList', className, {useSlide: useSlide})}>
       <ul className="itemList">
         {itemList}
       </ul>
