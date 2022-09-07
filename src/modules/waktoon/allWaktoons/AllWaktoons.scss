@@ -106,4 +106,59 @@
 @include desktop {
 }
 @include not-desktop {
+  .AllWaktoons {
+  
+    section.content {
+      align-self: stretch;
+      gap: 24px;
+      width: 100%;
+  
+      & > header {
+        padding: 24px 16px 16px;
+        gap: 4px;
+  
+        .btnBack {
+          font-size: 14px;
+    
+          svg {
+            display: inline-block;
+            margin: 1px;
+          }
+        }
+        .title {
+          font-size: 24px;
+        }
+        .desc {
+          font-size: 16px;
+        }
+      }
+  
+      .listHeader {
+        display: none;
+  
+        .filterWrapper {
+          .sortItemWrapper {
+          }
+        }
+        .BasicSearchBar {
+        }
+      }
+      
+      .waktoonEpisodeListWrapper {
+
+        .AllWaktoonList {
+          padding: 0px 8px;
+        }
+  
+        .PageSelect {
+  
+        }
+      }
+      .footer {
+        color: $secondary-text-color;
+        font-size: 12px;
+        text-align: right;
+      }
+    }
+  }
 }

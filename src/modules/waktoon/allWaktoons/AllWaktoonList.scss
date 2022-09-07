@@ -1,0 +1,30 @@
+@import '../../../common/common.scss';
+
+.WaktoonList.AllWaktoonList {
+  align-self: stretch;
+
+  ul.itemList {
+    padding-bottom: 8px;
+    padding-top: 0;
+    gap: 8px 5.1px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &.list {
+    
+    ul.itemList {
+      flex-direction: column;
+      flex-wrap: nowrap;
+    }
+  }
+
+  &.item {
+    
+    ul.itemList {
+      justify-content: center;
+    }
+  }
+}

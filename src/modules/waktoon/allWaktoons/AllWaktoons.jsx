@@ -14,10 +14,11 @@ import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftR
 
 import * as func from '../../../common/funtions';
 import * as service from '../../../services/Waktoon';
+import { Desktop, NotDesktop } from '../../../common/MediaQuery';
 
 import useInputs from '../../../hooks/useInputs';
 
-import WaktoonEpisodeList from '../waktoonViewer/WaktoonEpisodeList';
+import AllWaktoonList from './AllWaktoonList';
 
 import styles from './AllWaktoons.scss';
 import classNames from 'classnames/bind';
@@ -34,6 +35,7 @@ export default function AllWaktoons({location, history}) {
     orderBy: 'time',
     queryTarget: 'title',
     queryTxt: '',
+    viewType: 'item',
   });
 
   function onChangeList({ pagination }) {
@@ -63,14 +65,24 @@ export default function AllWaktoons({location, history}) {
           <BasicSearchBar placeholder="작품 검색" value={searchTarget.queryTxt} onSearch={({ value }) => onChange({target: {name: 'queryTxt', value: value}})} />
           <div className="filterWrapper">
             <div className="sortItemWrapper">
+              보기 형식
+              <BasicSelect options={[{name: '바둑판식', value: 'item'}, {name: '리스트', value: 'list'}]} name="viewType" value={searchTarget.viewType} onChange={onChange} />
+            </div>
+            <div className="sortItemWrapper">
               정렬 기준
               <BasicSelect options={[{name: '최신순', value: 'time'}, {name: '좋아요순', value: 'up'}, {name: '조회수순', value: 'view'}, {name: '댓글순', value: 'comment'}]} name="orderBy" value={searchTarget.orderBy} onChange={onChange} />
             </div>
           </div>
         </div>
         <div className="waktoonEpisodeListWrapper">
-          <WaktoonEpisodeList defaultShowCount={defaultShowCount} searchOptions={searchTarget} onChange={onChangeList} />
-          <PageSelect name="page" max={maxPage} maxLength={10} value={searchTarget.page} onChange={onChange} />
+          <Desktop>
+            <AllWaktoonList viewType={searchTarget.viewType} defaultShowCount={defaultShowCount} searchOptions={searchTarget} onChange={onChangeList} />
+            <PageSelect name="page" max={maxPage} maxLength={10} value={searchTarget.page} onChange={onChange} />
+          </Desktop>
+          <NotDesktop>
+            <AllWaktoonList viewType="list" defaultShowCount={defaultShowCount} searchOptions={searchTarget} onChange={onChangeList} />
+            <PageSelect name="page" max={maxPage} maxLength={5} value={searchTarget.page} onChange={onChange} />
+          </NotDesktop>
         </div>
         <div className="footer">
           에브리왁굳 왁굳코믹스의 모든 왁타버스 웹툰 정보는 누구나 접근 가능한 경로를 통해 수집되며,<br/>

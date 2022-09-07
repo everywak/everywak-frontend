@@ -1,0 +1,186 @@
+@import '../../common/common.scss';
+
+.WaktoonListItem {
+  box-sizing: border-box;
+  transition: box-shadow ease .15s;
+
+  @include desktop {
+    --imageWidth: 80px;
+    --imageHeight: 102px;
+  }
+  @include not-desktop {
+    --imageWidth: 80px;
+    --imageHeight: 102px;
+  }
+  
+  & > a {
+    border-radius: 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px;
+    gap: 12px;
+    width: 100%;
+    height: fit-content;
+    
+    img {
+      color: transparent;
+    }
+  
+    .previewWrapper {
+      background: rgba(0, 0, 0, .1);
+      border-radius: 8px;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.35);
+      opacity: 1;
+      overflow: hidden;
+      position: relative;
+      width: var(--imageWidth);
+      min-width: var(--imageWidth);
+      height: var(--imageHeight);
+      max-height: var(--imageHeight);
+      transition: opacity ease .15s, box-shadow ease .15s;
+      transition-delay: opacity 1s;
+  
+      &:hover{
+        box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.35);
+      }
+  
+      .previewImg {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  
+    .infoArea {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 8px 0px;
+      gap: 2px;
+      align-self: stretch;
+      flex-grow: 1;
+      width: 0;
+  
+      .descArea {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 2px;
+        align-self: stretch;
+  
+        .titleWrapper {
+          display: inline-block;
+          vertical-align: middle;
+          padding: 0px;
+          align-self: stretch;
+          line-height: 1.1em;
+
+          .icon {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            color: $dark-primary-text-color;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 1em;
+            display: inline-flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 2px 5px;
+            margin-inline-end: 4px;
+
+            &.newIcon {
+              background: #DE3500;
+              font-weight: 700;
+              font-size: 10px;
+              padding: 3px 4px;
+            }
+          }
+
+          .title {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 1em;
+            color: $primary-text-color;
+          }
+        }
+        .author, .publishedTime {
+          color: $secondary-text-color;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 1em;
+        }
+      }
+      .tagArea {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px;
+        gap: 4px;
+        align-self: stretch;
+
+        .tagList {
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          padding: 0px;
+          gap: 4px;
+
+          & > li.tag {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            color: $dark-primary-text-color;
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 1.2em;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 2px 4px;
+            gap: 2px;
+            
+            &.BestTag {
+              background: #B89829;
+            }
+            &.WakforestTag {
+              background: #57B829;
+            }
+          }
+        }
+        .popularityArea {
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          padding: 0px;
+          gap: 4px;
+
+          & > .popularity {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            color: $primary-middle-text-color;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 1em;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 2px 4px;
+            gap: 2px;
+
+            svg {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
