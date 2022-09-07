@@ -9,6 +9,13 @@ export const EXPANDED = 2;
 export const DARK = 10;
 export const LIGHT = 11;
 
+export const desktopLargeWidth = 1440;
+export const desktopSmallWidth = 1024;
+export const tabletSmallWidth = 960;
+export const mobileLargeWidth = 640;
+export const mobileMiddleWidth = 425;
+export const mobileSmallWidth = 375;
+
 export const Waktaverse = [
   {
     name: '우왁굳',

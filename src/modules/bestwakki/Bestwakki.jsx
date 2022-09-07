@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useState, useCallback } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import MediaQuery  from 'react-responsive';
 
 import ArticleList from '../board/ArticleList/ArticleList';
 import SearchBar from './SearchBar';
@@ -11,6 +10,7 @@ import BestwakkiBottomNavigator from './BestwakkiBottomNavigator';
 
 import * as service from '../../services/BestApi';
 import * as func from '../../common/funtions';
+import { Desktop } from '../../common/MediaQuery';
 
 import styles from './Bestwakki.scss';
 import classNames from 'classnames/bind';
@@ -170,7 +170,6 @@ function Bestwakki({front = false}) {
   const { list, loaded, loadedLength } = state;
   const today = new Date();
   const min = 1424876400000, max = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
-  const tablet_s_width = 960;
   return (
     <div className={cx('Bestwakki', {'front': front})}>
       {!front && 
@@ -180,10 +179,10 @@ function Bestwakki({front = false}) {
             <div className="controlWrapper">
               <SortList name="orderBy" value={searchFilter.orderBy} onChange={onChangeOrderByHandler} />
               <div className="right">
-                <MediaQuery minWidth={tablet_s_width}>
+                <Desktop>
                   <DateRange name="queryDate" min={min} max={max} start={searchFilter.beginAt} end={searchFilter.endAt} onChange={onChangeDateRangeHandler} />
                   <SearchBar defaultValue={searchFilter} onSearch={updateSearchFilter} />
-                </MediaQuery>
+                </Desktop>
               </div>
             </div>
           </div>

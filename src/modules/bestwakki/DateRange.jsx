@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react';
+
 import DatePicker from '../../common/Components/DatePicker';
 import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
-import MediaQuery  from 'react-responsive';
-import styles from './DateRange.scss';
 
+import { Desktop, NotDesktop } from '../../common/MediaQuery';
+
+import styles from './DateRange.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
@@ -128,11 +130,10 @@ class DateRange extends PureComponent {
     const { name, min, max } = this.props;
     const { start, end } = this.state;
     const { opened } = this.state;
-    const tablet_s_width = 960;
 
     return (
       <div className="DateRange">
-        <MediaQuery minWidth={tablet_s_width}>
+        <Desktop>
         <div className={cx('dateBtn', {opened: opened})} onClick={this.toggle}>
           <div className="dateWrapper">
             {this.getDatetimeString()}
@@ -143,8 +144,8 @@ class DateRange extends PureComponent {
         <div className="dateList">
           <DatePicker name={name} min={min} max={max} start={this.getRealRange(start, 'start')} end={this.getRealRange(end, 'end')} onChange={this.onChange} opened={opened} />
         </div>
-        </MediaQuery>
-        <MediaQuery maxWidth={tablet_s_width - 1}>
+        </Desktop>
+        <NotDesktop>
         <div className="dateBtn">
           <input type="date" name={name + "-start"} id={name + "-start"} min={this.genDatetimeInput(min)} value={this.genDatetimeInput(this.getRealRange(start, 'start'))} onChange={this.onChangeStart} />
         </div>
@@ -152,7 +153,7 @@ class DateRange extends PureComponent {
         <div className="dateBtn">
           <input type="date" name={name + "-end"} id={name + "-end"} max={this.genDatetimeInput(max)} value={this.genDatetimeInput(this.getRealRange(end, 'end') + 24*60*60 - 1)} onChange={this.onChangeEnd} />
         </div>
-        </MediaQuery>
+        </NotDesktop>
       </div>
     );
   }

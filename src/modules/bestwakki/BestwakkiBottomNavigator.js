@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import styled, { keyframes } from "styled-components";
-import styles from './BestwakkiBottomNavigator.scss';
-import MediaQuery  from 'react-responsive';
 import _ from 'lodash';
 
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
-import * as func from '../../common/funtions';
 
-import classNames from 'classnames/bind';
 import Button from '../../common/Components/Button';
 import BestwakkiSearchPanel from './BestwakkiSearchPanel';
 import ScrollToTopButton from './ScrollToTopButton';
+
+import * as func from '../../common/funtions';
+import { NotDesktop } from '../../common/MediaQuery';
+
+import styles from './BestwakkiBottomNavigator.scss';
+import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 class BestwakkiBottomNavigator extends Component {
@@ -91,12 +93,11 @@ class BestwakkiBottomNavigator extends Component {
   render () {
     const { searchFilter, onChangeDateRangeHandler, updateSearchFilter } = this.props;
     const { opened, showTop } = this.state;
-    const tablet_s_width = 960;
     
     return (
         <nav className={cx('BestwakkiBottomNavigator', {opened: opened})}>
           <div className="left">
-            <MediaQuery maxWidth={tablet_s_width - 1}>
+            <NotDesktop>
               <Button className="goHome"
                 href="/"
                 iconSrc={<HomeRoundedIcon fontSize="medium" />}
@@ -105,12 +106,12 @@ class BestwakkiBottomNavigator extends Component {
                 label="홈으로" 
                 labelSize="16px"
                 showLabel={true} />
-            </MediaQuery>
+            </NotDesktop>
           </div>
           <div className="right">
-            <MediaQuery maxWidth={tablet_s_width - 1}>
+            <NotDesktop>
               <BestwakkiSearchPanel searchFilter={searchFilter} onChangeDateRangeHandler={onChangeDateRangeHandler} updateSearchFilter={updateSearchFilter} />
-            </MediaQuery>
+            </NotDesktop>
             <ScrollToTopButton show={showTop} />
             <Button className="btnSetting"
               iconSrc={<SettingsRoundedIcon />} 
