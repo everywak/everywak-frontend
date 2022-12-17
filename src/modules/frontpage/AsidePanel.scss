@@ -1,0 +1,23 @@
+@import '../../common/common.scss';
+
+.AsidePanel {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px 16px;
+  gap: 24px;
+
+  & > header {
+
+  }
+
+  & > .contentWrapper {
+    box-sizing: border-box;
+    padding: 0;
+    width: 100%;
+  }
+}
