@@ -12,6 +12,8 @@ import Frontpage from './modules/frontpage/Frontpage';
 import Bestwakki from './modules/bestwakki/Bestwakki';
 import Live from './modules/live/Live';
 
+const Weather = lazy(() => import('./modules/weather/Weather'));
+
 const WithLive = lazy(() => import('./modules/withlive/WithLive'));
 
 const Waktoon = lazy(() => import('./modules/waktoon/Waktoon'));
@@ -37,6 +39,7 @@ export default function App(props) {
         <Route path="/bestwakki" component={Bestwakki}/>
         <Route path="/live" component={Live}/>
         <Route path="/isedol" component={Isedol}/>
+        <Route path="/weather" component={Weather}/>
 
         <Route path="/waktoon/all" component={AllWaktoons}/>
         <Route path="/waktoon/best" component={BestWaktoons}/>
