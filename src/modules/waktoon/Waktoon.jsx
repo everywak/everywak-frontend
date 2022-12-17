@@ -28,6 +28,7 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 export default function Waktoon(props) {
+  func.setBrowserTitle('왁굳코믹스');
 
   return (
     <div className={cx('Waktoon')}>
