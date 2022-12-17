@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 
 import SectionHeader from './SectionHeader';
 
-import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
-
 import styles from './ContentPanel.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);

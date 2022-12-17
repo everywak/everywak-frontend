@@ -1,15 +1,16 @@
 @import '../../common/common.scss';
 
-.ContentPanel {
+.ContentSubPanel {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  align-self: stretch;
+  gap: 8px;
 
   & > .contentWrapper {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
+    gap: 16px;
     align-self: stretch;
   }
 }
