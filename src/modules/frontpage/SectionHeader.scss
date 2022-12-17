@@ -1,0 +1,71 @@
+@import '../../common/common.scss';
+
+header.SectionHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 8px 0px 16px;
+  gap: 8px;
+  align-self: stretch;
+
+  &.spaceBetween .titleArea,
+  &.max .titleArea {
+    width: 0;
+    flex-grow: 1;
+  }
+  
+  &.big {
+    .titleArea .title {
+      font-size: 24px;
+    }
+  }
+  &.max {
+    .titleArea {
+      .title {
+        font-size: 32px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .titleArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 8px;
+
+    .title {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 1em;
+      color: $primary-text-color;
+    }
+    .subtitle {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 1em;
+      color: $secondary-text-color;
+    }
+    .bottomLine {
+      background: $component-secondary-border-color;
+      width: 160px;
+      height: 2px;
+      margin: 16px auto;
+    }
+  }
+
+  .more {
+    color: $primary-color;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 1px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1em;
+
+  }
+}

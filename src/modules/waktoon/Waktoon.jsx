@@ -9,7 +9,7 @@ import CircleImg from '../../common/Components/CircleImg';
 import LinkButton from '../../common/Components/Button/LinkButton';
 import HorizontalScrollableList from '../../common/Components/HorizontalScrollableList/HorizontalScrollableList';
 
-import FrontPanel from '../frontpage/FrontPanel';
+import ContentPanel from '../frontpage/ContentPanel';
 import BasicSearchBar from '../../common/Components/SearchBar/BasicSearchBar';
 
 
@@ -63,24 +63,15 @@ export default function Waktoon(props) {
         </div>
       </div>
       <div className="sectionWrapper">
-        <section className="main">
-          <FrontPanel data={{
-            id: 'waktoonpanel_all',
-            title: '모든 작품',
-            link: '/waktoon/all',
-            moreable: true,
-            component: <WaktoonGeneralList />,
-          }} />
-        </section>
+        <ContentPanel className="main" title="모든 작품" moreLink="/waktoon/all">
+          <WaktoonGeneralList />
+        </ContentPanel>
         <section className="side">
           <WaktoonSearchBar value="" searchTarget="title" onSearch={e => console.log(e)} />
-          <FrontPanel data={{
-            id: 'waktoonpanel_chart',
-            title: '인기급상승 왁툰',
-            link: '/waktoon/chart',
-            moreable: true,
-            component: <WaktoonChartList />,
-          }} />
+          
+          <ContentPanel className="main" title="인기급상승 왁툰" moreLink="/waktoon/chart">
+            <WaktoonChartList />
+          </ContentPanel>
         </section>
       </div>
     </div>

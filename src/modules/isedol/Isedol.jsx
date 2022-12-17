@@ -4,7 +4,7 @@ import * as func from '../../common/funtions';
 
 import CircleImgButton from '../../common/Components/Button/CircleImgButton';
 import LivePreview from './LivePreview';
-import FrontPanel from '../frontpage/FrontPanel';
+import ContentPanel from '../frontpage/ContentPanel';
 import IsedolYoutubeList from './IsedolYoutubeList';
 import IsedolClipList from './IsedolClipList';
 import IsedolMemberList from './IsedolMemberList';
@@ -36,24 +36,12 @@ function Isedol() {
           </div>
           <IsedolLiveList />
         </section>
-        <section className="youtubeSection">
-          <FrontPanel data={{
-            id: 'isedolpanel_youtube',
-            title: "이세돌 유튜브",
-            link: "/isedol/youtube",
-            moreable: false,
-            component: <IsedolYoutubeList />,
-          }} />
-        </section>
-        <section className="clipSection">
-          <FrontPanel data={{
-            id: 'isedolpanel_clip',
-            title: "이세돌 주간 핫클립",
-            link: "/isedol/clip",
-            moreable: false,
-            component: <IsedolClipList />,
-          }} />
-        </section>
+        <ContentPanel className="youtubeSection" title="이세돌 유튜브" /*moreLink="/isedol/youtube"*/>
+          <IsedolYoutubeList />
+        </ContentPanel>
+        <ContentPanel className="clipSection" title="이세돌 주간 핫클립" /*moreLink="/isedol/clip"*/>
+          <IsedolClipList />
+        </ContentPanel>
         <div className="memberLine"></div>
         <section className="memberSection">
           <IsedolMemberList />

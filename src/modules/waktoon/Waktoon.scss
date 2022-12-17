@@ -151,7 +151,7 @@
     gap: 32px;
     max-width: var(--width);
 
-    .FrontPanel {
+    .ContentPanel {
       margin-top: 0;
 
       .panelHeader > a {
@@ -172,7 +172,7 @@
       .BasicSearchBar {
         width: 100%;
       }
-      .FrontPanel {
+      .ContentPanel {
         width: 100%;
       }
     }
