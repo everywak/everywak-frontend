@@ -1,0 +1,56 @@
+@import '../../common/common.scss';
+
+.FrontWeatherItem {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+
+  .iconWrapper {
+    .weatherImg {
+      background: transparent;
+      width: 52px;
+      height: 52px;
+    }
+  }
+  .infoWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 6px;
+
+    .name {
+      color: $primary-text-color;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 1em;
+    }
+    .state {
+      color: $secondary-text-color;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1em;
+    }
+  }
+
+  &.skeleton {
+    .iconWrapper {
+      .weatherImg {
+        img {
+          opacity: 0;
+        }
+      }
+    }
+    .infoWrapper {
+      .name {
+        color: transparent;
+      }
+      .state {
+        color: transparent;
+      }
+    }
+  }
+}

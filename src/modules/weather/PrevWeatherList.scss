@@ -1,0 +1,34 @@
+@import '../../common/common.scss';
+
+.PrevWeatherList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0;
+
+  & > .date {
+    color: $secondary-text-color;
+    font-weight: 500;
+    font-size: calc((var(--responsiveScale) + 1px) / 2 * 20);
+    line-height: 1em;
+
+    &.dummy {
+      color: transparent;
+      pointer-events: none;
+      user-select: none;
+      @include mobile {
+        display: none;
+      }
+    }
+  }
+
+  .SkeletonLoader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    & > .date:not(.dummy) {
+      color: transparent;
+    }
+  }
+}

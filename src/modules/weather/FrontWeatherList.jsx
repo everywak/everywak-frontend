@@ -1,0 +1,40 @@
+import React, { useEffect, useState } from 'react';
+
+import { orderNickname } from './weather.common';
+import FrontWeatherItem from './FrontWeatherItem';
+
+import SkeletonLoader from '../../common/Components/SkeletonLoader';
+import * as service from '../../services/Isedol';
+
+import styles from './FrontWeatherList.scss';
+import classNames from 'classnames/bind';
+const cx = classNames.bind(styles);
+
+const skeleton = <FrontWeatherItem name="ㅇㅇㅇ" state="ㅇㅇㅇ" weather="sunny" isSkeleton />;
+
+/**
+ * Frontpage에 표시되는 날씨 아이템 리스트
+ * 
+ * @param {{items: [], isLoading: boolean}} props 
+ * @returns {JSX.Element}
+ */
+function FrontWeatherList({ items, isLoading }) {
+
+  const list = items && 
+    items
+    .sort((a, b) => orderNickname[a.nickname] - orderNickname[b.nickname])
+    .map(item => <FrontWeatherItem name={item.nickname} state={item.rawInfo} weather={item.weather} />);
+
+  return (
+    <div className="FrontWeatherList">
+      <ul className="itemList">
+        {isLoading ? <SkeletonLoader skeleton={skeleton} length={6} /> : list}
+      </ul>
+      <div className="present">
+        이세돌 뱅온정보 팀 제공
+      </div>
+    </div>
+  );
+}
+
+export default FrontWeatherList;

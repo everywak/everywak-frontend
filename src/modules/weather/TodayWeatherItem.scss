@@ -1,0 +1,136 @@
+@import '../../common/common.scss';
+
+.TodayWeatherItem {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  gap: calc(var(--responsiveScale) * 16);
+  width: calc((var(--responsiveScale) - .1px) / .9 * 184);
+  @include mobile {
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 8px;
+    width: 100%;
+  }
+
+  .nameWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 8px;
+    @include mobile {
+      flex-direction: row;
+      align-self: stretch;
+    }
+
+    .personalColorPoint {
+      --color: $component-secondary-border-color;
+      background: var(--color, $component-secondary-border-color);
+      border-radius: 50%;
+      width: 8px;
+      height: 8px;
+    }
+    .name {
+      color: $primary-text-color;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1em;
+      text-align: center;
+    }
+  }
+
+  .infoWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 16px;
+    @include mobile {
+      flex-direction: row;
+      align-self: stretch;
+      gap: 8px;
+    }
+
+    .iconWrapper {
+      --width: calc(var(--responsiveScale) * 128);
+      border-radius: 8px;
+      width: var(--width);
+      height: var(--width);
+      @include mobile {
+        width: 64px;
+        height: 64px;
+      }
+
+      .weatherImg {
+        background: transparent;
+        border-radius: 8px;
+        width: var(--width);
+        height: var(--width);
+        @include mobile {
+          width: 64px;
+          height: 64px;
+        }
+      }
+    }
+
+    .descWrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2px 0px;
+      gap: 8px;
+      align-self: stretch;
+      @include mobile {
+        align-items: flex-start;
+        width: 0;
+        flex-grow: 1;
+        gap: 4px;
+      }
+
+      .state {
+        color: $primary-text-color;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 1em;
+        text-align: center;
+      }
+      .description {
+        color: $secondary-text-color;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 1.25em;
+        text-align: center;
+        white-space: pre-line;
+        @include mobile {
+          text-align: left;
+        }
+      }
+    }
+  }
+
+  &.skeleton {
+    .nameWrapper {
+      .name {
+        color: transparent;
+      }
+    }
+    .iconWrapper {
+      .weatherImg {
+        img {
+          opacity: 0;
+        }
+      }
+    }
+    .descWrapper {
+      .state,
+      .description {
+        color: transparent;
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+@import '../../common/common.scss';
+
+.TodayWeatherList {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin: 0;
+  @include mobile {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .SkeletonLoader {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    @include mobile {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+}

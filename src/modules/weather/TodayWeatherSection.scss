@@ -1,0 +1,15 @@
+@import '../../common/common.scss';
+
+.TodayWeatherSection {
+  background: white;
+  box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 36px 32px;
+  @include mobile {
+    padding: 16px;
+    align-self: stretch;
+  }
+}
