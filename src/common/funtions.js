@@ -54,6 +54,18 @@ export function isDateStr (date) {
 }
 
 /**
+ * 숫자를 1000단위로 컴마가 삽입된 문자열로 변환합니다.
+ * 
+ * @param {number} n 
+ * @returns {string}
+ */
+export function formatNumberWithCommas(n) {
+  const parts = n.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return parts.join(".");
+}
+
+/**
  * @description 시각을 간략한 문자열로 반환합니다.
  * 
  * @param {Date} date

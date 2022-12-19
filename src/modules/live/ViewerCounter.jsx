@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 
+import { formatNumberWithCommas } from '../../common/funtions';
+
 import styles from './ViewerCounter.scss';
 
 export default function ViewerCounter({viewer = 0}) {
@@ -12,8 +14,8 @@ export default function ViewerCounter({viewer = 0}) {
       setMaxViewer(viewer);
     }
   }, [viewer]);
-  const formattedViewer = viewer.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
-  const formattedMaxViewer = maxViewer.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+  const formattedViewer = formatNumberWithCommas(viewer);
+  const formattedMaxViewer = formatNumberWithCommas(maxViewer);
   return (<div className="ViewerCounter">
     <RemoveRedEyeRoundedIcon fontSize="small" />
     <span className="counterWrapper">
