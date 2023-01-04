@@ -140,115 +140,184 @@ export const Waktaverse = [
     name: '뢴트게늄',
     login_name: '111roentgenium',
     role: 'manager',
+    twitch: {
+      broadcasterId: '137881582',
+    },
   },
   {
     name: '천양',
     login_name: 'chunyangkr',
     role: 'family',
+    twitch: {
+      broadcasterId: '132782743',
+    },
   },
   {
     name: '도파민박사',
     login_name: 'dopamine_dr',
     role: 'gomem',
+    twitch: {
+      broadcasterId: '686366264',
+    },
   },
   {
     name: '비밀소녀',
     login_name: 'secretmemolee',
     role: 'gomem',
+    twitch: {
+      broadcasterId: '691305503',
+    },
   },
   {
     name: '해루석',
     login_name: 'rusuk_',
     role: 'gomem',
+    twitch: {
+      broadcasterId: '55452641',
+    },
   },
   {
     name: '히키킹',
     login_name: 'hikiking0',
     role: 'gomem',
+    twitch: {
+      broadcasterId: '637081198',
+    },
   },
   {
     name: '풍신',
     login_name: 'pung_sin',
     role: 'gomem',
-  },
-  {
-    name: '새우튀김',
-    login_name: 'friedshrimp70',
-    role: 'gomem',
-  },
-  {
-    name: '부정형인간',
-    login_name: 'bujungingan',
-    role: 'gomem',
+    twitch: {
+      broadcasterId: '688493905',
+    },
   },
   {
     name: '독고혜지',
     login_name: 'dokkhye_',
     role: 'gomem',
+    twitch: {
+      broadcasterId: '726101394',
+    },
   },
   {
     name: '소피아',
     login_name: 'ssoph25',
     role: 'gomem',
+    twitch: {
+      broadcasterId: '724476973',
+    },
   },
   {
     name: '이덕수 할아바이',
     login_name: '2ducksoo',
     role: 'gomem',
+    twitch: {
+      broadcasterId: '694571266',
+    },
   },
   {
-    name: '미츠네 하쿠',
-    login_name: 'mitsune_89',
+    name: '하쿠0089',
+    login_name: 'haku200912',
     role: 'gomem',
+    twitch: {
+      broadcasterId: '727383392',
+    },
   },
   {
     name: '비즈니스 킴',
     login_name: 'businesskim111',
     role: 'gomem',
+    twitch: {
+      broadcasterId: '692399509',
+    },
   },
   {
     name: '카르나르 융터르',
     login_name: 'carnarjungtur',
     role: 'gomem',
+    twitch: {
+      broadcasterId: '776127800',
+    },
   },
   {
     name: '프리터',
     login_name: 'freeter1999',
     role: 'gomem',
+    twitch: {
+      broadcasterId: '757269147',
+    },
   },
   {
     name: '김치만두번영택사스가',
     login_name: 'cman0327',
+    role: 'gomem',
+    twitch: {
+      broadcasterId: '495411373',
+    },
+  },
+  {
+    name: '캘리칼리 데이비슨',
+    login_name: 'invenxd',
+    role: 'gomem',
+    twitch: {
+      broadcasterId: '708871268',
+    },
+  },
+  {
+    name: '새우튀김',
+    login_name: 'friedshrimp70',
     role: 'ghost',
+    twitch: {
+      broadcasterId: '145246183',
+    },
+  },
+  {
+    name: '부정형인간',
+    login_name: 'bujungingan',
+    role: 'ghost',
+    twitch: {
+      broadcasterId: '147540755',
+    },
   },
   {
     name: '단답벌레',
     login_name: 'dandapbug',
     role: 'ghost',
-  },
-  {
-    name: '캘리칼리 데이비슨',
-    login_name: 'invenxd',
-    role: 'ghost',
+    twitch: {
+      broadcasterId: '529929528',
+    },
   },
   {
     name: '곽춘식',
     login_name: 'realchunshik',
     role: 'ghost',
+    twitch: {
+      broadcasterId: '171950282',
+    },
   },
   {
     name: '왁파고',
     login_name: 'wakphago',
     role: 'ghost',
+    twitch: {
+      broadcasterId: '693895624',
+    },
   },
   {
     name: '권민',
     login_name: 'kwonmin98',
     role: 'ghost',
+    twitch: {
+      broadcasterId: '689539974',
+    },
   },
   {
     name: '노스페라투 호드',
     login_name: 'nosferatu_hodd',
     role: 'ghost',
+    twitch: {
+      broadcasterId: '833390409',
+    },
   },
 ];
