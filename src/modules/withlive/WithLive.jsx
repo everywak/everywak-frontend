@@ -299,7 +299,7 @@ function BroadcasterPanel() {
         에브리왁굳 왁타버스 같이보기 페이지는 YouTube 및 Twitch의 서드파티 사이트로 YouTube 및 Twitch에서 운영하는 사이트가 아닙니다.<br/>
         'YouTube' 및 '유튜브'는 YouTube, LLC의 등록상표이며 'Twitch' 및 '트위치'는 Twitch Interactive, Inc.의 등록상표입니다.<br/>
         &nbsp;<br/>
-        에브리왁굳 © 2020-2022. <a href="https://github.com/wei756" className="copyrighter_site_footer">Wei756</a>. All rights reserved.
+        에브리왁굳 © 2020-2023. <a href="https://github.com/wei756" className="copyrighter_site_footer">Wei756</a>. All rights reserved.
       </p>
     </div>
   );
