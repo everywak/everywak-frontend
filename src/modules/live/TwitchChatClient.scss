@@ -77,6 +77,16 @@
           text-align: center;
         }
 
+        &.hideNickname {
+          padding: 4px 16px;
+          line-height: 1.1em;
+
+          .chatProfile,
+          .chatDivider {
+            display: none;
+          }
+        }
+
         & > span {
           vertical-align: middle;;
         }

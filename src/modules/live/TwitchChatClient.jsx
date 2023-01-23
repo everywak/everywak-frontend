@@ -41,6 +41,7 @@ class TwitchChatClient extends PureComponent {
       showFilteredChatView: false,
       onlyModerator: false,
       onlySubscriber: false,
+      hideNickname: false,
       maxShowLength: 70,
       blacklist: [],
       whitelist: [],
@@ -208,7 +209,10 @@ class TwitchChatClient extends PureComponent {
               채팅
             </header>
             <TwitchChatList chatList={chatList} options={{...chatOptions}} />
-            {chatOptions.showFilteredChatView && <TwitchChatList className='filteredChatList' chatList={chatList} options={{whitelist: waktaverseLoginNames}} />}
+            {
+              chatOptions.showFilteredChatView && 
+              <TwitchChatList className='filteredChatList' chatList={chatList} options={{ hideNickname: chatOptions.hideNickname, whitelist: waktaverseLoginNames }} />
+            }
             <div className="twitchChatBottom">
               <div className="twitchChatInputWrapper">
                 <textarea 
@@ -261,6 +265,7 @@ class TwitchChatClient extends PureComponent {
  * @typedef TwitchChatListOptions
  * @property {boolean} onlyModerator
  * @property {boolean} onlySubscriber
+ * @property {boolean} hideNickname
  * @property {number} maxShowLength
  * @property {string[]} blacklist
  * @property {string[]} whitelist
@@ -318,6 +323,7 @@ function TwitchChatList({
   const _options = {
     onlyModerator: false,
     onlySubscriber: false,
+    hideNickname: false,
     maxShowLength: 70,
     blacklist: [],
     whitelist: [],
@@ -345,7 +351,7 @@ function TwitchChatList({
   const filteredChatList = filterChatList(chatList, _options);
   const cList = filteredChatList.map(chat => 
     chat.type === 'USERCHAT' ? 
-    <TwitchChatUserChat key={chat.key} chatItem={chat} /> :
+    <TwitchChatUserChat key={chat.key} chatItem={chat} hideNickname={_options.hideNickname} /> :
     <li key={chat.key} className="twitchChatItem sysMessage">
       <span className="chatContent">{chat.content}</span>
     </li>
@@ -374,9 +380,9 @@ function TwitchChatList({
  */
 /**
  * Twitch chat item
- * @param {{chatItem: TwitchChatItemData}} props 
+ * @param {{chatItem: TwitchChatItemData, hideNickname: boolean}} props 
  */
-const TwitchChatUserChat = React.memo(({chatItem}) => {
+const TwitchChatUserChat = React.memo(({ chatItem, hideNickname }) => {
 
   function geneProfile({ color, badges, displayName, userID }) {
     return (
@@ -395,9 +401,9 @@ const TwitchChatUserChat = React.memo(({chatItem}) => {
   }
 
   return (
-    <li className="twitchChatItem">
+    <li className={cx('twitchChatItem', {hideNickname: hideNickname})}>
       <span className="chatProfile">{useMemo(() => geneProfile(chatItem.profile), [chatItem])}</span>
-      <span>: </span>
+      <span className="chatDivider">: </span>
       <span className="chatContent">{geneContent(chatItem.content)}</span>
     </li>
   );
@@ -408,6 +414,7 @@ const TwitchChatUserChat = React.memo(({chatItem}) => {
  * @property {boolean} showFilteredChatView
  * @property {boolean} onlyModerator
  * @property {boolean} onlySubscriber
+ * @property {boolean} hideNickname
  * @property {number} maxShowLength
  * @property {string[]} blacklist
  * @property {string[]} whitelist
@@ -423,6 +430,7 @@ function TwitchChatSettingPanel({ chatOptions, onChange, setOnModal, }) {
     showFilteredChatView: chatOptions.showFilteredChatView,
     onlyModerator: chatOptions.onlyModerator,
     onlySubscriber: chatOptions.onlySubscriber,
+    hideNickname: chatOptions.hideNickname,
     maxShowLength: chatOptions.maxShowLength,
   });
 
@@ -430,6 +438,7 @@ function TwitchChatSettingPanel({ chatOptions, onChange, setOnModal, }) {
     if (chatOptions.showFilteredChatView != $chatOptions.showFilteredChatView ||
       chatOptions.onlyModerator != $chatOptions.onlyModerator ||
       chatOptions.onlySubscriber != $chatOptions.onlySubscriber ||
+      chatOptions.hideNickname != $chatOptions.hideNickname ||
       chatOptions.maxShowLength !== $chatOptions.maxShowLength
     ) {
       onChange($chatOptions);
@@ -450,6 +459,7 @@ function TwitchChatSettingPanel({ chatOptions, onChange, setOnModal, }) {
         <CheckBox label="구독자 채팅만 보기" name='onlySubscriber' value={$chatOptions.onlySubscriber} onChange={$onChange} fillContainer />
         <CheckBox label="매니저 채팅만 보기" name='onlyModerator' value={$chatOptions.onlyModerator} onChange={$onChange} fillContainer />
         <CheckBox label="왁타버스 멤버 채팅창 표시" name='showFilteredChatView' value={$chatOptions.showFilteredChatView} onChange={$onChange} fillContainer />
+        <CheckBox label="닉네임 숨기기" name='hideNickname' value={$chatOptions.hideNickname} onChange={$onChange} fillContainer />
       </div>
     </div>
   );
