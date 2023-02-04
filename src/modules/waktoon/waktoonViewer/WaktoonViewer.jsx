@@ -48,6 +48,7 @@ export default function WaktoonViewer({location, history}) {
         setTarget({});
       } else {
         setTarget(waktoonList[0]);
+        func.setBrowserTitle(`왁굳코믹스 - ${waktoonList[0].title}`);
       }
     }
     fetchWaktoonData();

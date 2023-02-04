@@ -13,6 +13,7 @@ const cx = classNames.bind(styles);
 export default function WaktoonEpisodeViewer({location, history}) {
 
   const { articleId } = useParams();
+  func.setBrowserTitle(`왁툰 작품 - ${articleId}`);
   
   useEffect(() => {
     setTimeout(() => func.redirectTo(`https://cafe.naver.com/steamindiegame/${articleId}`), 1000);
