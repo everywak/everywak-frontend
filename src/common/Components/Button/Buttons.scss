@@ -34,6 +34,7 @@
     height: 100%;
     background: rgba(255, 255, 255, 0);
     transition: background-color ease .15s;
+    pointer-events: none;
   }
   @include desktop {
     &:hover::after {
@@ -62,6 +63,34 @@
 
     .CircleImg {
       width: 100%;
+    }
+  }
+
+  &.hasRibbon {
+    & > .description {
+      display: none;
+    }
+    @include desktop {
+      & > .description {
+        background: #111a;
+        border-radius: 4px;
+        box-shadow: 0px 0px 8px 1px #0003;
+        color: $dark-primary-text-color;
+        display: flex;
+        font-size: 14px;
+        opacity: 0;
+        padding: 6px 8px;
+        position: absolute;
+        bottom: 100%;
+        pointer-events: none;
+        width: max-content;
+        transition: bottom ease .15s, opacity ease .15s;
+        z-index: 100;
+      }
+      &:hover > .description {
+        bottom: 110%;
+        opacity: 1;
+      }
     }
   }
 }
