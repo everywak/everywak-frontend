@@ -1,0 +1,122 @@
+@import '../../common.scss';
+
+.ContextMenu {
+  --menuMargin: 0px;
+  --animAmount: 4px;
+  &.root {
+    --animAmount: 0px;
+  }
+  background: #000a;
+  border-radius: 4px;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, .3);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: max-content;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity ease .15s, top ease .15s, left ease .15s, bottom ease .15s, right ease .15s;
+
+  &:hover,
+  &.root {
+    opacity: 1;
+  }
+
+  &.mt {
+    bottom: calc(100% + var(--menuMargin) - var(--animAmount));
+  }
+  &.mb {
+    top: calc(100% + var(--menuMargin) - var(--animAmount));
+  }
+  &.ml {
+    right: calc(100% + var(--menuMargin) - var(--animAmount));
+  }
+  &.mr {
+    left: calc(100% + var(--menuMargin) - var(--animAmount));
+  }
+  &.sl {
+    right: 0;
+  }
+  &.sr {
+    left: 0;
+  }
+  &.st {
+    bottom: 0;
+  }
+  &.sb {
+    top: 0;
+  }
+
+  .ContextMenuItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-self: stretch;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 12px 16px;
+    position: relative;
+    min-width: 96px;
+
+    &::after {
+      align-self: stretch;
+      background: #fff0;
+      border-radius: 4px;
+      box-sizing: border-box;
+      content: '';
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      transition: background ease .15s;
+    }
+    &:hover::after {
+      background: #fff1;
+    }
+    &:active::after {
+      background: #fff2;
+    }
+    &:hover .ContextMenu {
+      opacity: 1;
+      &.mt {
+        bottom: calc(100% + var(--menuMargin));
+      }
+      &.mb {
+        top: calc(100% + var(--menuMargin));
+      }
+      &.ml {
+        right: calc(100% + var(--menuMargin));
+      }
+      &.mr {
+        left: calc(100% + var(--menuMargin));
+      }
+    }
+
+    .labelWrapper {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      align-self: stretch;
+      width: 100%;
+
+      .label {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        color: $dark-primary-text-color;
+        width: 0;
+        flex-grow: 1;
+      }
+      .subLabel {
+        color: $dark-secondary-text-color;
+        padding-left: 8px;
+        width: max-content;
+      }
+    }
+  }
+}
