@@ -1,0 +1,70 @@
+@import '../../common.scss';
+
+.ProgressBar {
+  --defaultHeight: 4px;
+  --hoveredHeight: 8px;
+  position: relative;
+  user-select: none;
+
+  progress {
+    background: transparent;
+    height: var(--hoveredHeight);
+    width: 100%;
+    padding: calc((var(--hoveredHeight) - var(--defaultHeight)) / 2) 0;
+    overflow: hidden;
+    transition: padding ease .15s;
+  
+    &::-webkit-progress-bar,
+    &::-webkit-progress-value {
+      border-radius: calc(var(--defaultHeight) / 2);
+      height: 100%;
+      transition: height ease .15s, border-radius ease .15s;
+    }
+  }
+  &:hover {
+    progress {
+      padding: 0;
+
+      &::-webkit-progress-bar,
+      &::-webkit-progress-value {
+        border-radius: calc(var(--hoveredHeight) / 2);
+      }
+    }
+  }
+  
+  .progressBar {
+    border-radius: 2px;
+    cursor: pointer;
+    display: flex;
+    transition: padding ease .15s;
+
+    &::-webkit-progress-bar {
+      background: #fff3;
+    }
+    &::-webkit-progress-value {
+      background: white;
+    }
+  }
+  &:hover .preview {
+    opacity: 1;
+  }
+  .preview {
+    position: absolute;
+    top: 0px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity ease .3s;
+
+    &::-webkit-progress-bar {
+      background: transparent;
+      pointer-events: none;
+    }
+    &::-webkit-progress-value {
+      background: #fff4;
+      pointer-events: none;
+    }
+  }
+
+  @include not-desktop {
+  }
+}
