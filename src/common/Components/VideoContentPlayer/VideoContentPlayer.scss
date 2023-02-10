@@ -1,0 +1,251 @@
+@import '../../common.scss';
+
+.VideoContentPlayer {
+  background: $twitch-color;
+  box-sizing: border-box;
+  position: relative;
+  width: 854px;
+  height: 480px;
+
+  & > .player {
+    width: 100%;
+    height: 100%;
+  }
+
+  .overlay {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+
+    & > * {
+      cursor: auto;
+    }
+    &.hover::before {
+      opacity: 1;
+    }
+    &.hover .captionText {
+      bottom: 64px;
+    }
+    &::before {
+      background: linear-gradient(#0008 0%, #0000 20%, #0000 80%, #0008 100%);
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: 1;
+      transition: opacity ease .15s;
+    }
+
+    .mediaInfo, .controls {
+      opacity: 0;
+    }
+    &.hover .mediaInfo, 
+    &.hover .controls {
+      opacity: 1;
+    }
+
+    .mediaInfo {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-self: stretch;
+      gap: 4px;
+      padding: 24px 20px;
+      z-index: 10;
+      transition: opacity ease .15s;
+
+      .descArea {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 4px;
+
+        .title {
+          color: $dark-primary-text-color;
+          font-size: 22px;
+          font-weight: 500;
+          line-height: 1em;
+        }
+        .description {
+          color: $dark-secondary-text-color;
+          font-size: 16px;
+          line-height: 1em;
+        }
+      }
+    }
+
+    .captionText {
+      background: #000a;
+      border-radius: 4px;
+      color: var(--primary-text-color);
+      font-size: 26px;
+      font-weight: 400;
+      line-height: 1em;
+      margin: 0 auto 32px;
+      padding: 6px 8px;
+      width: fit-content;
+      position: absolute;
+      bottom: 32px;
+      transition: bottom ease .15s, opacity ease .15s;
+      @include not-desktop {
+        font-size: 18px;
+        padding: 4px 6px;
+        margin: 0 auto 12px;
+      }
+
+      &.hide,
+      &.noContent {
+        opacity: 0;
+      }
+    }
+
+    .controls {
+      padding: 8px 12px;
+      z-index: 10;
+      transition: opacity ease .15s;
+      pointer-events: auto;
+
+      &.hideProgress {
+        padding: 8px;
+
+        .videoProgress,
+        .buttonArea > .left > .musicTime {
+          display: none;
+        }
+      }
+
+      .buttonArea {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 4px;
+
+        & > .left,
+        & > .right {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+        }
+        & > .right {
+          gap: 0px;
+        }
+        .BasicButton {
+          border-radius: 50%;
+          box-sizing: border-box;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 0;
+          padding: 0;
+          position: relative;
+          width: 32px;
+          height: 32px;
+
+          &::after {
+            border-radius: 50%;
+          }
+          & > .description {
+            background: #1118;
+            font-size: 12px;
+            padding: 4px 6px;
+          }
+        }
+        .left {
+          .BasicButton.playpause .iconImg {
+            width: 28px;
+            height: 28px;
+          }
+          .BasicButton.playpause .iconImg.paused {
+            width: 26px;
+            height: 26px;
+          }
+
+          .mute:hover + .volumeWrapper,
+          .volumeWrapper.show {
+            width: 100px;
+          }
+          .volumeWrapper {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            overflow: hidden;
+            width: 0px;
+            height: 24px;
+            transition: width ease .15s;
+
+            &:hover {
+              width: 100px;
+            }
+
+            .volume {
+              --defaultHeight: 6px;
+              --hoveredHeight: 8px;
+              width: 100px;
+              min-width: 100px;
+            }
+          }
+          .musicTime {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 6px;
+            color: $dark-secondary-text-color;
+            font-size: 12px;
+            padding: 0 8px;
+    
+            .currTime {
+              color: $dark-primary-text-color;
+              font-size: 16px;
+            }
+            .line {
+              background: #fff5;
+              width: 1px;
+              height: 12px;
+            }
+            .wholeTime {
+              font-size: 16px;
+            }
+          }
+        }
+        .right {
+          padding: 0px 4px;
+
+          .BasicButton.caption .iconImg {
+            width: 18px;
+            height: 18px;
+          }
+          .BasicButton.settings {
+
+            &.on .description {
+              display: none;
+            }
+            .iconImg {
+              width: 20px;
+              height: 20px;
+            }
+          }
+          .BasicButton.theaterMode .iconImg {
+            width: 21px;
+            height: 21px;
+          }
+        }
+      }
+    }
+
+  }
+}
