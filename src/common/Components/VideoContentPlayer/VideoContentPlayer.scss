@@ -55,7 +55,7 @@
         pointer-events: auto;
       }
       &::before {
-        background: #0004;
+        background: #0003;
       }
       .controls {
         .left {
@@ -67,7 +67,8 @@
         .right {
           .BasicButton.caption,
           .BasicButton.settings,
-          .BasicButton.theaterMode {
+          .BasicButton.theaterMode,
+          .BasicButton.fullscreen {
             display: none;
           }
         }
