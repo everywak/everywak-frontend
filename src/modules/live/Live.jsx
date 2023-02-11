@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 
+import Header from '../../common/Header/Header.js';
 import Footer from '../../common/Footer/Footer.js';
 
 import LiveSummary from './LiveSummary';
 import TwitchChat from './TwitchChat';
-import WakPlayer from './WakPlayer';
+import VideoContentPlayer from '../../common/Components/VideoContentPlayer/VideoContentPlayer.jsx';
 
 import * as func from '../../common/funtions';
 
@@ -20,20 +21,18 @@ function addClassLive() {
   }
 }
 
-export default function Live ({front = false, location, history}) {
+export default function Live ({location, history}) {
 
   const [opened, setOpened] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
   // 브라우저 제목 설정
   useEffect(() => {
-    if (!front) {
-      func.setBrowserTitle('생방송');
-      addClassLive();
-    }
+    func.setBrowserTitle('생방송');
+    addClassLive();
 
     return () => {
-      document.querySelector('.App') && document.querySelector('.App').classList.remove('live');
+      document.querySelector('.App')?.classList.remove('live');
     }
   }, []);
 
@@ -49,42 +48,32 @@ export default function Live ({front = false, location, history}) {
   }, [expanded]);
   
 
-  function onChangeOverlayStateHandler({expanded, opened}) {
-    if (opened !== undefined) {
-      setOpened(opened);
+  const onPlayerOptionChangedHandler = useCallback(({theaterMode, hovering}) => {
+    console.log(hovering, opened)
+    if (hovering !== undefined && hovering !== opened) {
+      setOpened(hovering);
     }
-    if (expanded !== undefined) {
-      setExpanded(expanded);
+    if (theaterMode !== undefined && theaterMode !== expanded) {
+      setExpanded(theaterMode);
     }
-  }
+  }, [opened, expanded]);
 
   const channelId = 'woowakgood'; // process.env.REACT_APP_TWITCH_CHANNEL_NAME
 
-  return (
-    front ?
-    <LiveFront /> :
-    <div className={cx('Live')}>
+  return (<>
+    {!expanded &&
+      <Header />
+    }
+    <div className={cx('Live', {expanded: expanded})}>
       <div className={cx('playerWrapper', {opened: opened, expanded: expanded})} ref={refPlayerWrapper}>
-        <WakPlayer key="wakplayer" channelId={channelId} onChangeOverlayState={onChangeOverlayStateHandler} /> 
-        <LiveSummary channelId={channelId} expanded={expanded} onChangeOverlayState={onChangeOverlayStateHandler} />
+        <VideoContentPlayer key="wakplayer" mediaType="twitchLive" mediaId={channelId} onPlayerOptionChanged={onPlayerOptionChangedHandler} /> 
+        <LiveSummary channelId={channelId} expanded={expanded} onChangeOverlayState={onPlayerOptionChangedHandler} />
         <BroadcasterPanel />
         <Footer />
       </div>
       <TwitchChat location={location} history={history} />
     </div>
-  )
-}
-
-/**
- * FrontPage에 표시되는 생방송 컴포넌트
- */
-function LiveFront() {
-  return (
-    <div className={cx('Live', 'front')}>
-      <WakPlayer key="wakplayer" channelId="woowakgood" />
-      <LiveSummary style="simple" />
-    </div>
-  );
+  </>);
 }
 
 /**

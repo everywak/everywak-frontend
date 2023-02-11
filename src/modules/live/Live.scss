@@ -1,9 +1,16 @@
 @import '../../common/common.scss';
 
-.Live + footer.footer {
-  display: none;
+@include not-desktop {
+  @media (orientation: landscape) {
+    .App.live header.header {
+      display: none;
+    }
+  }
 }
-.Live:not(.front) {
+.Live {
+  width: 100%;
+  display: grid;
+  display: -ms-grid;
   @include desktop {
     height: calc(100vh - #{$header-height});
   }
@@ -15,11 +22,13 @@
       height: 100vh;
     }
   }
-}
-.Live:not(.front) {
-  width: 100%;
-  display: grid;
-  display: -ms-grid;
+  &.expanded {
+    height: 100vh;
+  }
+  
+  & + footer.footer {
+    display: none;
+  }
   @media (orientation: portrait) {
     grid-template-columns: 100%;
     grid-template-rows: auto 1fr;
@@ -30,7 +39,7 @@
     "chat";
     
     .playerWrapper {
-      .WakPlayer {
+      .VideoContentPlayer {
         height: calc(100vw / 16 * 9);
       }
       &.opened {
@@ -55,27 +64,24 @@
     grid-template-areas:
     "live chat";
   }
-}
-
-@include not-desktop {
-  
-  @media (orientation: landscape) {
-    .App.live header.header {
-      display: none;
+  .playerWrapper {
+    background: $component-primary-bg-color;
+    grid-area: live;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    @include desktop {
+      overflow-y: scroll;
     }
-  }
-  
-  .Live:not(.front) {
-    .playerWrapper {
+    @include not-desktop {
       height: 100vh;
       overflow-y: hidden;
-      .WakPlayer {
+      .VideoContentPlayer {
         transition: height ease .3s;
       }
       &.expanded {
         overflow-y: scroll;
   
-        .WakPlayer {
+        .VideoContentPlayer {
           height: 0px;
         }
       }
@@ -86,57 +92,82 @@
       }
     }
     
-  }
-}
-.Live:not(.front) .playerWrapper {
-  background: $component-primary-bg-color;
-  grid-area: live;
-  @include desktop {
-    overflow-y: scroll;
-  }
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+    @media (orientation: portrait) {
+      --wrapperPortraitHeight: calc(100vw / 16 * 9);
+      height: var(--wrapperPortraitHeight);
+      overflow: hidden;
+      transition: height ease .3s;
   
-  @media (orientation: portrait) {
-    --wrapperPortraitHeight: calc(100vw / 16 * 9);
-    height: var(--wrapperPortraitHeight);
-    overflow: hidden;
-    transition: height ease .3s;
-
-    footer.footer {
-      display: none;
+      footer.footer {
+        display: none;
+      }
     }
-  }
-  
-  &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
-  }
-  
-  .BroadcasterPanel {
     
-    .panelContainer {
-      padding: 16px 24px 24px;
-      
-      a img {
-        max-width: 100%;
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera*/
+    }
+    
+    .VideoContentPlayer {
+      width: 100%;
+      height: auto;
+      @media (orientation: landscape) {
+        @include desktop {
+          max-height: calc(100vh - #{$header-height} - 128px);
+        }
+        @include not-desktop {
+          height: 100vh;
+          transition: height ease .3s;
+          &::before {
+            padding-top: 100vh;
+          }
+        }
+      }
+
+      .overlay {
+        transition: padding ease .3s;
       }
     }
-    .footerTxt {
-      color: $secondary-text-color;
-      font-size: 14px;
-      font-weight: 400;
-      margin: 0;
-      padding: 12px 24px 72px;
+    @media (orientation: landscape) {
+      &.expanded {
+        .VideoContentPlayer {
+          height: 100vh;
+          max-height: 100vh;
+        }
+      }
+      @include not-desktop {
+        &.opened {
+          .VideoContentPlayer {
+            .overlay {
+              padding-bottom: 84px;
+            }
+          }
+        }
+      }
+    }
 
-      a {
-        color: $primary-text-color;
-        font-weight: 500;
+    .BroadcasterPanel {
+      
+      .panelContainer {
+        padding: 16px 24px 24px;
+        
+        a img {
+          max-width: 100%;
+        }
+      }
+      .footerTxt {
+        color: $secondary-text-color;
+        font-size: 14px;
+        font-weight: 400;
+        margin: 0;
+        padding: 12px 24px 72px;
+  
+        a {
+          color: $primary-text-color;
+          font-weight: 500;
+        }
       }
     }
   }
-}
-
-.Live {
   @media (orientation: portrait) {
     .opened + .TwitchChat {
       --wrapperPortraitHeight: calc(100vw / 16 * 9 + 84px);
@@ -167,4 +198,7 @@
       }
     }
   }
+}
+.VideoContentPlayer {
+  aspect-ratio: 16/9;
 }

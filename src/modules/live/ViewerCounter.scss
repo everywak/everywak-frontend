@@ -26,6 +26,7 @@
     opacity: 0;
     transition: opacity ease .15s;
     z-index: 500;
+    pointer-events: none;
     @include desktop {
       top: -8px;
       right: calc(100% + 8px);
