@@ -38,13 +38,13 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
 
   const [liveInfo, setLiveInfo] = useState(liveOffline);
 
-  const updateLiveInfo = useCallback(async () => {
+  const updateLiveInfo = async (target) => {
 
     const updatedTimeStamp = Date.now();
 
     // 프로필 로드
     const memberProfiles = await service.getWaktaverseInfo();
-    const memberProfile = memberProfiles.find(member => member.login === channelId);
+    const memberProfile = memberProfiles.find(member => member.login === target);
 
     // Client/Api 오프라인 예외 처리
     if (!memberProfile) {
@@ -64,7 +64,7 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
 
     // 생방송 정보 로드
     const lives = await service.getWaktaverseBroadcastInfo();
-    const fetchedInfo = lives.find(live => live.login_name === channelId);
+    const fetchedInfo = lives.find(live => live.login_name === target);
 
     if (fetchedInfo) { // 뱅온
 
@@ -80,15 +80,15 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
     if (liveInfo.updatedTimeStamp < updatedLiveInfo.updatedTimeStamp) {
       setLiveInfo(updatedLiveInfo);
     }
-  }, [channelId]);
+  };
 
   useEffect(() => {
-    updateLiveInfo();
+    updateLiveInfo(channelId);
 
-    const loopUpdateLiveInfo = setInterval(updateLiveInfo, 30 * 1000);
+    const loopUpdateLiveInfo = setInterval(() => updateLiveInfo(channelId), 30 * 1000);
 
     return () => clearInterval(loopUpdateLiveInfo);
-  }, [updateLiveInfo]);
+  }, [channelId]);
 
   const { broadcaster, nickname, profileImg, title, viewerCount, startedTime } = liveInfo;
 
