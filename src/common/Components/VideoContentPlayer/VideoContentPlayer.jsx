@@ -93,6 +93,7 @@ const useDelayedHovering = (ref, delay = 50) => {
  * description: string
  * playerSize: 'normal'|'simple'
  * useHotkey: boolean
+ * theaterMode: boolean
  * onClickOverlay: React.MouseEventHandler<HTMLDivElement>
  * onPlayerStateChanged?: ({}) => void
  * onPlayerOptionChanged?: ({}) => void}} props 
@@ -108,6 +109,7 @@ function VideoContentPlayer ({
   description, 
   playerSize = 'normal', 
   useHotkey = true, 
+  theaterMode = false,
   onClickOverlay = () => {},
   onPlayerStateChanged = () => {},
   onPlayerOptionChanged = () => {},
@@ -275,6 +277,13 @@ function VideoContentPlayer ({
     }
   }, [playerOptions, hovering]);
 
+  // 극장 모드 외부에서 변경
+  useEffect(() => {
+    if (theaterMode !== playerOptions.theaterMode) {
+      toggleTheaterMode();
+    }
+  }, [theaterMode]);
+
   // 플레이어 조작값 변경 반영
   useEffect(() => {
     //console.log(playerState)
@@ -313,6 +322,14 @@ function VideoContentPlayer ({
       }
     })
   }, [playerState]);
+  const toggleTheaterMode = useCallback(() => {
+    onChangeOption({
+      target: {
+        name: 'theaterMode',
+        value: !playerOptions.theaterMode,
+      }
+    })
+  }, [playerOptions]);
   const toggleFullscreen = useCallback(() => {
     onChangeOption({
       target: {
