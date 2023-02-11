@@ -293,14 +293,6 @@ function VideoContentPlayer ({
       }
       if (player?.getVolume() != playerState.volume) {
         player?.setVolume(playerState.volume);
-        if (playerState.volume > 0 && playerState.isMuted) {
-          onChangeState({
-            target: {
-              name: 'isMuted', 
-              value: false,
-            }
-          })
-        }
       }
     } catch(e) { console.error(e); }
 
@@ -418,7 +410,7 @@ function VideoContentPlayer ({
                 }
               </ToggleButton>
               <div className={cx('volumeWrapper', {show: volumeBarClicked})}>
-                <ProgressBar className="volume" min={0} max={100} name="volume" value={playerState.volume} onChange={onChangeState} onMouseDown={setVolumeBarClicked} actionType="drag" />
+                <ProgressBar className="volume" min={0} max={100} name="volume" value={playerState.volume} onChange={onChangeState} onMouseDown={e => {playerState.isMuted && toggleMute(); setVolumeBarClicked(e)}} actionType="drag" />
               </div>
               <div className="musicTime">
                 <span className="currTime">{formatHMMSSString(playerState.position)}</span>
