@@ -54,9 +54,11 @@ const useClicked = () => {
 /**
  * 
  * @param {React.MutableRefObject<undefined>} _el 
+ * @param {string} name
+ * @param {({target: {name: string, value: number}}) => void} onChange 
  * @returns {[boolean]}
  */
-const useDelayedHovering = (ref, delay = 50) => {
+const useDelayedHovering = (ref, name, onChange, delay = 50) => {
   const [hovering, setHovering] = useState(false);
   const [lifeHovering, setLifeHovering] = useState(0);
   useEffect(() => {
@@ -64,8 +66,16 @@ const useDelayedHovering = (ref, delay = 50) => {
       if (lifeHovering > 0) {
         setLifeHovering(val => --val);
         !hovering && setHovering(true);
+        !hovering && onChange({target: {
+          name,
+          value: true,
+        }});
       } else {
         hovering && setHovering(false);
+        hovering && onChange({target: {
+          name,
+          value: false,
+        }});
       }
     }, 50);
 
@@ -76,7 +86,7 @@ const useDelayedHovering = (ref, delay = 50) => {
     return(() => {
       clearInterval(loopLifeHovering);
     });
-  }, [ref, delay, hovering, lifeHovering]);
+  }, [ref, delay, name, onChange, hovering, lifeHovering]);
 
   return [hovering];
 }
@@ -131,6 +141,7 @@ function VideoContentPlayer ({
   });
 
   const [playerOptions, onChangeOption, resetOption] = useInputs({
+    hovering: false,
     theaterMode: false,
     fullscreen: false,
     showCaption: false,
@@ -254,7 +265,7 @@ function VideoContentPlayer ({
   useEffect(() => {
 
     // 변경사항 외부 전달
-    onPlayerOptionChanged({...playerOptions, hovering});
+    onPlayerOptionChanged({...playerOptions});
 
     // 전체화면 적용
     if (playerOptions.fullscreen) {
@@ -275,7 +286,7 @@ function VideoContentPlayer ({
     return () => {
       clearInterval(loopCheckFullscreen);
     }
-  }, [playerOptions, hovering]);
+  }, [playerOptions]);
 
   // 극장 모드 외부에서 변경
   useEffect(() => {
@@ -301,7 +312,7 @@ function VideoContentPlayer ({
 
   }, [player, playerState]);
 
-  const [hovering] = useDelayedHovering(_el, playerSize === 'simple' ? 1 : 50);
+  useDelayedHovering(_el, 'hovering', onChangeOption, playerSize === 'simple' ? 1 : 50);
 
   const togglePlayPause = useCallback(() => {
     playerState.playing ? player?.pause() : player?.play()
@@ -380,7 +391,7 @@ function VideoContentPlayer ({
       <div className="spinnerWrapper hide">
         <div className="spinner"><div className="innerWrapper"><div className="inner"></div></div></div>
       </div>
-      <div className={cx('overlay', {hover: hovering || volumeBarClicked || playerOptions.openedSettings, simple: playerSize === 'simple'})} onClick={onClickOverlay}>
+      <div className={cx('overlay', {hover: playerOptions.hovering || volumeBarClicked || playerOptions.openedSettings, simple: playerSize === 'simple'})} onClick={onClickOverlay}>
         <div className="mediaInfo">
           <div className="descArea">
             <div className="title">{title}</div>
