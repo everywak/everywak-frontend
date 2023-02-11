@@ -39,7 +39,7 @@ function TwitchLivePlayer ({
   }
 
   useEffect(() => {
-    const _embed = <TwitchPlayer className={cx('player', 'twitchLive', className)} channel={channelId} parent={[domain]} 
+    const _embed = <TwitchPlayer id={`streamembed_${channelId}`} className={cx('player', 'twitchLive', className)} channel={channelId} parent={[domain]} 
     width="100%" height="100%" hideControls={true} muted={true} 
     onReady={setPlayer} onPlay={_onPlay} onPlaying={_onPlaying} onPause={_onPause} 
     onOnline={_onOnline} onOffline={_onOffline} {...rest} />;
