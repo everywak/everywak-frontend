@@ -90,8 +90,10 @@ const useDelayedHovering = (ref, delay = 50) => {
  * startTime?: number
  * endTime?: number
  * title: string
- * description: string,
- * onPlayerStateChanged?: ({}) => void,
+ * description: string
+ * playerSize: 'normal'|'simple'
+ * onClickOverlay: React.MouseEventHandler<HTMLDivElement>
+ * onPlayerStateChanged?: ({}) => void
  * onPlayerOptionChanged?: ({}) => void}} props 
  * @returns {JSX.Element}
  */
@@ -103,6 +105,8 @@ function VideoContentPlayer ({
   endTime, 
   title, 
   description, 
+  playerSize = 'normal', 
+  onClickOverlay = () => {},
   onPlayerStateChanged = () => {},
   onPlayerOptionChanged = () => {},
   ...rest }) {
@@ -246,7 +250,7 @@ function VideoContentPlayer ({
   useEffect(() => {
 
     // 변경사항 외부 전달
-    onPlayerOptionChanged(playerOptions);
+    onPlayerOptionChanged({...playerOptions, hovering});
 
     // 전체화면 적용
     if (playerOptions.fullscreen) {
@@ -267,7 +271,7 @@ function VideoContentPlayer ({
     return () => {
       clearInterval(loopCheckFullscreen);
     }
-  }, [playerOptions]);
+  }, [playerOptions, hovering]);
 
   // 플레이어 조작값 변경 반영
   useEffect(() => {
@@ -294,7 +298,7 @@ function VideoContentPlayer ({
 
   }, [player, playerState]);
 
-  const [hovering] = useDelayedHovering(_el);
+  const [hovering] = useDelayedHovering(_el, playerSize === 'simple' ? 1 : 50);
 
   const togglePlayPause = useCallback(() => {
     playerState.playing ? player?.pause() : player?.play()
@@ -362,7 +366,7 @@ function VideoContentPlayer ({
       <div className="spinnerWrapper hide">
         <div className="spinner"><div className="innerWrapper"><div className="inner"></div></div></div>
       </div>
-      <div className={cx('overlay', {hover: hovering || volumeBarClicked || playerOptions.openedSettings})}>
+      <div className={cx('overlay', {hover: hovering || volumeBarClicked || playerOptions.openedSettings, simple: playerSize === 'simple'})} onClick={onClickOverlay}>
         <div className="mediaInfo">
           <div className="descArea">
             <div className="title">{title}</div>
@@ -430,7 +434,6 @@ function VideoContentPlayer ({
                   <FullscreenExitRoundedIcon className="iconImg" /> :
                   <FullscreenRoundedIcon className="iconImg" />
                 }
-                <BasicImage src={playerOptions.fullscreen ? './img/fullscreen.png' : './img/fullscreen.png'} />
               </ToggleButton>
             </div>
           </div>

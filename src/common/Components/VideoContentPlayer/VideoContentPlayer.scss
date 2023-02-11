@@ -23,10 +23,13 @@
     width: 100%;
     height: 100%;
     z-index: 10;
-    pointer-events: none;
+    pointer-events: auto;
 
     & > * {
       cursor: auto;
+    }
+    &.hover {
+      pointer-events: none;
     }
     &.hover::before {
       opacity: 1;
@@ -45,6 +48,41 @@
       opacity: 0;
       z-index: 1;
       transition: opacity ease .15s;
+    }
+    &.simple {
+
+      &.hover {
+        pointer-events: auto;
+      }
+      &::before {
+        background: #0004;
+      }
+      .controls {
+        .left {
+          .BasicButton.refresh,
+          .musicTime {
+            display: none;
+          }
+        }
+        .right {
+          .BasicButton.caption,
+          .BasicButton.settings,
+          .BasicButton.theaterMode {
+            display: none;
+          }
+        }
+      }
+      
+      &:hover::before {
+        opacity: 1;
+      }
+      &:hover .captionText {
+        bottom: 64px;
+      }
+      &:hover .mediaInfo, 
+      &:hover .controls {
+        opacity: 1;
+      }
     }
 
     .mediaInfo, .controls {
