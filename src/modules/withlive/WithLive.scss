@@ -15,6 +15,9 @@ header.header {
 }
 .WithLive {
   height: calc(100vh - #{$header-height});
+  &.expanded {
+    height: calc(100vh);
+  }
   @include not-desktop {
     @media (orientation: landscape) {
       height: 100vh;
@@ -39,7 +42,7 @@ header.header {
         --wrapperPortraitHeight: calc(100vw / 16 * 9 + 84px);
       }
       &.expanded {
-        --wrapperPortraitHeight: calc(100vh - #{$header-height});
+        --wrapperPortraitHeight: calc(100vh);
       }
       @include desktop {
         --wrapperPortraitHeight: calc(100vw / 16 * 9 + 100px);
@@ -52,6 +55,9 @@ header.header {
   @media (orientation: landscape) {
     @include desktop {
       grid-template-columns: 1fr calc((100vh - #{$header-height}) / 7 / 9 * 16) auto;
+      &.expanded {
+        grid-template-columns: 1fr calc(100vh / 7 / 9 * 16) auto;
+      }
     }
     @include not-desktop {
       grid-template-columns: 1fr calc(100vh / 7 / 9 * 16) auto;
@@ -160,8 +166,8 @@ header.header {
   }
 
   .playerWrapper {
-    .FloatingTarget {
-      @media (orientation: landscape) {
+    @media (orientation: landscape) {
+      .FloatingTarget {
         @include desktop {
           max-height: calc(100vh - #{$header-height} - 128px);
           &::before {
@@ -175,14 +181,16 @@ header.header {
           }
         }
       }
-    }
-    
-    @media (orientation: landscape) {
       @include not-desktop {
         .LiveSummary,
         .BroadcasterPanel,
-        footer.fooet {
+        footer.footer {
           z-index: 1000;
+        }
+      }
+      &.expanded {
+        .FloatingTarget {
+          max-height: calc(100vh);
         }
       }
     }
@@ -226,7 +234,7 @@ header.header {
         pointer-events: none;
       }
     
-      .WakPlayer {
+      .VideoContentPlayer {
         .controller {
           @include not-desktop {
             @media (orientation: portrait) {
@@ -242,8 +250,9 @@ header.header {
       }
     }
 
-    .WakPlayer {
+    .VideoContentPlayer {
       height: 100%;
+      width: 100%;
     }
   }
 }
@@ -254,7 +263,7 @@ header.header {
       --wrapperPortraitHeight: calc(100vw / 16 * 9 + (100vw / 7 / 16 * 9) + 84px);
     }
     .expanded + .TwitchChat {
-      --wrapperPortraitHeight: calc(100vh - #{$header-height});
+      --wrapperPortraitHeight: calc(100vh);
     }
   }
   .TwitchChat {
@@ -267,7 +276,7 @@ header.header {
         --wrapperPortraitHeight: calc(100vw / 16 * 9 + (100vw / 7 / 16 * 9) + 84px);
       }
       .expanded + & {
-        --wrapperPortraitHeight: calc(100vh - #{$header-height});
+        --wrapperPortraitHeight: calc(100vh);
       }
       transition: max-height ease .3s;
     }
@@ -280,4 +289,7 @@ header.header {
       }
     }
   }
+}
+.VideoContentPlayer {
+  aspect-ratio: 16/9;
 }

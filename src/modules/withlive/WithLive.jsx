@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
-import Footer from '../../common/Footer/Footer.js';
+import Header from '../../common/Header/Header';
+import Footer from '../../common/Footer/Footer';
 
 import LiveSummary from '../live/LiveSummary';
 import TwitchChat from '../live/TwitchChat';
-import WakPlayer from '../live/WakPlayer';
+import VideoContentPlayer from '../../common/Components/VideoContentPlayer/VideoContentPlayer';
 
 import * as func from '../../common/funtions';
 import * as service from '../../services/LiveWakApi';
@@ -134,14 +135,14 @@ export default function WithLive ({front = false, location, history}) {
   }, [expanded]);
   
 
-  function onChangeOverlayStateHandler({expanded, opened}) {
-    if (opened !== undefined) {
-      setOpened(opened);
+  const onPlayerOptionChangedHandler = useCallback(({theaterMode, hovering}) => {
+    if (hovering !== undefined && hovering !== opened) {
+      setOpened(hovering);
     }
-    if (expanded !== undefined) {
-      setExpanded(expanded);
+    if (theaterMode !== undefined && theaterMode !== expanded) {
+      setExpanded(theaterMode);
     }
-  }
+  }, [opened, expanded]);
 
   const setMainPlayer = useCallback(id => {
     const newMain = liveList.find(live => live.id === id); // 가운데로 올 플레이어
@@ -160,23 +161,27 @@ export default function WithLive ({front = false, location, history}) {
       channelId={live.id} 
       name={live.name} 
       target={`target_${live.pos}`} 
+      expanded={expanded}
       onClick={setMainPlayer}
-      onChangeOverlayState={onChangeOverlayStateHandler} />
-  ), [liveList, setMainPlayer]);
+      onPlayerOptionChanged={onPlayerOptionChangedHandler} />
+  ), [onPlayerOptionChangedHandler, liveList, setMainPlayer]);
 
   // 플레이어가 위치하는 div 리스트
   const [floatingTargetMain, ...floatingTargetSideList] = Array(8).fill(0).map((_, i) =>
-    <FloatingTarget className={`target_${i}`} /> 
+    <FloatingTarget key={i} className={`target_${i}`} /> 
   );
 
 
   const mainChannelId = liveList.find(live => live.pos === 0).id;
 
-  return (
-    <div className={cx('WithLive')}>
+  return (<>
+    {!expanded && 
+      <Header />
+    }
+    <div className={cx('WithLive', {expanded: expanded})}>
       <div className={cx('playerWrapper', {opened: opened, expanded: expanded})} ref={refPlayerWrapper}>
         {floatingTargetMain}
-        <LiveSummary channelId={mainChannelId} expanded={expanded} onChangeOverlayState={onChangeOverlayStateHandler} />
+        <LiveSummary channelId={mainChannelId} expanded={expanded} onChangeOverlayState={onPlayerOptionChangedHandler} />
         <BroadcasterPanel />
         <Footer />
       </div>
@@ -188,7 +193,7 @@ export default function WithLive ({front = false, location, history}) {
         {livePlayerList}
       </div>
     </div>
-  )
+  </>)
 }
 
 function FloatingTarget({className, ...rest}) {
@@ -196,7 +201,7 @@ function FloatingTarget({className, ...rest}) {
   return <div className={cx('FloatingTarget', className)} {...rest} />
 }
 
-function FloatingWakPlayer({channelId, name, target, onClick, onChangeOverlayState}) {
+function FloatingWakPlayer({channelId, name, target, expanded, onClick, onPlayerOptionChanged}) {
 
   const [style, setStyle] = useState({
     top: '0px',
@@ -271,15 +276,23 @@ function FloatingWakPlayer({channelId, name, target, onClick, onChangeOverlaySta
       '--name': `'${name}'`,
     })
   }
+
+  const isOverlayBackgroundArea = className => {
+    if (typeof className !== 'string') { return false; }
+
+    return className.includes('overlay') || ['buttonArea', 'mediaInfo'].includes(className);
+  };
   
   return (
     <div className={cx('FloatingWakPlayer', {isSide: target !== 'target_0', isMoving: transitionLife > 0})} style={style}>
-      <WakPlayer 
+      <VideoContentPlayer 
         key={`wakplayer_${channelId}`} 
-        channelId={channelId} 
-        overlayStyle={target === 'target_0' ? 'normal' : 'volumeOnly'} 
-        onClickOverlay={e => {e.target.className === 'controller' && onClick(channelId)}}
-        onChangeOverlayState={e => target === 'target_0' && onChangeOverlayState(e)} />
+        mediaType="twitchLive" mediaId={channelId} 
+        playerSize={target === 'target_0' ? 'normal' : 'simple'} 
+        useHotkey={target === 'target_0'}
+        onClickOverlay={e => {isOverlayBackgroundArea(e.target.className) && onClick(channelId)}}
+        theaterMode={expanded}
+        onPlayerOptionChanged={e => target === 'target_0' && onPlayerOptionChanged(e)} /> 
     </div>
   );
 }
