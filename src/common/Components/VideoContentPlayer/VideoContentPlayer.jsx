@@ -92,6 +92,7 @@ const useDelayedHovering = (ref, delay = 50) => {
  * title: string
  * description: string
  * playerSize: 'normal'|'simple'
+ * useHotkey: boolean
  * onClickOverlay: React.MouseEventHandler<HTMLDivElement>
  * onPlayerStateChanged?: ({}) => void
  * onPlayerOptionChanged?: ({}) => void}} props 
@@ -106,6 +107,7 @@ function VideoContentPlayer ({
   title, 
   description, 
   playerSize = 'normal', 
+  useHotkey = true, 
   onClickOverlay = () => {},
   onPlayerStateChanged = () => {},
   onPlayerOptionChanged = () => {},
@@ -327,7 +329,7 @@ function VideoContentPlayer ({
     }, 100);
   }
 
-  useKeyboardHotkeys([
+  useKeyboardHotkeys(useHotkey ? [
     {
       key: 'f', callback: toggleFullscreen,
     },
@@ -337,7 +339,7 @@ function VideoContentPlayer ({
     {
       key: ' ', callback: togglePlayPause,
     }
-  ], [player, playerState, playerOptions]);
+  ] : [], [player, playerState, playerOptions, useHotkey]);
 
   const volumeIcon = playerState.volume < 50 ?
   <VolumeMuteRoundedIcon className="iconImg" /> :
