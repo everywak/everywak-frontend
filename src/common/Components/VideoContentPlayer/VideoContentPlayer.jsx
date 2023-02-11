@@ -343,6 +343,9 @@ function VideoContentPlayer ({
       key: 'f', callback: toggleFullscreen,
     },
     {
+      key: 't', altKey: true, callback: toggleTheaterMode,
+    },
+    {
       key: 'm', callback: toggleMute,
     },
     {
