@@ -5,10 +5,13 @@
   display: flex;
   padding: 4px;
   align-self: stretch;
-  transition: box-shadow ease .15s;
+  transition: background ease .15s;
 
   &:hover {
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, .25);
+    background: #0001;
+  }
+  &:active {
+    background: #0002;
   }
 
   & > a {
