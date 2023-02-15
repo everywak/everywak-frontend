@@ -7,7 +7,7 @@ import WaktoonList from './WaktoonList';
 
 import GAEvents from '../../common/GAEvents';
 
-import styles from './WaktoonBestList.scss';
+import styles from './WaktoonGeneralList.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 

@@ -3,10 +3,44 @@
 .WaktoonList.WaktoonGeneralList {
 
   ul.itemList {
-    overflow-x: scroll;
-    flex-wrap: nowrap;
     padding-bottom: 8px;
-    padding-top: 16px;
-    justify-content: space-between;
+    padding-top: 0;
+    --listPadding: 64px;
+    --itemCount: 6;
+    @include not-desktop {
+      justify-content: center;
+      .WaktoonItem {
+        --width: calc((100vw - var(--listPadding, 64px) * 2) / var(--itemCount, 4));
+        --height: calc(var(--width) / 17 * 22);
+      }
+    }
+    @media (max-width: #{760px}) {
+      --itemCount: 5;
+    }
+    @media (max-width: #{620px}) {
+      --itemCount: 4;
+      --listPadding: 48px;
+    }
+    @media (max-width: #{470px}) {
+      --itemCount: 3;
+      --listPadding: 32px;
+      gap: 4px 5px;
+    }
+    @media (max-width: #{340px}) {
+      --itemCount: 2;
+      --listPadding: 24px;
+      .WaktoonItem {
+        padding: 2px 2px 0;
+        .infoArea .descArea {
+          .title, .author {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+    @media (max-width: #{240px}) {
+      --itemCount: 1;
+      --listPadding: 32px;
+    }
   }
 }
