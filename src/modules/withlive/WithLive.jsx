@@ -5,6 +5,7 @@ import Header from '../../common/Header/Header';
 import Footer from '../../common/Footer/Footer';
 
 import LiveSummary from '../live/LiveSummary';
+import BroadcasterPanel from '../live/BroadcasterPanel';
 import TwitchChat from '../live/TwitchChat';
 import VideoContentPlayer from '../../common/Components/VideoContentPlayer/VideoContentPlayer';
 
@@ -293,27 +294,6 @@ function FloatingWakPlayer({channelId, name, target, expanded, onClick, onPlayer
         onClickOverlay={e => {isOverlayBackgroundArea(e.target.className) && onClick(channelId)}}
         theaterMode={expanded}
         onPlayerOptionChanged={e => target === 'target_0' && onPlayerOptionChanged(e)} /> 
-    </div>
-  );
-}
-
-/**
- * 후원 배너 등 각종 패널들
- */
-function BroadcasterPanel() {
-  
-  return (
-    <div className="BroadcasterPanel">
-      <div className="panelContainer">
-        <a href="https://toon.at/donate/637445810791017450" target="_blank"><img src="https://everywak.kr/live/images/panel-donate2.png" alt="투네이션" /></a>
-        <a href="https://cafe.naver.com/steamindiegame" target="_blank"><img src="https://everywak.kr/live/images/panel-wakki.png" alt="우왁끼" /></a>
-      </div>
-      <p className="footerTxt">
-        에브리왁굳 왁타버스 같이보기 페이지는 YouTube 및 Twitch의 서드파티 사이트로 YouTube 및 Twitch에서 운영하는 사이트가 아닙니다.<br/>
-        'YouTube' 및 '유튜브'는 YouTube, LLC의 등록상표이며 'Twitch' 및 '트위치'는 Twitch Interactive, Inc.의 등록상표입니다.<br/>
-        &nbsp;<br/>
-        에브리왁굳 © 2020-2023. <a href="https://github.com/wei756" className="copyrighter_site_footer">Wei756</a>. All rights reserved.
-      </p>
     </div>
   );
 }

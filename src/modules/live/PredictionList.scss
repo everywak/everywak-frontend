@@ -1,0 +1,9 @@
+@import '../../common/common.scss';
+
+.PredictionList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}

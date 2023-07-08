@@ -146,26 +146,7 @@
     }
 
     .BroadcasterPanel {
-      
-      .panelContainer {
-        padding: 16px 24px 24px;
-        
-        a img {
-          max-width: 100%;
-        }
-      }
-      .footerTxt {
-        color: $secondary-text-color;
-        font-size: 14px;
-        font-weight: 400;
-        margin: 0;
-        padding: 12px 24px 72px;
-  
-        a {
-          color: $primary-text-color;
-          font-weight: 500;
-        }
-      }
+
     }
   }
   @media (orientation: portrait) {

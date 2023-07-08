@@ -1,0 +1,588 @@
+@import '../../common/common.scss';
+
+:root {
+  --accent-color: #406189;
+
+  --primary-text-color: #fafafa;
+  --secondary-text-color: #aaa;
+
+  --shrinkedHeight: 90px;
+  --extendedHeight: 130px;
+
+  --multipleOutcomeItemHeight: 50px;
+  --multipleOutcomeItemLength: 4;
+
+  --extendedMultipleHeight: calc(70px + /*36px +*/ var(--multipleOutcomeItemHeight) * var(--multipleOutcomeItemLength));
+}
+
+.PredictionItem {
+  --animStep: 0;
+  background: rgba(0, 0, 0, .5);
+  border: 2px solid rgba(255, 255, 255, .05);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, .25);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  margin: 12px 8px;
+  padding: 0px;
+  position: relative;
+  width: 360px;
+  height: var(--shrinkedHeight);
+  opacity: 0;
+
+  &.show {
+    animation: predictionStart 2s cubic-bezier(.85,0,.31,.99) 0s 1 normal forwards;
+  }
+  &.multiple.show {
+    animation: predictionMultipleStart 2s cubic-bezier(.85,0,.31,.99) 0s 1 normal forwards;
+  }
+}
+@keyframes predictionStart {
+  0% {
+    opacity: 0;
+    transform: scale(.8);
+    background: rgba(0, 167, 102, 0.5);
+    height: var(--shrinkedHeight);
+    --animStep: 0;
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1);
+    background: rgba(0, 167, 102, 0.5);
+    height: var(--shrinkedHeight);
+    --animStep: 0;
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1);
+    background: rgba(0, 167, 102, 0.5);
+    height: var(--shrinkedHeight);
+    --animStep: 50;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    background: rgba(0, 0, 0, .5);
+    height: var(--extendedHeight);
+    --animStep: 100;
+  }
+}
+@keyframes predictionMultipleStart {
+  0% {
+    opacity: 0;
+    transform: scale(.8);
+    background: rgba(0, 167, 102, 0.5);
+    height: var(--shrinkedHeight);
+    --animStep: 0;
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1);
+    background: rgba(0, 167, 102, 0.5);
+    height: var(--shrinkedHeight);
+    --animStep: 0;
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1);
+    background: rgba(0, 167, 102, 0.5);
+    height: var(--shrinkedHeight);
+    --animStep: 50;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    background: rgba(0, 0, 0, .5);
+    height: var(--extendedMultipleHeight);
+    --animStep: 100;
+  }
+}
+.PredictionItem .remainedTime {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  width: 100%;
+  height: 4px;
+  opacity: calc(1 * max(var(--animStep) - 50, 0) / 50);
+  transition: opacity ease .5s;
+
+  .timeBar {
+    --width: 0;
+    background: #D9D9D9;
+    width: calc(var(--width) * 1%);
+    height: 4px;
+    transition: width ease .1s;
+  }
+}
+.PredictionItem .contentWrapper {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 8px;
+  gap: 4px;
+  width: 100%;
+}
+.PredictionItem.umvsum .contentWrapper {
+  flex-grow: 1;
+}
+.PredictionItem .contentWrapper > .title {
+  filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, .5));
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 29px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+  top: calc(16px * max(50 - max(var(--animStep) - 50, 0), 0) / 50);
+  transform: scale(calc(1 + .2 * max(50 - var(--animStep), 0) / 50));
+  transition: transform ease .5s, top ease .4s;
+  width: 100%;
+
+  svg {
+    fill: white;
+  }
+  span {
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    word-break: break-all;
+    overflow: hidden;
+  }
+}
+.PredictionItem .contentWrapper .contentLine {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+  width: 100%;
+  opacity: calc(1 * max(var(--animStep) - 50, 0) / 50);
+  transition: opacity ease .5s, top ease .5s;
+}
+.PredictionItem.multiple .contentWrapper .contentLine,
+.PredictionItem.multiple > .ratioBar {
+  display: none;
+}
+.PredictionItem .contentWrapper .contentLine .contentLineWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+
+  &.lose {
+    flex-direction: row-reverse;
+  }
+  .winnerIcon {
+    display: none;
+  }
+}
+.PredictionItem .contentWrapper .contentLine .content {
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 4px;
+  gap: 2px;
+  &.lose {
+    flex-direction: row-reverse;
+  }
+  &.points {
+    opacity: .9;
+    
+    &.win {
+      background: #387AFF;
+    }
+    &.lose {
+      background: #F5009B;
+    }
+  }
+
+  img {
+    width: 12px;
+    height: 12px;
+  }
+  .peopleCount,
+  .baedangCount {
+    display: flex;
+    flex-direction: row;
+  }
+}
+.PredictionItem .contentWrapper .contentLine .content.people {
+  filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, .8));
+}
+.PredictionItem .contentWrapper .contentLine .content.points {
+  filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, .5));
+}
+.PredictionItem .contentWrapper .contentLine .content > span {
+  color: #FAFAFA;
+  display: block;
+  margin-bottom: 1px;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1em;
+}
+.PredictionItem > .ratioBar {
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  padding: 0px;
+  position: relative;
+  width: 100%;
+  height: 36px;
+  min-height: 36px;
+  .bar {
+    --width: 50;
+    box-sizing: border-box;
+    width: calc(var(--width, 0) * 1%);
+    height: 36px;
+    transition: width ease .8s;
+  }
+  .blueBar {
+    background: rgba(56, 122, 255, 0.8);
+  }
+  .redBar {
+    background: rgba(245, 0, 155, 0.8);
+  }
+}
+.PredictionItem > .ratioBar .captionOverlay {
+  filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, .3));
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.PredictionItem > .ratioBar .captionOverlay .labelWrapper {
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 2px;
+  gap: 10px; 
+}
+.PredictionItem > .ratioBar .captionOverlay .labelWrapper.lose {
+  flex-direction: row-reverse;
+}
+.PredictionItem > .ratioBar .captionOverlay .labelWrapper .title {
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 130px;
+  word-break: break-all;
+  overflow: hidden;
+  line-height: 1.1em;
+  margin-top: 1px;
+  box-sizing: border-box;
+}
+.PredictionItem > .ratioBar .captionOverlay .labelWrapper .ratio {
+  display: flex;
+  flex-direction: row;
+}
+@keyframes predictionResult-progress-opacity {
+  0% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes predictionResult-panel-height {
+  0% {
+    --animStep: 100;
+    opacity: 1;
+    height: var(--extendedHeight);
+  }
+  20% {
+    --animStep: 100;
+    opacity: 1;
+    height: var(--shrinkedHeight);
+  }
+  80% {
+    --animStep: 100;
+    opacity: 1;
+    height: var(--shrinkedHeight);
+  }
+  100% {
+    --animStep: 100;
+    opacity: 1;
+    height: var(--extendedHeight);
+  }
+}
+@keyframes predictionMultipleResult-panel-height {
+  0% {
+    --animStep: 100;
+    opacity: 1;
+    height: var(--extendedMultipleHeight);
+  }
+  20% {
+    --animStep: 100;
+    opacity: 1;
+    height: var(--shrinkedHeight);
+  }
+  80% {
+    --animStep: 100;
+    opacity: 1;
+    height: var(--shrinkedHeight);
+  }
+  100% {
+    --animStep: 100;
+    opacity: 1;
+    height: var(--extendedMultipleHeight);
+  }
+}
+@keyframes predictionResult-msg-position {
+  0% {
+    left: 105%;
+  }
+  25% {
+    left: 102%;
+  }
+  70% {
+    left: -59%;
+  }
+  100% {
+    left: -59%;
+  }
+}
+.PredictionItem.show.ended {
+  animation: predictionResult-panel-height 3s cubic-bezier(.85,0,.31,.99) 0s 1 normal forwards;
+}
+.PredictionItem.multiple.show.ended {
+  animation: predictionMultipleResult-panel-height 3s cubic-bezier(.85,0,.31,.99) 0s 1 normal forwards;
+}
+.PredictionItem.show.ended .contentWrapper,
+.PredictionItem.show.ended > .ratioBar,
+.PredictionItem.multiple.show.ended .multipleOutcomeWrapper,
+.PredictionItem.multiple.show.ended .multipleRatioBar {
+  animation: predictionResult-progress-opacity 3s cubic-bezier(.85,0,.31,.99) 0s 1 normal forwards;
+}
+.PredictionItem .resultMsg {
+  display: none;
+}
+.PredictionItem.ended .resultMsg {
+  color: white;
+  display: block;
+  font-size: 32px;
+  font-weight: 700;
+  position: absolute;
+  top: 20px;
+  left: 100%;
+  width: max-content;
+  filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, .5));
+  animation: predictionResult-msg-position 3s linear 0s 1 normal forwards;
+}
+.PredictionItem.leftWin .contentLine .contentLineWrapper:nth-child(2),
+.PredictionItem.leftWin .contentLine .content.people:nth-child(2),
+.PredictionItem.leftWin > .ratioBar .captionOverlay .labelWrapper.lose,
+.PredictionItem.rightWin .contentLine .contentLineWrapper:nth-child(1),
+.PredictionItem.rightWin .contentLine .content.people:nth-child(1),
+.PredictionItem.rightWin > .ratioBar .captionOverlay .labelWrapper.win,
+.PredictionItem.muhyo .contentLine .contentLineWrapper,
+.PredictionItem.muhyo .contentLine .content.people,
+.PredictionItem.muhyo > .ratioBar .captionOverlay .labelWrapper {
+  opacity: .4;
+}
+.PredictionItem.leftWin .contentWrapper .contentLine .contentLineWrapper.win .winnerIcon,
+.PredictionItem.rightWin .contentWrapper .contentLine .contentLineWrapper.lose .winnerIcon {
+  display: block;
+}
+.PredictionItem.leftWin > .ratioBar .redBar {
+  background: rgba(245, 0, 155, .3);
+}
+.PredictionItem.rightWin > .ratioBar .blueBar {
+  background: rgba(56, 122, 255, .3);
+}
+.PredictionItem canvas#particle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity ease .3s;
+}
+.PredictionItem.ended canvas#particle {
+  opacity: 1;
+}
+
+.PredictionItem .multipleRatioBar {
+  background: rgba(56, 122, 255, 0.8);
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 36px;
+  opacity: 0.8;
+}
+.PredictionItem .multipleRatioBar .ratioBarItem {
+  border-right: 4px solid white;
+  align-self: stretch;
+  width: calc(1% * var(--width, 0) - 4px);
+  transition: width ease .5s;
+}
+.PredictionItem .multipleRatioBar .ratioBarItem:last-child {
+  display: none;
+}
+.PredictionItem .multipleOutcomeWrapper {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 8px 2px;
+  width: 100%;
+  opacity: calc(1 * max(var(--animStep) - 50, 0) / 50);
+  transition: opacity ease .5s;
+}
+.PredictionItem.umvsum .multipleOutcomeWrapper {
+  display: none;
+}
+.PredictionItem .multipleOutcomeWrapper .MultipleOutcomeItem {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 6px 8px;
+  gap: 4px;
+  width: 100%;
+  position: relative;
+  
+  .ratioBar {
+    --width: 50;
+    background: rgba(56, 122, 255, 0.8);
+    border: #7d7d7d 2px solid;
+    border-radius: 10px;
+    box-sizing: border-box;
+    opacity: .8;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(var(--width, 0) * 1%);
+    height: 100%;
+    transition: width ease .8s;
+  }
+}
+.PredictionItem .multipleOutcomeWrapper .MultipleOutcomeItem > .left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+  flex-grow: 1;
+  width: 0;
+}
+.PredictionItem .multipleOutcomeWrapper .MultipleOutcomeItem > .left img {
+  width: 18px;
+  height: 18px;
+  filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, .5));
+}
+.PredictionItem .multipleOutcomeWrapper .MultipleOutcomeItem > .left .labelWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 2px;
+  filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, .5));
+}
+.PredictionItem .multipleOutcomeWrapper .MultipleOutcomeItem > .left .labelWrapper .titleWrapper {
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1em;
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  word-break: break-all;
+  overflow: hidden;
+}
+.PredictionItem .multipleOutcomeWrapper .MultipleOutcomeItem > .left .labelWrapper .titleWrapper .winnerIcon {
+  display: none;
+}
+.PredictionItem.ended .multipleOutcomeWrapper .MultipleOutcomeItem.win > .left .labelWrapper .titleWrapper .winnerIcon {
+  display: inline;
+}
+.PredictionItem.ended .multipleRatioBar .ratioBarItem,
+.PredictionItem.ended .multipleOutcomeWrapper .MultipleOutcomeItem {
+  opacity: .5;
+}
+.PredictionItem.ended .multipleRatioBar .ratioBarItem.win,
+.PredictionItem.ended .multipleOutcomeWrapper .MultipleOutcomeItem.win {
+  opacity: 1;
+}
+.PredictionItem .multipleOutcomeWrapper .MultipleOutcomeItem > .left .labelWrapper .desc {
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 4px;
+}
+.PredictionItem .multipleOutcomeWrapper .MultipleOutcomeItem > .right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 4px;
+}
+.PredictionItem .multipleOutcomeWrapper .MultipleOutcomeItem > .right > div {
+  border-radius: 4px;
+  color: white;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 4px;
+  gap: 2px;
+  width: max-content;
+  filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, .5));
+}
+.PredictionItem .multipleOutcomeWrapper .MultipleOutcomeItem > .right > .pointsWrapper {
+  background: #387AFF;
+}
+.PredictionItem .multipleOutcomeWrapper .MultipleOutcomeItem > .right > div > img {
+  width: 12px;
+  height: 12px;
+}
