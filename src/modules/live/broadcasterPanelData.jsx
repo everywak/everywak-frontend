@@ -19,6 +19,10 @@ const panels = [
         label: '메시 인스타',
         href: 'https://www.instagram.com/welshcorgimessi/',
       },
+      {
+        type: 'twitter',
+        href: 'https://twitter.com/jinjjawakgood',
+      },
     ],
   },
   {
