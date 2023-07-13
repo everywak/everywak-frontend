@@ -21,12 +21,12 @@ const cx = classNames.bind(styles);
 
 const isedolStreams = [
   'woowakgood',
-  'gosegugosegu',
-  'lilpaaaaaa',
-  'viichan6',
   'vo_ine',
-  'cotton__123',
   'jingburger',
+  'lilpaaaaaa',
+  'cotton__123',
+  'gosegugosegu',
+  'viichan6',
   '111roentgenium',
 ];
 
