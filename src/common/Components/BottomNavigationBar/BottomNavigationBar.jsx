@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import useWindowEvent from '../../../hooks/useWindowEvent';
+
 import styles from './BottomNavigationBar.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
@@ -39,12 +41,7 @@ function BottomNavigationBar(props) {
     prevScrollY = window.scrollY;
   };
 
-  useEffect(() => {
-    window.addEventListener('scroll', onScrollWindowHandler);
-    return () => {
-      window.removeEventListener('scroll', onScrollWindowHandler);
-    };
-  }, []);
+  useWindowEvent('scroll', onScrollWindowHandler, []);
 
   return (
     <div className={cx("BottomNavigationBar", className, {isOpened})} style={{'--accentColor': accentColor}} {...rest}>

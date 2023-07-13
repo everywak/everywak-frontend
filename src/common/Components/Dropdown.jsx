@@ -2,6 +2,8 @@ import React, { useCallback, useState, useEffect, useRef } from 'react';
 
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 
+import useWindowEvent from '../../hooks/useWindowEvent';
+
 import styles from './Dropdown.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
@@ -51,15 +53,7 @@ function Dropdown({ options = [], name, value, onChange = val => {}}) {
   }
   function close() { setOpened(false); }
 
-  useEffect(() => {
-    window.addEventListener('resize', close);
-    window.addEventListener('scroll', close);
-
-    return () => {
-      window.removeEventListener('resize', close);
-      window.removeEventListener('scroll', close);
-    };
-  }, []);
+  useWindowEvent('resize scroll', close, []);
     
   const list = options.map(
     item => (
