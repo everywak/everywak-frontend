@@ -159,6 +159,7 @@ export default function WithLive ({front = false, location, history}) {
   // 실제 플레이어 embed 리스트
   const livePlayerList = useMemo(() => liveList.map(live => 
     <FloatingWakPlayer 
+      key={live.id} 
       channelId={live.id} 
       name={live.name} 
       target={`target_${live.pos}`} 
