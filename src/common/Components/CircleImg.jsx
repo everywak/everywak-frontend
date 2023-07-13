@@ -29,7 +29,7 @@ function CircleImg(props) {
 
   return (
     <div className={cx('CircleImg', className)} {...rest}>
-        <Image src={src} alt={alt} objectFit={objectFit} padding={padding} onError={e => {e.target.src = '/images/blank.png'}} />
+        <Image src={src} alt={alt} objectFit={objectFit} padding={padding} draggable="false" onError={e => {e.target.src = '/images/blank.png'}} />
     </div>
   );
 
