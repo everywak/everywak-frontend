@@ -5,7 +5,9 @@
   border: none;
   border-radius: 8px;
   color: $dark-primary-text-color;
-  cursor: pointer;
+  &:not(.disabled) {
+    cursor: pointer;
+  }
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -19,6 +21,9 @@
   vertical-align: middle;
   user-select: none;
   
+  &.disabled {
+    opacity: .7;
+  }
   &.Transparent {
     background: transparent;
     color: $primary-text-color;
@@ -37,20 +42,20 @@
     pointer-events: none;
   }
   @include desktop {
-    &:hover::after {
+    &:not(.disabled):hover::after {
       background: rgba(255, 255, 255, .1);
     }
-    &.Transparent:hover::after {
+    &:not(.disabled).Transparent:hover::after {
       background: rgba(0, 0, 0, .1);
     }
   }
   &:focus {
     outline: none;
   }
-  &:active::after {
+  &:not(.disabled):active::after {
     background: rgba(0, 0, 0, .1);
   }
-  &.Transparent:active::after {
+  &:not(.disabled).Transparent:active::after {
     background: rgba(0, 0, 0, .2);
   }
 
