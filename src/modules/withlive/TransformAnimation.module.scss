@@ -1,0 +1,23 @@
+@import '../../common/common.scss';
+
+.TransformAnimation {
+  // background-color: #f001;
+  
+  & > .transformAnimation_contentWrapper {
+    --animationTime: .3s;
+    // background-color: #00f1;
+    position: fixed;
+    left: calc(var(--left) * 1px);
+    top: calc(var(--top) * 1px);
+    width: calc(var(--width) * 1px);
+    height: calc(var(--height) * 1px);
+  
+    &.transition {
+      transition: 
+      left cubic-bezier(0.670, 0.065, 0.305, 0.940) var(--animationTime), 
+      top cubic-bezier(0.670, 0.065, 0.305, 0.940) var(--animationTime), 
+      width cubic-bezier(0.670, 0.065, 0.305, 0.940) var(--animationTime), 
+      height cubic-bezier(0.670, 0.065, 0.305, 0.940) var(--animationTime);
+    }
+  }
+}

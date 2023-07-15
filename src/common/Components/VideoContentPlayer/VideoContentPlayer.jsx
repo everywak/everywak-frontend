@@ -120,6 +120,7 @@ function VideoContentPlayer ({
   playerSize = 'normal', 
   useHotkey = true, 
   theaterMode = false,
+  contextMenu = [],
   onClickOverlay = () => {},
   onPlayerStateChanged = () => {},
   onPlayerOptionChanged = () => {},
@@ -383,7 +384,8 @@ function VideoContentPlayer ({
         selected: false,
         onClick: e => player?.setQuality(item.value),
       })),
-    }
+    },
+    ...contextMenu
   ]
   return (
     <div className={cx('VideoContentPlayer', className)} ref={_el} {...rest}>

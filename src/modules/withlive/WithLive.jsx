@@ -4,10 +4,14 @@ import { useLocation, useParams } from 'react-router-dom';
 import Header from '../../common/Header/Header';
 import Footer from '../../common/Footer/Footer';
 
+import ModalFrame from '../../common/Components/ModalFrame';
+
 import LiveSummary from '../live/LiveSummary';
 import BroadcasterPanel from '../live/BroadcasterPanel';
 import TwitchChat from '../live/TwitchChat';
 import VideoContentPlayer from '../../common/Components/VideoContentPlayer/VideoContentPlayer';
+
+import SceneLayoutSettingPanel from './SceneLayoutSettingPanel';
 
 import * as func from '../../common/funtions';
 import * as service from '../../services/LiveWakApi';
@@ -18,6 +22,16 @@ import GAEvents from '../../common/GAEvents';
 import styles from './WithLive.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
+
+/**
+ * @typedef {'main-side'|'grid'} ViewLayoutOption
+ * 
+ * @typedef {object} LivePlayerItem
+ * @property {string} name nickname
+ * @property {string} id loginName
+ * @property {number} pos
+ * @property {number} volume 0~1
+ */
 
 const isedolStreams = [
   'woowakgood',
@@ -43,6 +57,10 @@ export default function WithLive ({front = false, location, history}) {
   const [opened, setOpened] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
+  const [isOpenedSceneSettingPanel, setOpenedSceneSettingPanel] = useState(false);
+  /** @type {[ViewLayoutOption, React.Dispatch<React.SetStateAction<ViewLayoutOption>>]} */
+  const [viewLayout, setViewLayout] = useState('main-side');
+  /** @type {[LivePlayerItem[], React.Dispatch<React.SetStateAction<LivePlayerItem[]>>]} */
   const [liveList, setLiveList] = useState([
     {
       name: '우왁굳',
@@ -85,6 +103,7 @@ export default function WithLive ({front = false, location, history}) {
     
     if (members.length > 0 && members[0] !== '') {
 
+      /** @type {LivePlayerItem[]} */
       const streams = members.map((id, i) => ({
         name: waktaverseInfo.find(member => member.login === id).display_name,
         id,
@@ -103,7 +122,7 @@ export default function WithLive ({front = false, location, history}) {
           oldMain.pos = newMainPos;
         }
       }
-      
+
       setLiveList(streams);
     }
   }
@@ -156,6 +175,17 @@ export default function WithLive ({front = false, location, history}) {
     }
   }, [liveList]);
 
+  /**
+   * 레이아웃 변경 핸들러
+   * 
+   * @param {{viewLayout: ViewLayoutOption, liveList: LivePlayerItem[]}} e 
+   */
+  const onChangeSceneSettingHandler = e => {
+    setViewLayout(e.viewLayout);
+    setLiveList(e.liveList);
+    setOpenedSceneSettingPanel(false);
+  };
+
   // 실제 플레이어 embed 리스트
   const livePlayerList = useMemo(() => liveList.map(live => 
     <FloatingWakPlayer 
@@ -165,35 +195,56 @@ export default function WithLive ({front = false, location, history}) {
       target={`target_${live.pos}`} 
       expanded={expanded}
       onClick={setMainPlayer}
+      setOpenedSceneSettingPanel={setOpenedSceneSettingPanel}
       onPlayerOptionChanged={onPlayerOptionChangedHandler} />
   ), [onPlayerOptionChangedHandler, liveList, setMainPlayer]);
 
   // 플레이어가 위치하는 div 리스트
-  const [floatingTargetMain, ...floatingTargetSideList] = Array(8).fill(0).map((_, i) =>
+  const [floatingTargetMain, ...floatingTargetSideList] = Array(liveList.length).fill(0).map((_, i) =>
     <FloatingTarget key={i} className={`target_${i}`} /> 
   );
 
-
-  const mainChannelId = liveList.find(live => live.pos === 0).id;
+  const mainChannelId = liveList.filter(v => v).find(live => live?.pos === 0)?.id;
 
   return (<>
     {!expanded && 
       <Header />
     }
-    <div className={cx('WithLive', {expanded: expanded})}>
-      <div className={cx('playerWrapper', {opened: opened, expanded: expanded})} ref={refPlayerWrapper}>
-        {floatingTargetMain}
-        <LiveSummary channelId={mainChannelId} expanded={expanded} onChangeOverlayState={onPlayerOptionChangedHandler} />
-        <BroadcasterPanel />
-        <Footer />
+    <div className={cx('WithLive', {expanded: expanded}, viewLayout)}>
+      <div className={cx('playerWrapper', {opened: opened, expanded: expanded}, viewLayout)} ref={refPlayerWrapper}>
+        {
+          viewLayout === 'main-side' && 
+          <>
+            {floatingTargetMain}
+            <LiveSummary channelId={mainChannelId} expanded={expanded} onChangeOverlayState={onPlayerOptionChangedHandler} />
+            <BroadcasterPanel channelId={mainChannelId} />
+            <Footer />
+          </>
+        }
+        {
+          viewLayout === 'grid' && 
+          <div className="playerGrid" style={{'--gridColumns': Math.ceil(liveList.length / Math.ceil(Math.sqrt(liveList.length))), '--gridRows': Math.ceil(Math.sqrt(liveList.length))}}>
+            {floatingTargetMain}
+            {floatingTargetSideList}
+          </div>
+        }
       </div>
-      <ul className={cx('SidePlayerList', {opened: opened, expanded: expanded})}>
-        {floatingTargetSideList}
-      </ul>
+      {
+        viewLayout === 'main-side' && 
+        <ul className={cx('SidePlayerList', {opened: opened, expanded: expanded}, viewLayout)}>
+          {floatingTargetSideList.slice(0, 7)}
+        </ul>
+      }
       <TwitchChat channelId={mainChannelId} location={location} history={history} />
       <div className="wakPlayerList">
         {livePlayerList}
       </div>
+      {
+        isOpenedSceneSettingPanel &&
+        <ModalFrame setOnModal={setOpenedSceneSettingPanel}>
+          <SceneLayoutSettingPanel liveList={liveList} viewLayout={viewLayout} onClose={e => setOpenedSceneSettingPanel(false)} onSubmit={onChangeSceneSettingHandler} />
+        </ModalFrame>
+      }
     </div>
   </>)
 }
@@ -203,7 +254,7 @@ function FloatingTarget({className, ...rest}) {
   return <div className={cx('FloatingTarget', className)} {...rest} />
 }
 
-function FloatingWakPlayer({channelId, name, target, expanded, onClick, onPlayerOptionChanged}) {
+function FloatingWakPlayer({channelId, name, target, expanded, onClick, onPlayerOptionChanged, setOpenedSceneSettingPanel}) {
 
   const [style, setStyle] = useState({
     top: '0px',
@@ -294,6 +345,12 @@ function FloatingWakPlayer({channelId, name, target, expanded, onClick, onPlayer
         useHotkey={target === 'target_0'}
         onClickOverlay={e => {isOverlayBackgroundArea(e.target.className) && onClick(channelId)}}
         theaterMode={expanded}
+        contextMenu={[
+          {
+            label: '화면 설정',
+            onClick: e => setOpenedSceneSettingPanel(true),
+          },
+        ]}
         onPlayerOptionChanged={e => target === 'target_0' && onPlayerOptionChanged(e)} /> 
     </div>
   );
