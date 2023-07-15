@@ -402,14 +402,6 @@ export const Waktaverse = [
     },
   },
   {
-    name: '대진맨',
-    login_name: 'gongdaejin',
-    role: 'academy',
-    twitch: {
-      broadcasterId: '913221701',
-    },
-  },
-  {
     name: '미미짱짱세용',
     login_name: 'mimi_chanchan_',
     role: 'academy',
