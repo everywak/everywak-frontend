@@ -248,7 +248,7 @@ class TwitchChatClient extends PureComponent {
               oauthState == TwitchChatClientCore.LOGOUTED ?
               <React.Fragment>
                 <span className="loginTitle">로그인해서 팬치들과 함께 해요.</span>
-                <a className="twitchChatButton btnLoginTwitch" href={`https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=chat:edit chat:read channel:read:predictions`}>Twitch로 로그인</a>
+                <a className="twitchChatButton btnLoginTwitch" href={`https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=chat:edit chat:read channel:read:predictions user:read:blocked_users`}>Twitch로 로그인</a>
               </React.Fragment> :
               <React.Fragment>
                 <Spinner caption="채팅방 접속중..." />

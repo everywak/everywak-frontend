@@ -21,6 +21,19 @@ const getCookie = name => cookies.get(name)
  * @property {string} key
  */
 
+/**
+ * @typedef MyUserInfo
+ * @property {string} loginName
+ * @property {string} id
+ * @property {string} nickname
+ * @property {boolean} moderator
+ * @property {{}} badges
+ * @property {[]} emoteSets
+ * @property {import('../../services/TwitchApi').BlockedUserInfoItem[]} blockedUsers
+ * @property {import('../../services/TwitchApi').UserInfoItem} originalInfo
+ * 
+ */
+
 class TwitchChatClientCore {
   
   static CLOSED     = 0;
@@ -54,6 +67,7 @@ class TwitchChatClientCore {
 
     this.selfInfo = '';
 
+    /** @type {MyUserInfo} */
     this.myUserInfo = { // TODO: 이모트 셋, 뱃지 여기로 통합
       loginName: '',
       id: '',
@@ -61,6 +75,7 @@ class TwitchChatClientCore {
       moderator: false,
       badges: {},
       emoteSets: [],
+      blockedUsers: [],
       originalInfo: null,
     };
 
@@ -259,15 +274,7 @@ class TwitchChatClientCore {
               });
             });
 
-            // set my login id
-            this.myUserInfo.loginName = data[0].substr(1, data[0].indexOf('!') - 1);
-
-            const [me] = await twitchApi.getUsers(this.myUserInfo.loginName);
-            if (me) {
-              this.myUserInfo.originalInfo = {...me};
-              this.myUserInfo.id = me.id;
-              this.myUserInfo.nickname = me.display_name;
-            }
+            await this.updateMyUserInfo(data[0].substr(1, data[0].indexOf('!') - 1));
           }
           break;
         case TwitchChatClientCore.JOINED:
@@ -296,6 +303,33 @@ class TwitchChatClientCore {
       const { loginName } = data[0].match(/:(?<loginName>[\w\d-_]+)!\k<loginName>@\k<loginName>\.tmi\.twitch\.tv/).groups;
       if (this.myUserInfo.loginName === loginName) { // is me
         this.setIRCState(TwitchChatClientCore.AUTHORIZED);
+      }
+    }
+  }
+
+  /**
+   * Update my user info
+   * 
+   * @param {string} loginName
+   */
+  updateMyUserInfo = async loginName => {
+    // set my loginName
+    this.myUserInfo.loginName = loginName;
+    
+    const twitchApi = this.getTwitchApi();
+
+    const [me] = await twitchApi.getUsers(this.myUserInfo.loginName);
+    if (me) {
+
+      // load my userinfo
+      this.myUserInfo.originalInfo = {...me};
+      this.myUserInfo.id = me.id;
+      this.myUserInfo.nickname = me.display_name;
+    
+      // get blocked user list
+      const blockedUsers = await twitchApi.getBlockedUsersAll(this.myUserInfo.id);
+      if (blockedUsers) {
+        this.myUserInfo.blockedUsers = [...blockedUsers];
       }
     }
   }
@@ -408,8 +442,10 @@ class TwitchChatClientCore {
       key: tags.id,
     };
 
-    // append chat to list
-    this.appendToChatList(chat);
+    if (!this.myUserInfo.blockedUsers.find(user => user.user_login === chat.userId)) { // check if blocked user
+      // append chat to list
+      this.appendToChatList(chat);
+    }
   }
 
   appendSystemMessage = ({id, msg}) => {
