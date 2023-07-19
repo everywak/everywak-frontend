@@ -53,7 +53,16 @@ class TwitchChatClientCore {
     this.connRetries = 0;
 
     this.selfInfo = '';
-    this.userLoginId = '';
+
+    this.myUserInfo = { // TODO: 이모트 셋, 뱃지 여기로 통합
+      loginName: '',
+      id: '',
+      nickname: '',
+      moderator: false,
+      badges: {},
+      emoteSets: [],
+      originalInfo: null,
+    };
 
     this.badges = {};
     this.emoteSets = [];
@@ -251,7 +260,14 @@ class TwitchChatClientCore {
             });
 
             // set my login id
-            this.userLoginId = data[0].substr(1, data[0].indexOf('!') - 1);
+            this.myUserInfo.loginName = data[0].substr(1, data[0].indexOf('!') - 1);
+
+            const [me] = await twitchApi.getUsers(this.myUserInfo.loginName);
+            if (me) {
+              this.myUserInfo.originalInfo = {...me};
+              this.myUserInfo.id = me.id;
+              this.myUserInfo.nickname = me.display_name;
+            }
           }
           break;
         case TwitchChatClientCore.JOINED:
@@ -278,7 +294,7 @@ class TwitchChatClientCore {
       this.updateSelfInfo(data);
     } else if ('PART' === data[1]) {
       const { loginName } = data[0].match(/:(?<loginName>[\w\d-_]+)!\k<loginName>@\k<loginName>\.tmi\.twitch\.tv/).groups;
-      if (this.userLoginId === loginName) { // is me
+      if (this.myUserInfo.loginName === loginName) { // is me
         this.setIRCState(TwitchChatClientCore.AUTHORIZED);
       }
     }
@@ -319,7 +335,7 @@ class TwitchChatClientCore {
   sendChat = msg => {
     if (this.IRCState === TwitchChatClientCore.JOINED) {
       this.sendMessage(`PRIVMSG #${this.channelName} :${msg}`);
-      const myUserLoginId = `:${this.userLoginId}!${this.userLoginId}@${this.userLoginId}.tmi.twitch.tv`;
+      const myUserLoginId = `:${this.myUserInfo.loginName}!${this.myUserInfo.loginName}@${this.myUserInfo.loginName}.tmi.twitch.tv`;
       if (msg != '') {
         this.receiveChat({
           tag: `${this.selfInfo};id=my-chat-${Math.random() * 9999999}`, 
