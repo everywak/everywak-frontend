@@ -92,12 +92,20 @@
         bottom: 100%;
         pointer-events: none;
         width: max-content;
-        transition: bottom ease .15s, opacity ease .15s;
+        transition: bottom ease .15s, top ease .15s, opacity ease .15s;
         z-index: 100;
       }
       &:hover > .description {
         bottom: 110%;
         opacity: 1;
+      }
+      &.bottomRibbon > .description {
+        bottom: auto;
+        top: 100%;
+      }
+      &.bottomRibbon:hover > .description {
+        bottom: auto;
+        top: 110%;
       }
     }
   }
