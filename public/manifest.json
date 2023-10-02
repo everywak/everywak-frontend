@@ -24,10 +24,22 @@
   "background_color": "#ffffff",
   "shortcuts": [
     {
+      "name": "뱅온정보",
+      "short_name": "뱅온정보",
+      "description": "",
+      "url": "/weather"
+    },
+    {
       "name": "왁물원 인기글",
       "short_name": "인기글",
       "description": "",
       "url": "/bestwakki"
+    },
+    {
+      "name": "왁타버스 같이보기",
+      "short_name": "같이보기",
+      "description": "",
+      "url": "/withlive"
     },
     {
       "name": "생방송",
