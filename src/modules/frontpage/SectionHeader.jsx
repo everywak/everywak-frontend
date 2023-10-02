@@ -24,9 +24,13 @@ function SectionHeader({ title, description, moreLabel = '더 보기', moreLink,
       </div>
       {
         moreLink &&
+        (moreLink.match(/^http/) ?
+        <a href={moreLink} className="more">
+          {moreLabel} <KeyboardArrowRightRoundedIcon fontSize="small"/>
+        </a> :
         <Link to={moreLink} className="more">
           {moreLabel} <KeyboardArrowRightRoundedIcon fontSize="small"/>
-        </Link>
+        </Link>)
       }
     </header>
   );
