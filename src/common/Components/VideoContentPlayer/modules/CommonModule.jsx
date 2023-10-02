@@ -1,20 +1,27 @@
 /**
- * @typedef {Object} VideoContentInterface
- * @property {() => void} play
- * @property {() => void} pause
- * @property {boolean => void} setMuted
- * @property {() => boolean} getMuted
- * @property {number => void} setVolume
- * @property {() => number} getVolume
- * @property {number => void} seek
- * @property {() => number} getCurrentTime
- * @property {() => number} getDuration
- * @property {string => void} setQuality
- * @property {() => string} getQuality
- * @property {() => string[]} getQualities
+ * @typedef VideoContentPlaybackInfo
+ * @property {number} bufferSize
+ * @property {number} hlsLatencyBroadcaster
+ * @property {number} playbackRate
  */
 /**
- * @typedef {Object} VideoContentHandlers
+ * @typedef VideoContentInterface
+ * @property {() => void} play
+ * @property {() => void} pause
+ * @property {(boolean) => void} setMuted
+ * @property {() => boolean} getMuted
+ * @property {(number) => void} setVolume
+ * @property {() => number} getVolume
+ * @property {(number) => void} seek
+ * @property {() => number} getCurrentTime
+ * @property {() => number} getDuration
+ * @property {(string) => void} setQuality
+ * @property {() => string} getQuality
+ * @property {() => string[]} getQualities
+ * @property {() => VideoContentPlaybackInfo} getPlaybackInfo
+ */
+/**
+ * @typedef VideoContentHandlers
  * @property {() => VideoContentInterface} onReady
  * @property {() => {}} onPlay
  * @property {() => {}} onPlaying

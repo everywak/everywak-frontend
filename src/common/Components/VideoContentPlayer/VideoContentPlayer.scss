@@ -84,6 +84,44 @@
       &:hover .controls {
         opacity: 1;
       }
+      
+      .VideoContentPlayerPlaybackInfoPanel {
+        display: none;
+      }
+    }
+
+    .VideoContentPlayerPlaybackInfoPanel {
+      background: #0001;
+      color: $dark-primary-text-color;
+      padding: 2px 6px;
+      pointer-events: auto;
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      z-index: 11;
+
+      .summary {
+        filter: drop-shadow(rgb(0, 0, 0) 0px 0px 2px) drop-shadow(rgba(0, 0, 0, 0.6) 0px 0px 0px);
+        font-size: 10px;
+        font-weight: 700;
+      }
+      .detail {
+        display: none;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 1.4em;
+      }
+      &:hover {
+        background: #000a;
+        padding: 8px;
+
+        .summary {
+          display: none;
+        }
+        .detail {
+          display: block;
+        }
+      }
     }
 
     .mediaInfo, .controls {

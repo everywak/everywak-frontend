@@ -7,6 +7,12 @@ import { qualityIdTwitch } from './CommonModule';
 import classNames from 'classnames/bind';
 const cx = classNames;
 
+/**
+ * Twitch Live Module
+ * 
+ * @param {import('./CommonModule').VideoContentHandlers} props 
+ * @returns {JSX.Element}
+ */
 function TwitchLivePlayer ({
   className = '',
   channelId = '',
@@ -48,7 +54,8 @@ function TwitchLivePlayer ({
 
   useEffect(() => {
     if (player) {
-      handlers.onReady({
+      /** @type {import('./CommonModule').VideoContentInterface} */
+      const videoContentInterface = {
         play: player.play,
         pause: player.pause,
         setMuted: player.setMuted,
@@ -61,7 +68,16 @@ function TwitchLivePlayer ({
         setQuality: quality => player.setQuality(quality || 'Auto'),
         getQuality: () => ({label: qualityIdTwitch[player.getQuality()], value: player.getQuality()}),
         getQualities: () => player.getQualities().map(item => ({label: qualityIdTwitch[item.name], value: item.name.includes('(source)') ? 'chunked' : item.name})),
-      });
+        getPlaybackInfo: () => {
+          const origInfo = player.getPlaybackStats();
+          return ({
+            bufferSize: origInfo.bufferSize,
+            hlsLatencyBroadcaster: origInfo.hlsLatencyBroadcaster,
+            playbackRate: origInfo.playbackRate,
+          });
+        },
+      };
+      handlers.onReady(videoContentInterface);
     }
   }, [player]);
 

@@ -146,6 +146,7 @@ function VideoContentPlayer ({
     theaterMode: false,
     fullscreen: false,
     showCaption: false,
+    showPlaybackInfo: true,
     openedSettings: false,
   });
 
@@ -394,6 +395,7 @@ function VideoContentPlayer ({
         <div className="spinner"><div className="innerWrapper"><div className="inner"></div></div></div>
       </div>
       <div className={cx('overlay', {hover: playerOptions.hovering || volumeBarClicked || playerOptions.openedSettings, simple: playerSize === 'simple'})} onClick={onClickOverlay}>
+        {mediaType === 'twitchLive' && player && <VideoContentPlayerPlaybackInfoPanel player={player} />}
         <div className="mediaInfo">
           <div className="descArea">
             <div className="title">{title}</div>
@@ -469,6 +471,45 @@ function VideoContentPlayer ({
     </div>
   )
 }
+
+/**
+ * 
+ * @param {{player: import('./modules/CommonModule').VideoContentInterface}} props 
+ */
+function VideoContentPlayerPlaybackInfoPanel ({ player }) {
+
+  const [playbackInfo, setPlaybackInfo] = useState({
+    bufferSize: 0,
+    hlsLatencyBroadcaster: 0,
+    playbackRate: 0,
+  });
+
+  useEffect(() => {
+    const loop = setInterval(() => {
+      const _playbackInfo = player?.getPlaybackInfo();
+      if (_playbackInfo) {
+        setPlaybackInfo({
+          bufferSize: _playbackInfo.bufferSize,
+          hlsLatencyBroadcaster: _playbackInfo.hlsLatencyBroadcaster,
+          playbackRate: _playbackInfo.playbackRate,
+        });
+      }
+    }, 1000);
+
+    return () => clearInterval(loop);
+  }, []);
+  return <div className="VideoContentPlayerPlaybackInfoPanel">
+    <div className="summary">
+      {parseInt(playbackInfo.bufferSize * 100) / 100}초<br />
+      {parseInt(playbackInfo.hlsLatencyBroadcaster * 100) / 100}초<br />
+    </div>
+    <div className="detail">
+      버퍼 크기: {parseInt(playbackInfo.bufferSize * 100) / 100}초<br />
+      브로드캐스트 지연 시간: {parseInt(playbackInfo.hlsLatencyBroadcaster * 100) / 100}초<br />
+      비트레이트: {playbackInfo.playbackRate}kbps
+    </div>
+  </div>
+};
 
 
 //TODO: 화면비율 핀치줌으로 확장
