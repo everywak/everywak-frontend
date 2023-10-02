@@ -69,16 +69,31 @@ export function formatNumberWithCommas(n) {
  * @description 시각을 간략한 문자열로 반환합니다.
  * 
  * @param {Date} date
+ * @returns {string}
  */
 export function formatDateTimeString(date) {
   const today = new Date();
   const diffTime = (today.getTime() - date.getTime()) / 1000;
 
-  if      (diffTime <               180) { return '방금 전'; }
-  else if (diffTime <          100 * 60) { return parseInt(diffTime / 60) + '분 전'; }
-  else if (diffTime <      24 * 60 * 60) { return parseInt(diffTime / 60 / 60) + '시간 전'; }
-  else if (diffTime < 60 * 24 * 60 * 60) { return parseInt(diffTime / 60 / 60 / 24) + '일 전'; }
-  else                                   { return parseInt(diffTime / 60 / 60 / 24 / 30) + '달 전'; }
+  if      (diffTime <                180) { return '방금 전'; }
+  else if (diffTime <           100 * 60) { return parseInt(diffTime / 60) + '분 전'; }
+  else if (diffTime <       24 * 60 * 60) { return parseInt(diffTime / 60 / 60) + '시간 전'; }
+  else if (diffTime <  60 * 24 * 60 * 60) { return parseInt(diffTime / 60 / 60 / 24) + '일 전'; }
+  else if (diffTime < 365 * 24 * 60 * 60) { return parseInt(diffTime / 60 / 60 / 24 / 30) + '달 전'; }
+  else                                    { return parseInt(diffTime / 60 / 60 / 24 / 30 / 12) + '년 전'; }
+}
+
+/**
+ * @description 정수를 간략한 문자열로 반환합니다.
+ * 
+ * @param {number} n
+ * @returns {string}
+ */
+export function formatNumberShort(n) {
+  if (n < 1000)           { return n; }
+  else if (n < 10000)     { return `${(parseInt(n / 100)) / 10}천`; }
+  else if (n < 100000000) { return `${(parseInt(n / 1000)) / 10}만`; }
+  else                    { return `${(parseInt(n / 10000000)) / 10}억`; }
 }
 
 /** 
