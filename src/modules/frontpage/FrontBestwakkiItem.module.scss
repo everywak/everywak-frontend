@@ -1,0 +1,48 @@
+@import '../../common/common.scss';
+
+.FrontBestwakkiItem {
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: $primary-text-color;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  align-self: stretch;
+  width: 100%;
+  transition: background ease .15s;
+
+  &:hover {
+    background: #0001;
+  }
+  &:active {
+    background: #0002;
+  }
+
+  .thumbnailWrapper {
+    .thumbnail {
+      border-radius: 8px;
+      width: 48px;
+      height: 48px;
+    }
+  }
+  .infoWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+
+    .board {
+      color: $secondary-text-color;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1em;
+    }
+    .subject {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 1.4em;
+    }
+  }
+}

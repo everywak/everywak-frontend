@@ -8,6 +8,8 @@ import DateRange from './DateRange';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import BestwakkiBottomNavigator from './BestwakkiBottomNavigator';
 
+import Header from '../../common/Header/Header';
+
 import * as service from '../../services/BestApi';
 import * as func from '../../common/funtions';
 import { Desktop } from '../../common/MediaQuery';
@@ -170,25 +172,22 @@ function Bestwakki({front = false}) {
   const { list, loaded, loadedLength } = state;
   const today = new Date();
   const min = 1424876400000, max = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
-  return (
+  return (<>
+    <Header />
     <div className={cx('Bestwakki', {'front': front})}>
-      {!front && 
-        <Fragment>
-          <div className="moduleHeader">
-            <Link to="/bestwakki"><h1>왁물원 인기글</h1></Link>
-            <div className="controlWrapper">
-              <SortList name="orderBy" value={searchFilter.orderBy} onChange={onChangeOrderByHandler} />
-              <div className="right">
-                <Desktop>
-                  <DateRange name="queryDate" min={min} max={max} start={searchFilter.beginAt} end={searchFilter.endAt} onChange={onChangeDateRangeHandler} />
-                  <SearchBar defaultValue={searchFilter} onSearch={updateSearchFilter} />
-                </Desktop>
-              </div>
-            </div>
+      <div className="moduleHeader">
+        <Link to="/bestwakki"><h1>왁물원 인기글</h1></Link>
+        <div className="controlWrapper">
+          <SortList name="orderBy" value={searchFilter.orderBy} onChange={onChangeOrderByHandler} />
+          <div className="right">
+            <Desktop>
+              <DateRange name="queryDate" min={min} max={max} start={searchFilter.beginAt} end={searchFilter.endAt} onChange={onChangeDateRangeHandler} />
+              <SearchBar defaultValue={searchFilter} onSearch={updateSearchFilter} />
+            </Desktop>
           </div>
-          <BestwakkiBottomNavigator history={history} searchFilter={searchFilter} onChangeDateRangeHandler={onChangeDateRangeHandler} updateSearchFilter={updateSearchFilter} />
-        </Fragment>
-      }
+        </div>
+      </div>
+      <BestwakkiBottomNavigator history={history} searchFilter={searchFilter} onChangeDateRangeHandler={onChangeDateRangeHandler} updateSearchFilter={updateSearchFilter} />
       <ArticleList 
         front={front} 
         data={list} 
@@ -196,14 +195,8 @@ function Bestwakki({front = false}) {
         pagination={front ? 'none' : 'more'}
         onMore={e => fetchArticlesInfo({reset: false})}
         responsiveMode={front ? 'mobile' : 'auto'} />
-      {
-        front &&
-        <div className="more">
-          <MoreVertRoundedIcon className="frontOnly" fontSize="small" />
-        </div>
-      }
     </div>
-  );
+  </>);
 }
 
 export default Bestwakki;
