@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 
-import Header from '../../common/Header/Header.js';
-import Footer from '../../common/Footer/Footer.js';
+import Header from '../../common/Header/Header';
+import Footer from '../../common/Footer/Footer';
 
 import LiveSummary from './LiveSummary';
 import BroadcasterPanel from './BroadcasterPanel.jsx';
