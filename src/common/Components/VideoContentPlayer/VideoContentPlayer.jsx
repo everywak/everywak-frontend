@@ -92,6 +92,20 @@ const useDelayedHovering = (ref, name, onChange, delay = 50) => {
 }
 
 /**
+ * @typedef PlayerCustomButton
+ * @property {string} className
+ * @property {string} description
+ * @property {'normal'|'toggle'} type
+ * @property {string} name only type toggle
+ * @property {boolean} value only type toggle
+ * @property {JSX.Element} iconNormal only type normal
+ * @property {JSX.Element} iconEnabled only type toggle
+ * @property {JSX.Element} iconDisabled only type toggle
+ * @property {boolean} disabled
+ * @property {() => void} onClick
+ */
+
+/**
  * 
  * @param {{
  * className: string,
@@ -104,6 +118,9 @@ const useDelayedHovering = (ref, name, onChange, delay = 50) => {
  * playerSize: 'normal'|'simple'
  * useHotkey: boolean
  * theaterMode: boolean
+ * contextMenu: import('../ContextMenu/ContextMenu').ContextMenuItemProps[]
+ * headerButtons: PlayerCustomButton[]
+ * controlButtons: PlayerCustomButton[]
  * onClickOverlay: React.MouseEventHandler<HTMLDivElement>
  * onPlayerStateChanged?: ({}) => void
  * onPlayerOptionChanged?: ({}) => void}} props 
@@ -121,6 +138,8 @@ function VideoContentPlayer ({
   useHotkey = true, 
   theaterMode = false,
   contextMenu = [],
+  headerButtons = [],
+  controlButtons = [],
   onClickOverlay = () => {},
   onPlayerStateChanged = () => {},
   onPlayerOptionChanged = () => {},
@@ -387,7 +406,43 @@ function VideoContentPlayer ({
       })),
     },
     ...contextMenu
-  ]
+  ];
+  const controlButtonItems = controlButtons.map(item => {
+    if (item.type === 'toggle') {
+      const EnabledIcon = item.iconEnabled;
+      const DisabledIcon = item.iconDisabled;
+      return <ToggleButton key={item.className} className={cx(item.className)} name={item.name} value={item.value} onChange={item.onChange} description={item.description} disabled={item.disabled} background="transparent">
+        {
+          item.value ?
+          <EnabledIcon className="iconImg" /> :
+          <DisabledIcon className="iconImg" />
+        }
+      </ToggleButton>;
+    } else {
+      const DeafultIcon = item.iconNormal;
+      return <BasicButton key={item.className} className={cx(item.className)} onClick={item.onClick} description={item.description} background="transparent">
+        <DeafultIcon className="iconImg" />
+      </BasicButton>;
+    }
+  });
+  const headerButtonItems = headerButtons.map(item => {
+    if (item.type === 'toggle') {
+      const EnabledIcon = item.iconEnabled;
+      const DisabledIcon = item.iconDisabled;
+      return <ToggleButton key={item.className} className={cx(item.className)} name={item.name} value={item.value} onChange={item.onChange} description={item.description} bottomRibbon disabled={item.disabled} background="transparent">
+        {
+          item.value ?
+          <EnabledIcon className="iconImg" /> :
+          <DisabledIcon className="iconImg" />
+        }
+      </ToggleButton>;
+    } else {
+      const DeafultIcon = item.iconNormal;
+      return <BasicButton key={item.className} className={cx(item.className)} onClick={item.onClick} description={item.description} bottomRibbon background="transparent">
+        <DeafultIcon className="iconImg" />
+      </BasicButton>;
+    }
+  });
   return (
     <div className={cx('VideoContentPlayer', className)} ref={_el} {...rest}>
       {playerEmbed}
@@ -400,6 +455,9 @@ function VideoContentPlayer ({
           <div className="descArea">
             <div className="title">{title}</div>
             {description && <div className="description">{description}</div>}
+          </div>
+          <div className="headerButtons">
+            {headerButtonItems}
           </div>
         </div>
         <div className="captionText noContent"></div>
@@ -451,6 +509,9 @@ function VideoContentPlayer ({
                   <ContextMenu className='settings' direction='tl' items={optionContextMenuItems} />
                 }
               </ToggleButton>
+              {
+                playerSize === 'normal' && controlButtonItems
+              }
               {
                 !playerOptions.fullscreen &&
                 <ToggleButton className="theaterMode" name="theaterMode" value={playerOptions.theaterMode} onChange={onChangeOption} description="극장 모드" background="transparent">

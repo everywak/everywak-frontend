@@ -57,19 +57,28 @@
       &::before {
         background: #0003;
       }
+      .mediaInfo .headerButtons,
+      .cus {
+        display: none;
+      }
       .controls {
-        .left {
-          .BasicButton.refresh,
-          .musicTime {
-            display: none;
-          }
+        .videoProgress {
+          display: none;
         }
-        .right {
-          .BasicButton.caption,
-          .BasicButton.settings,
-          .BasicButton.theaterMode,
-          .BasicButton.fullscreen {
-            display: none;
+        .buttonArea {
+          .left {
+            .BasicButton.refresh,
+            .musicTime {
+              display: none;
+            }
+          }
+          .right {
+            .BasicButton.caption,
+            .BasicButton.settings,
+            .BasicButton.theaterMode,
+            .BasicButton.fullscreen {
+              display: none;
+            }
           }
         }
       }
@@ -138,7 +147,7 @@
       justify-content: flex-start;
       align-self: stretch;
       gap: 4px;
-      padding: 24px 20px;
+      padding: 12px 8px 12px 20px;
       z-index: 10;
       transition: opacity ease .15s;
 
@@ -147,7 +156,9 @@
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
+        flex-grow: 1;
         gap: 4px;
+        padding: 12px 0;
 
         .title {
           color: $dark-primary-text-color;
@@ -159,6 +170,19 @@
           color: $dark-secondary-text-color;
           font-size: 16px;
           line-height: 1em;
+        }
+      }
+      .headerButtons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 0px;
+        pointer-events: auto;
+
+        .BasicButton {
+          width: 40px;
+          height: 40px;
         }
       }
     }
