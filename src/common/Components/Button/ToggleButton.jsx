@@ -8,7 +8,7 @@ const cx = classNames;
 /**
  * 토글 버튼
  * 
- * @param {{name: string, value: boolean, onChange?: ({target: {name: string, value: boolean}}) => void, className?: string, onClick?: function, children?: JSX.Element|String}} props 
+ * @param {{name: string, value: boolean, disabled: boolean, onChange?: ({target: {name: string, value: boolean}}) => void, className?: string, onClick?: function, children?: JSX.Element|String}} props 
  */
 function ToggleButton(props) {
   const {
