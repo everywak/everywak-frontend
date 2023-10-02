@@ -34,6 +34,10 @@ export const Waktaverse = [
       replayUploads: 'UU8bHm-zlsP-j5n591Zxuiiw',
     },
     profileImg: '/images/isedol/waktaverse{size}.jpg',
+    twitter: {
+      id: 'jinjjawakgood',
+      userId: '1620374642430189569',
+    },
   },
   {
     name: '아이네',
@@ -68,6 +72,10 @@ export const Waktaverse = [
       replayUploads: 'UUrN7Gb8xIZF_0ZYA1cmVNxQ',
     },
     profileImg: '/images/isedol/jingburger{size}.jpg',
+    twitter: {
+      id: 'jing_burger',
+      userId: '886087131914944513',
+    },
   },
   {
     name: '릴파',
@@ -85,6 +93,10 @@ export const Waktaverse = [
       replayUploads: 'UUp_jHNjcoiXC7SlElrBmzBA',
     },
     profileImg: '/images/isedol/lilpa{size}.jpg',
+    twitter: {
+      id: 'lilpa_official',
+      userId: '1699854272576516096',
+    },
   },
   {
     name: '주르르',
@@ -102,6 +114,10 @@ export const Waktaverse = [
       replayUploads: 'UUo28fS0LmlcyPcKItrZMPiQ',
     },
     profileImg: '/images/isedol/jururu{size}.jpg',
+    twitter: {
+      id: 'jururu_twitch',
+      userId: '1341013061981806592',
+    },
   },
   {
     name: '고세구',
@@ -119,6 +135,10 @@ export const Waktaverse = [
       replayUploads: 'UUc4qGj6d8LBXW2qZ9GZQWqQ',
     },
     profileImg: '/images/isedol/gosegu{size}.jpg',
+    twitter: {
+      id: 'gosegu486385',
+      userId: '1681727526706765825',
+    },
   },
   {
     name: '비챤',
@@ -136,6 +156,10 @@ export const Waktaverse = [
       replayUploads: 'UUk2vPN7LATiMz_r8VUiA0KQ',
     },
     profileImg: '/images/isedol/vichan{size}.jpg',
+    twitter: {
+      id: 'viichan6',
+      userId: '1000725569892306945',
+    },
   },
   {
     name: '뢴트게늄',
@@ -415,6 +439,54 @@ export const Waktaverse = [
     role: 'academy',
     twitch: {
       broadcasterId: '913218759',
+    },
+  },
+  {
+    name: '정삼품통정대부대곡',
+    login_name: 'daegok_joseon',
+    role: 'academy',
+    twitch: {
+      broadcasterId: '786899581',
+    },
+  },
+  {
+    name: '데스해머쵸로키',
+    login_name: 'deathhammer_',
+    role: 'academy',
+    twitch: {
+      broadcasterId: '937121095',
+    },
+  },
+  {
+    name: '스바스키나라바',
+    login_name: 'sivasekki_n',
+    role: 'academy',
+    twitch: {
+      broadcasterId: '943721453',
+    },
+  },
+  {
+    name: '만강준',
+    login_name: 'mkjune6',
+    role: 'academy',
+    twitch: {
+      broadcasterId: '931911502',
+    },
+  },
+  {
+    name: '크리즈',
+    login_name: 'kreaze_',
+    role: 'academy',
+    twitch: {
+      broadcasterId: '932882108',
+    },
+  },
+  {
+    name: '아이 쓰께끼',
+    login_name: 'icekkekki',
+    role: 'academy',
+    twitch: {
+      broadcasterId: '938325961',
     },
   },
 ];
