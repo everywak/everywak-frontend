@@ -1,99 +1,48 @@
 @import '../../common/common.scss';
 
 .TwitchChat {
-    --chatWidth: 320px;
+  width: 100%;
+  @media (orientation: landscape) {
+    width: var(--size, 320px);
+  }
+  height: 100%;
+  position: relative;
+
+  .content {
     width: 100%;
-    @media (orientation: landscape) {
-      width: var(--chatWidth);
-    }
     height: 100%;
-    position: relative;
-    
-    .content {
-      width: 100%;
-      height: 100%;
-    }
+  }
 
-    &.small {
-      
-      .TwitchChatClient .TwitchChatListWrapper {
+  &.small {
+    .TwitchChatClient .TwitchChatListWrapper {
+      .twitchChatItem {
+        font-size: 12px;
+        padding: 4px 4px 4px 8px;
 
-        .twitchChatItem {
-          font-size: 12px;
-          padding: 4px 4px 4px 8px;
+        &.sysMessage {
+          border-radius: 8px;
+          margin: 4px;
+          padding: 5px 16px;
+        }
 
-          &.sysMessage {
-            border-radius: 8px;
-            margin: 4px;
-            padding: 5px 16px;
+        .chatProfile {
+          .nickname {
           }
-
-          .chatProfile {
-
-            .nickname {
-            }
-            .userid {
-              font-weight: 400;
-              font-size: 10px;
-              margin-inline-start: 2px;
-            }
-          }
-
-          .TwitchChatBadge img {
-            width: 14px;
-            height: 14px;
+          .userid {
+            font-weight: 400;
+            font-size: 10px;
+            margin-inline-start: 2px;
           }
         }
-      }
-    }
-    
-    .sizeController {
-      cursor: ew-resize;
-      position: absolute;
-      top: 0;
-      left: -8px;
-      background: transparent;
-      width: 16px;
-      height: 100%;
-      transition: background ease .15s;
-      
-      &:hover {
-        background: rgba(0, 0, 0, .1);
-      }
-      &:active, &.focused {
-        background: rgba(0, 0, 0, .2);
-      }
-    }
-    
-    .sizeControlWrapper {
-      background: transparent;
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100vw;
-      height: 100%;
-      pointer-events: none;
-      
-      .sizeControlOverlay {
-        background: $primary-color;
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 100%;
-        opacity: 0;
-        transition: opacity ease .15s;
-      }
-      
-      &.dragged {
-        cursor: ew-resize;
-        pointer-events: auto;
-        
-        .sizeControlOverlay {
-          opacity: .3;
+
+        .TwitchChatBadge img {
+          width: 14px;
+          height: 14px;
         }
       }
     }
   }
+}
 
 @include not-desktop {
   .Live.portrait .TwitchChat {

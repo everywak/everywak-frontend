@@ -1,0 +1,102 @@
+@import '../../common.scss';
+
+.StretchableContainer {
+  --size: 320px;
+  --newSize: 320px;
+  --sliderSize: 16px;
+
+  .contentWrapper {
+    width: 100%;
+    height: 100%;
+  }
+
+  --sliderPos: calc(var(--sliderSize) / -2 - var(--newSize) + var(--size));
+  &.right .slider {
+    top: 0;
+    width: var(--sliderSize);
+    height: 100%;
+    left: var(--sliderPos);
+  }
+  &.left .slider {
+    top: 0;
+    width: var(--sliderSize);
+    height: 100%;
+    right: var(--sliderPos);
+  }
+  &.top .slider {
+    left: 0;
+    width: 100%;
+    height: var(--sliderSize);
+    bottom: var(--sliderPos);
+  }
+  &.bottom .slider {
+    left: 0;
+    width: 100%;
+    height: var(--sliderSize);
+    top: var(--sliderPos);
+  }
+
+  &.right .sizeControlWrapper.dragged,
+  &.left .sizeControlWrapper.dragged,
+  &.right .slider,
+  &.left .slider {
+    cursor: ew-resize;
+  }
+  &.top .sizeControlWrapper.dragged,
+  &.bottom .sizeControlWrapper.dragged,
+  &.top .slider,
+  &.bottom .slider {
+    cursor: ns-resize;
+  }
+  &.right .sizeControlWrapper .sizeControlOverlay,
+  &.left .sizeControlWrapper .sizeControlOverlay {
+    width: var(--newSize);
+    height: 100%;
+  }
+  &.top .sizeControlWrapper .sizeControlOverlay,
+  &.bottom .sizeControlWrapper .sizeControlOverlay {
+    width: 100%;
+    height: var(--newSize);
+  }
+  
+  .slider {
+    position: absolute;
+    background: transparent;
+    transition: background ease 0.15s;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
+    &:active,
+    &.focused {
+      background: rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .sizeControlWrapper {
+    background: transparent;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100%;
+    pointer-events: none;
+
+    .sizeControlOverlay {
+      background: $primary-color;
+      position: absolute;
+      top: 0;
+      right: 0;
+      opacity: 0;
+      transition: opacity ease 0.15s;
+    }
+
+    &.dragged {
+      pointer-events: auto;
+
+      .sizeControlOverlay {
+        opacity: 0.3;
+      }
+    }
+  }
+}
