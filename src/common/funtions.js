@@ -124,3 +124,22 @@ export function getRandomString (length = 16) {
 export function redirectTo(url) {
   window.location = url;
 }
+
+/**
+ * @description targetElement로 전체화면을 띄웁니다.
+ * 
+ * @param {HTMLElement} targetElement 
+ */
+export function enableFullscreen(targetElement) {
+  if (!document.fullscreenElement) {
+    targetElement?.requestFullscreen();
+  }
+}
+/**
+ * @description 전체화면을 해제합니다.
+ */
+export function disableFullscreen() {
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  }
+}
