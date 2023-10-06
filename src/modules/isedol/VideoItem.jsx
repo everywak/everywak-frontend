@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { formatNumberShort } from '../../common/funtions';
+import BasicImage from '../../common/Components/Image/BasicImage';
 import CircleImg from '../../common/Components/CircleImg';
 
 import styles from './VideoItem.scss';
@@ -9,27 +11,46 @@ const cx = classNames.bind(styles);
 
 function VideoItem(props) {
 
-  const { href, thumbnail, title, datetime, formattedDateTime, author, duration, viewCount, authorProfileImg } = props;
+  const {
+    href, thumbnail, title, datetime, formattedDateTime, author, duration, viewCount, authorProfileImg, onClick, hideThumbnail, size = 'medium', 
+  } = props;
   
-  const formattedViewCount = formatViewCount(viewCount || 0);
-  const formattedDuration = `0${parseInt((duration || 0) / 60)}`.slice(-2) + ':' + `0${parseInt((duration || 0) % 60)}`.slice(-2);
+  const formattedViewCount = formatNumberShort(viewCount || 0);
+  const formattedDuration = `${((duration || 0) / 60) > 60 ? '' + parseInt((duration || 0) / 3600) + ':' : ''}` + `0${parseInt((duration || 0) / 60) % 60}`.slice(-2) + ':' + `0${parseInt((duration || 0) % 60)}`.slice(-2);
 
   return (
-    <li className={cx('VideoItem')}>
-      <a href={href} target="_blank">
+    <li className={cx('VideoItem', {small: size === 'small'})}>
+      {href.match(/^http/) ?
+      <a href={href} target="_blank" onClick={e => onClick && onClick(e)}>
         <div className="previewWrapper">
-          <img className="previewImg" src={thumbnail} alt="썸네일" onError={e => {e.target.src = '/images/blank.png'}} />
+          <BasicImage className="previewImg" src={thumbnail} />
           {viewCount !== undefined && <span className="viewCount">{formattedViewCount}회 시청</span>}
           {duration !== undefined && <span className="duration">{formattedDuration}</span>}
         </div>
-        <div className="infoArea">
+        <div className={cx('infoArea', { hideThumbnail })}>
           <CircleImg className="profileCircle" src={authorProfileImg} alt="채널 프로필 이미지" />
           <div className="descArea">
             <div className="title">{title}</div>
             <div className="uploadedTime">{formattedDateTime}</div>
           </div>
         </div>
-      </a>
+      </a> :
+      <Link to={href} onClick={e => onClick && onClick(e)}>
+        <div className="previewWrapper">
+          <BasicImage className="previewImg" src={thumbnail} />
+          {viewCount !== undefined && <span className="viewCount">{formattedViewCount}회 시청</span>}
+          {duration !== undefined && <span className="duration">{formattedDuration}</span>}
+        </div>
+        <div className={cx('infoArea', { hideThumbnail })}>
+          <CircleImg className="profileCircle" src={authorProfileImg} alt="채널 프로필 이미지" />
+          <div className="descArea">
+            <div className="title">{title}</div>
+            <span className="viewCount">조회수 {formattedViewCount}회</span>
+            <div className="uploadedTime">{formattedDateTime}</div>
+          </div>
+        </div>
+      </Link>
+      }
     </li>
   );
 }
@@ -44,20 +65,5 @@ VideoItem.defaultProps = {
   viewCount: undefined, 
   authorProfileImg: '',
 };
-
-/**
- * 조회수를 간단하게 변환합니다.
- * 
- * @param {number} viewCount 
- */
-function formatViewCount(viewCount) {
-  if (viewCount < 10000) {
-    return `${viewCount}`.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-  } else if (viewCount < 100000000) {
-    return `${(viewCount / 10000).toFixed(1)}만`;
-  } else {
-    return `${(viewCount / 100000000).toFixed(1)}억`;
-  }
-}
   
 export default VideoItem;
