@@ -82,6 +82,10 @@ const panels = [
         type: 'soundcloud',
         href: 'https://soundcloud.com/bhdred9q6qtd',
       },
+      {
+        type: 'twitter',
+        href: 'https://twitter.com/lilpa_official',
+      },
     ],
   },
   {
@@ -94,6 +98,10 @@ const panels = [
       {
         type: 'instagram',
         href: 'https://www.instagram.com/ju_ruru_/',
+      },
+      {
+        type: 'soundcloud',
+        href: 'https://soundcloud.com/jururu123',
       },
       {
         type: 'tiktok',
@@ -119,6 +127,14 @@ const panels = [
       {
         type: 'instagram',
         href: 'https://www.instagram.com/gosegu_official/',
+      },
+      {
+        type: 'soundcloud',
+        href: 'https://soundcloud.com/ja2efzg96bap',
+      },
+      {
+        type: 'twitter',
+        href: 'https://twitter.com/gosegu486385',
       },
     ],
   },
