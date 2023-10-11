@@ -55,7 +55,7 @@ function Isedol() {
 
 function IsedolLiveList() {
 
-  const isedol = ['gosegugosegu','lilpaaaaaa','viichan6','vo_ine','cotton__123','jingburger'];
+  const isedol = ['vo_ine','jingburger','lilpaaaaaa','cotton__123','gosegugosegu','viichan6'];
   const liveList = isedol.map(id => <LivePreview key={`livepanel_${id}`} channelId={id} />);
   
   return (

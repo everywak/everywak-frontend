@@ -13,9 +13,15 @@ class IsedolMemberList extends Component {
   static defaultProps = {
     isedol: [
       {
-        name: '고세구',
+        name: '아이네',
         social: {
-          instagram: 'gosegu_official',
+          instagram: 'ine_hamine',
+        },
+      },
+      {
+        name: '징버거',
+        social: {
+          instagram: 'jing_burger',
         },
       },
       {
@@ -25,27 +31,21 @@ class IsedolMemberList extends Component {
         },
       },
       {
-        name: '비챤',
-        social: {
-          instagram: 'viichan6',
-        },
-      },
-      {
-        name: '아이네',
-        social: {
-          instagram: 'ine_hamine',
-        },
-      },
-      {
         name: '주르르',
         social: {
           instagram: 'ju_ruru_',
         },
       },
       {
-        name: '징버거',
+        name: '고세구',
         social: {
-          instagram: 'jing_burger',
+          instagram: 'gosegu_official',
+        },
+      },
+      {
+        name: '비챤',
+        social: {
+          instagram: 'viichan6',
         },
       },
     ],
