@@ -1,0 +1,51 @@
+@import '../../common/common.scss';
+
+.WakMusicChartItem {
+  background: rgba(0, 0, 0, 0);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 16px;
+
+  .rank {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1em;
+    text-align: center;
+    color: $secondary-text-color;
+    width: 24px;
+  }
+  .thumbnail {
+    background: #D9D9D9;
+    border-radius: 8px;
+    width: 52px;
+    height: 52px;
+  }
+  .infoWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 4px;
+    flex-grow: 1;
+    width: 0;
+
+    .title {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 1em;
+      color: $primary-text-color;
+    }
+    .author {
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 1em;
+      color: $secondary-text-color;
+    }
+  }
+  .moreIcon {
+
+  }
+}

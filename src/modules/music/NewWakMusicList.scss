@@ -1,0 +1,36 @@
+@import '../../common/common.scss';
+
+
+.NewWakMusicList {
+  width: 100%;
+
+  ul.list {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap: 8px;
+    margin: 0;
+    padding: 8px;
+    width: max-content;
+
+    .VideoItem {
+      width: 160px;
+      .previewWrapper {
+        --width: 160px;
+      }
+      .infoArea {
+        .descArea {
+          padding: 8px 8px 10px;
+
+          .title, 
+          .uploadedTime {
+            line-height: 1em;
+          }
+          .uploadedTime {
+            margin-top: 2px;
+          }
+        }
+      }
+    }
+  }
+}

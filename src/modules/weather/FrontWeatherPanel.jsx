@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
-import { MILLISECONDS_OF_DAY } from './weather.common';
-import FrontWeatherList from './FrontWeatherList';
+import * as service from '../../services/Isedol';
+import { Desktop, NotDesktop } from '../../common/MediaQuery';
 
 import AsidePanel from '../frontpage/AsidePanel';
+import SectionHeader from '../frontpage/SectionHeader';
 
-import * as service from '../../services/Isedol';
+import { MILLISECONDS_OF_DAY } from './weather.common';
+import FrontWeatherList from './FrontWeatherList';
 
 import styles from './FrontWeatherPanel.scss';
 import classNames from 'classnames/bind';
@@ -26,6 +28,30 @@ const getRelativeDateString = date => {
     return '어제';
   } else  {
     return `${dateCount}일 전`;
+  }
+}
+
+/**
+ * 시간대 문자열을 출력합니다.
+ * 
+ * @param {number} hours 
+ * @returns {string}
+ */
+const getHourString = hours => {
+  if (hours == 0 || hours >= 22) { // 22~0
+    return '밤';
+  } else if (hours <= 5) {  // 1~5
+    return '새벽';
+  } else if (hours <= 9) {  // 6~9
+    return '아침';
+  } else if (hours <= 11) { // 10~11
+    return '오전';
+  } else if (hours == 12) { // 12
+    return '낮';
+  } else if (hours <= 17) { // 13~17
+    return '오후';
+  } else {                  // 18~21
+    return '저녁';
   }
 }
 
@@ -58,13 +84,24 @@ function FrontWeatherPanel(props) {
 
   const dateStr = getRelativeDateString(weatherInfo.updatedTime);
   const timeHours = weatherInfo.updatedTime.getHours();
-  const updatedDateString = isLoading ? '불러오는 중...' : `${dateStr} ${timeHours}시 기준`;
+  const hourString = getHourString(timeHours);
+  const updatedDateString = isLoading ? '불러오는 중...' : `${dateStr} ${hourString} ${timeHours > 12 ? timeHours % 12 : timeHours}시 기준`;
 
-  return (
-    <AsidePanel title="이세계 일기예보" description={updatedDateString} moreLink="/weather">
-      <FrontWeatherList isLoading={isLoading} items={weatherInfo.OBIData} />
-    </AsidePanel>
-  );
+  return (<>
+    <Desktop>
+      <AsidePanel title="이세계 일기예보" description={updatedDateString} moreLink="/weather">
+        <FrontWeatherList isLoading={isLoading} items={weatherInfo.OBIData} />
+      </AsidePanel>
+    </Desktop>
+    <NotDesktop>
+      <div className="FrontWeatherMobilePanel">
+        <FrontWeatherList isLoading={isLoading} items={weatherInfo.OBIData} />
+        <div className="headerWrapper">
+          <SectionHeader description={updatedDateString} moreLabel="더 보기" moreLink="/weather" />
+        </div>
+      </div>
+    </NotDesktop>
+  </>);
 }
 
 export default FrontWeatherPanel;

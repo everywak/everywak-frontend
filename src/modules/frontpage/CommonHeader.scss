@@ -1,0 +1,125 @@
+@import '../../common/common.scss';
+
+.CommonHeader {
+  background: rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+  width: 100%;
+
+  .headerWrapper {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: stretch;
+    padding: 48px 16px 32px;
+    gap: 48px;
+    max-width: 1232px;
+    width: 100%;
+    margin: 0 auto;
+
+    .titleWrapper {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0px;
+      align-self: stretch;
+
+      h1.title {
+        color: $primary-text-color;
+        font-weight: 500;
+        font-size: 36px;
+        line-height: 1em;
+        margin: 0;
+
+        .beta {
+          color: #4ddf8a;
+          font-size: 24px;
+          font-style: italic;
+        }
+      }
+      nav.category {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0px;
+        gap: 32px;
+
+        .categoryList {
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          padding: 0px;
+          gap: 24px;
+
+          .categoryItem a {
+            color: $primary-text-color;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 1em;
+          }
+        }
+      }
+    }
+    .highlight {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 16px;
+
+      .intro {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 0px;
+        gap: 12px;
+
+        .subtitle {
+          color: $primary-text-color;
+          font-weight: 500;
+          font-size: 24px;
+          line-height: 1em;
+          margin: 0;
+        }
+        .description {
+          color: $secondary-text-color;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 1.6em;
+          white-space: pre-line;
+        }
+        .moreLink {
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          padding: 0px;
+          gap: 12px;
+
+          .btnMore {
+            color: $primary-color;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0px;
+            gap: 1px;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 1.86em;
+          }
+        }
+      }
+      .contentWrapper {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-self: flex-end;
+      }
+    }
+  }
+}

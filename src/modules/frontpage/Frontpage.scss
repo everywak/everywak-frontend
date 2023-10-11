@@ -1,67 +1,233 @@
 @import '../../common/common.scss';
 
-.FrontPanelList{
-  margin: 0 auto;
-  padding-bottom: 31px;
+.FrontPage.desktop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 72px;
+  gap: 48px;
 
-  .FrontPanel {
+  & > .CommonHeader {
+    .liveList {
+      --containerHeight: min(261px, calc(100vw * .36 / 16 * 9));
+      --gapVertical: calc(12 * (var(--containerHeight) / 261));
+      --gapHorizontal: calc(var(--gapVertical) / 12 * 16);
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 0px;
+      gap: var(--gapHorizontal);
 
-    &:nth-child(3),
-    &:nth-child(4) {
-      width: 100%;
-      
-      @include tablet {
-        max-width: 447px;
+      .side {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: var(--gapVertical);
       }
-      margin-left: auto;
-      margin-right: auto;
+      .center {
+        .LivePreview {
+          width: calc(var(--containerHeight) / 9 * 16);
+          height: var(--containerHeight);
+        }
+      }
 
-      .panelHeader {
-        padding: 0 8px;
+      .LivePreview {
+        width: calc((var(--containerHeight) - var(--gapVertical) * 2) / 3 / 9 * 16);
+        height: calc((var(--containerHeight) - var(--gapVertical) * 2) / 3);
       }
     }
-    &:nth-child(3) {
-      grid-area: apps;
+  }
+
+  main.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 96px;
+    width: 100%;
+    align-self: stretch;
+  
+    .twoColumns {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 32px;
+  
+      & > section.content {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0px;
+        gap: 32px;
+        flex-grow: 1;
+        width: 0;
+  
+        & > section.main {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 16px 0px;
+          gap: 24px;
+          align-self: stretch;
+          
+          & > section.sub {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 8px;
+            align-self: stretch;
+          }
+        }
+  
+      }
+  
+      & > aside {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: stretch;
+        padding: 0px;
+        gap: 24px;
+  
+        width: 360px;
+      }
     }
-    &:nth-child(4) {
-      grid-area: etcs;
+  
+    & > section {
+      width: 1200px;
+      max-width: 1200px;
+    }
+  }
+}
+
+.FrontPage.mobile {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 51.38%, rgba(0, 136, 255, 0.03) 88.02%);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+
+  & + .footer {
+    display: none;
+  }
+
+  & > header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
+    padding: 0px;
+    position: relative;
+    --circleScale: calc(100vw / 411);
+
+    & > .circle1 {
+      background: linear-gradient(180deg, rgba(0, 255, 25, 0.8) 35.94%, rgba(176, 255, 180, 0.8) 100%);
+      border-radius: 50%;
+      position: fixed;
+      width: calc(var(--circleScale) * 852);
+      height: calc(var(--circleScale) * 848);
+      left: calc(var(--circleScale) * -450);
+      top: calc((var(--circleScale) - .35px) / .65 * -554);
+      z-index: -1;
+    }
+    & > .circle2 {
+      background: linear-gradient(180deg, rgba(255, 0, 229, 0.3) 63.02%, rgba(255, 133, 243, 0.3) 100%);
+      border-radius: 50%;
+      position: fixed;
+      width: calc(var(--circleScale) * 642);
+      height: calc(var(--circleScale) * 639);
+      left: calc(var(--circleScale) * 120);
+      top: calc((var(--circleScale) - .55px) / .45 * -263);
+      z-index: -2;
     }
 
-    .panelHeader {
-      @include tablet {
-        margin: 0 calc((100% - 431px) / 2);
+    .headerWrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 16px 16px 32px;
+      gap: 16px;
+      align-self: stretch;
+
+      .highlight {
+        --scale: calc((100vw / 411 - .6px) / .4);
+        --padding: calc(var(--scale) * 32);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: calc((var(--scale) + 2px) / 3 * 32) var(--padding) calc((var(--scale) + 4px) / 5 * 24);
+        gap: 32px;
+        align-self: stretch;
+
+        .LivePreview {
+          --width: calc(100vw - var(--padding) * 2 - 32px);
+          width: var(--width);
+          height: calc(var(--width) / 16 * 9);
+
+          .profileCircle {
+            display: none;
+          }
+        }
+      }
+      & > .title {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        align-self: stretch;
+        padding: 0px;
+
+        .title {
+          img {
+            width: 120px;
+          }
+        }
       }
     }
   }
 
-  @include desktop {
-    display: grid;
-    grid-template-columns: calc(100% - 360px - 16px) 360px;
-    grid-template-rows: auto auto auto;
-    grid-template-areas:
-		"live bestwakki"
-		"apps apps"
-		"etcs etcs";
-    column-gap: 16px;
-    box-sizing: border-box;
-    max-width: 1300px;
-    padding: 0 32px 31px;
+  .apps {
 
-    .FrontPanel:nth-child(3),
-    .FrontPanel:nth-child(4) {
-      max-width: 1096px;
+    .appsWrapper {
+
     }
   }
-  @include mobile {
-    
-    .FrontPanel:nth-child(3),
-    .FrontPanel:nth-child(4) {
-      .panelHeader {
-        padding: 0;
-      }
-      .compContainer {
-        padding: 0 8px;
-      }
+  .footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    align-self: stretch;
+    padding: 0px;
+    padding-bottom: 16px;/* TODO: nav 구현하면 삭제 */
+    gap: 24px;
+
+    .FrontWeatherMobilePanel {
+
+    }
+    nav {
+      background: #FAFAFA;
+      border-top: 1px solid #F0F0F0;
+      box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.05);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      align-self: stretch;
+      padding: 0px 16px;
+      gap: 16px;
+      height: 56px;
     }
   }
 }

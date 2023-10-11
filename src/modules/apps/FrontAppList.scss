@@ -1,0 +1,26 @@
+@import '../../common/common.scss';
+
+.FrontAppList {
+  --column: 2;
+  --itemWidth: 102px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  align-self: stretch;
+
+  .appList {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px 8px;
+    width: calc(var(--column) * (var(--itemWidth) + 16px));
+    
+    .AppListItem {
+      width: var(--itemWidth);
+    }
+  }
+}

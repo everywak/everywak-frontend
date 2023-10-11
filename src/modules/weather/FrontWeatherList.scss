@@ -8,9 +8,11 @@
   ul.itemList {
     display: flex;
     flex-direction: row;
+    align-items: center;
     flex-wrap: wrap;
     margin: 0;
     width: 100%;
+
     .SkeletonLoader {
       display: flex;
       flex-direction: row;
@@ -18,9 +20,56 @@
       margin: 0;
       width: 100%;
     }
+    @include not-desktop {
+      justify-content: center;
+    }
 
     .FrontWeatherItem {
       width: 50%;
+      @include not-desktop {
+        display: none;
+        width: 164px;
+        &:nth-child(2),
+        &:nth-child(3) {
+          display: flex;
+        }
+      }
+    }
+    @include not-desktop {
+      .arrowButton {
+        background: none;
+        border: none;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        width: 12px;
+        height: 24px;
+        cursor: pointer;
+    
+        &.right {
+          transform: rotate(180deg);
+        }
+    
+        .line {
+          background-color: #DDDDDD;
+          width: 16px;
+          height: 1px;
+          transform: rotate(-45deg);
+          position: relative;
+          top: 6px;
+          left: -1px;
+        }
+        .lineBottom {
+          background-color: #DDDDDD;
+          width: 16px;
+          height: 1px;
+          transform: rotate(45deg);
+          position: relative;
+          top: 16px;
+          left: -1px;
+        }
+      }
     }
   }
 
@@ -33,5 +82,8 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 1em;
+    @include not-desktop {
+      display: none;
+    }
   }
 }

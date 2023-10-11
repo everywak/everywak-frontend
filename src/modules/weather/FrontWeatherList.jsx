@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
+import SkeletonLoader from '../../common/Components/SkeletonLoader';
+import { Desktop, NotDesktop } from '../../common/MediaQuery';
+
 import { orderNickname } from './weather.common';
 import FrontWeatherItem from './FrontWeatherItem';
-
-import SkeletonLoader from '../../common/Components/SkeletonLoader';
-import * as service from '../../services/Isedol';
 
 import styles from './FrontWeatherList.scss';
 import classNames from 'classnames/bind';
@@ -20,6 +20,19 @@ const skeleton = <FrontWeatherItem name="ㅇㅇㅇ" state="ㅇㅇㅇ" weather="s
  */
 function FrontWeatherList({ items, isLoading }) {
 
+  const [page, setPage] = useState(0);
+  const prevPage = () => {
+    setPage(page => (--page + 3) % 3);
+  };
+  const nextPage = () => {
+    setPage(page => (++page) % 3);
+  };
+  useEffect(() => {
+    const loopSlidePage = setTimeout(nextPage, 5000);
+
+    return () => { clearTimeout(loopSlidePage); };
+  }, [page]);
+
   const list = items && 
     items
     .sort((a, b) => orderNickname[a.nickname] - orderNickname[b.nickname])
@@ -28,7 +41,14 @@ function FrontWeatherList({ items, isLoading }) {
   return (
     <div className="FrontWeatherList">
       <ul className="itemList">
-        {isLoading ? <SkeletonLoader skeleton={skeleton} length={6} /> : list}
+        <Desktop>
+          {isLoading ? <SkeletonLoader skeleton={skeleton} length={6} /> : list}
+        </Desktop>
+        <NotDesktop>
+          <button className="arrowButton" onClick={prevPage}><div className="line"></div><div className="lineBottom"></div></button>
+          {list.slice(page * 2, page * 2 + 2)}
+          <button className="arrowButton right" onClick={nextPage}><div className="line"></div><div className="lineBottom"></div></button>
+        </NotDesktop>
       </ul>
       <div className="present">
         이세돌 뱅온정보 팀 제공

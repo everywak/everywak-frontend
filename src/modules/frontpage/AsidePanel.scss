@@ -11,6 +11,10 @@
   padding: 24px 16px 16px;
   gap: 24px;
 
+  &.headerOnly {
+    padding: 24px 16px;
+  }
+
   & > header {
 
   }

@@ -13,6 +13,7 @@ const cx = classNames.bind(styles);
 class LivePreview extends Component {
   static defaultProps = {
     channelId: 'twitchdev',
+    size: 'normal',
   };
 
   state = {
@@ -32,9 +33,10 @@ class LivePreview extends Component {
     const broadcast = await service.getWaktaverseBroadcastInfo();
     const targetBroadcast = broadcast.find(item => item.loginName === id);
     const targetInfo = userinfo.find(item => item.login === id);
-
+    const thWidth = this.props.size === 'big' ? 600 : 200;
+    
     if (targetBroadcast && targetInfo) { // 뱅온
-      const thumbnail = targetBroadcast.thumbnail.replace('{width}', '200').replace('{height}', '113');
+      const thumbnail = targetBroadcast.thumbnail.replace('{width}', thWidth).replace('{height}', parseInt(thWidth / 16 * 9));
       this.setState({
         loaded: true,
         live: true,
@@ -45,7 +47,7 @@ class LivePreview extends Component {
       this.setState({
         loaded: true,
         live: false,
-        previewImgUrl: targetInfo.offline_image_url,
+        previewImgUrl: targetInfo.offline_image_url.replace('1920x1080', `${thWidth}x${parseInt(thWidth / 16 * 9)}`),
         profileImgUrl: targetInfo.profile_image_url,
       });
     }
@@ -68,7 +70,7 @@ class LivePreview extends Component {
     
     return (
       <li className={cx('LivePreview', {loading: !loaded}, {off: !live})}>
-        <Link to={`/withlive/isedol?main=${channelId}`}>
+        <Link to={channelId === 'woowakgood' ? '/live' : `/withlive/isedol?main=${channelId}`}>
           <img className="previewImg" src={previewImgUrl} alt="생방송 썸네일" onError={e => {e.target.src = '/images/blank.png'}} />
           <div className="profileCircle">
             <CircleImg className="innerCircle" src={profileImgUrl} alt="채널 프로필 이미지" />

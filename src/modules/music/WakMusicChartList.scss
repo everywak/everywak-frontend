@@ -1,0 +1,32 @@
+@import '../../common/common.scss';
+
+
+.WakMusicChartList {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: 100%;
+
+  ul.list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 8px;
+    margin: 0;
+    padding: 8px;
+    width: 0;
+    flex-grow: 1;
+
+    &:nth-child(odd) {
+      .WakMusicChartItem:nth-child(odd) {
+        background: rgba(0, 0, 0, .05);
+      }
+    }
+    &:nth-child(even) {
+      .WakMusicChartItem:nth-child(even) {
+        background: rgba(0, 0, 0, .05);
+      }
+    }
+  }
+}
