@@ -1,6 +1,7 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
+import * as func from '../../common/funtions';
 import BasicButton from '../../common/Components/Button/BasicButton';
 import LinkButton from '../../common/Components/Button/LinkButton';
 import Spinner from '../../common/Components/Spinner';
@@ -12,6 +13,9 @@ const cx = classNames.bind(styles);
 export default function NotFoundPage() {
 
   const history = useHistory();
+
+  const location = useLocation();
+  func.setBrowserTitle(`404 - ${location.pathname + location.search}`);
 
   return (
     <div className={cx('NotFoundPage')}>
