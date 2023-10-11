@@ -98,7 +98,7 @@ export default function WithLive ({front = false, location, history}) {
       isedolStreams : 
       customMembers.length > 0 && customMembers[0] !== '' ?
       customMembers :
-      waktaverseLiveInfo.map(live => live.login_name)
+      waktaverseLiveInfo.map(live => live.loginName)
     ).slice(0, 8);
     
     if (members.length > 0 && members[0] !== '') {
