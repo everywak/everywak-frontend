@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState, useCallback } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 import ArticleList from '../board/ArticleList/ArticleList';
 import SearchBar from './SearchBar';
@@ -10,7 +11,7 @@ import BestwakkiBottomNavigator from './BestwakkiBottomNavigator';
 
 import Header from '../../common/Header/Header';
 
-import * as service from '../../services/BestApi';
+import * as everywakApi from '../../services/everywak-api/index';
 import * as func from '../../common/funtions';
 import { Desktop } from '../../common/MediaQuery';
 
@@ -22,7 +23,7 @@ function decodeDateStr(str) {
   return (func.isDateStr(str) ? new Date(str).getTime() : str * 1000);
 }
 
-function Bestwakki({front = false}) {
+function Bestwakki({}) {
 
   const [searchFilter, setSearchFilter] = useState({
     orderBy: 'time',
@@ -32,48 +33,30 @@ function Bestwakki({front = false}) {
     searchTarget: 'title',
   });
 
-  const [state, setState] = useState({
-    list: [],
-    loaded: false,
-    page: 1,
-    loadedLength: 1,
-  });
-
-  const fetchArticlesInfo = async ({ reset }) => {
-    setState({
-      ...state, 
-      loaded: false,
-    });
-
+  const fetchPopularArticles = async ({ page }) => {
     const params = {
       ...searchFilter, 
-      page: reset ? 1 : state.page + 1,
+      page,
     };
 
-    try {
-      const res = await service.getPopularArticles(params);
+    const res = await everywakApi.bestwakki.getPopularArticles(params);
 
-      if (res.status != 200) { throw res; }
+    if (res.message.status != 200) { throw res; }
 
-      const {
-        popularArticleList, page, perPage
-      } = res.result;
-  
-      const currList = state.list;
-      const list = reset ? popularArticleList : currList.concat(popularArticleList);
-      
-      setState({
-        list: list,
-        loaded: true,
-        page: params.page,
-        loadedLength: popularArticleList.length
-      });
-
-    } catch(e) {
-      //TODO: Bestwakki api 예외 처리
-      console.error(e);
-    };
+    return res.message.result;
   };
+  /**
+   * @type {{ data: {popularArticleList: any[], page: number, perPage: number, articleCount: number }, isLoading: boolean }}
+   */
+  const { data, fetchNextPage, hasNextPage, isLoading, isError } = useInfiniteQuery(
+    ['getPopularArticles', searchFilter],
+    ({ pageParam }) => fetchPopularArticles({ page: pageParam }),
+    {
+      getNextPageParam: (lastPage, allPosts) => {
+        return allPosts[allPosts.length - 1].articleCount > 0 ? lastPage.page + 1 : undefined;
+      },
+    },
+  );
 
   const updateSearchFilter = newFilter => {
     if (JSON.stringify(searchFilter) !== JSON.stringify({...searchFilter, ...newFilter})) {
@@ -90,31 +73,29 @@ function Bestwakki({front = false}) {
    * Bestwakki 페이지 접속시
    */
   useEffect(() => {
-    if (!front) {
-      func.setBrowserTitle('왁물원 인기글');
-      const { search } = location || {};
-      const { orderBy, beginAt, endAt, queryTxt, queryTarget } = func.getURLParams(search);
+    func.setBrowserTitle('왁물원 인기글');
+    const { search } = location || {};
+    const { orderBy, beginAt, endAt, queryTxt, queryTarget } = func.getURLParams(search);
 
-      const parsedSearchFilter = {
-        beginAt: beginAt ? decodeDateStr(beginAt) : -1,
-        endAt:   endAt   ? decodeDateStr(endAt)   : -1,
-      }
-
-      if (orderBy) {
-        parsedSearchFilter.orderBy = orderBy;
-      }
-      if (queryTxt) {
-        parsedSearchFilter.keyword = queryTxt;
-      }
-      if (queryTarget && ['title', 'author', 'board'].includes(queryTarget)) {
-        parsedSearchFilter.searchTarget = queryTarget;
-      }
-
-      if (JSON.stringify(parsedSearchFilter) !== JSON.stringify({beginAt: -1, endAt: -1})) {
-        setTimeout(() => updateSearchFilter(parsedSearchFilter), 10);
-      }
+    const parsedSearchFilter = {
+      beginAt: beginAt ? decodeDateStr(beginAt) : -1,
+      endAt:   endAt   ? decodeDateStr(endAt)   : -1,
     }
-  }, [front]);
+
+    if (orderBy) {
+      parsedSearchFilter.orderBy = orderBy;
+    }
+    if (queryTxt) {
+      parsedSearchFilter.keyword = queryTxt;
+    }
+    if (queryTarget && ['title', 'author', 'board'].includes(queryTarget)) {
+      parsedSearchFilter.searchTarget = queryTarget;
+    }
+
+    if (JSON.stringify(parsedSearchFilter) !== JSON.stringify({beginAt: -1, endAt: -1})) {
+      setTimeout(() => updateSearchFilter(parsedSearchFilter), 10);
+    }
+  }, []);
 
   /**
    * 검색 필터 변경시 URLParams 반영
@@ -141,18 +122,16 @@ function Bestwakki({front = false}) {
       params.endAt = parseInt(endAt / 1000);
     }
     
-    if (!front) {
-      func.setURLParams({
-        history: history,
-        location: location || {},
-        path: '/bestwakki', 
-        query: params,
-      });
-    }
+    func.setURLParams({
+      history: history,
+      location: location || {},
+      path: '/bestwakki', 
+      query: params,
+    });
   }
 
   useEffect(() => {
-    fetchArticlesInfo({reset: true});
+    //fetchArticlesInfo({reset: true});
     updateURLParams();
   }, [searchFilter]);
 
@@ -169,12 +148,11 @@ function Bestwakki({front = false}) {
     }
   }
 
-  const { list, loaded, loadedLength } = state;
   const today = new Date();
   const min = 1424876400000, max = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
   return (<>
     <Header />
-    <div className={cx('Bestwakki', {'front': front})}>
+    <div className={cx('Bestwakki')}>
       <div className="moduleHeader">
         <Link to="/bestwakki"><h1>왁물원 인기글</h1></Link>
         <div className="controlWrapper">
@@ -189,12 +167,12 @@ function Bestwakki({front = false}) {
       </div>
       <BestwakkiBottomNavigator history={history} searchFilter={searchFilter} onChangeDateRangeHandler={onChangeDateRangeHandler} updateSearchFilter={updateSearchFilter} />
       <ArticleList 
-        front={front} 
-        data={list} 
-        loaded={loaded} loadedLength={loadedLength}
-        pagination={front ? 'none' : 'more'}
-        onMore={e => fetchArticlesInfo({reset: false})}
-        responsiveMode={front ? 'mobile' : 'auto'} />
+        front={false} 
+        data={data?.pages?.map(page => page.popularArticleList).flat() || []} 
+        loaded={!isLoading} loadedLength={hasNextPage ? 1 : 0}
+        pagination="more"
+        onMore={fetchNextPage}
+        responsiveMode="auto" />
     </div>
   </>);
 }

@@ -1,5 +1,6 @@
 import React, { lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import useGAPageTracking from './common/GAPageTracking';
 import ScrollToTop from './common/ScrollToTop';
@@ -26,11 +27,14 @@ const BestWaktoons = lazy(() => import('./modules/waktoon/bestWaktoons/BestWakto
 
 const Isedol = lazy(() => import('./modules/isedol/Isedol'));
 
+const queryClient = new QueryClient();
+
 export default function App(props) {
 
   useGAPageTracking();
 
   return (
+    <QueryClientProvider client={queryClient}>
     <div className="App">
       <ScrollToTop />
       <Switch>
@@ -55,5 +59,6 @@ export default function App(props) {
       </Switch>
       <Footer />
     </div>
+    </QueryClientProvider>
   );
 }

@@ -1,32 +1,51 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 import FrontBestwakkiItem from './FrontBestwakkiItem';
 
-import * as service from '../../services/BestApi';
+import * as everywakApi from '../../services/everywak-api/index';
 
 /**
  * 메인 페이지에 표시되는 왁물원 인기글 리스트
- * 
- * @param {{name: string, state: string, weather: string}} props 
+ *
+ * @param {{}} props
  * @returns {JSX.Element}
  */
-function FrontBestwakkiList({ subject, board, thumbnail, href }) {
+function FrontBestwakkiList({}) {
 
-  const [articleList, setArticleList] = useState([]);
-  
-  const updateBestwakki = async () => {
+  const fetchPopularArticles = async () => {
+    const res = await everywakApi.bestwakki.getPopularArticles({
+      orderBy: 'time',
+      perPage: 5
+    });
 
-    const { result, status } = await service.getPopularArticles({ orderBy: 'time' });
-    
-    if (result.popularArticleList) {
-      setArticleList(result.popularArticleList.slice(0, 5).map(item => {
-        return(<FrontBestwakkiItem subject={item.subject} board={item.menuName} articleId={item.articleId} thumbnail={item.representImage} />);
-      }));
+    if (res.message.status != 200) {
+      throw res;
     }
-  };
-  useEffect(() => { updateBestwakki(); }, []);
 
-  return articleList;
+    return res.message.result;
+  };
+
+  /**
+   * @type {{ data: {popularArticleList: any[], page: number, perPage: number, articleCount: number }, isLoading: boolean }}
+   */
+  const { isLoading, isError, data, error } = useQuery(
+    ['getPopularArticlesFront'],
+    fetchPopularArticles
+  );
+
+  if (data) {
+    return data.popularArticleList.map(item => (
+      <FrontBestwakkiItem
+        subject={item.subject}
+        board={item.menuName}
+        articleId={item.articleId}
+        thumbnail={item.representImage}
+      />
+    ));
+  }
+
+  return <></>;
 }
 
 export default FrontBestwakkiList;
