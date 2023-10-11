@@ -35,6 +35,8 @@ const cx = classNames.bind(styles);
  * @typedef {object} LivePlayerItem
  * @property {string} name nickname
  * @property {string} id loginName
+ * @property {'TWITCH'|'YOUTUBE'} broadcasterType broadcasterType
+ * @property {string} videoId video id
  * @property {number} pos
  * @property {number} volume 0~1
  */
@@ -81,6 +83,8 @@ export default function WithLive ({front = false, location, history}) {
     {
       name: '우왁굳',
       id: 'woowakgood',
+      broadcasterType: 'TWITCH',
+      videoId: '',
       pos: 0,
       volume: 1, 
     }, 
@@ -122,6 +126,8 @@ export default function WithLive ({front = false, location, history}) {
       /** @type {LivePlayerItem[]} */
       const streams = members.map((id, i) => ({
         name: waktaverseInfo.find(member => member.login === id).display_name,
+        broadcasterType: waktaverseLiveInfo.find(live => live.loginName == id)?.broadcaster || 'TWITCH',
+        videoId: waktaverseLiveInfo.find(live => live.loginName == id)?.videoId,
         id,
         pos: i,
         volume: 1,
@@ -207,6 +213,8 @@ export default function WithLive ({front = false, location, history}) {
     <FloatingWakPlayer 
       key={live.id} 
       channelId={live.id} 
+      broadcasterType={live.broadcasterType}
+      videoId={live.videoId}
       name={live.name} 
       target={`target_${live.pos}`} 
       expanded={expanded}
@@ -276,7 +284,7 @@ function FloatingTarget({className, ...rest}) {
   return <div className={cx('FloatingTarget', className)} {...rest} />
 }
 
-function FloatingWakPlayer({channelId, name, target, expanded, onClick, onPlayerOptionChanged, setOpenedSceneSettingPanel}) {
+function FloatingWakPlayer({channelId, name, broadcasterType, videoId, target, expanded, onClick, playerOptions, onChangeOptions, onPlayerOptionChanged, setOpenedSceneSettingPanel}) {
 
   const [style, setStyle] = useState({
     top: '0px',
@@ -362,7 +370,7 @@ function FloatingWakPlayer({channelId, name, target, expanded, onClick, onPlayer
     <div className={cx('FloatingWakPlayer', {isSide: target !== 'target_0', isMoving: transitionLife > 0})} style={style}>
       <VideoContentPlayer 
         key={`wakplayer_${channelId}`} 
-        mediaType="twitchLive" mediaId={channelId} 
+        mediaType={broadcasterType == 'YOUTUBE' && videoId ? 'youtubeLive' : "twitchLive"} mediaId={broadcasterType == 'YOUTUBE' && videoId ? videoId : channelId} 
         playerSize={target === 'target_0' ? 'normal' : 'simple'} 
         useHotkey={target === 'target_0'}
         onClickOverlay={e => {isOverlayBackgroundArea(e.target.className) && onClick(channelId)}}

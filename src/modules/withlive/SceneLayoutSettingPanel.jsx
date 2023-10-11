@@ -78,12 +78,12 @@ export default function SceneLayoutSettingPanel({ viewLayout, liveList, onClose 
 
       const waktaverseInfoWithBroadcast = waktaverseInfo
         .sort((a, b) => (
-          (Waktaverse.findIndex(member => member.login_name === a.login) - (broadcastInfo.find(item => item.login_name === a.login)?.broadcaster ? 100 : 0)) - 
-          (Waktaverse.findIndex(member => member.login_name === b.login) - (broadcastInfo.find(item => item.login_name === b.login)?.broadcaster ? 100 : 0))
+          (Waktaverse.findIndex(member => member.login_name === a.login) - (broadcastInfo.find(item => item.loginName === a.login)?.broadcaster ? 100 : 0)) - 
+          (Waktaverse.findIndex(member => member.login_name === b.login) - (broadcastInfo.find(item => item.loginName === b.login)?.broadcaster ? 100 : 0))
           ))
         .map(member => ({
           ...member, 
-          broadcaster: broadcastInfo.find(item => item.login_name === member.login)?.broadcaster
+          broadcaster: broadcastInfo.find(item => item.loginName === member.login)?.broadcaster
         }));
       
       setAllMemberList(waktaverseInfoWithBroadcast);
@@ -186,10 +186,13 @@ export default function SceneLayoutSettingPanel({ viewLayout, liveList, onClose 
     });
   }
 
-  const onSubmitHandler = e => {
+  const onSubmitHandler = async e => {
+    const broadcastInfo = await service.getWaktaverseBroadcastInfo();
     const liveListFormatted = layoutSetting.liveList.map((item, i) => ({
       name: allMemberList.find(member => member.login === item).display_name,
       id: item,
+      broadcasterType: broadcastInfo.find(live => live.loginName == item)?.broadcaster || 'TWITCH',
+      videoId: broadcastInfo.find(live => live.loginName == item)?.videoId,
       pos: i,
       volume: 1, 
     }));
