@@ -33,7 +33,6 @@ export default function App(props) {
   return (
     <div className="App">
       <ScrollToTop />
-      <Header />
       <Switch>
         <Route exact path="/" component={Frontpage}/>
         <Route path="/bestwakki" component={Bestwakki}/>

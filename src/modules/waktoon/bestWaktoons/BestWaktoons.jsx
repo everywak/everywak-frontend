@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
 
+import Header from '../../../common/Header/Header';
 import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar';
 import BasicSelect from '../../../common/Components/Select/BasicSelect';
 import PageSelect from '../../../common/Components/Select/PageSelect';
@@ -50,7 +51,8 @@ export default function BestWaktoons({location, history}) {
     });
   }, [searchTarget.orderBy, searchTarget.queryTarget, searchTarget.queryTxt]);
 
-  return (
+  return (<>
+    <Header />
     <div className={cx('BestWaktoons')}>
       <section className="content">
         <header>
@@ -85,5 +87,5 @@ export default function BestWaktoons({location, history}) {
         </div>
       </section>
     </div>
-  );
+  </>);
 }

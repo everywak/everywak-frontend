@@ -9,6 +9,7 @@ import IsedolYoutubeList from './IsedolYoutubeList';
 import IsedolClipList from './IsedolClipList';
 import IsedolMemberList from './IsedolMemberList';
 
+import Header from '../../common/Header/Header';
 import styles from './Isedol.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
@@ -16,7 +17,8 @@ const cx = classNames.bind(styles);
 function Isedol() {
   func.setBrowserTitle('이세계 아이돌');
   
-  return (
+  return (<>
+    <Header />
     <div className={cx('Isedol')}>
       <div className="contentWrapper">
         <section className="liveSection">
@@ -48,7 +50,7 @@ function Isedol() {
         </section>
       </div>
     </div>
-  );
+  </>);
 }
 
 function IsedolLiveList() {

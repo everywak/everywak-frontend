@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
 
-import BasicImage from '../../../common/Components/Image/BasicImage';
-import BasicButton from '../../../common/Components/Button/BasicButton';
-import LinkButton from '../../../common/Components/Button/LinkButton';
-import CircleImg from '../../../common/Components/CircleImg';
+import Header from '../../../common/Header/Header';
 
 import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar';
 import BasicSelect from '../../../common/Components/Select/BasicSelect';
@@ -30,7 +27,8 @@ export default function WaktoonChart({location, history}) {
     keyword: '',
   });
 
-  return (
+  return (<>
+    <Header />
     <div className={cx('WaktoonChart')}>
       <section className="content">
         <header>
@@ -63,5 +61,5 @@ export default function WaktoonChart({location, history}) {
         </div>
       </section>
     </div>
-  );
+  </>);
 }

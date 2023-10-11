@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, Link, useParams } from 'react-router-dom';
 
+import Header from '../../../common/Header/Header';
 import CheckBox from '../../../common/Components/CheckBox/CheckBox';
 import BasicImage from '../../../common/Components/Image/BasicImage';
 import BasicButton from '../../../common/Components/Button/BasicButton';
@@ -55,7 +56,8 @@ export default function WaktoonViewer({location, history}) {
   }, [toonId]);
 
 
-  return (
+  return (<>
+    <Header />
     <div className={cx('WaktoonViewer')}>
       <div className="headerWrapper">
         <header>
@@ -82,7 +84,7 @@ export default function WaktoonViewer({location, history}) {
         </Switch>
       </section>
     </div>
-  );
+  </>);
 }
 
 const waktoonInfoSkeleton = 

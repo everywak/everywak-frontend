@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom';
 import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 
+import Header, { EverywakLogo } from '../../common/Header/Header';
 import CircleImg from '../../common/Components/CircleImg';
 //import BasicButton from '../../common/Components/Button/BasicButton';
 import LinkButton from '../../common/Components/Button/LinkButton';
 import HorizontalScrollableList from '../../common/Components/HorizontalScrollableList/HorizontalScrollableList';
+
+import { Desktop } from '../../common/MediaQuery';
 
 import ContentPanel from '../frontpage/ContentPanel';
 import BasicSearchBar from '../../common/Components/SearchBar/BasicSearchBar';
@@ -30,7 +33,10 @@ const cx = classNames.bind(styles);
 export default function Waktoon(props) {
   func.setBrowserTitle('왁굳코믹스');
 
-  return (
+  return (<>
+    <Desktop>
+      <Header />
+    </Desktop>
     <div className={cx('Waktoon')}>
       <div className="headerWrapper">
         <div className="headerContainer">
@@ -75,7 +81,7 @@ export default function Waktoon(props) {
         </section>
       </div>
     </div>
-  );
+  </>);
 }
 
 const searchOptions = [
