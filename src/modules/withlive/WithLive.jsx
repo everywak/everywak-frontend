@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
+import DashboardCustomizeRoundedIcon from '@mui/icons-material/DashboardCustomizeRounded';
+import FirstPageRoundedIcon from '@mui/icons-material/FirstPageRounded';
+import LastPageRoundedIcon from '@mui/icons-material/LastPageRounded';
+
 import Header from '../../common/Header/Header';
 import Footer from '../../common/Footer/Footer';
 
@@ -15,6 +19,8 @@ import SceneLayoutSettingPanel from './SceneLayoutSettingPanel';
 
 import * as func from '../../common/funtions';
 import * as service from '../../services/LiveWakApi';
+
+import useInputs from '../../hooks/useInputs';
 
 import ReactGA from 'react-ga';
 import GAEvents from '../../common/GAEvents';
@@ -54,10 +60,20 @@ function addClassLive() {
 
 export default function WithLive ({front = false, location, history}) {
 
+  //TODO: playerOptions 로 통합
   const [opened, setOpened] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
+  const [playerOptions, onChangeOptions, reset] = useInputs({
+    opened: false,
+    openedSceneSettingPanel: false, 
+    expanded: false, 
+    hideChat: false,
+  });
+
+  //TODO: playerOptions 로 통합
   const [isOpenedSceneSettingPanel, setOpenedSceneSettingPanel] = useState(false);
+
   /** @type {[ViewLayoutOption, React.Dispatch<React.SetStateAction<ViewLayoutOption>>]} */
   const [viewLayout, setViewLayout] = useState('main-side');
   /** @type {[LivePlayerItem[], React.Dispatch<React.SetStateAction<LivePlayerItem[]>>]} */
@@ -196,8 +212,11 @@ export default function WithLive ({front = false, location, history}) {
       expanded={expanded}
       onClick={setMainPlayer}
       setOpenedSceneSettingPanel={setOpenedSceneSettingPanel}
-      onPlayerOptionChanged={onPlayerOptionChangedHandler} />
-  ), [onPlayerOptionChangedHandler, liveList, setMainPlayer]);
+      onPlayerOptionChanged={onPlayerOptionChangedHandler}
+      playerOptions={playerOptions}
+      onChangeOptions={onChangeOptions}
+      />
+  ), [onPlayerOptionChangedHandler, liveList, setMainPlayer, playerOptions]);
 
   // 플레이어가 위치하는 div 리스트
   const [floatingTargetMain, ...floatingTargetSideList] = Array(liveList.length).fill(0).map((_, i) =>
@@ -235,7 +254,10 @@ export default function WithLive ({front = false, location, history}) {
           {floatingTargetSideList.slice(0, 7)}
         </ul>
       }
-      <TwitchChat channelId={mainChannelId} location={location} history={history} />
+      {
+        !playerOptions.hideChat &&
+        <TwitchChat channelId={mainChannelId} location={location} history={history} />
+      }
       <div className="wakPlayerList">
         {livePlayerList}
       </div>
@@ -345,11 +367,27 @@ function FloatingWakPlayer({channelId, name, target, expanded, onClick, onPlayer
         useHotkey={target === 'target_0'}
         onClickOverlay={e => {isOverlayBackgroundArea(e.target.className) && onClick(channelId)}}
         theaterMode={expanded}
-        contextMenu={[
+        contextMenu={[]}
+        headerButtons={[
           {
-            label: '화면 설정',
+            type: 'toggle',
+            className: 'toggleChat',
+            description: playerOptions.hideChat ? '채팅창 보이기' : '채팅창 숨기기',
+            name: 'hideChat',
+            value: playerOptions.hideChat,
+            onChange: onChangeOptions,
+            iconEnabled: FirstPageRoundedIcon,
+            iconDisabled: LastPageRoundedIcon,
+          }
+        ]}
+        controlButtons={[
+          {
+            type: 'normal',
+            className: 'editLayout',
+            description: '레이아웃 편집',
             onClick: e => setOpenedSceneSettingPanel(true),
-          },
+            iconNormal: DashboardCustomizeRoundedIcon,
+          }
         ]}
         onPlayerOptionChanged={e => target === 'target_0' && onPlayerOptionChanged(e)} /> 
     </div>
