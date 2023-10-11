@@ -64,7 +64,7 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
 
     // 생방송 정보 로드
     const lives = await service.getWaktaverseBroadcastInfo();
-    const fetchedInfo = lives.find(live => live.login_name === target);
+    const fetchedInfo = lives.find(live => live.loginName === target);
 
     if (fetchedInfo) { // 뱅온
 
@@ -73,12 +73,12 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
         broadcaster: fetchedInfo.broadcaster, 
         title: fetchedInfo.title,
         viewerCount: parseInt(fetchedInfo.viewerCount),
-        startedTime: new Date(fetchedInfo.startedTime).getTime(),
+        startedTime: fetchedInfo.startedTime * 1000,
         seed: Math.random(),
       });
     }
     if (liveInfo.updatedTimeStamp < updatedLiveInfo.updatedTimeStamp) {
-      setLiveInfo(updatedLiveInfo);
+      setLiveInfo({...updatedLiveInfo});
     }
   };
 

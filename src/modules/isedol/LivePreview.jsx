@@ -30,7 +30,7 @@ class LivePreview extends Component {
 
     const userinfo = await service.getWaktaverseInfo();
     const broadcast = await service.getWaktaverseBroadcastInfo();
-    const targetBroadcast = broadcast.find(item => item.login_name === id);
+    const targetBroadcast = broadcast.find(item => item.loginName === id);
     const targetInfo = userinfo.find(item => item.login === id);
 
     if (targetBroadcast && targetInfo) { // 뱅온

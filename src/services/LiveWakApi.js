@@ -72,11 +72,14 @@ export async function getBroadcastInfo() {
 /**
  * @typedef BroadcastInfoItem
  * @property {'TWITCH'|'YOUTUBE'} broadcaster
- * @property {string} login_name
+ * @property {string} broadcasterId
+ * @property {string} loginName
  * @property {string} nickname
- * @property {string} startedTime
+ * @property {number} startedTime
  * @property {string} thumbnail
  * @property {string} title
+ * @property {number} updatedTimeStamp
+ * @property {string} videoId
  * @property {number} viewerCount
  */
 /**
