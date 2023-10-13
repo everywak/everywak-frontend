@@ -7,9 +7,14 @@ import LivePreview from './LivePreview';
 import ContentPanel from '../frontpage/ContentPanel';
 import IsedolYoutubeList from './IsedolYoutubeList';
 import IsedolClipList from './IsedolClipList';
+import VideoContentList from './VideoContentList';
 import IsedolMemberList from './IsedolMemberList';
 
 import Header from '../../common/Header/Header';
+import CircleImgButton from '../../common/Components/Button/CircleImgButton';
+
+import * as func from '../../common/funtions';
+
 import styles from './Isedol.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
@@ -43,6 +48,13 @@ function Isedol() {
         </ContentPanel>
         <ContentPanel className="clipSection" title="이세돌 주간 핫클립" /*moreLink="/isedol/clip"*/>
           <IsedolClipList />
+        </ContentPanel>
+        <ContentPanel className="shortSection" title="이세돌 쇼츠" /*moreLink="/isedol/shorts"*/>
+          <VideoContentList 
+            className="IsedolShortsList"
+            options={{ type: 'youtubeVideo', twitchId: 'isedol' }}
+            shorts hideProfileCircle
+          />
         </ContentPanel>
         <div className="memberLine"></div>
         <section className="memberSection">
