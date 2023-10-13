@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Waktaverse } from '../../common/constants';
 import * as func from '../../common/funtions';
 import * as service from '../../services/Isedol';
+import * as videoApi from '../../services/everywak.video';
 
 import VideoList from './VideoList';
 
@@ -26,7 +27,8 @@ class IsedolYoutubeList extends Component {
   
   updateIsedolYotube = async (reset = true) => {
 
-    const { videoList, videoCount } = await service.getYoutubeVideos();
+    const response = await videoApi.getVideos({ type: 'youtubeVideo', twitchId: 'isedol' });
+    const { videoList, videoCount } = response.result;
     
     if (videoList) {
       this.setState({
@@ -44,7 +46,7 @@ class IsedolYoutubeList extends Component {
             author: item.nickname,
             duration: item.duration,
             viewCount: item.viewCount,
-            authorProfileImg: target.profileImg.replace('{size}', '240'),
+            authorProfileImg: target.profileImg?.replace('{size}', '240'),
           });
         })
       })

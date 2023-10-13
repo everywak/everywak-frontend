@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Waktaverse } from '../../common/constants';
 import * as func from '../../common/funtions';
 import * as service from '../../services/Isedol';
+import * as videoApi from '../../services/everywak.video';
 
 import VideoList from './VideoList';
 
@@ -25,8 +26,18 @@ class IsedolClipList extends Component {
 
   
   updateTwitchClips = async (reset = true) => {
+    const SECONDS_OF_DAY = 24 * 60 * 60;
 
-    const { videoList, videoCount } = await service.getTwitchClips();
+    const options = {
+      type: 'youtubeClip', 
+      twitchId: 'isedol',
+      orderBy: 'view',
+      beginAt: parseInt(Date.now() / 1000) - 7 * SECONDS_OF_DAY, 
+      endAt: parseInt(Date.now() / 1000),
+    };
+
+    const response = await videoApi.getVideos(options);
+    const { videoList, videoCount } = response.result;
     
     if (videoList) {
       this.setState({
@@ -35,8 +46,8 @@ class IsedolClipList extends Component {
           const thumbnails = JSON.parse(item.thumbnails);
           const thumbnail = thumbnails.high || thumbnails.medium || thumbnails.default || {url: ''};
           return({
-            key: `isedolClipItem-${item.videoId}`,
-            href: `https://clips.twitch.tv/${item.videoId}`,
+            key: `isedolYTItem-${item.videoId}`,
+            href: `https://youtu.be/${item.videoId}`,
             thumbnail: thumbnail.url,
             title: item.title,
             datetime: item.publishedAt * 1000,
@@ -44,7 +55,7 @@ class IsedolClipList extends Component {
             author: item.nickname,
             duration: item.duration,
             viewCount: item.viewCount,
-            authorProfileImg: target.profileImg.replace('{size}', '240'),
+            authorProfileImg: target.profileImg?.replace('{size}', '240'),
           });
         })
       })
