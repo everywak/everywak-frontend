@@ -1,18 +1,22 @@
 @import '../../common/common.scss';
 
-.AppListItem {
-  border-radius: 12px;
+.AppListItem:not(.tiny) {
+  border-radius: 16px;
   color: inherit;
   display: flex;
   flex-direction: row;
+  gap: 16px;
   padding: 8px;
-  transition: box-shadow ease .15s;
+  transition: background ease .15s;
 
   &:hover {
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, .25);
+    background: #0001;
+  }
+  &:active {
+    background: #0002;
   }
   
-  .thumbWrapper{
+  .thumbWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,7 +42,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 8px 16px;
+    padding: 8px 0;
+    gap: 8px;
 
     .title {
       font-size: 18px;
@@ -49,9 +54,37 @@
       font-size: 14px;
       font-weight: 400;
       line-height: 1em;
-      margin-top: 8px;
       padding-bottom: 1px;
     }
+  }
+  &.small {
+    border-radius: 8px;
+    gap: 12px;
+
+    .thumbWrapper {
+      width: 48px;
+      min-width: 48px;
+      height: 48px;
+  
+      .AppListItemIcon {
+        --width: 48px;
+        --height: 48px;
+        --iconWidth: 24px;
+        --iconHeight: 24px;
+      }
+    }
+
+    .descWrapper {
+      gap: 4px;
+
+      .title {
+        font-size: 14px;
+      }
+      .description {
+        font-size: 12px;
+      }
+    }
+
   }
   
   @include mobile {
@@ -68,6 +101,45 @@
       }
       .description {
       }
+    }
+  }
+}
+
+.AppListItem.tiny {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 12px;
+
+  .thumbWrapper {
+    .AppListItemIcon {
+      --width: 48px;
+      --height: 48px;
+      --iconWidth: 24px;
+      --iconHeight: 24px;
+      box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
+      
+      .bottomShadow {
+        display: none;
+      }
+    }
+  }
+  .descWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+
+    .title {
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 1em;
+      color: $primary-text-color;
+    }
+    .description {
+      display: none;
     }
   }
 }

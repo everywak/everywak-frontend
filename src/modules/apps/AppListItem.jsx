@@ -14,6 +14,7 @@ function AppListItem ({
   iconPadding = '0px',
   themeColor = '#d3d3d3',
   href = '',
+  size = 'normal', // normal || small || tiny
 }) {
 
   const content = <>
@@ -28,8 +29,8 @@ function AppListItem ({
 
   return (
     href.slice(0, 4) == 'http' ? 
-    <a href={href} className={cx('AppListItem')}>{content}</a> :
-    <Link to={href} className={cx('AppListItem')}>{content}</Link> 
+    <a href={href} className={cx('AppListItem', size)}>{content}</a> :
+    <Link to={href} className={cx('AppListItem', size)}>{content}</Link> 
   );
 }
   
