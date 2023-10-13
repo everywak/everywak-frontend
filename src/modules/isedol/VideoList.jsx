@@ -18,6 +18,7 @@ class VideoList extends Component {
     maximumShowCount: 30,
     moreTarget: '',
     onMore: () => {},
+    listStyle: 'item', // 'item'|'list'
   };
 
   state = {
@@ -48,6 +49,9 @@ class VideoList extends Component {
     this.props.onMore();
   }
 
+  onClickItem = e => {
+  }
+
   showMoreItems = e => {
     this.setState({
       showCount: this.state.showCount + this.props.perPageCount,
@@ -55,13 +59,13 @@ class VideoList extends Component {
   }
 
   render() {
-    const { list, maximumShowCount } = this.props;
+    const { list, maximumShowCount, listStyle } = this.props;
     const { showCount } = this.state;
 
-    const itemList = list.slice(0, showCount).map(item => <VideoItem key={item.key} {...item} />);
+    const itemList = list.slice(0, showCount).map(item => <VideoItem key={item.key} onClick={this.onClickItem} {...item} />);
     
     return (
-      <div className={cx('VideoList')}>
+      <div className={cx('VideoList', {listStyleList: listStyle == 'list'})}>
         <ul className="itemList">
           {itemList}
         </ul>
