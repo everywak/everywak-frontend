@@ -442,35 +442,11 @@ export const Waktaverse = [
     },
   },
   {
-    name: '정삼품통정대부대곡',
-    login_name: 'daegok_joseon',
-    role: 'academy',
-    twitch: {
-      broadcasterId: '786899581',
-    },
-  },
-  {
     name: '데스해머쵸로키',
     login_name: 'deathhammer_',
     role: 'academy',
     twitch: {
       broadcasterId: '937121095',
-    },
-  },
-  {
-    name: '스바스키나라바',
-    login_name: 'sivasekki_n',
-    role: 'academy',
-    twitch: {
-      broadcasterId: '943721453',
-    },
-  },
-  {
-    name: '만강준',
-    login_name: 'mkjune6',
-    role: 'academy',
-    twitch: {
-      broadcasterId: '931911502',
     },
   },
   {
