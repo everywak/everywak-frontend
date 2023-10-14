@@ -44,8 +44,7 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
     const updatedTimeStamp = Date.now();
 
     // 프로필 로드
-    const waktaverseInfo = (await everywakApi.live.getWaktaverseInfo()).message.result;
-    const memberInfo = waktaverseInfo?.find(member => member.twitchLoginName === target);
+    const memberInfo = (await everywakApi.live.getWaktaverseInfo({ loginName: target })).message.result[0];
 
     // Client/Api 오프라인 예외 처리
     if (!memberInfo) {
