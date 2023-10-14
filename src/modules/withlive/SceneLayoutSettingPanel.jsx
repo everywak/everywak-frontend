@@ -96,7 +96,7 @@ export default function SceneLayoutSettingPanel({ viewLayout, liveList, onClose 
     <MemberItem 
       key={`member_${member.twitchLoginName}`} 
       loginName={member.twitchLoginName} 
-      nickname={member.twitchNickname} 
+      nickname={member.nickname} 
       profileImg={member.twitchProfileImage} 
       broadcaster={member.broadcaster} 
       selected={member.twitchLoginName === dragItemState.cursor}
@@ -136,7 +136,7 @@ export default function SceneLayoutSettingPanel({ viewLayout, liveList, onClose 
           member && 
           <MemberItem 
             loginName={member.twitchLoginName} 
-            nickname={member.twitchNickname} 
+            nickname={member.nickname} 
             profileImg={member.twitchProfileImage} 
             broadcaster={member.broadcaster} 
             selected={member.twitchLoginName === dragItemState.cursor}
@@ -189,7 +189,7 @@ export default function SceneLayoutSettingPanel({ viewLayout, liveList, onClose 
   const onSubmitHandler = async e => {
     const broadcastInfo = await service.getWaktaverseBroadcastInfo();
     const liveListFormatted = layoutSetting.liveList.map((item, i) => ({
-      name: allMemberList.find(member => member.twitchLoginName === item).twitchNickname,
+      name: allMemberList.find(member => member.twitchLoginName === item).nickname,
       id: item,
       broadcasterType: broadcastInfo.find(live => live.loginName == item)?.broadcaster || 'TWITCH',
       videoId: broadcastInfo.find(live => live.loginName == item)?.videoId,
@@ -239,7 +239,7 @@ export default function SceneLayoutSettingPanel({ viewLayout, liveList, onClose 
       dragItemState.mode == 'ADD' && 
       <CursorMemberItem 
         loginName={dragItemState.cursor} 
-        nickname={allMemberList.find(member => member.twitchLoginName === dragItemState.cursor).twitchNickname} 
+        nickname={allMemberList.find(member => member.twitchLoginName === dragItemState.cursor).nickname} 
         profileImg={allMemberList.find(member => member.twitchLoginName === dragItemState.cursor).twitchProfileImage} 
       />
     }

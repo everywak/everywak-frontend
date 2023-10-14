@@ -126,7 +126,7 @@ export default function WithLive ({front = false, location, history}) {
 
       /** @type {LivePlayerItem[]} */
       const streams = members.map((id, i) => ({
-        name: waktaverseInfo.find(member => member.twitchLoginName === id).twitchNickname,
+        name: waktaverseInfo.find(member => member.twitchLoginName === id).nickname,
         broadcasterType: waktaverseLiveInfo.find(live => live.loginName == id)?.broadcaster || 'TWITCH',
         videoId: waktaverseLiveInfo.find(live => live.loginName == id)?.videoId,
         id,
