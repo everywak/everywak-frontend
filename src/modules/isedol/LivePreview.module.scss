@@ -30,6 +30,11 @@
     width: 100%;
     transition: opacity ease .15s;
     transition-delay: .2s;
+
+    & > img {
+      box-sizing: border-box;
+      display: block;
+    }
   }
   .profileCircle {
     background: white;
@@ -59,7 +64,7 @@
     }
   }
 
-  .Spinner {
+  .spinner {
     opacity: 0;
     position: absolute;
     top: 0;
@@ -71,7 +76,7 @@
 
   &.loading {
     
-    .Spinner {
+    .spinner {
       opacity: 1;
     }
     .previewImg,

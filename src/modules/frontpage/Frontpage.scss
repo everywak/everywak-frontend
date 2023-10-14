@@ -25,17 +25,15 @@
         align-items: flex-start;
         padding: 0px;
         gap: var(--gapVertical);
-      }
-      .center {
-        .LivePreview {
-          width: calc(var(--containerHeight) / 9 * 16);
-          height: var(--containerHeight);
+
+        & > li {
+          width: calc((var(--containerHeight) - var(--gapVertical) * 2) / 3 / 9 * 16);
+          height: calc((var(--containerHeight) - var(--gapVertical) * 2) / 3);
         }
       }
-
-      .LivePreview {
-        width: calc((var(--containerHeight) - var(--gapVertical) * 2) / 3 / 9 * 16);
-        height: calc((var(--containerHeight) - var(--gapVertical) * 2) / 3);
+      .center > li {
+        width: calc(var(--containerHeight) / 9 * 16);
+        height: var(--containerHeight);
       }
     }
   }
