@@ -7,6 +7,7 @@ import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 
 import * as func from '../../common/funtions';
 import * as service from '../../services/LiveWakApi';
+import * as everywakApi from '../../services/everywak-api/index';
 
 import StreamTimer from './StreamTimer';
 import ViewerCounter from './ViewerCounter';
@@ -43,19 +44,19 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
     const updatedTimeStamp = Date.now();
 
     // 프로필 로드
-    const memberProfiles = await service.getWaktaverseInfo();
-    const memberProfile = memberProfiles.find(member => member.login === target);
+    const waktaverseInfo = (await everywakApi.live.getWaktaverseInfo()).message.result;
+    const memberInfo = waktaverseInfo?.find(member => member.twitchLoginName === target);
 
     // Client/Api 오프라인 예외 처리
-    if (!memberProfile) {
+    if (!memberInfo) {
       setLiveInfo(liveOfflineByApiDown);
       return;
     }
 
     const updatedLiveInfo = {
       broadcaster: 'NONE',
-      nickname: memberProfile.display_name,
-      profileImg: memberProfile.profile_image_url,
+      nickname: memberInfo.twitchNickname,
+      profileImg: memberInfo.twitchProfileImage,
       title: '방송 중이 아닙니다.',
       viewerCount: 0,
       startedTime: 0,

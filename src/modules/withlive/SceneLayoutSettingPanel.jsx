@@ -13,6 +13,7 @@ import TransformAnimation from './TransformAnimation';
 
 import * as func from '../../common/funtions';
 import * as service from '../../services/LiveWakApi';
+import * as everywakApi from '../../services/everywak-api/index';
 import useInputs from '../../hooks/useInputs';
 import useWindowEvent from '../../hooks/useWindowEvent';
 
@@ -35,7 +36,7 @@ const cx = classNames.bind(styles);
  * @returns {JSX.Element}
  */
 export default function SceneLayoutSettingPanel({ viewLayout, liveList, onClose = () => {}, onSubmit = () => {} }) {
-  /** @type {[service.MemberInfoItem[], React.Dispatch<React.SetStateAction<{ ...service.MemberInfoItem, broadcaster: 'TWITCH' | 'YOUTUBE' | undefined }[]>>]} */
+  /** @type {[(everywakApi.live.DatabaseMemberItem & { broadcaster: 'TWITCH' | 'YOUTUBE' | undefined })[], React.Dispatch<React.SetStateAction<(everywakApi.live.DatabaseMemberItem & { broadcaster: 'TWITCH' | 'YOUTUBE' | undefined })[]>>]} */
   const [allMemberList, setAllMemberList] = useState([]);
   const [isLoading, setLoading] = useState(true);
 
@@ -73,18 +74,17 @@ export default function SceneLayoutSettingPanel({ viewLayout, liveList, onClose 
   useEffect(() => {
     const fetchWaktaverseMembersInfo = async () => {
       setLoading(true);
-      const waktaverseInfo = await service.getWaktaverseInfo();
+      const waktaverseInfo = (await everywakApi.live.getWaktaverseInfo()).message.result;
       const broadcastInfo = await service.getWaktaverseBroadcastInfo();
 
-      const waktaverseInfoWithBroadcast = waktaverseInfo
-        .sort((a, b) => (
-          (Waktaverse.findIndex(member => member.login_name === a.login) - (broadcastInfo.find(item => item.loginName === a.login)?.broadcaster ? 100 : 0)) - 
-          (Waktaverse.findIndex(member => member.login_name === b.login) - (broadcastInfo.find(item => item.loginName === b.login)?.broadcaster ? 100 : 0))
-          ))
-        .map(member => ({
-          ...member, 
-          broadcaster: broadcastInfo.find(item => item.loginName === member.login)?.broadcaster
-        }));
+      const waktaverseInfoWithBroadcast = waktaverseInfo?.sort((a, b) => (
+        (Waktaverse.findIndex(member => member.login_name === a.twitchLoginName) - (broadcastInfo.find(item => item.loginName === a.twitchLoginName)?.broadcaster ? 100 : 0)) - 
+        (Waktaverse.findIndex(member => member.login_name === b.twitchLoginName) - (broadcastInfo.find(item => item.loginName === b.twitchLoginName)?.broadcaster ? 100 : 0))
+      ))
+      .map(member => ({
+        ...member, 
+        broadcaster: broadcastInfo.find(item => item.loginName === member.twitchLoginName)?.broadcaster
+      }));
       
       setAllMemberList(waktaverseInfoWithBroadcast);
       setLoading(false);
@@ -92,15 +92,15 @@ export default function SceneLayoutSettingPanel({ viewLayout, liveList, onClose 
     fetchWaktaverseMembersInfo();
   }, []);
 
-  const memberList = allMemberList.filter(member => !layoutSetting.liveList.includes(member.login) && !(member.login === dragItemState.cursor && dragItemState.toIndex != -1)).map(member => (
+  const memberList = allMemberList.filter(member => !layoutSetting.liveList.includes(member.twitchLoginName) && !(member.twitchLoginName === dragItemState.cursor && dragItemState.toIndex != -1)).map(member => (
     <MemberItem 
-      key={`member_${member.login}`} 
-      loginName={member.login} 
-      nickname={member.display_name} 
-      profileImg={member.profile_image_url} 
+      key={`member_${member.twitchLoginName}`} 
+      loginName={member.twitchLoginName} 
+      nickname={member.twitchNickname} 
+      profileImg={member.twitchProfileImage} 
       broadcaster={member.broadcaster} 
-      selected={member.login === dragItemState.cursor}
-      onMouseDown={e => selectLiveItem('ADD', member.login)} 
+      selected={member.twitchLoginName === dragItemState.cursor}
+      onMouseDown={e => selectLiveItem('ADD', member.twitchLoginName)} 
     />
   ));
 
@@ -121,7 +121,7 @@ export default function SceneLayoutSettingPanel({ viewLayout, liveList, onClose 
   }
   const previewList = genePreviewList(layoutSetting.liveList, dragItemState);
   const previewItems = previewList.map((loginName, i) => {
-    const member = allMemberList.find(member => member.login === loginName);
+    const member = allMemberList.find(member => member.twitchLoginName === loginName);
     return <TransformAnimation 
       key={loginName}
       className={cx('previewItemWrapper', {selected: dragItemState.toIndex === i})}
@@ -129,17 +129,17 @@ export default function SceneLayoutSettingPanel({ viewLayout, liveList, onClose 
     >
       <div 
         className={cx('PreviewItem', {selected: dragItemState.toIndex === i})}  
-        onMouseDown={e => { !e.target?.className.includes('btnRemove') && selectLiveItem('MOVE', member.login, i) }} 
+        onMouseDown={e => { !e.target?.className.includes('btnRemove') && selectLiveItem('MOVE', member.twitchLoginName, i) }} 
       >
-        <TransparentButton className={styles.btnRemove} onClick={e => removeLiveItem(member.login)}><ClearRoundedIcon className={styles.btnRemoveIcon} /></TransparentButton>
+        <TransparentButton className={styles.btnRemove} onClick={e => removeLiveItem(member.twitchLoginName)}><ClearRoundedIcon className={styles.btnRemoveIcon} /></TransparentButton>
         {
           member && 
           <MemberItem 
-            loginName={member.login} 
-            nickname={member.display_name} 
-            profileImg={member.profile_image_url} 
+            loginName={member.twitchLoginName} 
+            nickname={member.twitchNickname} 
+            profileImg={member.twitchProfileImage} 
             broadcaster={member.broadcaster} 
-            selected={member.login === dragItemState.cursor}
+            selected={member.twitchLoginName === dragItemState.cursor}
           />
         }
       </div>
@@ -189,7 +189,7 @@ export default function SceneLayoutSettingPanel({ viewLayout, liveList, onClose 
   const onSubmitHandler = async e => {
     const broadcastInfo = await service.getWaktaverseBroadcastInfo();
     const liveListFormatted = layoutSetting.liveList.map((item, i) => ({
-      name: allMemberList.find(member => member.login === item).display_name,
+      name: allMemberList.find(member => member.twitchLoginName === item).twitchNickname,
       id: item,
       broadcasterType: broadcastInfo.find(live => live.loginName == item)?.broadcaster || 'TWITCH',
       videoId: broadcastInfo.find(live => live.loginName == item)?.videoId,
@@ -239,8 +239,8 @@ export default function SceneLayoutSettingPanel({ viewLayout, liveList, onClose 
       dragItemState.mode == 'ADD' && 
       <CursorMemberItem 
         loginName={dragItemState.cursor} 
-        nickname={allMemberList.find(member => member.login === dragItemState.cursor).display_name} 
-        profileImg={allMemberList.find(member => member.login === dragItemState.cursor).profile_image_url} 
+        nickname={allMemberList.find(member => member.twitchLoginName === dragItemState.cursor).twitchNickname} 
+        profileImg={allMemberList.find(member => member.twitchLoginName === dragItemState.cursor).twitchProfileImage} 
       />
     }
   </div>;

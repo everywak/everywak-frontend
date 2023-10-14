@@ -19,6 +19,7 @@ import SceneLayoutSettingPanel from './SceneLayoutSettingPanel';
 
 import * as func from '../../common/funtions';
 import * as service from '../../services/LiveWakApi';
+import * as everywakApi from '../../services/everywak-api/index';
 
 import useInputs from '../../hooks/useInputs';
 
@@ -109,7 +110,7 @@ export default function WithLive ({front = false, location, history}) {
   }, []);
 
   async function setStreams() {
-    const waktaverseInfo = await service.getWaktaverseInfo();
+    const waktaverseInfo = (await everywakApi.live.getWaktaverseInfo()).message.result;
     const waktaverseLiveInfo = await service.getWaktaverseBroadcastInfo();
 
     const customMembers = (new URLSearchParams(search).get('members') || '').split(',');
@@ -125,7 +126,7 @@ export default function WithLive ({front = false, location, history}) {
 
       /** @type {LivePlayerItem[]} */
       const streams = members.map((id, i) => ({
-        name: waktaverseInfo.find(member => member.login === id).display_name,
+        name: waktaverseInfo.find(member => member.twitchLoginName === id).twitchNickname,
         broadcasterType: waktaverseLiveInfo.find(live => live.loginName == id)?.broadcaster || 'TWITCH',
         videoId: waktaverseLiveInfo.find(live => live.loginName == id)?.videoId,
         id,

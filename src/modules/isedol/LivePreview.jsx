@@ -5,6 +5,7 @@ import Spinner from '../../common/Components/Spinner';
 import CircleImg from '../../common/Components/CircleImg';
 
 import * as service from '../../services/LiveWakApi';
+import * as everywakApi from '../../services/everywak-api/index';
 
 import styles from './LivePreview.scss';
 import classNames from 'classnames/bind';
@@ -27,12 +28,12 @@ class LivePreview extends Component {
     super(props);
   };
 
-  updateChannelImgs = async id => {
+  updateChannelImgs = async loginName => {
 
-    const userinfo = await service.getWaktaverseInfo();
+    const waktaverseInfo = (await everywakApi.live.getWaktaverseInfo()).message.result;
     const broadcast = await service.getWaktaverseBroadcastInfo();
-    const targetBroadcast = broadcast.find(item => item.loginName === id);
-    const targetInfo = userinfo.find(item => item.login === id);
+    const targetBroadcast = broadcast.find(item => item.loginName === loginName);
+    const targetInfo = waktaverseInfo?.find(item => item.twitchLoginName === loginName);
     const thWidth = this.props.size === 'big' ? 600 : 200;
     
     if (targetBroadcast && targetInfo) { // 뱅온
@@ -41,14 +42,14 @@ class LivePreview extends Component {
         loaded: true,
         live: true,
         previewImgUrl: thumbnail,
-        profileImgUrl: targetInfo.profile_image_url,
+        profileImgUrl: targetInfo.twitchProfileImage,
       });
     } else { // 뱅없
       this.setState({
         loaded: true,
         live: false,
-        previewImgUrl: targetInfo.offline_image_url.replace('1920x1080', `${thWidth}x${parseInt(thWidth / 16 * 9)}`),
-        profileImgUrl: targetInfo.profile_image_url,
+        previewImgUrl: targetInfo.twitchOfflineImage.replace('1920x1080', `${thWidth}x${parseInt(thWidth / 16 * 9)}`),
+        profileImgUrl: targetInfo.twitchProfileImage,
       });
     }
   }
