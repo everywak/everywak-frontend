@@ -234,9 +234,6 @@ header.header {
     --name: '';
     position: absolute;
 
-    transition: 
-      width ease .15s, 
-      height ease .15s;
     &.isMoving {
       transition: 
         left ease .15s, 

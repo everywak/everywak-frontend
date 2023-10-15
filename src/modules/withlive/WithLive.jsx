@@ -21,6 +21,7 @@ import * as func from '../../common/funtions';
 
 import useInputs from '../../hooks/useInputs';
 import useQueryWaktaverseLive from '../../hooks/useQueryWaktaverseLive';
+import useWindowEvent from '../../hooks/useWindowEvent';
 
 import ReactGA from 'react-ga';
 import GAEvents from '../../common/GAEvents';
@@ -321,6 +322,8 @@ function FloatingWakPlayer({channelId, name, broadcasterType, videoId, target, e
       clearInterval(loop);
     }
   }, [target])
+
+  useWindowEvent('resize', checkChangedPosition);
 
   useEffect(updatePosition, [target, onClick]);
 
