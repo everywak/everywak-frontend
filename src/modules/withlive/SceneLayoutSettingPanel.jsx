@@ -12,10 +12,9 @@ import { Waktaverse } from '../../common/constants';
 import TransformAnimation from './TransformAnimation';
 
 import * as func from '../../common/funtions';
-import * as service from '../../services/LiveWakApi';
-import * as everywakApi from '../../services/everywak-api/index';
 import useInputs from '../../hooks/useInputs';
 import useWindowEvent from '../../hooks/useWindowEvent';
+import useQueryWaktaverseLive from '../../hooks/useQueryWaktaverseLive';
 
 import styles from './SceneLayoutSettingPanel.module.scss';
 import classNames from 'classnames/bind';
@@ -36,9 +35,10 @@ const cx = classNames.bind(styles);
  * @returns {JSX.Element}
  */
 export default function SceneLayoutSettingPanel({ viewLayout, liveList, onClose = () => {}, onSubmit = () => {} }) {
-  /** @type {[(everywakApi.live.DatabaseMemberItem & { broadcaster: 'TWITCH' | 'YOUTUBE' | undefined })[], React.Dispatch<React.SetStateAction<(everywakApi.live.DatabaseMemberItem & { broadcaster: 'TWITCH' | 'YOUTUBE' | undefined })[]>>]} */
+  /** @type {[(import('../../services/everywak-api/modules/live').DatabaseMemberItem & { broadcaster: 'TWITCH' | 'YOUTUBE' | undefined })[], React.Dispatch<React.SetStateAction<(import('../../services/everywak-api/modules/live').DatabaseMemberItem & { broadcaster: 'TWITCH' | 'YOUTUBE' | undefined })[]>>]} */
   const [allMemberList, setAllMemberList] = useState([]);
-  const [isLoading, setLoading] = useState(true);
+
+  const { isLoading, data } = useQueryWaktaverseLive({ });
 
   const [layoutSetting, onChange] = useInputs({
     viewLayout: viewLayout,
@@ -72,25 +72,21 @@ export default function SceneLayoutSettingPanel({ viewLayout, liveList, onClose 
   }, [layoutSetting]);
 
   useEffect(() => {
-    const fetchWaktaverseMembersInfo = async () => {
-      setLoading(true);
-      const waktaverseInfo = (await everywakApi.live.getWaktaverseInfo()).message.result;
-      const broadcastInfo = await service.getWaktaverseBroadcastInfo();
-
-      const waktaverseInfoWithBroadcast = waktaverseInfo?.sort((a, b) => (
-        (Waktaverse.findIndex(member => member.login_name === a.twitchLoginName) - (broadcastInfo.find(item => item.loginName === a.twitchLoginName)?.broadcaster ? 100 : 0)) - 
-        (Waktaverse.findIndex(member => member.login_name === b.twitchLoginName) - (broadcastInfo.find(item => item.loginName === b.twitchLoginName)?.broadcaster ? 100 : 0))
-      ))
-      .map(member => ({
-        ...member, 
-        broadcaster: broadcastInfo.find(item => item.loginName === member.twitchLoginName)?.broadcaster
-      }));
-      
-      setAllMemberList(waktaverseInfoWithBroadcast);
-      setLoading(false);
+    if (isLoading || !data) {
+      return;
     }
-    fetchWaktaverseMembersInfo();
-  }, []);
+
+    const waktaverseInfoWithBroadcast = data.members.sort((a, b) => (
+      (Waktaverse.findIndex(member => member.login_name === a.twitchLoginName) - (data.lives.find(item => item.loginName === a.twitchLoginName)?.broadcaster ? 100 : 0)) - 
+      (Waktaverse.findIndex(member => member.login_name === b.twitchLoginName) - (data.lives.find(item => item.loginName === b.twitchLoginName)?.broadcaster ? 100 : 0))
+    ))
+    .map(member => ({
+      ...member, 
+      broadcaster: data.lives.find(item => item.loginName === member.twitchLoginName)?.broadcaster
+    }));
+    
+    setAllMemberList(waktaverseInfoWithBroadcast);
+  }, [isLoading, data]);
 
   const memberList = allMemberList.filter(member => !layoutSetting.liveList.includes(member.twitchLoginName) && !(member.twitchLoginName === dragItemState.cursor && dragItemState.toIndex != -1)).map(member => (
     <MemberItem 
@@ -187,12 +183,11 @@ export default function SceneLayoutSettingPanel({ viewLayout, liveList, onClose 
   }
 
   const onSubmitHandler = async e => {
-    const broadcastInfo = await service.getWaktaverseBroadcastInfo();
     const liveListFormatted = layoutSetting.liveList.map((item, i) => ({
       name: allMemberList.find(member => member.twitchLoginName === item).nickname,
       id: item,
-      broadcasterType: broadcastInfo.find(live => live.loginName == item)?.broadcaster || 'TWITCH',
-      videoId: broadcastInfo.find(live => live.loginName == item)?.videoId,
+      broadcasterType: data.lives.find(live => live.loginName == item)?.broadcaster || 'TWITCH',
+      videoId: data.lives.find(live => live.loginName == item)?.videoId,
       pos: i,
       volume: 1, 
     }));

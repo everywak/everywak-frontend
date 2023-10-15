@@ -1,88 +1,53 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
 
 import Spinner from '../../common/Components/Spinner';
 import CircleImg from '../../common/Components/CircleImg';
 import BasicImage from '../../common/Components/Image/BasicImage';
 
-import * as service from '../../services/LiveWakApi';
-import * as everywakApi from '../../services/everywak-api/index';
+import useQueryWaktaverseLive from '../../hooks/useQueryWaktaverseLive';
 
 import styles from './LivePreview.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-function LivePreview({ channelId = 'twitchdev', size = 'normal' }) {
-  const fetchWaktaverseInfo = async () => {
-    const resWaktaverseInfo = await everywakApi.live.getWaktaverseInfo({
-      loginName: channelId
-    });
+function LivePreview({ className, channelId = 'twitchdev', size = 'normal', hideProfile = false }) {
 
-    if (
-      resWaktaverseInfo.message.status !== 200 ||
-      !resWaktaverseInfo.message.result[0]
-    ) {
-      throw resWaktaverseInfo;
-    }
-
-    const broadcast = await service.getWaktaverseBroadcastInfo();
-
-    const targetInfo = resWaktaverseInfo.message.result[0];
-    const targetBroadcast = broadcast.find(
-      item => item.loginName === channelId
-    );
-    const thWidth = size === 'big' ? 600 : 200;
-
-    if (targetBroadcast && targetInfo) {
-      // 뱅온
-      const thumbnail = targetBroadcast.thumbnail
-        .replace('{width}', thWidth)
-        .replace('{height}', parseInt((thWidth / 16) * 9));
-      return {
-        isLive: true,
-        previewImgUrl: thumbnail,
-        profileImgUrl: targetInfo.twitchProfileImage
-      };
-    } else {
-      // 뱅없
-      return {
-        isLive: false,
-        previewImgUrl: targetInfo.twitchOfflineImage.replace(
-          '1920x1080',
-          `${thWidth}x${parseInt((thWidth / 16) * 9)}`
-        ),
-        profileImgUrl: targetInfo.twitchProfileImage
-      };
-    }
-  };
-
-  /**
-   * @type {{ data: {isLive: boolean, previewImgUrl: string, profileImgUrl: string }, isLoading: boolean }}
-   */
-  const { isLoading, data } = useQuery(
-    [`waktaverseInfo-${channelId}`],
-    fetchWaktaverseInfo
-  );
+  const { isLoading, data } = useQueryWaktaverseLive({ loginName: channelId });
 
   const url =
     channelId === 'woowakgood' ? '/live' : `/withlive/isedol?main=${channelId}`;
 
+  const thWidth = size === 'big' ? 600 : 200;
+  const isLive = !(data?.lives[0]?.broadcaster === 'NONE');
+  const profileImgUrl = data?.members[0]?.twitchProfileImage;
+  const previewImgUrl = isLive
+    ? data?.lives[0]?.thumbnail
+        ?.replace('{width}', thWidth)
+        .replace('{height}', parseInt((thWidth / 16) * 9)) // 방송 썸네일
+    : data?.members[0]?.twitchOfflineImage.replace(
+        '1920x1080',
+        `${thWidth}x${parseInt((thWidth / 16) * 9)}` // 오프라인 썸네일
+      );
+
   return (
-    <li className={cx('LivePreview', { loading: isLoading }, { off: !data?.isLive })}>
+    <li className={cx('LivePreview', className, { loading: isLoading })}>
       <Link to={url}>
         <BasicImage
           className={styles.previewImg}
-          src={data?.previewImgUrl}
+          src={previewImgUrl}
           alt="생방송 썸네일"
         />
-        <div className={styles.profileCircle}>
-          <CircleImg
-            className={styles.innerCircle}
-            src={data?.profileImgUrl}
-            alt="채널 프로필 이미지"
-          />
-        </div>
+        {
+          !hideProfile &&
+          <div className={cx('profileCircle', {youtube: data?.lives[0]?.broadcaster === 'YOUTUBE', twitch: data?.lives[0]?.broadcaster === 'TWITCH'})}>
+            <CircleImg
+              className={styles.innerCircle}
+              src={profileImgUrl}
+              alt="채널 프로필 이미지"
+            />
+          </div>
+        }
         <Spinner className={styles.spinner} />
       </Link>
     </li>

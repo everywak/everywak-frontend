@@ -122,10 +122,17 @@
     align-items: top;
     
     .liveProfile {
-      border: solid 2px $twitch-color;
+      border: solid 2px #888;
       border-radius: 50%;
       margin-right: 15px;
       height: fit-content;
+
+      &.twitch {
+        border-color: $twitch-color;
+      }
+      &.youtube {
+        border-color: $youtube-color;
+      }
 
       .profileWrapper {
         border: solid 2px $component-primary-border-color;

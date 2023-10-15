@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import TransparentButton from '../../common/Components/Button/TransparentButton';
-import CircleImg from '../../common/Components/CircleImg';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 
 import * as func from '../../common/funtions';
-import * as service from '../../services/LiveWakApi';
-import * as everywakApi from '../../services/everywak-api/index';
+import TransparentButton from '../../common/Components/Button/TransparentButton';
+import CircleImg from '../../common/Components/CircleImg';
+import useQueryWaktaverseLive from '../../hooks/useQueryWaktaverseLive';
 
 import StreamTimer from './StreamTimer';
 import ViewerCounter from './ViewerCounter';
@@ -16,89 +15,80 @@ import styles from './LiveSummary.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
+const liveOfflineByApiDown = {
+  broadcaster: 'NONE',
+  nickname: '',
+  profileImg: '',
+  title: '네트워크 상태를 확인해주세요.',
+  viewerCount: 0,
+  startedTime: 0,
+  updatedTimeStamp: 0,
+};
+const liveOfflineByWrongChannelId = {
+  broadcaster: 'NONE',
+  nickname: '',
+  profileImg: '',
+  title: '잘못된 채널id입니다.',
+  viewerCount: 0,
+  startedTime: 0,
+  updatedTimeStamp: 0,
+};
+
 export default function LiveSummary({channelId = 'woowakgood', style = 'normal', expanded, onChangeOverlayState}) {
 
-  const liveOffline = {
+  const [liveInfo, setLiveInfo] = useState({
     broadcaster: 'NONE',
     nickname: '',
     profileImg: '',
-    title: '방송 중이 아닙니다.',
+    title: '생방송 정보 불러오는 중...',
     viewerCount: 0,
     startedTime: 0,
     updatedTimeStamp: 0,
-  };
-  const liveOfflineByApiDown = {
-    broadcaster: 'NONE',
-    nickname: '',
-    profileImg: '',
-    title: '네트워크 상태를 확인해주세요.',
-    viewerCount: 0,
-    startedTime: 0,
-    updatedTimeStamp: 0,
-  };
+  });
 
-  const [liveInfo, setLiveInfo] = useState(liveOffline);
+  const refetchInterval = 15000;
+  const { isLoading, data, isError, error } = useQueryWaktaverseLive({ loginName: channelId, refetchInterval });
 
-  const updateLiveInfo = async (target) => {
-
-    const updatedTimeStamp = Date.now();
-
-    // 프로필 로드
-    const memberInfo = (await everywakApi.live.getWaktaverseInfo({ loginName: target })).message.result[0];
-
-    // Client/Api 오프라인 예외 처리
-    if (!memberInfo) {
-      setLiveInfo(liveOfflineByApiDown);
+  useEffect(() => {
+    if (isLoading || !data) {
       return;
     }
 
-    const updatedLiveInfo = {
-      broadcaster: 'NONE',
-      nickname: memberInfo.twitchNickname,
-      profileImg: memberInfo.twitchProfileImage,
-      title: '방송 중이 아닙니다.',
-      viewerCount: 0,
-      startedTime: 0,
-      updatedTimeStamp, 
-    };
-
-    // 생방송 정보 로드
-    const lives = await service.getWaktaverseBroadcastInfo();
-    const fetchedInfo = lives.find(live => live.loginName === target);
-
-    if (fetchedInfo) { // 뱅온
-
-      // 생방송 정보 삽입
-      Object.assign(updatedLiveInfo, {
-        broadcaster: fetchedInfo.broadcaster, 
-        title: fetchedInfo.title,
-        viewerCount: parseInt(fetchedInfo.viewerCount),
-        startedTime: fetchedInfo.startedTime * 1000,
-        seed: Math.random(),
-      });
-    }
-    if (liveInfo.updatedTimeStamp < updatedLiveInfo.updatedTimeStamp) {
-      setLiveInfo({...updatedLiveInfo});
-    }
-  };
+    setLiveInfo({
+      broadcaster: data.lives[0].broadcaster,
+      nickname: data.members[0].nickname,
+      profileImg: data.members[0].twitchProfileImage,
+      title: data.lives[0].title,
+      viewerCount: data.lives[0].broadcaster !== 'NONE' ? data.lives[0].viewerCount : 0,
+      startedTime: data.lives[0].startedTime * 1000,
+    });
+  }, [isLoading, data]);
 
   useEffect(() => {
-    updateLiveInfo(channelId);
+    console.log(error)
+    if (isError) {
+      if (error?.message.status === 200 && error?.message.result.length == 0) {
+        setLiveInfo({ ...liveOfflineByWrongChannelId });
+        return;
+      }
 
-    const loopUpdateLiveInfo = setInterval(() => updateLiveInfo(channelId), 30 * 1000);
+      // Client/Api 오프라인
+      setLiveInfo({ ...liveOfflineByApiDown });
+    }
 
-    return () => clearInterval(loopUpdateLiveInfo);
-  }, [channelId]);
+  }, [isError, error]);
 
-  const { broadcaster, nickname, profileImg, title, viewerCount, startedTime } = liveInfo;
+  const {
+    broadcaster, nickname, profileImg, title, viewerCount, startedTime
+  } = liveInfo;
 
-  const startedTimeString = startedTime !== 0 ? func.formatDateTimeString(new Date(startedTime)) : '';
-  const channelName = nickname;
-  const broadcastName = broadcaster.charAt(0) + broadcaster.slice(1).toLowerCase();
+  const startedTimeString = startedTime !== 0 ? func.formatDateTimeString(new Date(startedTime)) : '없음';
+  const broadcasterName = broadcaster.charAt(0) + broadcaster.slice(1).toLowerCase();
+  const isLive = broadcaster !== 'NONE';
 
   return (
-    style == 'simple' ?
-    <div className={cx('LiveSummary', {simple: style == 'simple'})}>
+    style === 'simple' ?
+    <div className={cx('LiveSummary', {simple: style === 'simple'})}>
       <div className="liveSummaryWrapper" >
         <span className="liveTitle">{title}</span>
         <span className="liveDateTime">{startedTimeString}</span>
@@ -106,24 +96,30 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
     </div> : 
     <div className={cx('LiveSummary')}>
       <div className="left">
-        <div className="liveProfile">
+        <div className={cx('liveProfile', {youtube: broadcaster === 'YOUTUBE', twitch: broadcaster === 'TWITCH'})}>
           <div className="profileWrapper">
             <CircleImg src={profileImg} alt="" className="profileImg" />
           </div>
         </div>
         <div className="liveSummaryWrapper" >
           <span className="liveTitle">{title}</span>
-          <span className={cx('livePresented', {hide: broadcastName == 'None'})}>
-            <span className="channelName">{channelName}</span>
-            &nbsp;on&nbsp;
-            <span className="broadcastName">{broadcastName}</span>
+          <span className={cx('livePresented')}>
+            <span className="channelName">{nickname}</span>
+            { isLive ? ' on ' : ' · ' }
+            <span className="broadcastName">
+              {
+                isLive
+                ? broadcasterName
+                : `최근 방송 ${startedTimeString}`
+              }
+            </span>
           </span>
         </div>
       </div>
       <div className="right">
         <div className="up">
           <ViewerCounter viewer={viewerCount} />
-          <StreamTimer startedTime={startedTime} />
+          { isLive && <StreamTimer startedTime={startedTime} /> }
         </div>
         <div className="down">
           <TransparentButton 

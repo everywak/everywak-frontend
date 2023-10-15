@@ -18,10 +18,9 @@ import VideoContentPlayer from '../../common/Components/VideoContentPlayer/Video
 import SceneLayoutSettingPanel from './SceneLayoutSettingPanel';
 
 import * as func from '../../common/funtions';
-import * as service from '../../services/LiveWakApi';
-import * as everywakApi from '../../services/everywak-api/index';
 
 import useInputs from '../../hooks/useInputs';
+import useQueryWaktaverseLive from '../../hooks/useQueryWaktaverseLive';
 
 import ReactGA from 'react-ga';
 import GAEvents from '../../common/GAEvents';
@@ -80,16 +79,9 @@ export default function WithLive ({front = false, location, history}) {
   /** @type {[ViewLayoutOption, React.Dispatch<React.SetStateAction<ViewLayoutOption>>]} */
   const [viewLayout, setViewLayout] = useState('main-side');
   /** @type {[LivePlayerItem[], React.Dispatch<React.SetStateAction<LivePlayerItem[]>>]} */
-  const [liveList, setLiveList] = useState([
-    {
-      name: '우왁굳',
-      id: 'woowakgood',
-      broadcasterType: 'TWITCH',
-      videoId: '',
-      pos: 0,
-      volume: 1, 
-    }, 
-  ])
+  const [liveList, setLiveList] = useState([]);
+
+  const { isLoading, data } = useQueryWaktaverseLive({ });
 
   // 브라우저 제목 설정
   useEffect(() => {
@@ -106,29 +98,32 @@ export default function WithLive ({front = false, location, history}) {
   const { search } = useLocation();
   const { group } = useParams();
   useEffect(() => {
-    setStreams();
-  }, []);
+    if (isLoading || !data) {
+      return;
+    }
 
-  async function setStreams() {
-    const waktaverseInfo = (await everywakApi.live.getWaktaverseInfo()).message.result;
-    const waktaverseLiveInfo = await service.getWaktaverseBroadcastInfo();
+    const prevMembers = liveList.map(live => live.id);
+    if (prevMembers.length > 0) {
+      return;
+    }
 
-    const customMembers = (new URLSearchParams(search).get('members') || '').split(',');
-    const members = (
-      group === 'isedol' ? 
-      isedolStreams : 
-      customMembers.length > 0 && customMembers[0] !== '' ?
-      customMembers :
-      waktaverseLiveInfo.map(live => live.loginName)
-    ).slice(0, 8);
+    const members = [];
+    const customMembers = (new URLSearchParams(search).get('members') || '').split(',').filter(loginName => data.members.find(member => member.twitchLoginName === loginName));
+    if (group === 'isedol') { // 이세돌 같이보기 페이지면
+      members.push(...isedolStreams);
+    } else if (customMembers.length > 0 && customMembers[0] !== '') { // 커스텀 멤버가 지정되어 있으면
+      members.push(...customMembers);
+    } else {
+      members.push(...data.lives.map(live => live.loginName)); // 생방송인 채널
+    }
     
     if (members.length > 0 && members[0] !== '') {
 
       /** @type {LivePlayerItem[]} */
-      const streams = members.map((id, i) => ({
-        name: waktaverseInfo.find(member => member.twitchLoginName === id).nickname,
-        broadcasterType: waktaverseLiveInfo.find(live => live.loginName == id)?.broadcaster || 'TWITCH',
-        videoId: waktaverseLiveInfo.find(live => live.loginName == id)?.videoId,
+      const streams = members.slice(0, 8).map((id, i) => ({
+        name: data.members.find(member => member.twitchLoginName === id).nickname,
+        broadcasterType: data.lives.find(live => live.loginName == id)?.broadcaster || 'TWITCH',
+        videoId: data.lives.find(live => live.loginName == id)?.videoId,
         id,
         pos: i,
         volume: 1,
@@ -145,10 +140,9 @@ export default function WithLive ({front = false, location, history}) {
           oldMain.pos = newMainPos;
         }
       }
-
       setLiveList(streams);
     }
-  }
+  }, [isLoading, data, liveList]);
 
   // GA 집계 누락 방지용 이벤트
   useEffect(() => {

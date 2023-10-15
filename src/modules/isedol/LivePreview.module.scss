@@ -38,7 +38,7 @@
   }
   .profileCircle {
     background: white;
-    border: 2px solid red;
+    border: 2px solid #555;
     border-radius: 50%;
     box-sizing: border-box;
     position: absolute;
@@ -55,6 +55,9 @@
       bottom: 6px;
       width: 32px;
       height: 32px;
+    }
+    &.twitch, &.youtube {
+      border-color: red;
     }
 
     .innerCircle{
@@ -82,12 +85,6 @@
     .previewImg,
     .profileCircle {
       opacity: 0;
-    }
-  }
-
-  &.off {
-    .profileCircle {
-      border: 2px solid #555;
     }
   }
 }

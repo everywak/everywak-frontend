@@ -147,7 +147,7 @@ function MobileFrontpage() {
       <div className="circle2"></div>
       <div className="headerWrapper">
         <div className="highlight">
-          <LivePreview channelId="woowakgood" size="big" />
+          <LivePreview className="livePreview" channelId="woowakgood" size="big" hideProfile />
         </div>
         <div className="title">
           <Link to="/" className="title"><img src="/images/everywak_logo.png" alt="Everywak 로고"/></Link>
