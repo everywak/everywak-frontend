@@ -266,7 +266,7 @@ export default function WithLive ({front = false, location, history}) {
     {!expanded && 
       <Header />
     }
-    <div className={cx('WithLive', {expanded: expanded}, viewLayout)}>
+    <div className={cx('WithLive', {expanded: expanded}, viewLayout)} style={{'--sidePlayerCount': Math.min(Math.max(floatingTargetSideList.length, 2), 7)}}>
       <div className={cx('playerWrapper', {opened: opened, expanded: expanded}, viewLayout)} ref={refPlayerWrapper}>
         {
           viewLayout === 'main-side' && 

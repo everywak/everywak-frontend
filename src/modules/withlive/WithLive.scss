@@ -14,6 +14,7 @@ header.header {
   }
 }
 .WithLive {
+  --sidePlayerCount: 7;
   height: calc(100vh - #{$header-height});
   &.expanded {
     height: calc(100vh);
@@ -28,7 +29,7 @@ header.header {
   display: -ms-grid;
   @media (orientation: portrait) {
     grid-template-columns: 100%;
-    grid-template-rows: auto calc(100vw / 7 / 16 * 9) 1fr;
+    grid-template-rows: auto calc(100vw / var(--sidePlayerCount) / 16 * 9) 1fr;
     grid-template-areas:
     "live"
     "side"
@@ -61,13 +62,13 @@ header.header {
   }
   @media (orientation: landscape) {
     @include desktop {
-      grid-template-columns: 1fr calc((100vh - #{$header-height}) / 7 / 9 * 16) auto;
+      grid-template-columns: 1fr calc((100vh - #{$header-height}) / var(--sidePlayerCount) / 9 * 16) auto;
       &.expanded {
-        grid-template-columns: 1fr calc(100vh / 7 / 9 * 16) auto;
+        grid-template-columns: 1fr calc(100vh / var(--sidePlayerCount) / 9 * 16) auto;
       }
     }
     @include not-desktop {
-      grid-template-columns: 1fr calc(100vh / 7 / 9 * 16) auto;
+      grid-template-columns: 1fr calc(100vh / var(--sidePlayerCount) / 9 * 16) auto;
     }
     grid-template-rows: 100%;
     grid-template-areas:
@@ -180,7 +181,7 @@ header.header {
     @media (orientation: portrait) {
       flex-direction: row;
       .FloatingTarget {
-        width: calc(100vw / 7);
+        width: calc(100vw / var(--sidePlayerCount));
       }
     }
   }
@@ -291,7 +292,7 @@ header.header {
 .WithLive {
   @media (orientation: portrait) {
     .opened + .TwitchChat {
-      --wrapperPortraitHeight: calc(100vw / 16 * 9 + (100vw / 7 / 16 * 9) + 84px);
+      --wrapperPortraitHeight: calc(100vw / 16 * 9 + (100vw / var(--sidePlayerCount) / 16 * 9) + 84px);
     }
     .expanded + .TwitchChat {
       --wrapperPortraitHeight: calc(100vh);
@@ -300,11 +301,11 @@ header.header {
   .TwitchChat {
     grid-area: chat;
     @media (orientation: portrait) {
-      --wrapperPortraitHeight: calc(100vw / 16 * 9 + (100vw / 7 / 16 * 9));
+      --wrapperPortraitHeight: calc(100vw / 16 * 9 + (100vw / var(--sidePlayerCount) / 16 * 9));
       max-height: calc(100vh - #{$header-height} - var(--wrapperPortraitHeight));
       
       .opened + & {
-        --wrapperPortraitHeight: calc(100vw / 16 * 9 + (100vw / 7 / 16 * 9) + 84px);
+        --wrapperPortraitHeight: calc(100vw / 16 * 9 + (100vw / var(--sidePlayerCount) / 16 * 9) + 84px);
       }
       .expanded + & {
         --wrapperPortraitHeight: calc(100vh);
