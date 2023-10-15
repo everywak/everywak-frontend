@@ -364,7 +364,7 @@ function FloatingWakPlayer({channelId, name, broadcasterType, videoId, target, e
   const isOverlayBackgroundArea = className => {
     if (typeof className !== 'string') { return false; }
 
-    return className.includes('overlay') || ['buttonArea', 'mediaInfo', 'descArea'].includes(className);
+    return className.includes('overlay') || ['buttonArea', 'mediaInfo', 'descArea', 'controls hideProgress'].includes(className);
   };
   
   return (
