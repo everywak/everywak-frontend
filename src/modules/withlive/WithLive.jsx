@@ -41,6 +41,11 @@ const cx = classNames.bind(styles);
  * @property {number} pos
  * @property {number} volume 0~1
  */
+/**
+ * @typedef SceneSetting
+ * @property {ViewLayoutOption} viewLayout
+ * @property {string[]} liveList
+ */
 
 const isedolStreams = [
   'woowakgood',
@@ -108,9 +113,24 @@ export default function WithLive ({front = false, location, history}) {
       return;
     }
 
+    // 초기 방송 세팅
     const members = [];
+    /** @type {SceneSetting | null} */
+    const savedSceneSetting = func.getLocalStorage('everywak.withlive.sceneSetting');
     const customMembers = (new URLSearchParams(search).get('members') || '').split(',').filter(loginName => data.members.find(member => member.twitchLoginName === loginName));
-    if (group === 'isedol') { // 이세돌 같이보기 페이지면
+    const mainChannelId = new URLSearchParams(search).get('main'); // 메인으로 올 스트림
+    if (savedSceneSetting) { // 최초 접속이 아니면
+      if (['main-side', 'grid'].includes(savedSceneSetting.viewLayout) && viewLayout != savedSceneSetting.viewLayout) {
+        setViewLayout(savedSceneSetting.viewLayout);
+      }
+      const filteredSavedLiveList = savedSceneSetting.liveList.filter(loginName => data.members.find(member => member.twitchLoginName === loginName));
+      
+      if (mainChannelId && data.members.find(member => member.twitchLoginName === mainChannelId)) { // 메인으로 고정할 채널 있으면 고정
+        members.push(mainChannelId, ...filteredSavedLiveList.filter(live => live !== mainChannelId));
+      } else {
+        members.push(...filteredSavedLiveList);
+      }
+    } else if (group === 'isedol') { // 이세돌 같이보기 페이지면
       members.push(...isedolStreams);
     } else if (customMembers.length > 0 && customMembers[0] !== '') { // 커스텀 멤버가 지정되어 있으면
       members.push(...customMembers);
@@ -119,6 +139,12 @@ export default function WithLive ({front = false, location, history}) {
     }
     
     if (members.length > 0 && members[0] !== '') {
+      if (!savedSceneSetting) {
+        func.setLocalStorage('everywak.withlive.sceneSetting', {
+          viewLayout,
+          liveList: members,
+        });
+      }
 
       /** @type {LivePlayerItem[]} */
       const streams = members.slice(0, 8).map((id, i) => ({
@@ -131,9 +157,8 @@ export default function WithLive ({front = false, location, history}) {
       }));
 
       // 메인으로 올 스트림 설정
-      const channelId = new URLSearchParams(search).get('main');
-      if (channelId) {
-        const newMain = streams.find(live => live.id === channelId); // 가운데로 올 플레이어
+      if (mainChannelId && data.members.find(member => member.twitchLoginName === mainChannelId)) {
+        const newMain = streams.find(live => live.id === mainChannelId); // 가운데로 올 플레이어
         const oldMain = streams.find(live => live.pos === 0); // 가운데에 있던 플레이어
         if (newMain && oldMain && oldMain !== newMain) {
           const newMainPos = newMain.pos;
@@ -190,6 +215,10 @@ export default function WithLive ({front = false, location, history}) {
       newMain.pos = 0;
       oldMain.pos = newMainPos;
       setLiveList([...liveList]);
+      func.setLocalStorage('everywak.withlive.sceneSetting', {
+        viewLayout: viewLayout,
+        liveList: liveList.sort((a, b) => a.pos - b.pos).map(item => item.id),
+      });
     }
   }, [liveList]);
 
@@ -201,6 +230,10 @@ export default function WithLive ({front = false, location, history}) {
   const onChangeSceneSettingHandler = e => {
     setViewLayout(e.viewLayout);
     setLiveList(e.liveList);
+    func.setLocalStorage('everywak.withlive.sceneSetting', {
+      viewLayout: e.viewLayout,
+      liveList: e.liveList.map(item => item.id),
+    });
     setOpenedSceneSettingPanel(false);
   };
 
