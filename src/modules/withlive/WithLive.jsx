@@ -105,12 +105,12 @@ export default function WithLive ({front = false, location, history}) {
   const { group } = useParams();
   useEffect(() => {
     if (isLoading || !data) {
-      return;
+      return () => {};
     }
 
     const prevMembers = liveList.map(live => live.id);
     if (prevMembers.length > 0) {
-      return;
+      return () => {};
     }
 
     // 초기 방송 세팅

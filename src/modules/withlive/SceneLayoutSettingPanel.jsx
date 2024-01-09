@@ -73,7 +73,7 @@ export default function SceneLayoutSettingPanel({ viewLayout, liveList, onClose 
 
   useEffect(() => {
     if (isLoading || !data) {
-      return;
+      return () => {};
     }
 
     const waktaverseInfoWithBroadcast = data.members.sort((a, b) => (

@@ -51,7 +51,7 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
 
   useEffect(() => {
     if (isLoading || !data) {
-      return;
+      return () => {};
     }
 
     setLiveInfo({
@@ -69,7 +69,7 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
     if (isError) {
       if (error?.message.status === 200 && error?.message.result.length == 0) {
         setLiveInfo({ ...liveOfflineByWrongChannelId });
-        return;
+        return () => {};
       }
 
       // Client/Api 오프라인
