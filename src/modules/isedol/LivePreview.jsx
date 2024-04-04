@@ -40,7 +40,12 @@ function LivePreview({ className, channelId = 'twitchdev', size = 'normal', hide
         />
         {
           !hideProfile &&
-          <div className={cx('profileCircle', {youtube: data?.lives[0]?.broadcaster === 'YOUTUBE', twitch: data?.lives[0]?.broadcaster === 'TWITCH'})}>
+          <div className={cx('profileCircle', {
+            youtube: data?.lives[0]?.broadcaster === 'YOUTUBE', 
+            twitch: data?.lives[0]?.broadcaster === 'TWITCH', 
+            chzzk: data?.lives[0]?.broadcaster === 'CHZZK', 
+            afreeca: data?.lives[0]?.broadcaster === 'AFREECA'
+            })}>
             <CircleImg
               className={styles.innerCircle}
               src={profileImgUrl}

@@ -77,7 +77,7 @@ export default function BestWaktoons({location, history}) {
           {
             searchTarget.viewType === 'series' ?
             <BestWaktoonList defaultShowCount={defaultShowCount[searchTarget.viewType]} searchOptions={searchTarget} onChange={onChangeList} /> :
-            <WaktoonEpisodeList defaultShowCount={defaultShowCount[searchTarget.viewType]} searchOptions={searchTarget} onChange={onChangeList} />
+            <WaktoonEpisodeList viewType="item" defaultShowCount={defaultShowCount[searchTarget.viewType]} searchOptions={searchTarget} onChange={onChangeList} />
           }
           <PageSelect name="page" max={maxPage} maxLength={10} value={searchTarget.page} onChange={onChange} />
         </div>

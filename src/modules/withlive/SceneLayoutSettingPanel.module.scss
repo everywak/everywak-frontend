@@ -26,10 +26,17 @@
     }
     .contentWrapper {
     }
-    &.waktaverseMemberList .contentWrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    &.waktaverseMemberList {
+      flex: 1;
+      height: 0;
+
+      .contentWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        height: 0;
+      }
     }
   }
   .SceneLayoutSelect {
@@ -220,6 +227,7 @@
     &.main-side {
       flex-direction: column;
       height: 656px;
+      max-height: calc(100vh - 120px);
     }
     &.grid {
       flex-direction: row;
@@ -227,6 +235,7 @@
       .previewItemWrapper {
         width: calc((100% - 16px * (var(--gridColumns, 1) - 1)) / var(--gridColumns, 1));
         height: calc((100% - 16px * (var(--gridRows, 1) - 1)) / var(--gridRows, 1));
+        max-height: calc(100vh - 120px);
       }
     }
   }
@@ -236,6 +245,8 @@
     align-items: stretch;
     gap: 12px;
     width: 320px;
+    height: 656px;
+    max-height: calc(100vh - 120px);
 
     .memberList {
       display: flex;
@@ -245,7 +256,7 @@
       gap: 16px;
       overflow-y: scroll;
       width: 260px;
-      height: 320px;
+      // height: 320px;
 
       &::-webkit-scrollbar {
         width: 8px;
@@ -312,7 +323,9 @@
       }
     }
     &.liveYoutube .circleWrapper,
-    &.liveTwitch .circleWrapper {
+    &.liveTwitch .circleWrapper,
+    &.liveChzzk .circleWrapper,
+    &.liveAfreeca .circleWrapper {
       box-sizing: border-box;
       border: white solid 2px;
       border-radius: 50%;
@@ -329,6 +342,12 @@
     }
     &.liveTwitch .profileCircle {
       border: $twitch-color solid 2px;
+    }
+    &.liveChzzk .profileCircle {
+      border: $chzzk-color solid 2px;
+    }
+    &.liveAfreeca .profileCircle {
+      border: $afreeca-color solid 2px;
     }
     .nickname {
       color: $secondary-text-color;

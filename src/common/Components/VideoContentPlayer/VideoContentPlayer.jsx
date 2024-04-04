@@ -31,6 +31,8 @@ import ContextMenu from '../ContextMenu/ContextMenu';
 import TwitchLiveModule from './modules/TwitchLiveModule';
 import YoutubeLiveModule from './modules/YoutubeLiveModule';
 import YoutubeVideoModule from './modules/YoutubeVideoModule';
+import ChzzkLiveTempModule from './modules/ChzzkLiveTempModule';
+import AfreecaLiveModule from './modules/AfreecaLiveModule';
 
 import styles from './VideoContentPlayer.scss';
 import classNames from 'classnames/bind';
@@ -206,6 +208,12 @@ function VideoContentPlayer ({
       setPlayerEmbed(embed);
     } else if (mediaType === 'youtubeVideo') {
       const embed = <YoutubeVideoModule videoId={mediaId} handlers={_handlers} />;
+      setPlayerEmbed(embed);
+    } else if (mediaType === 'chzzkLive') {
+      const embed = <ChzzkLiveTempModule channelId={mediaId} handlers={_handlers} />;
+      setPlayerEmbed(embed);
+    } else if (mediaType === 'afreecaLive') {
+      const embed = <AfreecaLiveModule channelId={mediaId} handlers={_handlers} />;
       setPlayerEmbed(embed);
     }
   }, [mediaType, mediaId]);
@@ -449,7 +457,7 @@ function VideoContentPlayer ({
       <div className="spinnerWrapper hide">
         <div className="spinner"><div className="innerWrapper"><div className="inner"></div></div></div>
       </div>
-      <div className={cx('overlay', {hover: playerOptions.hovering || volumeBarClicked || playerOptions.openedSettings, simple: playerSize === 'simple'})} onClick={onClickOverlay}>
+      <div className={cx('overlay', {iframemode: mediaType === 'chzzkLive' || mediaType === 'afreecaLive', hover: playerOptions.hovering || volumeBarClicked || playerOptions.openedSettings, simple: playerSize === 'simple'})} onClick={onClickOverlay}>
         {mediaType === 'twitchLive' && player && <VideoContentPlayerPlaybackInfoPanel player={player} />}
         <div className="mediaInfo">
           <div className="descArea">

@@ -96,7 +96,7 @@ export default function LiveSummary({channelId = 'woowakgood', style = 'normal',
     </div> : 
     <div className={cx('LiveSummary')}>
       <div className="left">
-        <div className={cx('liveProfile', {youtube: broadcaster === 'YOUTUBE', twitch: broadcaster === 'TWITCH'})}>
+        <div className={cx('liveProfile', {youtube: broadcaster === 'YOUTUBE', twitch: broadcaster === 'TWITCH', chzzk: broadcaster === 'CHZZK', afreeca: broadcaster === 'AFREECA'})}>
           <div className="profileWrapper">
             <CircleImg src={profileImg} alt="" className="profileImg" />
           </div>

@@ -11,6 +11,7 @@ $header-height: 52px;
 $primary-color: #0085ff;
 $primary-light-color: #1b91ff;
 $primary-dark-color: #0077e7;
+$background-white-color: #fafafa;
 $component-primary-bg-color: #fafafa;
 $component-primary-border-color: #f0f0f0;
 $component-secondary-bg-color: #f0f0f0;
@@ -29,8 +30,21 @@ $button-secondary-text-color: $primary-middle-text-color;
 
 $twitch-color: #9147ff;
 $youtube-color: #f00;
+$chzzk-color: #00ffa3;
+$afreeca-color: #0545b1;
 $instagram-color: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
 $wakki-color: #5ac467;
 $github-color: #1b1f23;
 
 $emphasis-text-color: #d40000;
+
+:root {
+  --isedol-color: #D74D74;
+  
+  --isedol-ine-color: #8A2BE2;
+  --isedol-jingburger-color: #F0A957;
+  --isedol-lilpa-color: #443965;
+  --isedol-jururu-color: #FF008C;
+  --isedol-gosegu-color: #467EC6;
+  --isedol-viichan-color: #95C100;
+}

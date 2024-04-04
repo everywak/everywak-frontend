@@ -243,6 +243,10 @@ header.header {
         height ease .15s;
     }
 
+    .VideoContentPlayer .overlay.iframemode {
+      display: none;
+    }
+
     &.isSide {
 
       &:hover::after {
@@ -267,6 +271,9 @@ header.header {
       }
     
       .VideoContentPlayer {
+        .overlay.iframemode {
+          display: flex;
+        }
         .controller {
           @include not-desktop {
             @media (orientation: portrait) {

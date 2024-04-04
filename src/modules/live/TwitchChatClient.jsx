@@ -22,14 +22,16 @@ const cx = classNames.bind(styles);
 
 const waktaverseLoginNames = Waktaverse.map(member => member.login_name);
 
-class TwitchChatClient extends PureComponent {
+class TwitchChatClient extends Component {
 
   static LIGHT = 100;
   static DARK  = 101;
 
   static defaultProps = {
+    className: '',
     clientId: '',
     channelName: '',
+    platform: '',
     redirectUri: '',
     colorTheme: TwitchChatClient.LIGHT,
   };
@@ -63,15 +65,22 @@ class TwitchChatClient extends PureComponent {
   }
 
   initTwitchChatCore = () => {
+    this.setState({
+      chatList: [],
+    });
     // create core instance
-    this.chatCore = new TwitchChatClientCore({
+    const coreOptions = {
       clientId: this.props.clientId, 
       channelName: this.props.channelName,
       onChangeOAuthState: this.onChangeOAuthState, 
       onChangeIRCState: this.onChangeIRCState,
       onUpdateEmoteSet: this.onUpdateEmoteSet, 
       onChat: this.onChat,
-    });
+    };
+    if (this.props.platform === 'space' || this.props.platform === 'afreeca') {
+      coreOptions.ircServer = 'wss://irc.everywak.kr';
+    }
+    this.chatCore = new TwitchChatClientCore(coreOptions);
 
     // get oauth token from cookie
     const { location, history } = this.props;
@@ -189,6 +198,14 @@ class TwitchChatClient extends PureComponent {
     if (prevProps.channelName != this.props.channelName) {
       this.chatCore.setChannelName(this.props.channelName);
     }
+    if (prevProps.platform != this.props.platform) {
+      this.initTwitchChatCore();
+    }
+    if (this.props.platform == 'afreeca' && this.state.oauthState !== TwitchChatClientCore.LOGINED) {
+      this.setState({
+        oauthState: TwitchChatClientCore.LOGINED,
+      })
+    }
     
   }
 
@@ -197,11 +214,11 @@ class TwitchChatClient extends PureComponent {
   }
 
   render() {
-    const { clientId, redirectUri } = this.props;
+    const { className, clientId, redirectUri } = this.props;
     const { chatList, chatOptions, oauthState, emoteSets, openedEmotePicker, onSettingPanel } = this.state;
 
     return (
-      <div className="TwitchChatClient content">
+      <div className={cx("TwitchChatClient content", className)}>
         {
           oauthState == TwitchChatClientCore.LOGINED ?
           <React.Fragment>
@@ -214,19 +231,22 @@ class TwitchChatClient extends PureComponent {
               <TwitchChatList className='filteredChatList' chatList={chatList} options={{ hideNickname: chatOptions.hideNickname, whitelist: waktaverseLoginNames }} />
             }
             <div className="twitchChatBottom">
-              <div className="twitchChatInputWrapper">
-                <textarea 
-                  className="twitchChatInput" 
-                  ref={this.chatInput} 
-                  onKeyPress={e => {if(e.key == 'Enter') { e.preventDefault(); this.sendChat() } }}
-                  onChange={e => {
-                    e.target.style.height = '0px';
-                    e.target.style.height = `${e.target.scrollHeight + 4}px`;
-                  }} />
-                <TransparentButton className="twitchChatBtnEmote" onClick={e => this.toggleEmotePicker()}>
-                  <InsertEmoticonRoundedIcon fontSize="small" />
-                </TransparentButton>
-              </div>
+              {
+                this.props.platform != 'afreeca' &&
+                <div className="twitchChatInputWrapper">
+                  <textarea 
+                    className="twitchChatInput" 
+                    ref={this.chatInput} 
+                    onKeyPress={e => {if(e.key == 'Enter') { e.preventDefault(); this.sendChat() } }}
+                    onChange={e => {
+                      e.target.style.height = '0px';
+                      e.target.style.height = `${e.target.scrollHeight + 4}px`;
+                    }} />
+                  <TransparentButton className="twitchChatBtnEmote" onClick={e => this.toggleEmotePicker()}>
+                    <InsertEmoticonRoundedIcon fontSize="small" />
+                  </TransparentButton>
+                </div>
+              }
               <TransparentButton className="twitchChatBtnSettingMobile" onClick={e => this.setOnSettingPanel(!onSettingPanel)}>
                 <MoreVertIcon fontSize="small" />
               </TransparentButton>
@@ -236,7 +256,10 @@ class TwitchChatClient extends PureComponent {
                   <TransparentButton className="twitchChatBtnSetting" onClick={e => this.setOnSettingPanel(!onSettingPanel)}>
                     <SettingsRoundedIcon fontSize="small" />
                   </TransparentButton>
-                  <BasicButton className="twitchChatBtnSend" onClick={this.sendChat}>채팅</BasicButton>
+                  {
+                    this.props.platform != 'afreeca' &&
+                    <BasicButton className="twitchChatBtnSend" onClick={this.sendChat}>채팅</BasicButton>
+                  }
                 </div>
               </div>
               {openedEmotePicker && <TwitchChatEmotePicker emotes={emoteSets} getTwitchApi={this.chatCore.getTwitchApi} appendToChatBox={this.appendToChatBox} setOnModal={this.closeEmotePicker} />}
@@ -247,7 +270,9 @@ class TwitchChatClient extends PureComponent {
             {
               oauthState == TwitchChatClientCore.LOGOUTED ?
               <React.Fragment>
-                <span className="loginTitle">로그인해서 팬치들과 함께 해요.</span>
+                <span className="loginTitle">
+                  로그인해서 {Waktaverse.filter(member => member.role === 'isedol').find(member => member.login_name === this.props.channelName) ? '이파리' : '팬치'}들과 함께 해요.
+                </span>
                 <a className="twitchChatButton btnLoginTwitch" href={`https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=chat:edit chat:read channel:read:predictions user:read:blocked_users`}>Twitch로 로그인</a>
               </React.Fragment> :
               <React.Fragment>
@@ -409,6 +434,10 @@ const TwitchChatUserChat = React.memo(({ chatItem, hideNickname }) => {
   );
 });
 
+// 강조 메시지 샘플
+//@badge-info=;badges=;color=#00FF7F;display-name=닉네임;emotes=;first-msg=0;flags=;id=01526872-7cde-4ca4-86d1-3739a35aab45;mod=0;msg-id=highlighted-message;returning-chatter=0;room-id=49045679;subscriber=0;tmi-sent-ts=1673460456087;turbo=0;user-id=807450268;user-type= :roentgenium11!roentgenium11@roentgenium11.tmi.twitch.tv PRIVMSG #woowakgood :왁굳형은 왁물원에 애니메이션게시판을 열어야 한다고 생각합니다
+
+
 /**
  * @typedef TwitchChatOptions
  * @property {boolean} showFilteredChatView
@@ -557,14 +586,14 @@ function TwitchChatEmotePicker ({emotes, getTwitchApi, appendToChatBox, setOnMod
     for(let emote of emotes) {
 
       // generate new emote set
-      if (!grouped[emote.emote_set_id]) {
-        grouped[emote.emote_set_id] = {
-          name: emote.emote_set_id,
+      if (!grouped[emote.owner_id]) {
+        grouped[emote.owner_id] = {
+          name: emote.owner_id,
           owner_id: emote.owner_id,
           emotes: [],
         }
       }
-      const emoteSet = grouped[emote.emote_set_id];
+      const emoteSet = grouped[emote.owner_id];
 
       emoteSet.emotes.push(emote);
     }
@@ -582,7 +611,11 @@ function TwitchChatEmotePicker ({emotes, getTwitchApi, appendToChatBox, setOnMod
           emotes: recents,
         }
       ], 
-      ...Object.entries(groupedEmotes).reverse()
+      ...Object.entries(groupedEmotes)
+      .sort((a, b) => (
+        (parseInt(a[0]) - (console.log(a[1].emotes?.find(em => ['subscriptions', 'follower'].includes(em.emote_type))),a[1].emotes?.find(em => ['subscriptions', 'follower'].includes(em.emote_type)) ? 10000000000 : 0)) - 
+        (parseInt(b[0]) - (b[1].emotes?.find(em => ['subscriptions', 'follower'].includes(em.emote_type)) ? 10000000000 : 0))
+      ))//.reverse()
     ].map(([emoteSetId, emoteSet]) => <TwitchChatEmoteSet emoteSet={emoteSet} getTwitchApi={getTwitchApi} appendToChatBox={appendToChatBox} />);
 
   return (

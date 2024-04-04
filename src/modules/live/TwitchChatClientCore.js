@@ -47,11 +47,13 @@ class TwitchChatClientCore {
   static LOGINED    = 2;
   
   constructor({
-    clientId, channelName,
+    clientId, channelName, ircServer = 'wss://irc-ws.chat.twitch.tv',
     onChangeOAuthState, onChangeIRCState, onUpdateEmoteSet, onChat
   }) {
     this.clientId = clientId || '';
     this.channelName = channelName || '';
+    this.ircServer = ircServer;
+    this.hostname = this.ircServer === 'wss://irc-ws.chat.twitch.tv' ? 'tmi.twitch.tv' : this.ircServer.replace('wss://', '').replace(/:\d+$/, '');
     
     this.maxChatCount = 1000;
     /**
@@ -111,7 +113,7 @@ class TwitchChatClientCore {
    * Create a WebSocket to communicate with Twitch Chat Server.
    */
   connectTwitchIRC = () => {
-    this.twitchIRC = new WebSocket('wss://irc-ws.chat.twitch.tv:443');
+    this.twitchIRC = new WebSocket(this.ircServer);
 
     // bind event handler
     this.twitchIRC.onopen    = this.onOpen;
@@ -120,7 +122,7 @@ class TwitchChatClientCore {
     this.twitchIRC.onerror   = this.onError;
 
     // start loop pingpong
-    this.loopPingPong = setInterval(() => this.sendMessage('PING :tmi.twitch.tv'), 300*1000);
+    this.loopPingPong = setInterval(() => this.sendMessage(`PING :${this.hostname}`), 300*1000);
   }
 
   /**
@@ -223,6 +225,7 @@ class TwitchChatClientCore {
     if (process.env.NODE_ENV == 'development') { console.log('Twitch IRC WebSocket has sended a message.'); console.log(res); }
 
     res.map(async data => {
+      if (process.env.NODE_ENV == 'development') { console.log(data); }
       switch(this.IRCState) {
         case TwitchChatClientCore.CONNECTED:
           if (data[2] === '* :Login authentication failed') {
@@ -280,7 +283,7 @@ class TwitchChatClientCore {
         case TwitchChatClientCore.JOINED:
           this.handleChatMessage(data);
           if (data[0] === 'PING') {
-            this.sendMessage('PONG :tmi.twitch.tv');
+            this.sendMessage(`PONG :${this.hostname}`);
           }
           break;
       }
@@ -288,6 +291,7 @@ class TwitchChatClientCore {
   };
 
   onError = e => {
+    console.log(e);
     console.log('Cannot connect to Twitch chat server.');
     this.setIRCState(TwitchChatClientCore.FAILED);
   };
@@ -369,7 +373,7 @@ class TwitchChatClientCore {
   sendChat = msg => {
     if (this.IRCState === TwitchChatClientCore.JOINED) {
       this.sendMessage(`PRIVMSG #${this.channelName} :${msg}`);
-      const myUserLoginId = `:${this.myUserInfo.loginName}!${this.myUserInfo.loginName}@${this.myUserInfo.loginName}.tmi.twitch.tv`;
+      const myUserLoginId = `:${this.myUserInfo.loginName}!${this.myUserInfo.loginName}@${this.myUserInfo.loginName}.${this.hostname}`;
       if (msg != '') {
         this.receiveChat({
           tag: `${this.selfInfo};id=my-chat-${Math.random() * 9999999}`, 
@@ -411,9 +415,12 @@ class TwitchChatClientCore {
       }
     })
 
+    const regexMsg = new RegExp(`:(?<loginName>[\\w\\d-_]+)!\\k<loginName>@\\k<loginName>\\.${this.hostname.replace(/\./g, '\\.')}`);
+
     const content     = this.replaceEmote(msg, emotes);
     const displayName = tags['display-name'];
-    const userID      = id.match(/:(?<loginName>[\w\d-_]+)!\k<loginName>@\k<loginName>\.tmi\.twitch\.tv/).groups.loginName;
+    const userID      = id.match(regexMsg)?.groups.loginName;
+    //const userID      = id.match(/:(?<loginName>[\w\d-_]+)!\k<loginName>@\k<loginName>\.tmi\.twitch\.tv/).groups.loginName;
     const color       = tags.color;
     const badgeList   = badges.map(bg => {
       if (bg) {
@@ -470,6 +477,7 @@ class TwitchChatClientCore {
       const twitchApi = this.getTwitchApi();
       const emoteSetsData = await twitchApi.getEmoteSets(emoteSets);
       this.emoteSets = emoteSetsData;
+      console.log('emotesets', this.emoteSets.map(em => ({name: em.name, type: em.emote_type})))
       this.onUpdateEmoteSet(this.emoteSets);
     }
   }

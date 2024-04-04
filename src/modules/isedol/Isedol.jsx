@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 
-import * as func from '../../common/funtions';
-
-import CircleImgButton from '../../common/Components/Button/CircleImgButton';
 import LivePreview from './LivePreview';
 import ContentPanel from '../frontpage/ContentPanel';
 import IsedolYoutubeList from './IsedolYoutubeList';

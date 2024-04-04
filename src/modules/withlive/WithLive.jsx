@@ -17,6 +17,7 @@ import VideoContentPlayer from '../../common/Components/VideoContentPlayer/Video
 
 import SceneLayoutSettingPanel from './SceneLayoutSettingPanel';
 
+import { Waktaverse } from '../../common/constants';
 import * as func from '../../common/funtions';
 
 import useInputs from '../../hooks/useInputs';
@@ -36,7 +37,7 @@ const cx = classNames.bind(styles);
  * @typedef {object} LivePlayerItem
  * @property {string} name nickname
  * @property {string} id loginName
- * @property {'TWITCH'|'YOUTUBE'} broadcasterType broadcasterType
+ * @property {'TWITCH'|'YOUTUBE'|'AFREECA'} broadcasterType broadcasterType
  * @property {string} videoId video id
  * @property {number} pos
  * @property {number} volume 0~1
@@ -79,13 +80,64 @@ export default function WithLive ({front = false, location, history}) {
     hideChat: false,
   });
 
+  // url 파싱
+  const { search } = useLocation();
+  const { group } = useParams();
+
   //TODO: playerOptions 로 통합
   const [isOpenedSceneSettingPanel, setOpenedSceneSettingPanel] = useState(false);
 
   /** @type {[ViewLayoutOption, React.Dispatch<React.SetStateAction<ViewLayoutOption>>]} */
-  const [viewLayout, setViewLayout] = useState('main-side');
+  const [viewLayout, setViewLayout] = useState(() => {
+    const savedSceneSetting = func.getLocalStorage('everywak.withlive.sceneSetting');
+    if (savedSceneSetting && ['main-side', 'grid'].includes(savedSceneSetting.viewLayout) && viewLayout != savedSceneSetting.viewLayout) {
+      return savedSceneSetting.viewLayout;
+    }
+    return 'main-side';
+  });
   /** @type {[LivePlayerItem[], React.Dispatch<React.SetStateAction<LivePlayerItem[]>>]} */
   const [liveList, setLiveList] = useState([]);
+  useEffect(() => {
+    const members = [];
+    const savedSceneSetting = func.getLocalStorage('everywak.withlive.sceneSetting');
+    const mainChannelId = new URLSearchParams(search).get('main'); // 메인으로 올 스트림
+    if (savedSceneSetting) { // 최초 접속이 아니면
+      const filteredSavedLiveList = savedSceneSetting.liveList.filter(loginName => Waktaverse.find(member => member.login_name === loginName));
+      
+      if (mainChannelId && Waktaverse.find(member => member.login_name === mainChannelId)) { // 메인으로 고정할 채널 있으면 고정
+        members.push(mainChannelId, ...filteredSavedLiveList.filter(live => live !== mainChannelId));
+      } else {
+        members.push(...filteredSavedLiveList);
+      }
+    }
+    
+    if (members.length > 0 && members[0] !== '') {
+
+      /** @type {LivePlayerItem[]} */
+      const streams = members.slice(0, 8).map((id, i) => ({
+        name: Waktaverse.find(member => member.login_name === id).name,
+        broadcasterType: 'AFREECA',
+        videoId: null,
+        id,
+        pos: i,
+        volume: 1,
+      }));
+
+      // 메인으로 올 스트림 설정
+      if (mainChannelId && Waktaverse.find(member => member.login_name === mainChannelId)) {
+        const newMain = streams.find(live => live.id === mainChannelId); // 가운데로 올 플레이어
+        const oldMain = streams.find(live => live.pos === 0); // 가운데에 있던 플레이어
+        if (newMain && oldMain && oldMain !== newMain) {
+          const newMainPos = newMain.pos;
+          newMain.pos = 0;
+          oldMain.pos = newMainPos;
+        }
+      }
+      console.log('set LiveList 136')
+      setLiveList(streams);
+    }
+    //return [];
+  }, []);
 
   const { isLoading, data } = useQueryWaktaverseLive({ });
 
@@ -101,15 +153,27 @@ export default function WithLive ({front = false, location, history}) {
     }
   }, []);
 
-  const { search } = useLocation();
-  const { group } = useParams();
   useEffect(() => {
     if (isLoading || !data) {
       return () => {};
     }
 
     const prevMembers = liveList.map(live => live.id);
-    if (prevMembers.length > 0) {
+    const compareUpdatedStreams = (prevList, newList) => {
+      return newList.reduce((isDiff, newStream) => {
+        const prevStream = prevList.find(stream => stream.id === newStream.loginName);
+        if (!prevStream) { return isDiff; }
+        if (newStream.broadcaster !== prevStream.broadcasterType) {
+          return true;
+        }
+        if (newStream.broadcaster === prevStream.broadcasterType
+          && newStream.videoId !== prevStream.videoId) {
+          return true;
+        }
+        return isDiff;
+      }, false)
+    };
+    if (prevMembers.length > 0 && !compareUpdatedStreams(liveList, data.lives)) {
       return () => {};
     }
 
@@ -260,7 +324,9 @@ export default function WithLive ({front = false, location, history}) {
     <FloatingTarget key={i} className={`target_${i}`} /> 
   );
 
-  const mainChannelId = liveList.filter(v => v).find(live => live?.pos === 0)?.id;
+  const mainChannel = liveList.filter(v => v).find(live => live?.pos === 0);
+  const mainChannelId = mainChannel?.id;
+  const mainChannelPlatform = mainChannel?.broadcasterType.toLowerCase();
 
   return (<>
     {!expanded && 
@@ -293,7 +359,7 @@ export default function WithLive ({front = false, location, history}) {
       }
       {
         !playerOptions.hideChat &&
-        <TwitchChat channelId={mainChannelId} location={location} history={history} />
+        <TwitchChat channelId={mainChannelId} platform={mainChannelPlatform} location={location} history={history} />
       }
       <div className="wakPlayerList">
         {livePlayerList}
@@ -396,12 +462,35 @@ function FloatingWakPlayer({channelId, name, broadcasterType, videoId, target, e
 
     return className.includes('overlay') || ['buttonArea', 'mediaInfo', 'descArea', 'controls hideProgress'].includes(className);
   };
+  const getMediaInfo = (broadcasterType, channelId, videoId) => {
+    const result = ['twitchLive', 'woowakgood'];
+    if (broadcasterType == 'TWITCH') {
+      result[0] = 'twitchLive';
+      result[1] = channelId;
+    }
+    if (broadcasterType == 'YOUTUBE' && videoId) {
+      result[0] = 'youtubeLive';
+      result[1] = videoId;
+    }
+    if (broadcasterType == 'CHZZK' && videoId) {
+      result[0] = 'chzzkLive';
+      result[1] = videoId;
+    }
+    if (broadcasterType == 'AFREECA' && videoId) {
+      result[0] = 'afreecaLive';
+      result[1] = `${channelId}/${videoId}`;
+    }
+
+    return result;
+  }
+
+  const [mediaType, mediaId] = getMediaInfo(broadcasterType, channelId, videoId);
   
   return (
     <div className={cx('FloatingWakPlayer', {isSide: target !== 'target_0', isMoving: transitionLife > 0})} style={style}>
       <VideoContentPlayer 
         key={`wakplayer_${channelId}`} 
-        mediaType={broadcasterType == 'YOUTUBE' && videoId ? 'youtubeLive' : "twitchLive"} mediaId={broadcasterType == 'YOUTUBE' && videoId ? videoId : channelId} 
+        mediaType={mediaType} mediaId={mediaId} 
         playerSize={target === 'target_0' ? 'normal' : 'simple'} 
         useHotkey={target === 'target_0'}
         onClickOverlay={e => {isOverlayBackgroundArea(e.target.className) && onClick(channelId)}}

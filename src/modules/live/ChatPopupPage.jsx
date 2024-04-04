@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { domain, Waktaverse } from '../../common/constants';
-import StretchableContainer from '../../common/Components/StretchableContainer/StretchableContainer';
+
+import GAEvents from '../../common/GAEvents';
+import * as func from '../../common/funtions';
+import * as service from '../../services/Music';
 
 import TwitchChatClient from './TwitchChatClient';
 
-import styles from './TwitchChat.scss';
+import styles from './ChatPopupPage.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-function TwitchChat ({ channelId = process.env.REACT_APP_TWITCH_CHANNEL_NAME, platform = 'twitch', location, history }) {
+function ChatPopupPage({ location, history }) {
+  const { platform, channelId } = useParams();
 
   const getChannelName = (platform, channelId) => {
     const result = [];
@@ -42,18 +47,21 @@ function TwitchChat ({ channelId = process.env.REACT_APP_TWITCH_CHANNEL_NAME, pl
     return result.join('');
   };
 
+  let channelName = getChannelName(platform, channelId);
+  console.log(platform, channelId);
+  console.log('channelName', channelName);
+
   return (
-  <StretchableContainer className={cx('TwitchChat', {small: 380 < 220})}>
-    <TwitchChatClient 
-      clientId={process.env.REACT_APP_TWITCH_CLIENT_ID} 
-      channelName={getChannelName(platform, channelId)} 
+    <TwitchChatClient
+      className={cx('ChatPopupPage')}
+      clientId={process.env.REACT_APP_TWITCH_CLIENT_ID}
+      channelName={channelName}
       platform={platform}
       redirectUri={`https://${domain}${location.pathname}`}
       location={location}
       history={history}
     />
-  </StretchableContainer>
   );
 }
 
-export default TwitchChat;
+export default ChatPopupPage;

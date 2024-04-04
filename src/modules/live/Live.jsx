@@ -59,15 +59,22 @@ export default function Live ({location, history}) {
     }
   }, [opened, expanded]);
 
+  // TODO: 유튜브 라이브 대응
+  const broadcasterType = 'TWITCH';
+  const videoId = 'woowakgood';
   const channelId = 'woowakgood'; // process.env.REACT_APP_TWITCH_CHANNEL_NAME
 
+  const mediaType = broadcasterType == 'YOUTUBE' && videoId ? 'youtubeLive' : 
+    broadcasterType == 'TWITCH' && videoId ? "twitchLive" : 
+    broadcasterType == 'CHZZK' && videoId ? "chzzkLive" : "afreecaLive";
+  const mediaId = broadcasterType == 'YOUTUBE' && channelId ? channelId : channelId; 
   return (<>
     {!expanded &&
       <Header />
     }
     <div className={cx('Live', {expanded: expanded})}>
       <div className={cx('playerWrapper', {opened: opened, expanded: expanded})} ref={refPlayerWrapper}>
-        <VideoContentPlayer key="wakplayer" mediaType="twitchLive" mediaId={channelId} onPlayerOptionChanged={onPlayerOptionChangedHandler} /> 
+        <VideoContentPlayer key="wakplayer" mediaType={mediaType} mediaId={mediaId} onPlayerOptionChanged={onPlayerOptionChangedHandler} /> 
         <LiveSummary channelId={channelId} expanded={expanded} onChangeOverlayState={onPlayerOptionChangedHandler} />
         <BroadcasterPanel channelId={channelId} />
         <Footer />

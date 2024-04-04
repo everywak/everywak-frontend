@@ -38,6 +38,9 @@ export const Waktaverse = [
       id: 'jinjjawakgood',
       userId: '1620374642430189569',
     },
+    afreeca: {
+      channelId: 'ecvhao',
+    },
   },
   {
     name: '아이네',
@@ -55,6 +58,9 @@ export const Waktaverse = [
       replayUploads: 'UUBF6nBTgFN_xzrLMF9eiRhw',
     },
     profileImg: '/images/isedol/ine{size}.jpg',
+    afreeca: {
+      channelId: 'inehine',
+    },
   },
   {
     name: '징버거',
@@ -75,6 +81,9 @@ export const Waktaverse = [
     twitter: {
       id: 'jing_burger',
       userId: '886087131914944513',
+    },
+    afreeca: {
+      channelId: 'jingburger1',
     },
   },
   {
@@ -97,6 +106,9 @@ export const Waktaverse = [
       id: 'lilpa_official',
       userId: '1699854272576516096',
     },
+    afreeca: {
+      channelId: 'lilpa0309',
+    },
   },
   {
     name: '주르르',
@@ -117,6 +129,9 @@ export const Waktaverse = [
     twitter: {
       id: 'jururu_twitch',
       userId: '1341013061981806592',
+    },
+    afreeca: {
+      channelId: 'cotton1217',
     },
   },
   {
@@ -139,6 +154,9 @@ export const Waktaverse = [
       id: 'gosegu486385',
       userId: '1681727526706765825',
     },
+    afreeca: {
+      channelId: 'gosegu2',
+    },
   },
   {
     name: '비챤',
@@ -160,6 +178,9 @@ export const Waktaverse = [
       id: 'viichan6',
       userId: '1000725569892306945',
     },
+    afreeca: {
+      channelId: 'viichan6',
+    },
   },
   {
     name: '뢴트게늄',
@@ -168,6 +189,9 @@ export const Waktaverse = [
     twitch: {
       broadcasterId: '137881582',
     },
+    afreeca: {
+      channelId: 'jey422',
+    },
   },
   {
     name: '천양',
@@ -175,6 +199,9 @@ export const Waktaverse = [
     role: 'family',
     twitch: {
       broadcasterId: '132782743',
+    },
+    afreeca: {
+      channelId: '243000',
     },
   },
   {

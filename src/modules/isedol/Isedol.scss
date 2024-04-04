@@ -11,7 +11,7 @@
     padding: 30px 0 48px;
   }
 
-  .contentWrapper {
+  & > .contentWrapper {
     @include desktop {
       margin: 0 auto;
       max-width: 1080px;
@@ -112,6 +112,23 @@
 
     .ContentPanel {
       margin-top: 58px;
+      box-sizing: border-box;
+      .contentWrapper {
+        box-sizing: border-box;
+      }
+
+      .VideoList {
+        width: 100%;
+      }
+
+      .IsedolShortsList {
+        ul.list {
+      
+          .VideoItem {
+            --width: 160px;
+          }
+        }
+      }
     }
 
     .memberLine {

@@ -67,12 +67,16 @@ export default function WaktoonViewer({location, history}) {
           <div className="infoWrapper">
             <WaktoonInfo waktoon={target} />
             <div className="statList">
-              <CounterButton IconEnabled={StarRoundedIcon} IconDisabled={StarOutlineRoundedIcon} label="즐겨찾기" value={false} onClick={null} />
-              <CounterButton IconEnabled={NotificationsActiveRoundedIcon} IconDisabled={NotificationsNoneRoundedIcon} label="신작 알림" value={false} onClick={null} />
+              <div className="counterWrapper">
+                <CounterButton IconEnabled={StarRoundedIcon} IconDisabled={StarOutlineRoundedIcon} label="즐겨찾기" value={false} onClick={null} />
+                <CounterButton IconEnabled={NotificationsActiveRoundedIcon} IconDisabled={NotificationsNoneRoundedIcon} label="신작 알림" value={false} onClick={null} />
+              </div>
               <div className="line"></div>
-              <StatCounter waktoon={target} type="view" />
-              <StatCounter waktoon={target} type="up" />
-              <StatCounter waktoon={target} type="comment" />
+              <div className="counterWrapper">
+                <StatCounter waktoon={target} type="view" />
+                <StatCounter waktoon={target} type="up" />
+                <StatCounter waktoon={target} type="comment" />
+              </div>
             </div>
           </div>
         </header>

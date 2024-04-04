@@ -296,7 +296,7 @@ function CursorMemberItem({ loginName, nickname, profileImg }) {
 }
 
 function MemberItem({ className, loginName, nickname, profileImg, selected = false, broadcaster = undefined, onMouseDown = e => {}, _ref, ...rest }) {
-  return <div className={cx('MemberItem', className, { liveYoutube: broadcaster === 'YOUTUBE', liveTwitch: broadcaster === 'TWITCH', selected })} draggable="false" onMouseDown={onMouseDown} ref={_ref} {...rest}>
+  return <div className={cx('MemberItem', className, { liveYoutube: broadcaster === 'YOUTUBE', liveTwitch: broadcaster === 'TWITCH', liveChzzk: broadcaster === 'CHZZK', liveAfreeca: broadcaster === 'AFREECA', selected })} draggable="false" onMouseDown={onMouseDown} ref={_ref} {...rest}>
     <div className={styles.profileCircle}>
       <div className={styles.circleWrapper}>
         <CircleImg className={styles.CircleImg} src={profileImg} />

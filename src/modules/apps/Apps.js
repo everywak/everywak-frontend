@@ -67,15 +67,15 @@ class Apps extends Component {
         description: '한 해의 마무리를 장식하는 우왁굳 연공전',
         icon: <EmojiEventsRoundedIcon />,
         themeColor: '#4A3DDE',
-        href: '/wakcontest',
+        href: 'https://everywak.kr/wakcontest',
       },
       {
         key: 'apps_facewakdu',
         title: '왁두 닮은꼴 테스트',
         description: '당신의 왁두는 ‘이것’입니다',
-        icon: '/images/wakdu_logo_2x.png',
+        icon: '/images/wakdu_logo_1x.png',
         themeColor: '#D29317',
-        href: '/app/facewakdu',
+        href: 'https://everywak.kr/wakdu',
       },
       {
         key: 'apps_gunghap',
@@ -83,7 +83,7 @@ class Apps extends Component {
         description: '형과 우리 사이 몇 퍼센트..?',
         icon: <FavoriteRoundedIcon />,
         themeColor: '#3D9ADE',
-        href: '/app/gunghap',
+        href: 'https://everywak.kr/trend/gunghap.wak',
       },
       {
         key: 'apps_more',
@@ -101,7 +101,7 @@ class Apps extends Component {
     const list = apps.map(app => <AppListItem {...app} />);
     
     return (
-      <div className={cx('Apps', {'front': front}, {'singleColumn': columns === 1})}>
+      <div className={cx('Apps', {'front': front}, {'singleColumn': columns === 1})} style={{'--column': columns}}>
         <ul className="appList">
           {list}
         </ul>

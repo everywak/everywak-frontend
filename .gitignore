@@ -24,3 +24,5 @@ yarn-error.log*
 
 # ga events
 /src/common/GAEvents.js
+
+*.pem

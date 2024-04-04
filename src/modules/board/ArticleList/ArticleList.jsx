@@ -101,7 +101,7 @@ function MoreArticleButton({hide, onClick}) {
  * 게시글 아이템
  * 
  * @param {{ 
- *  articleId: string,
+ *  articleId: number,
  *  menuName: string,
  *  subject: string,
  *  nickname: string,
@@ -113,7 +113,7 @@ function MoreArticleButton({hide, onClick}) {
  *  header: boolean }} props 
  */
 function Article({ 
-  articleId = '-1',
+  articleId = -1,
   menuName = '게시판',
   subject = '제목',
   nickname = '작성자',
@@ -125,7 +125,7 @@ function Article({
   header = false }) {
 
   const href = (
-    !header ? 'https://cafe.naver.com/steamindiegame/' + articleId.replace(/[^0-9]/g, '') : ''
+    !header ? 'https://cafe.naver.com/steamindiegame/' + articleId.toString().replace(/[^0-9]/g, '') : ''
   );
   const thumb_area = 
   <a href={href} className="thumb_area" target="_blank" rel="noreferrer">

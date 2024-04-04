@@ -14,7 +14,7 @@ import { Desktop } from '../../common/MediaQuery';
 
 import ContentPanel from '../frontpage/ContentPanel';
 import BasicSearchBar from '../../common/Components/SearchBar/BasicSearchBar';
-
+import WaktoonBottomNavigationBar from './WaktoonBottomNavigationBar';
 
 import WaktoonBestList from './WaktoonBestList';
 import WaktoonGeneralList from './WaktoonGeneralList';
@@ -41,7 +41,13 @@ export default function Waktoon(props) {
       <div className="headerWrapper">
         <div className="headerContainer">
           <header>
-            <h1 className="title">왁굳 코믹스<span className="beta">βeta</span></h1>
+            <h1 className="title">
+              <EverywakLogo />
+              <div className="line"></div>
+              <a href="/waktoon" className="waktoonLogo">
+                왁굳 코믹스<span className="beta">βeta</span>
+              </a>
+            </h1>
             <aside className="category">
               <ul className="categoryList">
                 <li><Link to="/waktoon/best">베스트 웹툰</Link></li>
@@ -80,6 +86,7 @@ export default function Waktoon(props) {
           </ContentPanel>
         </section>
       </div>
+      <WaktoonBottomNavigationBar />
     </div>
   </>);
 }
