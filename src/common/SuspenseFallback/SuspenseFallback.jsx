@@ -8,7 +8,7 @@ import styles from './SuspenseFallback.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-export default function SuspenseFallback({location, history}) {
+export default function SuspenseFallback() {
 
   return (
     <div className={cx('SuspenseFallback')}>

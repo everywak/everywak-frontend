@@ -55,5 +55,16 @@
       "not dead",
       "not op_mini all"
     ]
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/node": "^20.12.4",
+    "@types/react": "^18.2.74",
+    "@types/react-dom": "^18.2.24",
+    "@types/react-responsive": "^8.0.8",
+    "@types/react-router": "^5.1.20",
+    "@types/react-router-dom": "^5.3.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.3"
   }
 }
