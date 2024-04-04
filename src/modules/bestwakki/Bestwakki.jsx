@@ -12,7 +12,7 @@ import BestwakkiBottomNavigator from './BestwakkiBottomNavigator';
 import Header from '../../common/Header/Header';
 
 import * as everywakApi from '../../services/everywak-api/index';
-import * as func from '../../common/funtions';
+import * as func from '../../common/functions';
 import { Desktop } from '../../common/MediaQuery';
 
 import styles from './Bestwakki.scss';

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Dropdown from '../../common/Components/Dropdown';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
-import * as func from '../../common/funtions';
+import * as func from '../../common/functions';
 
 import useInputs from '../../hooks/useInputs';
 

@@ -8,7 +8,7 @@ import Button from '../../common/Components/Button';
 import BestwakkiSearchPanel from './BestwakkiSearchPanel';
 import ScrollToTopButton from './ScrollToTopButton';
 
-import * as func from '../../common/funtions';
+import * as func from '../../common/functions';
 import { NotDesktop } from '../../common/MediaQuery';
 
 import styles from './BestwakkiBottomNavigator.scss';

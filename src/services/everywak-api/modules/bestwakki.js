@@ -1,5 +1,3 @@
-import * as func from '../../../common/funtions';
-
 import { request } from '../common';
 
 /**

@@ -15,7 +15,7 @@ import TabletRoundedIcon from '@mui/icons-material/TabletRounded';
 import FullscreenRoundedIcon from '@mui/icons-material/FullscreenRounded';
 import FullscreenExitRoundedIcon from '@mui/icons-material/FullscreenExitRounded';
 
-import { enableFullscreen, disableFullscreen } from '../../funtions';
+import { enableFullscreen, disableFullscreen } from '../../functions';
 
 import useInputs from '../../../hooks/useInputs';
 import useKeyboardHotkeys from '../../../hooks/useKeyboardHotkeys';

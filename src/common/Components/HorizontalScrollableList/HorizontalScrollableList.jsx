@@ -4,7 +4,7 @@ import TransparentButton from '../Button/TransparentButton';
 import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
 import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
 
-import * as func from '../../funtions';
+import * as func from '../../functions';
 
 import styles from './HorizontalScrollableList.scss';
 import classNames from 'classnames/bind';

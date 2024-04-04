@@ -8,7 +8,7 @@ import BroadcasterPanel from './BroadcasterPanel.jsx';
 import TwitchChat from './TwitchChat';
 import VideoContentPlayer from '../../common/Components/VideoContentPlayer/VideoContentPlayer.jsx';
 
-import * as func from '../../common/funtions';
+import * as func from '../../common/functions';
 
 import styles from './Live.scss';
 import classNames from 'classnames/bind';

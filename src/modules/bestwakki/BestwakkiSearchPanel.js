@@ -4,7 +4,7 @@ import Button from '../../common/Components/Button';
 import DateRange from './DateRange';
 import SearchBar from './SearchBar';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-import * as func from '../../common/funtions';
+import * as func from '../../common/functions';
 
 import styles from './BestwakkiSearchPanel.scss';
 import classNames from 'classnames/bind';

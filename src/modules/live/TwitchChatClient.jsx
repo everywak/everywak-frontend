@@ -13,7 +13,7 @@ import TransparentButton from '../../common/Components/Button/TransparentButton'
 import CircleImg from '../../common/Components/CircleImg';
 import CheckBox from '../../common/Components/CheckBox/CheckBox';
 
-import * as func from '../../common/funtions';
+import * as func from '../../common/functions';
 import { Waktaverse } from '../../common/constants';
 
 import styles from './TwitchChatClient.scss';

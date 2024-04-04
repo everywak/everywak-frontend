@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 
-import * as func from '../../common/funtions';
+import * as func from '../../common/functions';
 import TransparentButton from '../../common/Components/Button/TransparentButton';
 import CircleImg from '../../common/Components/CircleImg';
 import useQueryWaktaverseLive from '../../hooks/useQueryWaktaverseLive';

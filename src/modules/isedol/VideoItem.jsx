@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { formatNumberShort } from '../../common/funtions';
+import { formatNumberShort } from '../../common/functions';
 import BasicImage from '../../common/Components/Image/BasicImage';
 import CircleImg from '../../common/Components/CircleImg';
 

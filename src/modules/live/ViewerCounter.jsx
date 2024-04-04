@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 
-import { formatNumberWithCommas } from '../../common/funtions';
+import { formatNumberWithCommas } from '../../common/functions';
 
 import styles from './ViewerCounter.scss';
 

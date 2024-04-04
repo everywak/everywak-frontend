@@ -18,7 +18,7 @@ import VideoContentPlayer from '../../common/Components/VideoContentPlayer/Video
 import SceneLayoutSettingPanel from './SceneLayoutSettingPanel';
 
 import { Waktaverse } from '../../common/constants';
-import * as func from '../../common/funtions';
+import * as func from '../../common/functions';
 
 import useInputs from '../../hooks/useInputs';
 import useQueryWaktaverseLive from '../../hooks/useQueryWaktaverseLive';

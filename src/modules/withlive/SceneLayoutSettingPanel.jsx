@@ -11,7 +11,7 @@ import { Waktaverse } from '../../common/constants';
 
 import TransformAnimation from './TransformAnimation';
 
-import * as func from '../../common/funtions';
+import * as func from '../../common/functions';
 import useInputs from '../../hooks/useInputs';
 import useWindowEvent from '../../hooks/useWindowEvent';
 import useQueryWaktaverseLive from '../../hooks/useQueryWaktaverseLive';

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { domain, Waktaverse } from '../../common/constants';
 
 import GAEvents from '../../common/GAEvents';
-import * as func from '../../common/funtions';
+import * as func from '../../common/functions';
 import * as service from '../../services/Music';
 
 import TwitchChatClient from './TwitchChatClient';

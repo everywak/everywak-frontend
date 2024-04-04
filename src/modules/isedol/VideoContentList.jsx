@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { Waktaverse } from '../../common/constants';
-import * as func from '../../common/funtions';
+import * as func from '../../common/functions';
 import * as videoApi from '../../services/everywak.video';
 
 import HorizontalScrollableList from '../../common/Components/HorizontalScrollableList/HorizontalScrollableList';
