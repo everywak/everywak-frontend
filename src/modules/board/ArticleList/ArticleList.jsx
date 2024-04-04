@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
-import styled, { keyframes } from "styled-components";
+import { keyframes } from '@emotion/react';
+import styled from '@emotion/styled';
 import MediaQuery  from 'react-responsive';
 
 import SkeletonLoader from '../../../common/Components/SkeletonLoader';

@@ -31,13 +31,6 @@ function HorizontalScrollableList({ children, backgroundColor = '#ffffff', scrol
 
   const refContent = useRef();
 
-  useEffect(() => {
-    const loop = setInterval(loopScrollHandler, 100);
-    return () => {
-      clearInterval(loop);
-    }
-  }, [loopScrollHandler]);
-
   const loopScrollHandler = useCallback(() => {
 
     if (!refContent.current) { return; }
@@ -55,6 +48,13 @@ function HorizontalScrollableList({ children, backgroundColor = '#ffffff', scrol
       setScrollState(SCROLL_MIDDLE);
     }
   }, [scrollState]);
+  
+  useEffect(() => {
+    const loop = setInterval(loopScrollHandler, 100);
+    return () => {
+      clearInterval(loop);
+    }
+  }, [loopScrollHandler]);
   
   function onClickScroll(rot) {
     if (refContent.current) {

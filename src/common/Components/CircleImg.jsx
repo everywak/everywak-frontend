@@ -1,6 +1,7 @@
 import React from 'react';
 
-import styled, { css } from 'styled-components';
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 
 import styles from './CircleImg.scss';
 import classNames from 'classnames/bind';

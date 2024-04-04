@@ -2,15 +2,19 @@
   "name": "everywak-app",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "HTTPS=true SSL_CRT_FILE=fullchain.pem SSL_KEY_FILE=privkey.pem PORT=3000 react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@mui/icons-material": "^5.10.2",
+    "@mui/material": "^5.15.14",
     "@mui/styled-engine-sc": "^5.10.1",
     "@tanstack/react-query": "^4.36.1",
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.7.1",
     "axios": "^0.21.4",
     "classnames": "^2.2.6",
     "crypto-js": "^4.1.1",
@@ -27,15 +31,7 @@
     "react-transition-group": "^4.4.1",
     "react-twitch-embed": "^3.0.1",
     "react-youtube": "^10.1.0",
-    "sass": "^1.49.11",
-    "styled-components": "^5.2.1",
-    "web-vitals": "^1.1.0"
-  },
-  "scripts": {
-    "start": "HTTPS=true SSL_CRT_FILE=fullchain.pem SSL_KEY_FILE=privkey.pem react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "sass": "^1.49.11"
   },
   "eslintConfig": {
     "extends": [
