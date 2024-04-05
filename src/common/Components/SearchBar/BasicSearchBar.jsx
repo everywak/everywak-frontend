@@ -4,8 +4,6 @@ import Dropdown from '../Dropdown';
 import TransparentButton from '../Button/TransparentButton';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
-//import * as func from '../../funtions';
-
 import useInputs from '../../../hooks/useInputs';
 
 import styles from './BasicSearchBar.scss';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
-import * as func from '../../common/funtions';
+import * as func from '../../common/functions';
 import BasicButton from '../../common/Components/Button/BasicButton';
 import LinkButton from '../../common/Components/Button/LinkButton';
 import Spinner from '../../common/Components/Spinner';

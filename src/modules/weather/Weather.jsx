@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
 
-import * as func from '../../common/funtions';
 import Header from '../../common/Header/Header';
 import Footer from '../../common/Footer/Footer';
 import BasicImage from '../../common/Components/Image/BasicImage';

@@ -23,7 +23,7 @@ import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneR
 import NotificationsActiveRoundedIcon from '@mui/icons-material/NotificationsActiveRounded';
 import MenuBookRoundedIcon from '@mui/icons-material/MenuBookRounded';
 
-import * as func from '../../../common/funtions';
+import * as func from '../../../common/functions';
 import * as service from '../../../services/Waktoon';
 import * as userService from '../../../services/Users';
 

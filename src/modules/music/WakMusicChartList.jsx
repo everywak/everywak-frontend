@@ -4,8 +4,6 @@ import { Waktaverse } from '../../common/constants';
 
 import WakMusicChartItem from './WakMusicChartItem';
 
-import GAEvents from '../../common/GAEvents';
-import * as func from '../../common/funtions';
 import * as service from '../../services/Music';
 
 import styles from './WakMusicChartList.scss';

@@ -20,7 +20,7 @@ import WaktoonBestList from './WaktoonBestList';
 import WaktoonGeneralList from './WaktoonGeneralList';
 import WaktoonChartList from './WaktoonChartList';
 
-import * as func from '../../common/funtions';
+import * as func from '../../common/functions';
 import * as service from '../../services/Waktoon';
 import * as userService from '../../services/Users';
 

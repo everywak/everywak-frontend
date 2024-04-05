@@ -8,7 +8,6 @@ import PageSelect from '../../../common/Components/Select/PageSelect';
 
 import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
 
-import * as func from '../../../common/funtions';
 import * as service from '../../../services/Waktoon';
 
 import useInputs from '../../../hooks/useInputs';

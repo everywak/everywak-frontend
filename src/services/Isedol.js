@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import { Waktaverse } from '../common/constants';
-import * as func from '../common/funtions';
 
 import { api, requestApi, apiErrorHandler } from './everywak.common';
 

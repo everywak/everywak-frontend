@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-//import * as func from '../common/funtions';
-
 /**
  * @typedef WaktoonInfoQuery
  * @property {String} title

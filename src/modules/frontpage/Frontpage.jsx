@@ -5,7 +5,7 @@ import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded';
 import FlagRoundedIcon from '@mui/icons-material/FlagRounded';
 
-import * as func from '../../common/funtions';
+import * as func from '../../common/functions';
 import { Desktop, NotDesktop } from '../../common/MediaQuery';
 
 import Apps from '../apps/Apps';

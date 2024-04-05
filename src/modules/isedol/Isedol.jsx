@@ -10,7 +10,7 @@ import IsedolMemberList from './IsedolMemberList';
 import Header from '../../common/Header/Header';
 import CircleImgButton from '../../common/Components/Button/CircleImgButton';
 
-import * as func from '../../common/funtions';
+import * as func from '../../common/functions';
 
 import styles from './Isedol.scss';
 import classNames from 'classnames/bind';

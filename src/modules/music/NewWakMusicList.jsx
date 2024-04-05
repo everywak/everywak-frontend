@@ -4,7 +4,7 @@ import VideoItem from '../isedol/VideoItem';
 
 import HorizontalScrollableList from '../../common/Components/HorizontalScrollableList/HorizontalScrollableList';
 
-import * as func from '../../common/funtions';
+import * as func from '../../common/functions';
 import * as service from '../../services/Music';
 
 import GAEvents from '../../common/GAEvents';

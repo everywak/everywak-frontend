@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 
 import BasicButton from '../Button/BasicButton';
 
-//import * as func from '../../funtions';
-
 import styles from './BasicSelect.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);

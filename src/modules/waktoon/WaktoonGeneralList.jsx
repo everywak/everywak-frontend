@@ -1,11 +1,8 @@
 import React, { Component, useEffect, useState } from 'react';
 
-import * as func from '../../common/funtions';
 import * as service from '../../services/Waktoon';
 
 import WaktoonList from './WaktoonList';
-
-import GAEvents from '../../common/GAEvents';
 
 import styles from './WaktoonGeneralList.scss';
 import classNames from 'classnames/bind';

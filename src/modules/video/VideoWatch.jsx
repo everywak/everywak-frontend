@@ -5,7 +5,7 @@ import ArchiveRoundedIcon from '@mui/icons-material/ArchiveRounded';
 
 import * as clipApi from '../../services/Clip';
 import * as everywakApi from '../../services/everywak-api/index';
-import * as func from '../../common/funtions';
+import * as func from '../../common/functions';
 import { Waktaverse } from '../../common/constants';
 import { Desktop, NotDesktop } from '../../common/MediaQuery';
 

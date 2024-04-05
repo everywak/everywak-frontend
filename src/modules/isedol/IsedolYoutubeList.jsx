@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Waktaverse } from '../../common/constants';
-import * as func from '../../common/funtions';
+import * as func from '../../common/functions';
 import * as service from '../../services/Isedol';
 import * as videoApi from '../../services/everywak.video';
 

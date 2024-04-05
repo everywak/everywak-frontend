@@ -1,7 +1,5 @@
 import React from 'react';
 
-//import * as func from '../../funtions';
-
 import styles from './TextInput.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);

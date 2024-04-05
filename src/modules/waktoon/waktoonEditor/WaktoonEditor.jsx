@@ -18,7 +18,6 @@ import PhotoLibraryRoundedIcon from '@mui/icons-material/PhotoLibraryRounded';
 import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
 
 
-import * as func from '../../../common/funtions';
 import * as service from '../../../services/Waktoon';
 
 import WaktoonEpisodeList from './WaktoonEpisodeList';

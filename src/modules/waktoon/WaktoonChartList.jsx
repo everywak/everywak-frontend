@@ -2,14 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 import SkeletonLoader from '../../common/Components/SkeletonLoader';
 
-//import * as func from '../../common/funtions';
 import * as service from '../../services/Waktoon';
 
 import WaktoonList from './WaktoonList';
 import WaktoonChartItem from './WaktoonChartItem';
 import WaktoonChartLargeItem from './WaktoonChartLargeItem';
-
-//import GAEvents from '../../common/GAEvents';
 
 import styles from './WaktoonChartList.scss';
 import classNames from 'classnames/bind';

@@ -1,6 +1,5 @@
 import React, { Component, useEffect, useState } from 'react';
 
-import * as func from '../../../common/funtions';
 import * as service from '../../../services/Waktoon';
 
 import WaktoonList from '../WaktoonList';

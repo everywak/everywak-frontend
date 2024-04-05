@@ -4,7 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import BasicButton from '../../../common/Components/Button/BasicButton';
 import Spinner from '../../../common/Components/Spinner';
 
-import * as func from '../../../common/funtions';
+import * as func from '../../../common/functions';
 
 import styles from './WaktoonEpisodeViewer.scss';
 import classNames from 'classnames/bind';
