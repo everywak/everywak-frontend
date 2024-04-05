@@ -6,7 +6,7 @@ import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 
 import Button from 'common/Components/Button';
 import BestwakkiSearchPanel from './BestwakkiSearchPanel';
-import ScrollToTopButton from './ScrollToTopButton';
+import ScrollToTopButton from './components/ScrollToTopButton';
 
 import { NotDesktop } from 'common/MediaQuery';
 
