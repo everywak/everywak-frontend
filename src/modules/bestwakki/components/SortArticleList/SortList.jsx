@@ -2,8 +2,6 @@ import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import * as func from '../../common/functions';
-
 import styles from './SortList.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);

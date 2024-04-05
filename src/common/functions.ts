@@ -1,5 +1,3 @@
-import { RouterChildContext } from 'react-router-dom';
-
 /**
  * @description URL 파라미터를 object화하여 반환합니다.
  */
@@ -13,51 +11,6 @@ export function getURLParams(url: string) {
   });
 
   return param;
-}
-
-/**
- * @description Object를 URL Prarameter String으로 변환하여 반환합니다.
- */
-export function toURLParams(params: Record<string, string>) {
-  return new URLSearchParams(params).toString();
-}
-
-/**
- * @description URL Prarameter를 query로 설정합니다.
- */
-export function setURLParams({
-  history,
-  path,
-  query
-}: {
-  history: RouterChildContext['router']['history'];
-  path: string;
-  query: Record<string, string>;
-}) {
-  history.push({
-    pathname: path,
-    search: toURLParams(query)
-  });
-}
-
-/**
- * @description URL Prarameter에 query를 추가합니다.
- */
-export function addURLParams({
-  location,
-  history,
-  path,
-  query
-}: {
-  history: RouterChildContext['router']['history'];
-  location: { search: string };
-  path: string;
-  query: Record<string, string>;
-}) {
-  const { search } = location || {};
-  const params = { ...getURLParams(search), ...query };
-
-  setURLParams({ history, path, query: params });
 }
 
 /**
@@ -130,13 +83,6 @@ export function getRandomString(length = 16) {
     .fill(0)
     .map(v => char[Math.floor(Math.random() * (char.length - 1))])
     .join('');
-}
-
-/**
- * 지정한 url로 이동합니다.
- */
-export function redirectTo(url: string) {
-  window.location = url;
 }
 
 /**

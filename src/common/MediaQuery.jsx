@@ -6,7 +6,7 @@ import * as DeviceWidth from './constants';
 /**
  * 데스크탑 환경에서만 표시됩니다.
  * 
- * @param {{children: JSX.Element|String}} props 
+ * @param {{children: ReactNode}} props 
  * @returns {JSX.Element}
  */
 export function Desktop({ children }) {

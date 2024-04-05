@@ -10,7 +10,7 @@ import NotFoundPage  from './modules/notfoundpage/NotFoundPage';
 import Header from './common/Header/Header';
 import Footer from './common/Footer/Footer';
 import Frontpage from './modules/frontpage/Frontpage';
-import Bestwakki from './modules/bestwakki/Bestwakki';
+import Bestwakki from './modules/bestwakki/page';
 import Live from './modules/live/Live';
 
 const Weather = lazy(() => import('./modules/weather/Weather'));
@@ -41,30 +41,31 @@ export default function App(props) {
     <QueryClientProvider client={queryClient}>
     <div className="App">
       <ScrollToTop />
-      <Switch>
-        <Route exact path="/" component={Frontpage}/>
-        <Route path="/bestwakki" component={Bestwakki}/>
-        <Route path="/live/chat/:platform/:channelId" component={ChatPopupPage}/>
-        <Route path="/live" component={Live}/>
-        <Route path="/isedol" component={Isedol}/>
-        <Route path="/weather" component={Weather}/>
+      
+      <Routes>
+        <Route exact path="/" element={<Frontpage/>}/>
+        <Route path="/bestwakki" element={<Bestwakki/>}/>
+        <Route path="/live/chat/:platform/:channelId" element={<ChatPopupPage/>}/>
+        <Route path="/live" element={<Live/>}/>
+        <Route path="/isedol" element={<Isedol/>}/>
+        <Route path="/weather" element={<Weather/>}/>
         
-        <Route path="/video/watch/:videoId" component={VideoWatch}/>
-        <Route path="/video/watch" component={VideoWatch}/>
+        <Route path="/video/watch/:videoId" element={<VideoWatch/>}/>
+        <Route path="/video/watch" element={<VideoWatch/>}/>
 
-        <Route path="/waktoon/all" component={AllWaktoons}/>
-        <Route path="/waktoon/best" component={BestWaktoons}/>
-        <Route path="/waktoon/chart" component={WaktoonChart}/>
-        <Route path="/waktoon/episode/:articleId" component={WaktoonEpisodeViewer}/>
-        <Route path="/waktoon/:toonId/edit" component={WaktoonEditor}/>
-        <Route path="/waktoon/:toonId/episode/:episodeNumber" component={WaktoonViewer}/>
-        <Route path="/waktoon/:toonId" component={WaktoonViewer}/>
-        <Route path="/waktoon" component={Waktoon}/>
+        <Route path="/waktoon/all" element={<AllWaktoons/>}/>
+        <Route path="/waktoon/best" element={<BestWaktoons/>}/>
+        <Route path="/waktoon/chart" element={<WaktoonChart/>}/>
+        <Route path="/waktoon/episode/:articleId" element={<WaktoonEpisodeViewer/>}/>
+        <Route path="/waktoon/:toonId/edit" element={<WaktoonEditor/>}/>
+        <Route path="/waktoon/:toonId/episode/:episodeNumber" element={<WaktoonViewer/>}/>
+        <Route path="/waktoon/:toonId" element={<WaktoonViewer/>}/>
+        <Route path="/waktoon" element={<Waktoon/>}/>
         
-        <Route path="/withlive/:group" component={WithLive}/>
-        <Route path="/withlive" component={WithLive}/>
-        <Route path="*" component={NotFoundPage} />
-      </Switch>
+        <Route path="/withlive/:group" element={<WithLive />}/>
+        <Route path="/withlive" element={<WithLive />}/>
+        <Route path="*" element={<NotFoundPage />}/>
+      </Routes>
       <Footer />
     </div>
     </QueryClientProvider>

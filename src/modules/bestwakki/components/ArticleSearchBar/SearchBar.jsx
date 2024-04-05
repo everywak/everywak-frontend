@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-import Dropdown from '../../common/Components/Dropdown';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
-import * as func from '../../common/functions';
+import Dropdown from 'common/Components/Dropdown';
 
-import useInputs from '../../hooks/useInputs';
+import useInputs from 'hooks/useInputs';
 
 import styles from './SearchBar.scss';
 import classNames from 'classnames/bind';
@@ -44,6 +43,7 @@ function SearchBar({ defaultValue = {searchTarget: 'title', keyword: ''}, onSear
   }, [defaultValue]);
   
   function onClickSearch() {
+    console.log("onClickSearch", value)
     onSearch(value);
   }
 

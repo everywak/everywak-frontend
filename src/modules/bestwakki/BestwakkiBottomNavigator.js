@@ -4,12 +4,11 @@ import _ from 'lodash';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 
-import Button from '../../common/Components/Button';
+import Button from 'common/Components/Button';
 import BestwakkiSearchPanel from './BestwakkiSearchPanel';
 import ScrollToTopButton from './ScrollToTopButton';
 
-import * as func from '../../common/functions';
-import { NotDesktop } from '../../common/MediaQuery';
+import { NotDesktop } from 'common/MediaQuery';
 
 import styles from './BestwakkiBottomNavigator.scss';
 import classNames from 'classnames/bind';
@@ -109,7 +108,7 @@ class BestwakkiBottomNavigator extends Component {
           </div>
           <div className="right">
             <NotDesktop>
-              <BestwakkiSearchPanel searchFilter={searchFilter} onChangeDateRangeHandler={onChangeDateRangeHandler} updateSearchFilter={updateSearchFilter} />
+              <BestwakkiSearchPanel searchFilter={searchFilter} onChangeDateRangeHandler={onChangeDateRangeHandler} />
             </NotDesktop>
             <ScrollToTopButton show={showTop} />
             <Button className="btnSetting"

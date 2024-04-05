@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 
 import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
 
-import Header from '../../common/Header/Header';
-import Footer from '../../common/Footer/Footer';
-import BasicImage from '../../common/Components/Image/BasicImage';
+import * as func from 'common/functions';
+import Header from 'common/Header/Header';
+import Footer from 'common/Footer/Footer';
+import BasicImage from 'common/Components/Image/BasicImage';
 
 import SectionHeader from '../frontpage/SectionHeader';
 

@@ -19,7 +19,7 @@ const cx = classNames.bind(styles);
  * 
  * @param {{
  * data: Array, 
- * front: boolean, 
+ * front?: boolean, 
  * loaded: boolean, 
  * loadedLength: number, 
  * pagination: 'none'|'more'|'page', 
