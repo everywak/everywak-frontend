@@ -91,8 +91,6 @@ export function BestwakkiProvider(props: Props): JSX.Element {
     if (endAt !== -1 && endDate.toDateString() !== todayDate.toDateString()) {
       params.endAt = '' + Math.floor((endAt as number) / 1000);
     }
-    console.log(searchFilter);
-    console.log('gogo' + new URLSearchParams(params).toString());
     setSearchParams(params);
   };
 
