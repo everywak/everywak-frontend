@@ -13,7 +13,6 @@ import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar'
 import BasicSelect from '../../../common/Components/Select/BasicSelect';
 
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
-import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
 import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
@@ -30,6 +29,7 @@ import * as userService from '../../../services/Users';
 
 import useInputs from '../../../hooks/useInputs';
 
+import BackButton from '../BackButton';
 import WaktoonEpisodeList from './WaktoonEpisodeList';
 
 import styles from './WaktoonViewer.scss';
@@ -37,7 +37,7 @@ import classNames from 'classnames/bind';
 import SkeletonLoader from '../../../common/Components/SkeletonLoader';
 const cx = classNames.bind(styles);
 
-export default function WaktoonViewer({location, history}) {
+export default function WaktoonViewer() {
 
   const [target, setTarget] = useState({ isLoading: true });
 
@@ -62,9 +62,7 @@ export default function WaktoonViewer({location, history}) {
     <div className={cx('WaktoonViewer')}>
       <div className="headerWrapper">
         <header>
-          <Link className="btnBackToPage" onClick={e => history.goBack()}>
-            <KeyboardArrowLeftRoundedIcon fontSize="medium"/> 목록으로
-          </Link>
+          <BackButton />
           <div className="infoWrapper">
             <WaktoonInfo waktoon={target} />
             <div className="statList">

@@ -83,17 +83,16 @@ class TwitchChatClient extends Component {
     this.chatCore = new TwitchChatClientCore(coreOptions);
 
     // get oauth token from cookie
-    const { location, history } = this.props;
-    const token = new URLSearchParams(location.hash.replace('#', '')).get('access_token');
+    const token = new URLSearchParams(window.location.hash.replace('#', '')).get('access_token');
     this.chatCore.loadClientOAuth(token);
     
     // remove token from url hash
-    const { search, pathname } = location || {};
-    func.setURLParams({
-      history: history,
-      pathname,
-      query: func.getURLParams(search),
-    })
+    // const { search, pathname } = location || {};
+    // func.setURLParams({
+    //   history: history,
+    //   pathname,
+    //   query: func.getURLParams(search),
+    // })
   }
   
   cleanTwitchChatCore = () => {

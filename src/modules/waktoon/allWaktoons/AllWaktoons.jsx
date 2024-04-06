@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
 
 import Header from '../../../common/Header/Header';
 
@@ -7,20 +6,18 @@ import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar'
 import BasicSelect from '../../../common/Components/Select/BasicSelect';
 import PageSelect from '../../../common/Components/Select/PageSelect';
 
-import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
-
-import * as service from '../../../services/Waktoon';
 import { Desktop, NotDesktop } from '../../../common/MediaQuery';
 
 import useInputs from '../../../hooks/useInputs';
 
+import BackButton from '../BackButton';
 import AllWaktoonList from './AllWaktoonList';
 
 import styles from './AllWaktoons.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-export default function AllWaktoons({location, history}) {
+export default function AllWaktoons() {
 
   const defaultShowCount = 24;
   const [maxPage, setMaxPage] = useState(1);
@@ -52,9 +49,7 @@ export default function AllWaktoons({location, history}) {
     <div className={cx('AllWaktoons')}>
       <section className="content">
         <header>
-          <Link className="btnBack" onClick={e => history.goBack()}>
-            <KeyboardArrowLeftRoundedIcon fontSize="medium"/> 메인으로
-          </Link>
+          <BackButton />
           <h1 className="title">왁툰 모두 보기</h1>
           <span className="desc">왁물원의 모든 웹툰</span>
         </header>

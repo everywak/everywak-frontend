@@ -1,5 +1,6 @@
 import React, { lazy, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router';
+import { clarity } from 'react-microsoft-clarity';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import useGAPageTracking from './common/GAPageTracking';
@@ -7,7 +8,6 @@ import ScrollToTop from './common/ScrollToTop';
 
 import NotFoundPage  from './modules/notfoundpage/NotFoundPage';
 
-import Header from './common/Header/Header';
 import Footer from './common/Footer/Footer';
 import Frontpage from './modules/frontpage/Frontpage';
 import Bestwakki from './modules/bestwakki/page';
@@ -16,6 +16,7 @@ import Live from './modules/live/Live';
 const Weather = lazy(() => import('./modules/weather/Weather'));
 
 const VideoWatch = lazy(() => import('./modules/video/VideoWatch'));
+
 const WithLive = lazy(() => import('./modules/withlive/WithLive'));
 const ChatPopupPage = lazy(() => import('./modules/live/ChatPopupPage'));
 
@@ -31,10 +32,12 @@ const Isedol = lazy(() => import('./modules/isedol/Isedol'));
 
 const queryClient = new QueryClient();
 
-export default function App(props) {
+export default function App() {
 
   useGAPageTracking();
   useEffect(() => {
+    process.env.REACT_APP_CLARITY_ID &&
+    clarity.init(process.env.REACT_APP_CLARITY_ID);
   });
 
   return (
@@ -43,7 +46,7 @@ export default function App(props) {
       <ScrollToTop />
       
       <Routes>
-        <Route exact path="/" element={<Frontpage/>}/>
+        <Route path="/" element={<Frontpage/>}/>
         <Route path="/bestwakki" element={<Bestwakki/>}/>
         <Route path="/live/chat/:platform/:channelId" element={<ChatPopupPage/>}/>
         <Route path="/live" element={<Live/>}/>

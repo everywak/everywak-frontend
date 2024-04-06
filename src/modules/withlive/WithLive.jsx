@@ -67,7 +67,7 @@ function addClassLive() {
   }
 }
 
-export default function WithLive ({front = false, location, history}) {
+export default function WithLive ({front = false}) {
 
   //TODO: playerOptions 로 통합
   const [opened, setOpened] = useState(false);
@@ -359,7 +359,7 @@ export default function WithLive ({front = false, location, history}) {
       }
       {
         !playerOptions.hideChat &&
-        <TwitchChat channelId={mainChannelId} platform={mainChannelPlatform} location={location} history={history} />
+        <TwitchChat channelId={mainChannelId} platform={mainChannelPlatform} />
       }
       <div className="wakPlayerList">
         {livePlayerList}

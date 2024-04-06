@@ -8,7 +8,7 @@ const cx = classNames;
 /**
  * 투명 버튼
  * 
- * @param {{className?: string, onClick?: function, children?: JSX.Element|String}} props 
+ * @param {{className?: string, onClick?: function, children?: import('react').ReactNode}} props 
  */
 function TransparentButton(props) {
   

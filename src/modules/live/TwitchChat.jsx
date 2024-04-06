@@ -9,7 +9,7 @@ import styles from './TwitchChat.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-function TwitchChat ({ channelId = process.env.REACT_APP_TWITCH_CHANNEL_NAME, platform = 'twitch', location, history }) {
+function TwitchChat ({ channelId = process.env.REACT_APP_TWITCH_CHANNEL_NAME, platform = 'twitch' }) {
 
   const getChannelName = (platform, channelId) => {
     const result = [];
@@ -48,9 +48,7 @@ function TwitchChat ({ channelId = process.env.REACT_APP_TWITCH_CHANNEL_NAME, pl
       clientId={process.env.REACT_APP_TWITCH_CLIENT_ID} 
       channelName={getChannelName(platform, channelId)} 
       platform={platform}
-      redirectUri={`https://${domain}${location.pathname}`}
-      location={location}
-      history={history}
+      redirectUri={`https://${domain}${window.location.pathname}`}
     />
   </StretchableContainer>
   );

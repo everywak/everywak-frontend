@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import useInputs from '../../../hooks/useInputs';
 
@@ -10,9 +10,6 @@ import TextInput from '../../../common/Components/TextInput/TextInput';
 import BasicSelect from '../../../common/Components/Select/BasicSelect';
 import BasicImage from '../../../common/Components/Image/BasicImage';
 
-import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar';
-
-import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
 import FileUploadRoundedIcon from '@mui/icons-material/CloudUploadRounded';
 import PhotoLibraryRoundedIcon from '@mui/icons-material/PhotoLibraryRounded';
 import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
@@ -20,13 +17,14 @@ import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
 
 import * as service from '../../../services/Waktoon';
 
+import BackButton from '../BackButton';
 import WaktoonEpisodeList from './WaktoonEpisodeList';
 
 import styles from './WaktoonEditor.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-export default function WaktoonEditor({location, history}) {
+export default function WaktoonEditor() {
 
   const [target, setTarget] = useState({});
 
@@ -47,9 +45,7 @@ export default function WaktoonEditor({location, history}) {
     <div className={cx('WaktoonEditor')}>
       <div className="headerWrapper">
         <header>
-          <Link className="btnBackToPage" onClick={e => history.goBack()}>
-            <KeyboardArrowLeftRoundedIcon fontSize="medium"/> 목록으로
-          </Link>
+          <BackButton />
           <div className="infoWrapper">
             <h1 className="subject">웹툰 정보 수정</h1>
             <div className="actionList">

@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import { domain, Waktaverse } from '../../common/constants';
-
-import GAEvents from '../../common/GAEvents';
-import * as func from '../../common/functions';
-import * as service from '../../services/Music';
 
 import TwitchChatClient from './TwitchChatClient';
 
@@ -13,7 +9,7 @@ import styles from './ChatPopupPage.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-function ChatPopupPage({ location, history }) {
+function ChatPopupPage() {
   const { platform, channelId } = useParams();
 
   const getChannelName = (platform, channelId) => {
@@ -57,9 +53,7 @@ function ChatPopupPage({ location, history }) {
       clientId={process.env.REACT_APP_TWITCH_CLIENT_ID}
       channelName={channelName}
       platform={platform}
-      redirectUri={`https://${domain}${location.pathname}`}
-      location={location}
-      history={history}
+      redirectUri={`https://${domain}${window.location.pathname}`}
     />
   );
 }

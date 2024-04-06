@@ -22,7 +22,7 @@ function addClassLive() {
   }
 }
 
-export default function Live ({location, history}) {
+export default function Live () {
 
   const [opened, setOpened] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -79,7 +79,7 @@ export default function Live ({location, history}) {
         <BroadcasterPanel channelId={channelId} />
         <Footer />
       </div>
-      <TwitchChat location={location} history={history} />
+      <TwitchChat />
     </div>
   </>);
 }

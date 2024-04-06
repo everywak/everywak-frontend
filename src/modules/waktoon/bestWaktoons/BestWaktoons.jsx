@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Header from '../../../common/Header/Header';
 import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar';
 import BasicSelect from '../../../common/Components/Select/BasicSelect';
 import PageSelect from '../../../common/Components/Select/PageSelect';
 
-import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
-
-import * as service from '../../../services/Waktoon';
-
 import useInputs from '../../../hooks/useInputs';
 
+import BackButton from '../BackButton';
 import BestWaktoonList from './BestWaktoonList';
 import WaktoonEpisodeList from '../waktoonViewer/WaktoonEpisodeList';
 
@@ -19,7 +16,7 @@ import styles from './BestWaktoons.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-export default function BestWaktoons({location, history}) {
+export default function BestWaktoons() {
 
   const defaultShowCount = {
     series: 12,
@@ -55,9 +52,7 @@ export default function BestWaktoons({location, history}) {
     <div className={cx('BestWaktoons')}>
       <section className="content">
         <header>
-          <Link className="btnBack" onClick={e => history.goBack()}>
-            <KeyboardArrowLeftRoundedIcon fontSize="medium"/> 메인으로
-          </Link>
+          <BackButton />
           <h1 className="title">베스트 왁툰</h1>
           <span className="desc">왁물원이 뒤집어지고 전세계가 감탄한</span>
         </header>

@@ -22,7 +22,7 @@
       margin: 0 auto;
       gap: 16px 0;
   
-      & > .btnBackToPage {
+      & > .btnBack {
         align-items: center;
         color: $primary-color;
         display: flex;
@@ -472,7 +472,7 @@
         padding: 24px 16px 16px;
         gap: 8px;
     
-        & > .btnBackToPage {
+        & > .btnBack {
           font-size: 14px;
     
           svg {
