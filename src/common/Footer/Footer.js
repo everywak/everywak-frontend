@@ -13,9 +13,9 @@ class Footer extends Component {
       {
         id: 0,
         type: 'btn',
-        color: '#9147FF',
-        href: 'https://twitch.tv/woowakgood',
-        img: '/images/twitch_logo.svg',
+        color: 'rgb(83, 109, 188)',
+        href: 'https://bj.afreecatv.com/ecvhao',
+        img: '/images/afreecatv_logo.svg',
         label: '우왁굳 트위치',
         showLabel: false,
       },
@@ -74,8 +74,8 @@ class Footer extends Component {
         <div className="btns">{btnList}</div>
         <div className="links"><Link to="/contact">개발자 연락처</Link> | <Link to="/siteinfo">개인정보 처리방침 및 운영방침</Link></div>
         <div className="desc">에브리왁굳은 스트리머 우왁굳의 팬사이트이며<br/>
-        특정 플랫폼에 귀속되어 있지 않은 개인이 운영하는 사이트입니다.</div>
-        <div className="copyright">에브리왁굳 ⓒ 2020-2023. Build by 백수맛팬치. 모든 게시물의 권리는 원작자에게 있습니다.</div>
+        특정 플랫폼에 소속되어 있지 않은 개인이 운영하는 사이트입니다.</div>
+        <div className="copyright">에브리왁굳 ⓒ 2020-2024. Build by 백수맛팬치. 모든 컨텐츠의 권리는 원작자에게 있습니다.</div>
       </footer>
     );
   }
