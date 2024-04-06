@@ -79,7 +79,7 @@ class IsedolMemberList extends Component {
         name: mb.name,
         profileImg: dataFromWtvs.profileImg.replace('{size}', 480),
         social: {
-          twitch: dataFromWtvs.login_name,
+          afreecatv: dataFromWtvs.afreeca.channelId,
           youtube: dataFromWtvs.youtube.channelId,
           ...(mb.social),
         },

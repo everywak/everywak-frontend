@@ -21,7 +21,7 @@ function IsedolMemberItem({ name, profileImg, social }) {
         <CircleImg src={profileImg} alt={`${name} 프로필 이미지`} />
       </div>
       <ul className="social">
-        <IsedolMemberSocialItem type='twitch' socialId={social.twitch} />
+        <IsedolMemberSocialItem type='afreecatv' socialId={social.afreecatv} />
         <IsedolMemberSocialItem type='youtube' socialId={social.youtube} />
         <IsedolMemberSocialItem type='instagram' socialId={social.instagram} />
       </ul>
@@ -47,6 +47,10 @@ IsedolMemberItem.defaultProps = {
 function IsedolMemberSocialItem({ type, socialId }) {
 
   const socialType = {
+    afreecatv: {
+      bg: '/images/afreecatv_logo.svg',
+      url: 'https://bj.afreecatv.com/{id}',
+    },
     twitch: {
       bg: '/images/twitch_logo.svg',
       url: 'https://twitch.tv/{id}',
@@ -65,6 +69,7 @@ function IsedolMemberSocialItem({ type, socialId }) {
   const href = url.replace('{id}', socialId);
 
   const className = {
+    afreecatv: type == 'afreecatv',
     twitch: type == 'twitch',
     youtube: type == 'youtube',
     instagram: type == 'instagram',

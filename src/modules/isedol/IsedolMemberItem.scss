@@ -24,7 +24,10 @@
     li.IsedolMemberSocialItem {
       width: 38px;
       height: 38px;
-
+      
+      &.afreecatv a.link {
+        background: $afreeca-light-color;
+      }
       &.twitch a.link {
         background: $twitch-color;
       }
