@@ -1,9 +1,8 @@
 import React from 'react';
 
-
 import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
 
-import Button from '../../../common/Components/Button';
+import Button from 'common/Components/Button';
 
 import styles from './ScrollToTopButton.module.scss';
 import classNames from 'classnames/bind';

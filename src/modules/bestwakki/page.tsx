@@ -56,12 +56,7 @@ function Bestwakki() {
             </div>
           </div>
         </div>
-        <NavigationBar
-          history={window.history}
-          searchFilter={searchFilter}
-          onChangeDateRangeHandler={onChangeDateRangeHandler}
-          updateSearchFilter={updateSearchFilter}
-        />
+        <NavigationBar />
         <PopularArticleList />
       </div>
     </BestwakkiProvider>
