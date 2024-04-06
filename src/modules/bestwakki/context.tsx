@@ -60,11 +60,40 @@ export function BestwakkiProvider(props: Props): JSX.Element {
 
   // searchParams filter 전달
   const [searchParams, setSearchParams] = useSearchParams();
-  const _orderBy = searchParams.get('orderBy') || 'time';
-  const _beginAt = parseInt(searchParams.get('beginAt') || '-1');
-  const _endAt = parseInt(searchParams.get('endAt') || '-1');
-  const _queryTxt = searchParams.get('queryTxt') || '';
-  const _queryTarget = searchParams.get('queryTarget') || 'title';
+  const parseSearchFilter = (searchParams: URLSearchParams): SearchFilter => {
+    const _orderBy = searchParams.get('orderBy') || 'time';
+    const _beginAt = parseInt(searchParams.get('beginAt') || '-1');
+    const _endAt = parseInt(searchParams.get('endAt') || '-1');
+    const _queryTxt = searchParams.get('queryTxt') || '';
+    const _queryTarget = searchParams.get('queryTarget') || 'title';
+
+    const searchFilter: SearchFilter = {
+      beginAt: !isNaN(_beginAt) && _beginAt !== -1 ? _beginAt * 1000 : -1,
+      endAt: !isNaN(_endAt) && _endAt !== -1 ? _endAt * 1000 : -1,
+      orderBy: 'time',
+      perPage: 30,
+      page: 1,
+      searchTarget: 'title',
+      keyword: ''
+    };
+
+    if (
+      _orderBy &&
+      ['time', 'time_oldest', 'up', 'comment', 'read'].includes(_orderBy)
+    ) {
+      searchFilter.orderBy = _orderBy as ListOrder;
+    }
+    if (_queryTxt) {
+      searchFilter.keyword = _queryTxt;
+    }
+    if (_queryTarget && ['title', 'author', 'board'].includes(_queryTarget)) {
+      searchFilter.searchTarget = _queryTarget as SearchTarget;
+    }
+
+    return searchFilter;
+  };
+
+  const searchFilter: SearchFilter = parseSearchFilter(searchParams);
 
   /**
    * 검색 필터 변경시 URLParams 반영
@@ -93,29 +122,6 @@ export function BestwakkiProvider(props: Props): JSX.Element {
     }
     setSearchParams(params);
   };
-
-  const searchFilter: SearchFilter = {
-    beginAt: !isNaN(_beginAt) && _beginAt !== -1 ? _beginAt * 1000 : -1,
-    endAt: !isNaN(_endAt) && _endAt !== -1 ? _endAt * 1000 : -1,
-    orderBy: 'time',
-    perPage: 30,
-    page: 1,
-    searchTarget: 'title',
-    keyword: ''
-  };
-
-  if (
-    _orderBy &&
-    ['time', 'time_oldest', 'up', 'comment', 'read'].includes(_orderBy)
-  ) {
-    searchFilter.orderBy = _orderBy as ListOrder;
-  }
-  if (_queryTxt) {
-    searchFilter.keyword = _queryTxt;
-  }
-  if (_queryTarget && ['title', 'author', 'board'].includes(_queryTarget)) {
-    searchFilter.searchTarget = _queryTarget as SearchTarget;
-  }
 
   const {
     isLoading,
