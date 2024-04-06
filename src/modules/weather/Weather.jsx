@@ -24,7 +24,7 @@ const cx = classNames.bind(styles);
  * @returns {JSX.Element}
  */
 function Weather(props) {
-  func.setBrowserTitle('이세계 일기예보');
+  func.setBrowserTitle('이세계 날씨');
 
   return (
     <div className="Weather">

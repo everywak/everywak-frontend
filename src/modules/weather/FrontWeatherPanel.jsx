@@ -89,7 +89,7 @@ function FrontWeatherPanel(props) {
 
   return (<>
     <Desktop>
-      <AsidePanel title="이세계 일기예보" description={updatedDateString} moreLink="/weather">
+      <AsidePanel title="이세계 날씨" description={updatedDateString} moreLink="/weather">
         <FrontWeatherList isLoading={isLoading} items={weatherInfo.OBIData} />
       </AsidePanel>
     </Desktop>
