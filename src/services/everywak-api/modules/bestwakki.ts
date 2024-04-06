@@ -86,12 +86,16 @@ const filterPopularArticlesParams = (query: SearchFilter) => {
   const queryTxt = query.keyword || _default.queryTxt;
 
   // 시작 날짜
-  const beginAt = Math.max(Math.floor(query.beginAt / 1000), _default.beginAt);
+  const beginAt = !isNaN(Math.floor(query.beginAt / 1000))
+    ? Math.max(Math.floor(query.beginAt / 1000), _default.beginAt)
+    : _default.beginAt;
 
   // 끝 날짜
   query.endAt = Math.floor(query.endAt / 1000) + 24 * 60 * 60 - 1;
   const endAt =
-    query.endAt >= beginAt && query.endAt <= _default.endAt
+    !isNaN(query.endAt) &&
+    query.endAt >= beginAt &&
+    query.endAt <= _default.endAt
       ? query.endAt
       : _default.endAt;
 
