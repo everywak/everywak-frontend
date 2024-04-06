@@ -303,6 +303,7 @@ function TwitchChatList({
   chatList = [], 
   options = {},
 }) {
+  const [autoScroll, setAutoScroll] = useState(true);
 
   const refList = useRef();
   useEffect(() => {
@@ -323,8 +324,6 @@ function TwitchChatList({
       });
     }
   }, [autoScroll]);
-
-  const [autoScroll, setAutoScroll] = useState(true);
 
   /**
    * Handle auto scroll
