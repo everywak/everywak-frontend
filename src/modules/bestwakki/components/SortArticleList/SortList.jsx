@@ -34,8 +34,7 @@ function SortList({name, value, onChange}) {
   const [prevValue, setPrevValue] = useState('time');
   const [HoverRect, setHoverRect] = useState('div');
 
-  const onClickItem = useCallback(e => {
-    const { value: newValue } = e.currentTarget.dataset;
+  const onClickItem = newValue => {
     if (value !== newValue) {
       setPrevValue(value);
     }
@@ -45,7 +44,7 @@ function SortList({name, value, onChange}) {
         value: newValue,
       }
     });
-  }, [value]);
+  };
 
   const refThis = useRef();
   const refPrevItem = useRef();
@@ -84,7 +83,7 @@ function SortList({name, value, onChange}) {
       key={`SortList_${item.value}`} 
       className={cx('sortItem', {selected: item.value === value})}
       data-value={item.value} 
-      onClick={onClickItem} 
+      onClick={() => onClickItem(item.value)} 
       ref={item.value === value ? 
       refSelectedItem : 
       item.value === prevValue ? 
