@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import BasicButton from '../../../common/Components/Button/BasicButton';
 import Spinner from '../../../common/Components/Spinner';
 
 import * as func from '../../../common/functions';
@@ -10,13 +9,14 @@ import styles from './WaktoonEpisodeViewer.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-export default function WaktoonEpisodeViewer({location, history}) {
+export default function WaktoonEpisodeViewer() {
 
   const { articleId } = useParams();
   func.setBrowserTitle(`왁툰 작품 - ${articleId}`);
   
+  const navigate = useNavigate()
   useEffect(() => {
-    setTimeout(() => func.redirectTo(`https://cafe.naver.com/steamindiegame/${articleId}`), 1000);
+    setTimeout(navigate, 1000, `https://cafe.naver.com/steamindiegame/${articleId}`);
   }, []);
 
   return (

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Switch, Link, useParams } from 'react-router-dom';
+import { Route, Routes } from 'react-router';
+import { Link, useParams } from 'react-router-dom';
 
 import Header from '../../../common/Header/Header';
 import CheckBox from '../../../common/Components/CheckBox/CheckBox';
@@ -82,10 +83,10 @@ export default function WaktoonViewer({location, history}) {
         </header>
       </div>
       <section className="content">
-        <Switch>
-          <Route path="/waktoon/:toonId/episode/:episodeNumber" children={<WaktoonEpisodeSlider parent={target} />}/>
-          <Route path="/waktoon/:toonId" children={<WaktoonEpisodeListWrapper target={target} />} />
-        </Switch>
+        <Routes>
+          <Route path="/waktoon/:toonId/episode/:episodeNumber" element={<WaktoonEpisodeSlider parent={target} />}/>
+          <Route path="/waktoon/:toonId" element={<WaktoonEpisodeListWrapper target={target} />} />
+        </Routes>
       </section>
     </div>
   </>);
