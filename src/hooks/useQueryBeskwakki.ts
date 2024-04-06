@@ -23,11 +23,11 @@ export default function useQueryBestwakki({
 
   return useInfiniteQuery<PopularArticlesResponse>({
     queryKey: ['getPopularArticles', searchFilter],
-    queryFn: ({ pageParam }) => fetch({ ...searchFilter, page: pageParam }),
-    getNextPageParam: (lastPage, allPosts): number => {
-      return allPosts[allPosts.length - 1].articleCount > 0
+    queryFn: ({ pageParam }) => fetch({ ...searchFilter, page: pageParam || 1 }),
+    getNextPageParam: (lastPage, allPosts): number | undefined => {
+      return allPosts[allPosts.length - 1]?.articleCount > 0
         ? lastPage.page + 1
-        : 1;
+        : undefined;
     },
     ...rest
   });
