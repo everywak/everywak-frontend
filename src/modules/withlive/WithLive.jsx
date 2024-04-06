@@ -90,7 +90,7 @@ export default function WithLive ({front = false}) {
   /** @type {[ViewLayoutOption, React.Dispatch<React.SetStateAction<ViewLayoutOption>>]} */
   const [viewLayout, setViewLayout] = useState(() => {
     const savedSceneSetting = func.getLocalStorage('everywak.withlive.sceneSetting');
-    if (savedSceneSetting && ['main-side', 'grid'].includes(savedSceneSetting.viewLayout) && viewLayout != savedSceneSetting.viewLayout) {
+    if (savedSceneSetting && ['main-side', 'grid'].includes(savedSceneSetting.viewLayout)) {
       return savedSceneSetting.viewLayout;
     }
     return 'main-side';
