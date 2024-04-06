@@ -5,16 +5,16 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 
 import Button from 'common/Components/Button';
-import BestwakkiSearchPanel from './BestwakkiSearchPanel';
-import ScrollToTopButton from './components/ScrollToTopButton';
+import BestwakkiSearchPanel from '../BestwakkiSearchPanel';
+import ScrollToTopButton from './ScrollToTopButton';
 
 import { NotDesktop } from 'common/MediaQuery';
 
-import styles from './BestwakkiBottomNavigator.scss';
+import styles from './NavigationBar.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-class BestwakkiBottomNavigator extends Component {
+class NavigationBar extends Component {
 
   static defaultProps = {
     searchFilter: null, 
@@ -93,7 +93,7 @@ class BestwakkiBottomNavigator extends Component {
     const { opened, showTop } = this.state;
     
     return (
-        <nav className={cx('BestwakkiBottomNavigator', {opened: opened})}>
+        <nav className={cx('NavigationBar', {opened: opened})}>
           <div className="left">
             <NotDesktop>
               <Button className="goHome"
@@ -123,4 +123,4 @@ class BestwakkiBottomNavigator extends Component {
   }
 }
 
-export default BestwakkiBottomNavigator;
+export default NavigationBar;

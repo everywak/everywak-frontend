@@ -10,7 +10,7 @@ import PopularArticleList from './components/PopularArticleList';
 import SortArticleList from './components/SortArticleList';
 import ArticleDateRange from './components/ArticleDateRange';
 import ArticleSearchBar from './components/ArticleSearchBar';
-import BestwakkiBottomNavigator from './BestwakkiBottomNavigator';
+import NavigationBar from './components/NavigationBar';
 import {
   BestwakkiProvider,
   useBestwakkiActions,
@@ -56,7 +56,7 @@ function Bestwakki() {
             </div>
           </div>
         </div>
-        <BestwakkiBottomNavigator
+        <NavigationBar
           history={window.history}
           searchFilter={searchFilter}
           onChangeDateRangeHandler={onChangeDateRangeHandler}
