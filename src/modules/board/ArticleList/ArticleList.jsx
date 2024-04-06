@@ -20,13 +20,13 @@ const cx = classNames.bind(styles);
  * @param {{
  * data: Array, 
  * front?: boolean, 
- * loaded: boolean, 
- * loadedLength: number, 
+ * isLoading: boolean, 
+ * hasNextPage?: boolean, 
  * pagination: 'none'|'more'|'page', 
  * onMore: function
  * responsiveMode: 'auto'|'mobile'|'desktop'}} props 
  */
-function ArticleList({data, front = false, loaded = false, pagination = 'more', loadedLength, onMore, responsiveMode = 'auto'}) {
+function ArticleList({data, front = false, isLoading = false, pagination = 'more', hasNextPage, onMore, responsiveMode = 'auto'}) {
 
   const responsiveLayoutMode = {
     resAuto:    responsiveMode != 'mobile' && responsiveMode != 'desktop', 
@@ -65,12 +65,12 @@ function ArticleList({data, front = false, loaded = false, pagination = 'more', 
       <ul className={cx('ArticleList', responsiveLayoutMode)}>
         <Article header={true} key={`articleItemHeader`} />
         {list}
-        {!loaded && <SkeletonLoader skeleton={skeleton} length={front ? 4 : 8} />}
+        {isLoading && <SkeletonLoader skeleton={skeleton} length={front ? 4 : 8} />}
         {
           pagination != 'none' &&
           <div className="pagination">
             <MoreArticleButton 
-              hide={!loaded || !loadedLength} 
+              hide={isLoading || !hasNextPage} 
               onClick={onMore} />
           </div>
         }

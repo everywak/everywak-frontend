@@ -4,13 +4,13 @@ import { useBestwakkiActions, useBestwakkiValue } from '../context';
 
 export default function PopularArticleList() {
   const { fetchNextPage } = useBestwakkiActions();
-  const { articles, hasNextPage, isLoading } = useBestwakkiValue();
+  const { articles, hasNextPage, isLoading, isFetchingNextPage } = useBestwakkiValue();
 
   return (
     <ArticleList
       data={articles}
-      loaded={!isLoading}
-      loadedLength={hasNextPage ? 1 : 0}
+      isLoading={isLoading || isFetchingNextPage}
+      hasNextPage={hasNextPage}
       pagination="more"
       onMore={fetchNextPage}
       responsiveMode="auto"
