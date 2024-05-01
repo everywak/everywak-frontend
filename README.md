@@ -1,6 +1,6 @@
-# Everywak
+# everywak-frontend
 
-ReactJS로 구현된 에브리왁굳 프론트엔드 소스
+ReactJS로 구현된 에브리왁굳 프론트엔드
 
 ## 에브리왁굳이란?
 
