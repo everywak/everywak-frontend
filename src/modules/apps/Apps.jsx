@@ -10,7 +10,7 @@ import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 
-import styles from './Apps.scss';
+import styles from './Apps.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
@@ -102,7 +102,7 @@ class Apps extends Component {
     
     return (
       <div className={cx('Apps', {'front': front}, {'singleColumn': columns === 1})} style={{'--column': columns}}>
-        <ul className="appList">
+        <ul className={styles.appList}>
           {list}
         </ul>
       </div>

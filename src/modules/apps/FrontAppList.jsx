@@ -8,7 +8,7 @@ import ArchiveRoundedIcon from '@mui/icons-material/ArchiveRounded';
 
 import AppListItem from './AppListItem';
 
-import styles from './FrontAppList.scss';
+import styles from './FrontAppList.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
@@ -66,7 +66,7 @@ function FrontAppList(props) {
   
   return (
     <div className={cx('FrontAppList')} style={{'--column': columns}}>
-      <ul className="appList">
+      <ul className={styles.appList}>
         {list}
       </ul>
     </div>

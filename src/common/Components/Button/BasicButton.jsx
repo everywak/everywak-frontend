@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from './Buttons.scss';
+import styles from './Buttons.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
@@ -26,7 +26,7 @@ function BasicButton(props) {
     <button className={cx("BasicButton", className, {hasRibbon: description, bottomRibbon, disabled})} onClick={onClick} {...rest} style={{background: background}} disabled={disabled}>
       {children}
       {description &&
-        <div className="description">{description}</div>
+        <div className={styles.description}>{description}</div>
       }
     </button>
   );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from './AppListItemIcon.scss';
+import styles from './AppListItemIcon.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
@@ -21,10 +21,10 @@ class AppListItemIcon extends Component {
     );
 
     return (
-      <div className="AppListItemIcon" style={{'--themeColor': themeColor}}>
-        <div className="bottomShadow"></div>
-        <div className="iconWrapper">
-          <div className="imgWrapper" style={{'--iconPadding': iconPadding}}>
+      <div className={styles.AppListItemIcon} style={{'--themeColor': themeColor}}>
+        <div className={styles.bottomShadow}></div>
+        <div className={styles.iconWrapper}>
+          <div className={styles.imgWrapper} style={{'--iconPadding': iconPadding}}>
             {icon}
           </div>
         </div>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import AppListItemIcon from './AppListItemIcon';
 
-import styles from './AppListItem.scss';
+import styles from './AppListItem.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
@@ -18,12 +18,12 @@ function AppListItem ({
 }) {
 
   const content = <>
-    <div className="thumbWrapper">
+    <div className={styles.thumbWrapper}>
       <AppListItemIcon src={icon} alt={title} iconPadding={iconPadding} themeColor={themeColor} />
     </div>
-    <div className="descWrapper">
-      <div className="title">{title}</div>
-      <div className="description">{description}</div>
+    <div className={styles.descWrapper}>
+      <div className={styles.title}>{title}</div>
+      <div className={styles.description}>{description}</div>
     </div>
   </>;
 

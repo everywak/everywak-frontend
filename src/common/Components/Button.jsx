@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from './Button.scss';
+import styles from './Button.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
@@ -32,7 +32,7 @@ class Button extends Component {
     return (
       <a className={cx("Button", className, btnSize)} href={href} onClick={e=> {if (onclick) {e.preventDefault();onclick(e);}}}>
         {iconSrc && 
-            <div className="icon" style={{background: iconBGColor}}>
+            <div className={styles.icon} style={{background: iconBGColor}}>
               {
                 typeof iconSrc === 'object' ?
                 iconSrc :
@@ -42,10 +42,10 @@ class Button extends Component {
         }
         {
           iconSrc && typeof iconSrc === 'object' &&
-          (!showLabel && label ? <i className="blind">{label}</i>  : '')
+          (!showLabel && label ? <i className={styles.blind}>{label}</i>  : '')
         }
         {showLabel && label && 
-          <div className="label" style={{background: labelBGColor, fontSize: labelSize}}>
+          <div className={styles.label} style={{background: labelBGColor, fontSize: labelSize}}>
             {label}
           </div>
         }
