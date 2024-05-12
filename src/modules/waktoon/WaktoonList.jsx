@@ -9,9 +9,8 @@ import { WaktoonItem } from './WaktoonItem';
 import ReactGA from 'react-ga';
 import GAEvents from '../../common/GAEvents';
 
-import styles from './WaktoonList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './WaktoonList.scss';
+import cx from 'classnames';
 
 function WaktoonList({
   className = '',

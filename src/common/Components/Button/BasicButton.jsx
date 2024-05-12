@@ -1,8 +1,7 @@
 import React from 'react';
 
-import styles from './Buttons.module.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './Buttons.scss';
+import cx from 'classnames';
 
 /**
  * 기본 버튼
@@ -26,7 +25,7 @@ function BasicButton(props) {
     <button className={cx("BasicButton", className, {hasRibbon: description, bottomRibbon, disabled})} onClick={onClick} {...rest} style={{background: background}} disabled={disabled}>
       {children}
       {description &&
-        <div className={styles.description}>{description}</div>
+        <div className="description">{description}</div>
       }
     </button>
   );

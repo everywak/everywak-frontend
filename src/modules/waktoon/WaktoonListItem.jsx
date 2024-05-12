@@ -6,9 +6,8 @@ import BasicImage from '../../common/Components/Image/BasicImage';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 
-import styles from './WaktoonListItem.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './WaktoonListItem.scss';
+import cx from 'classnames';
 
 const SECONDS_OF_DAY = 24 * 60 * 60;
 

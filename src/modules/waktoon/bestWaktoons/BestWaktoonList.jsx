@@ -7,9 +7,8 @@ import BestWaktoonItem from './BestWaktoonItem';
 
 //import GAEvents from '../../../common/GAEvents';
 
-import styles from './BestWaktoonList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './BestWaktoonList.scss';
+import cx from 'classnames';
 
 function formatWaktoonData(waktoonList) {
   return waktoonList.map(item => ({

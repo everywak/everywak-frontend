@@ -11,9 +11,8 @@ import CommentRoundedIcon from '@mui/icons-material/CommentRounded';
 import ArrowUpwardRoundedIcon from '@mui/icons-material/ArrowUpwardRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 
-import styles from './WaktoonChartLargeItem.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './WaktoonChartLargeItem.scss';
+import cx from 'classnames';
 
 const SECONDS_OF_DAY = 24 * 60 * 60;
 

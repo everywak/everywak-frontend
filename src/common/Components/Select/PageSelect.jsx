@@ -6,9 +6,8 @@ import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
 import FirstPageRoundedIcon from '@mui/icons-material/FirstPageRounded';
 import LastPageRoundedIcon from '@mui/icons-material/LastPageRounded';
 
-import styles from './PageSelect.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './PageSelect.scss';
+import cx from 'classnames';
 
 /**
  * Pagination용 Option

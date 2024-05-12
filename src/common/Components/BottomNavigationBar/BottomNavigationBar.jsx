@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import useWindowEvent from '../../../hooks/useWindowEvent';
 
-import styles from './BottomNavigationBar.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './BottomNavigationBar.scss';
+import cx from 'classnames';
 
 var prevScrollY = -1;
 

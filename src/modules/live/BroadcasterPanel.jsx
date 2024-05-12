@@ -8,9 +8,8 @@ import { panels, socialLogoImgSrc } from './broadcasterPanelData';
 import PredictionList from './PredictionList';
 import VideoContentList from '../isedol/VideoContentList';
 
-import styles from './BroadcasterPanel.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './BroadcasterPanel.scss';
+import cx from 'classnames';
 
 export default function BroadcasterPanel({ channelId }) {
 

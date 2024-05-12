@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 
 import AppListItemIcon from './AppListItemIcon';
 
-import styles from './AppListItem.module.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './AppListItem.scss';
+import cx from 'classnames/bind';
 
 function AppListItem ({
   title = '제목',
@@ -18,12 +17,12 @@ function AppListItem ({
 }) {
 
   const content = <>
-    <div className={styles.thumbWrapper}>
+    <div className="thumbWrapper">
       <AppListItemIcon src={icon} alt={title} iconPadding={iconPadding} themeColor={themeColor} />
     </div>
-    <div className={styles.descWrapper}>
-      <div className={styles.title}>{title}</div>
-      <div className={styles.description}>{description}</div>
+    <div className="descWrapper">
+      <div className="title">{title}</div>
+      <div className="description">{description}</div>
     </div>
   </>;
 

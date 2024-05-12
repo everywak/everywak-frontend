@@ -12,9 +12,8 @@ import CircleImgButton from '../../common/Components/Button/CircleImgButton';
 
 import * as func from '../../common/functions';
 
-import styles from './Isedol.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './Isedol.scss';
+import cx from 'classnames';
 
 function Isedol() {
   func.setBrowserTitle('이세계 아이돌');

@@ -8,9 +8,8 @@ import { useBestwakkiActions, useBestwakkiValue } from '../../context';
 import ArticleDateRange from '../ArticleDateRange';
 import SearchBar from '../ArticleSearchBar/SearchBar';
 
-import styles from './BestwakkiSearchPanel.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './BestwakkiSearchPanel.scss';
+import cx from 'classnames';
 
 function BestwakkiSearchPanel() {
   const [opened, setOpened] = useState(false);

@@ -6,9 +6,8 @@ import { Desktop, NotDesktop } from '../../common/MediaQuery';
 import { orderNickname } from './weather.common';
 import FrontWeatherItem from './FrontWeatherItem';
 
-import styles from './FrontWeatherList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './FrontWeatherList.scss';
+import cx from 'classnames';
 
 const skeleton = <FrontWeatherItem name="ㅇㅇㅇ" state="ㅇㅇㅇ" weather="sunny" isSkeleton />;
 

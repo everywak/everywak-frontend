@@ -4,9 +4,8 @@ import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRigh
 
 import BasicImage from '../../common/Components/Image/BasicImage';
 
-import styles from './WakMusicChartItem.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './WakMusicChartItem.scss';
+import cx from 'classnames';
 
 /**
  * 

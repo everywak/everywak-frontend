@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 import CircleImg from '../../common/Components/CircleImg';
 import CircleImgButton from '../../common/Components/Button/CircleImgButton';
 
-import styles from './IsedolMemberItem.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './IsedolMemberItem.scss';
+import cx from 'classnames';
 
 /**
  * 이세돌 멤버 프로필 아이콘

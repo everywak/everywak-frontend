@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 
 import SectionSubHeader from './SectionSubHeader';
 
-import styles from './ContentSubPanel.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './ContentSubPanel.scss';
+import cx from 'classnames';
 
 /**
  * ContentPanel 안에 들어가는 content sub panel

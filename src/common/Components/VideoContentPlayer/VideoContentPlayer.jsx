@@ -34,9 +34,8 @@ import YoutubeVideoModule from './modules/YoutubeVideoModule';
 import ChzzkLiveTempModule from './modules/ChzzkLiveTempModule';
 import AfreecaLiveModule from './modules/AfreecaLiveModule';
 
-import styles from './VideoContentPlayer.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './VideoContentPlayer.scss';
+import cx from 'classnames';
 
 const formatHMMSSString = seconds => (seconds >= 3600 ? `${parseInt(seconds / 3600)}:` : '') + `${parseInt(seconds / 60) % 60}:${('0' + parseInt(seconds % 60)).slice(-2)}`;
 

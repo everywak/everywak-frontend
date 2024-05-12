@@ -13,9 +13,8 @@ import useInputs from '../../../hooks/useInputs';
 import BackButton from '../BackButton';
 import AllWaktoonList from './AllWaktoonList';
 
-import styles from './AllWaktoons.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './AllWaktoons.scss';
+import cx from 'classnames';
 
 export default function AllWaktoons() {
 

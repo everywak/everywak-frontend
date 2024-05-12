@@ -6,9 +6,8 @@ import * as func from '../../functions';
 
 import SkeletonLoader from '../SkeletonLoader';
 
-import styles from './BasicImage.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './BasicImage.scss';
+import cx from 'classnames/bind';
 
 const skeleton = 
   <div className="skeleton">

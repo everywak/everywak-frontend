@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import styles from './CircleImg.scss';
+import styles from './CircleImg.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
@@ -30,7 +29,7 @@ function CircleImg(props) {
 
   return (
     <div className={cx('CircleImg', className)} {...rest}>
-        <Image src={src} alt={alt} objectFit={objectFit} padding={padding} draggable="false" onError={e => {e.target.src = '/images/blank.png'}} />
+      <Image src={src} alt={alt} objectFit={objectFit} padding={padding} draggable="false" onError={e => {e.target.src = '/images/blank.png'}} />
     </div>
   );
 

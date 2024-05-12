@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 
-import styles from './InputForm.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './InputForm.scss';
+import cx from 'classnames';
 
 /**
  * 

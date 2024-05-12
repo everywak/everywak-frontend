@@ -10,9 +10,8 @@ import useInputs from '../../../hooks/useInputs';
 import BackButton from '../BackButton';
 import WaktoonChartList from '../WaktoonChartList';
 
-import styles from './WaktoonChart.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './WaktoonChart.scss';
+import cx from 'classnames';
 
 export default function WaktoonChart() {
 

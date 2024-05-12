@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 
 import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
 
-import styles from './SectionSubHeader.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './SectionSubHeader.scss';
+import cx from 'classnames';
 
 /**
  * 섹션 내 서브 섹션의 헤더

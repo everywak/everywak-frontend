@@ -4,9 +4,8 @@ import { personalColor } from './weather.common';
 
 import BasicImage from '../../common/Components/Image/BasicImage';
 
-import styles from './TodayWeatherItem.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './TodayWeatherItem.scss';
+import cx from 'classnames';
 
 /**
  * 날씨 페이지 오늘 날씨 아이템

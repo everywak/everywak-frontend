@@ -3,8 +3,7 @@ import React from 'react';
 import LinkButton from './LinkButton';
 import CircleImg from '../CircleImg';
 
-import classNames from 'classnames/bind';
-const cx = classNames;
+import cx from 'classnames';
 
 /**
  * 원 이미지 버튼

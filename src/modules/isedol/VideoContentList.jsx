@@ -10,9 +10,8 @@ import VideoItem from './VideoItem';
 
 import GAEvents from '../../common/GAEvents';
 
-import styles from './VideoContentList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './VideoContentList.scss';
+import cx from 'classnames';
 
 /**
  * @typedef {object} VideoContentListProps

@@ -2,9 +2,8 @@ import React from 'react';
 
 import BasicImage from '../../common/Components/Image/BasicImage';
 
-import styles from './PrevWeatherItem.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './PrevWeatherItem.scss';
+import cx from 'classnames';
 
 /**
  * 최근 날씨 아이템

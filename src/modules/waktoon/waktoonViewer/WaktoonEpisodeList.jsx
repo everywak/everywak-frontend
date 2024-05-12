@@ -7,9 +7,8 @@ import { WaktoonItem, WaktoonEpisodeItem } from '../WaktoonItem';
 
 //import GAEvents from '../../../common/GAEvents';
 
-import styles from './WaktoonEpisodeList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './WaktoonEpisodeList.scss';
+import cx from 'classnames';
 
 function formatWaktoonEpisodeData(waktoonEpisodeList) {
   return waktoonEpisodeList.map(item => ({

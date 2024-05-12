@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 
 import BottomNavigationItemList from './BottomNavigationItemList';
 
-import styles from './BottomNavigationLinkList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './BottomNavigationLinkList.scss';
+import cx from 'classnames';
 
 /**
  * 하단 네비게이션 바에 들어가는 링크 리스트

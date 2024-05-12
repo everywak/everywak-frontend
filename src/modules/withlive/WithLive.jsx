@@ -27,9 +27,8 @@ import useWindowEvent from '../../hooks/useWindowEvent';
 import ReactGA from 'react-ga';
 import GAEvents from '../../common/GAEvents';
 
-import styles from './WithLive.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './WithLive.scss';
+import cx from 'classnames';
 
 /**
  * @typedef {'main-side'|'grid'} ViewLayoutOption

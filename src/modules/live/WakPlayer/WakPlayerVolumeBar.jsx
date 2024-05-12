@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
-import styles from './WakPlayerVolumeBar.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './WakPlayerVolumeBar.scss';
+import cx from 'classnames';
 
 class WakPlayerVolumeBar extends Component {
 

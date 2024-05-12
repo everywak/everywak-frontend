@@ -5,9 +5,8 @@ import TodayWeatherList from './TodayWeatherList';
 
 import * as service from '../../services/Isedol';
 
-import styles from './TodayWeatherSection.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './TodayWeatherSection.scss';
+import cx from 'classnames';
 
 /**
  * 날씨 페이지 오늘 날씨 영역

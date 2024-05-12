@@ -6,9 +6,8 @@ import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRigh
 
 import * as func from '../../functions';
 
-import styles from './HorizontalScrollableList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './HorizontalScrollableList.scss';
+import cx from 'classnames';
 
 const SCROLL_DISABLE = -1;
 const SCROLL_START = 0;

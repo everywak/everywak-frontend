@@ -10,9 +10,8 @@ import VideoContentPlayer from '../../common/Components/VideoContentPlayer/Video
 
 import * as func from '../../common/functions';
 
-import styles from './Live.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './Live.scss';
+import cx from 'classnames';
 
 function addClassLive() {
   if (document.querySelector('.App')) {
@@ -62,7 +61,7 @@ export default function Live () {
   // TODO: 유튜브 라이브 대응
   const broadcasterType = 'TWITCH';
   const videoId = 'woowakgood';
-  const channelId = 'woowakgood'; // process.env.REACT_APP_TWITCH_CHANNEL_NAME
+  const channelId = 'woowakgood'; // import.meta.env.VITE_TWITCH_CHANNEL_NAME
 
   const mediaType = broadcasterType == 'YOUTUBE' && videoId ? 'youtubeLive' : 
     broadcasterType == 'TWITCH' && videoId ? "twitchLive" : 

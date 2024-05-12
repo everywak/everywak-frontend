@@ -36,8 +36,8 @@ export default function App() {
 
   useGAPageTracking();
   useEffect(() => {
-    process.env.REACT_APP_CLARITY_ID &&
-    clarity.init(process.env.REACT_APP_CLARITY_ID);
+    import.meta.env.VITE_CLARITY_ID &&
+    clarity.init(import.meta.env.VITE_CLARITY_ID);
   });
 
   return (
@@ -61,7 +61,6 @@ export default function App() {
         <Route path="/waktoon/chart" element={<WaktoonChart/>}/>
         <Route path="/waktoon/episode/:articleId" element={<WaktoonEpisodeViewer/>}/>
         <Route path="/waktoon/:toonId/edit" element={<WaktoonEditor/>}/>
-        <Route path="/waktoon/:toonId/episode/:episodeNumber" element={<WaktoonViewer/>}/>
         <Route path="/waktoon/:toonId" element={<WaktoonViewer/>}/>
         <Route path="/waktoon" element={<Waktoon/>}/>
         

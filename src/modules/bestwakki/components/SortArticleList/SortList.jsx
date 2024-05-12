@@ -2,9 +2,8 @@ import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import styles from './SortList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './SortList.scss';
+import cx from 'classnames';
 
 const options = [
   {

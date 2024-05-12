@@ -5,9 +5,8 @@ import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRigh
 
 import SectionHeader from './SectionHeader';
 
-import styles from './AsidePanel.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './AsidePanel.scss';
+import cx from 'classnames';
 
 /**
  * Frontpage에 들어가는 aside panel

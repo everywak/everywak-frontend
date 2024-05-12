@@ -5,9 +5,8 @@ import TransparentButton from './Button/TransparentButton';
 import NavigateBeforeRoundedIcon from '@mui/icons-material/NavigateBeforeRounded';
 import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
 
-import styles from './DatePicker.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './DatePicker.scss';
+import cx from 'classnames';
 
 class DatePicker extends Component {
   static defaultProps = {

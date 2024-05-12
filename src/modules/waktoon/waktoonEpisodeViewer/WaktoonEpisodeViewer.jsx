@@ -5,9 +5,8 @@ import Spinner from '../../../common/Components/Spinner';
 
 import * as func from '../../../common/functions';
 
-import styles from './WaktoonEpisodeViewer.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './WaktoonEpisodeViewer.scss';
+import cx from 'classnames';
 
 export default function WaktoonEpisodeViewer() {
 

@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import styles from './ProgressBar.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './ProgressBar.scss';
+import cx from 'classnames';
 
 /**
  * 드래그시 변경값 전달

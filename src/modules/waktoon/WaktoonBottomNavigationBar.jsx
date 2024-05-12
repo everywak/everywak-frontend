@@ -10,9 +10,8 @@ import BottomNavigationLinkList from '../../common/Components/BottomNavigationBa
 
 import { NotDesktop } from '../../common/MediaQuery';
 
-import styles from './WaktoonBottomNavigationBar.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './WaktoonBottomNavigationBar.scss';
+import cx from 'classnames';
 
 const bottomNavigationList = [
   {

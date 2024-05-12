@@ -4,9 +4,8 @@ import * as predictionApi from '../../services/everywak.prediction';
 
 import PredictionItem from './PredictionItem';
 
-import styles from './PredictionList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './PredictionList.scss';
+import cx from 'classnames';
 
 function PredictionList({ channelId }) {
 

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import styles from './StreamTimer.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './StreamTimer.scss';
+import cx from 'classnames';
 
 export default function StreamTimer({startedTime = Date.now()}) {
   

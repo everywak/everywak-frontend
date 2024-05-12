@@ -7,9 +7,8 @@ import * as videoApi from '../../services/everywak.video';
 
 import VideoList from './VideoList';
 
-import styles from './IsedolYoutubeList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './IsedolYoutubeList.scss';
+import cx from 'classnames';
 
 class IsedolYoutubeList extends Component {
   static defaultProps = {

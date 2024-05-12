@@ -6,9 +6,8 @@ import { domain } from '../../common/constants';
 
 import { TwitchPlayer } from 'react-twitch-embed';
 
-import styles from './WakPlayer.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './WakPlayer.scss';
+import cx from 'classnames';
 
 class WakPlayer extends Component {
 

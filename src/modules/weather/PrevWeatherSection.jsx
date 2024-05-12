@@ -5,9 +5,8 @@ import PrevWeatherList from './PrevWeatherList';
 
 import * as service from '../../services/Isedol';
 
-import styles from './PrevWeatherSection.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './PrevWeatherSection.scss';
+import cx from 'classnames';
 
 /**
  * 최근 날씨 리스트 영역

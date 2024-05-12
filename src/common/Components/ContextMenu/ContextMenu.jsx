@@ -1,8 +1,7 @@
 import React from 'react';
 
-import styles from './ContextMenu.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './ContextMenu.scss';
+import cx from 'classnames';
 
 /**
  * @typedef {'tl'|'tr'|'lt'|'ld'|'dl'|'dr'|'rt'|'rd'} ContextMenuDirection

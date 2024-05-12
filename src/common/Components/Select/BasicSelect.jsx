@@ -2,9 +2,8 @@ import React, { useEffect } from 'react';
 
 import BasicButton from '../Button/BasicButton';
 
-import styles from './BasicSelect.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './BasicSelect.scss';
+import cx from 'classnames';
 
 /**
  * 탭 레이아웃의 Option

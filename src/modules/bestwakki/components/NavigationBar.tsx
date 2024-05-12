@@ -11,9 +11,8 @@ import Button from 'common/Components/Button';
 import BestwakkiSearchPanel from './NavigationBar/BestwakkiSearchPanel';
 import ScrollToTopButton from './NavigationBar/ScrollToTopButton';
 
-import styles from './NavigationBar.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './NavigationBar.scss';
+import cx from 'classnames';
 
 export default function NavigationBar() {
   const [isShowing, setShowing] = useState(true);

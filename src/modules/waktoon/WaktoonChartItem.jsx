@@ -10,9 +10,8 @@ import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import ArrowUpwardRoundedIcon from '@mui/icons-material/ArrowUpwardRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 
-import styles from './WaktoonChartItem.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './WaktoonChartItem.scss';
+import cx from 'classnames';
 
 const SECONDS_OF_DAY = 24 * 60 * 60;
 

@@ -16,9 +16,8 @@ import CircleImg from '../../common/Components/CircleImg';
 import ContentPanel from '../frontpage/ContentPanel';
 import RecommendClipList from './RecommendClipList';
 
-import styles from './VideoWatch.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './VideoWatch.scss';
+import cx from 'classnames';
 
 /**
  * 클립 페이지

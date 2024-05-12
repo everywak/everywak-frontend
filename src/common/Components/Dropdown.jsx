@@ -4,9 +4,8 @@ import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 
 import useWindowEvent from '../../hooks/useWindowEvent';
 
-import styles from './Dropdown.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './Dropdown.scss';
+import cx from 'classnames';
 
 /**
  * 드롭다운 메뉴

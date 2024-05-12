@@ -16,9 +16,8 @@ import CheckBox from '../../common/Components/CheckBox/CheckBox';
 import * as func from '../../common/functions';
 import { Waktaverse } from '../../common/constants';
 
-import styles from './TwitchChatClient.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './TwitchChatClient.scss';
+import cx from 'classnames';
 
 const waktaverseLoginNames = Waktaverse.map(member => member.login_name);
 

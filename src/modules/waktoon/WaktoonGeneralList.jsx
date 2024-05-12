@@ -4,10 +4,7 @@ import * as service from '../../services/Waktoon';
 
 import WaktoonList from './WaktoonList';
 
-import styles from './WaktoonGeneralList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
-
+import './WaktoonGeneralList.scss';
 
 const dummyList = [
   {

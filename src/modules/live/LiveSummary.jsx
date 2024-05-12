@@ -11,9 +11,8 @@ import useQueryWaktaverseLive from '../../hooks/useQueryWaktaverseLive';
 import StreamTimer from './StreamTimer';
 import ViewerCounter from './ViewerCounter';
 
-import styles from './LiveSummary.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './LiveSummary.scss';
+import cx from 'classnames';
 
 const liveOfflineByApiDown = {
   broadcaster: 'NONE',

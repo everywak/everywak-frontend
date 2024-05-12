@@ -1,8 +1,7 @@
 import React from 'react';
 
-import styles from './BottomNavigationItemList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './BottomNavigationItemList.scss';
+import cx from 'classnames';
 
 /**
  * 하단 네비게이션 바에 들어가는 아이템 리스트

@@ -2,11 +2,11 @@
   "name": "everywak-app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "start": "HTTPS=true SSL_CRT_FILE=fullchain.pem SSL_KEY_FILE=privkey.pem PORT=3000 react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite --port 3000 --host",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",
@@ -20,7 +20,6 @@
     "classnames": "^2.2.6",
     "crypto-js": "^4.1.1",
     "lodash": "^4.17.21",
-    "node-sass": "npm:sass@^1.49.11",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
@@ -29,34 +28,9 @@
     "react-responsive": "^8.2.0",
     "react-router": "^6.21.2",
     "react-router-dom": "^6.21.2",
-    "react-scripts": "^5.0.1",
     "react-transition-group": "^4.4.1",
     "react-twitch-embed": "^3.0.1",
-    "react-youtube": "^10.1.0",
-    "sass": "^1.49.11"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not ie 11",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version",
-      ">0.2%",
-      "not ie 11",
-      "not dead",
-      "not op_mini all"
-    ]
+    "react-youtube": "^10.1.0"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
@@ -66,7 +40,13 @@
     "@types/react-responsive": "^8.0.8",
     "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-react": "^4.2.1",
+    "sass": "^1.77.1",
+    "sass-loader": "^14.2.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "vite": "^5.2.11",
+    "vite-plugin-mkcert": "^1.17.5",
+    "vite-tsconfig-paths": "^4.3.2"
   }
 }

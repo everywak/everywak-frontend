@@ -9,9 +9,8 @@ import * as service from '../../services/Music';
 
 import GAEvents from '../../common/GAEvents';
 
-import styles from './NewWakMusicList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './NewWakMusicList.scss';
+import cx from 'classnames';
 
 const now = new Date();
 const lastWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - (now.getDay() + 1) % 7 - 7);

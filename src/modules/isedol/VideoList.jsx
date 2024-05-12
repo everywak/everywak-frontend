@@ -6,9 +6,8 @@ import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 
 import VideoItem from './VideoItem';
 
-import styles from './VideoList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './VideoList.scss';
+import cx from 'classnames';
 
 class VideoList extends Component {
   static defaultProps = {

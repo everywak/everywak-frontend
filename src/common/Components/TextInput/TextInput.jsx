@@ -1,8 +1,7 @@
 import React from 'react';
 
-import styles from './TextInput.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './TextInput.scss';
+import cx from 'classnames';
 
 /**
  * 문자열 입력 바

@@ -26,9 +26,8 @@ import * as userService from '../../services/Users';
 
 import { aesEncrypt } from '../../common/crypto';
 
-import styles from './Waktoon.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './Waktoon.scss';
+import cx from 'classnames';
 
 export default function Waktoon(props) {
   func.setBrowserTitle('왁굳코믹스');
@@ -212,7 +211,7 @@ function EverywakLoginArea(props) {
         </div> :
         <LinkButton className="btnLogin"
           target="_self"
-          href={`https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=${process.env.REACT_APP_BACKEND_TWITCH_CLIENT_ID}&redirect_uri=https://api.everywak.kr/auth/twitch/login&scope=&state=${stateStr}`}>
+          href={`https://id.twitch.tv/oauth2/authorize?response_type=code&client_id=${import.meta.env.VITE_BACKEND_TWITCH_CLIENT_ID}&redirect_uri=https://api.everywak.kr/auth/twitch/login&scope=&state=${stateStr}`}>
           <PersonRoundedIcon fontSize="default"/> 로그인
         </LinkButton>
       }

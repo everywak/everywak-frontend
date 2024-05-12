@@ -6,9 +6,8 @@ import Dropdown from 'common/Components/Dropdown';
 
 import useInputs from 'hooks/useInputs';
 
-import styles from './SearchBar.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './SearchBar.scss';
+import cx from 'classnames';
 
 function getRecommendKeyword() {
   const phTxtList = [

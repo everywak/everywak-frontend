@@ -7,9 +7,8 @@ import HorizontalScrollableList from '../../../common/Components/HorizontalScrol
 
 import WaktoonEpisodeList from '../waktoonViewer/WaktoonEpisodeList';
 
-import styles from './BestWaktoonItem.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './BestWaktoonItem.scss';
+import cx from 'classnames';
 
 const SECONDS_OF_DAY = 24 * 60 * 60;
 

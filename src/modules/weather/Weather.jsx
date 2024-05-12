@@ -13,9 +13,8 @@ import SectionHeader from '../frontpage/SectionHeader';
 import TodayWeatherSection from './TodayWeatherSection';
 import PrevWeatherSection from './PrevWeatherSection';
 
-import styles from './Weather.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './Weather.scss';
+import cx from 'classnames';
 
 /**
  * 날씨 페이지

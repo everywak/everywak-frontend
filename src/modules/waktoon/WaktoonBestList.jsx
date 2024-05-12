@@ -8,9 +8,8 @@ import { WaktoonBigItem } from './WaktoonItem';
 
 import GAEvents from '../../common/GAEvents';
 
-import styles from './WaktoonBestList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './WaktoonBestList.scss';
+import cx from 'classnames';
 
 const dummyList = [
   {

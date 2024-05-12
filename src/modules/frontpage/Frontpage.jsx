@@ -27,9 +27,8 @@ import WakMusicChartList from '../music/WakMusicChartList';
 
 import FrontAppList from '../apps/FrontAppList';
 
-import styles from './Frontpage.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './Frontpage.scss';
+import cx from 'classnames';
 
 function Frontpage() {
   func.setBrowserTitle('메인');

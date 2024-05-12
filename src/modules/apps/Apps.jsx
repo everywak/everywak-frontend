@@ -10,9 +10,8 @@ import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 
-import styles from './Apps.module.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './Apps.scss';
+import cx from 'classnames/bind';
 
 class Apps extends Component {
   static defaultProps = {
@@ -102,7 +101,7 @@ class Apps extends Component {
     
     return (
       <div className={cx('Apps', {'front': front}, {'singleColumn': columns === 1})} style={{'--column': columns}}>
-        <ul className={styles.appList}>
+        <ul className="appList">
           {list}
         </ul>
       </div>

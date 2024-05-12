@@ -9,9 +9,8 @@ import SectionHeader from '../frontpage/SectionHeader';
 import { MILLISECONDS_OF_DAY } from './weather.common';
 import FrontWeatherList from './FrontWeatherList';
 
-import styles from './FrontWeatherPanel.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './FrontWeatherPanel.scss';
+import cx from 'classnames';
 
 /**
  * 현재 시각을 기준으로 date의 상대시간을 출력합니다.

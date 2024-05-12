@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 
 import BasicImage from '../../common/Components/Image/BasicImage';
 
-import styles from './WaktoonItem.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './WaktoonItem.scss';
+import cx from 'classnames';
 
 const SECONDS_OF_DAY = 24 * 60 * 60;
 

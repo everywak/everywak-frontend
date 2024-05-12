@@ -6,9 +6,8 @@ import WakMusicChartItem from './WakMusicChartItem';
 
 import * as service from '../../services/Music';
 
-import styles from './WakMusicChartList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './WakMusicChartList.scss';
+import cx from 'classnames';
 
 function WakMusicChartList(props) {
   const [isLoading, setLoading] = useState(true);

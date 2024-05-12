@@ -1,5 +1,5 @@
 
-export const domain = process.env.REACT_APP_DOMAIN;
+export const domain = import.meta.env.VITE_DOMAIN;
 export const TOGGLE = -1;
 export const PORTRAIT = 0;
 export const LANDSCAPE = 1;

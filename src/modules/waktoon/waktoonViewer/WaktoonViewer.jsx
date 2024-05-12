@@ -11,6 +11,7 @@ import CircleImg from '../../../common/Components/CircleImg';
 
 import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar';
 import BasicSelect from '../../../common/Components/Select/BasicSelect';
+import SkeletonLoader from '../../../common/Components/SkeletonLoader';
 
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
@@ -32,10 +33,8 @@ import useInputs from '../../../hooks/useInputs';
 import BackButton from '../BackButton';
 import WaktoonEpisodeList from './WaktoonEpisodeList';
 
-import styles from './WaktoonViewer.scss';
-import classNames from 'classnames/bind';
-import SkeletonLoader from '../../../common/Components/SkeletonLoader';
-const cx = classNames.bind(styles);
+import './WaktoonViewer.scss';
+import cx from 'classnames/bind';
 
 export default function WaktoonViewer() {
 
@@ -81,10 +80,10 @@ export default function WaktoonViewer() {
         </header>
       </div>
       <section className="content">
-        <Routes>
-          <Route path="/waktoon/:toonId/episode/:episodeNumber" element={<WaktoonEpisodeSlider parent={target} />}/>
-          <Route path="/waktoon/:toonId" element={<WaktoonEpisodeListWrapper target={target} />} />
-        </Routes>
+        {/* <Routes> */}
+          {/* <Route path="/waktoon/:toonId/episode/:episodeNumber" element={<WaktoonEpisodeSlider parent={target} />}/> */}
+          <WaktoonEpisodeListWrapper target={target} />
+        {/* </Routes> */}
       </section>
     </div>
   </>);
@@ -223,6 +222,7 @@ const episodeItemSkeleton = <li className={cx('WaktoonItem', 'episode', 'skeleto
   </a>
 </li>;
 function WaktoonEpisodeListWrapper({ target }) {
+  console.log('asdflkasjhdfkajshdflkasjdhflkasjdhflsa')
   
   const [searchOptions, onChange, reset] = useInputs({orderBy: 'time', keyword: ''});
   

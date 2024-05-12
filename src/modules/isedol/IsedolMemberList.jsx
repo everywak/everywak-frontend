@@ -5,9 +5,8 @@ import { Waktaverse } from '../../common/constants';
 
 import IsedolMemberItem from './IsedolMemberItem';
 
-import styles from './IsedolMemberList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './IsedolMemberList.scss';
+import cx from 'classnames';
 
 class IsedolMemberList extends Component {
   static defaultProps = {

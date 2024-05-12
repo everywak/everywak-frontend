@@ -1,8 +1,6 @@
 import React from 'react';
 
-import styles from './SkeletonLoader.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './SkeletonLoader.scss';
 
 /**
  * 스켈레톤 로더

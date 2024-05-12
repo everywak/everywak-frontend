@@ -6,9 +6,8 @@ import TodayWeatherItem from './TodayWeatherItem';
 import SkeletonLoader from '../../common/Components/SkeletonLoader';
 import * as service from '../../services/Isedol';
 
-import styles from './TodayWeatherList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './TodayWeatherList.scss';
+import cx from 'classnames';
 
 const skeleton = <TodayWeatherItem name="ㅇㅇㅇ" state="ㅇㅇㅇ" weather="sunny" isSkeleton />;
 

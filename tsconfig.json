@@ -14,7 +14,13 @@
     "strict": true,
 
     "isolatedModules": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    
+    "paths": {
+      "@common/*": ["src/common/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@services/*": ["src/services/*"],
+    }
   },
   "include": ["src"]
 }

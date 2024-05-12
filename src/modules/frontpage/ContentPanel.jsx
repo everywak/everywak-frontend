@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 
 import SectionHeader from './SectionHeader';
 
-import styles from './ContentPanel.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './ContentPanel.scss';
+import cx from 'classnames';
 
 /**
  * Frontpage에 들어가는 content panel

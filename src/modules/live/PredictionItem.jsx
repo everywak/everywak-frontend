@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import styles from './PredictionItem.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './PredictionItem.scss';
+import cx from 'classnames';
 
 const numberWithCommas = x => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 

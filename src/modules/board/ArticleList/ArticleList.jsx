@@ -10,9 +10,8 @@ import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import CommentRoundedIcon from '@mui/icons-material/CommentRounded';
 
-import styles from './ArticleList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './ArticleList.scss';
+import cx from 'classnames';
 
 /**
  * 게시글 목록을 표시하는 리스트

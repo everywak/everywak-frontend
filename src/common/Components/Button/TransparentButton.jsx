@@ -2,8 +2,7 @@ import React from 'react';
 
 import BasicButton from './BasicButton';
 
-import classNames from 'classnames/bind';
-const cx = classNames;
+import cx from 'classnames';
 
 /**
  * 투명 버튼

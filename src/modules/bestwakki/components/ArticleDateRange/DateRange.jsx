@@ -5,9 +5,8 @@ import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
 import { Desktop, NotDesktop } from 'common/MediaQuery';
 import DatePicker from 'common/Components/DatePicker';
 
-import styles from './DateRange.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './DateRange.scss';
+import cx from 'classnames';
 
 const RANGE_MAX = -1;
 

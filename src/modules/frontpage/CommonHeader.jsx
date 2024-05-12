@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 
 import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
 
-import styles from './CommonHeader.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './CommonHeader.scss';
+import cx from 'classnames/bind';
 
 /**
  * @typedef LinkItem

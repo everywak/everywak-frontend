@@ -2,9 +2,8 @@ import React from 'react';
 
 import BasicImage from '../../common/Components/Image/BasicImage';
 
-import styles from './FrontWeatherItem.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './FrontWeatherItem.scss';
+import cx from 'classnames';
 
 /**
  * Frontpage에 표시되는 날씨 아이템

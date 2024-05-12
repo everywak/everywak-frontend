@@ -8,9 +8,8 @@ import WaktoonList from './WaktoonList';
 import WaktoonChartItem from './WaktoonChartItem';
 import WaktoonChartLargeItem from './WaktoonChartLargeItem';
 
-import styles from './WaktoonChartList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './WaktoonChartList.scss';
+import cx from 'classnames';
 
 /**
  * @typedef WaktoonChartItemData

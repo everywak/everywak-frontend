@@ -7,9 +7,8 @@ import PrevWeatherItem from './PrevWeatherItem';
 import SkeletonLoader from '../../common/Components/SkeletonLoader';
 import * as service from '../../services/Isedol';
 
-import styles from './PrevWeatherList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './PrevWeatherList.scss';
+import cx from 'classnames';
 
 const skeleton = <PrevWeatherItem weather="sunny" isSkeleton />;
 

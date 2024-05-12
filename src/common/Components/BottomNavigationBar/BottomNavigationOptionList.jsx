@@ -2,9 +2,8 @@ import React from 'react';
 
 import BottomNavigationItemList from './BottomNavigationItemList';
 
-import styles from './BottomNavigationOptionList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './BottomNavigationOptionList.scss';
+import cx from 'classnames';
 
 /**
  * 하단 네비게이션 바에 들어가는 옵션 리스트

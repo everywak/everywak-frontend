@@ -189,11 +189,11 @@ export async function getWaktoonEpisodes(params) {
     const output = await requestApi('/waktoon/WaktoonEpisode/list', params);
 
     if (output.status === 200) {
+      output.result.waktoonEpisodeList.forEach(item => item.title = item.title.replace(/&lt;/g, '<').replace(/&gt;/g, '>'));
       return output;
     }
     
   } catch(output) {
-    output.result.waktoonEpisodeList.forEach(item => item.title = item.title.replace(/&lt;/g, '<').replace(/&gt;/g, '>'));
     return apiErrorHandler(output);
   }
 }

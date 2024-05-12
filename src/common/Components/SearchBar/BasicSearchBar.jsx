@@ -6,9 +6,8 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
 import useInputs from '../../../hooks/useInputs';
 
-import styles from './BasicSearchBar.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './BasicSearchBar.scss';
+import cx from 'classnames';
 
 /**
  * 검색 바

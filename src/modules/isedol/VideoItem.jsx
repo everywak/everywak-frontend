@@ -5,9 +5,8 @@ import { formatNumberShort } from '../../common/functions';
 import BasicImage from '../../common/Components/Image/BasicImage';
 import CircleImg from '../../common/Components/CircleImg';
 
-import styles from './VideoItem.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './VideoItem.scss';
+import cx from 'classnames';
 
 function VideoItem(props) {
 

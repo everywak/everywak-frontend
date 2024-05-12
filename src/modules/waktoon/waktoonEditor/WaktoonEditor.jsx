@@ -20,9 +20,8 @@ import * as service from '../../../services/Waktoon';
 import BackButton from '../BackButton';
 import WaktoonEpisodeList from './WaktoonEpisodeList';
 
-import styles from './WaktoonEditor.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './WaktoonEditor.scss';
+import cx from 'classnames';
 
 export default function WaktoonEditor() {
 

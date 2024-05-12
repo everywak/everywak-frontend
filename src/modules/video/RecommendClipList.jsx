@@ -6,9 +6,8 @@ import * as service from '../../services/Isedol';
 
 import VideoList from '../isedol/VideoList';
 
-import styles from './RecommendClipList.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './RecommendClipList.scss';
+import cx from 'classnames';
 
 function RecommendClipList({ clipInfo }) {
 

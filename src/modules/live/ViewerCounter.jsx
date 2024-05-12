@@ -3,7 +3,7 @@ import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 
 import { formatNumberWithCommas } from '../../common/functions';
 
-import styles from './ViewerCounter.scss';
+import './ViewerCounter.scss';
 
 export default function ViewerCounter({viewer = 0}) {
 

@@ -12,9 +12,8 @@ import BackButton from '../BackButton';
 import BestWaktoonList from './BestWaktoonList';
 import WaktoonEpisodeList from '../waktoonViewer/WaktoonEpisodeList';
 
-import styles from './BestWaktoons.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import './BestWaktoons.scss';
+import cx from 'classnames';
 
 export default function BestWaktoons() {
 
