@@ -40,7 +40,21 @@ $github-color: #1b1f23;
 $emphasis-text-color: #d40000;
 
 :root {
-  --text-primary-color: #333;
+  --primary-color: #0085ff;
+
+  --white: #fff;
+  --gray-100: #fafafa;
+  --gray-200: #f8f8f8;
+  --gray-300: #eaeaea;
+  --gray-400: #d9d9d9;
+  --gray-500: #949494;
+  --gray-600: #777;
+  --gray-700: #424242;
+  --gray-800: #222;
+  --black: #000;
+
+  --text-primary-color: var(--gray-800);
+  --text-secondary-color: var(--gray-700);
   
   --isedol-color: #D74D74;
   
