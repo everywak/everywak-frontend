@@ -41,7 +41,7 @@ function AfreecaLivePlayer ({
   }
 
   useEffect(() => {
-    const _embed = <iframe id={`streamembed_${channelId}`} className={cx('player', 'afreecalive', className)} src={`https://play.afreecatv.com/${channelId}/embed`}
+    const _embed = <iframe id={`streamembed_${channelId}`} className={cx('player', 'afreecalive', className)} src={`https://play.afreecatv.com/${channelId}/embed?autoPlay=true`}
     allowFullScreen
      {...rest} />;
     setEmbed(_embed);
