@@ -14,7 +14,9 @@ function ChatPopupPage() {
 
   const getChannelName = (platform, channelId) => {
     const result = [];
-    const target = Waktaverse.find(member => member.login_name === channelId || member.name === channelId);
+    const target = Waktaverse.find(
+      (member) => member.login_name === channelId || member.name === channelId,
+    );
     if (platform === 'space') {
       result.push('x-space/');
 
@@ -41,15 +43,15 @@ function ChatPopupPage() {
     return result.join('');
   };
 
-  let channelName = getChannelName(platform, channelId);
-  console.log(platform, channelId);
-  console.log('channelName', channelName);
+  let channelNames = channelId
+    .split(',')
+    .map((channelId) => getChannelName(platform, channelId));
 
   return (
     <TwitchChatClient
       className={cx('ChatPopupPage')}
       clientId={import.meta.env.VITE_TWITCH_CLIENT_ID}
-      channelName={channelName}
+      channelName={channelNames}
       platform={platform}
       redirectUri={`https://${domain}${window.location.pathname}`}
     />
