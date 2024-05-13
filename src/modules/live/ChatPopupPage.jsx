@@ -48,7 +48,7 @@ function ChatPopupPage() {
   return (
     <TwitchChatClient
       className={cx('ChatPopupPage')}
-      clientId={process.env.REACT_APP_TWITCH_CLIENT_ID}
+      clientId={import.meta.env.VITE_TWITCH_CLIENT_ID}
       channelName={channelName}
       platform={platform}
       redirectUri={`https://${domain}${window.location.pathname}`}
