@@ -14,10 +14,10 @@ function ChatPopupPage() {
 
   const getChannelName = (platform, channelId) => {
     const result = [];
+    const target = Waktaverse.find(member => member.login_name === channelId || member.name === channelId);
     if (platform === 'space') {
       result.push('x-space/');
 
-      const target = Waktaverse.find(member => member.login_name === channelId);
       if (!target || !target.twitter) {
         return '';
       }
@@ -25,13 +25,11 @@ function ChatPopupPage() {
     } else if (platform === 'afreeca') {
       result.push('afreeca/');
 
-      const target = Waktaverse.find(member => member.login_name === channelId);
       if (!target || !target.afreeca) {
         return '';
       }
       result.push(target.afreeca.channelId);
     } else if (platform === 'twitch') {
-      const target = Waktaverse.find(member => member.login_name === channelId);
       if (!target) {
         return '';
       }
