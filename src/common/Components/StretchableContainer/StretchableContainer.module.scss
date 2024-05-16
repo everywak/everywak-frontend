@@ -4,6 +4,15 @@
   --size: 320px;
   --newSize: 320px;
   --sliderSize: 16px;
+  position: relative;
+  &.top,
+  &.bottom {
+    height: var(--size);
+  }
+  &.left,
+  &.right {
+    width: var(--size);
+  }
 
   .contentWrapper {
     width: 100%;
@@ -11,25 +20,25 @@
   }
 
   --sliderPos: calc(var(--sliderSize) / -2 - var(--newSize) + var(--size));
-  &.right .slider {
+  &.right > .slider {
     top: 0;
     width: var(--sliderSize);
     height: 100%;
     left: var(--sliderPos);
   }
-  &.left .slider {
+  &.left > .slider {
     top: 0;
     width: var(--sliderSize);
     height: 100%;
     right: var(--sliderPos);
   }
-  &.top .slider {
+  &.top > .slider {
     left: 0;
     width: 100%;
     height: var(--sliderSize);
     bottom: var(--sliderPos);
   }
-  &.bottom .slider {
+  &.bottom > .slider {
     left: 0;
     width: 100%;
     height: var(--sliderSize);
@@ -38,14 +47,14 @@
 
   &.right .sizeControlWrapper.dragged,
   &.left .sizeControlWrapper.dragged,
-  &.right .slider,
-  &.left .slider {
+  &.right > .slider,
+  &.left > .slider {
     cursor: ew-resize;
   }
   &.top .sizeControlWrapper.dragged,
   &.bottom .sizeControlWrapper.dragged,
-  &.top .slider,
-  &.bottom .slider {
+  &.top > .slider,
+  &.bottom > .slider {
     cursor: ns-resize;
   }
   &.right .sizeControlWrapper .sizeControlOverlay,
@@ -58,8 +67,8 @@
     width: 100%;
     height: var(--newSize);
   }
-  
-  .slider {
+
+  & > .slider {
     position: absolute;
     background: transparent;
     transition: background ease 0.15s;
@@ -79,7 +88,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 100vw;
+    width: 100%;
     height: 100%;
     pointer-events: none;
     z-index: 989;
