@@ -1,0 +1,18 @@
+.Chat {
+  --accentColor: transparent;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  border-left: 4px solid var(--accentColor, transparent);
+  padding: 0 16px 0 12px;
+  font-size: 14px;
+  font-weight: 400;
+  vertical-align: middle;
+
+  .contentContainer {
+    .content {
+      vertical-align: middle;
+      line-height: 20px;
+    }
+  }
+}

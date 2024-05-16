@@ -1,0 +1,16 @@
+.LiveChat {
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  height: 840px;
+
+  .collectorChatList {
+    height: 100%;
+    border-bottom: var(--gray-300) 1px solid;
+  }
+
+  .commonChatList {
+    height: 0;
+    flex: 1;
+  }
+}

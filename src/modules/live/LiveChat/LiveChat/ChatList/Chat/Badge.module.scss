@@ -1,0 +1,39 @@
+.Badge {
+  display: inline-block;
+  user-select: none;
+  position: relative;
+
+  img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+    vertical-align: middle;
+  }
+
+  svg {
+    vertical-align: middle;
+    display: inline-block;
+    padding-bottom: 2px;
+  }
+
+  .tip {
+    position: absolute;
+    top: -16px;
+    left: -4px;
+    width: max-content;
+    border-radius: 4px;
+    background-color: var(--white);
+    color: var(--text-primary-color);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    padding: 2px 4px;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity ease .15s, top ease .15s;
+  }
+  &:hover .tip {
+    opacity: 1;
+    top: -20px;
+  }
+}

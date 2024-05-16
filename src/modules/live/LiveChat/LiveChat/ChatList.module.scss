@@ -1,0 +1,43 @@
+.ChatList {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+
+  &.hideScrollbar .listWrapper::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  .listWrapper {
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    padding: 8px 0;
+
+    &::-webkit-scrollbar {
+      width: 12px;
+      padding: 4px 0;
+    }
+    &::-webkit-scrollbar-button {
+      display: none;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var(--gray-400);
+      background-clip: padding-box;
+      border: 3.5px solid transparent;
+      border-radius: 7px;
+      transition: background-color ease 0.2s;
+    }
+  }
+
+  .scrollButton {
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    right: 0;
+    width: fit-content;
+    margin: 0 auto;
+  }
+}

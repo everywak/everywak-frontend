@@ -1,0 +1,35 @@
+.Profile {
+  display: inline-flex;
+  flex-direction: row;
+  font-weight: 500;
+  height: 20px;
+  gap: 4px;
+  position: relative;
+  cursor: pointer;
+  margin-right: 8px;
+  vertical-align: middle;
+  --color: var(--primary-text-color);
+  color: var(--color);
+
+  &::before {
+    content: '';
+    position: absolute;
+    border-radius: 4px;
+    width: calc(100% + 8px);
+    height: calc(100% + 4px);
+    left: -4px;
+    top: -2px;
+    background-color: transparent;
+    pointer-events: none;
+  }
+  &:hover::before {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .badges {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    vertical-align: middle;
+  }
+}
