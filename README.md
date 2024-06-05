@@ -31,11 +31,6 @@ ReactJS로 구현된 에브리왁굳 프론트엔드
 왁물원에 올라오는 인기 팬웹툰들을 모아 정리해서 감상하기 쉽게 만들었습니다.\
 연재되는 작품들을 에피소드별로 찾아보거나 하루동안 좋아요를 많이 받은 작품들을 순위표로 보여줍니다.
 
-### 우왁굳, 이세돌 클립 저장소 - 개발중
-
-대한민국 트위치에서 사라져버린 클립들을 전부 모았습니다.\
-그 때 그 순간 지나간 추억들을 다시금 즐길 수 있습니다.
-
 ### 이세돌 뱅온정보 - [바로가기](https://beta.everywak.kr/weather)
 
 이세계 아이돌 멤버들의 생방송 정보를 일기예보 형식으로 보여줍니다.
@@ -61,17 +56,39 @@ ReactJS로 구현된 에브리왁굳 프론트엔드
 
 ## 라이센스
 
-본 프로젝트는 다음과 같은 경우를 제외하고 누구나 사용, 수정 및 재배포할 수 있습니다.
+다음의 행위는 허용됩니다.
 
-- 원작자의 동의 없이 에브리왁굳(everywak.kr)과 혼동을 줄 수 있는 웹사이트를 운영할 목적으로 본 프로젝트의 소스를 활용하는 경우
-- 상업적인 목적으로 사용하는 경우
+- 허용되지 않는 행위를 제외하고, 누구나 본 프로젝트의 소스 코드 중 일부 또는 전체를 사용, 수정 및 재배포할 수 있습니다. 단, 누구나 접근 가능한 곳에 원작자(@wei756) 크레딧을 명시해야 합니다.
+
+다음의 행위는 허용하지 않습니다.
+
+- 원작자의 동의 없이 본 프로젝트의 소스 코드 중 일부 또는 전체를 사용하여 에브리왁굳(everywak.kr)과 혼동의 여지가 있는 프로그램 또는 웹사이트를 제작 및 운영하는 경우.
+
+- 원작자의 동의 없이 본 프로젝트에서 제공하는 컨텐츠와 유사한 기능을 제공하는 웹사이트를 운영할 목적으로 본 프로젝트의 소스 코드 중 일부 또는 전체를 활용하는 경우. 본 프로젝트에서 제공하는 컨텐츠는 다음과 같습니다.
+
+- - 한 화면에서 다수의 생방송 스트림과 실시간 채팅을 동시에 시청할 수 있는 서비스
+
+- - 커뮤니티의 게시글 목록을 크롤링하고 목록화한 결과를 재가공하여 보여주는 서비스
+
+- 본 프로젝트의 소스 코드 중 일부 또는 전체를 사용한 모든 경우의 상업적 행위. 본 프로젝트에는 상업적 사용이 금지된 리소스 또는 스크립트가 포함되어 있으며, 이를 무단으로 이용함으로써 발생할 수 있는 법적 책임은 모두 사용한 자에게 있습니다.
 
 ## 오픈소스 라이센스
 
-- [React](https://github.com/facebook/react): The MIT License Copyright © Facebook, Inc.
-- [axios](https://github.com/axios/axios): The MIT License Copyright © 2014-present Matt Zabriskie
-- [Material UI](https://github.com/mui-org/material-ui): The MIT License Copyright © 2014 Call-Em-All
-- [Node-SASS](https://github.com/sass/node-sass): The MIT License Copyright © 2013-2016 Andrew Nesbitt
+- `react`
+  `axios`
+  `mui`
+  `sass`
+  `emotion`
+  `classnames`
+  `crypto-js`
+  `framer-motion`
+  `lodash`
+  `react-query`
+  `react-cookie`
+  `react-ga`
+  `react-microsoft-clarity`
+  `react-responsive`
+  `vite`
 
 ## 주석
 
