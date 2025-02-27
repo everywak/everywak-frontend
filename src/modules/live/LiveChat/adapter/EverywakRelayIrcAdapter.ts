@@ -7,7 +7,7 @@ import * as Everywak from 'services/api-v2/index';
 // TODO: CAP cmd 제대로 구현
 // TODO: 최초 로딩시 구독 뱃지, 이모티콘 리스트 표시되게
 // TODO: ogq스티커 구현
-// TODO: 채ㅌ팅방 입장, 퇴장 메시지 구현
+// TODO: 채팅방 입장, 퇴장 메시지 구현
 // TODO: 채금, 밴 메시지 구현
 
 export class EverywakRelayIrcAdapter extends LiveChatAdapterClass {

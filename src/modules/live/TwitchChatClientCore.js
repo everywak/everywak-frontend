@@ -1,3 +1,4 @@
+import { Waktaverse } from 'common/constants';
 import React from 'react';
 import { Cookies } from 'react-cookie';
 
@@ -51,7 +52,7 @@ class TwitchChatClientCore {
     onChangeOAuthState, onChangeIRCState, onUpdateEmoteSet, onChat
   }) {
     this.clientId = clientId || '';
-    this.channelName = channelName || '';
+    this.channelName = channelName || [''];
     this.ircServer = ircServer;
     this.hostname = this.ircServer === 'wss://irc-ws.chat.twitch.tv' ? 'tmi.twitch.tv' : this.ircServer.replace('wss://', '').replace(/:\d+$/, '');
     
@@ -181,8 +182,8 @@ class TwitchChatClientCore {
     this.channelName = newChannel;
     if (oldChannel !== newChannel) {
       if (this.IRCState === TwitchChatClientCore.JOINED) { // rejoin
-        this.sendMessage(`PART #${oldChannel}`);
-        this.sendMessage(`JOIN #${newChannel}`);
+        oldChannel.map(channelId => this.sendMessage(`PART #${channelId}`));
+        newChannel.map(channelId => this.sendMessage(`JOIN #${channelId}`));
       }
     }
   }
@@ -235,7 +236,7 @@ class TwitchChatClientCore {
           }
           if (data[1] == '376') {
             this.setIRCState(TwitchChatClientCore.AUTHORIZED);
-            this.sendMessage(`JOIN #${this.channelName}`);
+            this.channelName.map(channelId => this.sendMessage(`JOIN #${channelId}`));
             console.log('Login authentication completed successfully.');
           }
           break;
@@ -253,10 +254,10 @@ class TwitchChatClientCore {
               msg: `${data[2].slice(1)} 채팅방 입장`
             })
             const twitchApi = this.getTwitchApi();
-            const user = await twitchApi.getUsers(this.channelName);
+            const user = []//await twitchApi.getUsers(this.channelName);
             // load chat's bagdes
-            const badgesChannel = await twitchApi.getChannelChatBadges(user[0].id);
-            const badgesGlobal = await twitchApi.getGlobalChatBadges();
+            const badgesChannel = []//await twitchApi.getChannelChatBadges(user[0].id);
+            const badgesGlobal = []//await twitchApi.getGlobalChatBadges();
             badgesGlobal.map(b => {
               b.versions.map(bg => {
                 this.badges[b.set_id + '/' + bg.id] = {
@@ -300,11 +301,12 @@ class TwitchChatClientCore {
     if (process.env.NODE_ENV == 'development') { console.log(data); }
 
     if (data[2] == 'PRIVMSG') {
-      this.receiveChat({tag: data[0], id: data[1], msg: data[3].split(':').length > 1 ? data[3].split(':')[1] : data[3]});
+      const channelId = data[3].match(/#[a-z]*\/([a-z0-9_-]*) /)[1];
+      this.receiveChat({tag: data[0], id: data[1], msg: data[3].split(':').length > 1 ? data[3].split(':')[1] : data[3], channelId });
     } else if (data[2] && data[2].match(/^USERSTATE/)) {
       this.updateSelfInfo(data);
     } else if ('PART' === data[1]) {
-      const { loginName } = data[0].match(/:(?<loginName>[\w\d-_]+)!\k<loginName>@\k<loginName>\.tmi\.twitch\.tv/).groups;
+      const { loginName } = data[0].match(/:(?<loginName>[\w\d-_]+)!\k<loginName>@\k<loginName>\.tmi\.twitch\.tv/)?.groups || {loginName: ''};
       if (this.myUserInfo.loginName === loginName) { // is me
         this.setIRCState(TwitchChatClientCore.AUTHORIZED);
       }
@@ -322,7 +324,7 @@ class TwitchChatClientCore {
     
     const twitchApi = this.getTwitchApi();
 
-    const [me] = await twitchApi.getUsers(this.myUserInfo.loginName);
+    const [me] = []; // await twitchApi.getUsers(this.myUserInfo.loginName);
     if (me) {
 
       // load my userinfo
@@ -372,7 +374,7 @@ class TwitchChatClientCore {
    */
   sendChat = msg => {
     if (this.IRCState === TwitchChatClientCore.JOINED) {
-      this.sendMessage(`PRIVMSG #${this.channelName} :${msg}`);
+      this.sendMessage(`PRIVMSG #${this.channelName[0]} :${msg}`);
       const myUserLoginId = `:${this.myUserInfo.loginName}!${this.myUserInfo.loginName}@${this.myUserInfo.loginName}.${this.hostname}`;
       if (msg != '') {
         this.receiveChat({
@@ -395,7 +397,7 @@ class TwitchChatClientCore {
    * @param {String} id
    * @param {String} msg
    */
-  receiveChat = async ({ tag, id, msg, mine = false }) => {
+  receiveChat = async ({ tag, id, msg, mine = false, channelId = '' }) => {
     const tags = this.parseTag(tag);
     
     const badges    = this.parseBadge(tags.badges);
@@ -418,7 +420,8 @@ class TwitchChatClientCore {
     const regexMsg = new RegExp(`:(?<loginName>[\\w\\d-_]+)!\\k<loginName>@\\k<loginName>\\.${this.hostname.replace(/\./g, '\\.')}`);
 
     const content     = this.replaceEmote(msg, emotes);
-    const displayName = tags['display-name'];
+    const channel = Waktaverse.find(member => member.afreeca?.channelId === channelId);
+    const displayName = channel ? `${channel.name[0]}: ${tags['display-name']}` : tags['display-name'];
     const userID      = id.match(regexMsg)?.groups.loginName;
     //const userID      = id.match(/:(?<loginName>[\w\d-_]+)!\k<loginName>@\k<loginName>\.tmi\.twitch\.tv/).groups.loginName;
     const color       = tags.color;
@@ -594,7 +597,7 @@ class TwitchChatClientCore {
    * Close Twitch chat service
    */
   close = () => {
-    this.sendMessage(`PART #${this.channelName}`);
+    this.channelName.map(channelId => this.sendMessage(`PART #${channelId}`));
     this.twitchIRC.close();
   }
 }

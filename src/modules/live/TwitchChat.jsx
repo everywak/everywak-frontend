@@ -1,21 +1,25 @@
 import React from 'react';
 
-import { domain, Waktaverse } from '../../common/constants';
+import { Waktaverse } from '../../common/constants';
 import StretchableContainer from '../../common/Components/StretchableContainer/StretchableContainer';
 
-import TwitchChatClient from './TwitchChatClient';
+import { LiveChat } from './LiveChat/LiveChat';
 
 import './TwitchChat.scss';
 import cx from 'classnames';
 
-function TwitchChat ({ channelId = import.meta.env.VITE_TWITCH_CHANNEL_NAME, platform = 'twitch' }) {
-
+function TwitchChat({
+  channelId = import.meta.env.VITE_TWITCH_CHANNEL_NAME,
+  platform = 'twitch',
+}) {
   const getChannelName = (platform, channelId) => {
     const result = [];
     if (platform === 'space') {
       result.push('x-space/');
 
-      const target = Waktaverse.find(member => member.login_name === channelId);
+      const target = Waktaverse.find(
+        (member) => member.login_name === channelId,
+      );
       if (!target || !target.twitter) {
         return '';
       }
@@ -23,13 +27,17 @@ function TwitchChat ({ channelId = import.meta.env.VITE_TWITCH_CHANNEL_NAME, pla
     } else if (platform === 'afreeca') {
       result.push('afreeca/');
 
-      const target = Waktaverse.find(member => member.login_name === channelId);
+      const target = Waktaverse.find(
+        (member) => member.login_name === channelId,
+      );
       if (!target || !target.afreeca) {
         return '';
       }
       result.push(target.afreeca.channelId);
     } else if (platform === 'twitch') {
-      const target = Waktaverse.find(member => member.login_name === channelId);
+      const target = Waktaverse.find(
+        (member) => member.login_name === channelId,
+      );
       if (!target) {
         return '';
       }
@@ -42,14 +50,12 @@ function TwitchChat ({ channelId = import.meta.env.VITE_TWITCH_CHANNEL_NAME, pla
   };
 
   return (
-  <StretchableContainer className={cx('TwitchChat', {small: 380 < 220})}>
-    <TwitchChatClient 
-      clientId={import.meta.env.VITE_TWITCH_CLIENT_ID} 
-      channelName={[getChannelName(platform, channelId)]} 
-      platform={platform}
-      redirectUri={`https://${domain}${window.location.pathname}`}
-    />
-  </StretchableContainer>
+    <StretchableContainer className={cx('TwitchChat', { small: 380 < 220 })}>
+      <LiveChat
+        className="liveChat"
+        channelId={[getChannelName(platform, channelId)]}
+      />
+    </StretchableContainer>
   );
 }
 
