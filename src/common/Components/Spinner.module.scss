@@ -1,8 +1,6 @@
-@import '../common.scss';
-
 .Spinner {
   background-color: transparent;
-  color: $primary-text-color;
+  color: var(--text-primary-color);
   display: flex;
   align-items: center;
   justify-content: center;

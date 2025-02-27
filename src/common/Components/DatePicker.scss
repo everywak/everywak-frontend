@@ -1,4 +1,4 @@
-@import '../common.scss';
+@use '@common/mixin' as *;
 
 .DatePicker {
   background-color: #fff;
@@ -7,22 +7,21 @@
   display: none;
   grid-template-columns: auto auto;
   grid-template-rows: auto;
-  grid-template-areas: 
-    "preset range";
+  grid-template-areas: 'preset range';
   padding: 8px 4px 8px 0;
   user-select: none;
   position: absolute;
   z-index: 100;
   $itemWidth: 32px;
   $itemHeight: 30px;
-  animation: openDialog .3s 0s 1 ease normal forwards;
+  animation: openDialog 0.3s 0s 1 ease normal forwards;
 
   &.opened {
     display: grid;
   }
 
   .preset {
-    border-right: 1px solid $component-secondary-border-color;
+    border-right: 1px solid var(--component-secondary-border-color);
     grid-area: preset;
 
     .presetItem {
@@ -35,14 +34,14 @@
       width: 88px;
       height: 23px;
       vertical-align: middle;
-      transition: background-color ease .15s;
-  
+      transition: background-color ease 0.15s;
+
       &:not(.checked):hover {
-        background-color: rgba(0, 0, 0, .1);
+        background-color: rgba(0, 0, 0, 0.1);
       }
-      
+
       .marker {
-        background-color: $primary-color;
+        background-color: var(--primary-color);
         border-radius: 50%;
         display: inline-block;
         margin: 5px 8px 5px 2px;
@@ -50,28 +49,28 @@
         height: 4px;
         opacity: 0;
         pointer-events: none;
-        transition: opacity ease .15s;
+        transition: opacity ease 0.15s;
       }
       .name {
-        color: $secondary-text-color;
+        color: var(--text-secondary-color);
         display: inline-block;
         font-size: 14px;
         font-weight: 400;
         line-height: 14px;
         pointer-events: none;
-        transition: color ease .15s;
+        transition: color ease 0.15s;
       }
       &.checked {
         .marker {
           opacity: 1;
         }
         .name {
-          color: $primary-color;
+          color: var(--primary-color);
         }
       }
     }
     .presetLine {
-      background-color: $component-secondary-border-color;
+      background-color: var(--component-secondary-border-color);
       margin: 4px 8px 4px 8px;
       width: 88px;
       height: 1px;
@@ -82,14 +81,14 @@
     grid-area: range;
 
     .dateRange {
-      color: $secondary-text-color;
+      color: var(--text-secondary-color);
       font-size: 14px;
       margin: 3px 0px 1px 2px;
 
       .startDate,
       .endDate {
         display: inline;
-  
+
         .datetime {
           border: none;
           cursor: pointer;
@@ -99,12 +98,12 @@
           font-weight: 500;
           padding: 7px 0px 7px 6px;
           width: 84px;
-          transition: color ease .15s;
+          transition: color ease 0.15s;
 
           &:active,
           &:focus,
           &.selected {
-            color: $primary-color;
+            color: var(--primary-color);
             outline: none;
           }
         }
@@ -120,15 +119,13 @@
 
       .currentYearMonth {
         font-size: 14px;
-  
+
         .currYear {
-  
         }
         .currMonth {
-  
         }
       }
-  
+
       .changeBtnArea {
         .BasicButton {
           border-radius: 50%;
@@ -148,7 +145,7 @@
       height: $itemHeight;
 
       .day {
-        color: $secondary-text-color;
+        color: var(--text-secondary-color);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -161,7 +158,7 @@
       box-sizing: border-box;
       height: 180px;
       padding: 0 7px;
-      
+
       .DateView {
         height: calc(#{$itemHeight} * 6);
         margin: 1px 0 15px;
@@ -173,13 +170,14 @@
 
           .header {
             animation-name: fadein;
-            animation-duration: .1s;
+            animation-duration: 0.1s;
             animation-fill-mode: forwards;
             display: block;
             font-size: 14px;
             font-weight: 500;
             line-height: 14px;
-            padding: calc((#{$itemWidth} - 16px) / 2) calc((#{$itemHeight} - 14px) / 2);
+            padding: calc((#{$itemWidth} - 16px) / 2)
+              calc((#{$itemHeight} - 14px) / 2);
             width: calc(#{$itemWidth} * 7);
             height: $itemHeight;
             box-sizing: border-box;
@@ -187,20 +185,21 @@
 
           .DateItem {
             animation-name: fadein;
-            animation-duration: .1s;
+            animation-duration: 0.1s;
             animation-fill-mode: forwards;
             cursor: pointer;
             display: block;
             width: $itemWidth;
             height: $itemHeight;
             position: relative;
-    
+
             & > span {
-              color: $secondary-text-color;
+              color: var(--text-secondary-color);
               display: block;
               font-size: 14px;
               line-height: 14px;
-              margin: calc((#{$itemHeight} - 16px) / 2) calc((#{$itemWidth} - 16px) / 2);
+              margin: calc((#{$itemHeight} - 16px) / 2)
+                calc((#{$itemWidth} - 16px) / 2);
               padding: 0;
               width: 16px;
               height: 16px;
@@ -209,7 +208,6 @@
             }
             &.dummy.checked,
             &.checked {
-
               &::before {
                 background-color: white;
                 box-sizing: border-box;
@@ -221,20 +219,20 @@
                 top: 2px;
                 position: absolute;
                 z-index: 1;
-                border-top: 1px solid $component-secondary-border-color;
-                border-bottom: 1px solid $component-secondary-border-color;
+                border-top: 1px solid var(--component-secondary-border-color);
+                border-bottom: 1px solid var(--component-secondary-border-color);
               }
               &.start::before {
                 border-radius: 8px 0px 0px 8px;
-                border-left: 1px solid $component-secondary-border-color;
+                border-left: 1px solid var(--component-secondary-border-color);
               }
               &.end::before {
                 border-radius: 0px 8px 8px 0px;
-                border-right: 1px solid $component-secondary-border-color;
+                border-right: 1px solid var(--component-secondary-border-color);
               }
               &.this::before {
                 border-radius: 8px;
-                border: 1px solid $component-secondary-border-color;
+                border: 1px solid var(--component-secondary-border-color);
               }
               &.disabled::before {
                 background-color: transparent;
@@ -242,15 +240,14 @@
               }
 
               & > span {
-                color: $primary-color;
+                color: var(--primary-color);
                 position: absolute;
                 z-index: 2;
               }
             }
             &:hover {
-
               &::after {
-                background-color: $primary-color;
+                background-color: var(--primary-color);
                 border-radius: 8px;
                 box-sizing: border-box;
                 color: transparent;
@@ -277,15 +274,14 @@
             }
             &.disabled > span,
             &.dummy.disabled > span {
-              color: $component-primary-border-color;
+              color: var(--component-primary-border-color);
             }
             &.dummy > span {
-              color: $component-secondary-border-color;
+              color: var(--component-secondary-border-color);
             }
           }
         }
       }
-
     }
   }
 }

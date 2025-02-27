@@ -1,4 +1,4 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .FrontWeatherItem {
   box-sizing: border-box;
@@ -23,13 +23,13 @@
     gap: 6px;
 
     .name {
-      color: $primary-text-color;
+      color: var(--text-primary-color);
       font-weight: 500;
       font-size: 16px;
       line-height: 1em;
     }
     .state {
-      color: $secondary-text-color;
+      color: var(--text-secondary-color);
       font-weight: 500;
       font-size: 12px;
       line-height: 1em;

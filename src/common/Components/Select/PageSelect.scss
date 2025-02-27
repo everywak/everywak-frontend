@@ -1,4 +1,4 @@
-@import '../../common.scss';
+@use '@common/mixin' as *;
 
 .PageSelect {
   box-sizing: border-box;
@@ -11,7 +11,7 @@
   .option {
     background: transparent;
     border-radius: 50%;
-    color: $primary-text-color;
+    color: var(--text-primary-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,15 +22,14 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 1em;
-    transition: background ease .15s, color ease .15s;
+    transition: background ease 0.15s, color ease 0.15s;
 
     &.selected {
-      background: $primary-color;
+      background: var(--primary-color);
       color: $dark-primary-text-color;
     }
     &::after {
       border-radius: 50%;
     }
-
   }
 }

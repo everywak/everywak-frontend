@@ -1,4 +1,4 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .TodayWeatherItem {
   box-sizing: border-box;
@@ -8,7 +8,7 @@
   align-items: center;
   padding: 8px;
   gap: calc(var(--responsiveScale) * 16);
-  width: calc((var(--responsiveScale) - .1px) / .9 * 184);
+  width: calc((var(--responsiveScale) - 0.1px) / 0.9 * 184);
   @include mobile {
     align-items: flex-start;
     gap: 12px;
@@ -29,14 +29,14 @@
     }
 
     .personalColorPoint {
-      --color: $component-secondary-border-color;
-      background: var(--color, $component-secondary-border-color);
+      --color: var(--component-secondary-border-color);
+      background: var(--color, var(--component-secondary-border-color));
       border-radius: 50%;
       width: 8px;
       height: 8px;
     }
     .name {
-      color: $primary-text-color;
+      color: var(--text-primary-color);
       font-weight: 700;
       font-size: 16px;
       line-height: 1em;
@@ -93,14 +93,14 @@
       }
 
       .state {
-        color: $primary-text-color;
+        color: var(--text-primary-color);
         font-weight: 500;
         font-size: 14px;
         line-height: 1em;
         text-align: center;
       }
       .description {
-        color: $secondary-text-color;
+        color: var(--text-secondary-color);
         font-weight: 500;
         font-size: 12px;
         line-height: 1.25em;

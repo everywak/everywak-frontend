@@ -1,9 +1,9 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .FrontBestwakkiItem {
   border-radius: 8px;
   box-sizing: border-box;
-  color: $primary-text-color;
+  color: var(--text-primary-color);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -11,7 +11,7 @@
   padding: 8px;
   align-self: stretch;
   width: 100%;
-  transition: background ease .15s;
+  transition: background ease 0.15s;
 
   &:hover {
     background: #0001;
@@ -34,7 +34,7 @@
     gap: 1px;
 
     .board {
-      color: $secondary-text-color;
+      color: var(--text-secondary-color);
       font-weight: 500;
       font-size: 12px;
       line-height: 1em;

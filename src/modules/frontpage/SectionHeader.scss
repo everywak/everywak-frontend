@@ -1,4 +1,4 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 header.SectionHeader {
   display: flex;
@@ -13,7 +13,7 @@ header.SectionHeader {
     width: 0;
     flex-grow: 1;
   }
-  
+
   &.big {
     .titleArea .title {
       font-size: 24px;
@@ -40,16 +40,16 @@ header.SectionHeader {
       font-weight: 500;
       font-size: 20px;
       line-height: 1em;
-      color: $primary-text-color;
+      color: var(--text-primary-color);
     }
     .subtitle {
       font-weight: 500;
       font-size: 14px;
       line-height: 1em;
-      color: $secondary-text-color;
+      color: var(--text-secondary-color);
     }
     .bottomLine {
-      background: $component-secondary-border-color;
+      background: var(--component-secondary-border-color);
       width: 160px;
       height: 2px;
       margin: 16px auto;
@@ -57,7 +57,7 @@ header.SectionHeader {
   }
 
   .more {
-    color: $primary-color;
+    color: var(--primary-color);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -66,6 +66,5 @@ header.SectionHeader {
     font-size: 14px;
     font-weight: 500;
     line-height: 1em;
-
   }
 }

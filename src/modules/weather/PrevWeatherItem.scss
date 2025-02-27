@@ -1,4 +1,4 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .PrevWeatherItem {
   box-sizing: border-box;
@@ -7,9 +7,9 @@
   justify-content: center;
   align-items: center;
   padding: 8px;
-  width: calc((var(--responsiveScale) - .1px) /.9 * 160);
+  width: calc((var(--responsiveScale) - 0.1px) / 0.9 * 160);
   @include mobile {
-    width: calc((var(--responsiveScale) - .1px) /.9 * 172);
+    width: calc((var(--responsiveScale) - 0.1px) / 0.9 * 172);
   }
 
   .iconWrapper {
@@ -28,7 +28,6 @@
       height: var(--width);
     }
   }
-
 
   &.skeleton {
     .iconWrapper {

@@ -1,18 +1,18 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .SceneLayoutSettingPanel {
   background: white;
   border-radius: 16px;
-  box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, .1);
+  box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: stretch;
   gap: 0;
   line-height: 1em;
-  letter-spacing: -.03em;
+  letter-spacing: -0.03em;
 
   .SceneLayoutContentSection {
-    color: $primary-text-color;
+    color: var(--text-primary-color);
     font-size: 16px;
     font-weight: 500;
     display: flex;
@@ -52,10 +52,10 @@
       justify-content: center;
       align-items: center;
       gap: 16px;
-      transition: border ease .15s, color ease .15s, fill ease .15s;
+      transition: border ease 0.15s, color ease 0.15s, fill ease 0.15s;
 
       .iconWrapper {
-        background: $background-white-color;
+        background: var(--background-white-color);
         border: 2px solid transparent;
         border-radius: 16px;
         display: flex;
@@ -69,20 +69,20 @@
         }
       }
       .label {
-        color: $secondary-text-color;
+        color: var(--text-secondary-color);
         font-size: 14px;
         font-weight: 500;
       }
       &.selected {
         .iconWrapper {
-          border-color: $primary-color;
+          border-color: var(--primary-color);
 
           svg {
             fill: #7dc1fd;
           }
         }
         .label {
-          color: $primary-color;
+          color: var(--primary-color);
         }
       }
     }
@@ -116,7 +116,7 @@
     width: 600px;
     align-self: stretch;
     overflow: hidden;
-    transition: width ease .3s, height ease .3s;
+    transition: width ease 0.3s, height ease 0.3s;
 
     &.isDragging {
       .previewItemWrapper {
@@ -145,12 +145,11 @@
       &:nth-child(6),
       &:nth-child(7),
       &:nth-child(8) {
-  
         .MemberItem {
           flex-direction: row;
           gap: 8px;
           width: auto;
-  
+
           .profileCircle {
             --radius: 24px;
           }
@@ -182,11 +181,15 @@
       }
     }
     .PreviewItem {
-      --scaleOffset: clamp(0, max(var(--gridColumns, 1), var(--gridRows, 1)) - 4, 1);
+      --scaleOffset: clamp(
+        0,
+        max(var(--gridColumns, 1), var(--gridRows, 1)) - 4,
+        1
+      );
       background-color: #08f0;
       box-sizing: border-box;
       border-radius: 16px;
-      border: 2px solid $secondary-text-color;
+      border: 2px solid var(--text-secondary-color);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -194,15 +197,12 @@
       width: 100%;
       height: 100%;
       cursor: grab;
-      transition: 
-        width ease .3s, 
-        height ease .3s, 
-        background ease .3s, 
-        border ease .3s;
+      transition: width ease 0.3s, height ease 0.3s, background ease 0.3s,
+        border ease 0.3s;
 
       &.selected {
         background-color: #08f2;
-        border-color: $primary-color;
+        border-color: var(--primary-color);
         cursor: grabbing;
       }
 
@@ -215,9 +215,9 @@
         position: absolute;
         top: calc(8px - var(--scaleOffset) * 6px);
         right: calc(8px - var(--scaleOffset) * 6px);
-        transition: opacity ease .15s;
+        transition: opacity ease 0.15s;
         z-index: 1500;
-        
+
         svg {
           font-size: calc(24px - var(--scaleOffset) * 6px);
           pointer-events: none;
@@ -233,8 +233,12 @@
       flex-direction: row;
 
       .previewItemWrapper {
-        width: calc((100% - 16px * (var(--gridColumns, 1) - 1)) / var(--gridColumns, 1));
-        height: calc((100% - 16px * (var(--gridRows, 1) - 1)) / var(--gridRows, 1));
+        width: calc(
+          (100% - 16px * (var(--gridColumns, 1) - 1)) / var(--gridColumns, 1)
+        );
+        height: calc(
+          (100% - 16px * (var(--gridRows, 1) - 1)) / var(--gridRows, 1)
+        );
         max-height: calc(100vh - 120px);
       }
     }
@@ -271,11 +275,14 @@
         border: 2px solid transparent;
         border-radius: 4px;
       }
-
     }
   }
   .MemberItem {
-    --scaleOffset: clamp(0, max(var(--gridColumns, 1), var(--gridRows, 1)) - 4, 1);
+    --scaleOffset: clamp(
+      0,
+      max(var(--gridColumns, 1), var(--gridRows, 1)) - 4,
+      1
+    );
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -283,14 +290,14 @@
     gap: calc(8px - var(--scaleOffset) * 2px);
     width: 72px;
     cursor: grab;
-    transition: opacity ease .15s;
+    transition: opacity ease 0.15s;
     user-select: none;
 
     &:active {
       cursor: grabbing;
     }
     &.selected {
-      opacity: .5;
+      opacity: 0.5;
     }
 
     &.CursorMemberItem {
@@ -299,7 +306,7 @@
       left: calc(1px * var(--x, -100) - 36px);
       top: calc(1px * var(--y, -100) - 36px);
       opacity: 0;
-      transition: opacity ease .15s;
+      transition: opacity ease 0.15s;
       cursor: grabbing;
       pointer-events: none;
     }
@@ -314,12 +321,12 @@
       overflow: hidden;
       width: calc(var(--radius) * 2);
       height: calc(var(--radius) * 2);
-      transition: width ease .3s, height ease .3s;
+      transition: width ease 0.3s, height ease 0.3s;
 
       .CircleImg {
         width: calc(var(--radius) * 2);
         height: calc(var(--radius) * 2);
-        transition: width ease .3s, height ease .3s;
+        transition: width ease 0.3s, height ease 0.3s;
       }
     }
     &.liveYoutube .circleWrapper,
@@ -335,7 +342,7 @@
       width: calc((var(--radius) - 2px) * 2);
       height: calc((var(--radius) - 2px) * 2);
       overflow: hidden;
-      transition: width ease .3s, height ease .3s;
+      transition: width ease 0.3s, height ease 0.3s;
     }
     &.liveYoutube .profileCircle {
       border: $youtube-color solid 2px;
@@ -350,7 +357,7 @@
       border: $afreeca-color solid 2px;
     }
     .nickname {
-      color: $secondary-text-color;
+      color: var(--text-secondary-color);
       font-size: calc(14px - var(--scaleOffset) * 2px);
       font-weight: 500;
       line-height: 1em;
@@ -360,7 +367,7 @@
       max-width: 100%;
       word-break: break-all;
       overflow: hidden;
-      transition: font-size ease .3s;
+      transition: font-size ease 0.3s;
     }
   }
 }

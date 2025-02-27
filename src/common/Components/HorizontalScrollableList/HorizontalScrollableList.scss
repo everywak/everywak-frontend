@@ -1,4 +1,4 @@
-@import '../../common.scss';
+@use '@common/mixin' as *;
 
 .HorizontalScrollableList {
   --controlWidth: 64px;
@@ -16,14 +16,14 @@
 
   .btnControl {
     border-radius: 0;
-    color: $primary-text-color;
+    color: var(--text-primary-color);
     margin: 0;
     position: absolute;
     top: 0;
     width: var(--controlWidth);
     height: 100%;
     opacity: 1;
-    transition: opacity ease .3s;
+    transition: opacity ease 0.3s;
 
     &::after {
       display: none;
@@ -35,11 +35,19 @@
     }
   }
   .btnScrollLeft {
-    background: linear-gradient(to right, var(--backgroundColor), var(--backgroundTransparentColor));
+    background: linear-gradient(
+      to right,
+      var(--backgroundColor),
+      var(--backgroundTransparentColor)
+    );
     left: 0;
   }
   .btnScrollRight {
-    background: linear-gradient(to left, var(--backgroundColor), var(--backgroundTransparentColor));
+    background: linear-gradient(
+      to left,
+      var(--backgroundColor),
+      var(--backgroundTransparentColor)
+    );
     right: 0;
   }
 }

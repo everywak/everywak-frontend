@@ -1,4 +1,4 @@
-@import '../../../common/common.scss';
+@use '@common/mixin' as *;
 
 .AllWaktoons {
   width: 100%;
@@ -28,28 +28,28 @@
 
       .btnBack {
         align-items: center;
-        color: $primary-color;
+        color: var(--primary-color);
         display: flex;
         flex-direction: row;
         font-size: 16px;
         font-weight: 500;
         line-height: 1em;
         margin: 0;
-  
+
         svg {
           display: inline-block;
           margin: 1px;
         }
       }
       .title {
-        color: $primary-text-color;
+        color: var(--text-primary-color);
         font-weight: 500;
         font-size: 36px;
         line-height: 1em;
         margin: 0;
       }
       .desc {
-        color: $secondary-text-color;
+        color: var(--text-secondary-color);
         font-weight: 500;
         font-size: 20px;
         line-height: 1em;
@@ -84,7 +84,7 @@
         width: 320px;
       }
     }
-    
+
     .waktoonEpisodeListWrapper {
       display: flex;
       flex-direction: column;
@@ -93,11 +93,10 @@
       gap: 24px;
 
       .PageSelect {
-
       }
     }
     .footer {
-      color: $secondary-text-color;
+      color: var(--text-secondary-color);
       font-size: 14px;
       text-align: right;
     }
@@ -108,19 +107,18 @@
 }
 @include not-desktop {
   .AllWaktoons {
-  
     section.content {
       align-self: stretch;
       gap: 24px;
       width: 100%;
-  
+
       & > header {
         padding: 24px 16px 16px;
         gap: 4px;
-  
+
         .btnBack {
           font-size: 14px;
-    
+
           svg {
             display: inline-block;
             margin: 1px;
@@ -133,10 +131,10 @@
           font-size: 16px;
         }
       }
-  
+
       .listHeader {
         display: none;
-  
+
         .filterWrapper {
           .sortItemWrapper {
           }
@@ -144,19 +142,17 @@
         .BasicSearchBar {
         }
       }
-      
-      .waktoonEpisodeListWrapper {
 
+      .waktoonEpisodeListWrapper {
         .AllWaktoonList {
           padding: 0px 8px;
         }
-  
+
         .PageSelect {
-  
         }
       }
       .footer {
-        color: $secondary-text-color;
+        color: var(--text-secondary-color);
         font-size: 12px;
         text-align: right;
       }

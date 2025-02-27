@@ -1,8 +1,8 @@
-@import '/src/common/common.scss';
+@use '@common/mixin' as *;
 
 .SearchBar {
   align-items: center;
-  border: solid 1px $component-secondary-border-color;
+  border: solid 1px var(--component-secondary-border-color);
   border-radius: 8px;
   box-sizing: border-box;
   display: flex;
@@ -13,7 +13,7 @@
   .inputForm {
     border: 0;
     background: transparent;
-    color: $primary-text-color;
+    color: var(--text-primary-color);
     flex-grow: 1;
     font-family: inherit;
     font-size: 12px;
@@ -24,10 +24,10 @@
     width: 84px;
 
     &::placeholder {
-      color: $secondary-text-color;
+      color: var(--text-secondary-color);
       font-size: 12px;
       font-weight: 500;
-      transition: color ease .3s;
+      transition: color ease 0.3s;
     }
 
     &:focus {
@@ -35,7 +35,7 @@
 
       &::placeholder {
         color: transparent;
-        transition: color ease .1s;
+        transition: color ease 0.1s;
       }
     }
   }
@@ -43,43 +43,43 @@
   .Dropdown {
     .dispArea {
       .currName {
-        color: $primary-color;
+        color: var(--primary-color);
         display: block;
         min-width: fit-content;
         width: fit-content;
       }
       svg {
-        fill: $primary-color;
+        fill: var(--primary-color);
       }
     }
   }
 
   .btnSearch {
     align-items: center;
-    background: $primary-color;
+    background: var(--primary-color);
     cursor: pointer;
     display: flex;
     justify-content: center;
     height: 32px;
     width: 52px;
-    transition: background-color ease .3s;
+    transition: background-color ease 0.3s;
 
     &:hover {
-      background: $primary-light-color;
-    
+      background: var(--primary-light-color);
+
       svg {
         width: 20px;
         height: 20px;
       }
     }
     &:active {
-      background: $primary-dark-color;
+      background: var(--primary-dark-color);
     }
-    
+
     svg {
       width: 18px;
       height: 18px;
-      transition: width ease .3s, height ease .3s;
+      transition: width ease 0.3s, height ease 0.3s;
     }
   }
 }

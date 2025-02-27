@@ -1,4 +1,4 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .TodayWeatherSection {
   background: white;

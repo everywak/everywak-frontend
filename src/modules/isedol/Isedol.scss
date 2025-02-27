@@ -1,12 +1,20 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .Isedol {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, .02) 337px, transparent 338px);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.02) 337px,
+    transparent 338px
+  );
   box-sizing: border-box;
   padding: 48px 72px 58px;
   width: 100%;
   @include mobile {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, .02) 377px, transparent 378px);
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.02) 377px,
+      transparent 378px
+    );
     padding-top: 30px;
     padding: 30px 0 48px;
   }
@@ -123,7 +131,6 @@
 
       .IsedolShortsList {
         ul.list {
-      
           .VideoItem {
             --width: 160px;
           }
@@ -132,13 +139,12 @@
     }
 
     .memberLine {
-      background: $component-primary-border-color;
+      background: var(--component-primary-border-color);
       margin: 58px 0;
       width: 100%;
       height: 1px;
     }
     section.memberSection {
-
     }
   }
 }

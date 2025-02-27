@@ -1,4 +1,4 @@
-@import '../../common.scss';
+@use '@common/mixin' as *;
 
 .ContextMenu {
   --menuMargin: 0px;
@@ -8,7 +8,7 @@
   }
   background: #000a;
   border-radius: 4px;
-  box-shadow: 0px 0px 16px rgba(0, 0, 0, .3);
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -16,7 +16,8 @@
   width: max-content;
   z-index: 100;
   opacity: 0;
-  transition: opacity ease .15s, top ease .15s, left ease .15s, bottom ease .15s, right ease .15s;
+  transition: opacity ease 0.15s, top ease 0.15s, left ease 0.15s,
+    bottom ease 0.15s, right ease 0.15s;
 
   &:hover,
   &.root {
@@ -72,7 +73,7 @@
       top: 0;
       left: 0;
       pointer-events: none;
-      transition: background ease .15s;
+      transition: background ease 0.15s;
     }
     &:hover::after {
       background: #fff1;

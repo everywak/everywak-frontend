@@ -1,13 +1,13 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .WaktoonChartLargeItem {
   border-radius: 8px;
   display: flex;
   padding: 8px 4px;
-  transition: box-shadow ease .15s;
+  transition: box-shadow ease 0.15s;
 
   &:hover {
-    box-shadow: 0px 0px 16px rgba(0, 0, 0, .2);
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.2);
   }
 
   & > a {
@@ -32,9 +32,9 @@
     min-width: 24px;
     height: 24px;
     margin-right: 16px;
-    
+
     .rank {
-      color: $secondary-text-color;
+      color: var(--text-secondary-color);
       font-weight: 700;
       font-size: 18px;
       line-height: 1em;
@@ -45,7 +45,7 @@
   .previewWrapper {
     --width: 96px;
     --height: 124px;
-    background: rgba(0, 0, 0, .1);
+    background: rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     opacity: 1;
     overflow: hidden;
@@ -54,7 +54,7 @@
     min-width: var(--width);
     height: var(--height);
     max-height: var(--height);
-    transition: opacity ease .15s, box-shadow ease .15s;
+    transition: opacity ease 0.15s, box-shadow ease 0.15s;
     transition-delay: opacity 1s;
 
     .previewImg {
@@ -84,9 +84,9 @@
 
       .rankAmount {
         --newColor: #b59400;
-        --upColor: #00B528;
-        --downColor: #B50000;
-        color: $primary-text-color;
+        --upColor: #00b528;
+        --downColor: #b50000;
+        color: var(--text-primary-color);
         font-weight: 500;
         font-size: 14px;
         line-height: 1em;
@@ -101,7 +101,7 @@
           color: var(--downColor);
         }
         &.stay {
-          color: $secondary-text-color;
+          color: var(--text-secondary-color);
         }
         &.new {
           color: var(--newColor);
@@ -123,7 +123,7 @@
         width: 100%;
 
         .title {
-          color: $primary-text-color;
+          color: var(--text-primary-color);
           display: block;
           font-size: 16px;
           font-weight: 400;
@@ -139,7 +139,7 @@
           flex-grow: 1;
 
           .author {
-            color: $secondary-text-color;
+            color: var(--text-secondary-color);
             margin-top: 4px;
           }
         }
@@ -150,7 +150,7 @@
           width: fit-content;
 
           .changedAmount {
-            color: $secondary-text-color;
+            color: var(--text-secondary-color);
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
@@ -160,7 +160,7 @@
             line-height: 1em;
             width: 68px;
             gap: 4px;
-    
+
             svg {
               font-size: 16px;
             }
@@ -170,14 +170,15 @@
     }
   }
 
-
   &.skeleton {
     .infoArea .descArea {
       .rankAmount.new {
         color: transparent;
       }
       .titleWrapper {
-        .title, .changedAmount, .author {
+        .title,
+        .changedAmount,
+        .author {
           color: transparent;
           width: fit-content;
         }

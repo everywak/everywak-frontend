@@ -1,8 +1,8 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .WaktoonListItem {
   box-sizing: border-box;
-  transition: box-shadow ease .15s;
+  transition: box-shadow ease 0.15s;
 
   @include desktop {
     --imageWidth: 80px;
@@ -12,7 +12,7 @@
     --imageWidth: 80px;
     --imageHeight: 102px;
   }
-  
+
   & > a {
     border-radius: 8px;
     box-sizing: border-box;
@@ -23,13 +23,13 @@
     gap: 12px;
     width: 100%;
     height: fit-content;
-    
+
     img {
       color: transparent;
     }
-  
+
     .previewWrapper {
-      background: rgba(0, 0, 0, .1);
+      background: rgba(0, 0, 0, 0.1);
       border-radius: 8px;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.35);
       opacity: 1;
@@ -39,20 +39,20 @@
       min-width: var(--imageWidth);
       height: var(--imageHeight);
       max-height: var(--imageHeight);
-      transition: opacity ease .15s, box-shadow ease .15s;
+      transition: opacity ease 0.15s, box-shadow ease 0.15s;
       transition-delay: opacity 1s;
-  
-      &:hover{
+
+      &:hover {
         box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.35);
       }
-  
+
       .previewImg {
         object-fit: cover;
         width: 100%;
         height: 100%;
       }
     }
-  
+
     .infoArea {
       display: flex;
       flex-direction: column;
@@ -63,7 +63,7 @@
       align-self: stretch;
       flex-grow: 1;
       width: 0;
-  
+
       .descArea {
         display: flex;
         flex-direction: column;
@@ -71,7 +71,7 @@
         padding: 0px;
         gap: 2px;
         align-self: stretch;
-  
+
         .titleWrapper {
           display: inline-block;
           vertical-align: middle;
@@ -94,7 +94,7 @@
             margin-inline-end: 4px;
 
             &.newIcon {
-              background: #DE3500;
+              background: #de3500;
               font-weight: 700;
               font-size: 10px;
               padding: 3px 4px;
@@ -105,11 +105,12 @@
             font-weight: 500;
             font-size: 14px;
             line-height: 1em;
-            color: $primary-text-color;
+            color: var(--text-primary-color);
           }
         }
-        .author, .publishedTime {
-          color: $secondary-text-color;
+        .author,
+        .publishedTime {
+          color: var(--text-secondary-color);
           font-weight: 400;
           font-size: 14px;
           line-height: 1em;
@@ -144,12 +145,12 @@
             align-items: center;
             padding: 2px 4px;
             gap: 2px;
-            
+
             &.BestTag {
-              background: #B89829;
+              background: #b89829;
             }
             &.WakforestTag {
-              background: #57B829;
+              background: #57b829;
             }
           }
         }
@@ -182,5 +183,4 @@
       }
     }
   }
-
 }

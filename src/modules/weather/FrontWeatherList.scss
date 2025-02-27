@@ -1,4 +1,4 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .FrontWeatherList {
   display: flex;
@@ -46,13 +46,13 @@
         width: 12px;
         height: 24px;
         cursor: pointer;
-    
+
         &.right {
           transform: rotate(180deg);
         }
-    
+
         .line {
-          background-color: #DDDDDD;
+          background-color: #dddddd;
           width: 16px;
           height: 1px;
           transform: rotate(-45deg);
@@ -61,7 +61,7 @@
           left: -1px;
         }
         .lineBottom {
-          background-color: #DDDDDD;
+          background-color: #dddddd;
           width: 16px;
           height: 1px;
           transform: rotate(45deg);
@@ -74,7 +74,7 @@
   }
 
   .present {
-    color: $secondary-text-color;
+    color: var(--text-secondary-color);
     display: flex;
     flex-direction: column;
     align-items: flex-end;

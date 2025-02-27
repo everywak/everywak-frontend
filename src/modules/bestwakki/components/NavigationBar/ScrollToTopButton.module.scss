@@ -1,4 +1,4 @@
-@import '/src/common/common.scss';
+@use '@common/mixin' as *;
 
 .ScrollToTopButton {
   align-items: center;
@@ -19,7 +19,7 @@
     left: 50%;
     transform: translateX(-50%) scale(0);
   }
-  transition: transform ease .35s;
+  transition: transform ease 0.35s;
   pointer-events: none;
 
   &.show {
@@ -33,6 +33,6 @@
   }
 
   svg {
-    fill: $secondary-text-color;
+    fill: var(--text-secondary-color);
   }
 }

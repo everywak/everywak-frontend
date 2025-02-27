@@ -1,5 +1,4 @@
-@import '../../common/common.scss';
-
+@use '@common/mixin' as *;
 
 .WakMusicChartList {
   box-sizing: border-box;
@@ -20,12 +19,12 @@
 
     &:nth-child(odd) {
       .WakMusicChartItem:nth-child(odd) {
-        background: rgba(0, 0, 0, .05);
+        background: rgba(0, 0, 0, 0.05);
       }
     }
     &:nth-child(even) {
       .WakMusicChartItem:nth-child(even) {
-        background: rgba(0, 0, 0, .05);
+        background: rgba(0, 0, 0, 0.05);
       }
     }
   }

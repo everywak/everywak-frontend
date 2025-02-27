@@ -1,8 +1,8 @@
-@import '../../common.scss';
+@use '@common/mixin' as *;
 
 .BasicSearchBar {
   align-items: center;
-  border: solid 1px $component-secondary-border-color;
+  border: solid 1px var(--component-secondary-border-color);
   border-radius: 8px;
   box-sizing: border-box;
   display: flex;
@@ -20,17 +20,17 @@
       width: fit-content;
 
       .currName {
-        color: $primary-color;
+        color: var(--primary-color);
         display: block;
         font-size: 14px;
         min-width: fit-content;
         width: fit-content;
       }
       svg {
-        fill: $primary-color;
+        fill: var(--primary-color);
       }
     }
-    
+
     .dropdownAreaWrapper .dropdownArea .option .name {
       font-size: 14px;
     }
@@ -44,7 +44,7 @@
     background: transparent;
     border: 0;
     box-sizing: border-box;
-    color: $primary-text-color;
+    color: var(--text-primary-color);
     display: flex;
     flex-grow: 1;
     font-family: inherit;
@@ -55,10 +55,10 @@
     width: 100%;
 
     &::placeholder {
-      color: $secondary-text-color;
+      color: var(--text-secondary-color);
       font-size: inherit;
       font-weight: 500;
-      transition: color ease .3s;
+      transition: color ease 0.3s;
     }
 
     &:focus {
@@ -66,7 +66,7 @@
 
       &::placeholder {
         color: transparent;
-        transition: color ease .1s;
+        transition: color ease 0.1s;
       }
     }
   }
@@ -81,8 +81,8 @@
     }
 
     svg {
-      color: $primary-color;
-      transition: width ease .3s, height ease .3s;
+      color: var(--primary-color);
+      transition: width ease 0.3s, height ease 0.3s;
     }
   }
 }

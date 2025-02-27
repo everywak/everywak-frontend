@@ -1,10 +1,10 @@
-@import '../../common.scss';
+@use '@common/mixin' as *;
 
 .CheckBox {
   background: transparent;
   border: none;
   border-radius: 8px;
-  color: $primary-text-color;
+  color: var(--text-primary-color);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -24,15 +24,15 @@
 
   &.on {
     .indicator {
-      background: var(--accentColor, $primary-color);
-      border-color: var(--accentColor, $primary-color);
-  
+      background: var(--accentColor, var(--primary-color));
+      border-color: var(--accentColor, var(--primary-color));
+
       .marker {
         left: 10px;
       }
     }
   }
-  
+
   .label {
     flex-grow: 1;
     text-align: left;
@@ -43,7 +43,7 @@
     height: 16px;
     border-radius: 8px;
     border: #0003 solid 1px;
-    transition: background-color ease .15s;
+    transition: background-color ease 0.15s;
 
     .marker {
       background: #fafafa;
@@ -55,7 +55,7 @@
       position: relative;
       left: -2px;
       top: -2px;
-      transition: left ease .15s;
+      transition: left ease 0.15s;
     }
   }
 
@@ -63,22 +63,22 @@
     font-size: 16px;
     font-weight: 500;
     padding: 16px 12px;
-    transition: background-color ease .1s;
+    transition: background-color ease 0.1s;
 
     &:active {
-      background: rgba(0, 0, 0, .05);
+      background: rgba(0, 0, 0, 0.05);
     }
-    
+
     &.on {
       .indicator .marker {
         left: 10px;
       }
     }
-    
+
     .indicator {
       background: #0001;
       border: transparent solid 1px;
-  
+
       .marker {
         box-shadow: 0 0 2px 1px #0003;
       }

@@ -1,21 +1,21 @@
-@import '../../../common/common.scss';
+@use '@common/mixin' as *;
 
 .WakPlayerVolumeBar {
   cursor: pointer;
   opacity: 0;
-  transition: opacity ease .2s;
+  transition: opacity ease 0.2s;
   position: relative;
   width: 116px;
   height: 28px;
   -webkit-tap-highlight-color: transparent;
-        -webkit-touch-callout: none;
-                  user-select: none;
+  -webkit-touch-callout: none;
+  user-select: none;
   &:hover,
   &.pressed {
     opacity: 1;
   }
   .sliderBg {
-    background: rgba(255, 255, 255, .5);
+    background: rgba(255, 255, 255, 0.5);
     cursor: pointer;
     position: absolute;
     top: 13px;
@@ -23,8 +23,8 @@
     width: 116px;
     height: 2px;
     -webkit-tap-highlight-color: transparent;
-          -webkit-touch-callout: none;
-                    user-select: none;
+    -webkit-touch-callout: none;
+    user-select: none;
   }
   .sliderBar {
     background: #fff;
@@ -35,8 +35,8 @@
     width: 0;
     height: 2px;
     -webkit-tap-highlight-color: transparent;
-          -webkit-touch-callout: none;
-                    user-select: none;
+    -webkit-touch-callout: none;
+    user-select: none;
   }
   .sliderBtn {
     background: #fff;
@@ -49,7 +49,7 @@
     width: 16px;
     height: 16px;
     -webkit-tap-highlight-color: transparent;
-          -webkit-touch-callout: none;
-                    user-select: none;
+    -webkit-touch-callout: none;
+    user-select: none;
   }
 }

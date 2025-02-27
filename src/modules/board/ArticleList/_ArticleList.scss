@@ -2,7 +2,7 @@
   .Article {
     box-sizing: border-box;
     min-height: 97px;
-    border: solid 1px $component-primary-border-color;
+    border: solid 1px var(--component-primary-border-color);
     border-top: none;
     border-radius: 0;
     padding: 14px 15px 14px;
@@ -34,11 +34,13 @@
         }
 
         span {
-          margin-left: .5em;
+          margin-left: 0.5em;
           width: auto;
         }
 
-        .view, .like, .comment {
+        .view,
+        .like,
+        .comment {
           display: inline-flex;
           .icon {
             display: inline-block;
@@ -63,22 +65,22 @@
     }
   }
   .Article:nth-child(2) {
-    border-top: solid 1px $component-primary-border-color;
+    border-top: solid 1px var(--component-primary-border-color);
   }
 }
 
 @mixin ArticleListDesktop {
   margin: 16px 0;
   .Article {
-    border-bottom: solid 1px $component-primary-border-color;
+    border-bottom: solid 1px var(--component-primary-border-color);
     border-radius: 0;
     min-height: 16px;
     opacity: 0;
     position: relative;
-    transition: background-color ease .15s, border-radius ease .15s;
+    transition: background-color ease 0.15s, border-radius ease 0.15s;
 
     &:hover {
-      background-color: rgba(0, 0, 0, .1);
+      background-color: rgba(0, 0, 0, 0.1);
       border-radius: 8px;
       z-index: 10;
     }
@@ -87,7 +89,7 @@
       cursor: auto;
       display: flex;
       border-radius: 0;
-      border-top: solid 1px $component-primary-border-color;
+      border-top: solid 1px var(--component-primary-border-color);
       text-align: center;
       pointer-events: none;
 
@@ -107,7 +109,7 @@
         width: 110px;
       }
       strong.tit {
-        flex: 1; 
+        flex: 1;
       }
       .user_area {
         width: 245px;
@@ -117,22 +119,37 @@
           display: block;
           float: left;
         }
-        .datetime, .view, .like {
+        .datetime,
+        .view,
+        .like {
           text-align: center;
         }
-        .nickname { width: 110px; }
-        .datetime { width: 55px; }
-        .view, .like { width: 40px; }
+        .nickname {
+          width: 110px;
+        }
+        .datetime {
+          width: 55px;
+        }
+        .view,
+        .like {
+          width: 40px;
+        }
 
-        .comment { display: none; }
-        .view, .like, .comment {
-          .icon { display: none; }
+        .comment {
+          display: none;
+        }
+        .view,
+        .like,
+        .comment {
+          .icon {
+            display: none;
+          }
         }
       }
 
       &:hover + .thumb_area {
         background-color: #fff;
-        box-shadow: 0px 0px 6px rgba(0, 0, 0, .25);
+        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
         border-radius: 8px;
         display: block;
         position: absolute;

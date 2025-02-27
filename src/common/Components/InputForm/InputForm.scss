@@ -1,4 +1,4 @@
-@import '../../common.scss';
+@use '@common/mixin' as *;
 
 .InputForm {
   --nameWidth: 100px;
@@ -10,7 +10,7 @@
   gap: 16px;
 
   .name {
-    color: $primary-text-color;
+    color: var(--text-primary-color);
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -46,7 +46,7 @@
       align-self: stretch;
       padding: 0px 16px;
       gap: 10px;
-      color: $secondary-text-color;
+      color: var(--text-secondary-color);
       font-weight: 400;
       font-size: 14px;
       line-height: 1.5em;

@@ -1,4 +1,4 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .Waktoon {
   width: 100%;
@@ -11,7 +11,7 @@
 
   .headerWrapper {
     box-sizing: border-box;
-    background-color: rgba(0, 0, 0, .02);
+    background-color: rgba(0, 0, 0, 0.02);
     padding: 48px 0 32px;
     width: 100%;
 
@@ -29,19 +29,20 @@
         align-items: center;
 
         h1.title {
-          color: $primary-text-color;
+          color: var(--text-primary-color);
           font-weight: 500;
           font-size: 36px;
           line-height: 1em;
           margin: 0;
 
-          a.title, .line {
+          a.title,
+          .line {
             display: none;
           }
 
           .waktoonLogo {
-            color: $primary-text-color;
-            
+            color: var(--text-primary-color);
+
             .beta {
               color: #4ddf8a;
               font-size: 24px;
@@ -66,14 +67,14 @@
 
             li {
               a {
-                color: $primary-text-color;
+                color: var(--text-primary-color);
                 font-weight: 500;
                 font-size: 18px;
                 line-height: 1em;
-                transition: color ease .15s;
+                transition: color ease 0.15s;
 
                 &:hover {
-                  color: $primary-color;
+                  color: var(--primary-color);
                 }
               }
             }
@@ -94,7 +95,7 @@
           }
         }
       }
-      
+
       section.highlight {
         display: flex;
         flex-direction: row;
@@ -102,7 +103,7 @@
         padding: 0px;
         gap: 24px;
         width: 100%;
-        
+
         .intro {
           display: flex;
           flex-direction: column;
@@ -112,7 +113,7 @@
           width: 240px;
 
           h2.title {
-            color: $primary-text-color;
+            color: var(--text-primary-color);
             font-weight: 500;
             font-size: 24px;
             line-height: 1em;
@@ -125,7 +126,7 @@
             line-height: 1.6em;
           }
           .btnMoreBest {
-            color: $primary-color;
+            color: var(--primary-color);
             display: flex;
             align-items: center;
             font-weight: 500;
@@ -146,7 +147,6 @@
           }
         }
       }
-  
     }
   }
 
@@ -214,23 +214,23 @@
   .Waktoon {
     padding: 0 0 31px;
     gap: 0;
-    background: $component-secondary-bg-color;
-  
+    background: var(--component-secondary-bg-color);
+
     .headerWrapper {
-      background: $component-primary-bg-color;
+      background: var(--component-primary-bg-color);
       padding: 0;
-  
+
       .headerContainer {
         margin: 0;
         padding: 0px 0px 12px;
         gap: 32px;
-  
+
         & > header {
           padding: 8px 20px 10px;
           justify-content: center;
-  
+
           h1.title {
-            color: $primary-text-color;
+            color: var(--text-primary-color);
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -246,15 +246,15 @@
               }
             }
             a {
-              color: $primary-text-color;
+              color: var(--text-primary-color);
             }
             .line {
-              background-color: $secondary-text-color;
+              background-color: var(--text-secondary-color);
               display: block;
               width: 2px;
               height: 20px;
             }
-  
+
             .waktoonLogo {
               display: inline-block;
 
@@ -263,22 +263,22 @@
               }
             }
           }
-  
+
           aside.category {
             display: none;
           }
         }
-        
+
         section.highlight {
           flex-direction: column;
           gap: 8px;
-          
+
           .intro {
             flex-direction: row;
             padding: 0px 24px;
             gap: 12px;
             width: fit-content;
-  
+
             h2.title {
               font-size: 24px;
             }
@@ -286,7 +286,7 @@
               display: none;
             }
             .btnMoreBest {
-              color: $primary-color;
+              color: var(--primary-color);
               display: flex;
               align-items: center;
               font-weight: 500;
@@ -306,31 +306,29 @@
           }
           .waktoonBestListWrapper {
             width: 100%;
-  
+
             .WaktoonBestList {
               width: 100%;
-  
+
               ul.itemList {
                 padding-bottom: 0;
               }
             }
           }
         }
-    
       }
     }
-  
+
     .sectionWrapper {
       display: flex;
       flex-direction: column-reverse;
       gap: 16px;
       max-width: 100%;
-      
-  
+
       section.main {
-        background: $component-primary-bg-color;
+        background: var(--component-primary-bg-color);
         padding: 16px 0px;
-  
+
         .ContentPanel {
           padding: 16px 0px;
           gap: 24px;
@@ -340,7 +338,6 @@
           }
 
           .WaktoonGeneralList {
-
             .itemList {
               justify-content: center;
               gap: 0px 8px;
@@ -349,30 +346,31 @@
         }
       }
       section.side {
-        background: $component-primary-bg-color;
+        background: var(--component-primary-bg-color);
         border-top: 1px solid rgba(0, 0, 0, 0.1);
         padding: 8px 0px;
-  
+
         .BasicSearchBar {
           display: none;
         }
-  
+
         .ContentPanel {
           padding: 8px 0;
 
           .SectionHeader.big {
             padding: 0px 24px;
-            .titleArea .title, a {
+            .titleArea .title,
+            a {
               font-size: 16px;
               margin-bottom: 16px;
             }
           }
-  
+
           .SkeletonLoader {
             .WaktoonChartItem.skeleton {
               display: none;
               padding: 5px 16px;
-  
+
               &:first-child {
                 display: flex;
               }
@@ -383,7 +381,7 @@
               border: none;
               display: none;
               padding: 5px 16px;
-  
+
               &.highlight {
                 display: flex;
               }

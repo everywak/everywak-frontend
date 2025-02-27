@@ -1,4 +1,4 @@
-@import '../../common.scss';
+@use '@common/mixin' as *;
 
 .StretchableContainer {
   --size: 320px;
@@ -94,7 +94,7 @@
     z-index: 989;
 
     .sizeControlOverlay {
-      background: $primary-color;
+      background: var(--primary-color);
       position: absolute;
       top: 0;
       right: 0;

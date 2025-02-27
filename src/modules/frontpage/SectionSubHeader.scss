@@ -1,4 +1,4 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 header.SectionSubHeader {
   display: flex;
@@ -7,7 +7,7 @@ header.SectionSubHeader {
   padding: 0px 16px;
 
   .title {
-    color: $primary-text-color;
+    color: var(--text-primary-color);
     font-weight: 500;
     font-size: 16px;
     line-height: 1em;

@@ -1,7 +1,6 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .BottomNavigationBar.WaktoonBottomNavigationBar {
-  
   ul.itemList li.navigationItem .icon {
     background: transparent;
   }

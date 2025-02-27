@@ -7,21 +7,10 @@ $mob-s-width: 375px;
 
 $header-height: 52px;
 
-
-$primary-color: #0085ff;
-$primary-light-color: #1b91ff;
-$primary-dark-color: #0077e7;
-$background-white-color: #fafafa;
-$component-primary-bg-color: #fafafa;
-$component-primary-border-color: #f0f0f0;
-$component-secondary-bg-color: #f0f0f0;
-$component-secondary-border-color: #ccc;
-
 $image-background-color: #ddd;
 
 $primary-text-color: #333;
 $primary-middle-text-color: #555;
-$secondary-text-color: #888;
 $dark-primary-text-color: #f0f0f0;
 $dark-secondary-text-color: #aaa;
 
@@ -33,7 +22,14 @@ $youtube-color: #f00;
 $chzzk-color: #00ffa3;
 $afreeca-color: #0545b1;
 $afreeca-light-color: #3262b4;
-$instagram-color: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+$instagram-color: linear-gradient(
+  45deg,
+  #f09433 0%,
+  #e6683c 25%,
+  #dc2743 50%,
+  #cc2366 75%,
+  #bc1888 100%
+);
 $wakki-color: #5ac467;
 $github-color: #1b1f23;
 
@@ -41,6 +37,8 @@ $emphasis-text-color: #d40000;
 
 :root {
   --primary-color: #0085ff;
+  --primary-light-color: #1b91ff;
+  --primary-dark-color: #0077e7;
 
   --white: #fff;
   --gray-100: #fafafa;
@@ -55,13 +53,19 @@ $emphasis-text-color: #d40000;
 
   --text-primary-color: var(--gray-800);
   --text-secondary-color: var(--gray-700);
-  
-  --isedol-color: #D74D74;
-  
-  --isedol-ine-color: #8A2BE2;
-  --isedol-jingburger-color: #F0A957;
+
+  --background-white-color: #fafafa;
+  --component-primary-bg-color: #fafafa;
+  --component-primary-border-color: #f0f0f0;
+  --component-secondary-bg-color: #f0f0f0;
+  --component-secondary-border-color: #ccc;
+
+  --isedol-color: #d74d74;
+
+  --isedol-ine-color: #8a2be2;
+  --isedol-jingburger-color: #f0a957;
   --isedol-lilpa-color: #443965;
-  --isedol-jururu-color: #FF008C;
-  --isedol-gosegu-color: #467EC6;
-  --isedol-viichan-color: #95C100;
+  --isedol-jururu-color: #ff008c;
+  --isedol-gosegu-color: #467ec6;
+  --isedol-viichan-color: #95c100;
 }

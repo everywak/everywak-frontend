@@ -1,4 +1,4 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .WakMusicChartItem {
   background: rgba(0, 0, 0, 0);
@@ -14,11 +14,11 @@
     font-size: 16px;
     line-height: 1em;
     text-align: center;
-    color: $secondary-text-color;
+    color: var(--text-secondary-color);
     width: 24px;
   }
   .thumbnail {
-    background: #D9D9D9;
+    background: #d9d9d9;
     border-radius: 8px;
     width: 52px;
     height: 52px;
@@ -36,16 +36,15 @@
       font-weight: 400;
       font-size: 13px;
       line-height: 1em;
-      color: $primary-text-color;
+      color: var(--text-primary-color);
     }
     .author {
       font-weight: 400;
       font-size: 11px;
       line-height: 1em;
-      color: $secondary-text-color;
+      color: var(--text-secondary-color);
     }
   }
   .moreIcon {
-
   }
 }

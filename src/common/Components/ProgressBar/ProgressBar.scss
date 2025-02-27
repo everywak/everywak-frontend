@@ -1,4 +1,4 @@
-@import '../../common.scss';
+@use '@common/mixin' as *;
 
 .ProgressBar {
   --defaultHeight: 4px;
@@ -12,13 +12,13 @@
     width: 100%;
     padding: calc((var(--hoveredHeight) - var(--defaultHeight)) / 2) 0;
     overflow: hidden;
-    transition: padding ease .15s;
-  
+    transition: padding ease 0.15s;
+
     &::-webkit-progress-bar,
     &::-webkit-progress-value {
       border-radius: calc(var(--defaultHeight) / 2);
       height: 100%;
-      transition: height ease .15s, border-radius ease .15s;
+      transition: height ease 0.15s, border-radius ease 0.15s;
     }
   }
   &:hover {
@@ -31,12 +31,12 @@
       }
     }
   }
-  
+
   .progressBar {
     border-radius: 2px;
     cursor: pointer;
     display: flex;
-    transition: padding ease .15s;
+    transition: padding ease 0.15s;
 
     &::-webkit-progress-bar {
       background: #fff3;
@@ -53,7 +53,7 @@
     top: 0px;
     pointer-events: none;
     opacity: 0;
-    transition: opacity ease .3s;
+    transition: opacity ease 0.3s;
 
     &::-webkit-progress-bar {
       background: transparent;

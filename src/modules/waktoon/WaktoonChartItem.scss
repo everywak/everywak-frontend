@@ -1,11 +1,11 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .WaktoonChartItem {
   border-radius: 8px;
   display: flex;
   padding: 4px;
   align-self: stretch;
-  transition: background ease .15s;
+  transition: background ease 0.15s;
 
   &:hover {
     background: #0001;
@@ -35,9 +35,9 @@
     width: 28px;
     min-width: 28px;
     align-self: center;
-    
+
     .rank {
-      color: $secondary-text-color;
+      color: var(--text-secondary-color);
       font-weight: 700;
       font-size: 14px;
       line-height: 1em;
@@ -48,7 +48,7 @@
   .previewWrapper {
     --width: 48px;
     --height: 48px;
-    background: rgba(0, 0, 0, .1);
+    background: rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     opacity: 1;
     overflow: hidden;
@@ -57,7 +57,7 @@
     min-width: var(--width);
     height: var(--height);
     max-height: var(--height);
-    transition: opacity ease .15s, box-shadow ease .15s;
+    transition: opacity ease 0.15s, box-shadow ease 0.15s;
     transition-delay: opacity 1s;
 
     .previewImg {
@@ -96,7 +96,7 @@
         width: 0;
 
         .title {
-          color: $primary-text-color;
+          color: var(--text-primary-color);
           display: block;
           font-size: 14px;
           font-weight: 400;
@@ -111,7 +111,7 @@
           word-break: break-all;
         }
         .changedAmount {
-          color: $secondary-text-color;
+          color: var(--text-secondary-color);
           display: flex;
           flex-direction: row;
           justify-content: flex-start;
@@ -119,19 +119,19 @@
           font-size: 14px;
           font-weight: 400;
           line-height: 1em;
-  
+
           svg {
             font-size: 14px;
             margin-right: 2px;
           }
         }
       }
-      
+
       .rankAmount {
         --newColor: #b59400;
-        --upColor: #00B528;
-        --downColor: #B50000;
-        color: $primary-text-color;
+        --upColor: #00b528;
+        --downColor: #b50000;
+        color: var(--text-primary-color);
         font-weight: 500;
         font-size: 12px;
         line-height: 1em;
@@ -146,7 +146,7 @@
           color: var(--downColor);
         }
         &.stay {
-          color: $secondary-text-color;
+          color: var(--text-secondary-color);
         }
         &.new {
           color: var(--newColor);
@@ -163,14 +163,14 @@
     }
   }
 
-
   &.skeleton {
     .infoArea .descArea {
       .rankAmount.new {
         color: transparent;
       }
       .titleWrapper {
-        .title, .changedAmount {
+        .title,
+        .changedAmount {
           color: transparent;
           width: fit-content;
         }

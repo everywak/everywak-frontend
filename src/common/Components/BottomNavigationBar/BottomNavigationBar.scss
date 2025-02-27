@@ -1,9 +1,7 @@
-@import '../../common.scss';
-
-.BottomNavigationBar { 
-  --accentColor: $primary-color;
-  background: $component-primary-bg-color;
-  border: 1px solid $component-primary-border-color;
+.BottomNavigationBar {
+  --accentColor: var(--primary-color);
+  background: var(--component-primary-bg-color);
+  border: 1px solid var(--component-primary-border-color);
   box-sizing: border-box;
   padding: 0px 16px;
   width: 100%;

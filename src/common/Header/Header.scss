@@ -1,8 +1,8 @@
-@import '../common.scss';
+@use '@common/mixin' as *;
 
 header.header {
-  background-color: $component-primary-bg-color;
-  outline: solid 1px $component-primary-border-color;
+  background-color: var(--component-primary-bg-color);
+  outline: solid 1px var(--component-primary-border-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -19,7 +19,7 @@ header.header {
     }
   }
 
-  .left, 
+  .left,
   .right {
     position: relative;
     width: 52px;

@@ -1,4 +1,4 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .PrevWeatherList {
   display: flex;
@@ -7,7 +7,7 @@
   margin: 0;
 
   & > .date {
-    color: $secondary-text-color;
+    color: var(--text-secondary-color);
     font-weight: 500;
     font-size: calc((var(--responsiveScale) + 1px) / 2 * 20);
     line-height: 1em;

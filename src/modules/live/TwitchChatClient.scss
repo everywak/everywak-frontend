@@ -1,10 +1,10 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .TwitchChatClient {
   overflow: hidden;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  grid-template-areas: 
+  grid-template-areas:
     'header'
     'chat'
     'bottom';
@@ -13,7 +13,7 @@
   position: relative;
 
   .twitchChatHeader {
-    box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,10 +68,10 @@
         vertical-align: middle;
 
         &.sysMessage {
-          background: $component-primary-border-color;
+          background: var(--component-primary-border-color);
           border-radius: 8px;
           box-sizing: border-box;
-          color: $secondary-text-color;
+          color: var(--text-secondary-color);
           margin: 4px;
           padding: 5px 16px;
           text-align: center;
@@ -88,11 +88,10 @@
         }
 
         & > span {
-          vertical-align: middle;;
+          vertical-align: middle;
         }
 
         .chatProfile {
-
           .nickname {
             font-weight: 500;
           }
@@ -107,7 +106,6 @@
           vertical-align: middle;
 
           @include not-desktop {
-            
             img {
               width: 20px;
               height: 20px;
@@ -129,7 +127,7 @@
       right: 0;
       margin: 0 auto;
       opacity: 0;
-      animation: animFadeIn .3s .5s ease normal forwards;
+      animation: animFadeIn 0.3s 0.5s ease normal forwards;
     }
     @keyframes animFadeIn {
       0% {
@@ -141,8 +139,8 @@
     }
   }
   .TwitchChatList.filteredChatList {
-    background: $component-primary-bg-color;
-    border-bottom: 1px solid $component-secondary-border-color;
+    background: var(--component-primary-bg-color);
+    border-bottom: 1px solid var(--component-secondary-border-color);
     box-shadow: 0px 2px 8px 0px #0003;
     grid-area: chat;
     position: absolute;
@@ -155,7 +153,7 @@
   }
 
   .twitchChatBottom {
-    box-shadow: 0 0 4px 1px rgba(0, 0, 0, .1);
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -175,8 +173,8 @@
       position: relative;
 
       textarea.twitchChatInput {
-        background: $component-primary-border-color;
-        border: $component-primary-border-color solid 2px;
+        background: var(--component-primary-border-color);
+        border: var(--component-primary-border-color) solid 2px;
         border-radius: 8px;
         box-sizing: border-box;
         display: block;
@@ -187,15 +185,15 @@
         resize: none;
         width: 100%;
         height: 40px;
-        transition: border ease .3s;
-  
+        transition: border ease 0.3s;
+
         &:focus {
-          border-color: $primary-color;
+          border-color: var(--primary-color);
           outline: none;
         }
       }
       .twitchChatBtnEmote {
-        color: $secondary-text-color;
+        color: var(--text-secondary-color);
         position: absolute;
         right: 2px;
         bottom: 2px;
@@ -206,7 +204,7 @@
     .twitchChatBtnSettingMobile {
       padding: 6px;
       margin-right: 0;
-      
+
       @include desktop {
         display: none;
       }
@@ -219,7 +217,7 @@
       justify-content: space-between;
       margin-top: 8px;
       width: 100%;
-      
+
       @include not-desktop {
         & {
           display: none;
@@ -231,7 +229,7 @@
         flex-direction: row;
 
         .twitchChatBtnSetting {
-          color: $secondary-text-color;
+          color: var(--text-secondary-color);
           margin: 0 4px;
           padding: 1px 6px;
         }
@@ -262,9 +260,9 @@
       }
 
       .TwitchChatEmotePickerContent {
-        background: $component-primary-bg-color;
+        background: var(--component-primary-bg-color);
         border-radius: 8px;
-        box-shadow: 0px 0px 6px rgba(0, 0, 0, .25);
+        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
         height: 100%;
         overflow: hidden;
         overflow-y: scroll;
@@ -288,7 +286,7 @@
 
         .TwitchChatEmoteSet {
           padding: 8px 0;
-          border-bottom: 1px solid $component-secondary-border-color;
+          border-bottom: 1px solid var(--component-secondary-border-color);
 
           .emoteSetName {
             display: flex;
@@ -342,9 +340,9 @@
       }
 
       .TwitchChatSettingPanelContent {
-        background: $component-primary-bg-color;
+        background: var(--component-primary-bg-color);
         border-radius: 8px;
-        box-shadow: 0px 0px 6px rgba(0, 0, 0, .25);
+        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
         height: 100%;
         position: relative;
         padding: 8px;
@@ -360,7 +358,7 @@
             width: 28px;
           }
           .title {
-            color: $primary-text-color;
+            color: var(--text-primary-color);
             flex-grow: 1;
             font-size: 15px;
             font-weight: 500;
@@ -389,7 +387,7 @@
     grid-row-end: 4;
 
     .loginTitle {
-      color: $secondary-text-color;
+      color: var(--text-secondary-color);
       font-size: 14px;
       font-weight: 400;
     }
@@ -403,14 +401,14 @@
   }
 
   .twitchChatButton {
-    background: $primary-color;
+    background: var(--primary-color);
     border: none;
     border-radius: 8px;
     color: $dark-primary-text-color;
     display: flex;
     align-items: center;
     height: 32px;
-    transition: filter ease .15s, background-color ease .15s;
+    transition: filter ease 0.15s, background-color ease 0.15s;
     cursor: pointer;
 
     &:hover {

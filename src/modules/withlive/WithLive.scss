@@ -1,4 +1,4 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 header.header {
   z-index: 1000;
@@ -31,17 +31,17 @@ header.header {
     grid-template-columns: 100%;
     grid-template-rows: auto calc(100vw / var(--sidePlayerCount) / 16 * 9) 1fr;
     grid-template-areas:
-    "live"
-    "side"
-    "chat";
-    
+      'live'
+      'side'
+      'chat';
+
     &.grid {
       grid-template-rows: auto 1fr;
       grid-template-areas:
-        "live"
-        "chat";
+        'live'
+        'chat';
     }
-    
+
     .playerWrapper {
       .FloatingTarget {
         height: calc(100vw / 16 * 9);
@@ -62,7 +62,9 @@ header.header {
   }
   @media (orientation: landscape) {
     @include desktop {
-      grid-template-columns: 1fr calc((100vh - #{$header-height}) / var(--sidePlayerCount) / 9 * 16) auto;
+      grid-template-columns:
+        1fr calc((100vh - #{$header-height}) / var(--sidePlayerCount) / 9 * 16)
+        auto;
       &.expanded {
         grid-template-columns: 1fr calc(100vh / var(--sidePlayerCount) / 9 * 16) auto;
       }
@@ -71,13 +73,11 @@ header.header {
       grid-template-columns: 1fr calc(100vh / var(--sidePlayerCount) / 9 * 16) auto;
     }
     grid-template-rows: 100%;
-    grid-template-areas:
-    "live side chat";
+    grid-template-areas: 'live side chat';
 
     &.grid {
       grid-template-columns: 1fr auto;
-      grid-template-areas:
-        "live chat";
+      grid-template-areas: 'live chat';
       &.expanded {
         grid-template-columns: 1fr auto;
       }
@@ -89,11 +89,11 @@ header.header {
       height: 100vh;
       overflow-y: hidden;
       .FloatingTarget {
-        transition: height ease .3s;
+        transition: height ease 0.3s;
       }
       &.expanded {
         overflow-y: scroll;
-  
+
         .FloatingTarget {
           height: 0px;
         }
@@ -104,11 +104,10 @@ header.header {
         }
       }
     }
-    
   }
 
   .playerWrapper {
-    background: $component-primary-bg-color;
+    background: var(--component-primary-bg-color);
     grid-area: live;
     @include desktop {
       overflow-y: scroll;
@@ -133,40 +132,39 @@ header.header {
         height: calc(100% / var(--gridRows, 1));
       }
     }
-    
+
     @media (orientation: portrait) {
       --wrapperPortraitHeight: calc(100vw / 16 * 9);
       height: var(--wrapperPortraitHeight);
       overflow: hidden;
-      transition: height ease .3s;
+      transition: height ease 0.3s;
 
       footer.footer {
         display: none;
       }
     }
-    
+
     &::-webkit-scrollbar {
       display: none; /* Chrome, Safari, Opera*/
     }
-    
+
     .BroadcasterPanel {
-      
       .panelContainer {
         padding: 16px 24px 24px;
-        
+
         a img {
           max-width: 100%;
         }
       }
       .footerTxt {
-        color: $secondary-text-color;
+        color: var(--text-secondary-color);
         font-size: 14px;
         font-weight: 400;
         margin: 0;
         padding: 12px 24px 72px;
 
         a {
-          color: $primary-text-color;
+          color: var(--text-primary-color);
           font-weight: 500;
         }
       }
@@ -192,9 +190,9 @@ header.header {
     box-sizing: border-box;
     position: relative;
     width: 100%;
-  
+
     &::before {
-      content: "";
+      content: '';
       display: block;
       padding-top: calc(100% / 16 * 9);
     }
@@ -236,11 +234,8 @@ header.header {
     position: absolute;
 
     &.isMoving {
-      transition: 
-        left ease .15s, 
-        top ease .15s, 
-        width ease .15s, 
-        height ease .15s;
+      transition: left ease 0.15s, top ease 0.15s, width ease 0.15s,
+        height ease 0.15s;
     }
 
     .VideoContentPlayer .overlay.iframemode {
@@ -248,14 +243,13 @@ header.header {
     }
 
     &.isSide {
-
       &:hover::after {
         opacity: 1;
       }
-  
+
       &::after {
         color: $dark-primary-text-color;
-        content:var(--name);
+        content: var(--name);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -265,11 +259,11 @@ header.header {
         width: 100%;
         height: 100%;
         opacity: 0;
-        transition: opacity ease .15s;
+        transition: opacity ease 0.15s;
         user-select: none;
         pointer-events: none;
       }
-    
+
       .VideoContentPlayer {
         .overlay.iframemode {
           display: flex;
@@ -299,7 +293,9 @@ header.header {
 .WithLive {
   @media (orientation: portrait) {
     .opened + .TwitchChat {
-      --wrapperPortraitHeight: calc(100vw / 16 * 9 + (100vw / var(--sidePlayerCount) / 16 * 9) + 84px);
+      --wrapperPortraitHeight: calc(
+        100vw / 16 * 9 + (100vw / var(--sidePlayerCount) / 16 * 9) + 84px
+      );
     }
     .expanded + .TwitchChat {
       --wrapperPortraitHeight: calc(100vh);
@@ -308,18 +304,24 @@ header.header {
   .TwitchChat {
     grid-area: chat;
     @media (orientation: portrait) {
-      --wrapperPortraitHeight: calc(100vw / 16 * 9 + (100vw / var(--sidePlayerCount) / 16 * 9));
-      max-height: calc(100vh - #{$header-height} - var(--wrapperPortraitHeight));
-      
+      --wrapperPortraitHeight: calc(
+        100vw / 16 * 9 + (100vw / var(--sidePlayerCount) / 16 * 9)
+      );
+      max-height: calc(
+        100vh - #{$header-height} - var(--wrapperPortraitHeight)
+      );
+
       .opened + & {
-        --wrapperPortraitHeight: calc(100vw / 16 * 9 + (100vw / var(--sidePlayerCount) / 16 * 9) + 84px);
+        --wrapperPortraitHeight: calc(
+          100vw / 16 * 9 + (100vw / var(--sidePlayerCount) / 16 * 9) + 84px
+        );
       }
       .expanded + & {
         --wrapperPortraitHeight: calc(100vh);
       }
-      transition: max-height ease .3s;
+      transition: max-height ease 0.3s;
     }
-    
+
     .sizeController,
     .sizeControlWrapper .sizeControlOverlay {
       z-index: 1000;

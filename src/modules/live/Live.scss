@@ -1,4 +1,4 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 @include not-desktop {
   @media (orientation: landscape) {
@@ -25,7 +25,7 @@
   &.expanded {
     height: 100vh;
   }
-  
+
   & + footer.footer {
     display: none;
   }
@@ -35,9 +35,9 @@
     -ms-grid-columns: 100%;
     -ms-grid-rows: auto 1fr;
     grid-template-areas:
-    "live"
-    "chat";
-    
+      'live'
+      'chat';
+
     .playerWrapper {
       .VideoContentPlayer {
         height: calc(100vw / 16 * 9);
@@ -61,11 +61,10 @@
     grid-template-rows: 100%;
     -ms-grid-columns: 1fr auto;
     -ms-grid-rows: 100%;
-    grid-template-areas:
-    "live chat";
+    grid-template-areas: 'live chat';
   }
   .playerWrapper {
-    background: $component-primary-bg-color;
+    background: var(--component-primary-bg-color);
     grid-area: live;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -76,11 +75,11 @@
       height: 100vh;
       overflow-y: hidden;
       .VideoContentPlayer {
-        transition: height ease .3s;
+        transition: height ease 0.3s;
       }
       &.expanded {
         overflow-y: scroll;
-  
+
         .VideoContentPlayer {
           height: 0px;
         }
@@ -91,22 +90,22 @@
         }
       }
     }
-    
+
     @media (orientation: portrait) {
       --wrapperPortraitHeight: calc(100vw / 16 * 9);
       height: var(--wrapperPortraitHeight);
       overflow: hidden;
-      transition: height ease .3s;
-  
+      transition: height ease 0.3s;
+
       footer.footer {
         display: none;
       }
     }
-    
+
     &::-webkit-scrollbar {
       display: none; /* Chrome, Safari, Opera*/
     }
-    
+
     .VideoContentPlayer {
       width: 100%;
       height: auto;
@@ -116,7 +115,7 @@
         }
         @include not-desktop {
           height: 100vh;
-          transition: height ease .3s;
+          transition: height ease 0.3s;
           &::before {
             padding-top: 100vh;
           }
@@ -124,7 +123,7 @@
       }
 
       .overlay {
-        transition: padding ease .3s;
+        transition: padding ease 0.3s;
       }
     }
     @media (orientation: landscape) {
@@ -146,7 +145,6 @@
     }
 
     .BroadcasterPanel {
-
     }
   }
   @media (orientation: portrait) {
@@ -161,18 +159,22 @@
     grid-area: chat;
     @media (orientation: portrait) {
       --wrapperPortraitHeight: calc(100vw / 16 * 9);
-      max-height: calc(100vh - #{$header-height} - var(--wrapperPortraitHeight));
-      
+      max-height: calc(
+        100vh - #{$header-height} - var(--wrapperPortraitHeight)
+      );
+
       .opened + & {
         --wrapperPortraitHeight: calc(100vw / 16 * 9 + 84px);
-        max-height: calc(100vh - #{$header-height} - var(--wrapperPortraitHeight));
+        max-height: calc(
+          100vh - #{$header-height} - var(--wrapperPortraitHeight)
+        );
       }
       .expanded + & {
         --wrapperPortraitHeight: calc(100vh - #{$header-height});
       }
-      transition: max-height ease .3s;
+      transition: max-height ease 0.3s;
     }
-    
+
     .sizeController {
       @media (orientation: portrait) {
         display: none;

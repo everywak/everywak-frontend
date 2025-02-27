@@ -1,11 +1,10 @@
-@import '../../../common/common.scss';
+@use '@common/mixin' as *;
 @import './_ArticleList';
 
 .ArticleList {
-
   .Article {
     animation-name: fadein;
-    animation-duration: .3s;
+    animation-duration: 0.3s;
     animation-fill-mode: forwards;
     display: flex;
     width: 100%;
@@ -16,33 +15,33 @@
       width: 100%;
       line-height: 120%;
       font-size: 14px;
-      color: $primary-text-color;
+      color: var(--text-primary-color);
       order: 1;
 
-      .icon_new_txt{
+      .icon_new_txt {
         color: #a00;
         display: none;
       }
-  
+
       &:link {
-        color: $primary-text-color;
-        
-        .icon_new_txt{
+        color: var(--text-primary-color);
+
+        .icon_new_txt {
           color: #a00;
           display: none;
         }
       }
       &:visited {
-        color: $secondary-text-color;
-  
-        .icon_new_txt{
+        color: var(--text-secondary-color);
+
+        .icon_new_txt {
           color: #fff;
           display: none;
         }
       }
-  
+
       .board_txt {
-        color: $secondary-text-color;
+        color: var(--text-secondary-color);
         font-size: 12px;
         font-weight: 500;
         line-height: 12px;
@@ -52,13 +51,13 @@
         height: 100%;
       }
       .user_area {
-        color: $secondary-text-color;
+        color: var(--text-secondary-color);
         font-size: 12px;
         font-weight: 500;
       }
     }
     .thumb_area img {
-        border-radius: 8px;
+      border-radius: 8px;
     }
   }
 }
@@ -84,7 +83,7 @@
 
   .MoreArticleButton {
     border-radius: 8px;
-    color: $primary-color;
+    color: var(--primary-color);
     cursor: pointer;
     display: block;
     font-size: 14px;
@@ -92,10 +91,10 @@
     padding-top: 12px;
     text-align: center;
     width: 100%;
-    transition: background-color ease .3s;
+    transition: background-color ease 0.3s;
 
     &:hover {
-      background: rgba(0, 0, 0, .05);
+      background: rgba(0, 0, 0, 0.05);
       @include not-desktop {
         background: transparent;
       }
@@ -112,12 +111,12 @@
 
     svg {
       display: block;
-      fill: $primary-color;
+      fill: var(--primary-color);
       margin: 0 auto;
       position: relative;
       top: 0px;
       left: 0px;
-      transition: top .3s;
+      transition: top 0.3s;
       transition-timing-function: cubic-bezier(0.3, 2, 0.635, 1.005);
     }
   }
@@ -156,12 +155,16 @@
         display: inline-block;
         line-height: 14px;
         width: fit-content;
-        
+
         @include desktop {
-          &.mobile { display: none; }
+          &.mobile {
+            display: none;
+          }
         }
         @include not-desktop {
-          &.pc { display: none; }
+          &.pc {
+            display: none;
+          }
         }
         span {
           display: inline-block;
@@ -171,7 +174,9 @@
           }
           margin-left: 0;
         }
-        .datetime, .view, .like {
+        .datetime,
+        .view,
+        .like {
           span {
             text-align: center;
           }
@@ -190,5 +195,4 @@
       }
     }
   }
-
 }

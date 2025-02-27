@@ -1,4 +1,4 @@
-@import '../../../common/common.scss';
+@use '@common/mixin' as *;
 
 .WaktoonEditor {
   --contentWidth: 900px;
@@ -12,7 +12,7 @@
 
   .headerWrapper {
     box-sizing: border-box;
-    background-color: rgba(0, 0, 0, .02);
+    background-color: rgba(0, 0, 0, 0.02);
     padding: 48px 0 32px;
     width: 100%;
 
@@ -22,16 +22,16 @@
       max-width: var(--contentWidth);
       margin: 0 auto;
       gap: 16px 0;
-  
+
       & > .btnBack {
         align-items: center;
-        color: $primary-color;
+        color: var(--primary-color);
         display: flex;
         flex-direction: row;
         font-size: 16px;
         font-weight: 500;
         line-height: 1em;
-  
+
         svg {
           display: inline-block;
           margin: 1px;
@@ -47,7 +47,7 @@
         gap: 16px;
 
         h1.subject {
-          color: $primary-text-color;
+          color: var(--text-primary-color);
           font-weight: 500;
           font-size: 36px;
           line-height: 1em;
@@ -73,7 +73,6 @@
           }
         }
       }
-  
     }
   }
 
@@ -85,7 +84,9 @@
     gap: 24px;
     max-width: var(--contentWidth);
 
-    .WaktoonEditorForm { /* dummy */ }
+    .WaktoonEditorForm {
+      /* dummy */
+    }
 
     .waktoonEpisodeListWrapper {
       display: flex;
@@ -112,21 +113,20 @@
           gap: 8px;
 
           .title {
-            color: $primary-text-color;
+            color: var(--text-primary-color);
             font-weight: 500;
             font-size: 24px;
             line-height: 1em;
             margin: 0;
           }
           .description {
-            color: $secondary-text-color;
+            color: var(--text-secondary-color);
             font-weight: 500;
             font-size: 16px;
             line-height: 1em;
           }
         }
         .BasicButton {
-
         }
       }
       .WaktoonEpisodeList {
@@ -160,7 +160,7 @@
       position: relative;
       width: 255px;
       height: 330px;
-  
+
       & > .BasicImage {
         box-sizing: border-box;
         position: absolute;
@@ -170,7 +170,7 @@
         height: 100%;
       }
     }
-    
+
     .thumbnailFooter {
       box-sizing: border-box;
       display: flex;
@@ -182,7 +182,7 @@
       width: 100%;
 
       .thumbnailTxt {
-        color: $primary-text-color;
+        color: var(--text-primary-color);
         font-weight: 500;
         font-size: 16px;
         line-height: 1em;
@@ -196,13 +196,13 @@
         gap: 0;
 
         .BasicButton {
-          color: $primary-text-color;
+          color: var(--text-primary-color);
           margin: 0;
           padding: 6px;
-          transition: color ease .15s;
+          transition: color ease 0.15s;
 
           &:hover {
-            color: $primary-color;
+            color: var(--primary-color);
           }
         }
       }

@@ -1,5 +1,3 @@
-@import '../../common.scss';
-
 ul.BottomNavigationItemList {
   --itemLength: 4;
   display: flex;
@@ -20,7 +18,6 @@ ul.BottomNavigationItemList {
     gap: 4px;
 
     &.selected {
-
       .icon {
         color: var(--accentColor);
         svg {
@@ -35,7 +32,7 @@ ul.BottomNavigationItemList {
     .icon {
       background: transparent;
       border-radius: 50%;
-      color: $primary-text-color;
+      color: var(--text-primary-color);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -43,11 +40,11 @@ ul.BottomNavigationItemList {
       height: 24px;
 
       svg {
-        color: $primary-text-color;
+        color: var(--text-primary-color);
       }
     }
     .label {
-      color: $primary-text-color;
+      color: var(--text-primary-color);
       font-weight: 400;
       font-size: 12px;
       line-height: 1em;

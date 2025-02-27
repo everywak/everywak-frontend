@@ -1,15 +1,13 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .Bestwakki {
-
   @include tablet {
     margin: 0 calc((100% - 431px) / 2);
   }
-  
-  .moduleHeader {
 
+  .moduleHeader {
     h1 {
-      color: $primary-text-color;
+      color: var(--text-primary-color);
       margin: 31px 0 0;
       padding: 0 0 26px 16px;
       font-size: 28px;
@@ -27,12 +25,12 @@
 
       .SortList {
       }
-      
+
       .right {
         display: flex;
         align-items: center;
         flex-direction: row;
-        
+
         .SearchBar {
           margin-left: 4px;
         }
@@ -42,7 +40,7 @@
 
   .more {
     box-sizing: border-box;
-    border: solid 1px $component-primary-border-color;
+    border: solid 1px var(--component-primary-border-color);
     border-top: none;
     display: flex;
     justify-content: center;
@@ -52,7 +50,7 @@
 
     svg.frontOnly {
       display: block;
-      fill: $component-secondary-border-color;
+      fill: var(--component-secondary-border-color);
     }
   }
 }

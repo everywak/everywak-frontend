@@ -1,4 +1,4 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .VideoWatch {
   --responsiveScale: calc(min(100vw, 1200px) / 1200);
@@ -18,7 +18,7 @@
     --width: calc(100vw - var(--asideWidth) - 6.4vw - 64px - 24px);
     background: black;
     width: var(--width);
-    height: calc(var(--width)  / 16 * 9);
+    height: calc(var(--width) / 16 * 9);
     @include not-desktop {
       width: 100vw;
       height: calc(100vw / 16 * 9);
@@ -62,7 +62,7 @@
         gap: 24px;
 
         & > a {
-          color: $primary-text-color;
+          color: var(--text-primary-color);
           display: flex;
           flex-direction: row;
           align-items: center;
@@ -146,7 +146,7 @@
             flex-grow: 1;
 
             .title {
-              color: $primary-text-color;
+              color: var(--text-primary-color);
               font-weight: 500;
               font-size: 20px;
               line-height: 1em;
@@ -175,7 +175,7 @@
                 align-self: stretch;
 
                 .nickname {
-                  color: $primary-text-color;
+                  color: var(--text-primary-color);
                   font-weight: 400;
                   font-size: 18px;
                   line-height: 1em;
@@ -188,8 +188,8 @@
                   gap: 8px;
 
                   .btnLink {
-                    color: $primary-text-color;
-                    background: #F0F0F0;
+                    color: var(--text-primary-color);
+                    background: #f0f0f0;
                     border-radius: 15px;
                     display: flex;
                     flex-direction: row;
@@ -204,7 +204,6 @@
             }
           }
           .stat {
-
           }
         }
         .descriptionWrapper {
@@ -220,7 +219,7 @@
           font-size: 14px;
 
           .statText {
-            color: $primary-text-color;
+            color: var(--text-primary-color);
             display: flex;
             flex-direction: row;
             align-items: flex-start;

@@ -1,14 +1,14 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .LivePreview {
-  background: rgba(0, 0, 0, .1);
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   list-style: none;
   width: 100%;
   height: 100%;
   overflow: hidden;
   position: relative;
-  transition: box-shadow ease .3s;
+  transition: box-shadow ease 0.3s;
 
   & > a {
     display: block;
@@ -17,7 +17,7 @@
     position: relative;
   }
 
-  &:hover{
+  &:hover {
     box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
   }
 
@@ -28,8 +28,8 @@
   .previewImg {
     opacity: 1;
     width: 100%;
-    transition: opacity ease .15s;
-    transition-delay: .2s;
+    transition: opacity ease 0.15s;
+    transition-delay: 0.2s;
 
     & > img {
       box-sizing: border-box;
@@ -47,8 +47,8 @@
     width: 48px;
     height: 48px;
     opacity: 1;
-    transition: opacity ease .15s;
-    transition-delay: .3s;
+    transition: opacity ease 0.15s;
+    transition-delay: 0.3s;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
     @include tablet {
       left: 6px;
@@ -56,11 +56,14 @@
       width: 32px;
       height: 32px;
     }
-    &.twitch, &.youtube, &.chzzk, &.afreeca {
+    &.twitch,
+    &.youtube,
+    &.chzzk,
+    &.afreeca {
       border-color: red;
     }
 
-    .innerCircle{
+    .innerCircle {
       border: 1px solid white;
       box-sizing: border-box;
       width: 100%;
@@ -74,11 +77,10 @@
     left: 0;
     width: 100%;
     height: 100%;
-    transition: opacity ease .15s;
+    transition: opacity ease 0.15s;
   }
 
   &.loading {
-    
     .spinner {
       opacity: 1;
     }

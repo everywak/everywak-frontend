@@ -1,4 +1,4 @@
-@import '../../../common/common.scss';
+@use '@common/mixin' as *;
 
 .WaktoonChart {
   width: 100%;
@@ -28,27 +28,27 @@
 
       .btnBack {
         align-items: center;
-        color: $primary-color;
+        color: var(--primary-color);
         display: flex;
         flex-direction: row;
         font-size: 16px;
         font-weight: 500;
         line-height: 1em;
-  
+
         svg {
           display: inline-block;
           margin: 1px;
         }
       }
       .title {
-        color: $primary-text-color;
+        color: var(--text-primary-color);
         font-weight: 500;
         font-size: 36px;
         line-height: 1em;
         margin: 0;
       }
       .desc {
-        color: $secondary-text-color;
+        color: var(--text-secondary-color);
         font-weight: 500;
         font-size: 20px;
         line-height: 1em;
@@ -83,12 +83,12 @@
         width: 320px;
       }
     }
-    
+
     .waktoonCharListWrapper {
       align-self: stretch;
     }
     .footer {
-      color: $secondary-text-color;
+      color: var(--text-secondary-color);
       font-size: 14px;
       text-align: right;
     }
@@ -99,17 +99,16 @@
 }
 @include not-desktop {
   .WaktoonChart {
-  
     section.content {
       width: 100%;
-  
+
       & > header {
         padding: 24px 16px 16px;
         gap: 4px;
-  
+
         .btnBack {
           font-size: 14px;
-    
+
           /* svg { } */
         }
         .title {
@@ -119,14 +118,14 @@
           font-size: 16px;
         }
       }
-  
+
       .listHeader {
         display: none;
       }
-      
+
       .waktoonChartListWrapper {
         align-self: stretch;
-        
+
         .WaktoonChartLargeItem {
           padding: 0;
 
@@ -161,7 +160,8 @@
                   justify-content: space-between;
                   width: 0;
 
-                  .title, .author {
+                  .title,
+                  .author {
                     font-size: 14px;
                   }
                   .changedAmountArea {
@@ -174,7 +174,6 @@
                   }
                 }
               }
-              
             }
           }
         }

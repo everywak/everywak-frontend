@@ -13,6 +13,8 @@ import Frontpage from './modules/frontpage/Frontpage';
 import Bestwakki from './modules/bestwakki/page';
 import Live from './modules/live/Live';
 
+import './common/common.scss';
+
 const Weather = lazy(() => import('./modules/weather/Weather'));
 
 const VideoWatch = lazy(() => import('./modules/video/VideoWatch'));

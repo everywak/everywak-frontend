@@ -1,4 +1,4 @@
-@import '../../../common/common.scss';
+@use '@common/mixin' as *;
 
 .WaktoonList.AllWaktoonList {
   align-self: stretch;
@@ -14,7 +14,6 @@
   }
 
   &.list {
-    
     ul.itemList {
       flex-direction: column;
       flex-wrap: nowrap;
@@ -22,7 +21,6 @@
   }
 
   &.item {
-    
     ul.itemList {
       justify-content: center;
     }

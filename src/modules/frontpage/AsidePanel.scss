@@ -1,4 +1,4 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .AsidePanel {
   background: white;
@@ -16,7 +16,6 @@
   }
 
   & > header {
-
   }
 
   & > .contentWrapper {

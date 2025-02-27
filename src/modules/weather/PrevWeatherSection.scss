@@ -1,4 +1,4 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .PrevWeatherSection {
   display: flex;
@@ -12,11 +12,11 @@
   }
 
   .weatherBorder {
-    background: $component-secondary-border-color;
-    width: calc((var(--responsiveScale) - .1px) /.9 * 160 * 6);
+    background: var(--component-secondary-border-color);
+    width: calc((var(--responsiveScale) - 0.1px) / 0.9 * 160 * 6);
     height: 1px;
     @include mobile {
-      width: calc((var(--responsiveScale) - .1px) /.9 * 172 * 6);
+      width: calc((var(--responsiveScale) - 0.1px) / 0.9 * 172 * 6);
       margin-left: calc((var(--responsiveScale) + 1px) / 2 * 20 * 4.2);
     }
 

@@ -1,4 +1,4 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .IsedolMemberItem {
   width: fit-content;
@@ -24,7 +24,7 @@
     li.IsedolMemberSocialItem {
       width: 38px;
       height: 38px;
-      
+
       &.afreecatv a.link {
         background: $afreeca-light-color;
       }

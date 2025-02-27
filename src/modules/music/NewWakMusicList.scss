@@ -1,5 +1,4 @@
-@import '../../common/common.scss';
-
+@use '@common/mixin' as *;
 
 .NewWakMusicList {
   width: 100%;
@@ -22,7 +21,7 @@
         .descArea {
           padding: 8px 8px 10px;
 
-          .title, 
+          .title,
           .uploadedTime {
             line-height: 1em;
           }

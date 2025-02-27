@@ -1,9 +1,9 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .WaktoonItem {
   border-radius: 8px;
   padding: 2px 4px 0;
-  transition: box-shadow ease .15s;
+  transition: box-shadow ease 0.15s;
 
   @include desktop {
     --width: 128px;
@@ -13,7 +13,7 @@
     --width: 123px;
     --height: 156px;
   }
-  
+
   &.big {
     @include desktop {
       --width: 170px;
@@ -24,7 +24,7 @@
       --height: 180px;
     }
   }
-  
+
   & > a {
     display: flex;
     flex-direction: column;
@@ -38,7 +38,7 @@
   }
 
   .previewWrapper {
-    background: rgba(0, 0, 0, .1);
+    background: rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.35);
     opacity: 1;
@@ -48,10 +48,10 @@
     min-width: var(--width);
     height: var(--height);
     max-height: var(--height);
-    transition: opacity ease .15s, box-shadow ease .15s;
+    transition: opacity ease 0.15s, box-shadow ease 0.15s;
     transition-delay: opacity 1s;
 
-    &:hover{
+    &:hover {
       box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.35);
     }
 
@@ -86,10 +86,10 @@
         line-height: 1em;
 
         &.newIcon {
-          background: #DE3500;
+          background: #de3500;
         }
         &.updatedIcon {
-          background: #57B829;
+          background: #57b829;
         }
       }
     }
@@ -124,7 +124,7 @@
       padding: 8px;
 
       .title {
-        color: $primary-text-color;
+        color: var(--text-primary-color);
         display: block;
         font-size: 14px;
         font-weight: 500;
@@ -136,8 +136,9 @@
         word-break: break-all;
         width: calc(var(--width) - 16px);
       }
-      .author, .publishedTime {
-        color: $secondary-text-color;
+      .author,
+      .publishedTime {
+        color: var(--text-secondary-color);
         margin-top: 4px;
         font-size: 14px;
         font-weight: 400;
@@ -153,7 +154,7 @@
       }
     }
   }
-  
+
   &.episode {
     --width: 64px;
     --height: 84px;
@@ -162,15 +163,15 @@
       flex-direction: row;
       gap: 16px;
     }
-    
+
     .previewWrapper {
-      &:hover{
+      &:hover {
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.35);
       }
       .BasicImage .errorIcon svg {
         font-size: 28px;
       }
-  
+
       .episodeNumber {
         display: none;
       }
@@ -200,5 +201,4 @@
       }
     }
   }
-
 }

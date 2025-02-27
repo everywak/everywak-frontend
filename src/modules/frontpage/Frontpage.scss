@@ -1,4 +1,4 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .FrontPage.desktop {
   display: flex;
@@ -9,7 +9,7 @@
 
   & > .CommonHeader {
     .liveList {
-      --containerHeight: min(261px, calc(100vw * .36 / 16 * 9));
+      --containerHeight: min(261px, calc(100vw * 0.36 / 16 * 9));
       --gapVertical: calc(12 * (var(--containerHeight) / 261));
       --gapHorizontal: calc(var(--gapVertical) / 12 * 16);
       display: flex;
@@ -27,7 +27,9 @@
         gap: var(--gapVertical);
 
         & > li {
-          width: calc((var(--containerHeight) - var(--gapVertical) * 2) / 3 / 9 * 16);
+          width: calc(
+            (var(--containerHeight) - var(--gapVertical) * 2) / 3 / 9 * 16
+          );
           height: calc((var(--containerHeight) - var(--gapVertical) * 2) / 3);
         }
       }
@@ -46,7 +48,7 @@
     gap: 96px;
     width: 100%;
     align-self: stretch;
-  
+
     .twoColumns {
       display: flex;
       flex-direction: row;
@@ -54,7 +56,7 @@
       align-items: flex-start;
       padding: 0px;
       gap: 32px;
-  
+
       & > section.content {
         display: flex;
         flex-direction: column;
@@ -63,7 +65,7 @@
         gap: 32px;
         flex-grow: 1;
         width: 0;
-  
+
         & > section.main {
           display: flex;
           flex-direction: column;
@@ -71,7 +73,7 @@
           padding: 16px 0px;
           gap: 24px;
           align-self: stretch;
-          
+
           & > section.sub {
             display: flex;
             flex-direction: column;
@@ -81,9 +83,8 @@
             align-self: stretch;
           }
         }
-  
       }
-  
+
       & > aside {
         display: flex;
         flex-direction: column;
@@ -91,11 +92,11 @@
         align-items: stretch;
         padding: 0px;
         gap: 24px;
-  
+
         width: 360px;
       }
     }
-  
+
     & > section {
       width: 1200px;
       max-width: 1200px;
@@ -104,7 +105,11 @@
 }
 
 .FrontPage.mobile {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 51.38%, rgba(0, 136, 255, 0.03) 88.02%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 51.38%,
+    rgba(0, 136, 255, 0.03) 88.02%
+  );
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -128,23 +133,31 @@
     --circleScale: calc(100vw / 411);
 
     & > .circle1 {
-      background: linear-gradient(180deg, rgba(0, 255, 25, 0.8) 35.94%, rgba(176, 255, 180, 0.8) 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(0, 255, 25, 0.8) 35.94%,
+        rgba(176, 255, 180, 0.8) 100%
+      );
       border-radius: 50%;
       position: fixed;
       width: calc(var(--circleScale) * 852);
       height: calc(var(--circleScale) * 848);
       left: calc(var(--circleScale) * -450);
-      top: calc((var(--circleScale) - .35px) / .65 * -554);
+      top: calc((var(--circleScale) - 0.35px) / 0.65 * -554);
       z-index: -1;
     }
     & > .circle2 {
-      background: linear-gradient(180deg, rgba(255, 0, 229, 0.3) 63.02%, rgba(255, 133, 243, 0.3) 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(255, 0, 229, 0.3) 63.02%,
+        rgba(255, 133, 243, 0.3) 100%
+      );
       border-radius: 50%;
       position: fixed;
       width: calc(var(--circleScale) * 642);
       height: calc(var(--circleScale) * 639);
       left: calc(var(--circleScale) * 120);
-      top: calc((var(--circleScale) - .55px) / .45 * -263);
+      top: calc((var(--circleScale) - 0.55px) / 0.45 * -263);
       z-index: -2;
     }
 
@@ -158,12 +171,13 @@
       align-self: stretch;
 
       .highlight {
-        --scale: calc((100vw / 411 - .6px) / .4);
+        --scale: calc((100vw / 411 - 0.6px) / 0.4);
         --padding: calc(var(--scale) * 32);
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: calc((var(--scale) + 2px) / 3 * 32) var(--padding) calc((var(--scale) + 4px) / 5 * 24);
+        padding: calc((var(--scale) + 2px) / 3 * 32) var(--padding)
+          calc((var(--scale) + 4px) / 5 * 24);
         gap: 32px;
         align-self: stretch;
 
@@ -195,9 +209,7 @@
   }
 
   .apps {
-
     .appsWrapper {
-
     }
   }
   .footer {
@@ -207,15 +219,14 @@
     align-items: center;
     align-self: stretch;
     padding: 0px;
-    padding-bottom: 16px;/* TODO: nav 구현하면 삭제 */
+    padding-bottom: 16px; /* TODO: nav 구현하면 삭제 */
     gap: 24px;
 
     .FrontWeatherMobilePanel {
-
     }
     nav {
-      background: #FAFAFA;
-      border-top: 1px solid #F0F0F0;
+      background: #fafafa;
+      border-top: 1px solid #f0f0f0;
       box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.05);
       box-sizing: border-box;
       display: flex;

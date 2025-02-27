@@ -1,7 +1,7 @@
-@import '../../common.scss';
+@use '@common/mixin' as *;
 
 .BasicButton {
-  background: $primary-color;
+  background: var(--primary-color);
   border: none;
   border-radius: 8px;
   color: $dark-primary-text-color;
@@ -20,13 +20,13 @@
   width: fit-content;
   vertical-align: middle;
   user-select: none;
-  
+
   &.disabled {
-    opacity: .7;
+    opacity: 0.7;
   }
   &.Transparent {
     background: transparent;
-    color: $primary-text-color;
+    color: var(--text-primary-color);
   }
 
   &::after {
@@ -38,25 +38,25 @@
     width: 100%;
     height: 100%;
     background: rgba(255, 255, 255, 0);
-    transition: background-color ease .15s;
+    transition: background-color ease 0.15s;
     pointer-events: none;
   }
   @include desktop {
     &:not(.disabled):hover::after {
-      background: rgba(255, 255, 255, .1);
+      background: rgba(255, 255, 255, 0.1);
     }
     &:not(.disabled).Transparent:hover::after {
-      background: rgba(0, 0, 0, .1);
+      background: rgba(0, 0, 0, 0.1);
     }
   }
   &:focus {
     outline: none;
   }
   &:not(.disabled):active::after {
-    background: rgba(0, 0, 0, .1);
+    background: rgba(0, 0, 0, 0.1);
   }
   &:not(.disabled).Transparent:active::after {
-    background: rgba(0, 0, 0, .2);
+    background: rgba(0, 0, 0, 0.2);
   }
 
   &.CircleImgButton {
@@ -64,7 +64,7 @@
     padding: 0;
     width: fit-content;
     height: fit-content;
-    
+
     &::after {
       border-radius: 50%;
     }
@@ -92,7 +92,7 @@
         bottom: 100%;
         pointer-events: none;
         width: max-content;
-        transition: bottom ease .15s, top ease .15s, opacity ease .15s;
+        transition: bottom ease 0.15s, top ease 0.15s, opacity ease 0.15s;
         z-index: 100;
       }
       &:hover > .description {

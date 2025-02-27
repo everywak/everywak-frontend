@@ -1,7 +1,6 @@
-@import '../../../common/common.scss';
+@use '@common/mixin' as *;
 
 .WaktoonList.WaktoonEpisodeList {
-
   ul.itemList {
     padding-bottom: 8px;
     padding-top: 0;
@@ -13,7 +12,6 @@
   }
 
   &.list {
-    
     ul.itemList {
       flex-direction: column;
       flex-wrap: nowrap;

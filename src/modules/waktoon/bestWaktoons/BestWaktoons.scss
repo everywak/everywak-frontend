@@ -1,4 +1,4 @@
-@import '../../../common/common.scss';
+@use '@common/mixin' as *;
 
 .BestWaktoons {
   width: 100%;
@@ -28,28 +28,28 @@
 
       .btnBack {
         align-items: center;
-        color: $primary-color;
+        color: var(--primary-color);
         display: flex;
         flex-direction: row;
         font-size: 16px;
         font-weight: 500;
         line-height: 1em;
         margin: 0;
-  
+
         svg {
           display: inline-block;
           margin: 1px;
         }
       }
       .title {
-        color: $primary-text-color;
+        color: var(--text-primary-color);
         font-weight: 500;
         font-size: 36px;
         line-height: 1em;
         margin: 0;
       }
       .desc {
-        color: $secondary-text-color;
+        color: var(--text-secondary-color);
         font-weight: 500;
         font-size: 20px;
         line-height: 1em;
@@ -84,7 +84,7 @@
         width: 320px;
       }
     }
-    
+
     .waktoonEpisodeListWrapper {
       display: flex;
       flex-direction: column;
@@ -93,11 +93,10 @@
       gap: 24px;
 
       .PageSelect {
-
       }
     }
     .footer {
-      color: $secondary-text-color;
+      color: var(--text-secondary-color);
       font-size: 14px;
       text-align: right;
     }

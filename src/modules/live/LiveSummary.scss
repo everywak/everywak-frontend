@@ -1,8 +1,7 @@
-@import '../../common/common.scss';
+@use '@common/mixin' as *;
 
 .Live:not(.front),
 .WithLive {
-
   .LiveSummary {
     @include desktop {
       padding: 14px 23px;
@@ -21,7 +20,7 @@
 
         .liveProfile {
           margin-right: 10px;
-    
+
           .profileWrapper .profileImg {
             width: 56px;
           }
@@ -51,7 +50,7 @@
           .btnOpenInfo {
             height: 24px;
             margin: 0;
-            
+
             .icon {
               width: 24px;
             }
@@ -74,7 +73,7 @@
         background: inherit;
         position: relative;
         top: 0;
-        transition: top ease .3s;
+        transition: top ease 0.3s;
       }
     }
     &.landscape .playerWrapper.opened .LiveSummary {
@@ -89,7 +88,7 @@
   align-items: top;
 
   &.simple {
-    border: solid 1px $component-primary-border-color;
+    border: solid 1px var(--component-primary-border-color);
     padding: 15px 16px 20px;
 
     .liveSummaryWrapper {
@@ -98,16 +97,16 @@
       & > span {
         display: block;
       }
-      
+
       .liveTitle {
-        color: $primary-text-color;
+        color: var(--text-primary-color);
         font-size: 20px;
         font-weight: 500;
         line-height: 20px;
         margin-top: 0;
       }
       .liveDateTime {
-        color: $secondary-text-color;
+        color: var(--text-secondary-color);
         font-size: 14px;
         font-weight: 400;
         line-height: 14px;
@@ -115,12 +114,12 @@
       }
     }
   }
-  
+
   .left {
     display: flex;
     flex-direction: row;
     align-items: top;
-    
+
     .liveProfile {
       border: solid 2px #888;
       border-radius: 50%;
@@ -141,31 +140,31 @@
       }
 
       .profileWrapper {
-        border: solid 2px $component-primary-border-color;
+        border: solid 2px var(--component-primary-border-color);
         border-radius: 50%;
-        
+
         .profileImg {
           display: block;
           width: 64px;
         }
       }
     }
-    
+
     .liveSummaryWrapper {
       padding-top: 6px;
 
       & > span {
         display: block;
       }
-      
+
       .liveTitle {
-        color: $primary-text-color;
+        color: var(--text-primary-color);
         font-size: 18px;
         font-weight: 500;
         line-height: 18px;
       }
       .livePresented {
-        color: $primary-text-color;
+        color: var(--text-primary-color);
         font-size: 14px;
         font-weight: 500;
         line-height: 14px;
@@ -173,7 +172,7 @@
       }
     }
   }
-  
+
   .right {
     .up {
       display: flex;

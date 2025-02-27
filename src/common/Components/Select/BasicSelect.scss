@@ -1,8 +1,8 @@
-@import '../../common.scss';
+@use '@common/mixin' as *;
 
 .BasicSelect {
-  background: $component-primary-bg-color;
-  border: 1px solid $component-secondary-border-color;
+  background: var(--component-primary-bg-color);
+  border: 1px solid var(--component-secondary-border-color);
   border-radius: 8px;
   box-sizing: border-box;
   display: flex;
@@ -15,18 +15,17 @@
   .option {
     background: transparent;
     border-radius: 6px;
-    color: $primary-text-color;
+    color: var(--text-primary-color);
     margin: 0;
     padding: 8px 12px;
     font-weight: 400;
     font-size: 16px;
     line-height: 1em;
-    transition: background ease .15s, color ease .15s;
+    transition: background ease 0.15s, color ease 0.15s;
 
     &.selected {
-      background: $primary-color;
+      background: var(--primary-color);
       color: $dark-primary-text-color;
     }
-
   }
 }

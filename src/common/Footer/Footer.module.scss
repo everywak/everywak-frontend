@@ -1,7 +1,7 @@
-@import '../common.scss';
+@use '@common/mixin' as *;
 
 footer.footer {
-  background-color: $component-primary-bg-color;
+  background-color: var(--component-primary-bg-color);
   box-sizing: border-box;
   font-size: 12px;
   font-weight: 400;
@@ -16,7 +16,7 @@ footer.footer {
 
     .SnsButton {
       border-radius: 8px;
-      color: $primary-text-color;
+      color: var(--text-primary-color);
       display: inline-block;
       margin: 0 4px;
       overflow: hidden;
@@ -24,7 +24,7 @@ footer.footer {
       height: 32px;
       vertical-align: middle;
       user-select: none;
-  
+
       .icon {
         display: inline-flex;
         justify-content: center;
@@ -32,14 +32,14 @@ footer.footer {
         width: 32px;
         height: 32px;
         vertical-align: middle;
-  
+
         img {
           display: inline-block;
           width: 18px;
           height: auto;
         }
       }
-  
+
       .label {
         display: inline-block;
         box-sizing: border-box;
@@ -52,7 +52,7 @@ footer.footer {
       }
     }
     .line {
-      background-color: $component-secondary-border-color;
+      background-color: var(--component-secondary-border-color);
       display: inline-block;
       margin: 0 4px;
       width: 1px;
@@ -62,7 +62,7 @@ footer.footer {
   }
 
   .links {
-    color: $secondary-text-color;
+    color: var(--text-secondary-color);
     line-height: 12px;
     margin: 0;
     padding: 0;
@@ -72,7 +72,7 @@ footer.footer {
     }
   }
   .desc {
-    color: $secondary-text-color;
+    color: var(--text-secondary-color);
     margin: 8px auto 4px;
     line-height: 16px;
   }
@@ -80,5 +80,4 @@ footer.footer {
   .copyright {
     color: #555;
   }
-
 }
