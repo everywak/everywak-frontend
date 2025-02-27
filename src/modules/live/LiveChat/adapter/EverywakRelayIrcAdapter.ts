@@ -118,7 +118,7 @@ export class EverywakRelayIrcAdapter extends LiveChatAdapterClass {
 
   chatHandler = (data: string[]) => {
     if ('PART' === data[1]) {
-      this.removeChannel(data[2].slice(1));
+      this.removeChannel(data[2].slice(1).split(' ')[0]);
       return;
     }
 

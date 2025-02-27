@@ -54,15 +54,10 @@ export function LiveChatAdapter(props: Props) {
         [...adapter.current.getChannels()],
         channelId,
       );
-      adapter.current?.leaveChannel(willLeaves);
-      adapter.current?.joinChannel(willJoins);
+      adapter.current.leaveChannel(willLeaves);
+      adapter.current.joinChannel(willJoins);
     }
-  }, [
-    channelId,
-    adapter.current,
-    adapter.current?.isAuthorized,
-    adapter.current?.getChannels(),
-  ]);
+  }, [channelId]);
 
   // 채널 id 전달
   useEffect(() => {
