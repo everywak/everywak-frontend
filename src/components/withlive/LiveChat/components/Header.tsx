@@ -2,7 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 import styles from './Header.module.scss';
-import { Button } from './Button';
+import { Button } from 'common/components';
 import { useLiveChatActions } from '../LiveChat.context';
 import { KeyboardTabRounded, SettingsRounded } from '@mui/icons-material';
 const cx = classNames.bind(styles);

@@ -1,6 +1,6 @@
 import styles from './ClickToScrollButton.module.scss';
 import classNames from 'classnames/bind';
-import { Button } from '../Button';
+import { Button } from 'common/components';
 const cx = classNames.bind(styles);
 
 export type Props = {
