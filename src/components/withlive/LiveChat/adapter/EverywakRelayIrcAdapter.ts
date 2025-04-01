@@ -111,7 +111,7 @@ export class EverywakRelayIrcAdapter extends LiveChatAdapterClass {
         }
       }
       if (data[0] === 'PING') {
-        this.send(`PONG :irc.everywak.kr`);
+        this.send(`PONG :${this.serverAddress.replace('wss://', '')}`);
       }
     });
   };
@@ -183,7 +183,9 @@ export class EverywakRelayIrcAdapter extends LiveChatAdapterClass {
     );
 
     const regexMsg = new RegExp(
-      `:(?<loginName>[\\w\\d-_]+)!\\k<loginName>@\\k<loginName>\\.irc\\.everywak\\.kr`,
+      `:(?<loginName>[\\w\\d-_]+)!\\k<loginName>@\\k<loginName>\\.${this.serverAddress
+        .replace('wss://', '')
+        .replaceAll('.', '\\.')}`,
     );
 
     const displayName = tags['display-name'];
