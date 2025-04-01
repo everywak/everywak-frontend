@@ -1,25 +1,17 @@
+import { TypedEmitter } from 'tiny-typed-emitter';
 import { ChatItem } from '../LiveChat.type';
 
-export type EventName =
-  | 'chat'
-  | 'connect'
-  | 'disconnect'
-  | 'authorize'
-  | 'join'
-  | 'leave'
-  | 'error';
-export type LiveChatEvent<T> = (param: T) => void;
 export interface LiveChatEventMap {
-  chat: ChatItem[];
-  connect: undefined;
-  disconnect: undefined;
-  authorize: undefined;
-  join: string;
-  leave: string;
-  error: string;
+  chat: (chats: ChatItem[]) => void;
+  connect: () => void;
+  disconnect: () => void;
+  authorize: () => void;
+  join: (channelId: string) => void;
+  leave: (channelId: string) => void;
+  error: (error: string) => void;
 }
 
-export abstract class LiveChatAdapterClass {
+export abstract class LiveChatAdapterClass extends TypedEmitter<LiveChatEventMap> {
   protected serverAddress: string;
 
   private _isConnected: boolean;
@@ -30,7 +22,7 @@ export abstract class LiveChatAdapterClass {
     const oldValue = this._isConnected;
     this._isConnected = value;
     if (oldValue === value) return;
-    this.performEvent(value ? 'connect' : 'disconnect', undefined);
+    this.emit(value ? 'connect' : 'disconnect');
   }
 
   private _isAuthorized: boolean;
@@ -41,13 +33,14 @@ export abstract class LiveChatAdapterClass {
     const oldValue = this._isAuthorized;
     this._isAuthorized = value;
     if (oldValue === value || !value) return;
-    this.performEvent('authorize', undefined);
+    this.emit('authorize');
   }
 
   protected accessToken: string;
   protected channels: string[];
 
   constructor() {
+    super();
     this.serverAddress = '';
     this._isConnected = false;
     this._isAuthorized = false;
@@ -60,35 +53,6 @@ export abstract class LiveChatAdapterClass {
   abstract disconnect(): void;
   abstract authorize(token: string): void;
 
-  // events
-  private eventListeners: {
-    [T in EventName]: LiveChatEvent<LiveChatEventMap[T]>[];
-  } = {
-    chat: [],
-    connect: [],
-    disconnect: [],
-    authorize: [],
-    join: [],
-    leave: [],
-    error: [],
-  };
-  addEventListener<T extends EventName>(
-    event: T,
-    handler: LiveChatEvent<LiveChatEventMap[T]>,
-  ) {
-    this.eventListeners[event]?.push(handler);
-  }
-  removeEventListener<T extends EventName>(
-    event: T,
-    handler: LiveChatEvent<LiveChatEventMap[T]>,
-  ) {
-    (this.eventListeners[event] as LiveChatEvent<LiveChatEventMap[T]>[]) =
-      this.eventListeners[event]?.filter((h) => h !== handler);
-  }
-  performEvent<T extends EventName>(event: T, param: LiveChatEventMap[T]) {
-    this.eventListeners[event].forEach((handler) => handler(param));
-  }
-
   abstract joinChannel(channelId: string[]): void;
   abstract leaveChannel(channelId: string[]): void;
   getChannels() {
@@ -97,12 +61,12 @@ export abstract class LiveChatAdapterClass {
   protected addChannel(channelId: string) {
     if (this.channels.includes(channelId)) return;
     this.channels.push(channelId);
-    this.performEvent('join', channelId);
+    this.emit('join', channelId);
   }
   protected removeChannel(channelId: string) {
     if (!this.channels.includes(channelId)) return;
     this.channels = this.channels.filter((id) => id !== channelId);
-    this.performEvent('leave', channelId);
+    this.emit('leave', channelId);
   }
 
   abstract sendChat(channelId: string, message: string): void;

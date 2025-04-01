@@ -29,20 +29,20 @@ export function LiveChatAdapter(props: Props) {
       adapter.current = new EverywakRelayIrcAdapter();
     }
     const joinChannel = () => adapter.current?.joinChannel(channelId);
-    adapter.current?.addEventListener('authorize', joinChannel);
+    adapter.current?.on('authorize', joinChannel);
     if (!adapter.current.isConnected) {
       adapter.current.connect();
     }
     return () => {
-      adapter.current?.removeEventListener('authorize', joinChannel);
+      adapter.current?.off('authorize', joinChannel);
     };
   }, [channelId]);
 
   // add chat event listener
   useEffect(() => {
     if (adapter.current) {
-      adapter.current.addEventListener('chat', addChatItem);
-      return () => adapter.current?.removeEventListener('chat', addChatItem);
+      adapter.current.on('chat', addChatItem);
+      return () => adapter.current?.off('chat', addChatItem);
     }
     return () => {};
   }, [addChatItem]);

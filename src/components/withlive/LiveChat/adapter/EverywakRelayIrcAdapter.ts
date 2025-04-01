@@ -127,7 +127,7 @@ export class EverywakRelayIrcAdapter extends LiveChatAdapterClass {
       if (!channelId) {
         return;
       }
-      this.performEvent('chat', [
+      this.emit('chat', [
         this.parseChat({
           tag: data[0],
           id: data[1],
