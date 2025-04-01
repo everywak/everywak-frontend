@@ -1,4 +1,4 @@
-import { ChatProfile } from 'modules/live/LiveChat/LiveChat.type';
+import { ChatProfile } from 'components/withlive/LiveChat/LiveChat.type';
 import React from 'react';
 import { Badge } from './Badge';
 

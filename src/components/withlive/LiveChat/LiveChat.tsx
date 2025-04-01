@@ -3,9 +3,9 @@ import StretchableContainer from 'common/Components/StretchableContainer/Stretch
 import { LiveChatProvider } from './LiveChat.context';
 
 import { LiveChatAdapter } from './LiveChatAdapter';
-import { Header } from './LiveChat/Header';
-import { CommonChatList } from './LiveChat/CommonChatList';
-import { CollectorChatList } from './LiveChat/CollectorChatList';
+import { Header } from './components/Header';
+import { CommonChatList } from './components/CommonChatList';
+import { CollectorChatList } from './components/CollectorChatList';
 
 import styles from './LiveChat.module.scss';
 import classNames from 'classnames/bind';

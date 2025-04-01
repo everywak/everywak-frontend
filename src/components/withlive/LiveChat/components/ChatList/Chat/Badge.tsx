@@ -1,4 +1,4 @@
-import { ChatBadge } from 'modules/live/LiveChat/LiveChat.type';
+import { ChatBadge } from 'components/withlive/LiveChat/LiveChat.type';
 
 import styles from './Badge.module.scss';
 import { FanclubBadge } from './Badge/FanclubBadge';

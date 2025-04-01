@@ -3,7 +3,7 @@ import React from 'react';
 import { Waktaverse } from '../../common/constants';
 import StretchableContainer from '../../common/Components/StretchableContainer/StretchableContainer';
 
-import { LiveChat } from './LiveChat/LiveChat';
+import { LiveChat } from '../../components/withlive/LiveChat/LiveChat';
 
 import './TwitchChat.scss';
 import cx from 'classnames';
