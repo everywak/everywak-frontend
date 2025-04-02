@@ -1,4 +1,4 @@
-import { TypedEmitter } from 'tiny-typed-emitter';
+import { TypedEmitter } from 'utils/typed-emitter';
 import { ChatItem } from '../LiveChat.type';
 
 export interface LiveChatEventMap {
