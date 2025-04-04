@@ -57,7 +57,7 @@ export function RisingUp({
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className={className}
+          className={clsx(styles.risingUp, className)}
           initial={{
             height: 0,
           }}

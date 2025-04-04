@@ -7,6 +7,10 @@
   right: 0;
   width: 100%;
 
+  .risingUp{
+    overflow: hidden;
+  }
+
   .scrollButton {
     @include font14_14_500;
     display: flex;
