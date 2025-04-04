@@ -36,6 +36,7 @@ export function LiveChatAdapter(props: Props) {
     }
     return () => {
       adapter.current?.off('authorize', joinChannel);
+      adapter.current?.disconnect();
     };
   }, [channelId]);
 
