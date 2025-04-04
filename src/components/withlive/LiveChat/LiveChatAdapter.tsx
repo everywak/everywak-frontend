@@ -85,7 +85,7 @@ export function LiveChatAdapter(props: Props) {
   // 채널 id 전달
   useEffect(() => {
     setChannelId(props.channelIds);
-  }, [props.channelIds]);
+  }, [JSON.stringify(props.channelIds)]);
 
   return <></>;
 }
