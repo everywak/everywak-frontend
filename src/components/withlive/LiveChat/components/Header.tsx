@@ -4,12 +4,16 @@ import { useLiveChatActions } from '../LiveChat.context';
 import { KeyboardTabRounded, SettingsRounded } from '@mui/icons-material';
 import styles from './Header.module.scss';
 
-export function Header() {
+export interface Props {
+  onClickHide?: () => void;
+}
+
+export function Header({ onClickHide }: Props) {
   const { setOpenedSetting } = useLiveChatActions();
 
   return (
     <div className={styles.container}>
-      <Button color="black-transparent">
+      <Button color="black-transparent" onClick={onClickHide}>
         <KeyboardTabRounded />
       </Button>
       채팅

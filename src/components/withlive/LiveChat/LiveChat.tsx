@@ -13,15 +13,16 @@ const cx = classNames.bind(styles);
 
 export type Props = {
   className?: string;
-  channelId: string[];
+  channelIds: string[];
+  onClickHide?: () => void;
 };
 
 export function LiveChat(props: Props) {
   return (
     <LiveChatProvider>
-      <LiveChatAdapter channelId={props.channelId} />
+      <LiveChatAdapter channelIds={props.channelIds} />
       <div className={cx('LiveChat', props.className)}>
-        <Header />
+        <Header onClickHide={props.onClickHide} />
         <StretchableContainer
           className={styles.stretchableContainer}
           rotation="top"

@@ -14,7 +14,7 @@ const diffChannel = (oldChannels: string[], newChannels: string[]) => {
 };
 
 export type Props = {
-  channelId: string[];
+  channelIds: string[];
 };
 
 export function LiveChatAdapter(props: Props) {
@@ -84,8 +84,8 @@ export function LiveChatAdapter(props: Props) {
 
   // 채널 id 전달
   useEffect(() => {
-    setChannelId(props.channelId);
-  }, [props.channelId]);
+    setChannelId(props.channelIds);
+  }, [props.channelIds]);
 
   return <></>;
 }
