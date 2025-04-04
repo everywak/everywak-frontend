@@ -89,7 +89,7 @@ export class EverywakRelayChatAdapter extends LiveChatAdapterClass {
       }
       this.connect();
     }, 1000 * Math.pow(2, this.connRetries));
-  }
+  };
 
   authorize = (token: string) => {
     this.accessToken = token;
@@ -157,14 +157,7 @@ export class EverywakRelayChatAdapter extends LiveChatAdapterClass {
 
   onJoin = (msg: ChatJoinResponse) => {
     const channelIds = msg.body.channelIds ?? [];
-    channelIds.forEach(this.addChannel);
-
-    // if (!this.subscriptionList[channelId]) {
-    //   this.fetchSubscriptionList(channelId);
-    // }
-    // if (!this.emoteList[channelId]) {
-    //   this.fetchEmoteList(channelId);
-    // }
+    channelIds.forEach((channelId) => this.addChannel(channelId));
 
     // reset retry count
     this.connRetries = 0;
