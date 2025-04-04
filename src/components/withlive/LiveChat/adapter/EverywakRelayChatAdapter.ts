@@ -169,7 +169,12 @@ export class EverywakRelayChatAdapter extends LiveChatAdapterClass {
   };
   onPart = (msg: ChatPartResponse) => {
     const { channelIds } = msg.body;
-    channelIds.forEach(this.removeChannel);
+    channelIds.forEach((channelId) => this.removeChannel(channelId));
+
+    // this.appendSystemMessage({
+    //   key: `joinedChannel:${Date.now()}`,
+    //   msg: `${data[2].slice(1)} 채팅방 퇴장`
+    // })
   };
   onChannelList = (msg: ChatChannelListResponse) => {};
 
