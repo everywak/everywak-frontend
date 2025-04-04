@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { EverywakRelayIrcAdapter } from './adapter/EverywakRelayIrcAdapter';
+import { EverywakRelayChatAdapter } from './adapter/EverywakRelayChatAdapter';
 import { LiveChatAdapterClass } from './adapter/LiveChatAdapterClass';
 import { useLiveChatActions, useLiveChatValue } from './LiveChat.context';
 
@@ -27,7 +27,7 @@ export function LiveChatAdapter(props: Props) {
   // initialize adapter
   useEffect(() => {
     if (!adapter.current) {
-      adapter.current = new EverywakRelayIrcAdapter();
+      adapter.current = new EverywakRelayChatAdapter();
     }
     const joinChannel = () => adapter.current?.joinChannel(channelId);
     adapter.current?.on('authorize', joinChannel);
