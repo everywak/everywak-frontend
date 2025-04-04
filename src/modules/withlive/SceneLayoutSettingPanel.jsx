@@ -13,7 +13,7 @@ import TransformAnimation from './TransformAnimation';
 
 import * as func from '../../common/functions';
 import useInputs from '../../hooks/useInputs';
-import useWindowEvent from '../../hooks/useWindowEvent';
+import { useWindowEvent } from 'hooks/useWindowEvent';
 import useQueryWaktaverseLive from '../../hooks/useQueryWaktaverseLive';
 
 import styles from './SceneLayoutSettingPanel.module.scss';

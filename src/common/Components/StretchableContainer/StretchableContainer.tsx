@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import useWindowEvent from 'hooks/useWindowEvent';
+import { useWindowEvent } from 'hooks/useWindowEvent';
 
 import styles from './StretchableContainer.module.scss';
 import classNames from 'classnames/bind';

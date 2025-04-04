@@ -22,7 +22,7 @@ import * as func from '../../common/functions';
 
 import useInputs from '../../hooks/useInputs';
 import useQueryWaktaverseLive from '../../hooks/useQueryWaktaverseLive';
-import useWindowEvent from '../../hooks/useWindowEvent';
+import { useWindowEvent } from 'hooks/useWindowEvent';
 
 import ReactGA from 'react-ga';
 import GAEvents from '../../common/GAEvents';

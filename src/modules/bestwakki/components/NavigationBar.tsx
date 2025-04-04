@@ -5,7 +5,7 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 
 import { NotDesktop } from 'common/MediaQuery';
-import useWindowEvent from 'hooks/useWindowEvent';
+import { useWindowEvent } from 'hooks/useWindowEvent';
 
 import Button from 'common/Components/Button';
 import BestwakkiSearchPanel from './NavigationBar/BestwakkiSearchPanel';
@@ -46,7 +46,7 @@ export default function NavigationBar() {
     hide,
     showBtnTop,
     hideBtnTop,
-    prevScrollY
+    prevScrollY,
   ]);
 
   return (
