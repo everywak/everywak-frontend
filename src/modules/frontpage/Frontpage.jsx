@@ -52,7 +52,6 @@ function DesktopFrontpage() {
   return (<div className="FrontPage desktop">
     <CommonHeader 
       title="에브리왁굳"
-      isBeta={true}
       categories={[
         {key: 'withlive/isedol', name: '이세돌 같이보기', href: '/withlive/isedol'}, 
         {key: 'bestwakki', name: '왁물원 인기글', href: '/bestwakki'}, 
