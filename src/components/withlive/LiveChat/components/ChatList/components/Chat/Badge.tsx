@@ -1,10 +1,10 @@
+import React from 'react';
 import { ChatBadge } from 'components/withlive/LiveChat/LiveChat.type';
-
-import styles from './Badge.module.scss';
 import { FanclubBadge } from './Badge/FanclubBadge';
 import { ManagerBadge } from './Badge/ManagerBadge';
 import { SubscriberBadge } from './Badge/SubscriberBadge';
 import { TopfanBadge } from './Badge/TopfanBadge';
+import styles from './Badge.module.scss';
 
 export type Props = {
   badge: ChatBadge;
@@ -26,13 +26,15 @@ const BadgeContent = (badge: ChatBadge) => {
   return <img src={badge.icon} alt={badge.name} />;
 };
 
-export function Badge(props: Props) {
-  return (
+export const Badge = React.memo(
+  (props: Props) => (
     <div className={styles.Badge}>
       <BadgeContent {...props.badge} />
       <div className={styles.tip}>
         <span>{props.badge.name}</span>
       </div>
     </div>
-  );
-}
+  ),
+  (prevProps, nextProps) =>
+    JSON.stringify(prevProps.badge) === JSON.stringify(nextProps.badge),
+);

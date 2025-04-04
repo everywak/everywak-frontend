@@ -1,3 +1,4 @@
+import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import clsx from 'clsx';
 import { Button } from 'common/components';
@@ -10,7 +11,7 @@ export interface Props {
   snackBarMessage: string;
 }
 
-export function OverlayOnChat(props: Props) {
+export const OverlayOnChat = React.memo((props: Props) => {
   return (
     <div className={clsx(styles.container, props.className)}>
       <RisingUp
@@ -38,7 +39,7 @@ export function OverlayOnChat(props: Props) {
       </RisingUp>
     </div>
   );
-}
+});
 
 export function RisingUp({
   className,

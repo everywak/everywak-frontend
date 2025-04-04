@@ -1,4 +1,4 @@
-import { Ref, useEffect, useRef } from 'react';
+import { Ref, useCallback, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import { Chat, OverlayOnChat } from './components';
 import { ChatItem } from '../../LiveChat.type';
@@ -13,17 +13,14 @@ export type Props = {
 };
 
 export function ChatList(props: Props) {
-  const list = props.items.map((chatItem) => (
-    <Chat key={chatItem.id} item={chatItem} />
-  ));
   const thisRef = useRef<HTMLDivElement>(null);
   const touched = useRef(false);
 
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     if (thisRef.current) {
       thisRef.current.scrollTop = thisRef.current.scrollHeight;
     }
-  };
+  }, [thisRef]);
 
   const onScrollHandler: React.UIEventHandler<HTMLDivElement> = (
     e: React.UIEvent<HTMLDivElement, UIEvent>,
@@ -45,6 +42,13 @@ export function ChatList(props: Props) {
       setTimeout(scrollToBottom, 1);
     }
   }, [props.autoScroll, props.items]);
+
+  const renderChat = useCallback(
+    (chatItem: ChatItem) => <Chat key={chatItem.id} item={chatItem} />,
+    [],
+  );
+
+  const list = props.items.map(renderChat);
 
   return (
     <div

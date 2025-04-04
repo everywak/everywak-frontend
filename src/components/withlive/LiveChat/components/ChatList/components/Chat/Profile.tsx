@@ -4,28 +4,30 @@ import { Badge } from './Badge';
 
 import styles from './Profile.module.scss';
 
-export type Props = {
+export interface Props {
   profile: ChatProfile;
-};
+}
 
-export function Profile(props: Props) {
-  return (
+export const Profile = React.memo(
+  ({ profile }: Props) => (
     <span
       className={styles.Profile}
-      style={{ '--color': props.profile.color } as React.CSSProperties}
+      style={{ '--color': profile.color } as React.CSSProperties}
     >
-      {props.profile.badge.length > 0 && (
+      {profile.badge.length > 0 && (
         <span className={styles.badges}>
-          {props.profile.badge.map((badge) => (
+          {profile.badge.map((badge) => (
             <Badge key={badge.id} badge={badge} />
           ))}
         </span>
       )}
       <span className={styles.name}>
-        {props.profile.name !== props.profile.id && props.profile.id
-          ? `${props.profile.name}(${props.profile.id})`
-          : props.profile.name}
+        {profile.name !== profile.id && profile.id
+          ? `${profile.name}(${profile.id})`
+          : profile.name}
       </span>
     </span>
-  );
-}
+  ),
+  (prevProps, nextProps) =>
+    JSON.stringify(prevProps.profile) === JSON.stringify(nextProps.profile),
+);

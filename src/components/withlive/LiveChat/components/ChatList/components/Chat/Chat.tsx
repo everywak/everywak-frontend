@@ -5,11 +5,11 @@ import styles from './Chat.module.scss';
 import { Emote } from './Emote';
 import { Profile } from './Profile';
 
-export type Props = {
+export interface Props {
   item: ChatItem;
   hideProfile?: boolean;
   showTimestamp?: boolean;
-};
+}
 
 const accentColor: Record<AccentColor, string> = {
   '': 'transparent',
@@ -17,7 +17,7 @@ const accentColor: Record<AccentColor, string> = {
   red: '#FF0000',
 };
 
-export function Chat(props: Props) {
+export const Chat = React.memo((props: Props) => {
   if (props.item.type === 'system' || props.item.type === 'channel') {
     return <div className={styles.Chat}>{props.item.content}</div>;
   }
@@ -44,4 +44,4 @@ export function Chat(props: Props) {
       </span>
     </div>
   );
-}
+});
