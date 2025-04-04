@@ -15,10 +15,11 @@ import { getCookie, setCookie } from 'utils/cookie';
 
 export class EverywakRelayChatAdapter extends LiveChatAdapterClass {
   private socket: WebSocket | null;
-  private connRetries: number = 0;
+  private connRetries: number = -1;
   private userId: string = getCookie('userId'); // TODO: replace with actual user id
 
   private loopPing: NodeJS.Timeout | null = null;
+  private reconnectTimer: NodeJS.Timeout | null = null;
 
   constructor() {
     super();
@@ -41,6 +42,7 @@ export class EverywakRelayChatAdapter extends LiveChatAdapterClass {
     ) {
       return;
     }
+    this.connRetries = 0;
     this.socket = new WebSocket(this.serverAddress);
     this.socket.addEventListener('open', () => {
       this.isConnected = true;
@@ -56,6 +58,7 @@ export class EverywakRelayChatAdapter extends LiveChatAdapterClass {
       this.isAuthorized = false;
       clearInterval(this.loopPing!);
       this.loopPing = null;
+      this.tryReconnect();
     });
     this.socket.addEventListener('message', this.messageHandler);
     this.socket.addEventListener('error', (e) => console.log(e));
@@ -66,7 +69,27 @@ export class EverywakRelayChatAdapter extends LiveChatAdapterClass {
       this.socket.removeEventListener('message', this.messageHandler);
       this.socket.close();
     }
+    clearTimeout(this.reconnectTimer!);
+    this.reconnectTimer = null;
+    this.connRetries = -1;
   };
+
+  tryReconnect = () => {
+    if (this.connRetries === -1) {
+      return;
+    }
+    console.log(`Reconnect attempt ${this.connRetries + 1}`);
+    this.reconnectTimer = setTimeout(() => {
+      this.connRetries++;
+      if (this.connRetries > 5) {
+        console.error('Reconnect failed');
+        clearTimeout(this.reconnectTimer!);
+        this.reconnectTimer = null;
+        return;
+      }
+      this.connect();
+    }, 1000 * Math.pow(2, this.connRetries));
+  }
 
   authorize = (token: string) => {
     this.accessToken = token;
