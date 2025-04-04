@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
-
+import React, { useCallback, useState } from 'react';
+import clsx from 'clsx';
 import { useWindowEvent } from 'hooks/useWindowEvent';
-
 import styles from './StretchableContainer.module.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
 
-export type Props = {
+export interface Props {
   className?: string;
   rotation?: 'left' | 'right' | 'top' | 'bottom';
   defaultSize?: number;
   minSize?: number;
   sliderSize?: number;
   children: React.ReactNode;
-};
+}
 
 export default function StretchableContainer({
   className,
@@ -31,7 +28,7 @@ export default function StretchableContainer({
     newSize: size,
   });
 
-  const onDragStartHandler: React.PointerEventHandler<HTMLDivElement> = (e) => {
+  const onDragStartHandler: React.PointerEventHandler<HTMLDivElement> = useCallback((e) => {
     e.preventDefault();
     const pos = ['left', 'right'].includes(rotation) ? e.clientX : e.clientY;
     setDragState({
@@ -40,7 +37,7 @@ export default function StretchableContainer({
       prevSize: size,
       newSize: size,
     });
-  };
+  }, [rotation, size]);
   const onDragHandler = ((e: PointerEvent) => {
     if (dragState.isDragging) {
       e.preventDefault();
@@ -73,11 +70,11 @@ export default function StretchableContainer({
 
   return (
     <div
-      className={cx('StretchableContainer', className, {
-        right: rotation === 'right',
-        left: rotation === 'left',
-        top: rotation === 'top',
-        bottom: rotation === 'bottom',
+      className={clsx(styles.container, className, {
+        [styles.right]: rotation === 'right',
+        [styles.left]: rotation === 'left',
+        [styles.top]: rotation === 'top',
+        [styles.bottom]: rotation === 'bottom',
       })}
       style={
         {
@@ -89,12 +86,16 @@ export default function StretchableContainer({
     >
       <div className={styles.contentWrapper}>{children}</div>
       <div
-        className={cx('slider', { focused: dragState.isDragging })}
+        className={clsx(styles.slider, {
+          [styles.focused]: dragState.isDragging,
+        })}
         onPointerDown={onDragStartHandler}
         onDragStart={(_) => false}
       ></div>
       <div
-        className={cx('sizeControlWrapper', { dragged: dragState.isDragging })}
+        className={clsx(styles.sizeControlWrapper, {
+          [styles.dragged]: dragState.isDragging,
+        })}
       >
         <div className={styles.sizeControlOverlay}></div>
       </div>

@@ -1,6 +1,6 @@
 @use '@common/mixin' as *;
 
-.StretchableContainer {
+.container {
   --size: 320px;
   --newSize: 320px;
   --sliderSize: 16px;
