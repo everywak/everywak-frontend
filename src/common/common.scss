@@ -8,6 +8,9 @@ body, html {
   padding: 0;
   -webkit-tap-highlight-color: transparent;
 }
+* {
+  box-sizing: border-box;
+}
 #modal-root {
   margin: 0;
   padding: 0;
