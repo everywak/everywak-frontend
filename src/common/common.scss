@@ -1,9 +1,10 @@
-@use "./mixin" as *;
+@use './mixin' as *;
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700&display=swap&subset=korean');
-@import "./variables";
+@import './variables';
 
-body, html {
-	font-family: 'Noto Sans KR', sans-serif;
+body,
+html {
+  font-family: 'Noto Sans KR', sans-serif;
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
@@ -23,7 +24,9 @@ body, html {
   z-index: 1000;
   pointer-events: none;
 }
-textarea, input[type=text], button {
+textarea,
+input[type='text'],
+button {
   font-family: 'Noto Sans KR', sans-serif;
 }
 a {
@@ -33,7 +36,7 @@ ul {
   list-style: none;
   padding: 0;
 }
-i.blind { 
+i.blind {
   clip: rect(0 0 0 0);
   margin: -1px;
   overflow: hidden;
