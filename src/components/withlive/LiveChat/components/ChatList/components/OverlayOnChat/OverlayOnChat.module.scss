@@ -1,3 +1,5 @@
+@use '@common/mixin' as *;
+
 .container {
   position: absolute;
   bottom: 0;
@@ -6,24 +8,22 @@
   width: 100%;
 
   .scrollButton {
+    @include font14_14_500;
     display: flex;
     color: var(--white);
     background-color: var(--primary-color);
     border-radius: 20px;
-    font-size: 14px;
-    font-weight: 500;
     padding: 9px 12px;
     width: fit-content;
     margin: 0 auto;
     overflow: hidden;
   }
   .snackBar {
+    @include font14_14_500;
     display: flex;
-    font-size: 14px;
-    font-weight: 500;
     background-color: #0008;
     color: var(--white);
-    padding: 6px 16px;
+    padding: 8px 16px;
     width: 100%;
     border-radius: 0.5rem 0.5rem 0 0;
   }

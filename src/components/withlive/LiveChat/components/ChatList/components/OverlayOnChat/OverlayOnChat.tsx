@@ -23,14 +23,11 @@ export function OverlayOnChat(props: Props) {
           duration: 0.15,
         }}
       >
-        <ClickToScrollButton
-          className={styles.scrollButton}
-          onClick={props.scrollToBottom}
-        />
+        <ClickToScrollButton onClick={props.scrollToBottom} />
       </RisingUp>
       <RisingUp
         isVisible={props.snackBarMessage != ''}
-        height={32}
+        height={30}
         transition={{
           stiffness: 300,
           damping: 16,
@@ -80,14 +77,13 @@ export function RisingUp({
 }
 
 export function ClickToScrollButton({
-  className,
   onClick,
 }: {
   className?: string;
   onClick: () => void;
 }) {
   return (
-    <Button className={className} onClick={onClick}>
+    <Button className={styles.scrollButton} onClick={onClick}>
       클릭하여 스크롤
     </Button>
   );
