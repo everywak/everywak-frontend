@@ -1,20 +1,17 @@
-import { ChatItem } from '../LiveChat.type';
-
-import { Chat } from './ChatList/Chat';
-
+import { Ref, useEffect, useRef } from 'react';
+import clsx from 'clsx';
+import { Chat, OverlayOnChat } from './components';
+import { ChatItem } from '../../LiveChat.type';
 import styles from './ChatList.module.scss';
-import classNames from 'classnames/bind';
-import { forwardRef, Ref, useEffect, useRef } from 'react';
-import { ClickToScrollButton } from './ChatList/ClickToScrollButton';
-import { motion } from 'framer-motion';
-const cx = classNames.bind(styles);
 
 export type Props = {
   className?: string;
   items: ChatItem[];
+  snackBarMessage: string;
   autoScroll?: boolean;
   onTouchToBottom?: (touched: boolean) => void;
 };
+
 export function ChatList(props: Props) {
   const list = props.items.map((chatItem) => (
     <Chat key={chatItem.id} item={chatItem} />
@@ -50,7 +47,11 @@ export function ChatList(props: Props) {
   }, [props.autoScroll, props.items]);
 
   return (
-    <div className={cx('ChatList', props.className, {hideScrollbar: props.autoScroll})}>
+    <div
+      className={clsx(styles.container, props.className, {
+        hideScrollbar: props.autoScroll,
+      })}
+    >
       <div
         className={styles.listWrapper}
         ref={thisRef as Ref<HTMLDivElement>}
@@ -58,25 +59,11 @@ export function ChatList(props: Props) {
       >
         {list}
       </div>
-      {!props.autoScroll && (
-        <motion.div
-          className={styles.scrollButton}
-          initial={{
-            bottom: '-32px',
-          }}
-          animate={{
-            bottom: '8px',
-          }}
-          transition={{
-            type: 'spring',
-            stiffness: 300,
-            damping: 16,
-            duration: 0.15,
-          }}
-        >
-          <ClickToScrollButton onClick={scrollToBottom} />
-        </motion.div>
-      )}
+      <OverlayOnChat
+        autoScroll={props.autoScroll}
+        scrollToBottom={scrollToBottom}
+        snackBarMessage={props.snackBarMessage}
+      />
     </div>
   );
 }

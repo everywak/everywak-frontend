@@ -18,7 +18,8 @@ export type Props = {
 };
 
 export function LiveChatAdapter(props: Props) {
-  const { addChatItem, setChannelId } = useLiveChatActions();
+  const { addChatItem, setChannelId, setConnected, setAuthorized } =
+    useLiveChatActions();
   const { channelId } = useLiveChatValue();
 
   const adapter = useRef<LiveChatAdapterClass>();
@@ -42,7 +43,24 @@ export function LiveChatAdapter(props: Props) {
   useEffect(() => {
     if (adapter.current) {
       adapter.current.on('chat', addChatItem);
-      return () => adapter.current?.off('chat', addChatItem);
+      const onConnected = () => {
+        setConnected(true);
+      };
+      const onDisconnected = () => {
+        setConnected(false);
+        setAuthorized(false);
+      };
+      const onAuthorized = () => {
+        setAuthorized(true);
+      };
+      adapter.current.on('connect', onConnected);
+      adapter.current.on('disconnect', onDisconnected);
+      adapter.current.on('authorize', onAuthorized);
+      return () => {
+        adapter.current?.off('chat', addChatItem);
+        adapter.current?.off('connect', onConnected);
+        adapter.current?.off('disconnect', onDisconnected);
+      };
     }
     return () => {};
   }, [addChatItem]);

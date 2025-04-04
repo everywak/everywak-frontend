@@ -1,9 +1,9 @@
 import React from 'react';
-import { AccentColor, ChatItem } from '../../LiveChat.type';
+import { AccentColor, ChatItem } from '../../../../LiveChat.type';
 
 import styles from './Chat.module.scss';
-import { Emote } from './Chat/Emote';
-import { Profile } from './Chat/Profile';
+import { Emote } from './Emote';
+import { Profile } from './Profile';
 
 export type Props = {
   item: ChatItem;

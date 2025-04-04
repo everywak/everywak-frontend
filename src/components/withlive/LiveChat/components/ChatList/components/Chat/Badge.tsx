@@ -4,6 +4,7 @@ import styles from './Badge.module.scss';
 import { FanclubBadge } from './Badge/FanclubBadge';
 import { ManagerBadge } from './Badge/ManagerBadge';
 import { SubscriberBadge } from './Badge/SubscriberBadge';
+import { TopfanBadge } from './Badge/TopfanBadge';
 
 export type Props = {
   badge: ChatBadge;
@@ -12,6 +13,9 @@ export type Props = {
 const BadgeContent = (badge: ChatBadge) => {
   if (badge.id === 'manager') {
     return <ManagerBadge />;
+  }
+  if (badge.id === 'topfan') {
+    return <TopfanBadge />;
   }
   if (badge.id === 'fan') {
     return <FanclubBadge />;

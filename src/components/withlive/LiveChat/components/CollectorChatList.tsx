@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLiveChatActions, useLiveChatValue } from '../LiveChat.context';
-import { ChatList } from './ChatList';
+import { ChatList } from './ChatList/ChatList';
 
 export function CollectorChatList({ className }: { className?: string }) {
   const { collectedChatList } = useLiveChatValue();
@@ -16,6 +16,7 @@ export function CollectorChatList({ className }: { className?: string }) {
     <ChatList
       className={className}
       items={collectedChatList}
+      snackBarMessage=""
       autoScroll={autoScroll}
       onTouchToBottom={(touched) => setAutoScroll(touched)}
     />
