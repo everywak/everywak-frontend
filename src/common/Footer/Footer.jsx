@@ -75,7 +75,7 @@ class Footer extends Component {
         <div className={styles.links}><Link to="/contact">개발자 연락처</Link> | <Link to="/siteinfo">개인정보 처리방침 및 운영방침</Link></div>
         <div className={styles.desc}>에브리왁굳은 스트리머 우왁굳의 팬사이트이며<br/>
         특정 플랫폼에 소속되어 있지 않은 개인이 운영하는 사이트입니다.</div>
-        <div className={styles.copyright}>에브리왁굳 ⓒ 2020-2024. Build by 백수맛팬치. 모든 컨텐츠의 권리는 원작자에게 있습니다.</div>
+        <div className={styles.copyright}>에브리왁굳 ⓒ 2020-2025. Made by 백수맛팬치. 모든 컨텐츠의 권리는 원작자에게 있습니다.</div>
       </footer>
     );
   }
