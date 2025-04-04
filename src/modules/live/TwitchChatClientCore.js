@@ -1,13 +1,8 @@
 import { Waktaverse } from 'common/constants';
 import React from 'react';
-import { Cookies } from 'react-cookie';
+import { setCookie, getCookie } from 'utils/cookie';
 
 import TwitchApi from '../../services/TwitchApi';
-
-const cookies = new Cookies();
-
-const setCookie = (name, value, option) => cookies.set(name, value, { ...option })
-const getCookie = name => cookies.get(name)
 
 /**
  * @typedef TwitchChatItemData
