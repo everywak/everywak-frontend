@@ -29,14 +29,18 @@ export function LiveChatAdapter(props: Props) {
     if (!adapter.current) {
       adapter.current = new EverywakRelayChatAdapter();
     }
+    return () => {
+      adapter.current?.disconnect();
+    };
+  }, []);
+  useEffect(() => {
     const joinChannel = () => adapter.current?.joinChannel(channelId);
     adapter.current?.on('authorize', joinChannel);
-    if (!adapter.current.isConnected) {
-      adapter.current.connect();
+    if (!adapter.current?.isConnected) {
+      adapter.current?.connect();
     }
     return () => {
       adapter.current?.off('authorize', joinChannel);
-      adapter.current?.disconnect();
     };
   }, [channelId]);
 
