@@ -31,14 +31,9 @@ export default function StretchableContainer({
     newSize: size,
   });
 
-  const onDragStartHandler: React.MouseEventHandler<HTMLDivElement> = (e) => {
-    const pos = ['left', 'right'].includes(rotation)
-      ? e.type === 'touchstart'
-        ? e.touches[0].clientX
-        : e.clientX
-      : e.type === 'touchstart'
-      ? e.touches[0].clientY
-      : e.clientY;
+  const onDragStartHandler: React.PointerEventHandler<HTMLDivElement> = (e) => {
+    e.preventDefault();
+    const pos = ['left', 'right'].includes(rotation) ? e.clientX : e.clientY;
     setDragState({
       isDragging: true,
       prevScrollPos: pos,
@@ -46,16 +41,10 @@ export default function StretchableContainer({
       newSize: size,
     });
   };
-  const onDragHandler: React.MouseEventHandler<HTMLDivElement> = (e) => {
+  const onDragHandler = ((e: PointerEvent) => {
     if (dragState.isDragging) {
       e.preventDefault();
-      const pos = ['left', 'right'].includes(rotation)
-        ? e.type === 'touchstart'
-          ? e.touches[0].clientX
-          : e.clientX
-        : e.type === 'touchstart'
-        ? e.touches[0].clientY
-        : e.clientY;
+      const pos = ['left', 'right'].includes(rotation) ? e.clientX : e.clientY;
 
       const direction = ['left', 'top'].includes(rotation) ? -1 : 1;
       const newSize = Math.max(
@@ -67,8 +56,8 @@ export default function StretchableContainer({
         newSize,
       });
     }
-  };
-  const onDragEndHandler = (e) => {
+  }) as EventListener;
+  const onDragEndHandler = (_: any) => {
     if (dragState.isDragging) {
       setSize(dragState.newSize);
       setDragState({
@@ -79,8 +68,8 @@ export default function StretchableContainer({
       });
     }
   };
-  useWindowEvent('mousemove touchmove', onDragHandler, [dragState]);
-  useWindowEvent('mouseup touchend', onDragEndHandler, [dragState]);
+  useWindowEvent('pointermove', onDragHandler, [dragState]);
+  useWindowEvent('pointerup', onDragEndHandler, [dragState]);
 
   return (
     <div
@@ -101,8 +90,8 @@ export default function StretchableContainer({
       <div className={styles.contentWrapper}>{children}</div>
       <div
         className={cx('slider', { focused: dragState.isDragging })}
-        onMouseDown={onDragStartHandler}
-        onTouchStart={onDragStartHandler}
+        onPointerDown={onDragStartHandler}
+        onDragStart={(_) => false}
       ></div>
       <div
         className={cx('sizeControlWrapper', { dragged: dragState.isDragging })}

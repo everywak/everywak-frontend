@@ -5,6 +5,7 @@
   --newSize: 320px;
   --sliderSize: 16px;
   position: relative;
+  touch-action: none;
   &.top,
   &.bottom {
     height: var(--size);
