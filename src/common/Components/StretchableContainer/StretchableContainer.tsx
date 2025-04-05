@@ -86,6 +86,12 @@ export default function StretchableContainer({
     >
       <div className={styles.contentWrapper}>{children}</div>
       <div
+        className={clsx(styles.dimmer, {
+          [styles.dragged]: dragState.isDragging,
+        })}
+      >
+      </div>
+      <div
         className={clsx(styles.slider, {
           [styles.focused]: dragState.isDragging,
         })}

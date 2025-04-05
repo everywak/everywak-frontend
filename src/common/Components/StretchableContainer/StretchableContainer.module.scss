@@ -84,6 +84,20 @@
     }
   }
 
+  .dimmer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100dvw;
+    height: 100dvh;
+    pointer-events: none;
+    z-index: 980;
+
+    &.dragged {
+      pointer-events: auto;
+    }
+  }
+
   .sizeControlWrapper {
     background: transparent;
     position: absolute;
