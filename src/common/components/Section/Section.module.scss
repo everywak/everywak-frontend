@@ -1,0 +1,15 @@
+@use '@common/mixin' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  & > .contentWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    align-self: stretch;
+  }
+}
