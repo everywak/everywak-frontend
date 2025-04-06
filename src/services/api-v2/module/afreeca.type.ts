@@ -50,7 +50,10 @@ export type StreamInfoOnline = {
     PCON: number;
     PCON_TIME: number;
     PCON_MONTH: string[];
-    PCON_OBJECT: { tier1: SubscriptionBadge[]; tier2: SubscriptionBadge[] };
+    PCON_OBJECT: {
+      tier1: SubscriptionBadge[];
+      tier2: SubscriptionBadge[];
+    } | null;
     FTK: string;
     BPCBANNER: boolean;
     BPCCHATPOPBANNER: boolean;
