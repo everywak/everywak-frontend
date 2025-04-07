@@ -10,7 +10,7 @@ import './SearchBar.scss';
 import cx from 'classnames';
 
 function getRecommendKeyword() {
-  const phTxtList = ['manhwa', 'manhwa', 'ㅗㅜㅑ', '왁굳', 'ㅇㄷ', 'ㅇㅎ', '꿀팁', '꿀팁'];
+  const phTxtList = ['manhwa', '왁굳', 'ㅇㄷ', '꿀팁', '합방', '봤어', '모음'];
   const phTxt = phTxtList[Math.floor(Math.random() * phTxtList.length)];
   return phTxt;
 }
