@@ -281,10 +281,10 @@ export class EverywakRelayIrcAdapter extends LiveChatAdapterClass {
     try {
       const streamInfo = await Everywak.afreeca.getStream(channelName);
       if (streamInfo.CHANNEL.RESULT === 1) {
-        const subList = streamInfo.CHANNEL.PCON_OBJECT.tier1.map((sub) => ({
+        const subList = streamInfo.CHANNEL.PCON_OBJECT?.tier1.map((sub) => ({
           month: sub.MONTH,
           src: sub.FILENAME,
-        }));
+        })) || [];
         this.subscriptionList[channelName] = subList;
       }
     } catch (e) {
