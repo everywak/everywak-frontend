@@ -26,7 +26,7 @@ export function Section({
   children,
 }: Props) {
   return (
-    <section className={clsx('ContentPanel', styles.container, className)}>
+    <section className={clsx('Section', styles.container, className)}>
       <SectionHeader
         title={title}
         description={description}
