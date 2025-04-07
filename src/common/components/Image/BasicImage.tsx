@@ -81,7 +81,7 @@ export function BasicImage({
       })}
     >
       <img
-        className="img"
+        className={styles.img}
         src={src}
         alt={alt}
         onLoad={onLoad}
@@ -91,7 +91,7 @@ export function BasicImage({
         }
         style={imgStyle}
       />
-      <div className="errorIcon">
+      <div className={styles.errorIcon}>
         <BrokenImageRoundedIcon fontSize="large" />
       </div>
       {isLoading && <SkeletonLoader skeleton={skeleton} length={1} />}

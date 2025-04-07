@@ -1,0 +1,92 @@
+@use '@common/mixin' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  .channelPage {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+
+    .notice {
+      color: var(--gray-800);
+      background: rgba(0, 136, 255, 0.1);
+      border-radius: 0.75rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+
+      .tag {
+        background: rgba(0, 136, 255, 0.2);
+        @include font14_14_500;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+      }
+
+      .title {
+        @include font16_16_500;
+      }
+    }
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+  }
+}
+
+.tab.wipTab {
+  background-color: #0001;
+  border-radius: 1rem;
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  @include font16_16_500;
+}
+.tab.socialTab {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  padding: 16px;
+
+  .social {
+    background-color: white;
+    border-radius: 8px;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 4px;
+
+    .logo {
+      background: transparent;
+      width: fit-content;
+      height: 24px;
+      &.cafe {
+        display: flex;
+        background-color: var(--wakki-color);
+        border-radius: 4px;
+        padding: 4px;
+      }
+    }
+    .label {
+      color: var(--text-primary-color);
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+}
+
+.footer{
+  @include font14_14_500;
+  line-height: 140%;
+  color: var(--text-secondary-color);
+
+  a{
+    color: var(--text-primary-color);
+  }
+}

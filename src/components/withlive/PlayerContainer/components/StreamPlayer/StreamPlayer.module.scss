@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  &.expanded.full .playerWrapper {
+    min-height: 100vh;
+    height: 100vh;
+    aspect-ratio: auto;
+    .embed,
+    .offlineImage {
+      height: 100vh;
+    }
+  }
+  &.grid .playerWrapper {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    .embed,
+    .offlineImage {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: auto;
+    }
+  }
+  &.full {
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .playerWrapper {
+    width: 100%;
+    aspect-ratio: 16/9;
+    box-sizing: border-box;
+    max-height: 100vh;
+    position: relative;
+    padding: 0;
+
+    .offlineImage,
+    .embed {
+      display: flex;
+      width: 100%;
+      aspect-ratio: 16/9;
+    }
+    .offlineImage {
+      background-color: black;
+      color: white;
+    }
+
+    .embed {
+      box-sizing: border-box;
+      border: none;
+    }
+  }
+}

@@ -52,3 +52,15 @@
     @content;
   }
 }
+
+@mixin font16_16_500 {
+  font-size: 1rem;
+  line-height: 1rem;
+  font-weight: 500;
+}
+
+@mixin font14_14_500 {
+  font-size: 0.875rem;
+  line-height: 0.875rem;
+  font-weight: 500;
+}

@@ -8,17 +8,30 @@ import cx from 'classnames';
 
 /**
  * Frontpage에 들어가는 content panel
- * 
- * @param {{title: string, description?: string, moreLabel?: string, moreLink?: string, width: 'packed'|'spaceBetween', children: JSX.Element | string}} props 
+ *
+ * @param {{className?:string, title: string, description?: string, moreLabel?: string, moreLink?: string, width: 'packed'|'spaceBetween', children: JSX.Element | string}} props
  * @returns {JSX.Element}
  */
-function ContentPanel({ className, title, description, moreLabel, moreLink, width = 'packed', children }) {
+function ContentPanel({
+  className,
+  title,
+  description,
+  moreLabel,
+  moreLink,
+  width = 'packed',
+  children,
+}) {
   return (
     <section className={cx('ContentPanel', className)}>
-      <SectionHeader title={title} description={description} moreLabel={moreLabel} moreLink={moreLink} size="big" width={width} />
-      <div className="contentWrapper">
-        {children}
-      </div>
+      <SectionHeader
+        title={title}
+        description={description}
+        moreLabel={moreLabel}
+        moreLink={moreLink}
+        size="big"
+        width={width}
+      />
+      <div className="contentWrapper">{children}</div>
     </section>
   );
 }

@@ -36,6 +36,7 @@ $github-color: #1b1f23;
 $emphasis-text-color: #d40000;
 
 :root {
+  // TODO: prefix --color로 통일하기
   --primary-color: #0085ff;
   --primary-light-color: #1b91ff;
   --primary-dark-color: #0077e7;
@@ -54,6 +55,8 @@ $emphasis-text-color: #d40000;
   --text-primary-color: var(--gray-800);
   --text-secondary-color: var(--gray-700);
 
+  --text-dark-primary-color: var(--gray-300);
+
   --background-white-color: #fafafa;
   --component-primary-bg-color: #fafafa;
   --component-primary-border-color: #f0f0f0;
@@ -68,4 +71,35 @@ $emphasis-text-color: #d40000;
   --isedol-jururu-color: #ff008c;
   --isedol-gosegu-color: #467ec6;
   --isedol-viichan-color: #95c100;
+
+  --wakki-color: #5ac467;
+
+  // v2
+
+  // grayscale
+  --color-white: #fff;
+  --color-gray-100: #fafafa;
+  --color-gray-200: #f8f8f8;
+  --color-gray-300: #eaeaea;
+  --color-gray-400: #d9d9d9;
+  --color-gray-500: #949494;
+  --color-gray-600: #777;
+  --color-gray-700: #424242;
+  --color-gray-800: #222;
+  --color-black: #000;
+
+  // theme color
+  --color-primary: #0085ff;
+  --color-secondary: #ff6590;
+  --color-red: #d40000;
+
+  // text color
+  --color-text-primary: var(--gray-800);
+  --color-text-secondary: var(--gray-600);
+  --color-text-dark-primary: var(--gray-200); // darkmode, darken background
+  --color-text-dark-secondary: var(--gray-400);
+
+  // social color
+
+  // isedol color
 }

@@ -227,6 +227,9 @@ export const Waktaverse = [
     twitch: {
       broadcasterId: '55452641',
     },
+    afreeca: {
+      channelId: 'sangsoak',
+    }
   },
   {
     name: '히키킹',

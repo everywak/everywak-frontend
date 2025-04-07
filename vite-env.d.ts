@@ -6,6 +6,7 @@ interface ImportMetaEnv {
   readonly VITE_DOMAIN: string;
   readonly VITE_CLARITY_ID: string;
   readonly VITE_API_V2_URL: string;
+  readonly VITE_CHAT_URL: string;
   readonly GENERATE_SOURCEMAP: string;
 }
 

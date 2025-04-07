@@ -20,8 +20,8 @@ export type Props = {
 export function LiveChat(props: Props) {
   return (
     <LiveChatProvider>
-      <LiveChatAdapter channelIds={props.channelIds} />
       <div className={cx('LiveChat', props.className)}>
+        <LiveChatAdapter channelIds={props.channelIds} />
         <Header onClickHide={props.onClickHide} />
         <StretchableContainer
           className={styles.stretchableContainer}

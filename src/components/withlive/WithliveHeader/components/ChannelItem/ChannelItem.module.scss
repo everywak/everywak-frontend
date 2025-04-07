@@ -1,0 +1,47 @@
+.container {
+  --border-color: rgba(0, 0, 0, 0.5);
+  background: var(--gray-300);
+  border-radius: 50%;
+  box-shadow: 0px 0px 0px 1px var(--white) inset,
+    0px 0px 0px 1px var(--border-color);
+  width: 1.875rem;
+  height: 1.875rem;
+  padding: 0.0625rem;
+  position: relative;
+  cursor: pointer;
+  &.live {
+    --border-color: rgba(255, 0, 0, 0.75);
+    .imageWrapper {
+      opacity: 1;
+    }
+  }
+  &.watching {
+    .watchingMarker {
+      display: block;
+    }
+  }
+
+  & .imageWrapper {
+    border-radius: 50%;
+    width: 1.75rem;
+    height: 1.75rem;
+    overflow: hidden;
+    object-fit: cover;
+    opacity: 0.5;
+    img {
+      height: 100%;
+    }
+  }
+
+  .watchingMarker {
+    position: absolute;
+    bottom: calc(50% - 1rem);
+    left: -0.5rem;
+    width: 0.125rem;
+    height: 2rem;
+    border-radius: 0.15rem;
+    background: var(--gray-500);
+    z-index: 10;
+    display: none;
+  }
+}

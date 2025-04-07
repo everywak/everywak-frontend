@@ -1,0 +1,93 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 0;
+  height: 100%;
+  flex: 1;
+
+  &.single {
+    .player {
+      display: none;
+      height: 100%;
+      flex: 1;
+      &[data-order='1'] {
+        display: block;
+      }
+    }
+  }
+
+  &.oneSide {
+    display: grid;
+    --count: 6;
+
+    &.oneSideR {
+      grid-template-columns: auto calc(100dvh / var(--count) / 9 * 16);
+      grid-template-rows: repeat(auto-fill, auto);
+      grid-template-areas: 'main .';
+      & .player[data-order='1'] {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 1;
+        grid-row-end: 100;
+      }
+    }
+    &.oneSideL {
+      grid-template-columns: calc(100dvh / var(--count) / 9 * 16) auto;
+      grid-template-rows: repeat(auto-fill, auto);
+      grid-template-areas: '. main';
+      & .player[data-order='1'] {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 100;
+      }
+    }
+    &.oneSideT {
+      grid-template-columns: repeat(auto-fill, auto);
+      grid-template-rows: calc(100% / var(--count)) auto;
+      grid-template-areas: '.' 'main';
+      & .player[data-order='1'] {
+        grid-column-start: 1;
+        grid-column-end: 100;
+        grid-row-start: 2;
+        grid-row-end: 3;
+      }
+    }
+    &.oneSideB {
+      grid-template-columns: repeat(auto-fill, auto);
+      grid-template-rows: auto calc(100% / var(--count));
+      grid-template-areas: 'main' '.';
+      & .player[data-order='1'] {
+        grid-column-start: 1;
+        grid-column-end: 100;
+        grid-row-start: 1;
+        grid-row-end: 2;
+      }
+    }
+
+    .player {
+      width: calc(100dvh / var(--count) / 9 * 16);
+      height: 100%;
+      aspect-ratio: 16/9;
+
+      &[data-order='1'] {
+        aspect-ratio: auto;
+        flex: 1;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  &.grid {
+    --rows: 1;
+    --cols: 1;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), calc(100% / var(--cols)));
+    grid-template-rows: repeat(var(--rows), calc(100% / var(--rows)));
+    .player {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
