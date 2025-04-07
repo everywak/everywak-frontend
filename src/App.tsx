@@ -6,14 +6,17 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import useGAPageTracking from './common/GAPageTracking';
 import ScrollToTop from './common/ScrollToTop';
 
+import './common/common.scss';
+
 import NotFoundPage  from './modules/notfoundpage/NotFoundPage';
 
 import Footer from './common/Footer/Footer';
-import Frontpage from './modules/frontpage/Frontpage';
-import Bestwakki from './modules/bestwakki/page';
-import Live from './modules/live/Live';
 
-import './common/common.scss';
+const Frontpage = lazy(() => import('./modules/frontpage/Frontpage'));
+
+const Live = lazy(() => import('./modules/live/Live'));
+
+const Bestwakki = lazy(() => import('./modules/bestwakki/page'));
 
 const Weather = lazy(() => import('./modules/weather/Weather'));
 
