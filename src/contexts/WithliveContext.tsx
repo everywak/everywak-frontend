@@ -40,42 +40,8 @@ export type Actions = {
   updateDraggingPlayerState: (state: Partial<DraggingPlayerStateType>) => void;
 };
 
-const WithliveValuesContext = createContext<Values>({
-  channels: [],
-  isEnabledMultiView: false,
-  watchingChannels: [],
-  multiViewLayout: 'grid',
-  isFullscreen: false,
-  isExpanded: false,
-  isChatVisible: true,
-  chatChannelIds: [],
-  draggingPlayerState: {
-    isDragging: false,
-    targetMemberId: '',
-    prevOrder: -1,
-    order: -1,
-  },
-});
-
-const WithliveActionsContext = createContext<Actions>({
-  setChannels: () => {},
-
-  setIsEnabledMultiView: () => {},
-
-  setWatchingChannels: () => {},
-  addWatchingChannel: () => {},
-  setWatchingChannelOrder: () => {},
-  updateWatchingChannel: () => {},
-  removeWatchingChannel: () => {},
-
-  setMultiViewLayout: () => {},
-  setIsFullscreen: () => {},
-  setIsExpanded: () => {},
-  setIsChatVisible: () => {},
-  setChatChannelIds: () => {},
-
-  updateDraggingPlayerState: () => {},
-});
+const WithliveValuesContext = createContext<Values | undefined>(undefined);
+const WithliveActionsContext = createContext<Actions | undefined>(undefined);
 
 interface Props {
   readonly children: React.ReactNode;
@@ -319,9 +285,17 @@ export function WithliveProvider(props: Props): React.ReactNode {
 }
 
 export function useWithliveValues(): Values {
-  return useContext(WithliveValuesContext);
+  const context = useContext(WithliveValuesContext);
+  if (!context) {
+    throw new Error('useWithliveValues must be used within WithliveProvider');
+  }
+  return context;
 }
 
 export function useWithliveActions(): Actions {
-  return useContext(WithliveActionsContext);
+  const context = useContext(WithliveActionsContext);
+  if (!context) {
+    throw new Error('useWithliveActions must be used within WithliveProvider');
+  }
+  return context;
 }
