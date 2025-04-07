@@ -4,7 +4,7 @@ ReactJS로 구현된 에브리왁굳 프론트엔드
 
 ## 에브리왁굳이란?
 
-[에브리왁굳](https://beta.everywak.kr/)은 스트리머 [우왁굳](https://www.youtube.com/@woowakgood)과 왁타버스와 관련된 컨텐츠를 제공하는 팬사이트입니다.
+[에브리왁굳](https://everywak.kr/)은 스트리머 [우왁굳](https://www.youtube.com/@woowakgood)과 왁타버스와 관련된 컨텐츠를 제공하는 팬사이트입니다.
 
 ![메인 스크린샷](./screenshots/everywak_main.png)
 
@@ -12,22 +12,22 @@ ReactJS로 구현된 에브리왁굳 프론트엔드
 
 ## 주요 컨텐츠
 
-### [왁물원](https://cafe.naver.com/steamindiegame)<sup>[1](#footnote_1)</sup> 인기글 목록 및 검색 - [바로가기](https://beta.everywak.kr/bestwakki)
+### [왁물원](https://cafe.naver.com/steamindiegame)<sup>[1](#footnote_1)</sup> 인기글 목록 및 검색 - [바로가기](https://everywak.kr/bestwakki)
 
 오래되었거나 상대적으로 인기도가 떨어져 목록에서 사라져버린 인기글을 한 눈에 확인할 수 있습니다.\
 또한 다시 보고 싶은 글을 찾아보기 쉽도록 제목/게시판/작성자 닉네임을 통한 검색 기능도 제공합니다.
 
-### 왁타버스 생방송 멀티뷰 - [바로가기](https://beta.everywak.kr/withlive)
+### 왁타버스 생방송 멀티뷰 - [바로가기](https://everywak.kr/withlive)
 
 이세계아이돌, 고정 멤버 등 모든 왁타버스 멤버들의 방송을 동시에 시청할 수 있습니다.\
 채팅 콜렉터, 멀티 채팅창, 채팅창 팝업 등 아프리카TV보다 앞선 기능으로 편안한 시청 경험을 제공합니다.
 
-### 왁타버스 웹툰 플랫폼 - [바로가기](https://beta.everywak.kr/waktoon)
+### 왁타버스 웹툰 플랫폼 - [바로가기](https://everywak.kr/waktoon)
 
 왁물원에 올라오는 인기 팬웹툰들을 모아 정리해서 감상하기 쉽게 만들었습니다.\
 연재되는 작품들을 에피소드별로 찾아보거나 하루동안 좋아요를 많이 받은 작품들을 순위표로 보여줍니다.
 
-### 이세돌 뱅온정보 - [바로가기](https://beta.everywak.kr/weather)
+### 이세돌 뱅온정보 - [바로가기](https://everywak.kr/weather)
 
 이세계 아이돌 멤버들의 생방송 정보를 일기예보 형식으로 보여줍니다.
 
