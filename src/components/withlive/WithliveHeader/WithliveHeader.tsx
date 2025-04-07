@@ -6,44 +6,47 @@ import { ChannelItem } from './components';
 import styles from './WithliveHeader.module.scss';
 
 export function WithliveHeader() {
-  const { channels, watchingChannels, isExpanded } = useWithliveValues();
+  const { channels, watchingChannels, isExpanded, isEnabledMultiView } = useWithliveValues();
   const [hoverChannel, setHoverChannel] = useState<{
     thumbnailUrl: string;
     title: string;
     top: number;
   } | null>(null);
 
+  const defaultOrder = channels.map((channel) => channel.memberId);
+  const getPlayer = (memberId: string) =>
+    watchingChannels.find(
+      (watchingChannel) =>
+        watchingChannel.memberId === memberId &&
+        (isEnabledMultiView || watchingChannel.order === 0),
+    );
+
   const channelList = channels
+    .map((channel) => ({
+      memberId: channel.memberId,
+      channel,
+      player: getPlayer(channel.memberId),
+    }))
     .sort((a, b) => {
       const left =
-        (a.streamInfo?.isLive ? -1 : 0) +
-        (watchingChannels.findIndex(
-          (watchingChannel) => watchingChannel.memberId === a.memberId,
-        ) === -1
-          ? 0
-          : -5);
+        defaultOrder.indexOf(a.memberId) +
+        (a.channel.streamInfo?.isLive ? -200 : 0) +
+        (a.player ? -400 : 0);
 
       const right =
-        (b.streamInfo?.isLive ? -1 : 0) +
-        (watchingChannels.findIndex(
-          (watchingChannel) => watchingChannel.memberId === b.memberId,
-        ) === -1
-          ? 0
-          : -5);
+        defaultOrder.indexOf(b.memberId) +
+        (b.channel.streamInfo?.isLive ? -200 : 0) +
+        (b.player ? -400 : 0);
 
       return left - right;
     })
-    .map((channel) => (
+    .map(({ memberId, channel, player }) => (
       <ChannelItem
-        key={channel.memberId}
-        channelId={channel.memberId}
+        key={memberId}
+        channelId={memberId}
         profileImageUrl={channel.profileImage}
         isLive={channel.streamInfo?.isLive || false}
-        isWatching={
-          watchingChannels.find(
-            (watchingChannel) => watchingChannel.memberId === channel.memberId,
-          ) !== undefined
-        }
+        isWatching={!!player}
         thumbnailUrl={channel.streamInfo?.thumbnail}
         title={channel.streamInfo?.title}
         setHoverChannel={setHoverChannel}
