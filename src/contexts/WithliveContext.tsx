@@ -1,5 +1,6 @@
 import { useMember } from 'hooks/useMember';
 import { useQueryLive } from 'hooks/useQueryLive';
+import useStorage from 'hooks/useStorage';
 import { useWindowEvent } from 'hooks/useWindowEvent';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import {
@@ -85,12 +86,17 @@ interface Props {
 
 export function WithliveProvider(props: Props): React.ReactNode {
   const [channels, setChannels] = useState<ChannelType[]>([]);
-  const [isEnabledMultiView, setIsEnabledMultiView] = useState<boolean>(false);
-  const [watchingChannels, setWatchingChannels] = useState<ChannelStateType[]>(
-    [],
+  const [isEnabledMultiView, setIsEnabledMultiView] = useStorage<boolean>(
+    'everywak.withlive.multiview.enable',
+    false,
   );
-  const [multiViewLayout, setMultiViewLayout] =
-    useState<LayoutType>('one-side-r');
+  const [watchingChannels, setWatchingChannels] = useStorage<
+    ChannelStateType[]
+  >('everywak.withlive.multiview.players', []);
+  const [multiViewLayout, setMultiViewLayout] = useStorage<LayoutType>(
+    'everywak.withlive.multiview.layout',
+    'one-side-r',
+  );
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [isChatVisible, setIsChatVisible] = useState<boolean>(true);
