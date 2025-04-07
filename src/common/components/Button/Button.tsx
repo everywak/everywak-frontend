@@ -1,8 +1,7 @@
 import React from 'react';
+import clsx from 'clsx';
 
 import styles from './Button.module.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
 
 export type ButtonProps = {
   className?: string;
@@ -41,7 +40,14 @@ export function Button({
 }: ButtonProps): React.ReactElement {
   return (
     <button
-      className={cx(className, 'Button', { hideLabel, disabled, outlined }, size, color)}
+      className={clsx(
+        'Button',
+        styles.container,
+        className,
+        { [styles.hideLabel]: hideLabel, [styles.disabled]: disabled, [styles.outlined]: outlined },
+        styles[size],
+        styles[color],
+      )}
       onClick={onClick}
       {...rest}
     >
