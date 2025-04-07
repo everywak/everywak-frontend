@@ -22,22 +22,15 @@ export function WithliveHeader() {
     );
 
   const channelList = channels
-    .map((channel) => ({
+    .map((channel, i) => ({
       memberId: channel.memberId,
+      index: i,
       channel,
       player: getPlayer(channel.memberId),
     }))
     .sort((a, b) => {
-      const left =
-        defaultOrder.indexOf(a.memberId) +
-        (a.channel.streamInfo?.isLive ? -200 : 0) +
-        (a.player ? -400 : 0);
-
-      const right =
-        defaultOrder.indexOf(b.memberId) +
-        (b.channel.streamInfo?.isLive ? -200 : 0) +
-        (b.player ? -400 : 0);
-
+      const left = a.index + (a.channel.streamInfo?.isLive ? -200 : 0) + (a.player ? -400 : 0);
+      const right = b.index + (b.channel.streamInfo?.isLive ? -200 : 0) + (b.player ? -400 : 0);
       return left - right;
     })
     .map(({ memberId, channel, player }) => (
