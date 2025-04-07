@@ -11,6 +11,7 @@ import './common/common.scss';
 import NotFoundPage  from './modules/notfoundpage/NotFoundPage';
 
 import Footer from './common/Footer/Footer';
+import { ThemeProvider } from 'contexts/ThemeContext';
 
 const Frontpage = lazy(() => import('./modules/frontpage/Frontpage'));
 
@@ -48,6 +49,7 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
+    <ThemeProvider>
     <div className="App">
       <ScrollToTop />
       
@@ -77,6 +79,7 @@ export default function App() {
       </Routes>
       <Footer />
     </div>
+    </ThemeProvider>
     </QueryClientProvider>
   );
 }
