@@ -11,9 +11,9 @@ import './BestWaktoonList.scss';
 import cx from 'classnames';
 
 function formatWaktoonData(waktoonList) {
-  return waktoonList.map(item => ({
-    key: item.uuid, 
-    toonId: item.uuid, 
+  return waktoonList.map((item) => ({
+    key: item.uuid,
+    toonId: item.uuid,
     thumbnail: item.thumbnails && item.thumbnails.replace('100_100', '200_200'),
     serialStatus: item.serialStatus,
     title: item.title,
@@ -30,19 +30,19 @@ async function updateWaktoonList(query) {
   try {
     const res = await await service.getWaktoons(query);
 
-    if (res.status != 200) { throw res; }
+    if (res.status != 200) {
+      throw res;
+    }
 
-    const {
-      waktoonList, ...rest
-    } = res.result;
-    
-    return ({
+    const { waktoonList, ...rest } = res.result;
+
+    return {
       waktoonList: formatWaktoonData(waktoonList),
       ...rest,
-    });
-  } catch(err) {
+    };
+  } catch (err) {
     console.error(err);
-    return ({ waktoonList: [],  pagination: {}});
+    return { waktoonList: [], pagination: {} };
   }
 }
 
@@ -57,27 +57,32 @@ function BestWaktoonList({ defaultShowCount, searchOptions, onChange }) {
         searchOptions,
         pagination,
       });
-      
+
       setItemList(waktoonList);
     }
     fetchBestWaktooons({ searchOptions });
   }, [searchOptions]);
 
   return (
-    <WaktoonList 
+    <WaktoonList
       className="BestWaktoonList"
       ItemComponent={BestWaktoonItem}
-      list={itemList} 
-      defaultShowCount={defaultShowCount} 
+      list={itemList}
+      defaultShowCount={defaultShowCount}
       maximumShowCount={8}
-      gaEventOnClickMore={{
-        //category: GAEvents.Category.isedol,
-        //action: GAEvents.Action.isedol.moreClip,
-      }}
-      gaEventOnClickItem={{
-        //category: GAEvents.Category.isedol,
-        //action: GAEvents.Action.isedol.viewClip,
-      }} />
+      gaEventOnClickMore={
+        {
+          //category: GAEvents.Category.isedol,
+          //action: GAEvents.Action.isedol.moreClip,
+        }
+      }
+      gaEventOnClickItem={
+        {
+          //category: GAEvents.Category.isedol,
+          //action: GAEvents.Action.isedol.viewClip,
+        }
+      }
+    />
   );
 }
 

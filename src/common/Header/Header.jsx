@@ -15,8 +15,12 @@ function Header() {
   );
 }
 
-export function EverywakLogo (props) {
-  return <Link to="/" className="title"><img src="/images/everywak_logo.png" alt="Everywak 로고"/></Link>;
+export function EverywakLogo(props) {
+  return (
+    <Link to="/" className="title">
+      <img src="/images/everywak_logo.png" alt="Everywak 로고" />
+    </Link>
+  );
 }
 
 export default Header;

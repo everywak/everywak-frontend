@@ -1,11 +1,4 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useMemo,
-  useState
-} from 'react';
+import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { PopularArticle } from 'services/everywak-api/modules/bestwakki';
@@ -24,9 +17,7 @@ export type Values = {
 export type Actions = {
   readonly refresh: () => void;
   readonly fetchNextPage: () => void;
-  readonly updateSearchFilter: (
-    newFilter: Record<string, string | number>
-  ) => void;
+  readonly updateSearchFilter: (newFilter: Record<string, string | number>) => void;
 };
 
 const BestwakkiValueContext = createContext<Values>({
@@ -41,14 +32,14 @@ const BestwakkiValueContext = createContext<Values>({
     searchTarget: 'title',
     keyword: '',
     perPage: 30,
-    page: 1
-  }
+    page: 1,
+  },
 });
 
 const BestwakkiActionsContext = createContext<Actions>({
   refresh() {},
   fetchNextPage() {},
-  updateSearchFilter() {}
+  updateSearchFilter() {},
 });
 
 type Props = {
@@ -74,13 +65,10 @@ export function BestwakkiProvider(props: Props): JSX.Element {
       perPage: 30,
       page: 1,
       searchTarget: 'title',
-      keyword: ''
+      keyword: '',
     };
 
-    if (
-      _orderBy &&
-      ['time', 'time_oldest', 'up', 'comment', 'read'].includes(_orderBy)
-    ) {
+    if (_orderBy && ['time', 'time_oldest', 'up', 'comment', 'read'].includes(_orderBy)) {
       searchFilter.orderBy = _orderBy as ListOrder;
     }
     if (_queryTxt) {
@@ -101,7 +89,7 @@ export function BestwakkiProvider(props: Props): JSX.Element {
   const updateSearchFilter = (newFilter: Record<string, string | number>) => {
     const { orderBy, beginAt, endAt, keyword, searchTarget } = {
       ...searchFilter,
-      ...newFilter
+      ...newFilter,
     };
 
     const params: Record<string, string> = {};
@@ -123,16 +111,10 @@ export function BestwakkiProvider(props: Props): JSX.Element {
     setSearchParams(params);
   };
 
-  const {
-    isLoading,
-    data,
-    refetch,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage
-  } = useQueryBestwakki({
-    searchFilter
-  });
+  const { isLoading, data, refetch, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useQueryBestwakki({
+      searchFilter,
+    });
 
   const refresh = () => {
     if (!isLoading) {
@@ -142,7 +124,7 @@ export function BestwakkiProvider(props: Props): JSX.Element {
 
   useEffect(() => {
     if (data) {
-      setArticles(data.pages.flatMap(page => page.popularArticleList));
+      setArticles(data.pages.flatMap((page) => page.popularArticleList));
     }
   }, [data]);
 
@@ -150,9 +132,9 @@ export function BestwakkiProvider(props: Props): JSX.Element {
     () => ({
       refresh,
       fetchNextPage,
-      updateSearchFilter
+      updateSearchFilter,
     }),
-    [isLoading, refresh, fetchNextPage]
+    [isLoading, refresh, fetchNextPage],
   );
 
   return (
@@ -163,7 +145,7 @@ export function BestwakkiProvider(props: Props): JSX.Element {
           isLoading,
           isFetchingNextPage,
           hasNextPage,
-          searchFilter
+          searchFilter,
         }}
       >
         {props.children}
@@ -175,9 +157,7 @@ export function BestwakkiProvider(props: Props): JSX.Element {
 export function useBestwakkiValue() {
   const value = useContext(BestwakkiValueContext);
   if (!value) {
-    throw new Error(
-      'useBestwakkiValue should be used within BestwakkiProvider'
-    );
+    throw new Error('useBestwakkiValue should be used within BestwakkiProvider');
   }
   return value;
 }
@@ -185,9 +165,7 @@ export function useBestwakkiValue() {
 export function useBestwakkiActions() {
   const value = useContext(BestwakkiActionsContext);
   if (!value) {
-    throw new Error(
-      'useBestwakkiActions should be used within BestwakkiProvider'
-    );
+    throw new Error('useBestwakkiActions should be used within BestwakkiProvider');
   }
   return value;
 }

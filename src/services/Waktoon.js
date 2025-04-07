@@ -11,7 +11,7 @@ import axios from 'axios';
  * @property {String} parseKeyword
  * @property {String} description
  * @property {'single'|'series'} episodeType
- * 
+ *
  * @typedef WaktoonSearchQuery
  * @property {'all'|'best'|'general'} type
  * @property {String} queryTxt
@@ -20,7 +20,7 @@ import axios from 'axios';
  * @property {Number} perPage
  * @property {Number} page
  * @property {Number} pos
- * 
+ *
  * @typedef WaktoonInfoEditQuery
  * @property {String} uuid
  * @property {String} title
@@ -33,7 +33,7 @@ import axios from 'axios';
  * @property {Number} createdTimeStamp
  * @property {String} thumbnails
  * @property {'single'|'series'} episodeType
- * 
+ *
  * @typedef WaktoonEpisodeSearchQuery
  * @property {'all'|'best'|'general'} type
  * @property {String} queryTxt
@@ -42,7 +42,7 @@ import axios from 'axios';
  * @property {Number} perPage
  * @property {Number} page
  * @property {Number} pos
- * 
+ *
  * @typedef WaktoonEpisodeChartSearchQuery
  * @property {Number} before 시작 시점 timestamp(ms)
  * @property {Number} after 종료 시점 timestamp(ms)
@@ -60,56 +60,66 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: 'https://api.everywak.kr',
-})
+});
 
 const apiCache = [];
-function loadCache({route, params, salt}) {
-  return apiCache.find(cache => cache.route === route && JSON.stringify(cache.params) === JSON.stringify(params) && cache.salt === salt && cache.data);
+function loadCache({ route, params, salt }) {
+  return apiCache.find(
+    (cache) =>
+      cache.route === route &&
+      JSON.stringify(cache.params) === JSON.stringify(params) &&
+      cache.salt === salt &&
+      cache.data,
+  );
 }
 /**
  * API 서버 요청을 보냅니다.
- * 
- * @param {string} uri 
- * @param {object} params 
- * @param {'GET'|'POST'} method 
+ *
+ * @param {string} uri
+ * @param {object} params
+ * @param {'GET'|'POST'} method
  * @returns {ApiMessage<any>}
  */
 async function requestApi(uri, params, method = 'GET', forceUpdate = false) {
-
   if (!forceUpdate) {
-    const cache = loadCache({route: uri, params, salt: 0});
-    if (cache) { return cache.data; }
+    const cache = loadCache({ route: uri, params, salt: 0 });
+    if (cache) {
+      return cache.data;
+    }
   }
 
   const options = {
     method: method,
     mode: 'cors',
-    params: params, 
+    params: params,
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json;charset=UTF-8'
-    }
+      Accept: 'application/json',
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
   };
 
   try {
     const response = await api(uri, options);
 
-    const cache = loadCache({route: uri, params, salt: 0});
+    const cache = loadCache({ route: uri, params, salt: 0 });
     const fetchedData = {
       status: 200,
-      result: response.data.message.result
+      result: response.data.message.result,
     };
-    if (cache) { // 기존 캐시가 있으면 
+    if (cache) {
+      // 기존 캐시가 있으면
       cache.data = fetchedData; // 강제 갱신
     } else {
-      apiCache.push({ // 새 캐시 생성
-        route: uri, params, salt: 0, 
+      apiCache.push({
+        // 새 캐시 생성
+        route: uri,
+        params,
+        salt: 0,
         data: fetchedData,
       });
     }
     return fetchedData;
-
-  } catch(error) {
+  } catch (error) {
     if (error.response) {
       // api 에러
       return {
@@ -117,23 +127,20 @@ async function requestApi(uri, params, method = 'GET', forceUpdate = false) {
         error: {
           msg: '내부 서버 오류',
           data: error.response.data.message,
-        }
+        },
       };
-    }
-    else if (error.request) {
+    } else if (error.request) {
       // api 서버 연결 실패
       return {
         status: 503,
         error: {
           msg: 'API 서버 연결 실패',
-        }
+        },
       };
-    }
-    else {
+    } else {
       console.log('Error', error.message);
     }
   }
-
 }
 
 function apiErrorHandler(message) {
@@ -157,56 +164,55 @@ function apiErrorHandler(message) {
 
 /**
  * 왁툰 목록을 불러옵니다.
- * 
- * @param {WaktoonSearchQuery} params 
+ *
+ * @param {WaktoonSearchQuery} params
  * @returns {ApiMessage<{waktoonList: any[], waktoonCount: Number, pagination: {length: Number, pos: Number, perPage: Number}}>}
  */
 export async function getWaktoons(params) {
   try {
-
     const output = await requestApi('/waktoon/Waktoon/list', params);
-    
+
     if (output.status === 200) {
-      output.result.waktoonList.forEach(item => item.title = item.title.replace(/&lt;/g, '<').replace(/&gt;/g, '>'));
+      output.result.waktoonList.forEach(
+        (item) => (item.title = item.title.replace(/&lt;/g, '<').replace(/&gt;/g, '>')),
+      );
       return output;
     }
-    
-  } catch(output) {
+  } catch (output) {
     return apiErrorHandler(output);
   }
 }
 
 /**
  * 왁툰 에피소드 목록을 불러옵니다.
- * 
- * @param {WaktoonEpisodeSearchQuery} params 
+ *
+ * @param {WaktoonEpisodeSearchQuery} params
  * @returns {ApiMessage<{waktoonEpisodeList: any[], waktoonEpisodeCount: Number, pagination: {length: Number, pos: Number, perPage: Number}}>}
  */
 export async function getWaktoonEpisodes(params) {
   try {
-
     // api 요청
     const output = await requestApi('/waktoon/WaktoonEpisode/list', params);
 
     if (output.status === 200) {
-      output.result.waktoonEpisodeList.forEach(item => item.title = item.title.replace(/&lt;/g, '<').replace(/&gt;/g, '>'));
+      output.result.waktoonEpisodeList.forEach(
+        (item) => (item.title = item.title.replace(/&lt;/g, '<').replace(/&gt;/g, '>')),
+      );
       return output;
     }
-    
-  } catch(output) {
+  } catch (output) {
     return apiErrorHandler(output);
   }
 }
 
 /**
  * 왁툰 에피소드 인기도 증가량 차트를 불러옵니다.
- * 
- * @param {WaktoonEpisodeChartSearchQuery} query 
+ *
+ * @param {WaktoonEpisodeChartSearchQuery} query
  * @returns {ApiMessage}
  */
 export async function getWaktoonEpisodeChart(query) {
   try {
-  
     // 검색 조건 파라미터 필터링
     const filteredParams = filterWaktoonEpisodeChartSearchParams(query);
 
@@ -214,11 +220,12 @@ export async function getWaktoonEpisodeChart(query) {
     const output = await requestApi('/waktoon/WaktoonEpisode/Chart/list', filteredParams);
 
     if (output.status === 200) {
-      output.result.waktoonEpisodeChartList.forEach(item => item.title = item.title.replace(/&lt;/g, '<').replace(/&gt;/g, '>'));
+      output.result.waktoonEpisodeChartList.forEach(
+        (item) => (item.title = item.title.replace(/&lt;/g, '<').replace(/&gt;/g, '>')),
+      );
       return output;
     }
-    
-  } catch(output) {
+  } catch (output) {
     return apiErrorHandler(output);
   }
 }
@@ -226,12 +233,11 @@ export async function getWaktoonEpisodeChart(query) {
 const SECONDS_OF_DAY = 24 * 60 * 60;
 /**
  * 왁툰 에피소드 차트 출력 조건 파라미터를 필터링합니다.
- * 
+ *
  * @param {WaktoonEpisodeChartSearchQuery} query 원본 param
  * @returns {WaktoonEpisodeChartSearchQuery}
  */
 function filterWaktoonEpisodeChartSearchParams(query) {
-
   const result = {};
 
   // 끝 지점
@@ -245,14 +251,13 @@ function filterWaktoonEpisodeChartSearchParams(query) {
     query.before = result.after - SECONDS_OF_DAY; // before 미지정시 after - 1day로
   }
   result.before = parseInt(query.before);
-  
 
   // before가 after보다 큰 거 방지
-  const after  = Math.max(result.after, result.before);
+  const after = Math.max(result.after, result.before);
   const before = Math.min(result.after, result.before);
-  result.after  = after;
+  result.after = after;
   result.before = before;
-  
+
   // 정렬
   if (!query.orderBy || !['view', 'up', 'comment'].includes(query.orderBy)) {
     query.orderBy = 'up';
@@ -265,13 +270,13 @@ function filterWaktoonEpisodeChartSearchParams(query) {
   const page = parseInt(query.page);
   result.page = page && page > 0 ? page : 1;
   result.pos = result.perPage * (result.page - 1);
-  
+
   return result;
 }
 
 /**
  * API요청에 소금간을 칩니다 솔솔솔
- * 
+ *
  * @returns {number}
  */
 function geneSalt() {

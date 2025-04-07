@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './StreamTimer.scss';
 import cx from 'classnames';
 
-export default function StreamTimer({startedTime = Date.now()}) {
-  
+export default function StreamTimer({ startedTime = Date.now() }) {
   const [seconds, setSeconds] = useState(0);
 
   function updateTimer() {
@@ -20,20 +19,18 @@ export default function StreamTimer({startedTime = Date.now()}) {
 
     return () => {
       clearInterval(loopTimer);
-    }
+    };
   }, [startedTime]);
 
   return (
-    <div className={cx('StreamTimer', {hide: startedTime == 0})}>
-      {formatTimeString(seconds)}
-    </div>
+    <div className={cx('StreamTimer', { hide: startedTime == 0 })}>{formatTimeString(seconds)}</div>
   );
 }
 
 /**
  * period를 hh:mm:ss 형태로 변환합니다.
- * 
- * @param {number} time 
+ *
+ * @param {number} time
  * @returns {string} hh:mm:ss
  */
 function formatTimeString(time) {
@@ -46,8 +43,8 @@ function formatTimeString(time) {
 
 /**
  * 정수를 두자리 문자열로 변환합니다.
- * 
- * @param {number} n 
+ *
+ * @param {number} n
  * @return {string}
  */
 function formatInt(n) {

@@ -77,12 +77,7 @@ export function RisingUp({
   );
 }
 
-export function ClickToScrollButton({
-  onClick,
-}: {
-  className?: string;
-  onClick: () => void;
-}) {
+export function ClickToScrollButton({ onClick }: { className?: string; onClick: () => void }) {
   return (
     <Button className={styles.scrollButton} onClick={onClick}>
       클릭하여 스크롤

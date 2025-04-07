@@ -9,37 +9,36 @@ import SkeletonLoader from '../SkeletonLoader';
 import './BasicImage.scss';
 import cx from 'classnames/bind';
 
-const skeleton = 
+const skeleton = (
   <div className="skeleton">
-    <div className="skeletonItem">
-    </div>
-  </div>;
+    <div className="skeletonItem"></div>
+  </div>
+);
 /**
  * 이미지
- * 
+ *
  * @param {{
- * className?: String, 
- * src: String, 
- * alt: String, 
+ * className?: String,
+ * src: String,
+ * alt: String,
  * noReferrer: Boolean,
- * objectFit: 'cover'|'contain', 
- * }} props 
+ * objectFit: 'cover'|'contain',
+ * }} props
  */
 export default function BasicImage({ className = '', src, alt, noReferrer, objectFit = 'cover' }) {
-
-  const [{isLoading, isError}, setState] = useState({
+  const [{ isLoading, isError }, setState] = useState({
     isLoading: true,
     isError: false,
   });
 
   useEffect(() => {
     if (!src) {
-      setState(prevValue => ({
+      setState((prevValue) => ({
         isLoading: false,
         isError: true,
       }));
     } else {
-      setState(prevValue => ({
+      setState((prevValue) => ({
         isLoading: true,
         isError: false,
       }));
@@ -47,7 +46,7 @@ export default function BasicImage({ className = '', src, alt, noReferrer, objec
   }, [src]);
 
   function onError(e) {
-    setState(prevValue => ({
+    setState((prevValue) => ({
       isLoading: false,
       isError: true,
     }));
@@ -55,23 +54,32 @@ export default function BasicImage({ className = '', src, alt, noReferrer, objec
   }
 
   function onLoad(e) {
-    setTimeout(() => setState(prevValue => ({
-      isLoading: false,
-      isError: false,
-    })), 50);
+    setTimeout(
+      () =>
+        setState((prevValue) => ({
+          isLoading: false,
+          isError: false,
+        })),
+      50,
+    );
   }
 
   const imgStyle = {
-    objectFit: (['fill', 'contain', 'cover', 'none', 'scale-down'].includes(objectFit) ? objectFit : 'cover'),
-  }
+    objectFit: ['fill', 'contain', 'cover', 'none', 'scale-down'].includes(objectFit)
+      ? objectFit
+      : 'cover',
+  };
 
   return (
-    <div className={cx('BasicImage', className, {isLoading, isError})}>
-      <img className="img" src={src} alt={alt} 
-        onLoad={onLoad} 
-        onError={onError} 
-        referrerPolicy={noReferrer ? 'no-referrer' : 'strict-origin-when-cross-origin'} 
-        style={imgStyle} 
+    <div className={cx('BasicImage', className, { isLoading, isError })}>
+      <img
+        className="img"
+        src={src}
+        alt={alt}
+        onLoad={onLoad}
+        onError={onError}
+        referrerPolicy={noReferrer ? 'no-referrer' : 'strict-origin-when-cross-origin'}
+        style={imgStyle}
       />
       <div className="errorIcon">
         <BrokenImageRoundedIcon fontSize="large" />

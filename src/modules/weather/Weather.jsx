@@ -18,8 +18,8 @@ import cx from 'classnames';
 
 /**
  * 날씨 페이지
- * 
- * @param {{}} props 
+ *
+ * @param {{}} props
  * @returns {JSX.Element}
  */
 function Weather(props) {
@@ -31,7 +31,7 @@ function Weather(props) {
       <main className="contentWrapper">
         <div className="headerWrapper">
           <Link to="/" className="back">
-            <KeyboardArrowLeftRoundedIcon fontSize="small"/> 에브리왁굳 홈으로
+            <KeyboardArrowLeftRoundedIcon fontSize="small" /> 에브리왁굳 홈으로
           </Link>
           <h1 className="title">오늘 이세계 날씨는?</h1>
         </div>

@@ -27,8 +27,7 @@ export function ChatList(props: Props) {
   ) => {
     const target = e.target as HTMLDivElement;
 
-    const _touched =
-      target.scrollTop + target.clientHeight > target.scrollHeight - 60;
+    const _touched = target.scrollTop + target.clientHeight > target.scrollHeight - 60;
 
     if (touched.current !== _touched) {
       touched.current = _touched;

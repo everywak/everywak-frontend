@@ -6,7 +6,7 @@ export function getURLParams(url: string) {
 
   const params = new URLSearchParams(url);
 
-  [...params.keys()].forEach(key => {
+  [...params.keys()].forEach((key) => {
     param[key] = params.get(key) as string;
   });
 
@@ -81,7 +81,7 @@ export function getRandomString(length = 16) {
   const char = '0123456789abcdefghijklmnopqrstuvwxyz';
   return Array(length)
     .fill(0)
-    .map(v => char[Math.floor(Math.random() * (char.length - 1))])
+    .map((v) => char[Math.floor(Math.random() * (char.length - 1))])
     .join('');
 }
 

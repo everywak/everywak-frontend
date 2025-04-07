@@ -12,11 +12,10 @@ import * as everywakApi from '../../services/everywak-api/index';
  * @returns {JSX.Element}
  */
 function FrontBestwakkiList({}) {
-
   const fetchPopularArticles = async () => {
     const res = await everywakApi.bestwakki.getPopularArticles({
       orderBy: 'time',
-      perPage: 5
+      perPage: 5,
     });
 
     if (res.message.status != 200) {
@@ -31,11 +30,11 @@ function FrontBestwakkiList({}) {
    */
   const { isLoading, isError, data, error } = useQuery(
     ['getPopularArticlesFront'],
-    fetchPopularArticles
+    fetchPopularArticles,
   );
 
   if (data) {
-    return data.popularArticleList.map(item => (
+    return data.popularArticleList.map((item) => (
       <FrontBestwakkiItem
         subject={item.subject}
         board={item.menuName}

@@ -21,8 +21,7 @@ function addClassLive() {
   }
 }
 
-export default function Live () {
-
+export default function Live() {
   const [opened, setOpened] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
@@ -33,52 +32,72 @@ export default function Live () {
 
     return () => {
       document.querySelector('.App')?.classList.remove('live');
-    }
+    };
   }, []);
 
   const refPlayerWrapper = useRef(null);
 
   useEffect(() => {
     if (!expanded) {
-      refPlayerWrapper.current && refPlayerWrapper.current.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      })
+      refPlayerWrapper.current &&
+        refPlayerWrapper.current.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
     }
   }, [expanded]);
-  
 
-  const onPlayerOptionChangedHandler = useCallback(({theaterMode, hovering}) => {
-    console.log(hovering, opened)
-    if (hovering !== undefined && hovering !== opened) {
-      setOpened(hovering);
-    }
-    if (theaterMode !== undefined && theaterMode !== expanded) {
-      setExpanded(theaterMode);
-    }
-  }, [opened, expanded]);
+  const onPlayerOptionChangedHandler = useCallback(
+    ({ theaterMode, hovering }) => {
+      console.log(hovering, opened);
+      if (hovering !== undefined && hovering !== opened) {
+        setOpened(hovering);
+      }
+      if (theaterMode !== undefined && theaterMode !== expanded) {
+        setExpanded(theaterMode);
+      }
+    },
+    [opened, expanded],
+  );
 
   // TODO: 유튜브 라이브 대응
   const broadcasterType = 'TWITCH';
   const videoId = 'woowakgood';
   const channelId = 'woowakgood'; // import.meta.env.VITE_TWITCH_CHANNEL_NAME
 
-  const mediaType = broadcasterType == 'YOUTUBE' && videoId ? 'youtubeLive' : 
-    broadcasterType == 'TWITCH' && videoId ? "twitchLive" : 
-    broadcasterType == 'CHZZK' && videoId ? "chzzkLive" : "afreecaLive";
-  const mediaId = broadcasterType == 'YOUTUBE' && channelId ? channelId : channelId; 
-  return (<>
-    {!expanded &&
-      <Header />
-    }
-    <div className={cx('Live', {expanded: expanded})}>
-      <div className={cx('playerWrapper', {opened: opened, expanded: expanded})} ref={refPlayerWrapper}>
-        <VideoContentPlayer key="wakplayer" mediaType={mediaType} mediaId={mediaId} onPlayerOptionChanged={onPlayerOptionChangedHandler} /> 
-        <LiveSummary channelId={channelId} expanded={expanded} onChangeOverlayState={onPlayerOptionChangedHandler} />
-        <BroadcasterPanel channelId={channelId} />
-        <Footer />
+  const mediaType =
+    broadcasterType == 'YOUTUBE' && videoId
+      ? 'youtubeLive'
+      : broadcasterType == 'TWITCH' && videoId
+        ? 'twitchLive'
+        : broadcasterType == 'CHZZK' && videoId
+          ? 'chzzkLive'
+          : 'afreecaLive';
+  const mediaId = broadcasterType == 'YOUTUBE' && channelId ? channelId : channelId;
+  return (
+    <>
+      {!expanded && <Header />}
+      <div className={cx('Live', { expanded: expanded })}>
+        <div
+          className={cx('playerWrapper', { opened: opened, expanded: expanded })}
+          ref={refPlayerWrapper}
+        >
+          <VideoContentPlayer
+            key="wakplayer"
+            mediaType={mediaType}
+            mediaId={mediaId}
+            onPlayerOptionChanged={onPlayerOptionChangedHandler}
+          />
+          <LiveSummary
+            channelId={channelId}
+            expanded={expanded}
+            onChangeOverlayState={onPlayerOptionChangedHandler}
+          />
+          <BroadcasterPanel channelId={channelId} />
+          <Footer />
+        </div>
+        <TwitchChat />
       </div>
-      <TwitchChat />
-    </div>
-  </>);
+    </>
+  );
 }

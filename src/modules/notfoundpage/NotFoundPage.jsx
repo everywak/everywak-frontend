@@ -11,7 +11,6 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 export default function NotFoundPage() {
-
   const location = useLocation();
   func.setBrowserTitle(`404 - ${location.pathname + location.search}`);
 
@@ -21,9 +20,11 @@ export default function NotFoundPage() {
       <div className={styles.wrapper}>
         <span className={styles.c404}>404</span>
         <span className={styles.description}>준비 중이거나 존재하지 않는 페이지입니다.</span>
-        <img className={styles.img404} src="/images/404.jpg" alt="404"/>
+        <img className={styles.img404} src="/images/404.jpg" alt="404" />
         <div className={styles.btnArea}>
-          <BasicButton onClick={e => window.history.goBack()} background="#3b3">뒤로 가기</BasicButton>
+          <BasicButton onClick={(e) => window.history.goBack()} background="#3b3">
+            뒤로 가기
+          </BasicButton>
           <LinkButton to="/">에브리왁굳 메인으로</LinkButton>
         </div>
       </div>

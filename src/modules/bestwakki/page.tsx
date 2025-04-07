@@ -11,11 +11,7 @@ import SortArticleList from './components/SortArticleList';
 import ArticleDateRange from './components/ArticleDateRange';
 import ArticleSearchBar from './components/ArticleSearchBar';
 import NavigationBar from './components/NavigationBar';
-import {
-  BestwakkiProvider,
-  useBestwakkiActions,
-  useBestwakkiValue
-} from './context';
+import { BestwakkiProvider, useBestwakkiActions, useBestwakkiValue } from './context';
 
 import styles from './page.module.scss';
 import classNames from 'classnames/bind';
@@ -33,7 +29,7 @@ function Bestwakki() {
     if (searchFilter.beginAt !== e.start || searchFilter.endAt !== e.end) {
       updateSearchFilter({
         beginAt: e.start,
-        endAt: e.end
+        endAt: e.end,
       });
     }
   };

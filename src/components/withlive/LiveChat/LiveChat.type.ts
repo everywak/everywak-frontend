@@ -37,10 +37,7 @@ export type ChatEmote = {
   isMoving: boolean;
 };
 
-export type ChatItem =
-  | ChatItemCommonChat
-  | ChatItemSystemMessage
-  | ChatItemChannelMessage;
+export type ChatItem = ChatItemCommonChat | ChatItemSystemMessage | ChatItemChannelMessage;
 
 export type ChatItemCommonChat = {
   type: 'chat';

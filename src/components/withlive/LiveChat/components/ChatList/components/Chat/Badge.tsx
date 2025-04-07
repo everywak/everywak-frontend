@@ -35,6 +35,5 @@ export const Badge = React.memo(
       </div>
     </div>
   ),
-  (prevProps, nextProps) =>
-    JSON.stringify(prevProps.badge) === JSON.stringify(nextProps.badge),
+  (prevProps, nextProps) => JSON.stringify(prevProps.badge) === JSON.stringify(nextProps.badge),
 );

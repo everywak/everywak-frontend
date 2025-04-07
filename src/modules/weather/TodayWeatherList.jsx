@@ -13,16 +13,24 @@ const skeleton = <TodayWeatherItem name="ㅇㅇㅇ" state="ㅇㅇㅇ" weather="s
 
 /**
  * 날씨 페이지 오늘 날씨 리스트
- * 
- * @param {{items: [], isLoading: boolean}} props 
+ *
+ * @param {{items: [], isLoading: boolean}} props
  * @returns {JSX.Element}
  */
 function TodayWeatherList({ items, isLoading }) {
-
-  const list = items && 
+  const list =
+    items &&
     items
-    .sort((a, b) => orderNickname[a.nickname] - orderNickname[b.nickname])
-    .map(item => <TodayWeatherItem key={item.nickname} name={item.nickname} state={item.rawInfo} weather={item.weather} description={item.description} />);
+      .sort((a, b) => orderNickname[a.nickname] - orderNickname[b.nickname])
+      .map((item) => (
+        <TodayWeatherItem
+          key={item.nickname}
+          name={item.nickname}
+          state={item.rawInfo}
+          weather={item.weather}
+          description={item.description}
+        />
+      ));
 
   return (
     <ul className="TodayWeatherList">

@@ -36,7 +36,7 @@ const panels = [
         type: 'instagram',
         href: 'https://www.instagram.com/ine_hamine/',
       },
-    ], 
+    ],
   },
   {
     channelId: 'jingburger',
@@ -179,4 +179,4 @@ const socialHref = {
   tiktok: 'https://www.tiktok.com/@',
 };
 
-export { panels, socialLogoImgSrc, socialHref }
+export { panels, socialLogoImgSrc, socialHref };

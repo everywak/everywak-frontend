@@ -15,7 +15,7 @@ class DatePicker extends Component {
     max: 0,
     start: 0,
     end: 0,
-    onChange: val => {},
+    onChange: (val) => {},
     preset: [
       {
         type: 'option',
@@ -74,7 +74,7 @@ class DatePicker extends Component {
       },
     ],
     opened: false,
-  }
+  };
   state = {
     cursor: 'start',
     start: 0,
@@ -82,12 +82,10 @@ class DatePicker extends Component {
     preset: 'all',
     currYear: new Date().getFullYear(),
     currMonth: new Date().getMonth(),
-  }
+  };
 
   showYearMonth = (year, month) => {
-    const {
-      currYear, currMonth
-    } = this.state;
+    const { currYear, currMonth } = this.state;
 
     const targetMonth = new Date(year, month, 1);
     const actualYear = targetMonth.getFullYear();
@@ -99,17 +97,17 @@ class DatePicker extends Component {
         currMonth: actualMonth,
       });
     }
-  }
+  };
 
   showNextMonth = () => {
     this.showYearMonth(this.state.currYear, this.state.currMonth + 1);
-  }
+  };
 
   showPrevMonth = () => {
     this.showYearMonth(this.state.currYear, this.state.currMonth - 1);
-  }
+  };
 
-  genDatetime (timestamp) {
+  genDatetime(timestamp) {
     const date = new Date(timestamp);
     return `${date.getFullYear()}. ${date.getMonth() + 1}. ${date.getDate()}.`;
   }
@@ -121,30 +119,31 @@ class DatePicker extends Component {
       this.setState({
         start: timestamp,
         end: Math.max(end, timestamp),
-        cursor: 'end'
+        cursor: 'end',
       });
     } else if (type === 'end') {
       this.setState({
         start: Math.min(start, timestamp),
         end: timestamp,
-        cursor: 'start'
+        cursor: 'start',
       });
     }
-  }
+  };
 
   setDateTimestampAll = (start, end) => {
     this.setState({
       start: start,
       end: end,
-      cursor: 'start'
+      cursor: 'start',
     });
-  }
+  };
 
   setPreset = (data) => {
     const { min, max } = this.props;
     const { preset, targetStart, targetEnd } = data;
-    const day = 24*60*60*1000;
-    var start = min, end = max;
+    const day = 24 * 60 * 60 * 1000;
+    var start = min,
+      end = max;
     if (preset === 'today') {
       start = max;
     } else if (preset === '7days') {
@@ -163,10 +162,10 @@ class DatePicker extends Component {
     } else if (preset === 'custom') {
       this.setDateTimestampAll(targetStart, targetEnd);
     }
-  }
+  };
 
   handlerStartEndChanged = () => {
-    const day = 24*60*60*1000;
+    const day = 24 * 60 * 60 * 1000;
     const { min, max } = this.props;
     const { start, end } = this.state;
     const startDate = new Date(start);
@@ -185,45 +184,45 @@ class DatePicker extends Component {
         preset = 'thisweek';
       } else if (end - start === (endDate.getDate() - 1) * day) {
         preset = 'thismonth';
-      } else if (startDate.getFullYear() === endDate.getFullYear() && 
-                startDate.getMonth() === 0 && 
-                startDate.getDate() === 1) {
+      } else if (
+        startDate.getFullYear() === endDate.getFullYear() &&
+        startDate.getMonth() === 0 &&
+        startDate.getDate() === 1
+      ) {
         preset = 'thisyear';
       }
     }
     if (preset !== this.state.preset) {
       this.setState({
-        preset: preset
+        preset: preset,
       });
     }
-    
+
     this.props.onChange({
       start: start,
       end: end,
     });
-  }
+  };
 
-  onClickDate = timestamp => this.setDateTimestamp('cursor', timestamp)
+  onClickDate = (timestamp) => this.setDateTimestamp('cursor', timestamp);
 
-  componentDidMount () {
+  componentDidMount() {
     const { min, max, start, end } = this.props;
     this.setPreset({
       preset: 'custom',
-      targetStart: (start !== -1 ? start : min),
-      targetEnd: (end !== -1 ? end : max),
+      targetStart: start !== -1 ? start : min,
+      targetEnd: end !== -1 ? end : max,
     });
   }
 
-  componentDidUpdate (prevProps, prevState) {
-    if (prevProps.start !== this.props.start ||
-        prevProps.end   !== this.props.end) {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.start !== this.props.start || prevProps.end !== this.props.end) {
       this.setState({
         start: this.props.start !== -1 ? this.props.start : this.props.min,
         end: this.props.end !== -1 ? this.props.end : this.props.max,
-      })
+      });
     }
-    if (prevState.start !== this.state.start ||
-        prevState.end   !== this.state.end) {
+    if (prevState.start !== this.state.start || prevState.end !== this.state.end) {
       this.handlerStartEndChanged();
     }
   }
@@ -231,28 +230,49 @@ class DatePicker extends Component {
   render() {
     const { name, preset, opened, min, max } = this.props;
     const { start, end, cursor, currYear, currMonth } = this.state;
-    const presetList = preset.map(
-      (item, i) => 
-      (item.type === 'option' ? 
-      <PresetItem key={name + item.value} value={item.value} name={item.name} selected={this.state.preset === item.value} onclick={this.setPreset} /> : 
-      <div key={name + 'line' + i} className="presetLine"/>)
+    const presetList = preset.map((item, i) =>
+      item.type === 'option' ? (
+        <PresetItem
+          key={name + item.value}
+          value={item.value}
+          name={item.name}
+          selected={this.state.preset === item.value}
+          onclick={this.setPreset}
+        />
+      ) : (
+        <div key={name + 'line' + i} className="presetLine" />
+      ),
     );
-    
+
     return (
-      <div className={cx('DatePicker', {opened: opened})} data-name={this.props.name} >
-        <div className="preset">
-          {presetList}
-        </div>
+      <div className={cx('DatePicker', { opened: opened })} data-name={this.props.name}>
+        <div className="preset">{presetList}</div>
         <div className="range">
           <div className="dateRange">
-            <div className="startDate" onClick={e => (this.setState({cursor: 'start'}))} >
-              <div className={cx('datetime', {'selected': cursor === 'start'})} >{this.genDatetime(start)}</div>
-              <input type="hidden" name={name + "-start"} id={name + "-start"} value={parseInt(start / 1000)} />
-            </div>부터
-            <div className="endDate" onClick={e => (this.setState({cursor: 'end'}))} >
-              <div className={cx('datetime', {'selected': cursor === 'end'})} >{this.genDatetime(end)}</div>
-              <input type="hidden" name={name + "-end"} id={name + "-end"} value={parseInt(end / 1000) + 24*60*60 - 1} />
-            </div>까지
+            <div className="startDate" onClick={(e) => this.setState({ cursor: 'start' })}>
+              <div className={cx('datetime', { selected: cursor === 'start' })}>
+                {this.genDatetime(start)}
+              </div>
+              <input
+                type="hidden"
+                name={name + '-start'}
+                id={name + '-start'}
+                value={parseInt(start / 1000)}
+              />
+            </div>
+            부터
+            <div className="endDate" onClick={(e) => this.setState({ cursor: 'end' })}>
+              <div className={cx('datetime', { selected: cursor === 'end' })}>
+                {this.genDatetime(end)}
+              </div>
+              <input
+                type="hidden"
+                name={name + '-end'}
+                id={name + '-end'}
+                value={parseInt(end / 1000) + 24 * 60 * 60 - 1}
+              />
+            </div>
+            까지
           </div>
           <div className="monthController">
             <div className="currentYearMonth">
@@ -260,8 +280,12 @@ class DatePicker extends Component {
               <span className="currMonth">{currMonth + 1}</span>월
             </div>
             <div className="changeBtnArea">
-              <TransparentButton onClick={this.showPrevMonth}><NavigateBeforeRoundedIcon fontSize="small" /></TransparentButton>
-              <TransparentButton onClick={this.showNextMonth}><NavigateNextRoundedIcon fontSize="small" /></TransparentButton>
+              <TransparentButton onClick={this.showPrevMonth}>
+                <NavigateBeforeRoundedIcon fontSize="small" />
+              </TransparentButton>
+              <TransparentButton onClick={this.showNextMonth}>
+                <NavigateNextRoundedIcon fontSize="small" />
+              </TransparentButton>
             </div>
           </div>
           <div className="days">
@@ -274,11 +298,15 @@ class DatePicker extends Component {
             <div className="day">토</div>
           </div>
           <div className="dateViewWrapper">
-            <DateView 
-              year={currYear} 
-              month={currMonth} 
-              min={min} max={max} start={start} end={end} 
-              onClickDate={this.onClickDate} />
+            <DateView
+              year={currYear}
+              month={currMonth}
+              min={min}
+              max={max}
+              start={start}
+              end={end}
+              onClickDate={this.onClickDate}
+            />
           </div>
         </div>
       </div>
@@ -288,13 +316,15 @@ class DatePicker extends Component {
 
 /**
  * 프리셋 아이템
- * 
- * @param {{ name: string, value: string, selected: boolean, onclick: function }} props 
+ *
+ * @param {{ name: string, value: string, selected: boolean, onclick: function }} props
  */
 function PresetItem({ name, value, selected = false, onclick }) {
-
   return (
-    <div className={cx('presetItem', {checked: selected})} onClick={e => onclick({preset: value})}>
+    <div
+      className={cx('presetItem', { checked: selected })}
+      onClick={(e) => onclick({ preset: value })}
+    >
       <div className="marker" />
       <span className="name">{name}</span>
     </div>
@@ -303,63 +333,66 @@ function PresetItem({ name, value, selected = false, onclick }) {
 
 /**
  * 월을 표시합니다.
- * 
+ *
  * @param {{
- * year: number, 
- * month: number, 
- * min: number, 
- * max: number, 
- * start: number, 
- * end: number, 
- * onClickDate: function }} props 
+ * year: number,
+ * month: number,
+ * min: number,
+ * max: number,
+ * start: number,
+ * end: number,
+ * onClickDate: function }} props
  */
 function DateView({ year, month, min, max, start, end, onClickDate }) {
-
   const firstDay = new Date(year, month, 1).getDay();
   const lastDay = new Date(year, month + 1, 0).getDay();
   const lastDate = new Date(year, month + 1, 0).getDate();
 
-  const list = Array.from(
-    {length: firstDay + lastDate + 6 - lastDay}, 
-    (v, i) => {
-      const date = new Date(year, month, 1 - firstDay + i);
-      const datetime = date.getTime();
-      return <DateItem 
+  const list = Array.from({ length: firstDay + lastDate + 6 - lastDay }, (v, i) => {
+    const date = new Date(year, month, 1 - firstDay + i);
+    const datetime = date.getTime();
+    return (
+      <DateItem
         key={'dateitem' + datetime}
-        dateString={date.getDate()} 
-        datetime={datetime} 
-        currMonth={date.getMonth() === month} 
-        enabled={min <= datetime && max >= datetime} 
-        checkType={start <= datetime && end >= datetime ? (datetime === start) * 1 + (datetime === end) * 2 : -1}
-        onClick={onClickDate} 
-        />
+        dateString={date.getDate()}
+        datetime={datetime}
+        currMonth={date.getMonth() === month}
+        enabled={min <= datetime && max >= datetime}
+        checkType={
+          start <= datetime && end >= datetime
+            ? (datetime === start) * 1 + (datetime === end) * 2
+            : -1
+        }
+        onClick={onClickDate}
+      />
+    );
   });
 
   return (
-    <div className='DateView'>
-      <div className={cx('listWrapper')}>
-        {list}
-      </div>
+    <div className="DateView">
+      <div className={cx('listWrapper')}>{list}</div>
     </div>
   );
 }
 
 /**
  * 날짜를 표시합니다.
- * 
- * @param {{dateString: string, datetime: number, currMonth: boolean, enabled: boolean, checkType: number, onClick: function}} props 
+ *
+ * @param {{dateString: string, datetime: number, currMonth: boolean, enabled: boolean, checkType: number, onClick: function}} props
  */
-function DateItem({dateString, datetime, currMonth, enabled = true, checkType = -1, onClick}) {
-
+function DateItem({ dateString, datetime, currMonth, enabled = true, checkType = -1, onClick }) {
   const checkTypeClassName = {
-    checked: checkType > -1, 
-    start: checkType === 1, 
-    end: checkType === 2, 
-    this: checkType === 3
+    checked: checkType > -1,
+    start: checkType === 1,
+    end: checkType === 2,
+    this: checkType === 3,
   };
 
   return (
-    <div className={cx('DateItem', {dummy: !currMonth, disabled: !enabled}, checkTypeClassName)} onClick={e => enabled && onClick(datetime)}>
+    <div
+      className={cx('DateItem', { dummy: !currMonth, disabled: !enabled }, checkTypeClassName)}
+      onClick={(e) => enabled && onClick(datetime)}
+    >
       <span>{dateString}</span>
     </div>
   );

@@ -14,8 +14,7 @@ export class EverywakRelayIrcAdapter extends LiveChatAdapterClass {
   private socket: WebSocket | null;
   private connRetries: number = 0;
 
-  private subscriptionList: Record<string, { month: number; src: string }[]> =
-    {};
+  private subscriptionList: Record<string, { month: number; src: string }[]> = {};
   private emoteList: Record<string, { emote: ChatEmote[]; regex: RegExp }> = {};
 
   constructor() {
@@ -25,10 +24,7 @@ export class EverywakRelayIrcAdapter extends LiveChatAdapterClass {
   }
 
   connect() {
-    if (
-      this.isConnected ||
-      (this.socket && this.socket.readyState <= WebSocket.CLOSING)
-    ) {
+    if (this.isConnected || (this.socket && this.socket.readyState <= WebSocket.CLOSING)) {
       return;
     }
     this.socket = new WebSocket(this.serverAddress);
@@ -56,9 +52,7 @@ export class EverywakRelayIrcAdapter extends LiveChatAdapterClass {
 
     this.send(`PASS oauth:${this.accessToken}`);
     this.send('NICK EverywakChat');
-    this.send(
-      'CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership',
-    );
+    this.send('CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership');
   }
 
   joinChannel(channelId: string[]): void {
@@ -176,11 +170,7 @@ export class EverywakRelayIrcAdapter extends LiveChatAdapterClass {
       });
     }
 
-    const content = this.parseEmote(
-      msg,
-      channelId,
-      parseInt(tags.subscription) > 0,
-    );
+    const content = this.parseEmote(msg, channelId, parseInt(tags.subscription) > 0);
 
     const regexMsg = new RegExp(
       `:(?<loginName>[\\w\\d-_]+)!\\k<loginName>@\\k<loginName>\\.${this.serverAddress
@@ -230,11 +220,7 @@ export class EverywakRelayIrcAdapter extends LiveChatAdapterClass {
     return tags;
   };
 
-  parseEmote = (
-    msg: string,
-    channelId: string,
-    isSubscriber: boolean,
-  ): (string | ChatEmote)[] => {
+  parseEmote = (msg: string, channelId: string, isSubscriber: boolean): (string | ChatEmote)[] => {
     const result: (string | ChatEmote)[] = [];
 
     if (!isSubscriber || !this.emoteList[channelId]) {
@@ -281,10 +267,11 @@ export class EverywakRelayIrcAdapter extends LiveChatAdapterClass {
     try {
       const streamInfo = await Everywak.afreeca.getStream(channelName);
       if (streamInfo.CHANNEL.RESULT === 1) {
-        const subList = streamInfo.CHANNEL.PCON_OBJECT?.tier1.map((sub) => ({
-          month: sub.MONTH,
-          src: sub.FILENAME,
-        })) || [];
+        const subList =
+          streamInfo.CHANNEL.PCON_OBJECT?.tier1.map((sub) => ({
+            month: sub.MONTH,
+            src: sub.FILENAME,
+          })) || [];
         this.subscriptionList[channelName] = subList;
       }
     } catch (e) {
@@ -308,10 +295,7 @@ export class EverywakRelayIrcAdapter extends LiveChatAdapterClass {
         }));
         this.emoteList[channelName] = {
           emote,
-          regex: new RegExp(
-            `(${emote.map((emote) => `\\/${emote.name}\\/`).join('|')})`,
-            'g',
-          ),
+          regex: new RegExp(`(${emote.map((emote) => `\\/${emote.name}\\/`).join('|')})`, 'g'),
         };
       }
     } catch (e) {

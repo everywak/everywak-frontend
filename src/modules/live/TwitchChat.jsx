@@ -8,18 +8,13 @@ import { LiveChat } from '../../components/withlive/LiveChat/LiveChat';
 import './TwitchChat.scss';
 import cx from 'classnames';
 
-function TwitchChat({
-  channelId = import.meta.env.VITE_TWITCH_CHANNEL_NAME,
-  platform = 'twitch',
-}) {
+function TwitchChat({ channelId = import.meta.env.VITE_TWITCH_CHANNEL_NAME, platform = 'twitch' }) {
   const getChannelName = (platform, channelId) => {
     const result = [];
     if (platform === 'space') {
       result.push('x-space/');
 
-      const target = Waktaverse.find(
-        (member) => member.login_name === channelId,
-      );
+      const target = Waktaverse.find((member) => member.login_name === channelId);
       if (!target || !target.twitter) {
         return '';
       }
@@ -27,17 +22,13 @@ function TwitchChat({
     } else if (platform === 'afreeca') {
       result.push('afreeca/');
 
-      const target = Waktaverse.find(
-        (member) => member.login_name === channelId,
-      );
+      const target = Waktaverse.find((member) => member.login_name === channelId);
       if (!target || !target.afreeca) {
         return '';
       }
       result.push(target.afreeca.channelId);
     } else if (platform === 'twitch') {
-      const target = Waktaverse.find(
-        (member) => member.login_name === channelId,
-      );
+      const target = Waktaverse.find((member) => member.login_name === channelId);
       if (!target) {
         return '';
       }
@@ -51,10 +42,7 @@ function TwitchChat({
 
   return (
     <StretchableContainer className={cx('TwitchChat', { small: 380 < 220 })}>
-      <LiveChat
-        className="liveChat"
-        channelId={[getChannelName(platform, channelId)]}
-      />
+      <LiveChat className="liveChat" channelId={[getChannelName(platform, channelId)]} />
     </StretchableContainer>
   );
 }

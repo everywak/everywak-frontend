@@ -1,10 +1,4 @@
-import React, {
-  CSSProperties,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
 
 import TransparentButton from '../Button/TransparentButton';
 import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
@@ -94,9 +88,7 @@ function HorizontalScrollableList({
       </TransparentButton>
       <TransparentButton
         className={cx('btnControl', 'btnScrollRight', {
-          hideBtn: !(
-            scrollState == SCROLL_MIDDLE || scrollState == SCROLL_START
-          ),
+          hideBtn: !(scrollState == SCROLL_MIDDLE || scrollState == SCROLL_START),
         })}
         onClick={() => onClickScroll(1)}
       >

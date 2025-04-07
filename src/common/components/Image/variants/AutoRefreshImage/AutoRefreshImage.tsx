@@ -17,9 +17,7 @@ export const AutoRefreshImage = ({ interval, src, ...rest }: Props) => {
     return () => clearInterval(loop);
   }, []);
 
-  const params = new URLSearchParams(
-    src.includes('?') ? src.split('?')[1] : '',
-  );
+  const params = new URLSearchParams(src.includes('?') ? src.split('?')[1] : '');
   params.set('seed', randomSeed.toString());
 
   // without params  url

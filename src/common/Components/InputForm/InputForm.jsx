@@ -4,16 +4,16 @@ import './InputForm.scss';
 import cx from 'classnames';
 
 /**
- * 
+ *
  * @param {{
- * className: String, 
+ * className: String,
  * children: JSX.Element,
- * name: String, 
- * description?: String, 
- * }} props 
+ * name: String,
+ * description?: String,
+ * }} props
  * @returns {JSX.Element}
  */
-function InputForm({className, children, name = '', description}) {
+function InputForm({ className, children, name = '', description }) {
   return (
     <div className={cx('InputForm', className)}>
       <div className="name">{name}</div>

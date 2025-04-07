@@ -13,9 +13,9 @@ import cx from 'classnames';
 
 const dummyList = [
   {
-    key: 'dummy', 
-    type: 'waktoon', 
-    toonId: '1', 
+    key: 'dummy',
+    type: 'waktoon',
+    toonId: '1',
     thumbnail: '',
     title: '',
     author: '',
@@ -27,10 +27,10 @@ const dummyList = [
 ];
 
 function formatWaktoonData(waktoonList) {
-  return waktoonList.map(item => ({
-    key: item.uuid, 
-    type: 'waktoon', 
-    toonId: item.uuid, 
+  return waktoonList.map((item) => ({
+    key: item.uuid,
+    type: 'waktoon',
+    toonId: item.uuid,
     thumbnail: item.thumbnails && item.thumbnails.replace('100_100', '200_200'),
     serialStatus: item.serialStatus,
     title: item.title,
@@ -46,14 +46,14 @@ async function updateWaktoonList() {
   try {
     const res = await service.getWaktoons({});
 
-    if (res.status != 200) { throw res; }
+    if (res.status != 200) {
+      throw res;
+    }
 
-    const {
-      waktoonList, waktoonListCount
-    } = res.result;
-    
+    const { waktoonList, waktoonListCount } = res.result;
+
     return formatWaktoonData(waktoonList);
-  } catch(err) {
+  } catch (err) {
     console.error(err);
     return [];
   }
@@ -72,20 +72,25 @@ function WaktoonBestList(props) {
   }, []);
 
   return (
-    <WaktoonList 
+    <WaktoonList
       className="WaktoonBestList"
       ItemComponent={WaktoonBigItem}
-      list={itemList} 
-      defaultShowCount={defaultShowCount} 
+      list={itemList}
+      defaultShowCount={defaultShowCount}
       maximumShowCount={defaultShowCount}
-      gaEventOnClickMore={{
-        //category: GAEvents.Category.isedol,
-        //action: GAEvents.Action.isedol.moreClip,
-      }}
-      gaEventOnClickItem={{
-        //category: GAEvents.Category.isedol,
-        //action: GAEvents.Action.isedol.viewClip,
-      }} />
+      gaEventOnClickMore={
+        {
+          //category: GAEvents.Category.isedol,
+          //action: GAEvents.Action.isedol.moreClip,
+        }
+      }
+      gaEventOnClickItem={
+        {
+          //category: GAEvents.Category.isedol,
+          //action: GAEvents.Action.isedol.viewClip,
+        }
+      }
+    />
   );
 }
 

@@ -13,13 +13,7 @@ export interface Props {
   onChange: ({ target }: { target: { name: string; value: string } }) => void;
 }
 
-export function TabSelect({
-  className,
-  options,
-  name,
-  value,
-  onChange = () => {},
-}: Props) {
+export function TabSelect({ className, options, name, value, onChange = () => {} }: Props) {
   const optionList = options.map((opt) => (
     <Option
       key={opt.value}
@@ -32,14 +26,7 @@ export function TabSelect({
   ));
 
   return (
-    <div
-      className={clsx(
-        'TabSelect',
-        styles.container,
-        stylesVariant.container,
-        className,
-      )}
-    >
+    <div className={clsx('TabSelect', styles.container, stylesVariant.container, className)}>
       {optionList}
     </div>
   );

@@ -32,11 +32,7 @@ export function useStorage<T>(key: string, initialValue?: T) {
   const [value, setValue] = useState<T>(() => {
     const storageValue = persistentStorage.getItem(key);
 
-    if (
-      typeof initialValue === 'object' &&
-      !Array.isArray(initialValue) &&
-      initialValue !== null
-    ) {
+    if (typeof initialValue === 'object' && !Array.isArray(initialValue) && initialValue !== null) {
       return {
         ...initialValue,
         ...storageValue,

@@ -50,16 +50,12 @@ function VideoContentList(props: Props) {
     const response = await videoApi.getVideos(options as any);
     const { videoList } = response.result;
 
-    const urlPrefix = shorts
-      ? 'https://www.youtube.com/shorts/'
-      : 'https://youtu.be/';
+    const urlPrefix = shorts ? 'https://www.youtube.com/shorts/' : 'https://youtu.be/';
 
     if (videoList) {
       setVideoList(
         videoList.map((item: any) => {
-          const target = Waktaverse.find(
-            (mb) => mb.login_name === item.twitchId,
-          )!;
+          const target = Waktaverse.find((mb) => mb.login_name === item.twitchId)!;
           const thumbnails = JSON.parse(item.thumbnails);
           const thumbnail = thumbnails.high ||
             thumbnails.medium ||
@@ -70,9 +66,7 @@ function VideoContentList(props: Props) {
             thumbnail: thumbnail.url,
             title: item.title,
             datetime: item.publishedAt * 1000,
-            formattedDateTime: func.formatDateTimeString(
-              new Date(item.publishedAt * 1000),
-            ),
+            formattedDateTime: func.formatDateTimeString(new Date(item.publishedAt * 1000)),
             author: item.nickname,
             duration: item.duration,
             viewCount: item.viewCount,
@@ -86,9 +80,7 @@ function VideoContentList(props: Props) {
     fetchVideoContent();
   }, [options, shorts]);
 
-  const list = videoList.map((item) => (
-    <VideoItem {...(item as any)} size={size} />
-  ));
+  const list = videoList.map((item) => <VideoItem {...(item as any)} size={size} />);
   return (
     <div
       className={cx('VideoContentList', className, {

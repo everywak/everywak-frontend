@@ -31,16 +31,15 @@ const bottomNavigationList = [
     label: '모든 작품',
     icon: <ListAltRoundedIcon fontSize="medium" />,
     href: '/waktoon/all',
-  },/*
+  } /*
   {
     key: 'video',
     label: '영상툰',
     icon: <SmartDisplayRoundedIcon fontSize="medium" />,
     href: '/waktoon/video',
-  },*/
+  },*/,
 ];
 export default function WaktoonBottomNavigationBar(props) {
-
   return (
     <NotDesktop>
       <BottomNavigationBar className="WaktoonBottomNavigationBar">

@@ -7,17 +7,30 @@ import cx from 'classnames';
 
 /**
  * ContentPanel 안에 들어가는 content sub panel
- * 
- * @param {{title: string, description?: string, moreLabel?: string, moreLink?: string, width: 'packed'|'spaceBetween', children: JSX.Element | string}} props 
+ *
+ * @param {{title: string, description?: string, moreLabel?: string, moreLink?: string, width: 'packed'|'spaceBetween', children: JSX.Element | string}} props
  * @returns {JSX.Element}
  */
-function ContentSubPanel({ className, title, description, moreLabel, moreLink, width = 'packed', children }) {
+function ContentSubPanel({
+  className,
+  title,
+  description,
+  moreLabel,
+  moreLink,
+  width = 'packed',
+  children,
+}) {
   return (
     <section className={cx('ContentSubPanel', className)}>
-      <SectionSubHeader title={title} description={description} moreLabel={moreLabel} moreLink={moreLink} size="big" width={width} />
-      <div className="contentWrapper">
-        {children}
-      </div>
+      <SectionSubHeader
+        title={title}
+        description={description}
+        moreLabel={moreLabel}
+        moreLink={moreLink}
+        size="big"
+        width={width}
+      />
+      <div className="contentWrapper">{children}</div>
     </section>
   );
 }

@@ -87,11 +87,7 @@ function Dropdown({ options = [], name, value, onChange = (val) => {} }) {
         <ExpandMoreRoundedIcon />
       </div>
       <div className="closeArea" onClick={close}></div>
-      <div
-        className="dropdownAreaWrapper"
-        style={dropdownAreaStyle}
-        ref={dropdownArea}
-      >
+      <div className="dropdownAreaWrapper" style={dropdownAreaStyle} ref={dropdownArea}>
         <div className="dropdownArea">{list}</div>
       </div>
     </div>

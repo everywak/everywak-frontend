@@ -41,13 +41,7 @@ export function Button({
 }: ButtonProps): React.ReactElement {
   return (
     <button
-      className={cx(
-        className,
-        'Button',
-        { hideLabel, disabled, outlined },
-        size,
-        color,
-      )}
+      className={cx(className, 'Button', { hideLabel, disabled, outlined }, size, color)}
       onClick={onClick}
       {...rest}
     >

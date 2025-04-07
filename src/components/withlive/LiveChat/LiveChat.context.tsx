@@ -1,11 +1,4 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { createContext, ReactNode, useContext, useMemo, useRef, useState } from 'react';
 
 import { ChatItem, ChatOption } from './LiveChat.type';
 
@@ -102,13 +95,9 @@ export function LiveChatProvider(props: Props): JSX.Element {
       return;
     }
 
-    chatList.current = [...chatList.current, ...items].slice(
-      -option.maxStoreCount,
-    );
+    chatList.current = [...chatList.current, ...items].slice(-option.maxStoreCount);
     setDisplayedChatList((prev) =>
-      [...prev, ...items].slice(
-        isKeepOldChat ? -option.maxStoreCount : -option.maxDisplayCount,
-      ),
+      [...prev, ...items].slice(isKeepOldChat ? -option.maxStoreCount : -option.maxDisplayCount),
     );
     if (isOpenedCollectorView) {
       const filteredItems = items.filter((item) => {
@@ -118,20 +107,14 @@ export function LiveChatProvider(props: Props): JSX.Element {
         return option.chatCollectorFilter.some((filter) => {
           if (filter.target === 'user') {
             return (
-              (item.profile.name.includes(filter.keyword) ||
-                item.profile.id === filter.keyword) ===
+              (item.profile.name.includes(filter.keyword) || item.profile.id === filter.keyword) ===
               (filter.filter === 'include')
             );
           } else if (filter.target === 'message') {
-            return (
-              item.content.join('').includes(filter.keyword) ===
-              (filter.filter === 'include')
-            );
+            return item.content.join('').includes(filter.keyword) === (filter.filter === 'include');
           } else if (filter.target === 'badge') {
             return item.profile.badge.some(
-              (badge) =>
-                badge.id.includes(filter.keyword) ===
-                (filter.filter === 'include'),
+              (badge) => badge.id.includes(filter.keyword) === (filter.filter === 'include'),
             );
           }
         });
@@ -141,9 +124,7 @@ export function LiveChatProvider(props: Props): JSX.Element {
           item.accentColor = 'yellow';
         }
       });
-      setCollectedChatList((prev) =>
-        [...prev, ...filteredItems].slice(-option.maxDisplayCount),
-      );
+      setCollectedChatList((prev) => [...prev, ...filteredItems].slice(-option.maxDisplayCount));
     }
     onAddChatHandlers.current.forEach((handler) => handler(items));
   };
@@ -207,9 +188,7 @@ export function useLiveChatValue() {
 export function useLiveChatActions() {
   const value = useContext(LiveChatActionsContext);
   if (!value) {
-    throw new Error(
-      'useLiveChatActions should be used within LiveChatProvider',
-    );
+    throw new Error('useLiveChatActions should be used within LiveChatProvider');
   }
   return value;
 }

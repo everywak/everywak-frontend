@@ -9,18 +9,14 @@ export default function ArticleDateRange() {
     if (searchFilter.beginAt !== e.start || searchFilter.endAt !== e.end) {
       updateSearchFilter({
         beginAt: e.start,
-        endAt: e.end
+        endAt: e.end,
       });
     }
   };
 
   const today = new Date();
   const min = 1424876400000,
-    max = new Date(
-      today.getFullYear(),
-      today.getMonth(),
-      today.getDate()
-    ).getTime();
+    max = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
 
   return (
     <DateRange

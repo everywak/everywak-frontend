@@ -7,7 +7,6 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 export default function SuspenseFallback() {
-
   return (
     <div className={cx('SuspenseFallback')}>
       <div className={styles.sectionWrapper}>

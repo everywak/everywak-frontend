@@ -1,6 +1,6 @@
-import { Waktaverse } from "../common/constants";
+import { Waktaverse } from '../common/constants';
 
-import { requestApi, apiErrorHandler } from "./everywak.common";
+import { requestApi, apiErrorHandler } from './everywak.common';
 
 /**
  * @typedef {"youtubeVideo"|"yotuubeClip"|"youtubeVOD"} VideoContentType
@@ -22,7 +22,7 @@ import { requestApi, apiErrorHandler } from "./everywak.common";
  * @property {number} duration
  */
 
-const filterVideoParams = params => {
+const filterVideoParams = (params) => {
   const result = {
     type: 'all',
     twitchId: '',
@@ -35,7 +35,10 @@ const filterVideoParams = params => {
   if (params.orderBy && ['time', 'time_oldest', 'view'].includes(params.orderBy)) {
     result.orderBy = params.orderBy;
   }
-  if (params.twitchId && [...Waktaverse.map(item => item.login_name), 'isedol'].includes(params.twitchId)) {
+  if (
+    params.twitchId &&
+    [...Waktaverse.map((item) => item.login_name), 'isedol'].includes(params.twitchId)
+  ) {
     result.twitchId = params.twitchId;
   }
   if (params.queryTxt) {
@@ -49,25 +52,23 @@ const filterVideoParams = params => {
   }
 
   return result;
-}
+};
 
 /**
  * 왁타버스 영상 컨텐츠를 불러옵니다.
- * 
+ *
  * @param {string} query
  * @returns {ApiMessage<{videoList: VideoContent[], videoCount: number}>}
  */
 export async function getVideos(query) {
   try {
-    
     const params = new URLSearchParams(filterVideoParams(query));
 
     // api 요청
     const output = await requestApi(`/video/list?` + params.toString());
 
     return output;
-    
-  } catch(output) {
+  } catch (output) {
     return apiErrorHandler(output);
   }
 }

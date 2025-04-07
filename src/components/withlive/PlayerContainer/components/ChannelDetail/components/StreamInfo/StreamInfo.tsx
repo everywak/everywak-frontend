@@ -8,9 +8,7 @@ import styles from './StreamInfo.module.scss';
 export function StreamInfo(props: { channelId: string }) {
   const { channels } = useWithliveValues();
 
-  const channel = channels.find(
-    (channel) => channel.memberId === props.channelId,
-  );
+  const channel = channels.find((channel) => channel.memberId === props.channelId);
 
   return (
     <section className={styles.streamInfo}>
@@ -46,9 +44,7 @@ export function StreamInfo(props: { channelId: string }) {
             <ViewerCounter viewer={channel?.streamInfo?.viewerCount ?? 0} />
           </div>
           <div className={styles.time}>
-            <StreamTimer
-              startedTime={channel?.streamInfo?.startedTime ?? Date.now()}
-            />
+            <StreamTimer startedTime={channel?.streamInfo?.startedTime ?? Date.now()} />
           </div>
         </div>
       </div>

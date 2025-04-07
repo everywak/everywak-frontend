@@ -5,42 +5,52 @@ import cx from 'classnames';
 
 /**
  * 드래그시 변경값 전달
- * 
- * @param {number} max 
- * @param {string} actionType 
- * @param {string} name 
- * @param {({target: {name: string, value: number}}) => void} onChange 
+ *
+ * @param {number} max
+ * @param {string} actionType
+ * @param {string} name
+ * @param {({target: {name: string, value: number}}) => void} onChange
  * @returns {[React.MutableRefObject<undefined>, React.Dispatch<React.SetStateAction<boolean>>]}
  */
 const useDragChange = (max, actionType, name, onChange) => {
   const refProgress = useRef();
   const getRefOffset = useCallback(() => {
     const el = refProgress.current;
-    if (!el) { return; }
+    if (!el) {
+      return;
+    }
 
     const rect = el.getBoundingClientRect();
-    const offset = { 
-      top: rect.top + window.scrollY, 
-      left: rect.left + window.scrollX, 
+    const offset = {
+      top: rect.top + window.scrollY,
+      left: rect.left + window.scrollX,
     };
 
     return offset;
   }, [refProgress]);
   const [mouseDown, setMouseDown] = useState(false);
   useEffect(() => {
-    const onMouseUpHandler = e => setMouseDown(false);
-    const onMouseMoveHandler = e => {
-      if (actionType !== 'drag') { return; }
-      if (!mouseDown) { return; }
+    const onMouseUpHandler = (e) => setMouseDown(false);
+    const onMouseMoveHandler = (e) => {
+      if (actionType !== 'drag') {
+        return;
+      }
+      if (!mouseDown) {
+        return;
+      }
 
       const offset = getRefOffset();
-      if (!offset) { return; }
+      if (!offset) {
+        return;
+      }
 
       const targetValue = Math.min(Math.max(e.pageX - offset.left, 0), max);
-      onChange({target: {
-        name,
-        value: targetValue,
-      }});
+      onChange({
+        target: {
+          name,
+          value: targetValue,
+        },
+      });
     };
     document.addEventListener('mouseup', onMouseUpHandler);
     document.addEventListener('mousemove', onMouseMoveHandler);
@@ -48,61 +58,72 @@ const useDragChange = (max, actionType, name, onChange) => {
     return () => {
       document.removeEventListener('mouseup', onMouseUpHandler);
       document.removeEventListener('mousemove', onMouseMoveHandler);
-    }
+    };
   }, [getRefOffset, mouseDown, max, actionType, name, onChange]);
 
   return [refProgress, setMouseDown];
-}
+};
 
 /**
  * 진행바
- * 
+ *
  * @param {{
- * className?: string, 
- * name: string, 
- * value: number, 
- * max: number, 
- * onChange?: ({target: {name: string, value: number}}) => void, 
+ * className?: string,
+ * name: string,
+ * value: number,
+ * max: number,
+ * onChange?: ({target: {name: string, value: number}}) => void,
  * actionType?: 'click'|'drag',
- * accentColor: string}} props 
+ * accentColor: string}} props
  */
 function ProgressBar(props) {
   const {
-    className, 
+    className,
     name,
-    value, 
-    max, 
-    onChange, 
-    actionType = 'click', 
+    value,
+    max,
+    onChange,
+    actionType = 'click',
     accentColor,
     ...rest
   } = props;
 
   const [previewValue, setPreviewValue] = useState(value);
-  const onMouseMoveHandler = e => {
-    const targetValue = e.nativeEvent.offsetX / e.target.clientWidth * max;
+  const onMouseMoveHandler = (e) => {
+    const targetValue = (e.nativeEvent.offsetX / e.target.clientWidth) * max;
     setPreviewValue(targetValue);
   };
-  const onChangeHandler = e => {
-    const targetValue = e.nativeEvent.offsetX / e.target.clientWidth * max;
-    onChange({target: {
-      name,
-      value: targetValue,
-    }});
+  const onChangeHandler = (e) => {
+    const targetValue = (e.nativeEvent.offsetX / e.target.clientWidth) * max;
+    onChange({
+      target: {
+        name,
+        value: targetValue,
+      },
+    });
   };
 
   const [refProgress, setMouseDown] = useDragChange(max, actionType, name, onChange);
 
   return (
-    <div className={cx("ProgressBar", className)} {...rest} style={{'--accentColor': accentColor}}>
+    <div
+      className={cx('ProgressBar', className)}
+      {...rest}
+      style={{ '--accentColor': accentColor }}
+    >
       <progress className="preview" max={max} value={previewValue} />
-      <progress 
-        className="progressBar" 
+      <progress
+        className="progressBar"
         ref={refProgress}
-        max={max} value={value}
+        max={max}
+        value={value}
         onMouseMove={onMouseMoveHandler}
         onClick={onChangeHandler}
-        onMouseDown={e => {onChangeHandler(e);setMouseDown(true)}} />
+        onMouseDown={(e) => {
+          onChangeHandler(e);
+          setMouseDown(true);
+        }}
+      />
     </div>
   );
 }

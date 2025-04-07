@@ -4,7 +4,7 @@ import useInputs from '../../../hooks/useInputs';
 
 import VideoContentPlayer from './VideoContentPlayer';
 
-function TestForm ({ onApply }) {
+function TestForm({ onApply }) {
   const [form, onChange] = useInputs({
     mediaType: 'youtubeLive',
     mediaId: 'FJfwehhzIhw',
@@ -15,7 +15,8 @@ function TestForm ({ onApply }) {
   return (
     <div className="TestForm">
       <div className="line">
-        mediaType <select name="mediaType" value={form.mediaType} onChange={onChange}>
+        mediaType{' '}
+        <select name="mediaType" value={form.mediaType} onChange={onChange}>
           <option value="twitchLive">트위치 생방송</option>
           <option value="youtubeVideo">유튜브 동영상</option>
           <option value="youtubeLive">유튜브 생방송</option>
@@ -24,15 +25,24 @@ function TestForm ({ onApply }) {
         </select>
       </div>
       <div className="line">
-        mediaid<input type="text" name="mediaId" value={form.mediaId} onChange={onChange} />
+        mediaid
+        <input type="text" name="mediaId" value={form.mediaId} onChange={onChange} />
       </div>
       <div className="line">
-        title<input type="text" name="title" value={form.title} onChange={onChange} />
+        title
+        <input type="text" name="title" value={form.title} onChange={onChange} />
       </div>
       <div className="line">
-        description<input type="text" name="description" value={form.description} onChange={onChange} />
+        description
+        <input type="text" name="description" value={form.description} onChange={onChange} />
       </div>
-      <button onClick={e => {onApply(form)}}>apply</button>
+      <button
+        onClick={(e) => {
+          onApply(form);
+        }}
+      >
+        apply
+      </button>
     </div>
   );
 }
@@ -44,12 +54,12 @@ function TestPage({ className, mediaType = 'twitchLive', mediaId = 'gosegugosegu
     description: 'description',
   });
 
-  return <div className="TestPage">
-    <TestForm onApply={setData} />
-    <div className="currData">
-      {JSON.stringify(data)}
+  return (
+    <div className="TestPage">
+      <TestForm onApply={setData} />
+      <div className="currData">{JSON.stringify(data)}</div>
+      <VideoContentPlayer {...data} />
     </div>
-    <VideoContentPlayer {...data} />
-  </div>
+  );
 }
 export default TestPage;

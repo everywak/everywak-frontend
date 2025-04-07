@@ -1,8 +1,5 @@
 import clsx from 'clsx';
-import {
-  useWithliveActions,
-  useWithliveValues,
-} from 'contexts/WithliveContext';
+import { useWithliveActions, useWithliveValues } from 'contexts/WithliveContext';
 import { ChannelStateType } from 'utils/types/withlive.type';
 import { MultiViewControl } from './components';
 import styles from './PlayerOverlay.module.scss';
@@ -15,8 +12,7 @@ export interface Props {
 
 export const PlayerOverlay = ({ player, size, isAnimating }: Props) => {
   const { draggingPlayerState } = useWithliveValues();
-  const { updateDraggingPlayerState, setWatchingChannelOrder } =
-    useWithliveActions();
+  const { updateDraggingPlayerState, setWatchingChannelOrder } = useWithliveActions();
   return (
     <div className={clsx('PlayerOverlay', styles.container)}>
       <MultiViewControl className={styles.control} player={player} size={size} />
@@ -27,19 +23,14 @@ export const PlayerOverlay = ({ player, size, isAnimating }: Props) => {
           })}
           onPointerEnter={() => {
             if (
-              !(
-                isAnimating && draggingPlayerState.prevOrder === player.order
-              ) &&
+              !(isAnimating && draggingPlayerState.prevOrder === player.order) &&
               draggingPlayerState.order !== player.order
             ) {
               updateDraggingPlayerState({
                 prevOrder: draggingPlayerState.order,
                 order: player.order,
               });
-              setWatchingChannelOrder(
-                draggingPlayerState.targetMemberId,
-                player.order,
-              );
+              setWatchingChannelOrder(draggingPlayerState.targetMemberId, player.order);
             }
           }}
         ></div>

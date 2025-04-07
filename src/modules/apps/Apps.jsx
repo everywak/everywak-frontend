@@ -92,18 +92,19 @@ class Apps extends Component {
         themeColor: '#D3D3D3',
         href: '/app/apply',
       },
-    ]
+    ],
   };
 
   render() {
     const { front, apps, columns } = this.props;
-    const list = apps.map(app => <AppListItem {...app} />);
-    
+    const list = apps.map((app) => <AppListItem {...app} />);
+
     return (
-      <div className={cx('Apps', {'front': front}, {'singleColumn': columns === 1})} style={{'--column': columns}}>
-        <ul className="appList">
-          {list}
-        </ul>
+      <div
+        className={cx('Apps', { front: front }, { singleColumn: columns === 1 })}
+        style={{ '--column': columns }}
+      >
+        <ul className="appList">{list}</ul>
       </div>
     );
   }

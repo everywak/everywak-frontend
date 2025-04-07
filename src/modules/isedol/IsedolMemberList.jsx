@@ -50,48 +50,41 @@ class IsedolMemberList extends Component {
     ],
   };
 
-  state = {
-  };
+  state = {};
 
-  constructor (props) {
+  constructor(props) {
     super(props);
-  };
-
-  componentDidMount() {
   }
+
+  componentDidMount() {}
 
   shouldComponentUpdate(nextProps, nextState) {
     return true;
   }
 
-  componentWillUnmount() {
-  }
+  componentWillUnmount() {}
 
   render() {
     const { isedol } = this.props;
-    const {  } = this.state;
+    const {} = this.state;
 
-    const isedolData = isedol.map(mb => {
-      const dataFromWtvs = Waktaverse.find(item => item.name === mb.name);
-      return ({
+    const isedolData = isedol.map((mb) => {
+      const dataFromWtvs = Waktaverse.find((item) => item.name === mb.name);
+      return {
         key: `isedolmember_${dataFromWtvs.login_name}`,
         name: mb.name,
         profileImg: dataFromWtvs.profileImg.replace('{size}', 480),
         social: {
           afreecatv: dataFromWtvs.afreeca.channelId,
           youtube: dataFromWtvs.youtube.channelId,
-          ...(mb.social),
+          ...mb.social,
         },
-      });
-    })
-    const itemList = isedolData.map(item => <IsedolMemberItem key={item.key} {...item} />);
-    
-    return (
-      <ul className={cx('IsedolMemberList')}>
-        {itemList}
-      </ul>
-    );
+      };
+    });
+    const itemList = isedolData.map((item) => <IsedolMemberItem key={item.key} {...item} />);
+
+    return <ul className={cx('IsedolMemberList')}>{itemList}</ul>;
   }
 }
-  
+
 export default IsedolMemberList;

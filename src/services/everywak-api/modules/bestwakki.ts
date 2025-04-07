@@ -48,7 +48,7 @@ const filterPopularArticlesParams = (query: SearchFilter) => {
     queryTarget: 'title',
     queryTxt: '',
     beginAt: 1424876400,
-    endAt: Math.floor(Date.now() / 1000 / 300) * 300
+    endAt: Math.floor(Date.now() / 1000 / 300) * 300,
   };
 
   const ptNum = /[^0-9]/g;
@@ -56,23 +56,15 @@ const filterPopularArticlesParams = (query: SearchFilter) => {
 
   // 정렬
   const orders = ['time', 'time_oldest', 'up', 'comment', 'read'];
-  const orderBy = orders.includes(query.orderBy)
-    ? query.orderBy
-    : _default.orderBy;
+  const orderBy = orders.includes(query.orderBy) ? query.orderBy : _default.orderBy;
 
   // 페이지
-  const page = Math.max(
-    parseInt(String(query.page || _default.page).replace(ptNum, '')),
-    1
-  );
+  const page = Math.max(parseInt(String(query.page || _default.page).replace(ptNum, '')), 1);
 
   // 페이지 당 글 갯수
   const perPage = Math.min(
-    Math.max(
-      parseInt(String(query.perPage || _default.perPage).replace(ptNum, '')),
-      5
-    ),
-    999
+    Math.max(parseInt(String(query.perPage || _default.perPage).replace(ptNum, '')), 5),
+    999,
   );
 
   // 검색 타겟
@@ -93,9 +85,7 @@ const filterPopularArticlesParams = (query: SearchFilter) => {
   // 끝 날짜
   query.endAt = Math.floor(query.endAt / 1000) + 24 * 60 * 60 - 1;
   const endAt =
-    !isNaN(query.endAt) &&
-    query.endAt >= beginAt &&
-    query.endAt <= _default.endAt
+    !isNaN(query.endAt) && query.endAt >= beginAt && query.endAt <= _default.endAt
       ? query.endAt
       : _default.endAt;
 
@@ -106,7 +96,7 @@ const filterPopularArticlesParams = (query: SearchFilter) => {
     queryTarget,
     queryTxt,
     beginAt,
-    endAt
+    endAt,
   };
 
   return filteredParams;
@@ -119,7 +109,7 @@ const getPopularArticles = async (params: SearchFilter) =>
   await request<PopularArticlesResponse>({
     method: 'GET',
     uri: '/bestwakki/WakkiPopularArticles',
-    params: filterPopularArticlesParams(params)
+    params: filterPopularArticlesParams(params),
   });
 
 export { getPopularArticles };

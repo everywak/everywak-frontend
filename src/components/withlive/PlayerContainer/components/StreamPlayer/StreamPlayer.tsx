@@ -26,8 +26,7 @@ export interface Props {
 }
 
 export const StreamPlayer = (props: Props) => {
-  const { isExpanded, multiViewLayout, isEnabledMultiView } =
-    useWithliveValues();
+  const { isExpanded, multiViewLayout, isEnabledMultiView } = useWithliveValues();
   return (
     <StreamPlayer_
       {...props}
@@ -46,8 +45,7 @@ const StreamPlayer_ = (props: Props) => {
     <motion.div
       className={clsx(styles.container, props.className, {
         [styles.expanded]: props.isExpanded,
-        [styles.grid]:
-          props.isEnabledMultiView && props.multiViewLayout! === 'grid',
+        [styles.grid]: props.isEnabledMultiView && props.multiViewLayout! === 'grid',
         [styles.full]: props.size === 'full',
         [styles.normal]: props.size === 'normal',
         [styles.simple]: props.size === 'simple',
@@ -80,17 +78,10 @@ const StreamPlayer_ = (props: Props) => {
             alt={`${props.channel.nickname} 오프라인`}
           />
         )}
-        <PlayerOverlay
-          player={props.player}
-          size={props.size}
-          isAnimating={isAnimating}
-        />
+        <PlayerOverlay player={props.player} size={props.size} isAnimating={isAnimating} />
       </div>
       {props.size === 'full' && !props.isExpanded && (
-        <ChannelDetail
-          className={styles.channelDetail}
-          memberId={props.player.memberId}
-        />
+        <ChannelDetail className={styles.channelDetail} memberId={props.player.memberId} />
       )}
     </motion.div>
   );

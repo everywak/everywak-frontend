@@ -32,7 +32,7 @@ import cx from 'classnames';
 
 /**
  * @typedef {'main-side'|'grid'} ViewLayoutOption
- * 
+ *
  * @typedef {object} LivePlayerItem
  * @property {string} name nickname
  * @property {string} id loginName
@@ -66,16 +66,15 @@ function addClassLive() {
   }
 }
 
-export default function WithLive ({front = false}) {
-
+export default function WithLive({ front = false }) {
   //TODO: playerOptions 로 통합
   const [opened, setOpened] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
   const [playerOptions, onChangeOptions, reset] = useInputs({
     opened: false,
-    openedSceneSettingPanel: false, 
-    expanded: false, 
+    openedSceneSettingPanel: false,
+    expanded: false,
     hideChat: false,
   });
 
@@ -100,21 +99,27 @@ export default function WithLive ({front = false}) {
     const members = [];
     const savedSceneSetting = func.getLocalStorage('everywak.withlive.sceneSetting');
     const mainChannelId = new URLSearchParams(search).get('main'); // 메인으로 올 스트림
-    if (savedSceneSetting) { // 최초 접속이 아니면
-      const filteredSavedLiveList = savedSceneSetting.liveList.filter(loginName => Waktaverse.find(member => member.login_name === loginName));
-      
-      if (mainChannelId && Waktaverse.find(member => member.login_name === mainChannelId)) { // 메인으로 고정할 채널 있으면 고정
-        members.push(mainChannelId, ...filteredSavedLiveList.filter(live => live !== mainChannelId));
+    if (savedSceneSetting) {
+      // 최초 접속이 아니면
+      const filteredSavedLiveList = savedSceneSetting.liveList.filter((loginName) =>
+        Waktaverse.find((member) => member.login_name === loginName),
+      );
+
+      if (mainChannelId && Waktaverse.find((member) => member.login_name === mainChannelId)) {
+        // 메인으로 고정할 채널 있으면 고정
+        members.push(
+          mainChannelId,
+          ...filteredSavedLiveList.filter((live) => live !== mainChannelId),
+        );
       } else {
         members.push(...filteredSavedLiveList);
       }
     }
-    
-    if (members.length > 0 && members[0] !== '') {
 
+    if (members.length > 0 && members[0] !== '') {
       /** @type {LivePlayerItem[]} */
       const streams = members.slice(0, 8).map((id, i) => ({
-        name: Waktaverse.find(member => member.login_name === id).name,
+        name: Waktaverse.find((member) => member.login_name === id).name,
         broadcasterType: 'AFREECA',
         videoId: null,
         id,
@@ -123,22 +128,22 @@ export default function WithLive ({front = false}) {
       }));
 
       // 메인으로 올 스트림 설정
-      if (mainChannelId && Waktaverse.find(member => member.login_name === mainChannelId)) {
-        const newMain = streams.find(live => live.id === mainChannelId); // 가운데로 올 플레이어
-        const oldMain = streams.find(live => live.pos === 0); // 가운데에 있던 플레이어
+      if (mainChannelId && Waktaverse.find((member) => member.login_name === mainChannelId)) {
+        const newMain = streams.find((live) => live.id === mainChannelId); // 가운데로 올 플레이어
+        const oldMain = streams.find((live) => live.pos === 0); // 가운데에 있던 플레이어
         if (newMain && oldMain && oldMain !== newMain) {
           const newMainPos = newMain.pos;
           newMain.pos = 0;
           oldMain.pos = newMainPos;
         }
       }
-      console.log('set LiveList 136')
+      console.log('set LiveList 136');
       setLiveList(streams);
     }
     //return [];
   }, []);
 
-  const { isLoading, data } = useQueryWaktaverseLive({ });
+  const { isLoading, data } = useQueryWaktaverseLive({});
 
   // 브라우저 제목 설정
   useEffect(() => {
@@ -149,7 +154,7 @@ export default function WithLive ({front = false}) {
     return () => {
       document.querySelector('.App') && document.querySelector('.App').classList.remove('live');
       document.querySelector('body').style.overflowY = 'auto';
-    }
+    };
   }, []);
 
   useEffect(() => {
@@ -157,20 +162,24 @@ export default function WithLive ({front = false}) {
       return () => {};
     }
 
-    const prevMembers = liveList.map(live => live.id);
+    const prevMembers = liveList.map((live) => live.id);
     const compareUpdatedStreams = (prevList, newList) => {
       return newList.reduce((isDiff, newStream) => {
-        const prevStream = prevList.find(stream => stream.id === newStream.loginName);
-        if (!prevStream) { return isDiff; }
+        const prevStream = prevList.find((stream) => stream.id === newStream.loginName);
+        if (!prevStream) {
+          return isDiff;
+        }
         if (newStream.broadcaster !== prevStream.broadcasterType) {
           return true;
         }
-        if (newStream.broadcaster === prevStream.broadcasterType
-          && newStream.videoId !== prevStream.videoId) {
+        if (
+          newStream.broadcaster === prevStream.broadcasterType &&
+          newStream.videoId !== prevStream.videoId
+        ) {
           return true;
         }
         return isDiff;
-      }, false)
+      }, false);
     };
     if (prevMembers.length > 0 && !compareUpdatedStreams(liveList, data.lives)) {
       return () => {};
@@ -180,27 +189,44 @@ export default function WithLive ({front = false}) {
     const members = [];
     /** @type {SceneSetting | null} */
     const savedSceneSetting = func.getLocalStorage('everywak.withlive.sceneSetting');
-    const customMembers = (new URLSearchParams(search).get('members') || '').split(',').filter(loginName => data.members.find(member => member.twitchLoginName === loginName));
+    const customMembers = (new URLSearchParams(search).get('members') || '')
+      .split(',')
+      .filter((loginName) => data.members.find((member) => member.twitchLoginName === loginName));
     const mainChannelId = new URLSearchParams(search).get('main'); // 메인으로 올 스트림
-    if (savedSceneSetting) { // 최초 접속이 아니면
-      if (['main-side', 'grid'].includes(savedSceneSetting.viewLayout) && viewLayout != savedSceneSetting.viewLayout) {
+    if (savedSceneSetting) {
+      // 최초 접속이 아니면
+      if (
+        ['main-side', 'grid'].includes(savedSceneSetting.viewLayout) &&
+        viewLayout != savedSceneSetting.viewLayout
+      ) {
         setViewLayout(savedSceneSetting.viewLayout);
       }
-      const filteredSavedLiveList = savedSceneSetting.liveList.filter(loginName => data.members.find(member => member.twitchLoginName === loginName));
-      
-      if (mainChannelId && data.members.find(member => member.twitchLoginName === mainChannelId)) { // 메인으로 고정할 채널 있으면 고정
-        members.push(mainChannelId, ...filteredSavedLiveList.filter(live => live !== mainChannelId));
+      const filteredSavedLiveList = savedSceneSetting.liveList.filter((loginName) =>
+        data.members.find((member) => member.twitchLoginName === loginName),
+      );
+
+      if (
+        mainChannelId &&
+        data.members.find((member) => member.twitchLoginName === mainChannelId)
+      ) {
+        // 메인으로 고정할 채널 있으면 고정
+        members.push(
+          mainChannelId,
+          ...filteredSavedLiveList.filter((live) => live !== mainChannelId),
+        );
       } else {
         members.push(...filteredSavedLiveList);
       }
-    } else if (group === 'isedol') { // 이세돌 같이보기 페이지면
+    } else if (group === 'isedol') {
+      // 이세돌 같이보기 페이지면
       members.push(...isedolStreams);
-    } else if (customMembers.length > 0 && customMembers[0] !== '') { // 커스텀 멤버가 지정되어 있으면
+    } else if (customMembers.length > 0 && customMembers[0] !== '') {
+      // 커스텀 멤버가 지정되어 있으면
       members.push(...customMembers);
     } else {
-      members.push(...data.lives.map(live => live.loginName)); // 생방송인 채널
+      members.push(...data.lives.map((live) => live.loginName)); // 생방송인 채널
     }
-    
+
     if (members.length > 0 && members[0] !== '') {
       if (!savedSceneSetting) {
         func.setLocalStorage('everywak.withlive.sceneSetting', {
@@ -211,18 +237,21 @@ export default function WithLive ({front = false}) {
 
       /** @type {LivePlayerItem[]} */
       const streams = members.slice(0, 8).map((id, i) => ({
-        name: data.members.find(member => member.twitchLoginName === id).nickname,
-        broadcasterType: data.lives.find(live => live.loginName == id)?.broadcaster || 'TWITCH',
-        videoId: data.lives.find(live => live.loginName == id)?.videoId,
+        name: data.members.find((member) => member.twitchLoginName === id).nickname,
+        broadcasterType: data.lives.find((live) => live.loginName == id)?.broadcaster || 'TWITCH',
+        videoId: data.lives.find((live) => live.loginName == id)?.videoId,
         id,
         pos: i,
         volume: 1,
       }));
 
       // 메인으로 올 스트림 설정
-      if (mainChannelId && data.members.find(member => member.twitchLoginName === mainChannelId)) {
-        const newMain = streams.find(live => live.id === mainChannelId); // 가운데로 올 플레이어
-        const oldMain = streams.find(live => live.pos === 0); // 가운데에 있던 플레이어
+      if (
+        mainChannelId &&
+        data.members.find((member) => member.twitchLoginName === mainChannelId)
+      ) {
+        const newMain = streams.find((live) => live.id === mainChannelId); // 가운데로 올 플레이어
+        const oldMain = streams.find((live) => live.pos === 0); // 가운데에 있던 플레이어
         if (newMain && oldMain && oldMain !== newMain) {
           const newMainPos = newMain.pos;
           newMain.pos = 0;
@@ -239,9 +268,9 @@ export default function WithLive ({front = false}) {
 
     return () => {
       clearInterval(loopEventGAWatching);
-    }
+    };
   }, []);
-  
+
   function eventGAWatching() {
     ReactGA.event({
       category: GAEvents.Category.withlive,
@@ -253,133 +282,167 @@ export default function WithLive ({front = false}) {
 
   useEffect(() => {
     if (!expanded) {
-      refPlayerWrapper.current && refPlayerWrapper.current.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      })
+      refPlayerWrapper.current &&
+        refPlayerWrapper.current.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
     }
   }, [expanded]);
-  
 
-  const onPlayerOptionChangedHandler = useCallback(({theaterMode, hovering}) => {
-    if (hovering !== undefined && hovering !== opened) {
-      setOpened(hovering);
-    }
-    if (theaterMode !== undefined && theaterMode !== expanded) {
-      setExpanded(theaterMode);
-    }
-  }, [opened, expanded]);
+  const onPlayerOptionChangedHandler = useCallback(
+    ({ theaterMode, hovering }) => {
+      if (hovering !== undefined && hovering !== opened) {
+        setOpened(hovering);
+      }
+      if (theaterMode !== undefined && theaterMode !== expanded) {
+        setExpanded(theaterMode);
+      }
+    },
+    [opened, expanded],
+  );
 
-  const setMainPlayer = useCallback(id => {
-    const newMain = liveList.find(live => live.id === id); // 가운데로 올 플레이어
-    const oldMain = liveList.find(live => live.pos === 0); // 가운데에 있던 플레이어
-    if (newMain && oldMain && oldMain !== newMain) {
-      const newMainPos = newMain.pos;
-      newMain.pos = 0;
-      oldMain.pos = newMainPos;
-      setLiveList([...liveList]);
-      func.setLocalStorage('everywak.withlive.sceneSetting', {
-        viewLayout: viewLayout,
-        liveList: liveList.sort((a, b) => a.pos - b.pos).map(item => item.id),
-      });
-    }
-  }, [liveList]);
+  const setMainPlayer = useCallback(
+    (id) => {
+      const newMain = liveList.find((live) => live.id === id); // 가운데로 올 플레이어
+      const oldMain = liveList.find((live) => live.pos === 0); // 가운데에 있던 플레이어
+      if (newMain && oldMain && oldMain !== newMain) {
+        const newMainPos = newMain.pos;
+        newMain.pos = 0;
+        oldMain.pos = newMainPos;
+        setLiveList([...liveList]);
+        func.setLocalStorage('everywak.withlive.sceneSetting', {
+          viewLayout: viewLayout,
+          liveList: liveList.sort((a, b) => a.pos - b.pos).map((item) => item.id),
+        });
+      }
+    },
+    [liveList],
+  );
 
   /**
    * 레이아웃 변경 핸들러
-   * 
-   * @param {{viewLayout: ViewLayoutOption, liveList: LivePlayerItem[]}} e 
+   *
+   * @param {{viewLayout: ViewLayoutOption, liveList: LivePlayerItem[]}} e
    */
-  const onChangeSceneSettingHandler = e => {
+  const onChangeSceneSettingHandler = (e) => {
     setViewLayout(e.viewLayout);
     setLiveList(e.liveList);
     func.setLocalStorage('everywak.withlive.sceneSetting', {
       viewLayout: e.viewLayout,
-      liveList: e.liveList.map(item => item.id),
+      liveList: e.liveList.map((item) => item.id),
     });
     setOpenedSceneSettingPanel(false);
   };
 
   // 실제 플레이어 embed 리스트
-  const livePlayerList = useMemo(() => liveList.map(live => 
-    <FloatingWakPlayer 
-      key={live.id} 
-      channelId={live.id} 
-      broadcasterType={live.broadcasterType}
-      videoId={live.videoId}
-      name={live.name} 
-      target={`target_${live.pos}`} 
-      expanded={expanded}
-      onClick={setMainPlayer}
-      setOpenedSceneSettingPanel={setOpenedSceneSettingPanel}
-      onPlayerOptionChanged={onPlayerOptionChangedHandler}
-      playerOptions={playerOptions}
-      onChangeOptions={onChangeOptions}
-      />
-  ), [onPlayerOptionChangedHandler, liveList, setMainPlayer, playerOptions]);
-
-  // 플레이어가 위치하는 div 리스트
-  const [floatingTargetMain, ...floatingTargetSideList] = Array(liveList.length).fill(0).map((_, i) =>
-    <FloatingTarget key={i} className={`target_${i}`} /> 
+  const livePlayerList = useMemo(
+    () =>
+      liveList.map((live) => (
+        <FloatingWakPlayer
+          key={live.id}
+          channelId={live.id}
+          broadcasterType={live.broadcasterType}
+          videoId={live.videoId}
+          name={live.name}
+          target={`target_${live.pos}`}
+          expanded={expanded}
+          onClick={setMainPlayer}
+          setOpenedSceneSettingPanel={setOpenedSceneSettingPanel}
+          onPlayerOptionChanged={onPlayerOptionChangedHandler}
+          playerOptions={playerOptions}
+          onChangeOptions={onChangeOptions}
+        />
+      )),
+    [onPlayerOptionChangedHandler, liveList, setMainPlayer, playerOptions],
   );
 
-  const mainChannel = liveList.filter(v => v).find(live => live?.pos === 0);
+  // 플레이어가 위치하는 div 리스트
+  const [floatingTargetMain, ...floatingTargetSideList] = Array(liveList.length)
+    .fill(0)
+    .map((_, i) => <FloatingTarget key={i} className={`target_${i}`} />);
+
+  const mainChannel = liveList.filter((v) => v).find((live) => live?.pos === 0);
   const mainChannelId = mainChannel?.id;
   const mainChannelPlatform = mainChannel?.broadcasterType.toLowerCase();
 
-  return (<>
-    {!expanded && 
-      <Header />
-    }
-    <div className={cx('WithLive', {expanded: expanded}, viewLayout)} style={{'--sidePlayerCount': Math.min(Math.max(floatingTargetSideList.length, 2), 7)}}>
-      <div className={cx('playerWrapper', {opened: opened, expanded: expanded}, viewLayout)} ref={refPlayerWrapper}>
-        {
-          viewLayout === 'main-side' && 
-          <>
-            {floatingTargetMain}
-            <LiveSummary channelId={mainChannelId} expanded={expanded} onChangeOverlayState={onPlayerOptionChangedHandler} />
-            <BroadcasterPanel channelId={mainChannelId} />
-            <Footer />
-          </>
-        }
-        {
-          viewLayout === 'grid' && 
-          <div className="playerGrid" style={{'--gridColumns': Math.ceil(liveList.length / Math.ceil(Math.sqrt(liveList.length))), '--gridRows': Math.ceil(Math.sqrt(liveList.length))}}>
-            {floatingTargetMain}
-            {floatingTargetSideList}
-          </div>
-        }
+  return (
+    <>
+      {!expanded && <Header />}
+      <div
+        className={cx('WithLive', { expanded: expanded }, viewLayout)}
+        style={{ '--sidePlayerCount': Math.min(Math.max(floatingTargetSideList.length, 2), 7) }}
+      >
+        <div
+          className={cx('playerWrapper', { opened: opened, expanded: expanded }, viewLayout)}
+          ref={refPlayerWrapper}
+        >
+          {viewLayout === 'main-side' && (
+            <>
+              {floatingTargetMain}
+              <LiveSummary
+                channelId={mainChannelId}
+                expanded={expanded}
+                onChangeOverlayState={onPlayerOptionChangedHandler}
+              />
+              <BroadcasterPanel channelId={mainChannelId} />
+              <Footer />
+            </>
+          )}
+          {viewLayout === 'grid' && (
+            <div
+              className="playerGrid"
+              style={{
+                '--gridColumns': Math.ceil(liveList.length / Math.ceil(Math.sqrt(liveList.length))),
+                '--gridRows': Math.ceil(Math.sqrt(liveList.length)),
+              }}
+            >
+              {floatingTargetMain}
+              {floatingTargetSideList}
+            </div>
+          )}
+        </div>
+        {viewLayout === 'main-side' && (
+          <ul className={cx('SidePlayerList', { opened: opened, expanded: expanded }, viewLayout)}>
+            {floatingTargetSideList.slice(0, 7)}
+          </ul>
+        )}
+        {!playerOptions.hideChat && (
+          <TwitchChat channelId={mainChannelId} platform={mainChannelPlatform} />
+        )}
+        <div className="wakPlayerList">{livePlayerList}</div>
+        {isOpenedSceneSettingPanel && (
+          <ModalFrame setOnModal={setOpenedSceneSettingPanel}>
+            <SceneLayoutSettingPanel
+              liveList={liveList}
+              viewLayout={viewLayout}
+              onClose={(e) => setOpenedSceneSettingPanel(false)}
+              onSubmit={onChangeSceneSettingHandler}
+            />
+          </ModalFrame>
+        )}
       </div>
-      {
-        viewLayout === 'main-side' && 
-        <ul className={cx('SidePlayerList', {opened: opened, expanded: expanded}, viewLayout)}>
-          {floatingTargetSideList.slice(0, 7)}
-        </ul>
-      }
-      {
-        !playerOptions.hideChat &&
-        <TwitchChat channelId={mainChannelId} platform={mainChannelPlatform} />
-      }
-      <div className="wakPlayerList">
-        {livePlayerList}
-      </div>
-      {
-        isOpenedSceneSettingPanel &&
-        <ModalFrame setOnModal={setOpenedSceneSettingPanel}>
-          <SceneLayoutSettingPanel liveList={liveList} viewLayout={viewLayout} onClose={e => setOpenedSceneSettingPanel(false)} onSubmit={onChangeSceneSettingHandler} />
-        </ModalFrame>
-      }
-    </div>
-  </>)
+    </>
+  );
 }
 
-function FloatingTarget({className, ...rest}) {
-
-  return <div className={cx('FloatingTarget', className)} {...rest} />
+function FloatingTarget({ className, ...rest }) {
+  return <div className={cx('FloatingTarget', className)} {...rest} />;
 }
 
-function FloatingWakPlayer({channelId, name, broadcasterType, videoId, target, expanded, onClick, playerOptions, onChangeOptions, onPlayerOptionChanged, setOpenedSceneSettingPanel}) {
-
+function FloatingWakPlayer({
+  channelId,
+  name,
+  broadcasterType,
+  videoId,
+  target,
+  expanded,
+  onClick,
+  playerOptions,
+  onChangeOptions,
+  onPlayerOptionChanged,
+  setOpenedSceneSettingPanel,
+}) {
   const [style, setStyle] = useState({
     top: '0px',
     left: '0px',
@@ -395,7 +458,7 @@ function FloatingWakPlayer({channelId, name, broadcasterType, videoId, target, e
     height: 0,
   };
 
-  // 플레이어 전환에 따른 위치 이동시에만 트랜지션 활성화되게 
+  // 플레이어 전환에 따른 위치 이동시에만 트랜지션 활성화되게
   const [transitionLife, setTransitionLife] = useState(0);
 
   const reduceTransitionLife = useCallback(() => {
@@ -409,7 +472,7 @@ function FloatingWakPlayer({channelId, name, broadcasterType, videoId, target, e
 
     return () => {
       clearInterval(loop);
-    }
+    };
   }, [reduceTransitionLife]);
 
   useEffect(() => {
@@ -418,8 +481,8 @@ function FloatingWakPlayer({channelId, name, broadcasterType, videoId, target, e
 
     return () => {
       clearInterval(loop);
-    }
-  }, [target])
+    };
+  }, [target]);
 
   useWindowEvent('resize', checkChangedPosition);
 
@@ -437,7 +500,8 @@ function FloatingWakPlayer({channelId, name, broadcasterType, videoId, target, e
   }
 
   function diffRect(prevRect, newRect) {
-    return (prevRect.top !== newRect.top ||
+    return (
+      prevRect.top !== newRect.top ||
       prevRect.left !== newRect.left ||
       prevRect.width !== newRect.width ||
       prevRect.height !== newRect.height
@@ -453,13 +517,18 @@ function FloatingWakPlayer({channelId, name, broadcasterType, videoId, target, e
       width: `${newRect.width}px`,
       height: `${newRect.height}px`,
       '--name': `'${name}'`,
-    })
+    });
   }
 
-  const isOverlayBackgroundArea = className => {
-    if (typeof className !== 'string') { return false; }
+  const isOverlayBackgroundArea = (className) => {
+    if (typeof className !== 'string') {
+      return false;
+    }
 
-    return className.includes('overlay') || ['buttonArea', 'mediaInfo', 'descArea', 'controls hideProgress'].includes(className);
+    return (
+      className.includes('overlay') ||
+      ['buttonArea', 'mediaInfo', 'descArea', 'controls hideProgress'].includes(className)
+    );
   };
   const getMediaInfo = (broadcasterType, channelId, videoId) => {
     const result = ['twitchLive', 'woowakgood'];
@@ -481,18 +550,27 @@ function FloatingWakPlayer({channelId, name, broadcasterType, videoId, target, e
     }
 
     return result;
-  }
+  };
 
   const [mediaType, mediaId] = getMediaInfo(broadcasterType, channelId, videoId);
-  
+
   return (
-    <div className={cx('FloatingWakPlayer', {isSide: target !== 'target_0', isMoving: transitionLife > 0})} style={style}>
-      <VideoContentPlayer 
-        key={`wakplayer_${channelId}`} 
-        mediaType={mediaType} mediaId={mediaId} 
-        playerSize={target === 'target_0' ? 'normal' : 'simple'} 
+    <div
+      className={cx('FloatingWakPlayer', {
+        isSide: target !== 'target_0',
+        isMoving: transitionLife > 0,
+      })}
+      style={style}
+    >
+      <VideoContentPlayer
+        key={`wakplayer_${channelId}`}
+        mediaType={mediaType}
+        mediaId={mediaId}
+        playerSize={target === 'target_0' ? 'normal' : 'simple'}
         useHotkey={target === 'target_0'}
-        onClickOverlay={e => {isOverlayBackgroundArea(e.target.className) && onClick(channelId)}}
+        onClickOverlay={(e) => {
+          isOverlayBackgroundArea(e.target.className) && onClick(channelId);
+        }}
         theaterMode={expanded}
         contextMenu={[]}
         headerButtons={[
@@ -505,18 +583,19 @@ function FloatingWakPlayer({channelId, name, broadcasterType, videoId, target, e
             onChange: onChangeOptions,
             iconEnabled: FirstPageRoundedIcon,
             iconDisabled: LastPageRoundedIcon,
-          }
+          },
         ]}
         controlButtons={[
           {
             type: 'normal',
             className: 'editLayout',
             description: '레이아웃 편집',
-            onClick: e => setOpenedSceneSettingPanel(true),
+            onClick: (e) => setOpenedSceneSettingPanel(true),
             iconNormal: DashboardCustomizeRoundedIcon,
-          }
+          },
         ]}
-        onPlayerOptionChanged={e => target === 'target_0' && onPlayerOptionChanged(e)} /> 
+        onPlayerOptionChanged={(e) => target === 'target_0' && onPlayerOptionChanged(e)}
+      />
     </div>
   );
 }

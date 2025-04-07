@@ -41,13 +41,7 @@ export default function NavigationBar() {
     }
     prevScrollY.current = window.scrollY;
   }, 100);
-  useWindowEvent('scroll', scrollHandler, [
-    show,
-    hide,
-    showBtnTop,
-    hideBtnTop,
-    prevScrollY,
-  ]);
+  useWindowEvent('scroll', scrollHandler, [show, hide, showBtnTop, hideBtnTop, prevScrollY]);
 
   return (
     <nav className={cx('NavigationBar', { opened: isShowing })}>

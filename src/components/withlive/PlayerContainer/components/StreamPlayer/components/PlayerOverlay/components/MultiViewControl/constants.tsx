@@ -1,4 +1,4 @@
-import { LayoutType } from "utils/types/withlive.type";
+import { LayoutType } from 'utils/types/withlive.type';
 
 import {
   GridIcon,

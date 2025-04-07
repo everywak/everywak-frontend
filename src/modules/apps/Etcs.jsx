@@ -34,7 +34,7 @@ class Etcs extends Apps {
         themeColor: '#DAD21B',
         href: '/siteinfo',
       },
-    ]
+    ],
   };
 }
 

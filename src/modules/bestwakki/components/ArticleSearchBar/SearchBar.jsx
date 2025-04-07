@@ -10,26 +10,23 @@ import './SearchBar.scss';
 import cx from 'classnames';
 
 function getRecommendKeyword() {
-  const phTxtList = [
-    'manhwa', 'manhwa', 'ㅗㅜㅑ', '왁굳', 'ㅇㄷ', 'ㅇㅎ', '꿀팁', '꿀팁', 
-  ];
+  const phTxtList = ['manhwa', 'manhwa', 'ㅗㅜㅑ', '왁굳', 'ㅇㄷ', 'ㅇㅎ', '꿀팁', '꿀팁'];
   const phTxt = phTxtList[Math.floor(Math.random() * phTxtList.length)];
   return phTxt;
 }
 
 /**
  * 검색 바
- * 
+ *
  * @param {{
  * defaultValue: {
- *   searchTarget: 'title' | 'author' | 'board', 
+ *   searchTarget: 'title' | 'author' | 'board',
  *   keyword: string
  * },
  * onSearch: function
- * }} props 
+ * }} props
  */
-function SearchBar({ defaultValue = {searchTarget: 'title', keyword: ''}, onSearch = () => {} }) {
-
+function SearchBar({ defaultValue = { searchTarget: 'title', keyword: '' }, onSearch = () => {} }) {
   const [value, onChange, reset] = useInputs(defaultValue);
   const [recommendKeyword, setRecommendKeyword] = useState('');
 
@@ -40,9 +37,9 @@ function SearchBar({ defaultValue = {searchTarget: 'title', keyword: ''}, onSear
   useEffect(() => {
     reset();
   }, [defaultValue]);
-  
+
   function onClickSearch() {
-    console.log("onClickSearch", value)
+    console.log('onClickSearch', value);
     onSearch(value);
   }
 
@@ -62,11 +59,29 @@ function SearchBar({ defaultValue = {searchTarget: 'title', keyword: ''}, onSear
   ];
 
   return (
-    <div className="SearchBar" >
-      <input type="text" className="inputForm" onKeyUp={e => {if (e.key === 'Enter') {onClickSearch()}}} placeholder={`'${recommendKeyword}' 검색해 보기`} name="keyword" value={value.keyword} onChange={onChange} />
-      <Dropdown className="searchTarget" name="searchTarget" options={searchTargetOptions} value={value.searchTarget} onChange={onChange} />
-      <div className="btnSearch" onClick={e => onClickSearch()}>
-          <SearchRoundedIcon style={{ color: "white" }} />
+    <div className="SearchBar">
+      <input
+        type="text"
+        className="inputForm"
+        onKeyUp={(e) => {
+          if (e.key === 'Enter') {
+            onClickSearch();
+          }
+        }}
+        placeholder={`'${recommendKeyword}' 검색해 보기`}
+        name="keyword"
+        value={value.keyword}
+        onChange={onChange}
+      />
+      <Dropdown
+        className="searchTarget"
+        name="searchTarget"
+        options={searchTargetOptions}
+        value={value.searchTarget}
+        onChange={onChange}
+      />
+      <div className="btnSearch" onClick={(e) => onClickSearch()}>
+        <SearchRoundedIcon style={{ color: 'white' }} />
       </div>
     </div>
   );

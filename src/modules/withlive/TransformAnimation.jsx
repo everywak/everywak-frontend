@@ -5,7 +5,6 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 export default function TransformAnimation({ className = '', children, ...rest }) {
-
   const [targetRect, setTargetRect] = useState({
     top: 0,
     left: 0,
@@ -17,7 +16,8 @@ export default function TransformAnimation({ className = '', children, ...rest }
   const refElement = useRef();
 
   const diffRect = (prevRect, newRect) => {
-    return (prevRect.top !== newRect?.top ||
+    return (
+      prevRect.top !== newRect?.top ||
       prevRect.left !== newRect?.left ||
       prevRect.width !== newRect?.width ||
       prevRect.height !== newRect?.height
@@ -49,10 +49,16 @@ export default function TransformAnimation({ className = '', children, ...rest }
     '--height': targetRect.height,
   };
 
-  return <div ref={refElement} className={cx('TransformAnimation', className)} {...rest}>
-
-    <div className={cx('transformAnimation_contentWrapper', { transition: targetRect.transition == 0 })} style={style}>
-      {children}
+  return (
+    <div ref={refElement} className={cx('TransformAnimation', className)} {...rest}>
+      <div
+        className={cx('transformAnimation_contentWrapper', {
+          transition: targetRect.transition == 0,
+        })}
+        style={style}
+      >
+        {children}
+      </div>
     </div>
-  </div>;
+  );
 }

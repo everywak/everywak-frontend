@@ -9,7 +9,7 @@ export default function ArticleSearchBar() {
     <SearchBar
       defaultValue={{
         searchTarget: searchFilter.searchTarget || 'title',
-        keyword: searchFilter.keyword || ''
+        keyword: searchFilter.keyword || '',
       }}
       onSearch={updateSearchFilter}
     />

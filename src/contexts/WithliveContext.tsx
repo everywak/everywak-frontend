@@ -53,9 +53,10 @@ export function WithliveProvider(props: Props): React.ReactNode {
     'everywak.withlive.multiview.enable',
     false,
   );
-  const [watchingChannels, setWatchingChannels] = useStorage<
-    ChannelStateType[]
-  >('everywak.withlive.multiview.players', []);
+  const [watchingChannels, setWatchingChannels] = useStorage<ChannelStateType[]>(
+    'everywak.withlive.multiview.players',
+    [],
+  );
   const [multiViewLayout, setMultiViewLayout] = useStorage<LayoutType>(
     'everywak.withlive.multiview.layout',
     'one-side-r',
@@ -65,13 +66,12 @@ export function WithliveProvider(props: Props): React.ReactNode {
   const [isChatVisible, setIsChatVisible] = useState<boolean>(true);
   const [chatChannelIds, setChatChannelIds] = useState<string[]>([]);
 
-  const [draggingPlayerState, setDraggingPlayerState] =
-    useState<DraggingPlayerStateType>({
-      isDragging: false,
-      targetMemberId: '',
-      prevOrder: -1,
-      order: -1,
-    });
+  const [draggingPlayerState, setDraggingPlayerState] = useState<DraggingPlayerStateType>({
+    isDragging: false,
+    targetMemberId: '',
+    prevOrder: -1,
+    order: -1,
+  });
 
   const members = useMember();
   const { isLoading, data: lives } = useQueryLive({
@@ -84,9 +84,7 @@ export function WithliveProvider(props: Props): React.ReactNode {
     }
     setWatchingChannels((old) => {
       const oldWatchingChannels = [...old].sort((a, b) => b.order - a.order); // order 내림차순
-      const watchingChannelIndex = oldWatchingChannels.findIndex(
-        (c) => c.memberId === memberId,
-      );
+      const watchingChannelIndex = oldWatchingChannels.findIndex((c) => c.memberId === memberId);
       if (watchingChannelIndex == -1) {
         oldWatchingChannels.push({
           memberId,
@@ -113,24 +111,15 @@ export function WithliveProvider(props: Props): React.ReactNode {
       }
 
       // memberId 오름차순
-      return oldWatchingChannels.sort((a, b) =>
-        a.memberId.localeCompare(b.memberId),
-      );
+      return oldWatchingChannels.sort((a, b) => a.memberId.localeCompare(b.memberId));
     });
   };
 
   const setWatchingChannelOrder = (memberId: string, value: number) => {
     setWatchingChannels((channels) => {
-      const fromIndex = channels.findIndex(
-        (channel) => channel.memberId === memberId,
-      );
+      const fromIndex = channels.findIndex((channel) => channel.memberId === memberId);
       const toIndex = channels.findIndex((channel) => channel.order === value);
-      if (
-        value >= 0 &&
-        value < channels.length &&
-        fromIndex !== -1 &&
-        toIndex !== -1
-      ) {
+      if (value >= 0 && value < channels.length && fromIndex !== -1 && toIndex !== -1) {
         const fromOrder = channels[fromIndex].order;
         channels[fromIndex] = { ...channels[fromIndex], order: value };
         channels[toIndex] = { ...channels[toIndex], order: fromOrder };
@@ -139,13 +128,8 @@ export function WithliveProvider(props: Props): React.ReactNode {
     });
   };
 
-  const updateWatchingChannel = (
-    channelId: string,
-    channel: ChannelStateType,
-  ) => {
-    const index = watchingChannels.findIndex(
-      (channel) => channel.memberId === channelId,
-    );
+  const updateWatchingChannel = (channelId: string, channel: ChannelStateType) => {
+    const index = watchingChannels.findIndex((channel) => channel.memberId === channelId);
     if (index !== -1) {
       const newChannels = [...watchingChannels];
       newChannels[index] = channel;
@@ -154,17 +138,12 @@ export function WithliveProvider(props: Props): React.ReactNode {
   };
 
   const removeWatchingChannel = (memberId: string) => {
-    if (
-      watchingChannels.findIndex((channel) => channel.memberId === memberId) ===
-      -1
-    ) {
+    if (watchingChannels.findIndex((channel) => channel.memberId === memberId) === -1) {
       return;
     }
     setWatchingChannels((old) => {
       const oldWatchingChannels = [...old].sort((a, b) => a.order - b.order); // order 오름차순
-      const targetIndex = oldWatchingChannels.findIndex(
-        (c) => c.memberId === memberId,
-      );
+      const targetIndex = oldWatchingChannels.findIndex((c) => c.memberId === memberId);
       if (targetIndex === -1) {
         return old;
       }
@@ -174,9 +153,7 @@ export function WithliveProvider(props: Props): React.ReactNode {
       }
 
       // memberId 오름차순
-      return oldWatchingChannels.sort((a, b) =>
-        a.memberId.localeCompare(b.memberId),
-      );
+      return oldWatchingChannels.sort((a, b) => a.memberId.localeCompare(b.memberId));
     });
   };
 
@@ -215,9 +192,7 @@ export function WithliveProvider(props: Props): React.ReactNode {
     }));
     if (!isLoading && lives) {
       channels.forEach((channel) => {
-        const live = lives.find(
-          (live) => live.id.split(':')[0] === channel.memberId,
-        );
+        const live = lives.find((live) => live.id.split(':')[0] === channel.memberId);
         if (!live) {
           return;
         }
@@ -239,9 +214,7 @@ export function WithliveProvider(props: Props): React.ReactNode {
   }, [isLoading, lives]);
 
   useEffect(() => {
-    const onlineChannels = channels.filter(
-      (channel) => channel.streamInfo?.isLive,
-    );
+    const onlineChannels = channels.filter((channel) => channel.streamInfo?.isLive);
     if (onlineChannels.length > 0 && watchingChannels.length === 0) {
       addWatchingChannel(onlineChannels[0].memberId);
     }

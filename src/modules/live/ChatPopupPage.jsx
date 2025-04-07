@@ -43,9 +43,7 @@ function ChatPopupPage() {
     return result.join('');
   };
 
-  let channelNames = channelId
-    .split(',')
-    .map((channelId) => getChannelName(platform, channelId));
+  let channelNames = channelId.split(',').map((channelId) => getChannelName(platform, channelId));
 
   return (
     <TwitchChatClient

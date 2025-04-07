@@ -11,7 +11,6 @@ export function useWindowEvent(
   useEffect(() => {
     const eventTypes = type.split(' ');
     eventTypes.forEach((type) => window.addEventListener(type, handler));
-    return () =>
-      eventTypes.forEach((type) => window.removeEventListener(type, handler));
+    return () => eventTypes.forEach((type) => window.removeEventListener(type, handler));
   }, deps);
 }

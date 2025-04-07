@@ -25,10 +25,8 @@ export default function useQueryBestwakki({
     queryKey: ['getPopularArticles', searchFilter],
     queryFn: ({ pageParam }) => fetch({ ...searchFilter, page: pageParam || 1 }),
     getNextPageParam: (lastPage, allPosts): number | undefined => {
-      return allPosts[allPosts.length - 1]?.articleCount > 0
-        ? lastPage.page + 1
-        : undefined;
+      return allPosts[allPosts.length - 1]?.articleCount > 0 ? lastPage.page + 1 : undefined;
     },
-    ...rest
+    ...rest,
   });
 }

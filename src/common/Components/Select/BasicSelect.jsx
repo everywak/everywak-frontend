@@ -7,34 +7,34 @@ import cx from 'classnames';
 
 /**
  * 탭 레이아웃의 Option
- * 
+ *
  * @param {{
- * className: String, 
+ * className: String,
  * options: {name: String, value: String}[],
  * name: String,
  * value: String,
  * onChange: ({target: {name: String, value: String}}) => void,
- * }} props 
+ * }} props
  * @returns {JSX.Element}
  */
-function BasicSelect({className, options, name, value, onChange = e => {}}) {
-
-  const optionList = options.map(opt => (
-    <BasicButton className={cx('option', {selected: opt.value === value})} onClick={e => onChange({
-      target: {
-        name: name,
-        value: opt.value,
+function BasicSelect({ className, options, name, value, onChange = (e) => {} }) {
+  const optionList = options.map((opt) => (
+    <BasicButton
+      className={cx('option', { selected: opt.value === value })}
+      onClick={(e) =>
+        onChange({
+          target: {
+            name: name,
+            value: opt.value,
+          },
+        })
       }
-      })}>
+    >
       {opt.name}
     </BasicButton>
-  ))
+  ));
 
-  return (
-    <div className={cx('BasicSelect', className)}>
-      {optionList}
-    </div>
-  );
+  return <div className={cx('BasicSelect', className)}>{optionList}</div>;
 }
 
 export default BasicSelect;

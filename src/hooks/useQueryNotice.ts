@@ -21,12 +21,8 @@ export function useQueryNotice({
     }
   };
 
-  return useQuery(
-    [`waktaverseMemberNotices-${memberId}-${page}-${perPage}`],
-    fetch,
-    {
-      staleTime: 15000,
-      ...rest,
-    },
-  );
+  return useQuery([`waktaverseMemberNotices-${memberId}-${page}-${perPage}`], fetch, {
+    staleTime: 15000,
+    ...rest,
+  });
 }

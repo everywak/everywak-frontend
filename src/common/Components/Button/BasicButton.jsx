@@ -5,28 +5,31 @@ import cx from 'classnames';
 
 /**
  * 기본 버튼
- * 
- * @param {{background?: string, className?: string, description?: string, bottomRibbon?: boolean, onClick?: function, disabled?: boolean, children?: import('react').ReactNode}} props 
+ *
+ * @param {{background?: string, className?: string, description?: string, bottomRibbon?: boolean, onClick?: function, disabled?: boolean, children?: import('react').ReactNode}} props
  */
 function BasicButton(props) {
-  
   const {
     background,
-    className, 
-    description, 
+    className,
+    description,
     bottomRibbon = false,
-    onClick, 
-    children, 
+    onClick,
+    children,
     disabled,
     ...rest
   } = props;
 
   return (
-    <button className={cx("BasicButton", className, {hasRibbon: description, bottomRibbon, disabled})} onClick={onClick} {...rest} style={{background: background}} disabled={disabled}>
+    <button
+      className={cx('BasicButton', className, { hasRibbon: description, bottomRibbon, disabled })}
+      onClick={onClick}
+      {...rest}
+      style={{ background: background }}
+      disabled={disabled}
+    >
       {children}
-      {description &&
-        <div className="description">{description}</div>
-      }
+      {description && <div className="description">{description}</div>}
     </button>
   );
 }

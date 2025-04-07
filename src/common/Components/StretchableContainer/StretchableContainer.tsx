@@ -28,16 +28,19 @@ export default function StretchableContainer({
     newSize: size,
   });
 
-  const onDragStartHandler: React.PointerEventHandler<HTMLDivElement> = useCallback((e) => {
-    e.preventDefault();
-    const pos = ['left', 'right'].includes(rotation) ? e.clientX : e.clientY;
-    setDragState({
-      isDragging: true,
-      prevScrollPos: pos,
-      prevSize: size,
-      newSize: size,
-    });
-  }, [rotation, size]);
+  const onDragStartHandler: React.PointerEventHandler<HTMLDivElement> = useCallback(
+    (e) => {
+      e.preventDefault();
+      const pos = ['left', 'right'].includes(rotation) ? e.clientX : e.clientY;
+      setDragState({
+        isDragging: true,
+        prevScrollPos: pos,
+        prevSize: size,
+        newSize: size,
+      });
+    },
+    [rotation, size],
+  );
   const onDragHandler = ((e: PointerEvent) => {
     if (dragState.isDragging) {
       e.preventDefault();
@@ -89,8 +92,7 @@ export default function StretchableContainer({
         className={clsx(styles.dimmer, {
           [styles.dragged]: dragState.isDragging,
         })}
-      >
-      </div>
+      ></div>
       <div
         className={clsx(styles.slider, {
           [styles.focused]: dragState.isDragging,

@@ -5,46 +5,54 @@ const cx = classNames;
 
 /**
  * Chzzk Live Temporary Module
- * 
- * @param {import('./CommonModule').VideoContentHandlers} props 
+ *
+ * @param {import('./CommonModule').VideoContentHandlers} props
  * @returns {JSX.Element}
  */
-function ChzzkLiveTempPlayer ({
+function ChzzkLiveTempPlayer({
   className = '',
   channelId = '',
   domain = '',
   handlers = {
-  onReady: () => {},
-  onPlay: () => {},
-  onPlaying: () => {},
-  onPause: () => {},
-  onOnline: () => {},
-  onOffline: () => {}}, ...rest
+    onReady: () => {},
+    onPlay: () => {},
+    onPlaying: () => {},
+    onPause: () => {},
+    onOnline: () => {},
+    onOffline: () => {},
+  },
+  ...rest
 }) {
-  console.log("asdfasdfasdf")
+  console.log('asdfasdfasdf');
   const [embed, setEmbed] = useState(null);
   const [player, setPlayer] = useState(null);
 
-  const _onPlay = e => {
+  const _onPlay = (e) => {
     handlers.onPlay(e);
-  }
-  const _onPlaying = e => {
+  };
+  const _onPlaying = (e) => {
     handlers.onPlaying(e);
-  }
-  const _onPause = e => {
+  };
+  const _onPause = (e) => {
     handlers.onPause(e);
-  }
-  const _onOnline = e => {
+  };
+  const _onOnline = (e) => {
     handlers.onOnline(e);
-  }
-  const _onOffline = e => {
+  };
+  const _onOffline = (e) => {
     handlers.onOffline(e);
-  }
+  };
 
   useEffect(() => {
-    const _embed = <iframe id={`streamembed_${channelId}`} className={cx('player', 'chzzklive', className)} src={`https://chzzk.naver.com/live/${channelId}`}
-      scrolling="no" 
-     {...rest} />;
+    const _embed = (
+      <iframe
+        id={`streamembed_${channelId}`}
+        className={cx('player', 'chzzklive', className)}
+        src={`https://chzzk.naver.com/live/${channelId}`}
+        scrolling="no"
+        {...rest}
+      />
+    );
     setEmbed(_embed);
     setPlayer(_embed);
   }, [className, channelId, domain]);
@@ -63,14 +71,14 @@ function ChzzkLiveTempPlayer ({
         getCurrentTime: () => {},
         getDuration: () => {},
         setQuality: () => {},
-        getQuality: () => ({label: 'default', value: 'default'}),
-        getQualities: () => [{label: 'default', value: 'default'}],
+        getQuality: () => ({ label: 'default', value: 'default' }),
+        getQualities: () => [{ label: 'default', value: 'default' }],
         getPlaybackInfo: () => {
-          return ({
+          return {
             bufferSize: 0,
             hlsLatencyBroadcaster: 0,
             playbackRate: 0,
-          });
+          };
         },
       };
       handlers.onReady(videoContentInterface);
@@ -78,6 +86,6 @@ function ChzzkLiveTempPlayer ({
   }, [player]);
 
   return embed;
-};
+}
 
 export default ChzzkLiveTempPlayer;

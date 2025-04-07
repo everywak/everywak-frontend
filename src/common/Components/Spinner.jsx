@@ -5,11 +5,10 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 /**
- * 
- * @param {{className?: string, caption?: string}} props 
+ *
+ * @param {{className?: string, caption?: string}} props
  */
 function Spinner({ className, caption = '' }) {
-
   return (
     <div className={cx('Spinner', className)}>
       <div className={styles.spinnerWrapper}>
@@ -18,7 +17,6 @@ function Spinner({ className, caption = '' }) {
       </div>
     </div>
   );
-
 }
 
 export default Spinner;

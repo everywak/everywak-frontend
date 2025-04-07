@@ -14,39 +14,40 @@ function WakMusicChartList(props) {
   const [musicList, setMusicList] = useState([]);
 
   const updateWakMusicChart = async (reset = true) => {
+    const { musicList, musicCount } = (
+      await service.getWakMusics({ viewerRange: 'daily', orderBy: 'view', perPage: 10 })
+    ).result;
 
-    const { musicList, musicCount } = (await service.getWakMusics({ viewerRange: 'daily', orderBy: 'view', perPage: 10 })).result;
-    
     if (musicList) {
-      setMusicList(musicList.map((item, i) => {
-        return({
-          key: `wakMusicItem-${i}-${item.uuid}`,
-          rank: i + 1,
-          href: `https://youtu.be/${item.videoId}`,
-          thumbnail: item.thumbnail,
-          title: item.title,
-          datetime: item.publishedTimeStamp,
-          author: item.singer,
-          duration: item.duration,
-          viewCount: item.viewCountChanged,
-        });
-      }));
+      setMusicList(
+        musicList.map((item, i) => {
+          return {
+            key: `wakMusicItem-${i}-${item.uuid}`,
+            rank: i + 1,
+            href: `https://youtu.be/${item.videoId}`,
+            thumbnail: item.thumbnail,
+            title: item.title,
+            datetime: item.publishedTimeStamp,
+            author: item.singer,
+            duration: item.duration,
+            viewCount: item.viewCountChanged,
+          };
+        }),
+      );
       setLoading(false);
     }
   };
-  useEffect(() => { updateWakMusicChart(); }, []);
+  useEffect(() => {
+    updateWakMusicChart();
+  }, []);
 
-  const list = musicList.map(item => <WakMusicChartItem {...item} hideThumbnail />);
+  const list = musicList.map((item) => <WakMusicChartItem {...item} hideThumbnail />);
   return (
     <div className="WakMusicChartList">
-      <ul className="list">
-        {list.slice(0, 5)}
-      </ul>
-      <ul className="list">
-        {list.slice(5, 10)}
-      </ul>
+      <ul className="list">{list.slice(0, 5)}</ul>
+      <ul className="list">{list.slice(5, 10)}</ul>
     </div>
-  )
+  );
 }
-  
+
 export default WakMusicChartList;

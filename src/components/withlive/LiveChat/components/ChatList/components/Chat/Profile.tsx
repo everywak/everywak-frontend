@@ -10,10 +10,7 @@ export interface Props {
 
 export const Profile = React.memo(
   ({ profile }: Props) => (
-    <span
-      className={styles.Profile}
-      style={{ '--color': profile.color } as React.CSSProperties}
-    >
+    <span className={styles.Profile} style={{ '--color': profile.color } as React.CSSProperties}>
       {profile.badge.length > 0 && (
         <span className={styles.badges}>
           {profile.badge.map((badge) => (
@@ -28,6 +25,5 @@ export const Profile = React.memo(
       </span>
     </span>
   ),
-  (prevProps, nextProps) =>
-    JSON.stringify(prevProps.profile) === JSON.stringify(nextProps.profile),
+  (prevProps, nextProps) => JSON.stringify(prevProps.profile) === JSON.stringify(nextProps.profile),
 );

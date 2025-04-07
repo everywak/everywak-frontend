@@ -42,10 +42,8 @@ import { request } from '../common';
  * @see getWaktaverseInfo
  * @param {{[key: string]: string}} query
  */
-const filterWaktaverseInfoParams = query => {
-
-  const filteredParams = {
-  };
+const filterWaktaverseInfoParams = (query) => {
+  const filteredParams = {};
 
   if (query?.loginName) {
     filteredParams.loginName = query.loginName.replace(/[^0-9a-zA-Z_]/g, '');
@@ -63,11 +61,11 @@ const filterWaktaverseInfoParams = query => {
  * @param {*} params
  * @returns {Promise<import('../common').CommonMessage<DatabaseMemberItem[]>}
  */
-const getWaktaverseInfo = async params =>
+const getWaktaverseInfo = async (params) =>
   await request({
     method: 'GET',
     uri: '/live/WaktaverseInfo',
-    params: filterWaktaverseInfoParams(params)
+    params: filterWaktaverseInfoParams(params),
   });
 
 /**
@@ -76,10 +74,8 @@ const getWaktaverseInfo = async params =>
  * @see getWaktaverseLiveInfo
  * @param {{[key: string]: string}} query
  */
-const filterWaktaverseLiveInfoParams = query => {
-
-  const filteredParams = {
-  };
+const filterWaktaverseLiveInfoParams = (query) => {
+  const filteredParams = {};
 
   if (query?.loginName) {
     filteredParams.loginName = query.loginName.replace(/[^0-9a-zA-Z_]/g, '');
@@ -97,11 +93,11 @@ const filterWaktaverseLiveInfoParams = query => {
  * @param {*} params
  * @returns {Promise<import('../common').CommonMessage<DatabaseLiveItem[]>}
  */
-const getWaktaverseLiveInfo = async params =>
+const getWaktaverseLiveInfo = async (params) =>
   await request({
     method: 'GET',
     uri: '/live/WaktaverseLiveInfo',
-    params: filterWaktaverseLiveInfoParams(params)
+    params: filterWaktaverseLiveInfoParams(params),
   });
 
 export { getWaktaverseInfo, getWaktaverseLiveInfo };

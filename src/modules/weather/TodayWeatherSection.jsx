@@ -10,30 +10,33 @@ import cx from 'classnames';
 
 /**
  * 날씨 페이지 오늘 날씨 영역
- * 
- * @param {{}} props 
+ *
+ * @param {{}} props
  * @returns {JSX.Element}
  */
 function TodayWeatherSection(props) {
   const [isLoading, setLoading] = useState(true);
-  const [weatherInfo, setWeatherInfo] = useState(/** @type {OBIData: service.OBIInfoItem[], updatedTime: Date} */{
-    OBIData: [], 
-    updatedTime: new Date(), 
-  });
+  const [weatherInfo, setWeatherInfo] = useState(
+    /** @type {OBIData: service.OBIInfoItem[], updatedTime: Date} */ {
+      OBIData: [],
+      updatedTime: new Date(),
+    },
+  );
 
   const updateIsedolWeather = async () => {
-
     const { OBIData, updatedTimeStamp } = (await service.getOBI()).result;
-    console.log(updatedTimeStamp)
+    console.log(updatedTimeStamp);
     if (OBIData) {
       setWeatherInfo({
-        OBIData, 
-        updatedTime: new Date(updatedTimeStamp), 
+        OBIData,
+        updatedTime: new Date(updatedTimeStamp),
       });
       setLoading(false);
     }
   };
-  useEffect(() => { updateIsedolWeather(); }, []);
+  useEffect(() => {
+    updateIsedolWeather();
+  }, []);
 
   const dateStr = getRelativeDateString(weatherInfo.updatedTime);
   const timeHours = weatherInfo.updatedTime.getHours();

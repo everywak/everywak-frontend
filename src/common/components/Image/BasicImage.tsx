@@ -20,13 +20,7 @@ const skeleton = (
   </div>
 );
 
-export function BasicImage({
-  className = '',
-  src,
-  alt,
-  noReferrer,
-  objectFit = 'cover',
-}: Props) {
+export function BasicImage({ className = '', src, alt, noReferrer, objectFit = 'cover' }: Props) {
   const [{ isLoading, isError }, setState] = useState({
     isLoading: true,
     isError: false,
@@ -66,9 +60,7 @@ export function BasicImage({
   };
 
   const imgStyle = {
-    objectFit: ['fill', 'contain', 'cover', 'none', 'scale-down'].includes(
-      objectFit,
-    )
+    objectFit: ['fill', 'contain', 'cover', 'none', 'scale-down'].includes(objectFit)
       ? objectFit
       : 'cover',
   };
@@ -86,9 +78,7 @@ export function BasicImage({
         alt={alt}
         onLoad={onLoad}
         onError={onError as any}
-        referrerPolicy={
-          noReferrer ? 'no-referrer' : 'strict-origin-when-cross-origin'
-        }
+        referrerPolicy={noReferrer ? 'no-referrer' : 'strict-origin-when-cross-origin'}
         style={imgStyle}
       />
       <div className={styles.errorIcon}>

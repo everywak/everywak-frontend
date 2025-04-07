@@ -4,12 +4,8 @@ import { LiveChatAdapterClass } from './adapter/LiveChatAdapterClass';
 import { useLiveChatActions, useLiveChatValue } from './LiveChat.context';
 
 const diffChannel = (oldChannels: string[], newChannels: string[]) => {
-  const willLeaves = oldChannels.filter(
-    (channel) => !newChannels.includes(channel),
-  );
-  const willJoins = newChannels.filter(
-    (channel) => !oldChannels.includes(channel),
-  );
+  const willLeaves = oldChannels.filter((channel) => !newChannels.includes(channel));
+  const willJoins = newChannels.filter((channel) => !oldChannels.includes(channel));
   return { willLeaves, willJoins };
 };
 
@@ -18,8 +14,7 @@ export type Props = {
 };
 
 export function LiveChatAdapter(props: Props) {
-  const { addChatItem, setChannelId, setConnected, setAuthorized } =
-    useLiveChatActions();
+  const { addChatItem, setChannelId, setConnected, setAuthorized } = useLiveChatActions();
   const { channelId } = useLiveChatValue();
 
   const adapter = useRef<LiveChatAdapterClass>();
@@ -73,10 +68,7 @@ export function LiveChatAdapter(props: Props) {
   // join channel
   useEffect(() => {
     if (adapter.current && adapter.current.isAuthorized) {
-      const { willLeaves, willJoins } = diffChannel(
-        [...adapter.current.getChannels()],
-        channelId,
-      );
+      const { willLeaves, willJoins } = diffChannel([...adapter.current.getChannels()], channelId);
       adapter.current.leaveChannel(willLeaves);
       adapter.current.joinChannel(willJoins);
     }

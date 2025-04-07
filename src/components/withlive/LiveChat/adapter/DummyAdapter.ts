@@ -20,9 +20,7 @@ export class DummyAdapter extends LiveChatAdapterClass {
                   icon: 'https://static.file.afreecatv.com/spcon/514365c0f92a9b601.png?_=1707179859',
                 },
               ],
-              color: ['#1915bf', '#eb500d', '#0c80d3', '#0b6d82'][
-                Math.floor(Math.random() * 4)
-              ],
+              color: ['#1915bf', '#eb500d', '#0c80d3', '#0b6d82'][Math.floor(Math.random() * 4)],
             },
             content: [
               'content content content content content content'.slice(
@@ -52,11 +50,11 @@ export class DummyAdapter extends LiveChatAdapterClass {
   }
 
   joinChannel(channelId: string[]): void {
-    channelId.forEach(id => this.addChannel(id));
+    channelId.forEach((id) => this.addChannel(id));
   }
 
   leaveChannel(channelId: string[]): void {
-    channelId.forEach(id => this.removeChannel(id));
+    channelId.forEach((id) => this.removeChannel(id));
   }
 
   sendChat(channelId: string, message: string): void {

@@ -5,31 +5,35 @@ import cx from 'classnames';
 
 /**
  * 체크박스
- * 
+ *
  * @param {{
- * className?: string, 
- * name: string, 
- * value: boolean, 
- * onChange?: ({target: {name: string, value: boolean}}) => void, 
- * accentColor: string, 
+ * className?: string,
+ * name: string,
+ * value: boolean,
+ * onChange?: ({target: {name: string, value: boolean}}) => void,
+ * accentColor: string,
  * label?: JSX.Element|String
- * fillContainer: boolean}} props 
+ * fillContainer: boolean}} props
  */
 function CheckBox(props) {
-  
   const {
-    className, 
+    className,
     name,
-    value, 
-    onChange, 
+    value,
+    onChange,
     accentColor,
-    label, 
+    label,
     fillContainer = false,
     ...rest
   } = props;
 
   return (
-    <button className={cx("CheckBox", className, {on: value, fillContainer})} onClick={e => onChange({target: {name, value: !value}})} {...rest} style={{'--accentColor': accentColor}}>
+    <button
+      className={cx('CheckBox', className, { on: value, fillContainer })}
+      onClick={(e) => onChange({ target: { name, value: !value } })}
+      {...rest}
+      style={{ '--accentColor': accentColor }}
+    >
       <div className="label">{label}</div>
       <div className="indicator">
         <div className="marker"></div>

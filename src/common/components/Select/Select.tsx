@@ -12,13 +12,7 @@ export interface Props {
   onChange: ({ target }: { target: { name: string; value: string } }) => void;
 }
 
-export function Select({
-  className,
-  options,
-  name,
-  value,
-  onChange = () => {},
-}: Props) {
+export function Select({ className, options, name, value, onChange = () => {} }: Props) {
   const optionList = options.map((opt) => (
     <Option
       key={opt.value}
@@ -30,11 +24,7 @@ export function Select({
     />
   ));
 
-  return (
-    <div className={clsx('Select', styles.container, className)}>
-      {optionList}
-    </div>
-  );
+  return <div className={clsx('Select', styles.container, className)}>{optionList}</div>;
 }
 
 const Option = React.memo(

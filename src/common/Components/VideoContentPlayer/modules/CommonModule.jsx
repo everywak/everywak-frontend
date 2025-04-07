@@ -31,20 +31,20 @@
  */
 
 const qualityIdYoutube = {
-  'hd2160': '2160p', 
-  'hd1440': '1440p', 
-  'hd1080': '1080p', 
-  'hd720': '720p', 
-  'large': '480p', 
-  'medium': '360p', 
-  'small': '240p', 
-  'tiny': '144p', 
-  'auto': '자동',
+  hd2160: '2160p',
+  hd1440: '1440p',
+  hd1080: '1080p',
+  hd720: '720p',
+  large: '480p',
+  medium: '360p',
+  small: '240p',
+  tiny: '144p',
+  auto: '자동',
 };
 const qualityIdTwitch = {
-  'Auto': '자동',
-  'auto': '자동',
-  'chunked': '원본 화질',
+  Auto: '자동',
+  auto: '자동',
+  chunked: '원본 화질',
   '1440p60 (source)': '1440p60 (원본)',
   '1440p60': '1440p60',
   '1080p60 (source)': '1080p60 (원본)',
@@ -63,4 +63,4 @@ const qualityIdTwitch = {
   '160p30': '160p',
 };
 
-export { qualityIdYoutube, qualityIdTwitch }
+export { qualityIdYoutube, qualityIdTwitch };

@@ -27,19 +27,13 @@ export class EverywakRelayChatAdapter extends LiveChatAdapterClass {
     this.socket = null;
 
     if (!getCookie('USER_CHAT_ID')) {
-      setCookie(
-        'USER_CHAT_ID',
-        `justinfan${Math.floor(100 + Math.random() * 900)}`,
-      );
+      setCookie('USER_CHAT_ID', `justinfan${Math.floor(100 + Math.random() * 900)}`);
     }
     this.userId = getCookie('USER_CHAT_ID');
   }
 
   connect = () => {
-    if (
-      this.isConnected ||
-      (this.socket && this.socket.readyState <= WebSocket.CLOSING)
-    ) {
+    if (this.isConnected || (this.socket && this.socket.readyState <= WebSocket.CLOSING)) {
       return;
     }
     this.connRetries = 0;
@@ -79,16 +73,19 @@ export class EverywakRelayChatAdapter extends LiveChatAdapterClass {
       return;
     }
     console.log(`Reconnect attempt ${this.connRetries + 1}`);
-    this.reconnectTimer = setTimeout(() => {
-      this.connRetries++;
-      if (this.connRetries > 5) {
-        console.error('Reconnect failed');
-        clearTimeout(this.reconnectTimer!);
-        this.reconnectTimer = null;
-        return;
-      }
-      this.connect();
-    }, 1000 * Math.pow(2, this.connRetries));
+    this.reconnectTimer = setTimeout(
+      () => {
+        this.connRetries++;
+        if (this.connRetries > 5) {
+          console.error('Reconnect failed');
+          clearTimeout(this.reconnectTimer!);
+          this.reconnectTimer = null;
+          return;
+        }
+        this.connect();
+      },
+      1000 * Math.pow(2, this.connRetries),
+    );
   };
 
   authorize = (token: string) => {
@@ -291,11 +288,7 @@ export class EverywakRelayChatAdapter extends LiveChatAdapterClass {
   };
 
   send = (type: ChatType, body?: any) => {
-    if (
-      !this.socket ||
-      this.socket?.readyState !== this.socket.OPEN ||
-      !this.isConnected
-    ) {
+    if (!this.socket || this.socket?.readyState !== this.socket.OPEN || !this.isConnected) {
       return;
       //throw new Error(`Socket is not opened`);
     }

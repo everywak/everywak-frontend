@@ -17,10 +17,10 @@ class DateRange extends PureComponent {
     max: 0,
     start: RANGE_MAX,
     end: RANGE_MAX,
-    onChange: val => {}
+    onChange: (val) => {},
   };
   state = {
-    opened: false
+    opened: false,
   };
 
   getRealRange = (val, type = 'start') => {
@@ -30,7 +30,7 @@ class DateRange extends PureComponent {
   getDatetimeString = () => {
     const { min, max, start, end } = this.props;
     return `${this.genDatetime(
-      this.getRealRange(start, 'start')
+      this.getRealRange(start, 'start'),
     )} - ${this.genDatetime(this.getRealRange(end, 'end'))}`;
   };
   genDatetime(time) {
@@ -46,17 +46,17 @@ class DateRange extends PureComponent {
 
   open = () => {
     this.setState({
-      opened: true
+      opened: true,
     });
   };
   close = () => {
     this.setState({
-      opened: false
+      opened: false,
     });
   };
   toggle = () => {
     this.setState({
-      opened: !this.state.opened
+      opened: !this.state.opened,
     });
   };
 
@@ -65,11 +65,11 @@ class DateRange extends PureComponent {
    *
    * @param {{start: number, end: number}} e
    */
-  onChange = e => {
+  onChange = (e) => {
     const { min, max } = this.props;
     const val = {
       start: e.start !== min ? e.start : -1,
-      end: e.end !== max ? e.end : -1
+      end: e.end !== max ? e.end : -1,
     };
     this.props.onChange(val);
   };
@@ -79,12 +79,12 @@ class DateRange extends PureComponent {
    *
    * @param {object} e
    */
-  onChangeStart = e => {
+  onChangeStart = (e) => {
     const { min, max } = this.props;
     const val = new Date(e.target.value).getTime();
     const newState = {
       start: val !== min ? val : -1,
-      end: this.state.end
+      end: this.state.end,
     };
     this.props.onChange(newState);
   };
@@ -93,12 +93,12 @@ class DateRange extends PureComponent {
    *
    * @param {object} e
    */
-  onChangeEnd = e => {
+  onChangeEnd = (e) => {
     const { min, max } = this.props;
     const val = new Date(e.target.value).getTime();
     const newState = {
       start: this.state.start,
-      end: val !== max ? val : -1
+      end: val !== max ? val : -1,
     };
     this.props.onChange(newState);
   };
@@ -110,10 +110,7 @@ class DateRange extends PureComponent {
     return (
       <div className="DateRange">
         <Desktop>
-          <div
-            className={cx('dateBtn', { opened: opened })}
-            onClick={this.toggle}
-          >
+          <div className={cx('dateBtn', { opened: opened })} onClick={this.toggle}>
             <div className="dateWrapper">{this.getDatetimeString()}</div>
             <DateRangeRoundedIcon fontSize="small" />
           </div>
@@ -148,9 +145,7 @@ class DateRange extends PureComponent {
               name={name + '-end'}
               id={name + '-end'}
               max={this.genDatetimeInput(max)}
-              value={this.genDatetimeInput(
-                this.getRealRange(end, 'end') + 24 * 60 * 60 - 1
-              )}
+              value={this.genDatetimeInput(this.getRealRange(end, 'end') + 24 * 60 * 60 - 1)}
               onChange={this.onChangeEnd}
             />
           </div>

@@ -61,13 +61,11 @@ function FrontAppList(props) {
       href: '/video',
     },*/
   ];
-  const list = appItems.map(app => <AppListItem {...app} size="tiny" />);
-  
+  const list = appItems.map((app) => <AppListItem {...app} size="tiny" />);
+
   return (
-    <div className={cx('FrontAppList')} style={{'--column': columns}}>
-      <ul className="appList">
-        {list}
-      </ul>
+    <div className={cx('FrontAppList')} style={{ '--column': columns }}>
+      <ul className="appList">{list}</ul>
     </div>
   );
 }

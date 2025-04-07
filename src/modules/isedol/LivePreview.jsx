@@ -12,11 +12,9 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 function LivePreview({ className, channelId = 'twitchdev', size = 'normal', hideProfile = false }) {
-
   const { isLoading, data } = useQueryWaktaverseLive({ loginName: channelId });
 
-  const url =
-    channelId === 'woowakgood' ? '/live' : `/withlive/isedol?main=${channelId}`;
+  const url = channelId === 'woowakgood' ? '/live' : `/withlive/isedol?main=${channelId}`;
 
   const thWidth = size === 'big' ? 600 : 200;
   const isLive = !(data?.lives[0]?.broadcaster === 'NONE');
@@ -27,32 +25,29 @@ function LivePreview({ className, channelId = 'twitchdev', size = 'normal', hide
         .replace('{height}', parseInt((thWidth / 16) * 9)) // 방송 썸네일
     : data?.members[0]?.twitchOfflineImage.replace(
         '1920x1080',
-        `${thWidth}x${parseInt((thWidth / 16) * 9)}` // 오프라인 썸네일
+        `${thWidth}x${parseInt((thWidth / 16) * 9)}`, // 오프라인 썸네일
       );
 
   return (
     <li className={cx('LivePreview', className, { loading: isLoading })}>
       <Link to={url}>
-        <BasicImage
-          className={styles.previewImg}
-          src={previewImgUrl}
-          alt="생방송 썸네일"
-        />
-        {
-          !hideProfile &&
-          <div className={cx('profileCircle', {
-            youtube: data?.lives[0]?.broadcaster === 'YOUTUBE', 
-            twitch: data?.lives[0]?.broadcaster === 'TWITCH', 
-            chzzk: data?.lives[0]?.broadcaster === 'CHZZK', 
-            afreeca: data?.lives[0]?.broadcaster === 'AFREECA'
-            })}>
+        <BasicImage className={styles.previewImg} src={previewImgUrl} alt="생방송 썸네일" />
+        {!hideProfile && (
+          <div
+            className={cx('profileCircle', {
+              youtube: data?.lives[0]?.broadcaster === 'YOUTUBE',
+              twitch: data?.lives[0]?.broadcaster === 'TWITCH',
+              chzzk: data?.lives[0]?.broadcaster === 'CHZZK',
+              afreeca: data?.lives[0]?.broadcaster === 'AFREECA',
+            })}
+          >
             <CircleImg
               className={styles.innerCircle}
               src={profileImgUrl}
               alt="채널 프로필 이미지"
             />
           </div>
-        }
+        )}
         <Spinner className={styles.spinner} />
       </Link>
     </li>

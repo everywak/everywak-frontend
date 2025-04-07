@@ -54,10 +54,7 @@ export function WithliveHeader() {
     <>
       {!isExpanded && (
         <header className={styles.container}>
-          <div
-            className={styles.content}
-            onMouseLeave={() => setHoverChannel(null)}
-          >
+          <div className={styles.content} onMouseLeave={() => setHoverChannel(null)}>
             <Link to="/" className={styles.logo}>
               <img src="/logo/logo.svg" alt="logo" />
             </Link>

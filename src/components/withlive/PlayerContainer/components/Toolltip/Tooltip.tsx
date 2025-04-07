@@ -10,13 +10,7 @@ export interface Props {
 }
 export const Tooltip = React.memo((props: Props) => {
   return (
-    <div
-      className={clsx(
-        styles.container,
-        props.className,
-        styles[props.direction ?? 'bottom'],
-      )}
-    >
+    <div className={clsx(styles.container, props.className, styles[props.direction ?? 'bottom'])}>
       {props.children}
     </div>
   );

@@ -13,45 +13,51 @@ const skeleton = <FrontWeatherItem name="ㅇㅇㅇ" state="ㅇㅇㅇ" weather="s
 
 /**
  * Frontpage에 표시되는 날씨 아이템 리스트
- * 
- * @param {{items: [], isLoading: boolean}} props 
+ *
+ * @param {{items: [], isLoading: boolean}} props
  * @returns {JSX.Element}
  */
 function FrontWeatherList({ items, isLoading }) {
-
   const [page, setPage] = useState(0);
   const prevPage = () => {
-    setPage(page => (--page + 3) % 3);
+    setPage((page) => (--page + 3) % 3);
   };
   const nextPage = () => {
-    setPage(page => (++page) % 3);
+    setPage((page) => ++page % 3);
   };
   useEffect(() => {
     const loopSlidePage = setTimeout(nextPage, 5000);
 
-    return () => { clearTimeout(loopSlidePage); };
+    return () => {
+      clearTimeout(loopSlidePage);
+    };
   }, [page]);
 
-  const list = items && 
+  const list =
+    items &&
     items
-    .sort((a, b) => orderNickname[a.nickname] - orderNickname[b.nickname])
-    .map(item => <FrontWeatherItem name={item.nickname} state={item.rawInfo} weather={item.weather} />);
+      .sort((a, b) => orderNickname[a.nickname] - orderNickname[b.nickname])
+      .map((item) => (
+        <FrontWeatherItem name={item.nickname} state={item.rawInfo} weather={item.weather} />
+      ));
 
   return (
     <div className="FrontWeatherList">
       <ul className="itemList">
-        <Desktop>
-          {isLoading ? <SkeletonLoader skeleton={skeleton} length={6} /> : list}
-        </Desktop>
+        <Desktop>{isLoading ? <SkeletonLoader skeleton={skeleton} length={6} /> : list}</Desktop>
         <NotDesktop>
-          <button className="arrowButton" onClick={prevPage}><div className="line"></div><div className="lineBottom"></div></button>
+          <button className="arrowButton" onClick={prevPage}>
+            <div className="line"></div>
+            <div className="lineBottom"></div>
+          </button>
           {list.slice(page * 2, page * 2 + 2)}
-          <button className="arrowButton right" onClick={nextPage}><div className="line"></div><div className="lineBottom"></div></button>
+          <button className="arrowButton right" onClick={nextPage}>
+            <div className="line"></div>
+            <div className="lineBottom"></div>
+          </button>
         </NotDesktop>
       </ul>
-      <div className="present">
-        이세돌 뱅온정보 팀 제공
-      </div>
+      <div className="present">이세돌 뱅온정보 팀 제공</div>
     </div>
   );
 }

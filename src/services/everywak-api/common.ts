@@ -11,7 +11,7 @@ export type CommonError = {
 };
 
 const api = axios.create({
-  baseURL: 'https://api.everywak.kr'
+  baseURL: 'https://api.everywak.kr',
 });
 
 export type RequestParams = {
@@ -28,7 +28,7 @@ const request = async <T>({
   method = 'GET',
   uri,
   params,
-  data
+  data,
 }: RequestParams): Promise<CommonError | CommonMessage<T>> => {
   const options = {
     method,
@@ -37,9 +37,9 @@ const request = async <T>({
     data,
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json;charset=UTF-8'
+      'Content-Type': 'application/json;charset=UTF-8',
     },
-    withCredentials: true
+    withCredentials: true,
   };
   const response = await api(uri, options);
 

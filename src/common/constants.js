@@ -1,4 +1,3 @@
-
 export const domain = import.meta.env.VITE_DOMAIN;
 export const TOGGLE = -1;
 export const PORTRAIT = 0;
@@ -25,12 +24,12 @@ export const Waktaverse = [
       broadcasterId: '49045679',
     },
     youtube: {
-      channelId:     'UCzh4yY8rl38knH33XpNqXbQ',
-      uploads:       'UUzh4yY8rl38knH33XpNqXbQ', // 왁타버스
+      channelId: 'UCzh4yY8rl38knH33XpNqXbQ',
+      uploads: 'UUzh4yY8rl38knH33XpNqXbQ', // 왁타버스
       //uploads:     'UUBkyj16n2snkRg1BAzpovXQ', // 본채널
-      clipId:        'UCZOcwheypMvYN_J2oRBgt2A',
-      clipUploads:   'UUZOcwheypMvYN_J2oRBgt2A',
-      replayId:      'UC8bHm-zlsP-j5n591Zxuiiw',
+      clipId: 'UCZOcwheypMvYN_J2oRBgt2A',
+      clipUploads: 'UUZOcwheypMvYN_J2oRBgt2A',
+      replayId: 'UC8bHm-zlsP-j5n591Zxuiiw',
       replayUploads: 'UU8bHm-zlsP-j5n591Zxuiiw',
     },
     profileImg: '/images/isedol/waktaverse{size}.jpg',
@@ -50,11 +49,11 @@ export const Waktaverse = [
       broadcasterId: '702754423',
     },
     youtube: {
-      channelId:     'UCroM00J2ahCN6k-0-oAiDxg',
-      uploads:       'UUroM00J2ahCN6k-0-oAiDxg',
-      clipId:        'UCmHltryGykfakS-JmaxrNBg',
-      clipUploads:   'UUmHltryGykfakS-JmaxrNBg',
-      replayId:      'UCBF6nBTgFN_xzrLMF9eiRhw',
+      channelId: 'UCroM00J2ahCN6k-0-oAiDxg',
+      uploads: 'UUroM00J2ahCN6k-0-oAiDxg',
+      clipId: 'UCmHltryGykfakS-JmaxrNBg',
+      clipUploads: 'UUmHltryGykfakS-JmaxrNBg',
+      replayId: 'UCBF6nBTgFN_xzrLMF9eiRhw',
       replayUploads: 'UUBF6nBTgFN_xzrLMF9eiRhw',
     },
     profileImg: '/images/isedol/ine{size}.jpg',
@@ -70,11 +69,11 @@ export const Waktaverse = [
       broadcasterId: '237570548',
     },
     youtube: {
-      channelId:     'UCHE7GBQVtdh-c1m3tjFdevQ',
-      uploads:       'UUHE7GBQVtdh-c1m3tjFdevQ',
-      clipId:        'UC-S9NE-xzcBpxOFSvsmOzAA',
-      clipUploads:   'UU-S9NE-xzcBpxOFSvsmOzAA',
-      replayId:      'UCrN7Gb8xIZF_0ZYA1cmVNxQ',
+      channelId: 'UCHE7GBQVtdh-c1m3tjFdevQ',
+      uploads: 'UUHE7GBQVtdh-c1m3tjFdevQ',
+      clipId: 'UC-S9NE-xzcBpxOFSvsmOzAA',
+      clipUploads: 'UU-S9NE-xzcBpxOFSvsmOzAA',
+      replayId: 'UCrN7Gb8xIZF_0ZYA1cmVNxQ',
       replayUploads: 'UUrN7Gb8xIZF_0ZYA1cmVNxQ',
     },
     profileImg: '/images/isedol/jingburger{size}.jpg',
@@ -94,11 +93,11 @@ export const Waktaverse = [
       broadcasterId: '169700336',
     },
     youtube: {
-      channelId:     'UC-oCJP9t47v7-DmsnmXV38Q',
-      uploads:       'UU-oCJP9t47v7-DmsnmXV38Q',
-      clipId:        'UC8dEJs2kpS5x2vI1X7aaUhA',
-      clipUploads:   'UU8dEJs2kpS5x2vI1X7aaUhA',
-      replayId:      'UCp_jHNjcoiXC7SlElrBmzBA',
+      channelId: 'UC-oCJP9t47v7-DmsnmXV38Q',
+      uploads: 'UU-oCJP9t47v7-DmsnmXV38Q',
+      clipId: 'UC8dEJs2kpS5x2vI1X7aaUhA',
+      clipUploads: 'UU8dEJs2kpS5x2vI1X7aaUhA',
+      replayId: 'UCp_jHNjcoiXC7SlElrBmzBA',
       replayUploads: 'UUp_jHNjcoiXC7SlElrBmzBA',
     },
     profileImg: '/images/isedol/lilpa{size}.jpg',
@@ -118,11 +117,11 @@ export const Waktaverse = [
       broadcasterId: '203667951',
     },
     youtube: {
-      channelId:     'UCTifMx1ONpElK5x6B4ng8eg',
-      uploads:       'UUTifMx1ONpElK5x6B4ng8eg',
-      clipId:        'UCgGvSg2lscdNUx9ZJIBh9FQ',
-      clipUploads:   'UUgGvSg2lscdNUx9ZJIBh9FQ',
-      replayId:      'UCo28fS0LmlcyPcKItrZMPiQ',
+      channelId: 'UCTifMx1ONpElK5x6B4ng8eg',
+      uploads: 'UUTifMx1ONpElK5x6B4ng8eg',
+      clipId: 'UCgGvSg2lscdNUx9ZJIBh9FQ',
+      clipUploads: 'UUgGvSg2lscdNUx9ZJIBh9FQ',
+      replayId: 'UCo28fS0LmlcyPcKItrZMPiQ',
       replayUploads: 'UUo28fS0LmlcyPcKItrZMPiQ',
     },
     profileImg: '/images/isedol/jururu{size}.jpg',
@@ -142,11 +141,11 @@ export const Waktaverse = [
       broadcasterId: '707328484',
     },
     youtube: {
-      channelId:     'UCV9WL7sW6_KjanYkUUaIDfQ',
-      uploads:       'UUV9WL7sW6_KjanYkUUaIDfQ',
-      clipId:        'UCSSPlgcyDA5eoN3hrkXpvHg',
-      clipUploads:   'UUSSPlgcyDA5eoN3hrkXpvHg',
-      replayId:      'UCc4qGj6d8LBXW2qZ9GZQWqQ',
+      channelId: 'UCV9WL7sW6_KjanYkUUaIDfQ',
+      uploads: 'UUV9WL7sW6_KjanYkUUaIDfQ',
+      clipId: 'UCSSPlgcyDA5eoN3hrkXpvHg',
+      clipUploads: 'UUSSPlgcyDA5eoN3hrkXpvHg',
+      replayId: 'UCc4qGj6d8LBXW2qZ9GZQWqQ',
       replayUploads: 'UUc4qGj6d8LBXW2qZ9GZQWqQ',
     },
     profileImg: '/images/isedol/gosegu{size}.jpg',
@@ -166,11 +165,11 @@ export const Waktaverse = [
       broadcasterId: '195641865',
     },
     youtube: {
-      channelId:     'UCs6EwgxKLY9GG4QNUrP5hoQ',
-      uploads:       'UUs6EwgxKLY9GG4QNUrP5hoQ',
-      clipId:        'UCuJUfqThFp5-k-lrHcO1dFg',
-      clipUploads:   'UUuJUfqThFp5-k-lrHcO1dFg',
-      replayId:      'UCk2vPN7LATiMz_r8VUiA0KQ',
+      channelId: 'UCs6EwgxKLY9GG4QNUrP5hoQ',
+      uploads: 'UUs6EwgxKLY9GG4QNUrP5hoQ',
+      clipId: 'UCuJUfqThFp5-k-lrHcO1dFg',
+      clipUploads: 'UUuJUfqThFp5-k-lrHcO1dFg',
+      replayId: 'UCk2vPN7LATiMz_r8VUiA0KQ',
       replayUploads: 'UUk2vPN7LATiMz_r8VUiA0KQ',
     },
     profileImg: '/images/isedol/vichan{size}.jpg',
@@ -229,7 +228,7 @@ export const Waktaverse = [
     },
     afreeca: {
       channelId: 'sangsoak',
-    }
+    },
   },
   {
     name: '히키킹',

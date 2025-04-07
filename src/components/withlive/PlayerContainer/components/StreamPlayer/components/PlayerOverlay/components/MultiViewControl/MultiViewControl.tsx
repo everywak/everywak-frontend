@@ -16,10 +16,7 @@ import {
 import { Button } from 'common/components';
 import { Tooltip } from '../../../../..';
 import { ChannelStateType } from 'utils/types/withlive.type';
-import {
-  useWithliveActions,
-  useWithliveValues,
-} from 'contexts/WithliveContext';
+import { useWithliveActions, useWithliveValues } from 'contexts/WithliveContext';
 import styles from './MultiViewControl.module.scss';
 import { layoutIcons, layoutLabels } from './constants';
 
@@ -70,11 +67,7 @@ export const MultiViewControl = ({ className, player, size }: Props) => {
                   ...player,
                   isActive: !player.isActive,
                 }),
-              children: player.isActive ? (
-                <VisibilityRounded />
-              ) : (
-                <VisibilityOffRounded />
-              ),
+              children: player.isActive ? <VisibilityRounded /> : <VisibilityOffRounded />,
             },
             ...(watchingChannels.length > 1
               ? [
@@ -112,29 +105,17 @@ export const MultiViewControl = ({ className, player, size }: Props) => {
                   });
                 setIsEnabledMultiView(!isEnabledMultiView);
               },
-              children: isEnabledMultiView ? (
-                <RectangleRounded />
-              ) : (
-                <ViewCarouselRounded />
-              ),
+              children: isEnabledMultiView ? <RectangleRounded /> : <ViewCarouselRounded />,
             },
             {
               tooltip: isExpanded ? '스크린 모드 끄기' : '스크린 모드',
               onClick: () => setIsExpanded(!isExpanded),
-              children: isExpanded ? (
-                <RectangleOutlined />
-              ) : (
-                <SettingsOverscanRounded />
-              ),
+              children: isExpanded ? <RectangleOutlined /> : <SettingsOverscanRounded />,
             },
             {
               tooltip: isChatVisible ? '채팅창 숨기기' : '채팅창 보기',
               onClick: () => setIsChatVisible(!isChatVisible),
-              children: isChatVisible ? (
-                <ChatRounded />
-              ) : (
-                <SpeakerNotesOffRounded />
-              ),
+              children: isChatVisible ? <ChatRounded /> : <SpeakerNotesOffRounded />,
             },
           ]
         : []),

@@ -45,10 +45,7 @@ export type ChatBase<T extends ChatType = ChatType, U = undefined> = {
   type: T;
 } & (U extends undefined ? {} : { body: U });
 
-export type ChannelChatBase<
-  T extends ChatType = ChatType,
-  U = undefined,
-> = ChatBase<T, U> & {
+export type ChannelChatBase<T extends ChatType = ChatType, U = undefined> = ChatBase<T, U> & {
   channelId: string;
 };
 

@@ -6,9 +6,7 @@ import FixMobileViewportHeight from './common/FixMobileViewportHeight';
 
 import App from './App';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <FixMobileViewportHeight />
@@ -17,5 +15,5 @@ root.render(
         <App />
       </Suspense>
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

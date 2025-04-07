@@ -24,15 +24,15 @@ class VideoList extends Component {
     showCount: 8,
   };
 
-  constructor (props) {
+  constructor(props) {
     super(props);
-  };
+  }
 
   componentDidMount() {
     if (this.props.defaultShowCount !== this.state.showCount) {
       this.setState({
         showCount: this.props.defaultShowCount,
-      })
+      });
     }
   }
 
@@ -40,51 +40,49 @@ class VideoList extends Component {
     return true;
   }
 
-  componentWillUnmount() {
-  }
+  componentWillUnmount() {}
 
-  onClickMore = e => {
+  onClickMore = (e) => {
     this.showMoreItems();
     this.props.onMore();
-  }
+  };
 
-  onClickItem = e => {
-  }
+  onClickItem = (e) => {};
 
-  showMoreItems = e => {
+  showMoreItems = (e) => {
     this.setState({
       showCount: this.state.showCount + this.props.perPageCount,
     });
-  }
+  };
 
   render() {
     const { list, maximumShowCount, listStyle } = this.props;
     const { showCount } = this.state;
 
-    const itemList = list.slice(0, showCount).map(item => <VideoItem key={item.key} onClick={this.onClickItem} {...item} />);
-    
+    const itemList = list
+      .slice(0, showCount)
+      .map((item) => <VideoItem key={item.key} onClick={this.onClickItem} {...item} />);
+
     return (
-      <div className={cx('VideoList', {listStyleList: listStyle == 'list'})}>
-        <ul className="itemList">
-          {itemList}
-        </ul>
-        {
-          showCount < maximumShowCount &&
+      <div className={cx('VideoList', { listStyleList: listStyle == 'list' })}>
+        <ul className="itemList">{itemList}</ul>
+        {showCount < maximumShowCount && (
           <div className="more">
-            <Button 
-              className={cx('moreLoad')} 
-              href="" 
-              size="fillWidth" 
-              label={<ExpandMoreRoundedIcon />} 
-              showLabel={true} 
-              labelSize="14px" 
-              labelBGColor="transparent" 
-              onclick={this.onClickMore} />
+            <Button
+              className={cx('moreLoad')}
+              href=""
+              size="fillWidth"
+              label={<ExpandMoreRoundedIcon />}
+              showLabel={true}
+              labelSize="14px"
+              labelBGColor="transparent"
+              onclick={this.onClickMore}
+            />
           </div>
-        }
+        )}
       </div>
     );
   }
 }
-  
+
 export default VideoList;

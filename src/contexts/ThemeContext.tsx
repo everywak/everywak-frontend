@@ -18,8 +18,7 @@ export const ThemeProvider = (props: Props): React.ReactNode => {
   const [theme, _setTheme] = useStorage<Theme>('everywak.theme', 'preferred');
 
   const isDarkMode = () =>
-    theme === 'dark' ||
-    window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+    theme === 'dark' || window.matchMedia?.('(prefers-color-scheme: dark)').matches;
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDarkMode());
@@ -31,9 +30,7 @@ export const ThemeProvider = (props: Props): React.ReactNode => {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      {props.children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme, setTheme }}>{props.children}</ThemeContext.Provider>
   );
 };
 

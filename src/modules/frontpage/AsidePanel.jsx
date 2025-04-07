@@ -16,7 +16,7 @@ import cx from 'classnames';
  */
 function AsidePanel({ title, description, moreLabel, moreLink, children }) {
   return (
-    <section className={cx('AsidePanel', {headerOnly: !children})}>
+    <section className={cx('AsidePanel', { headerOnly: !children })}>
       <SectionHeader
         title={title}
         description={description}

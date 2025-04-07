@@ -11,10 +11,10 @@ import './WaktoonEpisodeList.scss';
 import cx from 'classnames';
 
 function formatWaktoonEpisodeData(waktoonEpisodeList) {
-  return waktoonEpisodeList.map(item => ({
-    key: item.articleId, 
-    type: 'episode', 
-    toonId: item.articleId, 
+  return waktoonEpisodeList.map((item) => ({
+    key: item.articleId,
+    type: 'episode',
+    toonId: item.articleId,
     thumbnail: item.thumbnails && item.thumbnails.replace('100_100', '200_200'),
     title: item.title,
     author: item.authorNickname,
@@ -29,29 +29,39 @@ async function updateWaktoonEpisodeList(query) {
   try {
     const res = await await service.getWaktoonEpisodes(query);
 
-    if (res.status != 200) { throw res; }
+    if (res.status != 200) {
+      throw res;
+    }
 
-    const {
-      waktoonEpisodeList, ...rest
-    } = res.result;
-    
-    return ({
+    const { waktoonEpisodeList, ...rest } = res.result;
+
+    return {
       waktoonEpisodeList: formatWaktoonEpisodeData(waktoonEpisodeList),
       ...rest,
-    });
-  } catch(err) {
+    };
+  } catch (err) {
     console.error(err);
     return [];
   }
 }
 
-function WaktoonEpisodeList({ toonTitle, uuid, viewType = 'item', defaultShowCount = 50, searchOptions, onChange = () => {} }) {
+function WaktoonEpisodeList({
+  toonTitle,
+  uuid,
+  viewType = 'item',
+  defaultShowCount = 50,
+  searchOptions,
+  onChange = () => {},
+}) {
   const [itemList, setItemList] = useState([]);
 
   useEffect(() => {
     async function fetchWithParent({ toonTitle, uuid, searchOptions }) {
-      const { waktoonEpisodeList: episodeList, pagination } = await updateWaktoonEpisodeList({ queryTarget: 'parent', queryTxt: uuid });
-  
+      const { waktoonEpisodeList: episodeList, pagination } = await updateWaktoonEpisodeList({
+        queryTarget: 'parent',
+        queryTxt: uuid,
+      });
+
       if (searchOptions.orderBy === 'time_oldest') {
         episodeList.reverse();
       }
@@ -61,18 +71,24 @@ function WaktoonEpisodeList({ toonTitle, uuid, viewType = 'item', defaultShowCou
       });
       setItemList(
         episodeList
-        .filter(item => item.title.includes(searchOptions.keyword))
-        .map(item => (item.title = toonTitle ? item.title.replace(toonTitle, '').trim() : item.title, item))
+          .filter((item) => item.title.includes(searchOptions.keyword))
+          .map(
+            (item) => (
+              (item.title = toonTitle ? item.title.replace(toonTitle, '').trim() : item.title), item
+            ),
+          ),
       );
     }
     async function fetchWithoutParent({ searchOptions }) {
-      const { waktoonEpisodeList: episodeList, pagination } = await updateWaktoonEpisodeList({ ...searchOptions });
+      const { waktoonEpisodeList: episodeList, pagination } = await updateWaktoonEpisodeList({
+        ...searchOptions,
+      });
 
       onChange({
         searchOptions,
         pagination,
       });
-      
+
       setItemList(episodeList);
     }
     if (uuid) {
@@ -83,20 +99,25 @@ function WaktoonEpisodeList({ toonTitle, uuid, viewType = 'item', defaultShowCou
   }, [toonTitle, uuid, searchOptions]);
 
   return (
-    <WaktoonList 
-      className={cx('WaktoonEpisodeList', {list: viewType === 'list', item: viewType === 'item'})} 
-      ItemComponent={viewType === 'list' ? WaktoonEpisodeItem : WaktoonItem} 
-      list={itemList} 
-      defaultShowCount={defaultShowCount} 
+    <WaktoonList
+      className={cx('WaktoonEpisodeList', { list: viewType === 'list', item: viewType === 'item' })}
+      ItemComponent={viewType === 'list' ? WaktoonEpisodeItem : WaktoonItem}
+      list={itemList}
+      defaultShowCount={defaultShowCount}
       maximumShowCount={1}
-      gaEventOnClickMore={{
-        //category: GAEvents.Category.isedol,
-        //action: GAEvents.Action.isedol.moreClip,
-      }}
-      gaEventOnClickItem={{
-        //category: GAEvents.Category.isedol,
-        //action: GAEvents.Action.isedol.viewClip,
-      }} />
+      gaEventOnClickMore={
+        {
+          //category: GAEvents.Category.isedol,
+          //action: GAEvents.Action.isedol.moreClip,
+        }
+      }
+      gaEventOnClickItem={
+        {
+          //category: GAEvents.Category.isedol,
+          //action: GAEvents.Action.isedol.viewClip,
+        }
+      }
+    />
   );
 }
 

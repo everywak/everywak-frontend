@@ -3,11 +3,7 @@ import { Cookie, CookieSetOptions, CookieGetOptions } from 'universal-cookie';
 
 const cookies = new Cookies();
 
-export const setCookie = (
-  name: string,
-  value: Cookie,
-  option?: CookieSetOptions,
-) => {
+export const setCookie = (name: string, value: Cookie, option?: CookieSetOptions) => {
   return cookies.set(name, value, { ...option });
 };
 

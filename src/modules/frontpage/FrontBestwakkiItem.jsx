@@ -8,14 +8,17 @@ const cx = classNames.bind(styles);
 
 /**
  * 메인 페이지에 표시되는 왁물원 인기글 아이템
- * 
- * @param {{name: string, state: string, weather: string}} props 
+ *
+ * @param {{name: string, state: string, weather: string}} props
  * @returns {JSX.Element}
  */
 function FrontBestwakkiItem({ subject, board, thumbnail, articleId }) {
-
   return (
-    <a href={`https://cafe.naver.com/steamindiegame/${articleId}`} className={cx('FrontBestwakkiItem')} target="_blank">
+    <a
+      href={`https://cafe.naver.com/steamindiegame/${articleId}`}
+      className={cx('FrontBestwakkiItem')}
+      target="_blank"
+    >
       <div className={styles.thumbnailWrapper}>
         <BasicImage className={styles.thumbnail} src={thumbnail} noReferrer />
       </div>

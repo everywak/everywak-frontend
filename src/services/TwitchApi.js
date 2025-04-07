@@ -24,32 +24,33 @@ import axios from 'axios';
 const wait = (timeToDelay) => new Promise((resolve) => setTimeout(resolve, timeToDelay));
 
 class TwitchApi {
-
   constructor({ clientId, token }) {
     this.clientId = clientId;
     this.token = token;
     this.headers = {
-      'Authorization': `Bearer ${this.token}`,
+      Authorization: `Bearer ${this.token}`,
       'Client-Id': this.clientId,
     };
   }
 
-  request = async ({url}) => await axios.get(url, {headers: this.headers});
-  respond = res => res.status == 200 ? res.data.data : false;
+  request = async ({ url }) => await axios.get(url, { headers: this.headers });
+  respond = (res) => (res.status == 200 ? res.data.data : false);
 
   /**
    * Gets information about one or more specified Twitch users.
-   * 
+   *
    * @param {string} loginName
    * @return {UserInfoItem[]}
    */
-  getUsers = async loginName => {
+  getUsers = async (loginName) => {
     if (!this._users[loginName]) {
-      const res = await this.request({url: `https://api.twitch.tv/helix/users?login=${loginName}`});
+      const res = await this.request({
+        url: `https://api.twitch.tv/helix/users?login=${loginName}`,
+      });
       this._users[loginName] = this.respond(res);
     }
     return this._users[loginName];
-  }
+  };
 
   _users = {};
 
@@ -66,78 +67,87 @@ class TwitchApi {
    */
   /**
    * Gets channel information for users.
-   * 
+   *
    * @param {string} broadcasterId
    * @return {ChannelInfoItem[]}
    */
-  getChannelInfo = async broadcasterId => {
+  getChannelInfo = async (broadcasterId) => {
     if (!this._channelInfos[broadcasterId]) {
-      const res = await this.request({url: `https://api.twitch.tv/helix/channels?broadcaster_id=${broadcasterId}`});
+      const res = await this.request({
+        url: `https://api.twitch.tv/helix/channels?broadcaster_id=${broadcasterId}`,
+      });
       this._channelInfos[broadcasterId] = this.respond(res);
     }
     return this._channelInfos[broadcasterId];
-  }
+  };
   _channelInfos = {};
 
-  getChannelChatBadges = async userId => {
-    const res = await this.request({url: `https://api.twitch.tv/helix/chat/badges?broadcaster_id=${userId}`});
+  getChannelChatBadges = async (userId) => {
+    const res = await this.request({
+      url: `https://api.twitch.tv/helix/chat/badges?broadcaster_id=${userId}`,
+    });
 
     return this.respond(res);
-  }
+  };
 
   getGlobalChatBadges = async () => {
-    const res = await this.request({url: `https://api.twitch.tv/helix/chat/badges/global`});
+    const res = await this.request({ url: `https://api.twitch.tv/helix/chat/badges/global` });
 
     return this.respond(res);
-  }
+  };
 
-  getEmoteSets = async emoteSetID => {
-    const res = await this.request({url: `https://api.twitch.tv/helix/chat/emotes/set?${emoteSetID.map(em => `emote_set_id=${em}`).join('&')}`});
+  getEmoteSets = async (emoteSetID) => {
+    const res = await this.request({
+      url: `https://api.twitch.tv/helix/chat/emotes/set?${emoteSetID.map((em) => `emote_set_id=${em}`).join('&')}`,
+    });
 
     return this.respond(res);
-  }
+  };
 
   /**
    * broadcasterId에서 차단된 유저 목록을 출력합니다.
-   * 
+   *
    * @see _getBlockedUsers
-   * @param {string} broadcasterId 
+   * @param {string} broadcasterId
    * @returns {BlockedUserInfoItem[]}
    */
   getBlockedUsersAll = async (broadcasterId) => {
     try {
       const outputs = [];
-      
+
       let pageToken = '';
-      while(true) {
+      while (true) {
         const res = await this._getBlockedUsers(broadcasterId, pageToken);
-        console.log(res)
-  
-        if (!res.data.data) { break; }
-  
+        console.log(res);
+
+        if (!res.data.data) {
+          break;
+        }
+
         outputs.push(...res.data.data);
         pageToken = res.data.pagination.cursor;
-        if (!res.data.pagination.cursor) { break; }
+        if (!res.data.pagination.cursor) {
+          break;
+        }
         await wait(10);
       }
-  
+
       if (outputs.length === 0) {
         return false;
       }
-  
-      return (outputs);
 
-    } catch(err) {
+      return outputs;
+    } catch (err) {
       console.log(err);
       return false;
     }
-  }
+  };
 
   /**
    * broadcasterId에서 차단된 유저 목록을 출력합니다.
-   * 
-   * @param {string} broadcasterId 
-   * @param {string} pageToken 
+   *
+   * @param {string} broadcasterId
+   * @param {string} pageToken
    */
   _getBlockedUsers = async (broadcasterId, pageToken = '') => {
     const params = new URLSearchParams({
@@ -146,10 +156,12 @@ class TwitchApi {
       after: pageToken,
     });
 
-    const res = await this.request({url: `https://api.twitch.tv/helix/users/blocks?${params.toString()}`});
+    const res = await this.request({
+      url: `https://api.twitch.tv/helix/users/blocks?${params.toString()}`,
+    });
 
     return res;
-  }
+  };
 }
 
 export default TwitchApi;
