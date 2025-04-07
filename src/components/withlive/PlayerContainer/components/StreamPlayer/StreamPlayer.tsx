@@ -23,16 +23,22 @@ export interface Props {
   isExpanded?: boolean;
   multiViewLayout?: LayoutType;
   isEnabledMultiView?: boolean;
+  isTargetDragging?: boolean;
 }
 
 export const StreamPlayer = (props: Props) => {
-  const { isExpanded, multiViewLayout, isEnabledMultiView } = useWithliveValues();
+  const { isExpanded, multiViewLayout, isEnabledMultiView, draggingPlayerState } =
+    useWithliveValues();
   return (
     <StreamPlayer_
       {...props}
       isExpanded={isExpanded}
       multiViewLayout={multiViewLayout}
       isEnabledMultiView={isEnabledMultiView}
+      isTargetDragging={
+        draggingPlayerState.isDragging &&
+        draggingPlayerState.targetMemberId === props.channel.memberId
+      }
     />
   );
 };
@@ -49,6 +55,7 @@ const StreamPlayer_ = (props: Props) => {
         [styles.full]: props.size === 'full',
         [styles.normal]: props.size === 'normal',
         [styles.simple]: props.size === 'simple',
+        [styles.isDragging]: props.isTargetDragging,
       })}
       style={{
         order: props.order + 1,

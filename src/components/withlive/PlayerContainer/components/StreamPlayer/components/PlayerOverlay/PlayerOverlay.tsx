@@ -14,7 +14,7 @@ export const PlayerOverlay = ({ player, size, isAnimating }: Props) => {
   const { draggingPlayerState } = useWithliveValues();
   const { updateDraggingPlayerState, setWatchingChannelOrder } = useWithliveActions();
   return (
-    <div className={clsx('PlayerOverlay', styles.container)}>
+    <div className={clsx('PlayerOverlay', styles.container)} draggable={false}>
       <MultiViewControl className={styles.control} player={player} size={size} />
       {draggingPlayerState.isDragging && (
         <div

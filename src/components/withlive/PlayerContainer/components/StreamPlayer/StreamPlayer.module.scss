@@ -29,6 +29,9 @@
       display: none;
     }
   }
+  &.isDragging{
+    z-index: 10;
+  }
 
   .playerWrapper {
     width: 100%;
