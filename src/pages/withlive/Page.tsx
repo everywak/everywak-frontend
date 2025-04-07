@@ -1,5 +1,5 @@
 import { WithliveProvider } from 'contexts/WithliveContext';
-import { WithliveHeader, PlayerContainer, Chat } from 'components/withlive';
+import { WithliveHeader, PlayerContainer, LiveChatContainer } from 'components/withlive';
 import styles from './Page.module.scss';
 
 export default function Page() {
@@ -9,7 +9,7 @@ export default function Page() {
         <WithliveHeader />
         <section className={styles.main}>
           <PlayerContainer />
-          <Chat />
+          <LiveChatContainer />
         </section>
       </div>
     </WithliveProvider>

@@ -1,9 +1,9 @@
 import { LiveChat } from './LiveChat';
 import { useWithliveActions, useWithliveValues } from 'contexts/WithliveContext';
 import StretchableContainer from 'common/Components/StretchableContainer/StretchableContainer';
-import styles from './Chat.module.scss';
+import styles from './LiveChatContainer.module.scss';
 
-export function Chat() {
+export function LiveChatContainer() {
   const { watchingChannels, isEnabledMultiView, isChatVisible, multiViewLayout } =
     useWithliveValues();
   const { setIsChatVisible } = useWithliveActions();
