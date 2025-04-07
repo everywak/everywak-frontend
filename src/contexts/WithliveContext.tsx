@@ -1,6 +1,6 @@
 import { useMember } from 'hooks/useMember';
 import { useQueryLive } from 'hooks/useQueryLive';
-import useStorage from 'hooks/useStorage';
+import { useStorage } from 'hooks/useStorage';
 import { useWindowEvent } from 'hooks/useWindowEvent';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import {

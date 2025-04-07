@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Member } from 'services/api-v2/module/member.type';
-import useStorage from './useStorage';
+import { useStorage } from './useStorage';
 import { useQueryMember } from './useQueryMember';
 
 export function useMember() {

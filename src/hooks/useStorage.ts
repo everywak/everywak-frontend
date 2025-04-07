@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 class LocalStorage {
   getItem(key: string) {
@@ -6,8 +6,8 @@ class LocalStorage {
 
     if (item === null) return undefined;
 
-    if (item === "null") return null;
-    if (item === "undefined") return undefined;
+    if (item === 'null') return null;
+    if (item === 'undefined') return undefined;
 
     try {
       return JSON.parse(item);
@@ -28,12 +28,12 @@ class LocalStorage {
 
 const persistentStorage = new LocalStorage();
 
-export default function useStorage<T>(key: string, initialValue?: T) {
+export function useStorage<T>(key: string, initialValue?: T) {
   const [value, setValue] = useState<T>(() => {
     const storageValue = persistentStorage.getItem(key);
 
     if (
-      typeof initialValue === "object" &&
+      typeof initialValue === 'object' &&
       !Array.isArray(initialValue) &&
       initialValue !== null
     ) {
@@ -42,10 +42,10 @@ export default function useStorage<T>(key: string, initialValue?: T) {
         ...storageValue,
       };
     } else if (
-      (typeof initialValue === "object" &&
+      (typeof initialValue === 'object' &&
         Array.isArray(initialValue) &&
         !(storageValue?.length > 0)) ||
-      (typeof initialValue === "string" && !storageValue && storageValue !== "")
+      (typeof initialValue === 'string' && !storageValue && storageValue !== '')
     ) {
       return initialValue;
     } else {
