@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import clsx from 'clsx';
 import { useWindowEvent } from 'hooks/useWindowEvent';
-import styles from './StretchableContainer.module.scss';
+import styles from './Stretchable.module.scss';
 
 export interface Props {
   className?: string;
@@ -12,7 +12,7 @@ export interface Props {
   children: React.ReactNode;
 }
 
-export default function StretchableContainer({
+export function Stretchable({
   className,
   rotation = 'right',
   defaultSize = 320,

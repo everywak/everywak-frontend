@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Waktaverse } from '../../common/constants';
-import StretchableContainer from '../../common/Components/StretchableContainer/StretchableContainer';
+import { Stretchable } from 'common/components';
 
 import { LiveChat } from '../../components/withlive/LiveChat/LiveChat';
 
@@ -41,9 +41,9 @@ function TwitchChat({ channelId = import.meta.env.VITE_TWITCH_CHANNEL_NAME, plat
   };
 
   return (
-    <StretchableContainer className={cx('TwitchChat', { small: 380 < 220 })}>
+    <Stretchable className={cx('TwitchChat', { small: 380 < 220 })}>
       <LiveChat className="liveChat" channelId={[getChannelName(platform, channelId)]} />
-    </StretchableContainer>
+    </Stretchable>
   );
 }
 

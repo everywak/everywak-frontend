@@ -1,5 +1,4 @@
-import StretchableContainer from 'common/Components/StretchableContainer/StretchableContainer';
-
+import { Stretchable } from 'common/components';
 import { LiveChatProvider } from './LiveChat.context';
 
 import { LiveChatAdapter } from './LiveChatAdapter';
@@ -23,14 +22,14 @@ export function LiveChat(props: Props) {
       <div className={cx('LiveChat', props.className)}>
         <LiveChatAdapter channelIds={props.channelIds} />
         <Header onClickHide={props.onClickHide} />
-        <StretchableContainer
+        <Stretchable
           className={styles.stretchableContainer}
           rotation="top"
           minSize={64}
           defaultSize={200}
         >
           <CollectorChatList className={styles.collectorChatList} />
-        </StretchableContainer>
+        </Stretchable>
         <CommonChatList className={styles.commonChatList} />
       </div>
     </LiveChatProvider>

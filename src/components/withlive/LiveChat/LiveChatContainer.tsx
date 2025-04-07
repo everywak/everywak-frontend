@@ -1,6 +1,6 @@
-import { LiveChat } from './LiveChat';
+import { Stretchable } from 'common/components';
 import { useWithliveActions, useWithliveValues } from 'contexts/WithliveContext';
-import StretchableContainer from 'common/Components/StretchableContainer/StretchableContainer';
+import { LiveChat } from './LiveChat';
 import styles from './LiveChatContainer.module.scss';
 
 export function LiveChatContainer() {
@@ -18,18 +18,13 @@ export function LiveChatContainer() {
 
   return (
     isChatVisible && (
-      <StretchableContainer
-        className={styles.container}
-        rotation="right"
-        minSize={64}
-        defaultSize={360}
-      >
+      <Stretchable className={styles.container} rotation="right" minSize={64} defaultSize={360}>
         <LiveChat
           className={styles.chat}
           channelIds={channelIds}
           onClickHide={() => setIsChatVisible(false)}
         />
-      </StretchableContainer>
+      </Stretchable>
     )
   );
 }
