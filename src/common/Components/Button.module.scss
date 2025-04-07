@@ -89,4 +89,12 @@
     padding: 0 8px 0 6px;
     vertical-align: middle;
   }
+
+  .blind {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
 }
