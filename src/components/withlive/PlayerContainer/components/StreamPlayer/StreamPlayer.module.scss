@@ -11,7 +11,8 @@
       height: 100vh;
     }
   }
-  &.grid .playerWrapper {
+  &.grid .playerWrapper,
+  &.oneSideV .playerWrapper  {
     width: 100%;
     height: 100%;
     aspect-ratio: auto;
@@ -29,7 +30,7 @@
       display: none;
     }
   }
-  &.isDragging{
+  &.isDragging {
     z-index: 10;
   }
 

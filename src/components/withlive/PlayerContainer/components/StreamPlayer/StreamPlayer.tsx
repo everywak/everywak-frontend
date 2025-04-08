@@ -52,6 +52,9 @@ const StreamPlayer_ = (props: Props) => {
       className={clsx(styles.container, props.className, {
         [styles.expanded]: props.isExpanded,
         [styles.grid]: props.isEnabledMultiView && props.multiViewLayout! === 'grid',
+        [styles.oneSideV]:
+          props.isEnabledMultiView &&
+          (props.multiViewLayout! === 'one-side-t' || props.multiViewLayout! === 'one-side-b'),
         [styles.full]: props.size === 'full',
         [styles.normal]: props.size === 'normal',
         [styles.simple]: props.size === 'simple',
@@ -72,7 +75,7 @@ const StreamPlayer_ = (props: Props) => {
       onLayoutAnimationComplete={() => setIsAnimating(false)}
     >
       <div className={styles.playerWrapper}>
-        {streamInfo?.isLive && props.player.isActive ? (
+        {(streamInfo?.isLive && props.player.isActive) ? (
           <Iframe streamInfo={streamInfo} />
         ) : (
           <AutoRefreshImage
