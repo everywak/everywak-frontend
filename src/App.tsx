@@ -15,16 +15,13 @@ import { ThemeProvider } from 'contexts/ThemeContext';
 
 const Frontpage = lazy(() => import('./modules/frontpage/Frontpage'));
 
-const Live = lazy(() => import('./modules/live/Live'));
-
 const Bestwakki = lazy(() => import('./modules/bestwakki/page'));
 
 const Weather = lazy(() => import('./modules/weather/Weather'));
 
 const VideoWatch = lazy(() => import('./modules/video/VideoWatch'));
 
-const WithLive = lazy(() => import('./modules/withlive/WithLive'));
-const WithLiveV2 = lazy(() => import('./pages/withlive/Page'));
+const WithLive = lazy(() => import('./pages/withlive/Page'));
 const ChatPopupPage = lazy(() => import('./modules/live/ChatPopupPage'));
 
 const Waktoon = lazy(() => import('./modules/waktoon/Waktoon'));
@@ -57,7 +54,6 @@ export default function App() {
             <Route path="/" element={<Frontpage />} />
             <Route path="/bestwakki" element={<Bestwakki />} />
             <Route path="/live/chat/:platform/:channelId" element={<ChatPopupPage />} />
-            <Route path="/live" element={<Live />} />
             <Route path="/isedol" element={<Isedol />} />
             <Route path="/weather" element={<Weather />} />
 
@@ -72,9 +68,7 @@ export default function App() {
             <Route path="/waktoon/:toonId" element={<WaktoonViewer />} />
             <Route path="/waktoon" element={<Waktoon />} />
 
-            <Route path="/withlive/:group" element={<WithLive />} />
             <Route path="/withlive" element={<WithLive />} />
-            <Route path="/v2/withlive" element={<WithLiveV2 />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
           <Footer />

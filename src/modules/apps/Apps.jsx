@@ -19,13 +19,12 @@ class Apps extends Component {
     columns: 2,
     apps: [
       {
-        key: 'apps_live',
-        title: '우왁굳 생방송',
-        description: '트위치, 유튜브, 어디서든 형과 함께',
-        icon: <LiveTvRoundedIcon />,
-        iconPadding: '1px',
-        themeColor: '#8D2BDA',
-        href: '/live',
+        key: 'apps_waktaverselive',
+        title: '왁타버스 같이보기',
+        description: '왁씨티브이 ON',
+        icon: <ViewCarouselRoundedIcon />,
+        themeColor: '#DD3535',
+        href: '/withlive',
       },
       {
         key: 'apps_bestwakki',
@@ -51,14 +50,6 @@ class Apps extends Component {
         icon: <MenuBookRoundedIcon />,
         themeColor: '#10CBa1',
         href: '/waktoon',
-      },
-      {
-        key: 'apps_waktaverselive',
-        title: '왁타버스 같이보기',
-        description: '왁씨티브이 ON',
-        icon: <ViewCarouselRoundedIcon />,
-        themeColor: '#DD3535',
-        href: '/withlive',
       },
       {
         key: 'apps_wakcontest',

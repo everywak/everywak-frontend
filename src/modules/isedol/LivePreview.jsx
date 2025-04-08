@@ -14,7 +14,7 @@ const cx = classNames.bind(styles);
 function LivePreview({ className, channelId = 'twitchdev', size = 'normal', hideProfile = false }) {
   const { isLoading, data } = useQueryWaktaverseLive({ loginName: channelId });
 
-  const url = channelId === 'woowakgood' ? '/live' : `/withlive/isedol?main=${channelId}`;
+  const url = `/withlive?main=${channelId}`;
 
   const thWidth = size === 'big' ? 600 : 200;
   const isLive = !(data?.lives[0]?.broadcaster === 'NONE');

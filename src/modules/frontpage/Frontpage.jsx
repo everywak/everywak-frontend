@@ -59,7 +59,7 @@ function DesktopFrontpage() {
       <CommonHeader
         title="에브리왁굳"
         categories={[
-          { key: 'withlive/isedol', name: '이세돌 같이보기', href: '/withlive/isedol' },
+          { key: 'withlive', name: '왁타버스 같이보기', href: '/withlive' },
           { key: 'bestwakki', name: '왁물원 인기글', href: '/bestwakki' },
           { key: 'waktoon', name: '왁굳코믹스', href: '/waktoon' },
           //{key: 'clip', name: '왁굳TV', href: '/video'}
@@ -68,10 +68,7 @@ function DesktopFrontpage() {
         description={
           '계륵님, 고멤 그리고 이세돌 생방송부터\n이제는 볼 수 없는 트위치 핫클립까지\n마르지 않는 샘물을 에브리왁굳에서 즐겨보세요!'
         }
-        moreLink={[
-          { key: 'live', name: '생방송 보러가기', href: '/live' },
-          { key: 'withlive/isedol', name: '이세돌 같이 보기', href: '/withlive/isedol' },
-        ]}
+        moreLink={[{ key: 'withlive', name: '왁타버스 같이보기', href: '/withlive' }]}
       >
         <div className="liveList">
           <div className="side">{leftLiveList}</div>
