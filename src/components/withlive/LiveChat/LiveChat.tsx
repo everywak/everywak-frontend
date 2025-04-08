@@ -1,9 +1,8 @@
 import clsx from 'clsx';
-import { Stretchable } from 'common/components';
 import { LiveChatProvider } from './LiveChat.context';
 
 import { LiveChatAdapter } from './LiveChatAdapter';
-import { Header, CommonChatList, CollectorChatList } from './components';
+import { Header, CommonChatList, CollectorChatList, ChatSetting } from './components';
 
 import styles from './LiveChat.module.scss';
 
@@ -19,15 +18,9 @@ export function LiveChat(props: Props) {
       <div className={clsx('LiveChat', styles.container, props.className)}>
         <LiveChatAdapter channelIds={props.channelIds} />
         <Header onClickHide={props.onClickHide} />
-        <Stretchable
-          className={styles.stretchableContainer}
-          rotation="top"
-          minSize={64}
-          defaultSize={200}
-        >
-          <CollectorChatList className={styles.collectorChatList} />
-        </Stretchable>
+        <CollectorChatList className={styles.collectorChatList} />
         <CommonChatList className={styles.commonChatList} />
+        <ChatSetting />
       </div>
     </LiveChatProvider>
   );

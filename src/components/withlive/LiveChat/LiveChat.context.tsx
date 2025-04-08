@@ -6,7 +6,6 @@ import { ChatItem, ChatOption } from './LiveChat.type';
 
 export type Values = {
   readonly channelId: string[];
-  readonly isOpenedCollectorView: boolean;
   readonly isConnected: boolean;
   readonly isAuthorized: boolean;
   readonly isOpenedSetting: boolean;
@@ -21,11 +20,10 @@ export type Actions = {
   readonly setChannelId: (ids: string[]) => void;
   readonly setConnected: (state: boolean) => void;
   readonly setAuthorized: (state: boolean) => void;
-  readonly setOpenedCollectorView: (state: boolean) => void;
   readonly setOpenedSetting: (state: boolean) => void;
   readonly setKeepOldChat: (state: boolean) => void;
   readonly setEnabledSendChat: (state: boolean) => void;
-  readonly setOption: (option: ChatOption) => void;
+  readonly updateOption: (option: Partial<ChatOption>) => void;
   readonly addChatItem: (items: ChatItem[]) => void;
 };
 
@@ -38,7 +36,6 @@ type Props = {
 
 export function LiveChatProvider(props: Props): JSX.Element {
   const [channelId, setChannelId] = useState<string[]>([]);
-  const [isOpenedCollectorView, setOpenedCollectorView] = useState(false);
   const [isConnected, setConnected] = useState(false);
   const [isAuthorized, setAuthorized] = useState(false);
   const [isOpenedSetting, setOpenedSetting] = useState(false);
@@ -47,9 +44,15 @@ export function LiveChatProvider(props: Props): JSX.Element {
   const [option, setOption] = useState<ChatOption>({
     maxDisplayCount: 30,
     maxStoreCount: 500,
-    showOnlyManager: false,
-    showOnlySubscriber: false,
-    chatCollectorFilter: [
+    isHideUserId: false,
+    isHideProfile: false,
+    isShowTimestamp: false,
+    isShowOnlyManager: false,
+    isShowOnlySubscriber: false,
+    isShowOnlyFan: false,
+    isShowAllMultiView: true,
+    isShowCollectorChat: true,
+    chatCollectorFilters: [
       {
         target: 'badge',
         keyword: 'manager',
@@ -62,21 +65,39 @@ export function LiveChatProvider(props: Props): JSX.Element {
   const [collectedChatList, setCollectedChatList] = useState<ChatItem[]>([]);
   const onAddChatHandlers = useRef<((items?: ChatItem[]) => void)[]>([]);
 
+  const filterChat = (chatItem: ChatItem) => {
+    if (chatItem.type !== 'chat') {
+      return true;
+    }
+    const isManager = chatItem.profile.badge.some((badge) => badge.id === 'manager');
+    const isSubscriber = chatItem.profile.badge.some((badge) => badge.id.includes('-sub-'));
+    const isFan = chatItem.profile.badge.some((badge) => badge.id === 'fan');
+    return !(
+      (option.isShowOnlyManager && !isManager) ||
+      (option.isShowOnlySubscriber && !isSubscriber) ||
+      (option.isShowOnlyFan && !(isFan || isSubscriber))
+    );
+  };
+
   const addChatItem = (items: ChatItem[]) => {
     if (!items || items.length === 0) {
       return;
     }
 
-    chatList.current = [...chatList.current, ...items].slice(-option.maxStoreCount);
+    const filteredItems = items.filter(filterChat);
+
+    chatList.current = [...chatList.current, ...filteredItems].slice(-option.maxStoreCount);
     setDisplayedChatList((prev) =>
-      [...prev, ...items].slice(isKeepOldChat ? -option.maxStoreCount : -option.maxDisplayCount),
+      [...prev, ...filteredItems].slice(
+        isKeepOldChat ? -option.maxStoreCount : -option.maxDisplayCount,
+      ),
     );
-    if (isOpenedCollectorView) {
-      const filteredItems = items.filter((item) => {
+    if (option.isShowCollectorChat) {
+      const filteredCollectorItems = items.filter((item) => {
         if (item.type !== 'chat') {
           return false;
         }
-        return option.chatCollectorFilter.some((filter) => {
+        return option.chatCollectorFilters.some((filter) => {
           if (filter.target === 'user') {
             return (
               (item.profile.name.includes(filter.keyword) || item.profile.id === filter.keyword) ===
@@ -91,14 +112,21 @@ export function LiveChatProvider(props: Props): JSX.Element {
           }
         });
       });
-      filteredItems.forEach((item) => {
+      filteredCollectorItems.forEach((item) => {
         if (item.type === 'chat') {
           item.accentColor = 'yellow';
         }
       });
-      setCollectedChatList((prev) => [...prev, ...filteredItems].slice(-option.maxDisplayCount));
+      setCollectedChatList((prev) => [...prev, ...filteredCollectorItems].slice(-option.maxDisplayCount));
     }
-    onAddChatHandlers.current.forEach((handler) => handler(items));
+    onAddChatHandlers.current.forEach((handler) => handler(filteredItems));
+  };
+
+  const updateOption = (newOption: Partial<ChatOption>) => {
+    setOption((prev) => ({
+      ...prev,
+      ...newOption,
+    }));
   };
 
   const actions: Actions = useMemo(
@@ -106,21 +134,19 @@ export function LiveChatProvider(props: Props): JSX.Element {
       setChannelId,
       setConnected,
       setAuthorized,
-      setOpenedCollectorView,
       setOpenedSetting,
       setKeepOldChat,
       setEnabledSendChat,
-      setOption,
+      updateOption,
       addChatItem,
     }),
     [
       setChannelId,
-      isOpenedCollectorView,
-      setOpenedCollectorView,
       setConnected,
       setOpenedSetting,
       isKeepOldChat,
       setKeepOldChat,
+      updateOption,
       setOption,
       setDisplayedChatList,
       setCollectedChatList,
@@ -134,7 +160,6 @@ export function LiveChatProvider(props: Props): JSX.Element {
           channelId,
           isConnected,
           isAuthorized,
-          isOpenedCollectorView,
           isOpenedSetting,
           isKeepOldChat,
           isEnabledSendChat,

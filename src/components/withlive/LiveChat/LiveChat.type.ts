@@ -7,9 +7,15 @@ export type ChatFilter = {
 export type ChatOption = {
   maxDisplayCount: number;
   maxStoreCount: number;
-  showOnlyManager: boolean;
-  showOnlySubscriber: boolean;
-  chatCollectorFilter: ChatFilter[];
+  isHideUserId: boolean;
+  isHideProfile: boolean;
+  isShowTimestamp: boolean;
+  isShowOnlyManager: boolean;
+  isShowOnlySubscriber: boolean;
+  isShowOnlyFan: boolean;
+  isShowAllMultiView: boolean;
+  isShowCollectorChat: boolean;
+  chatCollectorFilters: ChatFilter[];
 };
 
 export type AccentColor = '' | 'yellow' | 'red';

@@ -7,8 +7,9 @@ import { Profile } from './Profile';
 
 export interface Props {
   item: ChatItem;
-  hideProfile?: boolean;
-  showTimestamp?: boolean;
+  isHideUserId: boolean;
+  isHideProfile: boolean;
+  isShowTimestamp: boolean;
 }
 
 const accentColor: Record<AccentColor, string> = {
@@ -39,7 +40,23 @@ export const Chat = React.memo((props: Props) => {
       }
     >
       <span className={styles.contentContainer}>
-        {!props.hideProfile && <Profile profile={props.item.profile} />}
+        {props.isShowTimestamp && (
+          <span className={styles.timestamp}>
+            {new Date(props.item.timestamp).toLocaleTimeString('en-US', {
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: false,
+              second: '2-digit',
+            })}
+          </span>
+        )}
+        {!props.isHideProfile && (
+          <Profile
+            profile={props.item.profile}
+            isHideUserId={props.isHideUserId}
+            isShowTimestamp={props.isShowTimestamp}
+          />
+        )}
         <span className={styles.content}>{content}</span>
       </span>
     </div>

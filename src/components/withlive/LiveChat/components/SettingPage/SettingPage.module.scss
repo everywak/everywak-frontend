@@ -1,0 +1,35 @@
+@use '@common/mixin' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--color-background-white);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-gray-300);
+
+  .header {
+    @include font16_16_500;
+    background-color: var(--color-background-white);
+    border-bottom: 1px solid var(--color-gray-300);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5625rem;
+
+    .left {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      & > span {
+        padding: 0 0.5625rem;
+      }
+    }
+  }
+}

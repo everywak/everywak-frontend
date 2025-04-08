@@ -3,11 +3,7 @@
   flex-direction: column;
   width: 360px;
   height: 840px;
-
-  .collectorChatList {
-    height: 100%;
-    border-bottom: var(--gray-300) 1px solid;
-  }
+  position: relative;
 
   .commonChatList {
     height: 0;

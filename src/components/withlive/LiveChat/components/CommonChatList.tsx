@@ -2,7 +2,8 @@ import { useLiveChatActions, useLiveChatValue } from '../LiveChat.context';
 import { ChatList } from './ChatList/ChatList';
 
 export function CommonChatList({ className }: { className?: string }) {
-  const { displayedChatList, isKeepOldChat, isConnected, isAuthorized } = useLiveChatValue();
+  const { displayedChatList, isKeepOldChat, isConnected, isAuthorized, option } =
+    useLiveChatValue();
   const { setKeepOldChat } = useLiveChatActions();
 
   const getSnackBarMessage = (isConnected: boolean, isAuthorized: boolean) => {
@@ -22,6 +23,7 @@ export function CommonChatList({ className }: { className?: string }) {
       snackBarMessage={getSnackBarMessage(isConnected, isAuthorized)}
       autoScroll={!isKeepOldChat}
       onTouchToBottom={(touched) => setKeepOldChat(!touched)}
+      options={option}
     />
   );
 }

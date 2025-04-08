@@ -1,7 +1,7 @@
 import { Ref, useCallback, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import { Chat, OverlayOnChat } from './components';
-import { ChatItem } from '../../LiveChat.type';
+import { ChatItem, ChatOption } from '../../LiveChat.type';
 import styles from './ChatList.module.scss';
 
 export type Props = {
@@ -10,6 +10,7 @@ export type Props = {
   snackBarMessage: string;
   autoScroll?: boolean;
   onTouchToBottom?: (touched: boolean) => void;
+  options: ChatOption;
 };
 
 export function ChatList(props: Props) {
@@ -43,8 +44,16 @@ export function ChatList(props: Props) {
   }, [props.autoScroll, props.items]);
 
   const renderChat = useCallback(
-    (chatItem: ChatItem) => <Chat key={chatItem.id} item={chatItem} />,
-    [],
+    (chatItem: ChatItem) => (
+      <Chat
+        key={chatItem.id}
+        item={chatItem}
+        isHideUserId={props.options.isHideUserId}
+        isHideProfile={props.options.isHideProfile}
+        isShowTimestamp={props.options.isShowTimestamp}
+      />
+    ),
+    [props.options.isHideUserId, props.options.isHideProfile, props.options.isShowTimestamp],
   );
 
   const list = props.items.map(renderChat);
