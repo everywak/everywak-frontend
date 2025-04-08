@@ -1,10 +1,17 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, ChangeEvent, ChangeEventHandler } from 'react';
 
-export function useInputs<T>(initialForm: T) {
+export function useInputs<T>(
+  initialForm: T,
+): [T, ChangeEventHandler<HTMLInputElement>, () => void] {
   const [form, setForm] = useState(initialForm);
 
-  const onChange = useCallback((e: { target: { name: string; value: any } }) => {
-    const { name, value } = e.target;
+  const onChange: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
+    const { name, type, value, checked } = e.target;
+    console.log('onChange', { name, type, value, checked });
+    if (type === 'checkbox') {
+      setForm((form) => ({ ...form, [name]: checked }));
+      return;
+    }
     setForm((form) => ({ ...form, [name]: value }));
   }, []);
 
