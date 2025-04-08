@@ -6,7 +6,7 @@ import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar'
 import BasicSelect from '../../../common/Components/Select/BasicSelect';
 import PageSelect from '../../../common/Components/Select/PageSelect';
 
-import useInputs from '../../../hooks/useInputs';
+import { useInputs } from 'hooks/useInputs';
 
 import BackButton from '../BackButton';
 import BestWaktoonList from './BestWaktoonList';

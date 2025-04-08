@@ -5,7 +5,7 @@ import Header from '../../../common/Header/Header';
 import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar';
 import BasicSelect from '../../../common/Components/Select/BasicSelect';
 
-import useInputs from '../../../hooks/useInputs';
+import { useInputs } from 'hooks/useInputs';
 
 import BackButton from '../BackButton';
 import WaktoonChartList from '../WaktoonChartList';

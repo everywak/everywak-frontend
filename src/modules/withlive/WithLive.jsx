@@ -20,7 +20,7 @@ import SceneLayoutSettingPanel from './SceneLayoutSettingPanel';
 import { Waktaverse } from '../../common/constants';
 import * as func from '../../common/functions';
 
-import useInputs from '../../hooks/useInputs';
+import { useInputs } from 'hooks/useInputs';
 import useQueryWaktaverseLive from '../../hooks/useQueryWaktaverseLive';
 import { useWindowEvent } from 'hooks/useWindowEvent';
 

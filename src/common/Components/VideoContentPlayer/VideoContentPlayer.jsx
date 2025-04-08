@@ -17,7 +17,7 @@ import FullscreenExitRoundedIcon from '@mui/icons-material/FullscreenExitRounded
 
 import { enableFullscreen, disableFullscreen } from '../../functions';
 
-import useInputs from '../../../hooks/useInputs';
+import { useInputs } from 'hooks/useInputs';
 import useKeyboardHotkeys from '../../../hooks/useKeyboardHotkeys';
 
 import { domain } from '../../constants';

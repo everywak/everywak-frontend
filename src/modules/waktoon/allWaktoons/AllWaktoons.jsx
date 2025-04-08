@@ -8,7 +8,7 @@ import PageSelect from '../../../common/Components/Select/PageSelect';
 
 import { Desktop, NotDesktop } from '../../../common/MediaQuery';
 
-import useInputs from '../../../hooks/useInputs';
+import { useInputs } from 'hooks/useInputs';
 
 import BackButton from '../BackButton';
 import AllWaktoonList from './AllWaktoonList';

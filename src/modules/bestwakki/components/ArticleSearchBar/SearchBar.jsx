@@ -4,7 +4,7 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
 import Dropdown from 'common/Components/Dropdown';
 
-import useInputs from 'hooks/useInputs';
+import { useInputs } from 'hooks/useInputs';
 
 import './SearchBar.scss';
 import cx from 'classnames';

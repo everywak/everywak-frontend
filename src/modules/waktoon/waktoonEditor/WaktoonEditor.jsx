@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import useInputs from '../../../hooks/useInputs';
+import { useInputs } from 'hooks/useInputs';
 
 import BasicButton from '../../../common/Components/Button/BasicButton';
 import TransparentButton from '../../../common/Components/Button/TransparentButton';

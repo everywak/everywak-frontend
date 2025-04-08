@@ -4,7 +4,7 @@ import Dropdown from '../Dropdown';
 import TransparentButton from '../Button/TransparentButton';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
-import useInputs from '../../../hooks/useInputs';
+import { useInputs } from 'hooks/useInputs';
 
 import './BasicSearchBar.scss';
 import cx from 'classnames';

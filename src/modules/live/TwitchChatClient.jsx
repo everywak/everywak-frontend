@@ -8,7 +8,7 @@ import React, {
   PureComponent,
 } from 'react';
 
-import useInputs from '../../hooks/useInputs';
+import { useInputs } from 'hooks/useInputs';
 
 import TwitchChatClientCore from './TwitchChatClientCore';
 import Spinner from '../../common/Components/Spinner';
