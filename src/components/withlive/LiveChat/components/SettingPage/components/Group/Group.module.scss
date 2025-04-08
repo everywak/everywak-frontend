@@ -1,0 +1,10 @@
+@use '@common/mixin' as *;
+
+.container {
+  display: flex;
+  user-select: none;
+  padding: 1rem 1rem 0.5rem;
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  line-height: 0.75rem;
+}
