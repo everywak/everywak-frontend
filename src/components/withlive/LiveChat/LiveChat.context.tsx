@@ -29,36 +29,8 @@ export type Actions = {
   readonly addChatItem: (items: ChatItem[]) => void;
 };
 
-const LiveChatValueContext = createContext<Values>({
-  channelId: [],
-  isOpenedCollectorView: false,
-  isConnected: false,
-  isAuthorized: false,
-  isOpenedSetting: false,
-  isKeepOldChat: false,
-  isEnabledSendChat: false,
-  displayedChatList: [],
-  collectedChatList: [],
-  option: {
-    maxDisplayCount: 30,
-    maxStoreCount: 500,
-    showOnlyManager: false,
-    showOnlySubscriber: false,
-    chatCollectorFilter: [],
-  },
-});
-
-const LiveChatActionsContext = createContext<Actions>({
-  setChannelId: (ids: string[]) => {},
-  setConnected: (state: boolean) => {},
-  setAuthorized: (state: boolean) => {},
-  setOpenedCollectorView: (state: boolean) => {},
-  setOpenedSetting: (state: boolean) => {},
-  setKeepOldChat: (state: boolean) => {},
-  setEnabledSendChat: (state: boolean) => {},
-  setOption: (option: ChatOption) => {},
-  addChatItem: (items: ChatItem[]) => {},
-});
+const LiveChatValueContext = createContext<Values | undefined>(undefined);
+const LiveChatActionsContext = createContext<Actions | undefined>(undefined);
 
 type Props = {
   readonly children: ReactNode;
