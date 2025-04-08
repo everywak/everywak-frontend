@@ -211,7 +211,7 @@ export function WithliveProvider(props: Props): React.ReactNode {
       });
     }
     setChannels(channels);
-  }, [isLoading, lives]);
+  }, [isLoading, lives, members]);
 
   useEffect(() => {
     const onlineChannels = channels.filter((channel) => channel.streamInfo?.isLive);

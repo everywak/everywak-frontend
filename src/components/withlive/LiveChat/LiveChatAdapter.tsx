@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { EverywakRelayChatAdapter } from './adapter/EverywakRelayChatAdapter';
 import { LiveChatAdapterClass } from './adapter/LiveChatAdapterClass';
 import { useLiveChatActions, useLiveChatValue } from './LiveChat.context';
+import { useWithliveValues } from 'contexts/WithliveContext';
 
 const diffChannel = (oldChannels: string[], newChannels: string[]) => {
   const willLeaves = oldChannels.filter((channel) => !newChannels.includes(channel));
@@ -14,8 +15,9 @@ export type Props = {
 };
 
 export function LiveChatAdapter(props: Props) {
+  const { watchingChannels } = useWithliveValues();
   const { addChatItem, setChannelId, setConnected, setAuthorized } = useLiveChatActions();
-  const { channelId } = useLiveChatValue();
+  const { channelId, option } = useLiveChatValue();
 
   const adapter = useRef<LiveChatAdapterClass>();
 
@@ -69,15 +71,20 @@ export function LiveChatAdapter(props: Props) {
   useEffect(() => {
     if (adapter.current && adapter.current.isAuthorized) {
       const { willLeaves, willJoins } = diffChannel([...adapter.current.getChannels()], channelId);
-      adapter.current.leaveChannel(willLeaves);
-      adapter.current.joinChannel(willJoins);
+      willLeaves.length > 0 && adapter.current.leaveChannel(willLeaves);
+      willJoins.length > 0 && adapter.current.joinChannel(willJoins);
     }
   }, [channelId]);
 
   // 채널 id 전달
   useEffect(() => {
-    setChannelId(props.channelIds);
-  }, [JSON.stringify(props.channelIds)]);
+    if (!option.isShowAllMultiView) {
+      const mainChannel = watchingChannels.find((channel) => channel.order === 0);
+      mainChannel && setChannelId([mainChannel.memberId]);
+    } else {
+      setChannelId(props.channelIds);
+    }
+  }, [JSON.stringify(props.channelIds), watchingChannels, option.isShowAllMultiView]);
 
   return <></>;
 }
