@@ -2,8 +2,8 @@ import React, { Component, useEffect, useState } from 'react';
 
 import VideoItem from '../isedol/VideoItem';
 
-import HorizontalScrollableList from '../../common/Components/HorizontalScrollableList/HorizontalScrollableList';
-import Spinner from 'common/Components/Spinner';
+import HorizontalScrollableList from '../../common/components/legacy/HorizontalScrollableList/HorizontalScrollableList';
+import Spinner from 'common/components/legacy/Spinner';
 
 import * as func from '../../common/functions';
 import * as service from '../../services/Music';

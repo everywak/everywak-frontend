@@ -1,13 +1,11 @@
-import React, { Component, useCallback, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useCallback, useState, useEffect } from 'react';
 
-import Button from '../../common/Components/Button';
+import Button from 'common/components/legacy/Button';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 
 import { WaktoonItem } from './WaktoonItem';
 
 import ReactGA from 'react-ga';
-import GAEvents from '../../common/GAEvents';
 
 import './WaktoonList.scss';
 import cx from 'classnames';

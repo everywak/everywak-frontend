@@ -3,12 +3,12 @@ import { useParams } from 'react-router-dom';
 
 import { useInputs } from 'hooks/useInputs';
 
-import BasicButton from '../../../common/Components/Button/BasicButton';
-import TransparentButton from '../../../common/Components/Button/TransparentButton';
-import InputForm from '../../../common/Components/InputForm/InputForm';
-import TextInput from '../../../common/Components/TextInput/TextInput';
-import BasicSelect from '../../../common/Components/Select/BasicSelect';
-import BasicImage from '../../../common/Components/Image/BasicImage';
+import BasicButton from '../../../common/components/legacy/Button/BasicButton';
+import TransparentButton from '../../../common/components/legacy/Button/TransparentButton';
+import InputForm from '../../../common/components/legacy/InputForm/InputForm';
+import TextInput from '../../../common/components/legacy/TextInput/TextInput';
+import BasicSelect from '../../../common/components/legacy/Select/BasicSelect';
+import BasicImage from '../../../common/components/legacy/Image/BasicImage';
 
 import FileUploadRoundedIcon from '@mui/icons-material/CloudUploadRounded';
 import PhotoLibraryRoundedIcon from '@mui/icons-material/PhotoLibraryRounded';

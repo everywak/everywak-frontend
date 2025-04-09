@@ -1,10 +1,7 @@
 import React, { Fragment } from 'react';
-import { keyframes } from '@emotion/react';
-import styled from '@emotion/styled';
-import MediaQuery from 'react-responsive';
 
-import SkeletonLoader from '../../../common/Components/SkeletonLoader';
-import Button from '../../../common/Components/Button';
+import SkeletonLoader from '../../../common/components/legacy/SkeletonLoader';
+import Button from 'common/components/legacy/Button';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
-import Button from 'common/Components/Button';
+import Button from 'common/components/legacy/Button';
 
 import { useBestwakkiActions, useBestwakkiValue } from '../../context';
 import ArticleDateRange from '../ArticleDateRange';

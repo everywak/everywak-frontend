@@ -6,7 +6,7 @@ import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftR
 import * as func from 'common/functions';
 import Header from 'common/Header/Header';
 import Footer from 'common/Footer/Footer';
-import BasicImage from 'common/Components/Image/BasicImage';
+import BasicImage from 'common/components/legacy/Image/BasicImage';
 
 import SectionHeader from '../frontpage/SectionHeader';
 

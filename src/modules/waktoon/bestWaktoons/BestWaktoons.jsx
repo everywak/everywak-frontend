@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import Header from '../../../common/Header/Header';
-import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar';
-import PageSelect from '../../../common/Components/Select/PageSelect';
-import {Select} from 'common/components';
+import BasicSearchBar from '../../../common/components/legacy/SearchBar/BasicSearchBar';
+import PageSelect from '../../../common/components/legacy/Select/PageSelect';
+import { Select } from 'common/components';
 
 import { useInputs } from 'hooks/useInputs';
 

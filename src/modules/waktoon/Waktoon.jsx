@@ -5,14 +5,14 @@ import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRigh
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 
 import Header, { EverywakLogo } from '../../common/Header/Header';
-import CircleImg from '../../common/Components/CircleImg';
-import LinkButton from '../../common/Components/Button/LinkButton';
-import HorizontalScrollableList from '../../common/Components/HorizontalScrollableList/HorizontalScrollableList';
+import CircleImg from '../../common/components/legacy/CircleImg';
+import LinkButton from '../../common/components/legacy/Button/LinkButton';
+import HorizontalScrollableList from '../../common/components/legacy/HorizontalScrollableList/HorizontalScrollableList';
 
 import { Desktop } from '../../common/MediaQuery';
 
 import ContentPanel from '../frontpage/ContentPanel';
-import BasicSearchBar from '../../common/Components/SearchBar/BasicSearchBar';
+import BasicSearchBar from '../../common/components/legacy/SearchBar/BasicSearchBar';
 import WaktoonBottomNavigationBar from './WaktoonBottomNavigationBar';
 
 import WaktoonBestList from './WaktoonBestList';

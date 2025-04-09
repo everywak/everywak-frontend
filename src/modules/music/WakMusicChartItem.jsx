@@ -2,7 +2,7 @@ import React from 'react';
 
 import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
 
-import BasicImage from '../../common/Components/Image/BasicImage';
+import BasicImage from '../../common/components/legacy/Image/BasicImage';
 
 import './WakMusicChartItem.scss';
 import cx from 'classnames';

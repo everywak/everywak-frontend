@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
-import Button from '../../common/Components/Button';
+import Button from 'common/components/legacy/Button';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 
 import VideoItem from './VideoItem';

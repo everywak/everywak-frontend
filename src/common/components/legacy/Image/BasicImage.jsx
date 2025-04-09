@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import BrokenImageRoundedIcon from '@mui/icons-material/BrokenImageRounded';
 
-import * as func from '../../functions';
+import * as func from '../../../functions';
 
 import SkeletonLoader from '../SkeletonLoader';
 

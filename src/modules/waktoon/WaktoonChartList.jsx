@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import SkeletonLoader from '../../common/Components/SkeletonLoader';
+import SkeletonLoader from '../../common/components/legacy/SkeletonLoader';
 
 import * as service from '../../services/Waktoon';
 

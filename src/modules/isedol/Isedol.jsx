@@ -8,7 +8,7 @@ import VideoContentList from './VideoContentList';
 import IsedolMemberList from './IsedolMemberList';
 
 import Header from '../../common/Header/Header';
-import CircleImgButton from '../../common/Components/Button/CircleImgButton';
+import CircleImgButton from '../../common/components/legacy/Button/CircleImgButton';
 
 import * as func from '../../common/functions';
 

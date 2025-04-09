@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { formatNumberShort } from '../../common/functions';
-import BasicImage from '../../common/Components/Image/BasicImage';
-import CircleImg from '../../common/Components/CircleImg';
+import BasicImage from '../../common/components/legacy/Image/BasicImage';
+import CircleImg from '../../common/components/legacy/CircleImg';
 
 import './VideoItem.scss';
 import cx from 'classnames';

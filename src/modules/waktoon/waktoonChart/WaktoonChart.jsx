@@ -2,7 +2,7 @@ import React from 'react';
 
 import Header from '../../../common/Header/Header';
 
-import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar';
+import BasicSearchBar from '../../../common/components/legacy/SearchBar/BasicSearchBar';
 import { Select } from 'common/components';
 
 import { useInputs } from 'hooks/useInputs';

@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
 
-import TransparentButton from 'common/Components/Button/TransparentButton';
+import TransparentButton from 'common/components/legacy/Button/TransparentButton';
 
 export default function BackButton() {
   const navigate = useNavigate();

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Spinner from '../../common/Components/Spinner';
-import CircleImg from '../../common/Components/CircleImg';
-import BasicImage from '../../common/Components/Image/BasicImage';
+import Spinner from '../../common/components/legacy/Spinner';
+import CircleImg from '../../common/components/legacy/CircleImg';
+import BasicImage from '../../common/components/legacy/Image/BasicImage';
 
 import useQueryWaktaverseLive from '../../hooks/useQueryWaktaverseLive';
 

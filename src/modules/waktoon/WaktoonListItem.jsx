@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import BasicImage from '../../common/Components/Image/BasicImage';
+import BasicImage from '../../common/components/legacy/Image/BasicImage';
 
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';

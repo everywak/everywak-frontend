@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
-import Dropdown from 'common/Components/Dropdown';
+import Dropdown from 'common/components/legacy/Dropdown';
 
 import { useInputs } from 'hooks/useInputs';
 

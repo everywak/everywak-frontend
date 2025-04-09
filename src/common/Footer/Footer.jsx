@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Route, Link } from 'react-router-dom';
 
-import Button from '../Components/Button';
+import Button from 'common/components/legacy/Button';
 
 import styles from './Footer.module.scss';
 import classNames from 'classnames/bind';

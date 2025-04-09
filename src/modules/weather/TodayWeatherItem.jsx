@@ -2,7 +2,7 @@ import React from 'react';
 
 import { personalColor } from './weather.common';
 
-import BasicImage from '../../common/Components/Image/BasicImage';
+import BasicImage from '../../common/components/legacy/Image/BasicImage';
 
 import './TodayWeatherItem.scss';
 import cx from 'classnames';

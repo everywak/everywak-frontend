@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import Header from '../../../common/Header/Header';
-import BasicImage from '../../../common/Components/Image/BasicImage';
-import BasicButton from '../../../common/Components/Button/BasicButton';
-import LinkButton from '../../../common/Components/Button/LinkButton';
-import CircleImg from '../../../common/Components/CircleImg';
+import BasicImage from '../../../common/components/legacy/Image/BasicImage';
+import BasicButton from '../../../common/components/legacy/Button/BasicButton';
+import LinkButton from '../../../common/components/legacy/Button/LinkButton';
+import CircleImg from '../../../common/components/legacy/CircleImg';
 
-import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar';
+import BasicSearchBar from '../../../common/components/legacy/SearchBar/BasicSearchBar';
 import { Select } from 'common/components';
-import SkeletonLoader from '../../../common/Components/SkeletonLoader';
+import SkeletonLoader from '../../../common/components/legacy/SkeletonLoader';
 
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';

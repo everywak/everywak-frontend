@@ -10,8 +10,8 @@ import { Waktaverse } from '../../common/constants';
 import { Desktop, NotDesktop } from '../../common/MediaQuery';
 
 import Header from '../../common/Header/Header';
-import BasicSearchBar from '../../common/Components/SearchBar/BasicSearchBar';
-import CircleImg from '../../common/Components/CircleImg';
+import BasicSearchBar from '../../common/components/legacy/SearchBar/BasicSearchBar';
+import CircleImg from '../../common/components/legacy/CircleImg';
 
 import ContentPanel from '../frontpage/ContentPanel';
 import RecommendClipList from './RecommendClipList';

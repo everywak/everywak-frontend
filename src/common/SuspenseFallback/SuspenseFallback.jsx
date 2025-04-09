@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Spinner from '../Components/Spinner';
+import Spinner from '../components/legacy/Spinner';
 
 import styles from './SuspenseFallback.module.scss';
 import classNames from 'classnames/bind';

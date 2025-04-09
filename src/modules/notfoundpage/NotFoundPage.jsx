@@ -2,9 +2,9 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 import * as func from '../../common/functions';
-import BasicButton from '../../common/Components/Button/BasicButton';
-import LinkButton from '../../common/Components/Button/LinkButton';
-import Spinner from '../../common/Components/Spinner';
+import BasicButton from '../../common/components/legacy/Button/BasicButton';
+import LinkButton from '../../common/components/legacy/Button/LinkButton';
+import Spinner from '../../common/components/legacy/Spinner';
 
 import styles from './NotFoundPage.module.scss';
 import classNames from 'classnames/bind';

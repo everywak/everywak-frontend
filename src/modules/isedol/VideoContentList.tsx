@@ -4,8 +4,8 @@ import { Waktaverse } from '../../common/constants';
 import * as func from '../../common/functions';
 import * as videoApi from '../../services/everywak.video';
 
-import HorizontalScrollableList from '../../common/Components/HorizontalScrollableList/HorizontalScrollableList';
-import Spinner from 'common/Components/Spinner';
+import HorizontalScrollableList from '../../common/components/legacy/HorizontalScrollableList/HorizontalScrollableList';
+import Spinner from 'common/components/legacy/Spinner';
 
 import VideoItem from './VideoItem';
 

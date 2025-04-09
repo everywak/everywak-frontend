@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { orderNickname } from './weather.common';
 import TodayWeatherItem from './TodayWeatherItem';
 
-import SkeletonLoader from '../../common/Components/SkeletonLoader';
+import SkeletonLoader from '../../common/components/legacy/SkeletonLoader';
 import * as service from '../../services/Isedol';
 
 import './TodayWeatherList.scss';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import BasicImage from '../../common/Components/Image/BasicImage';
+import BasicImage from '../../common/components/legacy/Image/BasicImage';
 
 import styles from './FrontBestwakkiItem.module.scss';
 import classNames from 'classnames/bind';

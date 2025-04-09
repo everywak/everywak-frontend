@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import BasicImage from '../../../common/Components/Image/BasicImage';
-import CircleImg from '../../../common/Components/CircleImg';
-import HorizontalScrollableList from '../../../common/Components/HorizontalScrollableList/HorizontalScrollableList';
+import BasicImage from '../../../common/components/legacy/Image/BasicImage';
+import CircleImg from '../../../common/components/legacy/CircleImg';
+import HorizontalScrollableList from '../../../common/components/legacy/HorizontalScrollableList/HorizontalScrollableList';
 
 import WaktoonEpisodeList from '../waktoonViewer/WaktoonEpisodeList';
 
@@ -50,7 +50,11 @@ function BestWaktoonItem(props) {
         <div className="ctrArea"></div>
       </Link>
       <ul className="episodeListWrapper">
-        <HorizontalScrollableList backgroundColor="var(--color-component-white)" controlWidth={96} scrollAmount={400}>
+        <HorizontalScrollableList
+          backgroundColor="var(--color-component-white)"
+          controlWidth={96}
+          scrollAmount={400}
+        >
           <WaktoonEpisodeList uuid={toonId} defaultShowCount={10} searchOptions={{ keyword: '' }} />
         </HorizontalScrollableList>
       </ul>

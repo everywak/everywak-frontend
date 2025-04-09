@@ -4,7 +4,7 @@ import { orderNickname } from './weather.common';
 
 import PrevWeatherItem from './PrevWeatherItem';
 
-import SkeletonLoader from '../../common/Components/SkeletonLoader';
+import SkeletonLoader from '../../common/components/legacy/SkeletonLoader';
 import * as service from '../../services/Isedol';
 
 import './PrevWeatherList.scss';
