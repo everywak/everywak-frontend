@@ -129,12 +129,13 @@ export function WithliveProvider(props: Props): React.ReactNode {
   };
 
   const updateWatchingChannel = (channelId: string, channel: ChannelStateType) => {
-    const index = watchingChannels.findIndex((channel) => channel.memberId === channelId);
-    if (index !== -1) {
-      const newChannels = [...watchingChannels];
-      newChannels[index] = channel;
-      setWatchingChannels(newChannels);
-    }
+    setWatchingChannels((channels) => {
+      const index = channels.findIndex((channel) => channel.memberId === channelId);
+      if (index !== -1) {
+        channels[index] = channel;
+      }
+      return [...channels];
+    });
   };
 
   const removeWatchingChannel = (memberId: string) => {
