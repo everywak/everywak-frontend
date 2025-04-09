@@ -2,7 +2,7 @@ import { WithliveProvider } from 'contexts/WithliveContext';
 import { WithliveHeader, PlayerContainer, LiveChatContainer, Redirect } from 'components/withlive';
 import styles from './Page.module.scss';
 
-export default function Page() {
+export const Page = () => {
   return (
     <WithliveProvider>
       <Redirect />
@@ -15,4 +15,5 @@ export default function Page() {
       </div>
     </WithliveProvider>
   );
-}
+};
+export default Page;

@@ -8,10 +8,10 @@ import ScrollToTop from './common/ScrollToTop';
 
 import './common/common.scss';
 
-import NotFoundPage from './modules/notfoundpage/NotFoundPage';
-
 import Footer from './common/Footer/Footer';
 import { ThemeProvider } from 'contexts/ThemeContext';
+
+const NotFoundPage = lazy(() => import('./pages/notfoundpage/Page'));
 
 const Frontpage = lazy(() => import('./modules/frontpage/Frontpage'));
 
@@ -21,7 +21,7 @@ const Weather = lazy(() => import('./modules/weather/Weather'));
 
 const VideoWatch = lazy(() => import('./modules/video/VideoWatch'));
 
-const WithLive = lazy(() => import('./pages/withlive/Page'));
+const Withlive = lazy(() => import('./pages/withlive/Page'));
 
 const Waktoon = lazy(() => import('./modules/waktoon/Waktoon'));
 const WaktoonEpisodeViewer = lazy(
@@ -62,9 +62,9 @@ export default function App() {
             <Route path="/waktoon/:toonId/edit" element={<WaktoonEditor />} />
             <Route path="/waktoon/:toonId" element={<WaktoonViewer />} />
             <Route path="/waktoon" element={<Waktoon />} />
-            <Route path="/withlive" element={<WithLive />} />
-            <Route path="/withlive/isedol" element={<WithLive />} /> {/* 레거시 리다이렉트용 */}
-            <Route path="/live" element={<WithLive />} /> {/* 레거시 리다이렉트용 */}
+            <Route path="/withlive" element={<Withlive />} />
+            <Route path="/withlive/isedol" element={<Withlive />} /> {/* 레거시 리다이렉트용 */}
+            <Route path="/live" element={<Withlive />} /> {/* 레거시 리다이렉트용 */}
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
           <Footer />
