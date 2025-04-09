@@ -39,7 +39,7 @@ export type PopularArticlesResponse = {
  * @see getPopularArticles
  * @param {any} query
  */
-const filterPopularArticlesParams = (query: SearchFilter) => {
+const filterPopularArticlesParams = (query: Partial<SearchFilter>) => {
   // 기본값 정의
   const _default: PopularArticlesRequest = {
     orderBy: 'time',
@@ -56,7 +56,9 @@ const filterPopularArticlesParams = (query: SearchFilter) => {
 
   // 정렬
   const orders = ['time', 'time_oldest', 'up', 'comment', 'read'];
-  const orderBy = orders.includes(query.orderBy) ? query.orderBy : _default.orderBy;
+  const orderBy = orders.includes(query.orderBy ?? _default.orderBy)
+    ? (query.orderBy as ListOrder)
+    : _default.orderBy;
 
   // 페이지
   const page = Math.max(parseInt(String(query.page || _default.page).replace(ptNum, '')), 1);
@@ -78,12 +80,12 @@ const filterPopularArticlesParams = (query: SearchFilter) => {
   const queryTxt = query.keyword || _default.queryTxt;
 
   // 시작 날짜
-  const beginAt = !isNaN(Math.floor(query.beginAt / 1000))
-    ? Math.max(Math.floor(query.beginAt / 1000), _default.beginAt)
+  const beginAt = !isNaN(Math.floor((query.beginAt ?? 0) / 1000))
+    ? Math.max(Math.floor((query.beginAt ?? 0) / 1000), _default.beginAt)
     : _default.beginAt;
 
   // 끝 날짜
-  query.endAt = Math.floor(query.endAt / 1000) + 24 * 60 * 60 - 1;
+  query.endAt = Math.floor((query.endAt ?? Date.now()) / 1000) + 24 * 60 * 60 - 1;
   const endAt =
     !isNaN(query.endAt) && query.endAt >= beginAt && query.endAt <= _default.endAt
       ? query.endAt
@@ -105,7 +107,7 @@ const filterPopularArticlesParams = (query: SearchFilter) => {
 /**
  * 왁물원 인기글 목록을 불러옵니다.
  */
-const getPopularArticles = async (params: SearchFilter) =>
+const getPopularArticles = async (params: Partial<SearchFilter>) =>
   await request<PopularArticlesResponse>({
     method: 'GET',
     uri: '/bestwakki/WakkiPopularArticles',
