@@ -18,7 +18,9 @@
     align-items: center;
     flex-direction: row;
     padding: 6px 8px;
-    transition: color ease 0.15s, background-color ease 0.15s;
+    transition:
+      color ease 0.15s,
+      background-color ease 0.15s;
 
     .dateWrapper {
       color: var(--color-text-secondary);
@@ -33,6 +35,9 @@
       margin-left: 8px;
       width: 18px;
       height: 18px;
+    }
+    input {
+      color: var(--color-text-primary);
     }
 
     &.opened,
