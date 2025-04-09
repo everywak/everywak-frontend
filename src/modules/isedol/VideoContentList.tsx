@@ -5,6 +5,7 @@ import * as func from '../../common/functions';
 import * as videoApi from '../../services/everywak.video';
 
 import HorizontalScrollableList from '../../common/Components/HorizontalScrollableList/HorizontalScrollableList';
+import Spinner from 'common/Components/Spinner';
 
 import VideoItem from './VideoItem';
 
@@ -39,7 +40,7 @@ function VideoContentList(props: Props) {
     backgroundColor = 'var(--color-background-white)',
     ...rest
   } = props;
-
+  const [isLoading, setIsLoading] = useState(true);
   const [videoList, setVideoList] = useState([]);
 
   const fetchVideoContent = async () => {
@@ -75,11 +76,29 @@ function VideoContentList(props: Props) {
         }),
       );
     }
+    setIsLoading(false);
   };
   useEffect(() => {
     fetchVideoContent();
   }, [options, shorts]);
 
+  if (isLoading) {
+    return (
+      <div
+        className={cx('VideoContentList', className, {
+          shorts,
+          hideProfileCircle,
+        })}
+        {...rest}
+      >
+        <HorizontalScrollableList backgroundColor={backgroundColor}>
+          <ul className="list">
+            <Spinner className="spinner" />
+          </ul>
+        </HorizontalScrollableList>
+      </div>
+    );
+  }
   const list = videoList.map((item) => <VideoItem {...(item as any)} size={size} />);
   return (
     <div

@@ -32,4 +32,17 @@
       }
     }
   }
+
+  .spinner {
+    width: 790px;
+    height: 128px;
+  }
+
+  .empty {
+    @include font14_14_500;
+    color: var(--color-text-secondary);
+    text-align: center;
+    width: 100%;
+    padding: 4rem;
+  }
 }

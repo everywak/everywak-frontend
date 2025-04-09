@@ -3,14 +3,12 @@ import React, { Component, useEffect, useState } from 'react';
 import VideoItem from '../isedol/VideoItem';
 
 import HorizontalScrollableList from '../../common/Components/HorizontalScrollableList/HorizontalScrollableList';
+import Spinner from 'common/Components/Spinner';
 
 import * as func from '../../common/functions';
 import * as service from '../../services/Music';
 
-import GAEvents from '../../common/GAEvents';
-
 import './NewWakMusicList.scss';
-import cx from 'classnames';
 
 const now = new Date();
 const lastWeek = new Date(
@@ -19,7 +17,7 @@ const lastWeek = new Date(
   now.getDate() - ((now.getDay() + 1) % 7) - 7,
 );
 
-function NewWakMusicList(props) {
+function NewWakMusicList() {
   const [isLoading, setLoading] = useState(true);
   const [musicList, setMusicList] = useState([]);
 
@@ -57,11 +55,27 @@ function NewWakMusicList(props) {
     updateNewWakMusic();
   }, []);
 
+  if (isLoading) {
+    return (
+      <div className="NewWakMusicList">
+        <HorizontalScrollableList backgroundColor="var(--color-background-white)">
+          <ul className="list">
+            <Spinner className="spinner" />
+          </ul>
+        </HorizontalScrollableList>
+      </div>
+    );
+  }
+
   const list = musicList.map((item) => <VideoItem {...item} hideThumbnail />);
   return (
     <div className="NewWakMusicList">
-      <HorizontalScrollableList>
-        <ul className="list">{list}</ul>
+      <HorizontalScrollableList backgroundColor="var(--color-background-white)">
+        {list.length > 0 ? (
+          <ul className="list">{list}</ul>
+        ) : (
+          <div className="empty">최근 2주간 신곡이 올라오지 않았어요.</div>
+        )}
       </HorizontalScrollableList>
     </div>
   );

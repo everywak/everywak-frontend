@@ -97,7 +97,7 @@ function DesktopFrontpage() {
               className="main wakMusic"
               title="에브리뮤직"
               moreLink="https://everywak.kr/music/concert"
-              moreLabel="이세돌 콘서트 바로가기"
+              moreLabel="지난 이세돌 콘서트 바로가기"
               width="spaceBetween"
             >
               <ContentSubPanel className="sub newMusic" title="이 주의 신곡">

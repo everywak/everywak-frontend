@@ -1,6 +1,7 @@
 @use '@common/mixin' as *;
 
 .BottomNavigationBar.WaktoonBottomNavigationBar {
+  background-color: var(--color-component-gray);
   ul.itemList li.navigationItem .icon {
     background: transparent;
   }
