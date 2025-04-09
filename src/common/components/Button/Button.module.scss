@@ -26,15 +26,20 @@
   &.red-transparent {
     --theme-color: var(--color-red);
   }
+  &.green,
+  &.green-transparent {
+    --theme-color: var(--color-green);
+  }
   &.primary,
   &.secondary,
   &.black,
   &.gray,
-  &.red {
+  &.red,
+  &.green {
     --text-primary-color: var(--color-text-dark-primary);
   }
   &.white {
-    --text-primary-color: var(--text-primary-color);
+    --text-primary-color: var(--color-text-primary);
   }
 
   --background-color: var(--theme-color);
@@ -45,12 +50,14 @@
   &.gray-transparent,
   &.white-transparent,
   &.red-transparent,
+  &.green-transparent,
   &.outlined.primary,
   &.outlined.secondray,
   &.outlined.black,
   &.outlined.gray,
   &.outlined.white,
-  &.outlined.red {
+  &.outlined.red,
+  &.outlined.green {
     --background-color: transparent;
     --text-primary-color: var(--theme-color);
   }

@@ -13,12 +13,14 @@ export type ButtonProps = {
     | 'gray'
     | 'white'
     | 'red'
+    | 'green'
     | 'primary-transparent'
     | 'secondary-transparent'
     | 'black-transparent'
     | 'gray-transparent'
     | 'white-transparent'
-    | 'red-transparent';
+    | 'red-transparent'
+    | 'green-transparent';
   size?: 'small' | 'medium' | 'large';
   href?: string;
   target?: string;
