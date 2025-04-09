@@ -26,7 +26,7 @@ export function ChannelDetail(props: Props) {
       <StreamInfo channelId={props.memberId} />
       <section className={styles.channelPage}>
         <a
-          href={data?.[0] ? `https://cafe.naver.com/steamindiegame/${data?.[0].articleId}` : ''}
+          href={data?.[0] && `https://cafe.naver.com/steamindiegame/${data?.[0].articleId}`}
           className={styles.notice}
           target="_blank"
         >
