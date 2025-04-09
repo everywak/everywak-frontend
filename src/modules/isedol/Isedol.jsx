@@ -16,7 +16,7 @@ import './Isedol.scss';
 import cx from 'classnames';
 
 function Isedol() {
-  func.setBrowserTitle('이세계 아이돌');
+  func.setBrowserTitle('이세계아이돌');
 
   return (
     <>
@@ -28,7 +28,7 @@ function Isedol() {
               <img
                 className="logoImg"
                 src="/images/isedol/isedol_logo.png"
-                alt="이세계 아이돌 로고"
+                alt="이세계아이돌 로고"
               />
               <ul className="social">
                 <li className="socialItem waktube">

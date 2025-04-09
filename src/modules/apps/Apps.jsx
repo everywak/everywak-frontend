@@ -37,7 +37,7 @@ class Apps extends Component {
       },
       {
         key: 'apps_isedol',
-        title: '이세계 아이돌 in 에브리왁',
+        title: '이세계아이돌 in 에브리왁',
         description: '이세돌의 생방송, 핫클립, 유튜브 영상들을 한 눈에',
         icon: <StarRoundedIcon />,
         themeColor: '#F2499A',

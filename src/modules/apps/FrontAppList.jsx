@@ -32,7 +32,7 @@ function FrontAppList(props) {
     },
     {
       key: 'apps_isedol',
-      title: '이세계 아이돌',
+      title: '이세계아이돌',
       icon: <StarRoundedIcon />,
       themeColor: '#F2499A',
       href: '/isedol',
