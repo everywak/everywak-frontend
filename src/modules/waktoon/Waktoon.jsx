@@ -6,7 +6,6 @@ import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 
 import Header, { EverywakLogo } from '../../common/Header/Header';
 import CircleImg from '../../common/Components/CircleImg';
-//import BasicButton from '../../common/Components/Button/BasicButton';
 import LinkButton from '../../common/Components/Button/LinkButton';
 import HorizontalScrollableList from '../../common/Components/HorizontalScrollableList/HorizontalScrollableList';
 
@@ -83,7 +82,7 @@ export default function Waktoon(props) {
               </div>
               <div className="waktoonBestListWrapper">
                 <HorizontalScrollableList
-                  backgroundColor="#fafafa"
+                  backgroundColor="var(--color-background-header)"
                   controlWidth={96}
                   scrollAmount={400}
                 >
@@ -98,7 +97,7 @@ export default function Waktoon(props) {
             <WaktoonGeneralList />
           </ContentPanel>
           <section className="side">
-            <WaktoonSearchBar value="" searchTarget="title" onSearch={(e) => console.log(e)} />
+            {/* <WaktoonSearchBar value="" searchTarget="title" onSearch={(e) => console.log(e)} /> */}
 
             <ContentPanel className="main" title="인기급상승 왁툰" moreLink="/waktoon/chart">
               <WaktoonChartList />

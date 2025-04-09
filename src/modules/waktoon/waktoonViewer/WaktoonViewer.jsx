@@ -10,7 +10,7 @@ import LinkButton from '../../../common/Components/Button/LinkButton';
 import CircleImg from '../../../common/Components/CircleImg';
 
 import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar';
-import BasicSelect from '../../../common/Components/Select/BasicSelect';
+import { Select } from 'common/components';
 import SkeletonLoader from '../../../common/Components/SkeletonLoader';
 
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
@@ -263,7 +263,7 @@ function WaktoonEpisodeListWrapper({ target }) {
             <MenuBookRoundedIcon />
             1화부터 보기
           </BasicButton>
-          <BasicSelect
+          <Select
             options={[
               { name: '최신 화부터', value: 'time' },
               { name: '첫 화부터', value: 'time_oldest' },

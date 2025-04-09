@@ -35,6 +35,9 @@
     top: 0;
     width: 100%;
     height: 100%;
+    html.dark & {
+      filter: brightness(0.9);
+    }
 
     &::after {
       border-radius: var(--borderRadius);

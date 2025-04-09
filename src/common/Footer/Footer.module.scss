@@ -1,7 +1,7 @@
 @use '@common/mixin' as *;
 
 footer.footer {
-  background-color: var(--component-primary-bg-color);
+  background-color: var(--color-background-footer);
   box-sizing: border-box;
   font-size: 12px;
   font-weight: 400;
@@ -16,7 +16,6 @@ footer.footer {
 
     .SnsButton {
       border-radius: 8px;
-      color: var(--text-primary-color);
       display: inline-block;
       margin: 0 4px;
       overflow: hidden;
@@ -41,9 +40,8 @@ footer.footer {
       }
 
       .label {
+        background-color: var(--color-component-gray);
         display: inline-block;
-        box-sizing: border-box;
-        background-color: #fff;
         font-size: 12px;
         font-weight: 500;
         height: 32px;
@@ -52,7 +50,7 @@ footer.footer {
       }
     }
     .line {
-      background-color: var(--component-secondary-border-color);
+      background-color: var(--color-border);
       display: inline-block;
       margin: 0 4px;
       width: 1px;
@@ -62,7 +60,7 @@ footer.footer {
   }
 
   .links {
-    color: var(--text-secondary-color);
+    color: var(--color-text-secondary);
     line-height: 12px;
     margin: 0;
     padding: 0;
@@ -72,12 +70,12 @@ footer.footer {
     }
   }
   .desc {
-    color: var(--text-secondary-color);
+    color: var(--color-text-secondary);
     margin: 8px auto 4px;
     line-height: 16px;
   }
 
   .copyright {
-    color: #555;
+    color: var(--color-text-secondary);
   }
 }

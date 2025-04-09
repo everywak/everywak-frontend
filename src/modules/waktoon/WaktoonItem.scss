@@ -38,7 +38,11 @@
   }
 
   .previewWrapper {
-    background: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
+    html.dark & {
+      background-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.15);
+    }
     border-radius: 8px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.35);
     opacity: 1;
@@ -48,11 +52,16 @@
     min-width: var(--width);
     height: var(--height);
     max-height: var(--height);
-    transition: opacity ease 0.15s, box-shadow ease 0.15s;
+    transition:
+      opacity ease 0.15s,
+      box-shadow ease 0.15s;
     transition-delay: opacity 1s;
 
     &:hover {
       box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.35);
+      html.dark & {
+        box-shadow: 0px 2px 16px rgba(255, 255, 255, 0.15);
+      }
     }
 
     .previewImg {
@@ -80,16 +89,16 @@
         padding: 3px 4px;
         gap: 10px;
 
-        color: $dark-primary-text-color;
+        color: var(--color-text-dark-primary);
         font-weight: 900;
         font-size: 12px;
         line-height: 1em;
 
         &.newIcon {
-          background: #de3500;
+          background: var(--color-red);
         }
         &.updatedIcon {
-          background: #57b829;
+          background: var(--color-green);
         }
       }
     }
@@ -102,7 +111,7 @@
       right: 0px;
       bottom: 0px;
 
-      color: $dark-primary-text-color;
+      color: var(--color-gray-400);
       font-weight: 500;
       font-size: 14px;
       line-height: 1em;
@@ -124,7 +133,6 @@
       padding: 8px;
 
       .title {
-        color: var(--text-primary-color);
         display: block;
         font-size: 14px;
         font-weight: 500;
@@ -138,7 +146,7 @@
       }
       .author,
       .publishedTime {
-        color: var(--text-secondary-color);
+        color: var(--color-text-secondary);
         margin-top: 4px;
         font-size: 14px;
         font-weight: 400;

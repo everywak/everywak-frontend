@@ -1,7 +1,7 @@
 @use '@common/mixin' as *;
 
 .BestWaktoonItem {
-  background: var(--component-primary-bg-color);
+  background-color: var(--color-component-gray);
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   display: flex;
@@ -54,13 +54,12 @@
           gap: 8px;
 
           .ended {
-            color: var(--text-secondary-color);
+            color: var(--color-text-secondary);
             font-weight: 500;
             font-size: 14px;
             line-height: 1em;
           }
           .title {
-            color: var(--text-primary-color);
             font-weight: 500;
             font-size: 30px;
             line-height: 1em;
@@ -80,20 +79,18 @@
               gap: 8px;
 
               .authorProfile {
-                background: white;
+                background: var(--color-component-white);
                 width: 32px;
               }
               .authorNickname {
-                color: $primary-middle-text-color;
-                font-weight: 500;
-                font-size: 16px;
-                line-height: 1em;
+                @include font16_16_500;
+                color: var(--color-text-secondary);
               }
             }
           }
         }
         .description {
-          color: $primary-middle-text-color;
+          color: var(--color-text-secondary);
           font-weight: 500;
           font-size: 14px;
           line-height: 1.7em;
@@ -112,7 +109,7 @@
   }
 
   .episodeListWrapper {
-    background: var(--component-secondary-bg-color);
+    background: var(--color-component-white);
     border-radius: 0px 0px 8px 8px;
     display: flex;
     flex-direction: row;

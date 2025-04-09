@@ -11,7 +11,7 @@
 
   .headerWrapper {
     box-sizing: border-box;
-    background-color: rgba(0, 0, 0, 0.02);
+    background-color: var(--color-background-gray);
     padding: 48px 0 32px;
     width: 100%;
 
@@ -24,7 +24,7 @@
 
       & > .btnBack {
         align-items: center;
-        color: var(--primary-color);
+        color: var(--color-primary);
         display: flex;
         flex-direction: row;
         font-size: 16px;
@@ -43,10 +43,6 @@
         align-items: flex-end;
         justify-content: space-between;
         width: 100%;
-
-        .WaktoonInfo {
-          /* dummy */
-        }
 
         .statList {
           display: flex;
@@ -166,7 +162,7 @@
   --coverHeight: 220px;
 
   .thumbnailWrapper {
-    background-color: #d9d9d9;
+    background-color: var(--color-component-gray);
     border-radius: 8px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.35);
     overflow: hidden;
@@ -201,7 +197,7 @@
         font-weight: 500;
         font-size: 16px;
         line-height: 1em;
-        color: var(--text-secondary-color);
+        color: var(--color-text-secondary);
       }
       h1.title {
         display: flex;
@@ -213,7 +209,7 @@
 
         .btnEdit {
           background: transparent;
-          color: var(--text-secondary-color);
+          color: var(--color-text-secondary);
           width: 36px;
           height: 36px;
           margin: 0;
@@ -223,7 +219,7 @@
       }
       .authorArea {
         align-items: center;
-        color: $primary-middle-text-color;
+        color: var(--color-text-secondary);
         display: flex;
         flex-direction: row;
         font-weight: 500;
@@ -239,7 +235,7 @@
           gap: 8px;
 
           .authorProfile {
-            background: #d9d9d9;
+            background: var(--color-component-gray);
             width: 36px;
           }
           .authorNickname {
@@ -247,12 +243,12 @@
         }
 
         .btnMoreWaktoon {
-          color: var(--text-secondary-color);
+          color: var(--color-text-secondary);
         }
       }
     }
     .description {
-      color: $primary-middle-text-color;
+      color: var(--color-text-secondary);
       font-weight: 500;
       font-size: 16px;
       line-height: 1.6em;
@@ -291,13 +287,13 @@
   gap: 8px;
 
   &.view .icon {
-    color: #00ac30;
+    color: var(--color-green);
   }
   &.up .icon {
-    color: #d30000;
+    color: var(--color-red);
   }
   &.comment .icon {
-    color: #0064ac;
+    color: var(--color-blue);
   }
 
   .icon {
@@ -307,7 +303,7 @@
     justify-content: center;
     width: 48px;
     height: 48px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--color-border);
     border-radius: 50%;
 
     svg {
@@ -317,7 +313,7 @@
   }
 
   .label {
-    color: $primary-middle-text-color;
+    color: var(--color-text-secondary);
     font-family: 'Noto Sans KR';
     font-weight: 500;
     font-size: 14px;
@@ -346,6 +342,18 @@
   &:active .icon {
     background: rgba(0, 0, 0, 0.2);
   }
+  html.dark & {
+    .icon {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--color-text-secondary);
+    }
+    &:hover .icon {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    &:active .icon {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
 }
 
 .WaktoonEpisodeSlider {
@@ -363,8 +371,6 @@
     align-self: stretch;
     padding: 0px;
 
-    .btnBackToList {
-    }
     .CheckBox {
       width: fit-content;
     }
@@ -377,9 +383,6 @@
     align-items: center;
     padding: 0px;
     gap: 36px;
-
-    .WaktoonEpisodeViewItem {
-    }
   }
 }
 
@@ -405,7 +408,6 @@
   }
 
   .title {
-    color: var(--text-primary-color);
     font-family: 'Noto Sans KR';
     font-style: normal;
     font-weight: 500;
@@ -417,7 +419,7 @@
     height: 360px;
   }
   .caption {
-    color: var(--text-secondary-color);
+    color: var(--color-text-secondary);
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -441,7 +443,9 @@
   min-width: var(--width);
   height: var(--height);
   max-height: var(--height);
-  transition: opacity ease 0.15s, box-shadow ease 0.15s;
+  transition:
+    opacity ease 0.15s,
+    box-shadow ease 0.15s;
   transition-delay: opacity 1s;
 
   &:hover {
@@ -480,9 +484,6 @@
 
         & > .btnBack {
           font-size: 14px;
-
-          svg {
-          }
         }
 
         .infoWrapper {
@@ -491,10 +492,6 @@
           justify-content: flex-start;
           align-self: stretch;
 
-          .WaktoonInfo {
-            /* dummy */
-          }
-
           .statList {
             flex-direction: row-reverse;
             justify-content: center;
@@ -502,10 +499,6 @@
 
             .counterWrapper {
               gap: 12px;
-
-              .StatCounter {
-                /* dummy */
-              }
             }
 
             .line {

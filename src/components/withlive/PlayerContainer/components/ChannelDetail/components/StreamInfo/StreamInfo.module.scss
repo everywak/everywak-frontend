@@ -23,7 +23,7 @@
       border-radius: 50%;
       box-shadow: 0px 0px 0px 2px var(--border-color) inset;
       &.offline {
-        --border-color: var(--gray-400);
+        --border-color: var(--color-border);
       }
 
       .profileWrapper {
@@ -39,7 +39,6 @@
     }
 
     .desc {
-      color: var(--gray-800);
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
@@ -68,14 +67,14 @@
       flex-direction: row;
 
       .line {
+        background: var(--color-border);
         width: 1px;
         height: 1.5rem;
-        background: var(--gray-400);
         margin: 0 0.25rem;
       }
 
       .button {
-        color: var(--text-secondary-color);
+        color: var(--color-text-secondary);
         
         & > svg {
           font-size: 24px;
@@ -83,16 +82,16 @@
       }
     }
     .counter {
+      @include font14_14_500;
+      color: var(--color-text-secondary);
       display: flex;
       flex-direction: row;
-      color: var(--gray-600);
-      @include font14_14_500;
       &.offline {
         display: none;
       }
 
       .viewers {
-        color: #d40000;
+        color: var(--color-red);
         display: flex;
         flex-direction: row;
         align-items: center;

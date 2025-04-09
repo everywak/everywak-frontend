@@ -52,7 +52,7 @@
         }
 
         .line {
-          background-color: #dddddd;
+          background-color: var(--color-border);
           width: 16px;
           height: 1px;
           transform: rotate(-45deg);
@@ -61,7 +61,7 @@
           left: -1px;
         }
         .lineBottom {
-          background-color: #dddddd;
+          background-color: var(--color-border);
           width: 16px;
           height: 1px;
           transform: rotate(45deg);
@@ -74,7 +74,7 @@
   }
 
   .present {
-    color: var(--text-secondary-color);
+    color: var(--color-text-secondary);
     display: flex;
     flex-direction: column;
     align-items: flex-end;

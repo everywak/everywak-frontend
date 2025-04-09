@@ -26,13 +26,13 @@
       height: 38px;
 
       &.afreecatv a.link {
-        background: $afreeca-light-color;
+        background: var(--color-soop-light);
       }
       &.twitch a.link {
-        background: $twitch-color;
+        background: var(--color-twitch);
       }
       &.youtube a.link {
-        background: $youtube-color;
+        background: var(--color-youtube);
       }
       &.instagram a.link {
         background: $instagram-color;

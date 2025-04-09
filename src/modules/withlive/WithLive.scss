@@ -157,14 +157,13 @@ header.header {
         }
       }
       .footerTxt {
-        color: var(--text-secondary-color);
+        color: var(--color-text-secondary);
         font-size: 14px;
         font-weight: 400;
         margin: 0;
         padding: 12px 24px 72px;
 
         a {
-          color: var(--text-primary-color);
           font-weight: 500;
         }
       }
@@ -234,7 +233,10 @@ header.header {
     position: absolute;
 
     &.isMoving {
-      transition: left ease 0.15s, top ease 0.15s, width ease 0.15s,
+      transition:
+        left ease 0.15s,
+        top ease 0.15s,
+        width ease 0.15s,
         height ease 0.15s;
     }
 
@@ -248,7 +250,7 @@ header.header {
       }
 
       &::after {
-        color: $dark-primary-text-color;
+        color: var(--color-text-dark-primary);
         content: var(--name);
         display: flex;
         justify-content: center;
@@ -304,12 +306,8 @@ header.header {
   .TwitchChat {
     grid-area: chat;
     @media (orientation: portrait) {
-      --wrapperPortraitHeight: calc(
-        100vw / 16 * 9 + (100vw / var(--sidePlayerCount) / 16 * 9)
-      );
-      max-height: calc(
-        100vh - #{$header-height} - var(--wrapperPortraitHeight)
-      );
+      --wrapperPortraitHeight: calc(100vw / 16 * 9 + (100vw / var(--sidePlayerCount) / 16 * 9));
+      max-height: calc(100vh - #{$header-height} - var(--wrapperPortraitHeight));
 
       .opened + & {
         --wrapperPortraitHeight: calc(

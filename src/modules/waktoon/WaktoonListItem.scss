@@ -39,7 +39,9 @@
       min-width: var(--imageWidth);
       height: var(--imageHeight);
       max-height: var(--imageHeight);
-      transition: opacity ease 0.15s, box-shadow ease 0.15s;
+      transition:
+        opacity ease 0.15s,
+        box-shadow ease 0.15s;
       transition-delay: opacity 1s;
 
       &:hover {
@@ -82,7 +84,7 @@
           .icon {
             background: rgba(0, 0, 0, 0.5);
             border-radius: 8px;
-            color: $dark-primary-text-color;
+            color: var(--color-text-dark-primary);
             font-weight: 500;
             font-size: 12px;
             line-height: 1em;
@@ -105,12 +107,11 @@
             font-weight: 500;
             font-size: 14px;
             line-height: 1em;
-            color: var(--text-primary-color);
           }
         }
         .author,
         .publishedTime {
-          color: var(--text-secondary-color);
+          color: var(--color-text-secondary);
           font-weight: 400;
           font-size: 14px;
           line-height: 1em;
@@ -135,7 +136,7 @@
           & > li.tag {
             background: rgba(0, 0, 0, 0.5);
             border-radius: 4px;
-            color: $dark-primary-text-color;
+            color: var(--color-text-dark-primary);
             font-weight: 700;
             font-size: 12px;
             line-height: 1.2em;
@@ -164,7 +165,7 @@
           & > .popularity {
             background: rgba(0, 0, 0, 0.1);
             border-radius: 4px;
-            color: $primary-middle-text-color;
+            color: var(--color-text-secondary);
             font-weight: 500;
             font-size: 12px;
             line-height: 1em;

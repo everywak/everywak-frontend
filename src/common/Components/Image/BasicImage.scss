@@ -15,7 +15,7 @@
     }
   }
   .errorIcon {
-    color: $dark-primary-text-color;
+    color: var(--color-text-dark-primary);
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,6 +1,6 @@
 .container {
   --theme-color: var(--color-primary);
-  --text-primary-color: var(--text-dark-primary-color);
+  --text-primary-color: var(--color-text-dark-primary);
 
   &.primary,
   &.primary-transparent {
@@ -12,7 +12,7 @@
   }
   &.black,
   &.black-transparent {
-    --theme-color: var(--color-black);
+    --theme-color: var(--color-component-black);
   }
   &.gray,
   &.gray-transparent {
@@ -20,7 +20,7 @@
   }
   &.white,
   &.white-transparent {
-    --theme-color: var(--color-white);
+    --theme-color: var(--color-component-white);
   }
   &.red,
   &.red-transparent {
@@ -31,7 +31,7 @@
   &.black,
   &.gray,
   &.red {
-    --text-primary-color: var(--text-dark-primary-color);
+    --text-primary-color: var(--color-text-dark-primary);
   }
   &.white {
     --text-primary-color: var(--text-primary-color);

@@ -2,7 +2,7 @@
   .Article {
     box-sizing: border-box;
     min-height: 97px;
-    border: solid 1px var(--component-primary-border-color);
+    border: solid 1px var(--color-border);
     border-top: none;
     border-radius: 0;
     padding: 14px 15px 14px;
@@ -65,14 +65,14 @@
     }
   }
   .Article:nth-child(2) {
-    border-top: solid 1px var(--component-primary-border-color);
+    border-top: solid 1px var(--color-border);
   }
 }
 
 @mixin ArticleListDesktop {
   margin: 16px 0;
   .Article {
-    border-bottom: solid 1px var(--component-primary-border-color);
+    border-bottom: solid 1px var(--color-border);
     border-radius: 0;
     min-height: 16px;
     opacity: 0;
@@ -89,7 +89,7 @@
       cursor: auto;
       display: flex;
       border-radius: 0;
-      border-top: solid 1px var(--component-primary-border-color);
+      border-top: solid 1px var(--color-border);
       text-align: center;
       pointer-events: none;
 
@@ -148,7 +148,7 @@
       }
 
       &:hover + .thumb_area {
-        background-color: #fff;
+        background-color: var(--color-component-white);
         box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
         border-radius: 8px;
         display: block;

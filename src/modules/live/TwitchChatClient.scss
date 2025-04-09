@@ -71,7 +71,7 @@
           background: var(--component-primary-border-color);
           border-radius: 8px;
           box-sizing: border-box;
-          color: var(--text-secondary-color);
+          color: var(--color-text-secondary);
           margin: 4px;
           padding: 5px 16px;
           text-align: center;
@@ -188,12 +188,12 @@
         transition: border ease 0.3s;
 
         &:focus {
-          border-color: var(--primary-color);
+          border-color: var(--color-primary);
           outline: none;
         }
       }
       .twitchChatBtnEmote {
-        color: var(--text-secondary-color);
+        color: var(--color-text-secondary);
         position: absolute;
         right: 2px;
         bottom: 2px;
@@ -229,7 +229,7 @@
         flex-direction: row;
 
         .twitchChatBtnSetting {
-          color: var(--text-secondary-color);
+          color: var(--color-text-secondary);
           margin: 0 4px;
           padding: 1px 6px;
         }
@@ -387,12 +387,12 @@
     grid-row-end: 4;
 
     .loginTitle {
-      color: var(--text-secondary-color);
+      color: var(--color-text-secondary);
       font-size: 14px;
       font-weight: 400;
     }
     .btnLoginTwitch {
-      background: $twitch-color;
+      background: var(--color-twitch);
       font-size: 14px;
       font-weight: 500;
       margin-top: 8px;
@@ -401,14 +401,16 @@
   }
 
   .twitchChatButton {
-    background: var(--primary-color);
+    background: var(--color-primary);
     border: none;
     border-radius: 8px;
-    color: $dark-primary-text-color;
+    color: var(--color-text-dark-primary);
     display: flex;
     align-items: center;
     height: 32px;
-    transition: filter ease 0.15s, background-color ease 0.15s;
+    transition:
+      filter ease 0.15s,
+      background-color ease 0.15s;
     cursor: pointer;
 
     &:hover {

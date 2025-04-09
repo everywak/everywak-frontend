@@ -7,21 +7,6 @@ $mob-s-width: 375px;
 
 $header-height: 52px;
 
-$image-background-color: #ddd;
-
-$primary-text-color: #333;
-$primary-middle-text-color: #555;
-$dark-primary-text-color: #f0f0f0;
-$dark-secondary-text-color: #aaa;
-
-$button-secondary-bg-color: #f0f0f0;
-$button-secondary-text-color: $primary-middle-text-color;
-
-$twitch-color: #9147ff;
-$youtube-color: #f00;
-$chzzk-color: #00ffa3;
-$afreeca-color: #0545b1;
-$afreeca-light-color: #3262b4;
 $instagram-color: linear-gradient(
   45deg,
   #f09433 0%,
@@ -30,49 +15,11 @@ $instagram-color: linear-gradient(
   #cc2366 75%,
   #bc1888 100%
 );
-$wakki-color: #5ac467;
-$github-color: #1b1f23;
-
-$emphasis-text-color: #d40000;
 
 :root {
   // TODO: prefix --color로 통일하기
-  --primary-color: #0085ff;
   --primary-light-color: #1b91ff;
   --primary-dark-color: #0077e7;
-
-  --white: #fff;
-  --gray-100: #fafafa;
-  --gray-200: #f8f8f8;
-  --gray-300: #eaeaea;
-  --gray-400: #d9d9d9;
-  --gray-500: #949494;
-  --gray-600: #777;
-  --gray-700: #424242;
-  --gray-800: #222;
-  --black: #000;
-
-  --text-primary-color: var(--gray-800);
-  --text-secondary-color: var(--gray-700);
-
-  --text-dark-primary-color: var(--gray-300);
-
-  --background-white-color: #fafafa;
-  --component-primary-bg-color: #fafafa;
-  --component-primary-border-color: #f0f0f0;
-  --component-secondary-bg-color: #f0f0f0;
-  --component-secondary-border-color: #ccc;
-
-  --isedol-color: #d74d74;
-
-  --isedol-ine-color: #8a2be2;
-  --isedol-jingburger-color: #f0a957;
-  --isedol-lilpa-color: #443965;
-  --isedol-jururu-color: #ff008c;
-  --isedol-gosegu-color: #467ec6;
-  --isedol-viichan-color: #95c100;
-
-  --wakki-color: #5ac467;
 
   // v2
 
@@ -86,23 +33,83 @@ $emphasis-text-color: #d40000;
   --color-gray-600: #777;
   --color-gray-700: #424242;
   --color-gray-800: #222;
+  --color-gray-900: #111;
   --color-black: #000;
+  --color-white-transparent: #fff0;
+  --color-black-transparent: #0000;
+  --color-white-50: #fff5;
+  --color-black-50: #0008;
 
   // theme color
   --color-primary: #0085ff;
   --color-secondary: #ff6590;
   --color-red: #d40000;
+  --color-green: #00b528;
+  --color-orange: #b59400;
 
   // text color
-  --color-text-primary: var(--gray-800);
-  --color-text-secondary: var(--gray-600);
-  --color-text-dark-primary: var(--gray-200); // darkmode, darken background
-  --color-text-dark-secondary: var(--gray-400);
+  --color-text-primary: var(--color-gray-800);
+  --color-text-secondary: var(--color-gray-600);
+  --color-text-dark-primary: var(--color-gray-200); // darkmode, darken background
+  --color-text-dark-secondary: var(--color-gray-400);
 
   // social color
+  --color-github: #1b1f23;
+  --color-wakki: #5ac467;
+  --color-twitch: #9147ff;
+  --color-youtube: #f00;
+  --color-chzzk: #00ffa3;
+  --color-soop: #0545b1;
+  --color-soop-light: #3262b4;
 
   // isedol color
+  --color-isedol: #d74d74;
+  --color-ine: #8a2be2;
+  --color-jingburger: #f0a957;
+  --color-lilpa: #443965;
+  --color-jururu: #ff008c;
+  --color-gosegu: #467ec6;
+  --color-viichan: #95c100;
 
   // component color
+  --color-component-black: var(--color-black);
+  --color-component-white: var(--color-white);
+  --color-component-gray: var(--color-gray-200);
   --color-background-white: var(--color-white);
+  --color-background-white-transparent: var(--color-white-transparent);
+  --color-background-header: var(--color-gray-100);
+  --color-background-footer: var(--color-gray-100);
+  --color-background-toggle: var(--color-gray-500);
+  --color-border: var(--color-gray-300);
+  --color-scrollbar: var(--color-gray-400);
+  --color-overlay: var(--color-black-50);
+}
+
+html.dark {
+  // theme color
+  --color-primary: #006dd2;
+  --color-secondary: #ff6590;
+  --color-red: #d40000;
+  --color-green: #019120;
+  --color-orange: #8b7100;
+  --color-blue: #0064ac;
+
+  // text color
+  --color-text-primary: var(--color-gray-400);
+  --color-text-secondary: var(--color-gray-500);
+  --color-text-dark-primary: var(--color-gray-800); // darkmode, darken background
+  --color-text-dark-secondary: var(--color-gray-600);
+
+  // component color
+  --color-component-black: var(--color-gray-400);
+  --color-component-white: var(--color-gray-900);
+  --color-component-gray: var(--color-gray-800);
+  --color-background-white: var(--color-black);
+  --color-background-white-transparent: var(--color-black-transparent);
+  --color-background-header: var(--color-gray-900);
+  --color-background-footer: var(--color-gray-900);
+  --color-background-toggle: var(--color-gray-700);
+  --color-border: var(--color-gray-700);
+  --color-scrollbar: var(--color-gray-700);
+  --color-overlay: var(--color-white-50);
 }

@@ -14,7 +14,7 @@
     font-size: 16px;
     line-height: 1em;
     text-align: center;
-    color: var(--text-secondary-color);
+    color: var(--color-text-secondary);
     width: 24px;
   }
   .thumbnail {
@@ -36,15 +36,12 @@
       font-weight: 400;
       font-size: 13px;
       line-height: 1em;
-      color: var(--text-primary-color);
     }
     .author {
       font-weight: 400;
       font-size: 11px;
       line-height: 1em;
-      color: var(--text-secondary-color);
+      color: var(--color-text-secondary);
     }
-  }
-  .moreIcon {
   }
 }

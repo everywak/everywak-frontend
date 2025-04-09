@@ -12,7 +12,7 @@
   }
 
   .weatherBorder {
-    background: var(--component-secondary-border-color);
+    background: var(--color-border);
     width: calc((var(--responsiveScale) - 0.1px) / 0.9 * 160 * 6);
     height: 1px;
     @include mobile {

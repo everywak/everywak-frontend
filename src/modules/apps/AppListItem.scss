@@ -7,13 +7,20 @@
   flex-direction: row;
   gap: 16px;
   padding: 8px;
-  transition: background ease 0.15s;
 
   &:hover {
     background: #0001;
   }
   &:active {
     background: #0002;
+  }
+  html.dark & {
+    &:hover {
+      background: #fff1;
+    }
+    &:active {
+      background: #fff2;
+    }
   }
 
   .thumbWrapper {
@@ -135,7 +142,6 @@
       font-weight: 400;
       font-size: 13px;
       line-height: 1em;
-      color: var(--text-primary-color);
     }
     .description {
       display: none;

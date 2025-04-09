@@ -2,7 +2,6 @@
 
 .Button {
   border-radius: 8px;
-  color: var(--text-primary-color);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -81,7 +80,7 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    background-color: var(--primary-color);
+    background-color: var(--color-primary);
     font-size: 12px;
     font-weight: 500;
     height: 100%;

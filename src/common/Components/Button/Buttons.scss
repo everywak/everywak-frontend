@@ -1,10 +1,10 @@
 @use '@common/mixin' as *;
 
 .BasicButton {
-  background: var(--primary-color);
+  background: var(--color-primary);
   border: none;
   border-radius: 8px;
-  color: $dark-primary-text-color;
+  color: var(--color-text-dark-primary);
   &:not(.disabled) {
     cursor: pointer;
   }
@@ -26,7 +26,6 @@
   }
   &.Transparent {
     background: transparent;
-    color: var(--text-primary-color);
   }
 
   &::after {
@@ -83,7 +82,7 @@
         background: #111a;
         border-radius: 4px;
         box-shadow: 0px 0px 8px 1px #0003;
-        color: $dark-primary-text-color;
+        color: var(--color-text-dark-primary);
         display: flex;
         font-size: 14px;
         opacity: 0;
@@ -92,7 +91,10 @@
         bottom: 100%;
         pointer-events: none;
         width: max-content;
-        transition: bottom ease 0.15s, top ease 0.15s, opacity ease 0.15s;
+        transition:
+          bottom ease 0.15s,
+          top ease 0.15s,
+          opacity ease 0.15s;
         z-index: 100;
       }
       &:hover > .description {

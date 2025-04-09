@@ -16,8 +16,12 @@
   width: max-content;
   z-index: 100;
   opacity: 0;
-  transition: opacity ease 0.15s, top ease 0.15s, left ease 0.15s,
-    bottom ease 0.15s, right ease 0.15s;
+  transition:
+    opacity ease 0.15s,
+    top ease 0.15s,
+    left ease 0.15s,
+    bottom ease 0.15s,
+    right ease 0.15s;
 
   &:hover,
   &.root {
@@ -109,12 +113,12 @@
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
-        color: $dark-primary-text-color;
+        color: var(--color-text-dark-primary);
         width: 0;
         flex-grow: 1;
       }
       .subLabel {
-        color: $dark-secondary-text-color;
+        color: var(--color-text-dark-secondary);
         padding-left: 8px;
         width: max-content;
       }

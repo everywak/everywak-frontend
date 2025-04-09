@@ -15,7 +15,6 @@
       width: 100%;
       line-height: 120%;
       font-size: 14px;
-      color: var(--text-primary-color);
       order: 1;
 
       .icon_new_txt {
@@ -24,15 +23,13 @@
       }
 
       &:link {
-        color: var(--text-primary-color);
-
         .icon_new_txt {
           color: #a00;
           display: none;
         }
       }
       &:visited {
-        color: var(--text-secondary-color);
+        color: var(--color-text-secondary);
 
         .icon_new_txt {
           color: #fff;
@@ -41,7 +38,7 @@
       }
 
       .board_txt {
-        color: var(--text-secondary-color);
+        color: var(--color-text-secondary);
         font-size: 12px;
         font-weight: 500;
         line-height: 12px;
@@ -51,7 +48,7 @@
         height: 100%;
       }
       .user_area {
-        color: var(--text-secondary-color);
+        color: var(--color-text-secondary);
         font-size: 12px;
         font-weight: 500;
       }
@@ -83,7 +80,7 @@
 
   .MoreArticleButton {
     border-radius: 8px;
-    color: var(--primary-color);
+    color: var(--color-primary);
     cursor: pointer;
     display: block;
     font-size: 14px;
@@ -111,7 +108,7 @@
 
     svg {
       display: block;
-      fill: var(--primary-color);
+      fill: var(--color-primary);
       margin: 0 auto;
       position: relative;
       top: 0px;

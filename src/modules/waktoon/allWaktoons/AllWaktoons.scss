@@ -28,7 +28,7 @@
 
       .btnBack {
         align-items: center;
-        color: var(--primary-color);
+        color: var(--color-primary);
         display: flex;
         flex-direction: row;
         font-size: 16px;
@@ -42,14 +42,13 @@
         }
       }
       .title {
-        color: var(--text-primary-color);
         font-weight: 500;
         font-size: 36px;
         line-height: 1em;
         margin: 0;
       }
       .desc {
-        color: var(--text-secondary-color);
+        color: var(--color-text-secondary);
         font-weight: 500;
         font-size: 20px;
         line-height: 1em;
@@ -91,12 +90,9 @@
       align-items: center;
       align-self: stretch;
       gap: 24px;
-
-      .PageSelect {
-      }
     }
     .footer {
-      color: var(--text-secondary-color);
+      color: var(--color-text-secondary);
       font-size: 14px;
       text-align: right;
     }
@@ -134,25 +130,15 @@
 
       .listHeader {
         display: none;
-
-        .filterWrapper {
-          .sortItemWrapper {
-          }
-        }
-        .BasicSearchBar {
-        }
       }
 
       .waktoonEpisodeListWrapper {
         .AllWaktoonList {
           padding: 0px 8px;
         }
-
-        .PageSelect {
-        }
       }
       .footer {
-        color: var(--text-secondary-color);
+        color: var(--color-text-secondary);
         font-size: 12px;
         text-align: right;
       }

@@ -1,7 +1,7 @@
 @use '@common/mixin' as *;
 
 .DatePicker {
-  background-color: #fff;
+  background-color: var(--color-component-white);
   border-radius: 8px;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
   display: none;
@@ -21,7 +21,7 @@
   }
 
   .preset {
-    border-right: 1px solid var(--component-secondary-border-color);
+    border-right: 1px solid var(--color-border);
     grid-area: preset;
 
     .presetItem {
@@ -41,7 +41,7 @@
       }
 
       .marker {
-        background-color: var(--primary-color);
+        background-color: var(--color-primary);
         border-radius: 50%;
         display: inline-block;
         margin: 5px 8px 5px 2px;
@@ -52,7 +52,7 @@
         transition: opacity ease 0.15s;
       }
       .name {
-        color: var(--text-secondary-color);
+        color: var(--color-text-secondary);
         display: inline-block;
         font-size: 14px;
         font-weight: 400;
@@ -65,12 +65,12 @@
           opacity: 1;
         }
         .name {
-          color: var(--primary-color);
+          color: var(--color-primary);
         }
       }
     }
     .presetLine {
-      background-color: var(--component-secondary-border-color);
+      background-color: var(--color-border);
       margin: 4px 8px 4px 8px;
       width: 88px;
       height: 1px;
@@ -81,7 +81,7 @@
     grid-area: range;
 
     .dateRange {
-      color: var(--text-secondary-color);
+      color: var(--color-text-secondary);
       font-size: 14px;
       margin: 3px 0px 1px 2px;
 
@@ -103,7 +103,7 @@
           &:active,
           &:focus,
           &.selected {
-            color: var(--primary-color);
+            color: var(--color-primary);
             outline: none;
           }
         }
@@ -119,18 +119,13 @@
 
       .currentYearMonth {
         font-size: 14px;
-
-        .currYear {
-        }
-        .currMonth {
-        }
       }
 
       .changeBtnArea {
         .BasicButton {
           border-radius: 50%;
           padding: 2px;
-          &::after {
+          &:after {
             border-radius: 50%;
           }
         }
@@ -145,7 +140,7 @@
       height: $itemHeight;
 
       .day {
-        color: var(--text-secondary-color);
+        color: var(--color-text-secondary);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -194,7 +189,7 @@
             position: relative;
 
             & > span {
-              color: var(--text-secondary-color);
+              color: var(--color-text-secondary);
               display: block;
               font-size: 14px;
               line-height: 14px;
@@ -208,8 +203,8 @@
             }
             &.dummy.checked,
             &.checked {
-              &::before {
-                background-color: white;
+              &:before {
+                background-color: var(--color-component-gray);
                 box-sizing: border-box;
                 color: transparent;
                 content: 'n';
@@ -219,35 +214,35 @@
                 top: 2px;
                 position: absolute;
                 z-index: 1;
-                border-top: 1px solid var(--component-secondary-border-color);
-                border-bottom: 1px solid var(--component-secondary-border-color);
+                border-top: 1px solid var(--color-border);
+                border-bottom: 1px solid var(--color-border);
               }
-              &.start::before {
+              &.start:before {
                 border-radius: 8px 0px 0px 8px;
-                border-left: 1px solid var(--component-secondary-border-color);
+                border-left: 1px solid var(--color-border);
               }
-              &.end::before {
+              &.end:before {
                 border-radius: 0px 8px 8px 0px;
-                border-right: 1px solid var(--component-secondary-border-color);
+                border-right: 1px solid var(--color-border);
               }
-              &.this::before {
+              &.this:before {
                 border-radius: 8px;
-                border: 1px solid var(--component-secondary-border-color);
+                border: 1px solid var(--color-border);
               }
-              &.disabled::before {
+              &.disabled:before {
                 background-color: transparent;
                 border: none;
               }
 
               & > span {
-                color: var(--primary-color);
+                color: var(--color-primary);
                 position: absolute;
                 z-index: 2;
               }
             }
             &:hover {
               &::after {
-                background-color: var(--primary-color);
+                background-color: var(--color-primary);
                 border-radius: 8px;
                 box-sizing: border-box;
                 color: transparent;
@@ -274,10 +269,10 @@
             }
             &.disabled > span,
             &.dummy.disabled > span {
-              color: var(--component-primary-border-color);
+              color: var(--color-border);
             }
             &.dummy > span {
-              color: var(--component-secondary-border-color);
+              color: var(--color-border);
             }
           }
         }

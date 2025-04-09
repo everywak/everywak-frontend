@@ -52,7 +52,10 @@
       justify-content: center;
       align-items: center;
       gap: 16px;
-      transition: border ease 0.15s, color ease 0.15s, fill ease 0.15s;
+      transition:
+        border ease 0.15s,
+        color ease 0.15s,
+        fill ease 0.15s;
 
       .iconWrapper {
         background: var(--background-white-color);
@@ -69,20 +72,20 @@
         }
       }
       .label {
-        color: var(--text-secondary-color);
+        color: var(--color-text-secondary);
         font-size: 14px;
         font-weight: 500;
       }
       &.selected {
         .iconWrapper {
-          border-color: var(--primary-color);
+          border-color: var(--color-primary);
 
           svg {
             fill: #7dc1fd;
           }
         }
         .label {
-          color: var(--primary-color);
+          color: var(--color-primary);
         }
       }
     }
@@ -116,7 +119,9 @@
     width: 600px;
     align-self: stretch;
     overflow: hidden;
-    transition: width ease 0.3s, height ease 0.3s;
+    transition:
+      width ease 0.3s,
+      height ease 0.3s;
 
     &.isDragging {
       .previewItemWrapper {
@@ -181,11 +186,7 @@
       }
     }
     .PreviewItem {
-      --scaleOffset: clamp(
-        0,
-        max(var(--gridColumns, 1), var(--gridRows, 1)) - 4,
-        1
-      );
+      --scaleOffset: clamp(0, max(var(--gridColumns, 1), var(--gridRows, 1)) - 4, 1);
       background-color: #08f0;
       box-sizing: border-box;
       border-radius: 16px;
@@ -197,12 +198,15 @@
       width: 100%;
       height: 100%;
       cursor: grab;
-      transition: width ease 0.3s, height ease 0.3s, background ease 0.3s,
+      transition:
+        width ease 0.3s,
+        height ease 0.3s,
+        background ease 0.3s,
         border ease 0.3s;
 
       &.selected {
         background-color: #08f2;
-        border-color: var(--primary-color);
+        border-color: var(--color-primary);
         cursor: grabbing;
       }
 
@@ -233,12 +237,8 @@
       flex-direction: row;
 
       .previewItemWrapper {
-        width: calc(
-          (100% - 16px * (var(--gridColumns, 1) - 1)) / var(--gridColumns, 1)
-        );
-        height: calc(
-          (100% - 16px * (var(--gridRows, 1) - 1)) / var(--gridRows, 1)
-        );
+        width: calc((100% - 16px * (var(--gridColumns, 1) - 1)) / var(--gridColumns, 1));
+        height: calc((100% - 16px * (var(--gridRows, 1) - 1)) / var(--gridRows, 1));
         max-height: calc(100vh - 120px);
       }
     }
@@ -278,11 +278,7 @@
     }
   }
   .MemberItem {
-    --scaleOffset: clamp(
-      0,
-      max(var(--gridColumns, 1), var(--gridRows, 1)) - 4,
-      1
-    );
+    --scaleOffset: clamp(0, max(var(--gridColumns, 1), var(--gridRows, 1)) - 4, 1);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -321,12 +317,16 @@
       overflow: hidden;
       width: calc(var(--radius) * 2);
       height: calc(var(--radius) * 2);
-      transition: width ease 0.3s, height ease 0.3s;
+      transition:
+        width ease 0.3s,
+        height ease 0.3s;
 
       .CircleImg {
         width: calc(var(--radius) * 2);
         height: calc(var(--radius) * 2);
-        transition: width ease 0.3s, height ease 0.3s;
+        transition:
+          width ease 0.3s,
+          height ease 0.3s;
       }
     }
     &.liveYoutube .circleWrapper,
@@ -342,22 +342,24 @@
       width: calc((var(--radius) - 2px) * 2);
       height: calc((var(--radius) - 2px) * 2);
       overflow: hidden;
-      transition: width ease 0.3s, height ease 0.3s;
+      transition:
+        width ease 0.3s,
+        height ease 0.3s;
     }
     &.liveYoutube .profileCircle {
-      border: $youtube-color solid 2px;
+      border: var(--color-youtube) solid 2px;
     }
     &.liveTwitch .profileCircle {
-      border: $twitch-color solid 2px;
+      border: var(--color-twitch) solid 2px;
     }
     &.liveChzzk .profileCircle {
-      border: $chzzk-color solid 2px;
+      border: var(--color-chzzk) solid 2px;
     }
     &.liveAfreeca .profileCircle {
-      border: $afreeca-color solid 2px;
+      border: var(--color-soop) solid 2px;
     }
     .nickname {
-      color: var(--text-secondary-color);
+      color: var(--color-text-secondary);
       font-size: calc(14px - var(--scaleOffset) * 2px);
       font-weight: 500;
       line-height: 1em;

@@ -9,12 +9,10 @@
     padding: 4px 4px 4px 8px;
 
     .currName {
-      color: var(--text-primary-color);
       font-size: 12px;
       line-height: 18px;
     }
     svg {
-      fill: var(--text-primary-color);
       width: 18px;
       height: 18px;
     }
@@ -44,7 +42,7 @@
     }
 
     .dropdownArea {
-      background-color: white;
+      background-color: var(--color-component-white);
       box-sizing: border-box;
       box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
       border-radius: 8px;
@@ -63,12 +61,12 @@
 
         .marker {
           opacity: 0;
-          background-color: var(--primary-color);
+          background-color: var(--color-primary);
           border-radius: 50%;
           pointer-events: none;
         }
         .name {
-          color: var(--text-secondary-color);
+          color: var(--color-text-secondary);
           font-weight: 500;
           pointer-events: none;
         }
@@ -77,7 +75,7 @@
             opacity: 1;
           }
           .name {
-            color: var(--primary-color);
+            color: var(--color-primary);
           }
         }
       }
@@ -116,6 +114,9 @@
 
           &:not(.checked):hover {
             background-color: rgba(0, 0, 0, 0.1);
+            html.dark & {
+              background-color: rgba(255, 255, 255, 0.1);
+            }
           }
 
           .marker {

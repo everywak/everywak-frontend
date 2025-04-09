@@ -1,0 +1,25 @@
+@use '@common/mixin' as *;
+
+.container {
+  display: flex;
+  flex-direction: row;
+  user-select: none;
+  align-items: center;
+
+  .content {
+    @include font14_14_500;
+    position: relative;
+    flex: 1;
+    padding: 0.75rem 1rem;
+  }
+  .select {
+    height: fit-content;
+    margin-right: .5rem;
+    border: none;
+
+    button {
+      @include font14_14_500;
+      padding: .5rem .75rem;
+    }
+  }
+}

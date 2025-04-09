@@ -24,7 +24,7 @@
       display: none;
     }
     &::-webkit-scrollbar-thumb {
-      background: var(--gray-400);
+      background: var(--color-scrollbar);
       background-clip: padding-box;
       border: 3.5px solid transparent;
       border-radius: 7px;

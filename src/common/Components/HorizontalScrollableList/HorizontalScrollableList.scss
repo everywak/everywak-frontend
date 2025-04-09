@@ -2,8 +2,8 @@
 
 .HorizontalScrollableList {
   --controlWidth: 64px;
-  --backgroundColor: #ffffff;
-  --backgroundTransparentColor: #ffffff;
+  --backgroundColor: var(--color-background-white);
+  --backgroundTransparentColor: var(--color-background-white);
   position: relative;
 
   .listWrapper {
@@ -16,7 +16,6 @@
 
   .btnControl {
     border-radius: 0;
-    color: var(--text-primary-color);
     margin: 0;
     position: absolute;
     top: 0;

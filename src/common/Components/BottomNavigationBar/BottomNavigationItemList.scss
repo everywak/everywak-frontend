@@ -32,19 +32,13 @@ ul.BottomNavigationItemList {
     .icon {
       background: transparent;
       border-radius: 50%;
-      color: var(--text-primary-color);
       display: flex;
       justify-content: center;
       align-items: center;
       width: 24px;
       height: 24px;
-
-      svg {
-        color: var(--text-primary-color);
-      }
     }
     .label {
-      color: var(--text-primary-color);
       font-weight: 400;
       font-size: 12px;
       line-height: 1em;

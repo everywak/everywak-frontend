@@ -1,19 +1,23 @@
 @use '@common/mixin' as *;
 
 .container {
-  position: absolute;
-  width: max-content;
+  color: var(--gray-300);
   border-radius: 16px;
   background-color: #000a;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  color: var(--text-dark-primary-color);
   padding: 8px 12px;
   font-size: 14px;
   font-weight: 500;
   opacity: 0;
   pointer-events: none;
-  transition: opacity ease 0.15s, top ease 0.15s, bottom ease 0.15s,
-    left ease 0.15s, right ease 0.15s;
+  transition:
+    opacity ease 0.15s,
+    top ease 0.15s,
+    bottom ease 0.15s,
+    left ease 0.15s,
+    right ease 0.15s;
+  position: absolute;
+  width: max-content;
   z-index: 10;
 }
 *:hover > .container {

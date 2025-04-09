@@ -48,7 +48,8 @@ class Footer extends Component {
       {
         id: 4,
         type: 'btn',
-        color: '#1B1F23',
+        color: '#1b1f23',
+        bgColor: 'var(--color-component-white)',
         href: 'https://github.com/wei756',
         img: '/images/github_logo.svg',
         label: '@wei756',
@@ -65,6 +66,7 @@ class Footer extends Component {
           href={btn.href}
           iconSrc={btn.img}
           iconBGColor={btn.color}
+          labelBGColor={btn.bgColor}
           label={btn.label}
           showLabel={btn.showLabel}
         />

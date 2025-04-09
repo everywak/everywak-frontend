@@ -69,7 +69,7 @@ function HorizontalScrollableList({
 
   const listStyle = {
     '--backgroundColor': backgroundColor,
-    '--backgroundTransparentColor': backgroundColor + '00',
+    '--backgroundTransparentColor': 'var(--color-background-white-transparent)',
     '--controlWidth': controlWidth + 'px',
   } as CSSProperties;
 

@@ -50,7 +50,7 @@ function BestWaktoonItem(props) {
         <div className="ctrArea"></div>
       </Link>
       <ul className="episodeListWrapper">
-        <HorizontalScrollableList backgroundColor="#f0f0f0" controlWidth={96} scrollAmount={400}>
+        <HorizontalScrollableList backgroundColor="var(--color-component-white)" controlWidth={96} scrollAmount={400}>
           <WaktoonEpisodeList uuid={toonId} defaultShowCount={10} searchOptions={{ keyword: '' }} />
         </HorizontalScrollableList>
       </ul>

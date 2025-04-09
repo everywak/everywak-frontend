@@ -2,7 +2,7 @@
 
 .SearchBar {
   align-items: center;
-  border: solid 1px var(--component-secondary-border-color);
+  border: solid 1px var(--color-border);
   border-radius: 8px;
   box-sizing: border-box;
   display: flex;
@@ -13,7 +13,7 @@
   .inputForm {
     border: 0;
     background: transparent;
-    color: var(--text-primary-color);
+    color: var(--color-text-primary);
     flex-grow: 1;
     font-family: inherit;
     font-size: 12px;
@@ -23,8 +23,8 @@
     vertical-align: middle;
     width: 84px;
 
-    &::placeholder {
-      color: var(--text-secondary-color);
+    &:placeholder {
+      color: var(--color-text-secondary);
       font-size: 12px;
       font-weight: 500;
       transition: color ease 0.3s;
@@ -33,7 +33,7 @@
     &:focus {
       outline: none;
 
-      &::placeholder {
+      &:placeholder {
         color: transparent;
         transition: color ease 0.1s;
       }
@@ -43,20 +43,20 @@
   .Dropdown {
     .dispArea {
       .currName {
-        color: var(--primary-color);
+        color: var(--color-primary);
         display: block;
         min-width: fit-content;
         width: fit-content;
       }
       svg {
-        fill: var(--primary-color);
+        fill: var(--color-primary);
       }
     }
   }
 
   .btnSearch {
     align-items: center;
-    background: var(--primary-color);
+    background: var(--color-primary);
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -79,7 +79,9 @@
     svg {
       width: 18px;
       height: 18px;
-      transition: width ease 0.3s, height ease 0.3s;
+      transition:
+        width ease 0.3s,
+        height ease 0.3s;
     }
   }
 }

@@ -10,12 +10,12 @@
   z-index: 1000;
   background-color: var(--color-background-white);
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--color-gray-300);
+  border-bottom: 1px solid var(--color-border);
 
   .header {
     @include font16_16_500;
     background-color: var(--color-background-white);
-    border-bottom: 1px solid var(--color-gray-300);
+    border-bottom: 1px solid var(--color-border);
     display: flex;
     flex-direction: row;
     justify-content: space-between;

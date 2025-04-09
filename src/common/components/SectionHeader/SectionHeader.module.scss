@@ -40,16 +40,15 @@
       font-weight: 500;
       font-size: 20px;
       line-height: 1em;
-      color: var(--text-primary-color);
     }
     .subtitle {
+      color: var(--color-text-secondary);
       font-weight: 500;
       font-size: 14px;
       line-height: 1em;
-      color: var(--text-secondary-color);
     }
     .bottomLine {
-      background: var(--component-secondary-border-color);
+      background: var(--color-border);
       width: 160px;
       height: 2px;
       margin: 16px auto;
@@ -57,7 +56,7 @@
   }
 
   .more {
-    color: var(--primary-color);
+    color: var(--color-primary);
     display: flex;
     flex-direction: row;
     align-items: center;

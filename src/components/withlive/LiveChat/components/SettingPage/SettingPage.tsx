@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { ComponentProps } from './types';
-import { CheckBox, Group } from './components';
+import { CheckBox, Group, Select } from './components';
 import styles from './SettingPage.module.scss';
 import React from 'react';
 
@@ -29,6 +29,18 @@ export const SettingPage = React.memo((props: Props) => {
         );
       case 'group':
         return <Group key={i} title={item.title} />;
+      case 'select':
+        return (
+          <Select
+            key={i}
+            name={item.name}
+            value={item.value}
+            options={item.options}
+            onChange={item.onChange}
+          >
+            {item.label}
+          </Select>
+        );
       default:
         return <></>;
     }

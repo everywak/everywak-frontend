@@ -5,8 +5,10 @@ import { SettingPage } from '..';
 import { Button } from 'common/components';
 import { CloseRounded } from '@mui/icons-material';
 import { ComponentProps } from '../SettingPage/types';
+import { Theme, useTheme } from 'contexts/ThemeContext';
 
 export const ChatSetting = () => {
+  const { theme, setTheme } = useTheme();
   const { isOpenedSetting, option } = useLiveChatValue();
   const { setOpenedSetting, updateOption } = useLiveChatActions();
 
@@ -47,6 +49,29 @@ export const ChatSetting = () => {
       value: form.isShowTimestamp,
       onChange: onChange,
       label: '타임스탬프 보기',
+    },
+    {
+      type: 'select',
+      name: 'theme',
+      value: theme,
+      onChange: (e) => {
+        setTheme(e.target.value as Theme);
+      },
+      options: [
+        {
+          name: '라이트',
+          value: 'light',
+        },
+        {
+          name: '다크',
+          value: 'dark',
+        },
+        {
+          name: '시스템 설정',
+          value: 'preferred',
+        },
+      ],
+      label: '테마',
     },
 
     {

@@ -29,7 +29,6 @@
         align-items: center;
 
         h1.title {
-          color: var(--text-primary-color);
           font-weight: 500;
           font-size: 36px;
           line-height: 1em;
@@ -41,8 +40,6 @@
           }
 
           .waktoonLogo {
-            color: var(--text-primary-color);
-
             .beta {
               color: #4ddf8a;
               font-size: 24px;
@@ -67,21 +64,20 @@
 
             li {
               a {
-                color: var(--text-primary-color);
                 font-weight: 500;
                 font-size: 18px;
                 line-height: 1em;
                 transition: color ease 0.15s;
 
                 &:hover {
-                  color: var(--primary-color);
+                  color: var(--color-primary);
                 }
               }
             }
           }
           .btnLogin {
-            background: $button-secondary-bg-color;
-            color: $button-secondary-text-color;
+            background-color: var(--color-component-gray);
+            color: var(--color-text-secondary);
             display: flex;
             flex-direction: row;
             justify-content: center;
@@ -113,20 +109,19 @@
           width: 240px;
 
           h2.title {
-            color: var(--text-primary-color);
             font-weight: 500;
             font-size: 24px;
             line-height: 1em;
             margin: 0;
           }
           .description {
-            color: $primary-middle-text-color;
+            color: var(--color-text-secondary);
             font-weight: 500;
             font-size: 16px;
             line-height: 1.6em;
           }
           .btnMoreBest {
-            color: var(--primary-color);
+            color: var(--color-primary);
             display: flex;
             align-items: center;
             font-weight: 500;
@@ -141,9 +136,6 @@
 
           .WaktoonBestList {
             width: 100%;
-
-            ul.itemList {
-            }
           }
         }
       }
@@ -200,7 +192,7 @@
 
     .CircleImg {
       width: 44px;
-      background: #d9d9d9;
+      background-color: var(--color-component-gray);
       border-radius: 50%;
     }
     .nickname {
@@ -209,18 +201,22 @@
   }
 }
 @include desktop {
+  .Waktoon {
+    .headerWrapper {
+      background: var(--color-background-header);
+    }
+  }
 }
 @include not-desktop {
   .Waktoon {
     padding: 0 0 31px;
     gap: 0;
-    background: var(--component-secondary-bg-color);
 
     .headerWrapper {
-      background: var(--component-primary-bg-color);
       padding: 0;
 
       .headerContainer {
+        background: var(--color-background-header);
         margin: 0;
         padding: 0px 0px 12px;
         gap: 32px;
@@ -230,7 +226,6 @@
           justify-content: center;
 
           h1.title {
-            color: var(--text-primary-color);
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -243,13 +238,13 @@
 
               img {
                 height: inherit;
+                html.dark & {
+                  filter: invert(1);
+                }
               }
             }
-            a {
-              color: var(--text-primary-color);
-            }
             .line {
-              background-color: var(--text-secondary-color);
+              background-color: var(--color-border);
               display: block;
               width: 2px;
               height: 20px;
@@ -286,7 +281,7 @@
               display: none;
             }
             .btnMoreBest {
-              color: var(--primary-color);
+              color: var(--color-primary);
               display: flex;
               align-items: center;
               font-weight: 500;
@@ -326,7 +321,6 @@
       max-width: 100%;
 
       section.main {
-        background: var(--component-primary-bg-color);
         padding: 16px 0px;
 
         .ContentPanel {
@@ -346,7 +340,6 @@
         }
       }
       section.side {
-        background: var(--component-primary-bg-color);
         border-top: 1px solid rgba(0, 0, 0, 0.1);
         padding: 8px 0px;
 

@@ -5,7 +5,7 @@ import styles from './Select.module.scss';
 import React from 'react';
 
 export interface Props {
-  className: string;
+  className?: string;
   options: { name: string; value: string }[];
   name: string;
   value: string;

@@ -109,7 +109,7 @@ const VideoContentTab = ({ member }: { member: Member }) => {
             type: 'youtubeClip',
             twitchId: member.livePlatform.find((platform) => platform.type === 'twitch')?.name,
           }}
-          backgroundColor="#fafafa"
+          backgroundColor={'var(--color-background-white)'}
           hideProfileCircle
         />
       </Section>
@@ -119,7 +119,7 @@ const VideoContentTab = ({ member }: { member: Member }) => {
             type: 'youtubeVOD',
             twitchId: member.livePlatform.find((platform) => platform.type === 'twitch')?.name,
           }}
-          backgroundColor="#fafafa"
+          backgroundColor={'var(--color-background-white)'}
           type="horizontal"
           hideProfileCircle
         />

@@ -33,7 +33,7 @@
       gap: calc((var(--responsiveScale) + 1px) / 2 * 8);
 
       .back {
-        color: var(--primary-color);
+        color: var(--color-primary);
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -44,7 +44,6 @@
         line-height: 1.6em;
       }
       h1.title {
-        color: var(--text-primary-color);
         font-weight: 500;
         font-size: calc((var(--responsiveScale) + 1px) / 2 * 40);
         line-height: 1em;

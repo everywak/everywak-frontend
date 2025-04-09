@@ -1,8 +1,8 @@
 @use '@common/mixin' as *;
 
 .container {
-  background: var(--component-primary-bg-color);
-  border: 1px solid var(--component-secondary-border-color);
+  background: var(--color-component-white);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   box-sizing: border-box;
   display: flex;
@@ -15,17 +15,19 @@
   .option {
     background: transparent;
     border-radius: 6px;
-    color: var(--text-primary-color);
+    color: var(--color-text-secondary);
     margin: 0;
-    padding: 8px 12px;
+    padding: .5rem .75rem;
     font-weight: 400;
     font-size: 16px;
     line-height: 1em;
-    transition: background ease 0.15s, color ease 0.15s;
+    transition:
+      background ease 0.15s,
+      color ease 0.15s;
 
     &.selected {
-      background: var(--primary-color);
-      color: $dark-primary-text-color;
+      background: var(--color-primary);
+      color: var(--color-text-dark-primary);
     }
   }
 }

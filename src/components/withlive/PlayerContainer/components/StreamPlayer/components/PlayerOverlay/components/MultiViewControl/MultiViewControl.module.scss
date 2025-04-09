@@ -28,6 +28,7 @@
   transition: opacity 0.15s ease, top 0.15s ease;
 
   .controlButton {
+    color: #fffa;
     border-radius: 50%;
     &:after {
       border-radius: 50%;
@@ -45,6 +46,7 @@
   }
 
   .subMenu {
+    color: #fffa;
     position: relative;
     &:after {
       display: none;

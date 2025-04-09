@@ -6,7 +6,7 @@
   &.all {
     .dateBtn {
       .dateWrapper {
-        color: var(--text-secondary-color);
+        color: var(--color-text-secondary);
       }
     }
   }
@@ -21,7 +21,7 @@
     transition: color ease 0.15s, background-color ease 0.15s;
 
     .dateWrapper {
-      color: var(--text-secondary-color);
+      color: var(--color-text-secondary);
       font-size: 12px;
       line-height: 12px;
       transition: inherit;
@@ -29,7 +29,7 @@
       white-space: nowrap;
     }
     svg {
-      fill: var(--text-secondary-color);
+      color: var(--color-text-secondary);
       margin-left: 8px;
       width: 18px;
       height: 18px;
@@ -38,12 +38,15 @@
     &.opened,
     &:hover {
       background-color: rgba(0, 0, 0, 0.1);
+      html.dark & {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
 
       .dateWrapper {
-        color: var(--primary-color);
+        color: var(--color-primary);
       }
       svg {
-        fill: var(--primary-color);
+        fill: var(--color-primary);
       }
     }
   }

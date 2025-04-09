@@ -2,7 +2,7 @@
 
 .BasicSearchBar {
   align-items: center;
-  border: solid 1px var(--component-secondary-border-color);
+  border: solid 1px var(--color-border);
   border-radius: 8px;
   box-sizing: border-box;
   display: flex;
@@ -20,14 +20,14 @@
       width: fit-content;
 
       .currName {
-        color: var(--primary-color);
+        color: var(--color-primary);
         display: block;
         font-size: 14px;
         min-width: fit-content;
         width: fit-content;
       }
       svg {
-        fill: var(--primary-color);
+        fill: var(--color-primary);
       }
     }
 
@@ -44,7 +44,7 @@
     background: transparent;
     border: 0;
     box-sizing: border-box;
-    color: var(--text-primary-color);
+    color: var(--color-text-primary);
     display: flex;
     flex-grow: 1;
     font-family: inherit;
@@ -54,8 +54,8 @@
     vertical-align: middle;
     width: 100%;
 
-    &::placeholder {
-      color: var(--text-secondary-color);
+    &:placeholder {
+      color: var(--color-text-secondary);
       font-size: inherit;
       font-weight: 500;
       transition: color ease 0.3s;
@@ -64,7 +64,7 @@
     &:focus {
       outline: none;
 
-      &::placeholder {
+      &:placeholder {
         color: transparent;
         transition: color ease 0.1s;
       }
@@ -81,8 +81,10 @@
     }
 
     svg {
-      color: var(--primary-color);
-      transition: width ease 0.3s, height ease 0.3s;
+      color: var(--color-primary);
+      transition:
+        width ease 0.3s,
+        height ease 0.3s;
     }
   }
 }

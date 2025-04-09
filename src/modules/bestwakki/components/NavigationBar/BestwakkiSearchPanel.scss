@@ -30,13 +30,13 @@
   }
 
   .search {
-    background-color: #fff;
+    background-color: var(--color-component-white);
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
     box-sizing: border-box;
     border-radius: 8px;
     display: none;
     margin-top: 1px;
-    outline: 1px solid var(--component-primary-border-color);
+    outline: 1px solid var(--color-border);
     padding: 24px 16px 14px;
     position: fixed;
     left: 0;
@@ -49,7 +49,6 @@
       display: block;
     }
     .dialogTitle {
-      color: var(--text-primary-color);
       font-size: 16px;
       font-weight: 500;
       line-height: 16px;
@@ -63,7 +62,7 @@
       padding: 8px 0;
 
       .label {
-        color: var(--text-secondary-color);
+        color: var(--color-text-secondary);
         font-size: 14px;
         font-weight: 500;
         line-height: 14px;
@@ -80,7 +79,7 @@
       height: 42px;
 
       .dateBtn {
-        border: solid 1px var(--component-secondary-border-color);
+        border: solid 1px var(--color-border);
         border-radius: 8px;
         box-sizing: border-box;
         flex: 1;
@@ -109,7 +108,7 @@
         }
       }
       .dateDivide {
-        color: var(--text-secondary-color);
+        color: var(--color-text-secondary);
         margin: 0 8px;
       }
       .DatePicker {
@@ -155,7 +154,7 @@
         }
         &::before {
           content: '검색';
-          color: var(--primary-color);
+          color: var(--color-primary);
           font-size: 14px;
           font-family: 'Noto Sans KR', sans-serif;
           font-weight: 500;
@@ -203,17 +202,16 @@
           }
         }
         .label {
-          color: var(--text-primary-color);
           display: inline-block;
           font-size: 14px;
           font-weight: 500;
           line-height: 14px;
         }
         &.primary .label {
-          color: var(--primary-color);
+          color: var(--color-primary);
         }
         &.secondary .label {
-          color: var(--text-secondary-color);
+          color: var(--color-text-secondary);
         }
       }
     }

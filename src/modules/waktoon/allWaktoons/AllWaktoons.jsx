@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../../../common/Header/Header';
 
 import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar';
-import BasicSelect from '../../../common/Components/Select/BasicSelect';
+import { Select } from 'common/components';
 import PageSelect from '../../../common/Components/Select/PageSelect';
 
 import { Desktop, NotDesktop } from '../../../common/MediaQuery';
@@ -61,7 +61,7 @@ export default function AllWaktoons() {
             <div className="filterWrapper">
               <div className="sortItemWrapper">
                 보기 형식
-                <BasicSelect
+                <Select
                   options={[
                     { name: '바둑판식', value: 'item' },
                     { name: '리스트', value: 'list' },
@@ -73,7 +73,7 @@ export default function AllWaktoons() {
               </div>
               <div className="sortItemWrapper">
                 정렬 기준
-                <BasicSelect
+                <Select
                   options={[
                     { name: '최신순', value: 'time' },
                     { name: '좋아요순', value: 'up' },

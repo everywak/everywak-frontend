@@ -34,7 +34,7 @@
     margin-right: 16px;
 
     .rank {
-      color: var(--text-secondary-color);
+      color: var(--color-text-secondary);
       font-weight: 700;
       font-size: 18px;
       line-height: 1em;
@@ -54,7 +54,9 @@
     min-width: var(--width);
     height: var(--height);
     max-height: var(--height);
-    transition: opacity ease 0.15s, box-shadow ease 0.15s;
+    transition:
+      opacity ease 0.15s,
+      box-shadow ease 0.15s;
     transition-delay: opacity 1s;
 
     .previewImg {
@@ -83,10 +85,9 @@
       width: 100%;
 
       .rankAmount {
-        --newColor: #b59400;
-        --upColor: #00b528;
-        --downColor: #b50000;
-        color: var(--text-primary-color);
+        --newColor: var(--color-orange);
+        --upColor: var(--color-green);
+        --downColor: var(--color-red);
         font-weight: 500;
         font-size: 14px;
         line-height: 1em;
@@ -101,7 +102,7 @@
           color: var(--downColor);
         }
         &.stay {
-          color: var(--text-secondary-color);
+          color: var(--color-text-secondary);
         }
         &.new {
           color: var(--newColor);
@@ -123,7 +124,6 @@
         width: 100%;
 
         .title {
-          color: var(--text-primary-color);
           display: block;
           font-size: 16px;
           font-weight: 400;
@@ -139,7 +139,7 @@
           flex-grow: 1;
 
           .author {
-            color: var(--text-secondary-color);
+            color: var(--color-text-secondary);
             margin-top: 4px;
           }
         }
@@ -150,7 +150,7 @@
           width: fit-content;
 
           .changedAmount {
-            color: var(--text-secondary-color);
+            color: var(--color-text-secondary);
             display: flex;
             flex-direction: row;
             justify-content: flex-start;

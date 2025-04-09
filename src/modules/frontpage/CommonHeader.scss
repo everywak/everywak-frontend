@@ -1,7 +1,7 @@
 @use '@common/mixin' as *;
 
 .CommonHeader {
-  background: rgba(0, 0, 0, 0.02);
+  background-color: var(--color-background-header);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +30,6 @@
       align-self: stretch;
 
       h1.title {
-        color: var(--text-primary-color);
         font-weight: 500;
         font-size: 36px;
         line-height: 1em;
@@ -57,10 +56,9 @@
           gap: 24px;
 
           .categoryItem a {
-            color: var(--text-primary-color);
-            font-weight: 500;
             font-size: 18px;
             line-height: 1em;
+            font-weight: 500;
           }
         }
       }
@@ -81,14 +79,13 @@
         gap: 12px;
 
         .subtitle {
-          color: var(--text-primary-color);
           font-weight: 500;
           font-size: 24px;
           line-height: 1em;
           margin: 0;
         }
         .description {
-          color: var(--text-secondary-color);
+          color: var(--color-text-secondary);
           font-weight: 500;
           font-size: 16px;
           line-height: 1.6em;
@@ -102,7 +99,7 @@
           gap: 12px;
 
           .btnMore {
-            color: var(--primary-color);
+            color: var(--color-primary);
             display: flex;
             flex-direction: row;
             align-items: center;

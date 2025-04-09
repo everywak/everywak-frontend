@@ -1,16 +1,17 @@
 @use '@common/mixin' as *;
 
-.ScrollToTopButton {
+.container {
   align-items: center;
-  background-color: white;
+  background-color: var(--color-component-gray);
   border-radius: 50%;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
-  display: flex;
-  justify-content: center;
   position: absolute;
   top: -60px;
   width: 40px;
   height: 40px;
+  &:after {
+    border-radius: 50%;
+  }
   @include desktop {
     right: 16px;
     transform: scale(0);
@@ -33,6 +34,6 @@
   }
 
   svg {
-    fill: var(--text-secondary-color);
+    fill: var(--color-text-secondary);
   }
 }

@@ -36,7 +36,7 @@ function VideoContentList(props: Props) {
     size = 'normal',
     shorts = false,
     hideProfileCircle = false,
-    backgroundColor = '#ffffff',
+    backgroundColor = 'var(--color-background-white)',
     ...rest
   } = props;
 

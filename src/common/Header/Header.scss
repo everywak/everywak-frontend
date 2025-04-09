@@ -1,8 +1,8 @@
 @use '@common/mixin' as *;
 
 header.header {
-  background-color: var(--component-primary-bg-color);
-  outline: solid 1px var(--component-primary-border-color);
+  background-color: var(--color-component-white);
+  outline: solid 1px var(--color-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,6 +16,11 @@ header.header {
     img {
       width: 90px;
       height: 29px;
+    }
+    html.dark & {
+      img {
+        filter: invert(1);
+      }
     }
   }
 

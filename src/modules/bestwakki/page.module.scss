@@ -7,7 +7,6 @@
 
   .moduleHeader {
     h1 {
-      color: var(--text-primary-color);
       margin: 31px 0 0;
       padding: 0 0 26px 16px;
       font-size: 28px;
@@ -23,9 +22,6 @@
         justify-content: space-between;
       }
 
-      .SortList {
-      }
-
       .right {
         display: flex;
         align-items: center;
@@ -35,22 +31,6 @@
           margin-left: 4px;
         }
       }
-    }
-  }
-
-  .more {
-    box-sizing: border-box;
-    border: solid 1px var(--component-primary-border-color);
-    border-top: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 32px;
-    min-height: 32px;
-
-    svg.frontOnly {
-      display: block;
-      fill: var(--component-secondary-border-color);
     }
   }
 }

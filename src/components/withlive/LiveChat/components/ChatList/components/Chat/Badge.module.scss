@@ -17,13 +17,13 @@
   }
 
   .tip {
+    color: var(--color-text-primary);
+    background-color: var(--color-component-white);
     position: absolute;
     top: -16px;
     left: -4px;
     width: max-content;
     border-radius: 4px;
-    background-color: var(--white);
-    color: var(--text-primary-color);
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
     padding: 2px 4px;
     font-size: 12px;

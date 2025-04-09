@@ -4,13 +4,23 @@
 
 body,
 html {
+  color: var(--color-text-primary);
+  background-color: var(--color-background-white);
   font-family: 'Noto Sans KR', sans-serif;
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
 }
+a {
+  color: var(--color-text-primary);
+}
 * {
   box-sizing: border-box;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 #modal-root {
   margin: 0;

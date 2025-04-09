@@ -10,7 +10,6 @@
     padding: 1rem;
 
     .notice {
-      color: var(--gray-800);
       background: rgba(0, 136, 255, 0.1);
       border-radius: 0.75rem;
       display: flex;
@@ -40,7 +39,7 @@
 }
 
 .tab.wipTab {
-  background-color: #0001;
+  background-color: var(--color-component-gray);
   border-radius: 1rem;
   width: 100%;
   padding: 2rem;
@@ -54,7 +53,7 @@
   padding: 16px;
 
   .social {
-    background-color: white;
+    background-color: var(--color-component-gray);
     border-radius: 8px;
     display: inline-flex;
     flex-direction: row;
@@ -68,13 +67,12 @@
       height: 24px;
       &.cafe {
         display: flex;
-        background-color: var(--wakki-color);
+        background-color: var(--color-wakki);
         border-radius: 4px;
         padding: 4px;
       }
     }
     .label {
-      color: var(--text-primary-color);
       font-size: 12px;
       font-weight: 500;
     }
@@ -84,9 +82,5 @@
 .footer{
   @include font14_14_500;
   line-height: 140%;
-  color: var(--text-secondary-color);
-
-  a{
-    color: var(--text-primary-color);
-  }
+  color: var(--color-text-secondary);
 }

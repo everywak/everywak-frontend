@@ -3,7 +3,7 @@ import React from 'react';
 import Header from '../../../common/Header/Header';
 
 import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar';
-import BasicSelect from '../../../common/Components/Select/BasicSelect';
+import { Select } from 'common/components';
 
 import { useInputs } from 'hooks/useInputs';
 
@@ -38,7 +38,7 @@ export default function WaktoonChart() {
             <div className="filterWrapper">
               <div className="sortItemWrapper">
                 기간
-                <BasicSelect
+                <Select
                   options={[
                     { name: '최근 24시간', value: 'daily' },
                     { name: '주간', value: 'weekly' },
@@ -51,7 +51,7 @@ export default function WaktoonChart() {
               </div>
               <div className="sortItemWrapper">
                 정렬 기준
-                <BasicSelect
+                <Select
                   options={[
                     { name: '좋아요', value: 'up' },
                     { name: '조회수', value: 'view' },

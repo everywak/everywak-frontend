@@ -29,14 +29,13 @@
     }
 
     .personalColorPoint {
-      --color: var(--component-secondary-border-color);
-      background: var(--color, var(--component-secondary-border-color));
+      --color: var(--color-border);
+      background: var(--color, var(--color-border));
       border-radius: 50%;
       width: 8px;
       height: 8px;
     }
     .name {
-      color: var(--text-primary-color);
       font-weight: 700;
       font-size: 16px;
       line-height: 1em;
@@ -93,14 +92,13 @@
       }
 
       .state {
-        color: var(--text-primary-color);
         font-weight: 500;
         font-size: 14px;
         line-height: 1em;
         text-align: center;
       }
       .description {
-        color: var(--text-secondary-color);
+        color: var(--color-text-secondary);
         font-weight: 500;
         font-size: 12px;
         line-height: 1.25em;

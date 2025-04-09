@@ -7,7 +7,7 @@
   margin: 0;
 
   & > .date {
-    color: var(--text-secondary-color);
+    color: var(--color-text-secondary);
     font-weight: 500;
     font-size: calc((var(--responsiveScale) + 1px) / 2 * 20);
     line-height: 1em;

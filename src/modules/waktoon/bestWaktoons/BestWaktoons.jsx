@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 import Header from '../../../common/Header/Header';
 import BasicSearchBar from '../../../common/Components/SearchBar/BasicSearchBar';
-import BasicSelect from '../../../common/Components/Select/BasicSelect';
 import PageSelect from '../../../common/Components/Select/PageSelect';
+import {Select} from 'common/components';
 
 import { useInputs } from 'hooks/useInputs';
 
@@ -64,7 +64,7 @@ export default function BestWaktoons() {
             <div className="filterWrapper">
               <div className="sortItemWrapper">
                 분류
-                <BasicSelect
+                <Select
                   options={[
                     { name: '시리즈', value: 'series' },
                     { name: '단편작', value: 'episode' },
@@ -79,7 +79,7 @@ export default function BestWaktoons() {
                   )}
                 />
                 정렬 기준
-                <BasicSelect
+                <Select
                   options={[
                     { name: '최신순', value: 'time' },
                     { name: '좋아요순', value: 'up' },

@@ -62,7 +62,6 @@
         gap: 24px;
 
         & > a {
-          color: var(--text-primary-color);
           display: flex;
           flex-direction: row;
           align-items: center;
@@ -146,7 +145,6 @@
             flex-grow: 1;
 
             .title {
-              color: var(--text-primary-color);
               font-weight: 500;
               font-size: 20px;
               line-height: 1em;
@@ -175,7 +173,6 @@
                 align-self: stretch;
 
                 .nickname {
-                  color: var(--text-primary-color);
                   font-weight: 400;
                   font-size: 18px;
                   line-height: 1em;
@@ -188,7 +185,6 @@
                   gap: 8px;
 
                   .btnLink {
-                    color: var(--text-primary-color);
                     background: #f0f0f0;
                     border-radius: 15px;
                     display: flex;
@@ -202,8 +198,6 @@
                 }
               }
             }
-          }
-          .stat {
           }
         }
         .descriptionWrapper {
@@ -219,7 +213,6 @@
           font-size: 14px;
 
           .statText {
-            color: var(--text-primary-color);
             display: flex;
             flex-direction: row;
             align-items: flex-start;

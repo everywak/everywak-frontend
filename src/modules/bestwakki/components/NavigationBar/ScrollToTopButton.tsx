@@ -2,11 +2,10 @@ import React from 'react';
 
 import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
 
-import Button from 'common/Components/Button';
+import { Button } from 'common/components';
 
 import styles from './ScrollToTopButton.module.scss';
-import classNames from 'classnames/bind';
-const cx = classNames.bind(styles);
+import clsx from 'clsx';
 
 /**
  * 페이지 최상단으로 이동하는 버튼
@@ -18,12 +17,11 @@ export default function ScrollToTopButton({ show = false }) {
 
   return (
     <Button
-      className={cx('ScrollToTopButton', { show: show })}
-      iconSrc={<KeyboardArrowUpRoundedIcon fontSize="small" />}
-      iconBGColor="white"
-      label="맨 위로"
-      onclick={gotoTop}
-      showLabel={false}
-    />
+      className={clsx('ScrollToTopButton', styles.container, { [styles.show]: show })}
+      color="white"
+      onClick={gotoTop}
+    >
+      <KeyboardArrowUpRoundedIcon fontSize="small" />
+    </Button>
   );
 }

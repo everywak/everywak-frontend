@@ -12,9 +12,7 @@
 
     .VideoItem {
       @media (min-width: #{$mob-l-width}) and (max-width: 1280px) {
-        --width: calc(
-          (100% - var(--gap) * (var(--column-count) - 1)) / var(--column-count)
-        );
+        --width: calc((100% - var(--gap) * (var(--column-count) - 1)) / var(--column-count));
       }
       @media (min-width: 900px) and (max-width: 1280px) {
         --column-count: 3;
@@ -127,6 +125,14 @@
         &:active {
           background: #0002;
         }
+        html.dark & {
+          &:hover {
+            background: #fff1;
+          }
+          &:active {
+            background: #fff2;
+          }
+        }
 
         .previewWrapper {
           border-radius: 8px;
@@ -192,6 +198,9 @@
 
       &:hover {
         background: rgba(0, 0, 0, 0.05);
+        html.dark & {
+          background: rgba(255, 255, 255, 0.05);
+        }
         @include not-desktop {
           background: transparent;
         }

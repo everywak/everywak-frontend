@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type ComponentProps = CheckBoxProps | GroupProps;
+export type ComponentProps = CheckBoxProps | GroupProps | SelectProps;
 
 export type CheckBoxProps = {
   type: 'checkbox';
@@ -14,4 +14,16 @@ export type CheckBoxProps = {
 export type GroupProps = {
   type: 'group';
   title: string;
+};
+
+export type SelectProps = {
+  type: 'select';
+  name: string;
+  value: string;
+  label: React.ReactNode;
+  options: {
+    name: string;
+    value: string;
+  }[];
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 };

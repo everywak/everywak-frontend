@@ -1,7 +1,7 @@
 @use '@common/mixin' as *;
 
 .VideoContentPlayer {
-  background: $twitch-color;
+  background: var(--color-twitch);
   box-sizing: border-box;
   position: relative;
   width: 854px;
@@ -103,7 +103,7 @@
 
     .VideoContentPlayerPlaybackInfoPanel {
       background: #0001;
-      color: $dark-primary-text-color;
+      color: var(--color-text-dark-primary);
       padding: 2px 6px;
       pointer-events: auto;
       position: absolute;
@@ -112,8 +112,7 @@
       z-index: 11;
 
       .summary {
-        filter: drop-shadow(rgb(0, 0, 0) 0px 0px 2px)
-          drop-shadow(rgba(0, 0, 0, 0.6) 0px 0px 0px);
+        filter: drop-shadow(rgb(0, 0, 0) 0px 0px 2px) drop-shadow(rgba(0, 0, 0, 0.6) 0px 0px 0px);
         font-size: 10px;
         font-weight: 700;
       }
@@ -165,13 +164,13 @@
         padding: 12px 0;
 
         .title {
-          color: $dark-primary-text-color;
+          color: var(--color-text-dark-primary);
           font-size: 22px;
           font-weight: 500;
           line-height: 1em;
         }
         .description {
-          color: $dark-secondary-text-color;
+          color: var(--color-text-dark-secondary);
           font-size: 16px;
           line-height: 1em;
         }
@@ -203,7 +202,9 @@
       width: fit-content;
       position: absolute;
       bottom: 32px;
-      transition: bottom ease 0.15s, opacity ease 0.15s;
+      transition:
+        bottom ease 0.15s,
+        opacity ease 0.15s;
       @include not-desktop {
         font-size: 18px;
         padding: 4px 6px;
@@ -309,12 +310,12 @@
             flex-direction: row;
             align-items: center;
             gap: 6px;
-            color: $dark-secondary-text-color;
+            color: var(--color-text-dark-secondary);
             font-size: 12px;
             padding: 0 8px;
 
             .currTime {
-              color: $dark-primary-text-color;
+              color: var(--color-text-dark-primary);
               font-size: 16px;
             }
             .line {

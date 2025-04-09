@@ -1,8 +1,8 @@
 @use '@common/mixin' as *;
 
 .NavigationBar {
-  background: white;
-  border-top: 1px solid var(--component-secondary-border-color);
+  background: var(--color-component-white);
+  border-top: 1px solid var(--color-border);
   border-bottom: 1px solid transparent;
   bottom: -50px;
   display: flex;
@@ -31,17 +31,17 @@
     padding: 0 10px;
 
     svg {
-      fill: var(--text-secondary-color);
+      fill: var(--color-text-secondary);
     }
     .label {
-      color: var(--text-secondary-color);
+      color: var(--color-text-secondary);
     }
   }
   .BestwakkiSearchPanel .btnSearch {
     margin: 0;
 
     svg {
-      fill: var(--primary-color);
+      fill: var(--color-primary);
     }
   }
   .btnSetting {
@@ -50,7 +50,7 @@
     padding: 0 10px;
 
     svg {
-      fill: var(--text-secondary-color);
+      fill: var(--color-text-secondary);
     }
   }
 }

@@ -108,7 +108,6 @@
         font-weight: 400;
       }
       .title {
-        color: var(--text-primary-color);
         display: block;
         margin-top: 1px;
         overflow: hidden;
@@ -119,7 +118,7 @@
       }
       .uploadedTime,
       .viewCount {
-        color: var(--text-secondary-color);
+        color: var(--color-text-secondary);
         margin-top: 4px;
       }
       .viewCount {
