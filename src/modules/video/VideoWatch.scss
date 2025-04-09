@@ -157,7 +157,7 @@
               gap: 12px;
 
               .CircleImg {
-                background: $image-background-color;
+                background: var(--color-component-gray);
                 width: 64px;
                 @include not-desktop {
                   width: 52px;
