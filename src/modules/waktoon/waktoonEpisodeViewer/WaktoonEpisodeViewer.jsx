@@ -14,7 +14,9 @@ export default function WaktoonEpisodeViewer() {
 
   const navigate = useNavigate();
   useEffect(() => {
-    setTimeout(navigate, 1000, `https://cafe.naver.com/steamindiegame/${articleId}`);
+    setTimeout(() => {
+      document.location.href = `https://cafe.naver.com/steamindiegame/${articleId}`;
+    }, 1000);
   }, []);
 
   return (
