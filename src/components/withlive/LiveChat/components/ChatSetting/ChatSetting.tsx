@@ -59,11 +59,11 @@ export const ChatSetting = () => {
       },
       options: [
         {
-          name: '라이트',
+          name: '밝게',
           value: 'light',
         },
         {
-          name: '다크',
+          name: '어둡게',
           value: 'dark',
         },
         {
