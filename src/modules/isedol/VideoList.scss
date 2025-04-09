@@ -116,22 +116,14 @@
 
         &:hover {
           box-shadow: none;
-          background: #0001;
+          background-color: var(--color-hover);
 
           .previewWrapper {
             border-radius: 8px;
           }
         }
         &:active {
-          background: #0002;
-        }
-        html.dark & {
-          &:hover {
-            background: #fff1;
-          }
-          &:active {
-            background: #fff2;
-          }
+          background-color: var(--color-active);
         }
 
         .previewWrapper {

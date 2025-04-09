@@ -109,3 +109,5 @@ export function setLocalStorage(key: string, value: any) {
 export function getLocalStorage(key: string) {
   return JSON.parse(window.localStorage.getItem(key) as string);
 }
+
+export const isExternalUrl = (url: string) => url.startsWith('https:') || url.startsWith('http:');

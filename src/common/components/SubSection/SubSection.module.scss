@@ -1,15 +1,16 @@
 @use '@common/mixin' as *;
 
-.ContentPanel {
+.container {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  align-self: stretch;
+  gap: 0.5rem;
 
-  & > .contentWrapper {
+  .content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
     align-self: stretch;
+    gap: 1rem;
   }
 }

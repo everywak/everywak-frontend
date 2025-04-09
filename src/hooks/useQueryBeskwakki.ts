@@ -9,9 +9,9 @@ export default function useQueryBestwakki({
   searchFilter,
   ...rest
 }: {
-  searchFilter: SearchFilter;
+  searchFilter: Partial<SearchFilter>;
 }) {
-  const fetch = async (searchFilter: SearchFilter) => {
+  const fetch = async (searchFilter: Partial<SearchFilter>) => {
     const res = await everywakApi.bestwakki.getPopularArticles(searchFilter);
 
     if (res.message.status != 200) {

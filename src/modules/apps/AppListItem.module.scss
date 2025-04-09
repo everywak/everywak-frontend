@@ -1,6 +1,6 @@
 @use '@common/mixin' as *;
 
-.AppListItem:not(.tiny) {
+.container:not(.tiny) {
   border-radius: 16px;
   color: inherit;
   display: flex;
@@ -9,18 +9,10 @@
   padding: 8px;
 
   &:hover {
-    background: #0001;
+    background-color: var(--color-hover);
   }
   &:active {
-    background: #0002;
-  }
-  html.dark & {
-    &:hover {
-      background: #fff1;
-    }
-    &:active {
-      background: #fff2;
-    }
+    background-color: var(--color-active);
   }
 
   .thumbWrapper {
@@ -31,7 +23,7 @@
     min-width: 72px;
     height: 72px;
 
-    .AppListItemIcon {
+    .icon {
       --width: 72px;
       --height: 72px;
       @include mobile {
@@ -73,7 +65,7 @@
       min-width: 48px;
       height: 48px;
 
-      .AppListItemIcon {
+      .icon {
         --width: 48px;
         --height: 48px;
         --iconWidth: 24px;
@@ -111,7 +103,7 @@
   }
 }
 
-.AppListItem.tiny {
+.container.tiny {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -120,11 +112,23 @@
   gap: 12px;
 
   .thumbWrapper {
-    .AppListItemIcon {
+    .icon {
       --width: 48px;
       --height: 48px;
       --iconWidth: 24px;
       --iconHeight: 24px;
+      @include mobile-m {
+        --width: 40px;
+        --height: 40px;
+        --iconWidth: 22px;
+        --iconHeight: 22px;
+      }
+      @include mobile-s {
+        --width: 40px;
+        --height: 40px;
+        --iconWidth: 22px;
+        --iconHeight: 22px;
+      }
       box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
 
       .bottomShadow {
@@ -142,6 +146,12 @@
       font-weight: 400;
       font-size: 13px;
       line-height: 1em;
+      @include mobile-m {
+        font-size: 11px;
+      }
+      @include mobile-s {
+        font-size: 10px;
+      }
     }
     .description {
       display: none;

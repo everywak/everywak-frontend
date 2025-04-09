@@ -7,8 +7,7 @@ import * as func from 'common/functions';
 import Header from 'common/Header/Header';
 import Footer from 'common/Footer/Footer';
 import BasicImage from 'common/components/legacy/Image/BasicImage';
-
-import SectionHeader from '../frontpage/SectionHeader';
+import { SectionHeader } from 'common/components';
 
 import TodayWeatherSection from './TodayWeatherSection';
 import PrevWeatherSection from './PrevWeatherSection';

@@ -1,0 +1,105 @@
+@use '@common/mixin' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 72px;
+  gap: 48px;
+
+  & > .header {
+    .lives {
+      --containerHeight: min(261px, calc(100vw * 0.36 / 16 * 9));
+      --gapVertical: calc(12 * (var(--containerHeight) / 261));
+      --gapHorizontal: calc(var(--gapVertical) / 12 * 16);
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 0px;
+      gap: var(--gapHorizontal);
+
+      .side {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: var(--gapVertical);
+
+        & > li {
+          width: calc(
+            (var(--containerHeight) - var(--gapVertical) * 2) / 3 / 9 * 16
+          );
+          height: calc((var(--containerHeight) - var(--gapVertical) * 2) / 3);
+        }
+      }
+      .center > li {
+        width: calc(var(--containerHeight) / 9 * 16);
+        height: var(--containerHeight);
+      }
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 96px;
+    width: 100%;
+    align-self: stretch;
+
+    .twoColumns {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 32px;
+
+      & > .videoAndMusic {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0px;
+        gap: 32px;
+        flex-grow: 1;
+        width: 0;
+
+        & > section {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 16px 0px;
+          gap: 24px;
+          align-self: stretch;
+
+          & > section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 8px;
+            align-self: stretch;
+          }
+        }
+      }
+
+      & > aside {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: stretch;
+        padding: 0px;
+        gap: 24px;
+
+        width: 360px;
+      }
+    }
+
+    & > section {
+      width: 1200px;
+      max-width: 1200px;
+    }
+  }
+}

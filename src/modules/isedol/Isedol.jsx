@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
+
+import Header from 'common/Header/Header';
+import { Section } from 'common/components';
+import CircleImgButton from 'common/components/legacy/Button/CircleImgButton';
+
+import * as func from '../../common/functions';
 
 import LivePreview from './LivePreview';
-import ContentPanel from '../frontpage/ContentPanel';
 import IsedolYoutubeList from './IsedolYoutubeList';
 import IsedolClipList from './IsedolClipList';
 import VideoContentList from './VideoContentList';
 import IsedolMemberList from './IsedolMemberList';
-
-import Header from '../../common/Header/Header';
-import CircleImgButton from '../../common/components/legacy/Button/CircleImgButton';
-
-import * as func from '../../common/functions';
 
 import './Isedol.scss';
 import cx from 'classnames';
@@ -61,26 +61,20 @@ function Isedol() {
             </div>
             <IsedolLiveList />
           </section>
-          <ContentPanel
-            className="youtubeSection"
-            title="이세돌 유튜브" /*moreLink="/isedol/youtube"*/
-          >
+          <Section className="youtubeSection" title="이세돌 유튜브" /*moreLink="/isedol/youtube"*/>
             <IsedolYoutubeList />
-          </ContentPanel>
-          <ContentPanel
-            className="clipSection"
-            title="이세돌 주간 핫클립" /*moreLink="/isedol/clip"*/
-          >
+          </Section>
+          <Section className="clipSection" title="이세돌 주간 핫클립" /*moreLink="/isedol/clip"*/>
             <IsedolClipList />
-          </ContentPanel>
-          <ContentPanel className="shortSection" title="이세돌 쇼츠" /*moreLink="/isedol/shorts"*/>
+          </Section>
+          <Section className="shortSection" title="이세돌 쇼츠" /*moreLink="/isedol/shorts"*/>
             <VideoContentList
               className="IsedolShortsList"
               options={{ type: 'youtubeVideo', twitchId: 'isedol' }}
               shorts
               hideProfileCircle
             />
-          </ContentPanel>
+          </Section>
           <div className="memberLine"></div>
           <section className="memberSection">
             <IsedolMemberList />

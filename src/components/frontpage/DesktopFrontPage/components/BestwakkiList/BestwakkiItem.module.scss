@@ -1,6 +1,6 @@
 @use '@common/mixin' as *;
 
-.FrontBestwakkiItem {
+.container {
   border-radius: 8px;
   display: flex;
   flex-direction: row;
@@ -11,10 +11,10 @@
   width: 100%;
 
   &:hover {
-    background: #0001;
+    background-color: var(--color-hover);
   }
   &:active {
-    background: #0002;
+    background-color: var(--color-active);
   }
 
   .thumbnailWrapper {

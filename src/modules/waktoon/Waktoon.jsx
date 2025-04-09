@@ -11,7 +11,7 @@ import HorizontalScrollableList from '../../common/components/legacy/HorizontalS
 
 import { Desktop } from '../../common/MediaQuery';
 
-import ContentPanel from '../frontpage/ContentPanel';
+import { Section } from 'common/components';
 import BasicSearchBar from '../../common/components/legacy/SearchBar/BasicSearchBar';
 import WaktoonBottomNavigationBar from './WaktoonBottomNavigationBar';
 
@@ -93,15 +93,15 @@ export default function Waktoon(props) {
           </div>
         </div>
         <div className="sectionWrapper">
-          <ContentPanel className="main" title="모든 작품" moreLink="/waktoon/all">
+          <Section className="main" title="모든 작품" moreLink="/waktoon/all">
             <WaktoonGeneralList />
-          </ContentPanel>
+          </Section>
           <section className="side">
             {/* <WaktoonSearchBar value="" searchTarget="title" onSearch={(e) => console.log(e)} /> */}
 
-            <ContentPanel className="main" title="인기급상승 왁툰" moreLink="/waktoon/chart">
+            <Section className="main" title="인기급상승 왁툰" moreLink="/waktoon/chart">
               <WaktoonChartList />
-            </ContentPanel>
+            </Section>
           </section>
         </div>
         <WaktoonBottomNavigationBar />

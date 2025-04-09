@@ -47,6 +47,10 @@ $instagram-color: linear-gradient(
   --color-green: #00b528;
   --color-orange: #b59400;
 
+  // interaction color
+  --color-hover: #0001;
+  --color-active: #0002;
+
   // text color
   --color-text-primary: var(--color-gray-800);
   --color-text-secondary: var(--color-gray-600);
@@ -93,6 +97,10 @@ html.dark {
   --color-green: #019120;
   --color-orange: #8b7100;
   --color-blue: #0064ac;
+
+  // interaction color
+  --color-hover: #fff1;
+  --color-active: #fff2;
 
   // text color
   --color-text-primary: var(--color-gray-400);

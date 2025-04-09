@@ -8,10 +8,10 @@
   transition: background ease 0.15s;
 
   &:hover {
-    background: #0001;
+    background-color: var(--color-hover);
   }
   &:active {
-    background: #0002;
+    background-color: var(--color-active);
   }
 
   & > a {

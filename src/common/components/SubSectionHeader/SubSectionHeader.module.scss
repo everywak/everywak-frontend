@@ -1,14 +1,12 @@
 @use '@common/mixin' as *;
 
-header.SectionSubHeader {
+.container {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 0px 16px;
+  padding: 0 1rem;
 
   .title {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1em;
+    @include font16_16_500;
   }
 }

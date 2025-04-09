@@ -1,22 +1,21 @@
 @use '@common/mixin' as *;
 
-.CommonHeader {
+.container {
   background-color: var(--color-background-header);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0px;
+  padding: 0;
   gap: 10px;
   width: 100%;
 
-  .headerWrapper {
-    box-sizing: border-box;
+  .wrapper {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: stretch;
-    padding: 48px 16px 32px;
-    gap: 48px;
+    padding: 3rem 1rem 2rem;
+    gap: 3rem;
     max-width: 1232px;
     width: 100%;
     margin: 0 auto;
@@ -26,7 +25,7 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      padding: 0px;
+      padding: 0;
       align-self: stretch;
 
       h1.title {
@@ -37,25 +36,25 @@
 
         .beta {
           color: #4ddf8a;
-          font-size: 24px;
+          font-size: 1.5rem;
           font-style: italic;
         }
       }
-      nav.category {
+      nav.links {
         display: flex;
         flex-direction: row;
         align-items: center;
         padding: 0px;
-        gap: 32px;
+        gap: 2rem;
 
-        .categoryList {
+        .list {
           display: flex;
           flex-direction: row;
           align-items: flex-start;
           padding: 0px;
-          gap: 24px;
+          gap: 1.5rem;
 
-          .categoryItem a {
+          .sideLink a {
             font-size: 18px;
             line-height: 1em;
             font-weight: 500;
@@ -91,7 +90,7 @@
           line-height: 1.6em;
           white-space: pre-line;
         }
-        .moreLink {
+        .more {
           display: flex;
           flex-direction: row;
           align-items: flex-start;
@@ -111,7 +110,7 @@
           }
         }
       }
-      .contentWrapper {
+      .content {
         flex-grow: 1;
         display: flex;
         flex-direction: column;

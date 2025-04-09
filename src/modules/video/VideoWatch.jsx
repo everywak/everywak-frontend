@@ -1,19 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-import ArchiveRoundedIcon from '@mui/icons-material/ArchiveRounded';
+import * as clipApi from 'services/Clip';
+import * as everywakApi from 'services/everywak-api/index';
+import * as func from 'common/functions';
+import { Waktaverse } from 'common/constants';
+import { Desktop, NotDesktop } from 'common/MediaQuery';
 
-import * as clipApi from '../../services/Clip';
-import * as everywakApi from '../../services/everywak-api/index';
-import * as func from '../../common/functions';
-import { Waktaverse } from '../../common/constants';
-import { Desktop, NotDesktop } from '../../common/MediaQuery';
+import Header from 'common/Header/Header';
+import CircleImg from 'common/components/legacy/CircleImg';
+import { Section } from 'common/components';
 
-import Header from '../../common/Header/Header';
-import BasicSearchBar from '../../common/components/legacy/SearchBar/BasicSearchBar';
-import CircleImg from '../../common/components/legacy/CircleImg';
-
-import ContentPanel from '../frontpage/ContentPanel';
 import RecommendClipList from './RecommendClipList';
 
 import './VideoWatch.scss';
@@ -160,12 +157,9 @@ function VideoWatch(props) {
               </div>
             </main>
             <aside>
-              {/*<ContentPanel title="다시보기" moreLabel="더 보기" moreLink="/">
-
-            </ContentPanel>*/}
-              <ContentPanel title="관련 클립">
+              <Section title="관련 클립">
                 <RecommendClipList clipInfo={clipInfo} />
-              </ContentPanel>
+              </Section>
             </aside>
           </div>
         </div>

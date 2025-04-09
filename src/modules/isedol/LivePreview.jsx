@@ -11,7 +11,7 @@ import styles from './LivePreview.module.scss';
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-function LivePreview({ className, channelId = 'twitchdev', size = 'normal', hideProfile = false }) {
+function LivePreview({ className = '', channelId = 'twitchdev', size = 'normal', hideProfile = false }) {
   const { isLoading, data } = useQueryWaktaverseLive({ loginName: channelId });
 
   const url = `/withlive?main=${channelId}`;

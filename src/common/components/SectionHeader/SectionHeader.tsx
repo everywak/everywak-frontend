@@ -5,10 +5,12 @@ import { KeyboardArrowRightRounded } from '@mui/icons-material';
 import styles from './SectionHeader.module.scss';
 
 export interface Props {
-  title: string;
+  title?: string;
   description?: string;
-  moreLabel?: string;
-  moreLink?: string;
+  more?: {
+    label: string;
+    link: string;
+  };
   width?: 'packed' | 'spaceBetween';
   size?: 'big' | 'medium' | 'small' | 'max';
 }
@@ -16,14 +18,13 @@ export interface Props {
 /**
  * 더 보기 링크가 있는 섹션 헤더
  */
-export function SectionHeader({
+export const SectionHeader = ({
   title,
   description,
-  moreLabel = '더 보기',
-  moreLink,
+  more,
   width = 'packed',
   size = 'medium',
-}: Props) {
+}: Props) => {
   return (
     <header
       className={clsx('SectionHeader', styles.container, {
@@ -35,20 +36,20 @@ export function SectionHeader({
       })}
     >
       <div className={styles.titleArea}>
-        <div className={styles.title}>{title}</div>
+        {title && <div className={styles.title}>{title}</div>}
         {description && <div className={styles.subtitle}>{description}</div>}
         {size === 'max' && <div className={styles.bottomLine}>&nbsp;</div>}
       </div>
-      {moreLink &&
-        (moreLink.match(/^http/) ? (
-          <a href={moreLink} className={styles.more}>
-            {moreLabel} <KeyboardArrowRightRounded fontSize="small" />
+      {more &&
+        (more.link.match(/^http/) ? (
+          <a href={more.link} className={styles.more}>
+            {more.label} <KeyboardArrowRightRounded fontSize="small" />
           </a>
         ) : (
-          <Link to={moreLink} className={styles.more}>
-            {moreLabel} <KeyboardArrowRightRounded fontSize="small" />
+          <Link to={more.link} className={styles.more}>
+            {more.label} <KeyboardArrowRightRounded fontSize="small" />
           </Link>
         ))}
     </header>
   );
-}
+};

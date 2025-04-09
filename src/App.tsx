@@ -13,7 +13,7 @@ import { ThemeProvider } from 'contexts/ThemeContext';
 
 const NotFoundPage = lazy(() => import('./pages/notfoundpage/Page'));
 
-const Frontpage = lazy(() => import('./modules/frontpage/Frontpage'));
+const Frontpage = lazy(() => import('./pages/frontpage/Page'));
 
 const Bestwakki = lazy(() => import('./modules/bestwakki/page'));
 

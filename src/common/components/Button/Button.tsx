@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
+import { isExternalUrl } from 'common/functions';
 
 import styles from './Button.module.scss';
 
@@ -58,7 +59,7 @@ export function Button({
     ...rest,
   };
   if (href) {
-    if (href.startsWith('https:') || href.startsWith('http:')) {
+    if (isExternalUrl(href)) {
       // 외부 링크
       return (
         <a {...props} href={href} target={target ?? '_blank'} rel="noopener noreferrer">

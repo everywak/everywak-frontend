@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
-import AppListItem from './AppListItem';
+import { AppListItem } from './AppListItem';
 
-import LiveTvRoundedIcon from '@mui/icons-material/LiveTvRounded';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import MenuBookRoundedIcon from '@mui/icons-material/MenuBookRounded';
 import ViewCarouselRoundedIcon from '@mui/icons-material/ViewCarouselRounded';

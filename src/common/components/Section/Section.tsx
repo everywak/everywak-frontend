@@ -7,8 +7,10 @@ export interface Props {
   className?: string;
   title: string;
   description?: string;
-  moreLabel?: string;
-  moreLink?: string;
+  more?: {
+    label: string;
+    link: string;
+  };
   width?: 'packed' | 'spaceBetween';
   children: React.ReactNode;
 }
@@ -20,21 +22,13 @@ export function Section({
   className,
   title,
   description,
-  moreLabel,
-  moreLink,
+  more,
   width = 'packed',
   children,
 }: Props) {
   return (
     <section className={clsx('Section', styles.container, className)}>
-      <SectionHeader
-        title={title}
-        description={description}
-        moreLabel={moreLabel}
-        moreLink={moreLink}
-        size="big"
-        width={width}
-      />
+      <SectionHeader title={title} description={description} more={more} size="big" width={width} />
       <div className={styles.contentWrapper}>{children}</div>
     </section>
   );

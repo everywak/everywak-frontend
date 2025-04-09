@@ -1,6 +1,6 @@
 @use '@common/mixin' as *;
 
-.FrontAppList {
+.container {
   --column: 2;
   --itemWidth: 102px;
   display: flex;
@@ -10,16 +10,26 @@
   padding: 0px;
   align-self: stretch;
 
-  .appList {
+  @include mobile-m {
+    --itemWidth: 90px;
+  }
+  @include mobile-s {
+    --itemWidth: 84px;
+  }
+
+  .list {
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     gap: 32px 8px;
+    @include mobile {
+      gap: 0;
+    }
     width: calc(var(--column) * (var(--itemWidth) + 16px));
 
-    .AppListItem {
+    .item {
       width: var(--itemWidth);
     }
   }

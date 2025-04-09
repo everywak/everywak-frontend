@@ -3,21 +3,17 @@ import React, { useEffect, useState } from 'react';
 import * as service from '../../services/Isedol';
 import { Desktop, NotDesktop } from '../../common/MediaQuery';
 
-import AsidePanel from '../frontpage/AsidePanel';
-import SectionHeader from '../frontpage/SectionHeader';
-
 import { MILLISECONDS_OF_DAY } from './weather.common';
 import FrontWeatherList from './FrontWeatherList';
 
 import './FrontWeatherPanel.scss';
-import cx from 'classnames';
+import { AsidePanel } from 'components/frontpage/DesktopFrontPage/components';
+import { SectionHeader } from 'common/components';
 
 /**
  * 현재 시각을 기준으로 date의 상대시간을 출력합니다.
- * @param {Date} date
- * @returns {string}
  */
-const getRelativeDateString = (date) => {
+const getRelativeDateString = (date: Date): string => {
   const today = new Date(
     new Date().getFullYear(),
     new Date().getMonth(),
@@ -36,11 +32,8 @@ const getRelativeDateString = (date) => {
 
 /**
  * 시간대 문자열을 출력합니다.
- *
- * @param {number} hours
- * @returns {string}
  */
-const getHourString = (hours) => {
+const getHourString = (hours: number): string => {
   if (hours == 0 || hours >= 22) {
     // 22~0
     return '밤';
@@ -68,10 +61,8 @@ const getHourString = (hours) => {
 /**
  * Frontpage에 표시되는 날씨 리스트 AsidePanel
  *
- * @param {{}} props
- * @returns {JSX.Element}
  */
-function FrontWeatherPanel(props) {
+function FrontWeatherPanel() {
   const [isLoading, setLoading] = useState(true);
   const [weatherInfo, setWeatherInfo] = useState(
     /** @type {OBIData: [], updatedTime: Date} */ {
@@ -105,18 +96,21 @@ function FrontWeatherPanel(props) {
   return (
     <>
       <Desktop>
-        <AsidePanel title="이세계 날씨" description={updatedDateString} moreLink="/weather">
-          <FrontWeatherList isLoading={isLoading} items={weatherInfo.OBIData} />
+        <AsidePanel
+          title="이세계 날씨"
+          description={updatedDateString}
+          more={{ link: '/weather', label: '더 보기' }}
+        >
+          <FrontWeatherList isLoading={isLoading} items={weatherInfo.OBIData as []} />
         </AsidePanel>
       </Desktop>
       <NotDesktop>
         <div className="FrontWeatherMobilePanel">
-          <FrontWeatherList isLoading={isLoading} items={weatherInfo.OBIData} />
+          <FrontWeatherList isLoading={isLoading} items={weatherInfo.OBIData as []} />
           <div className="headerWrapper">
             <SectionHeader
               description={updatedDateString}
-              moreLabel="더 보기"
-              moreLink="/weather"
+              more={{ label: '더 보기', link: '/weather' }}
             />
           </div>
         </div>
