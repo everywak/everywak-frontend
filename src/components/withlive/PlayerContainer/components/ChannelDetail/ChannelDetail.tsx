@@ -2,13 +2,13 @@ import { SetStateAction, useState } from 'react';
 import clsx from 'clsx';
 import { useQueryNotice } from 'hooks/useQueryNotice';
 import { TabSelect } from 'common/components/Select/variants';
+import { BasicImage, Section } from 'common/components';
+import VideoContentList from 'modules/isedol/VideoContentList';
+import { useQueryMember } from 'hooks/useQueryMember';
+import { Member } from 'services/api-v2/module/member.type';
+import { socialHref, socialLogoImgSrc } from './constants';
 import { StreamInfo } from './components';
 import styles from './ChannelDetail.module.scss';
-import VideoContentList from 'modules/isedol/VideoContentList';
-import { BasicImage, Section } from 'common/components';
-import { useQueryMember } from 'hooks/useQueryMember';
-import { socialHref, socialLogoImgSrc } from 'modules/live/broadcasterPanelData';
-import { Member } from 'services/api-v2/module/member.type';
 
 export interface Props {
   memberId: string;

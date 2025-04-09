@@ -22,7 +22,6 @@ const Weather = lazy(() => import('./modules/weather/Weather'));
 const VideoWatch = lazy(() => import('./modules/video/VideoWatch'));
 
 const WithLive = lazy(() => import('./pages/withlive/Page'));
-const ChatPopupPage = lazy(() => import('./modules/live/ChatPopupPage'));
 
 const Waktoon = lazy(() => import('./modules/waktoon/Waktoon'));
 const WaktoonEpisodeViewer = lazy(
@@ -49,17 +48,13 @@ export default function App() {
       <ThemeProvider>
         <div className="App">
           <ScrollToTop />
-
           <Routes>
             <Route path="/" element={<Frontpage />} />
             <Route path="/bestwakki" element={<Bestwakki />} />
-            <Route path="/live/chat/:platform/:channelId" element={<ChatPopupPage />} />
             <Route path="/isedol" element={<Isedol />} />
             <Route path="/weather" element={<Weather />} />
-
             <Route path="/video/watch/:videoId" element={<VideoWatch />} />
             <Route path="/video/watch" element={<VideoWatch />} />
-
             <Route path="/waktoon/all" element={<AllWaktoons />} />
             <Route path="/waktoon/best" element={<BestWaktoons />} />
             <Route path="/waktoon/chart" element={<WaktoonChart />} />
@@ -67,8 +62,9 @@ export default function App() {
             <Route path="/waktoon/:toonId/edit" element={<WaktoonEditor />} />
             <Route path="/waktoon/:toonId" element={<WaktoonViewer />} />
             <Route path="/waktoon" element={<Waktoon />} />
-
             <Route path="/withlive" element={<WithLive />} />
+            <Route path="/withlive/isedol" element={<WithLive />} /> {/* 레거시 리다이렉트용 */}
+            <Route path="/live" element={<WithLive />} /> {/* 레거시 리다이렉트용 */}
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
           <Footer />

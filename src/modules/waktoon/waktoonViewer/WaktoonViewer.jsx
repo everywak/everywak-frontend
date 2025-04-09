@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Route, Routes } from 'react-router';
+import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import Header from '../../../common/Header/Header';
-import CheckBox from '../../../common/Components/CheckBox/CheckBox';
 import BasicImage from '../../../common/Components/Image/BasicImage';
 import BasicButton from '../../../common/Components/Button/BasicButton';
 import LinkButton from '../../../common/Components/Button/LinkButton';
@@ -14,7 +12,6 @@ import { Select } from 'common/components';
 import SkeletonLoader from '../../../common/Components/SkeletonLoader';
 
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
-import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import CommentRoundedIcon from '@mui/icons-material/CommentRounded';
@@ -294,73 +291,6 @@ function WaktoonEpisodeListWrapper({ target }) {
         />
       )}
     </>
-  );
-}
-
-function WaktoonEpisodeSlider({ parent }) {
-  const [autoRedirect, setAutoRedirect] = useState(true);
-
-  const { toonId, episodeNumber } = useParams();
-
-  return (
-    <div className="WaktoonEpisodeSlider">
-      <div className="sliderHeader">
-        <BasicButton className="btnBackToList">
-          <MenuBookRoundedIcon />
-          에피소드 목록
-        </BasicButton>
-        <CheckBox
-          label="다음/이전화 클릭시 자동으로 링크 열기"
-          name="autoRedirect"
-          value={true}
-          onChange={(e) => {}}
-        />
-      </div>
-      <div className="slider">
-        <WaktoonEpisodeViewItem
-          target={{
-            toonId: '12345678',
-            thumbnail: '',
-            title: '이전 에피소드',
-            episodeNumber: '1',
-            onClick: () => {},
-          }}
-          side
-        />
-        <WaktoonEpisodeViewItem
-          target={{
-            toonId: '12345678',
-            thumbnail: '',
-            title: '이번 에피소드',
-            episodeNumber: '2',
-            onClick: () => {},
-          }}
-        />
-        <WaktoonEpisodeViewItem
-          target={{
-            toonId: '12345678',
-            thumbnail: '',
-            title: '다음 에피소드',
-            episodeNumber: '3',
-            onClick: () => {},
-          }}
-          side
-        />
-      </div>
-    </div>
-  );
-}
-
-function WaktoonEpisodeViewItem({ target, side = false }) {
-  return (
-    <div className={cx('WaktoonEpisodeViewItem', { side: side })}>
-      <div className="title">{target.title}</div>
-      <CoverImg src={target.thumbnail} alt="썸네일"></CoverImg>
-      <div className="caption">
-        <KeyboardArrowUpRoundedIcon fontSize="small" />
-        클릭해서 감상
-      </div>
-    </div>
   );
 }
 

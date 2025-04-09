@@ -1,6 +1,6 @@
 @use '@common/mixin' as *;
 
-.ViewerCounter {
+.container {
   color: var(--color-red);
   display: inline-flex;
   flex-direction: row;
@@ -14,7 +14,7 @@
   .counterWrapper {
     display: inline-block;
   }
-  .maxViewerWrapper {
+  .maxViewer {
     background: var(--color-component-white);
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
@@ -37,7 +37,7 @@
     }
   }
 
-  &:hover .maxViewerWrapper {
+  &:hover .maxViewer {
     opacity: 1;
   }
 }

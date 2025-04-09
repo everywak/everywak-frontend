@@ -1,8 +1,7 @@
 import clsx from 'clsx';
 
 import { useWithliveValues } from 'contexts/WithliveContext';
-import ViewerCounter from 'modules/live/ViewerCounter';
-import StreamTimer from 'modules/live/StreamTimer';
+import { StreamTimer, ViewerCounter } from './components';
 import styles from './StreamInfo.module.scss';
 
 export function StreamInfo(props: { channelId: string }) {
