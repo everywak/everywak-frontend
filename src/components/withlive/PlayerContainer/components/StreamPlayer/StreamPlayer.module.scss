@@ -1,6 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  transition: padding 0.15s ease;
 
   &.expanded.full .playerWrapper {
     min-height: 100vh;
@@ -12,7 +13,7 @@
     }
   }
   &.grid .playerWrapper,
-  &.oneSideV .playerWrapper  {
+  &.oneSideV .playerWrapper {
     width: 100%;
     height: 100%;
     aspect-ratio: auto;
@@ -32,6 +33,17 @@
   }
   &.isDragging {
     z-index: 10;
+    padding: 0.5rem;
+    .playerWrapper {
+      width: 100%;
+      height: 100%;
+      .offlineImage,
+      .embed {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: auto;
+      }
+    }
   }
 
   .playerWrapper {
