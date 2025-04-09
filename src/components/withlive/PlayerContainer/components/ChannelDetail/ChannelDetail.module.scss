@@ -59,7 +59,7 @@
     flex-direction: row;
     align-items: center;
     gap: 8px;
-    padding: 4px;
+    padding: 0.25rem 0.5rem 0.25rem 0.25rem;
 
     .logo {
       background: transparent;
@@ -79,7 +79,7 @@
   }
 }
 
-.footer{
+.footer {
   @include font14_14_500;
   line-height: 140%;
   color: var(--color-text-secondary);
