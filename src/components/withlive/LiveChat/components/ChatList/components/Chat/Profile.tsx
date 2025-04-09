@@ -7,11 +7,10 @@ import styles from './Profile.module.scss';
 export interface Props {
   profile: ChatProfile;
   isHideUserId: boolean;
-  isShowTimestamp: boolean;
 }
 
 export const Profile = React.memo(
-  ({ profile, isHideUserId, isShowTimestamp }: Props) => (
+  ({ profile, isHideUserId }: Props) => (
     <span className={styles.Profile} style={{ '--color': profile.color } as React.CSSProperties}>
       {profile.badge.length > 0 && (
         <span className={styles.badges}>
@@ -27,5 +26,7 @@ export const Profile = React.memo(
       </span>
     </span>
   ),
-  (prevProps, nextProps) => JSON.stringify(prevProps.profile) === JSON.stringify(nextProps.profile),
+  (prevProps, nextProps) =>
+    `${JSON.stringify(prevProps.profile)}${prevProps.isHideUserId ? '1' : '0'}` ===
+    `${JSON.stringify(nextProps.profile)}${nextProps.isHideUserId ? '1' : '0'}`,
 );

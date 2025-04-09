@@ -54,7 +54,6 @@ export const Chat = React.memo((props: Props) => {
           <Profile
             profile={props.item.profile}
             isHideUserId={props.isHideUserId}
-            isShowTimestamp={props.isShowTimestamp}
           />
         )}
         <span className={styles.content}>{content}</span>
