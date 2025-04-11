@@ -74,7 +74,7 @@
 
   font-weight: 700;
   font-size: 14px;
-  line-height: 1em;
+  line-height: 18px;
 
   border: none;
   border-radius: 4px;
@@ -125,6 +125,7 @@
 
   &.small {
     font-size: 11px;
+    line-height: 16px;
 
     gap: 2px;
     padding: calc(2px + var(--padding-offset)) calc(3px + var(--padding-offset));
@@ -135,6 +136,7 @@
   }
   &.large {
     font-size: 16px;
+    line-height: 24px;
 
     gap: 6px;
     padding: calc(12px + var(--padding-offset)) calc(16px + var(--padding-offset));
