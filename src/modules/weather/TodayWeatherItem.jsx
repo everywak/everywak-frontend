@@ -14,7 +14,7 @@ import cx from 'classnames';
  * @returns {JSX.Element}
  */
 function TodayWeatherItem({ name = 'null', state, description = '', weather, isSkeleton }) {
-  const color = name !== 'null' ? { '--color': `var(--isedol-${personalColor[name]}-color)` } : {};
+  const color = name !== 'null' ? { '--color': `var(--color-${personalColor[name]})` } : {};
 
   return (
     <div className={cx('TodayWeatherItem', { skeleton: isSkeleton })}>
