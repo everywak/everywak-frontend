@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef, CSSProperties } from 'react';
+import React, { useCallback, useState, useRef, CSSProperties, ChangeEventHandler } from 'react';
 import clsx from 'clsx';
 import { ExpandMoreRounded } from '@mui/icons-material';
 import { useWindowEvent } from 'hooks/useWindowEvent';
@@ -10,7 +10,7 @@ export interface Props {
   options: { name: string; value: string }[];
   name: string;
   value: string;
-  onChange?: ({ target }: { target: { name: string; value: string } }) => void;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
 export const Dropdown = ({ options = [], name, value, onChange = () => {} }: Props) => {
@@ -29,7 +29,7 @@ export const Dropdown = ({ options = [], name, value, onChange = () => {} }: Pro
           value: val,
           name,
         },
-      });
+      } as React.ChangeEvent<HTMLInputElement>);
     },
     [name],
   );
