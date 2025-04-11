@@ -1,12 +1,13 @@
 @use '@common/mixin' as *;
 
-.Dropdown {
+.container {
   user-select: none;
 
   .dispArea {
     cursor: pointer;
     display: flex;
     padding: 4px 4px 4px 8px;
+    color: var(--color-primary);
 
     .currName {
       font-size: 12px;

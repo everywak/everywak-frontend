@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import Dropdown from '../Dropdown';
+import { Dropdown } from 'common/components';
 import TransparentButton from '../Button/TransparentButton';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 

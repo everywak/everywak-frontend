@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import { SearchRounded } from '@mui/icons-material';
 
-import Dropdown from 'common/components/legacy/Dropdown';
+import { Dropdown } from 'common/components';
 
 import { useInputs } from 'hooks/useInputs';
 
@@ -81,7 +81,7 @@ function SearchBar({ defaultValue = { searchTarget: 'title', keyword: '' }, onSe
         onChange={onChange}
       />
       <div className="btnSearch" onClick={(e) => onClickSearch()}>
-        <SearchRoundedIcon style={{ color: 'white' }} />
+        <SearchRounded style={{ color: 'white' }} />
       </div>
     </div>
   );
