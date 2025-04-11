@@ -13,10 +13,21 @@ export interface Props {
 }
 
 export const CheckBox = (props: Props) => {
+  const onClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    if (props.onClick) {
+      e.preventDefault();
+      e.stopPropagation();
+      props.onClick();
+    }
+  };
+
   return (
     <div className={clsx('CheckBox', styles.container, props.className)}>
       <label className={styles.label}>
-        <div className={styles.content}>{props.children}</div>
+        <div className={styles.content} onClick={onClick}>
+          {props.children}
+        </div>
+        {props.onClick && <div className={styles.line} />}
         <input type="checkbox" name={props.name} onChange={props.onChange} checked={props.value} />
         <div className={clsx(styles.slider, { [styles.on]: props.value })}>
           <div className={styles.background}></div>
