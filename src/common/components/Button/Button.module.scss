@@ -65,8 +65,8 @@
   --padding-offset: 0px;
 
   &.outlined {
-    --padding-offset: -2px;
-    border: 2px solid var(--theme-color);
+    --padding-offset: -1px;
+    border: 1px solid var(--theme-color);
   }
 
   background: var(--background-color);
@@ -128,7 +128,7 @@
     line-height: 16px;
 
     gap: 2px;
-    padding: calc(2px + var(--padding-offset)) calc(3px + var(--padding-offset));
+    padding: calc(2px + var(--padding-offset)) calc(2px + var(--padding-offset));
 
     & > svg {
       font-size: 16px;
