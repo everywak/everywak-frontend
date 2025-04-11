@@ -31,6 +31,7 @@ export type ChatProfile = {
   name: string;
   badge: ChatBadge[];
   color: string;
+  colorDarkmode: string;
 };
 
 export type ChatEmote = {

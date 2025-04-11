@@ -257,6 +257,7 @@ export class EverywakRelayChatAdapter extends LiveChatAdapterClass {
       id: '' + Date.now() + '' + Math.random(),
       profile: {
         color: `#${msg.body.profile.color}`,
+        colorDarkmode: `#${msg.body.profile.colorDarkmode}`,
         name: msg.body.profile.nickname,
         id: msg.body.profile.userId.replace(/\(\d\)/, ''),
         badge,

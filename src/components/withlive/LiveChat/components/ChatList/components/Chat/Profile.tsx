@@ -7,11 +7,19 @@ import styles from './Profile.module.scss';
 export interface Props {
   profile: ChatProfile;
   isHideUserId: boolean;
+  isDarkMode?: boolean;
 }
 
 export const Profile = React.memo(
-  ({ profile, isHideUserId }: Props) => (
-    <span className={styles.Profile} style={{ '--color': profile.color } as React.CSSProperties}>
+  ({ profile, isHideUserId, isDarkMode }: Props) => (
+    <span
+      className={styles.Profile}
+      style={
+        {
+          '--color': isDarkMode ? profile.colorDarkmode : profile.color,
+        } as React.CSSProperties
+      }
+    >
       {profile.badge.length > 0 && (
         <span className={styles.badges}>
           {profile.badge.map((badge) => (
@@ -27,6 +35,6 @@ export const Profile = React.memo(
     </span>
   ),
   (prevProps, nextProps) =>
-    `${JSON.stringify(prevProps.profile)}${prevProps.isHideUserId ? '1' : '0'}` ===
-    `${JSON.stringify(nextProps.profile)}${nextProps.isHideUserId ? '1' : '0'}`,
+    `${JSON.stringify(prevProps.profile)}${prevProps.isHideUserId ? '1' : '0'}${prevProps.isDarkMode ? '1' : '0'}` ===
+    `${JSON.stringify(nextProps.profile)}${nextProps.isHideUserId ? '1' : '0'}${nextProps.isDarkMode ? '1' : '0'}`,
 );

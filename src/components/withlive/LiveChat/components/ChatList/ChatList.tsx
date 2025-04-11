@@ -11,6 +11,7 @@ export type Props = {
   autoScroll?: boolean;
   onTouchToBottom?: (touched: boolean) => void;
   options: ChatOption;
+  isDarkMode?: boolean;
 };
 
 export function ChatList(props: Props) {
@@ -51,9 +52,15 @@ export function ChatList(props: Props) {
         isHideUserId={props.options.isHideUserId}
         isHideProfile={props.options.isHideProfile}
         isShowTimestamp={props.options.isShowTimestamp}
+        isDarkMode={props.isDarkMode}
       />
     ),
-    [props.options.isHideUserId, props.options.isHideProfile, props.options.isShowTimestamp],
+    [
+      props.options.isHideUserId,
+      props.options.isHideProfile,
+      props.options.isShowTimestamp,
+      props.isDarkMode,
+    ],
   );
 
   const list = props.items.map(renderChat);
