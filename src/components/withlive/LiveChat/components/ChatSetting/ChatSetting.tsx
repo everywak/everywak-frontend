@@ -9,8 +9,8 @@ import { Theme, useTheme } from 'contexts/ThemeContext';
 
 export const ChatSetting = () => {
   const { theme, setTheme } = useTheme();
-  const { isOpenedSetting, option } = useLiveChatValue();
-  const { setOpenedSetting, updateOption } = useLiveChatActions();
+  const { openedSettingState, option } = useLiveChatValue();
+  const { setOpenedSettingState, updateOption } = useLiveChatActions();
 
   const [form, onChange] = useInputs(option);
 
@@ -19,7 +19,7 @@ export const ChatSetting = () => {
   }, [form]);
 
   const closeButton = (
-    <Button color="black-transparent" onClick={() => setOpenedSetting(false)}>
+    <Button color="black-transparent" onClick={() => setOpenedSettingState('off')}>
       <CloseRounded />
     </Button>
   );
@@ -105,7 +105,9 @@ export const ChatSetting = () => {
       value: form.isShowCollectorChat,
       onChange: onChange,
       label: '채팅 콜렉터',
-      onClick: () => {},
+      onClick: () => {
+        setOpenedSettingState('collector');
+      },
     },
     {
       type: 'group',
@@ -120,7 +122,7 @@ export const ChatSetting = () => {
     },
   ];
 
-  if (!isOpenedSetting) {
+  if (openedSettingState !== 'general') {
     return <></>;
   }
   return <SettingPage title="채팅 설정" rightButton={closeButton} items={body} />;

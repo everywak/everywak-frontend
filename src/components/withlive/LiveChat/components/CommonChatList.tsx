@@ -1,3 +1,4 @@
+import { useTheme } from 'contexts/ThemeContext';
 import { useLiveChatActions, useLiveChatValue } from '../LiveChat.context';
 import { ChatList } from './ChatList/ChatList';
 
@@ -5,6 +6,7 @@ export function CommonChatList({ className }: { className?: string }) {
   const { displayedChatList, isKeepOldChat, isConnected, isAuthorized, option } =
     useLiveChatValue();
   const { setKeepOldChat } = useLiveChatActions();
+  const { isDarkMode } = useTheme();
 
   const getSnackBarMessage = (isConnected: boolean, isAuthorized: boolean) => {
     if (!isConnected) {
@@ -24,6 +26,7 @@ export function CommonChatList({ className }: { className?: string }) {
       autoScroll={!isKeepOldChat}
       onTouchToBottom={(touched) => setKeepOldChat(!touched)}
       options={option}
+      isDarkMode={isDarkMode()}
     />
   );
 }

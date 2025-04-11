@@ -1,0 +1,1 @@
+export { useChatCollector } from './useChatCollector';

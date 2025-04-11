@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type ComponentProps = CheckBoxProps | GroupProps | SelectProps;
+export type ComponentProps = CheckBoxProps | GroupProps | SelectProps | CollectorCustomInputProps;
 
 export type CheckBoxProps = {
   type: 'checkbox';
@@ -26,4 +26,8 @@ export type SelectProps = {
     value: string;
   }[];
   onChange: React.ChangeEventHandler<HTMLInputElement>;
+};
+
+export type CollectorCustomInputProps = {
+  type: 'collectorCustomInput';
 };

@@ -1,0 +1,76 @@
+@use '@common/mixin' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  align-items: stretch;
+  padding: 0 1rem;
+
+  .inputField {
+    border: var(--color-border) 1px solid;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 0.25rem;
+
+    button {
+      width: max-content;
+    }
+    .target {
+      padding: 0.5rem;
+    }
+
+    input[type='text'] {
+      @include font14_14_500;
+      background-color: var(--color-background-white);
+      color: var(--color-text-primary);
+      border: none;
+      outline: none;
+      padding: 0.6875rem 0.5rem;
+      width: 0;
+      flex: 1;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 0.25rem;
+    }
+  }
+
+  .export {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    button {
+      flex: 1;
+    }
+  }
+  .list {
+    margin: 0;
+  }
+}
+
+.filterItem {
+  @include font12_12_500;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.5rem 0;
+  gap: 0.25rem;
+
+  .target {
+    text-align: center;
+    width: 3.75rem;
+  }
+  .keyword {
+    flex: 1;
+    width: 0;
+  }
+  .filter {
+    padding: 0 0.5rem;
+  }
+}

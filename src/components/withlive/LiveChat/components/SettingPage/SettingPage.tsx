@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { ComponentProps } from './types';
-import { CheckBox, Group, Select } from './components';
+import { CheckBox, CollectorCustomInput, Group, Select } from './components';
 import styles from './SettingPage.module.scss';
 import React from 'react';
 
@@ -41,6 +41,8 @@ export const SettingPage = React.memo((props: Props) => {
             {item.label}
           </Select>
         );
+      case 'collectorCustomInput':
+        return <CollectorCustomInput key={i} />;
       default:
         return <></>;
     }

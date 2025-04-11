@@ -9,7 +9,7 @@ export interface Props {
 }
 
 export function Header({ onClickHide }: Props) {
-  const { setOpenedSetting } = useLiveChatActions();
+  const { setOpenedSettingState } = useLiveChatActions();
 
   return (
     <div className={styles.container}>
@@ -17,7 +17,7 @@ export function Header({ onClickHide }: Props) {
         <KeyboardTabRounded />
       </Button>
       채팅
-      <Button color="black-transparent" onClick={() => setOpenedSetting(true)}>
+      <Button color="black-transparent" onClick={() => setOpenedSettingState('general')}>
         <SettingsRounded />
       </Button>
     </div>

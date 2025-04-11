@@ -1,6 +1,14 @@
 import { createContext, ReactNode, useContext, useMemo, useRef, useState } from 'react';
 
-import { ChatItem, ChatOption } from './LiveChat.type';
+import {
+  ChatCollectorOption,
+  ChatFilter,
+  ChatItem,
+  ChatOption,
+  ChatSettingState,
+} from './LiveChat.type';
+import { useChatCollector } from './hooks';
+import { useStorage } from 'hooks';
 
 // TODO: 옵션 localStorage 연동
 
@@ -8,23 +16,30 @@ export type Values = {
   readonly channelId: string[];
   readonly isConnected: boolean;
   readonly isAuthorized: boolean;
-  readonly isOpenedSetting: boolean;
   readonly isKeepOldChat: boolean;
   readonly isEnabledSendChat: boolean;
+  readonly openedSettingState: ChatSettingState;
   readonly option: ChatOption;
   readonly displayedChatList: ChatItem[];
   readonly collectedChatList: ChatItem[];
+  readonly collectorOption: ChatCollectorOption;
+  readonly collectorFilters: ChatFilter[];
 };
 
 export type Actions = {
   readonly setChannelId: (ids: string[]) => void;
   readonly setConnected: (state: boolean) => void;
   readonly setAuthorized: (state: boolean) => void;
-  readonly setOpenedSetting: (state: boolean) => void;
+  readonly setOpenedSettingState: (state: ChatSettingState) => void;
   readonly setKeepOldChat: (state: boolean) => void;
   readonly setEnabledSendChat: (state: boolean) => void;
   readonly updateOption: (option: Partial<ChatOption>) => void;
   readonly addChatItem: (items: ChatItem[]) => void;
+  readonly updateCollectorOption: (option: Partial<ChatCollectorOption>) => void;
+  readonly addChatFilter: (filter: ChatFilter) => void;
+  readonly removeChatFilter: (filter: ChatFilter) => void;
+  readonly exportChatFilter: () => void;
+  readonly importChatFilter: () => void;
 };
 
 const LiveChatValueContext = createContext<Values | undefined>(undefined);
@@ -38,13 +53,13 @@ export function LiveChatProvider(props: Props): JSX.Element {
   const [channelId, setChannelId] = useState<string[]>([]);
   const [isConnected, setConnected] = useState(false);
   const [isAuthorized, setAuthorized] = useState(false);
-  const [isOpenedSetting, setOpenedSetting] = useState(false);
   const [isKeepOldChat, setKeepOldChat] = useState(false);
   const [isEnabledSendChat, setEnabledSendChat] = useState(false);
-  const [option, setOption] = useState<ChatOption>({
-    maxDisplayCount: 30,
+  const [openedSettingState, setOpenedSettingState] = useState<ChatSettingState>('off');
+  const [option, setOption] = useStorage<ChatOption>('everywak.withlive.chat.option', {
+    maxDisplayCount: 50,
     maxStoreCount: 500,
-    isHideUserId: false,
+    isHideUserId: true,
     isHideProfile: false,
     isShowTimestamp: false,
     isShowOnlyManager: false,
@@ -52,14 +67,18 @@ export function LiveChatProvider(props: Props): JSX.Element {
     isShowOnlyFan: false,
     isShowAllMultiView: true,
     isShowCollectorChat: true,
-    chatCollectorFilters: [
-      {
-        target: 'badge',
-        keyword: 'manager',
-        filter: 'include',
-      },
-    ],
   });
+
+  const {
+    collectorOption,
+    collectorFilters,
+    updateCollectorOption,
+    addChatFilter,
+    removeChatFilter,
+    exportChatFilter,
+    importChatFilter,
+  } = useChatCollector();
+
   const chatList = useRef<ChatItem[]>([]);
   const [displayedChatList, setDisplayedChatList] = useState<ChatItem[]>([]);
   const [collectedChatList, setCollectedChatList] = useState<ChatItem[]>([]);
@@ -97,27 +116,42 @@ export function LiveChatProvider(props: Props): JSX.Element {
         if (item.type !== 'chat') {
           return false;
         }
-        return option.chatCollectorFilters.some((filter) => {
-          if (filter.target === 'user') {
-            return (
-              (item.profile.name.includes(filter.keyword) || item.profile.id === filter.keyword) ===
-              (filter.filter === 'include')
-            );
-          } else if (filter.target === 'message') {
-            return item.content.join('').includes(filter.keyword) === (filter.filter === 'include');
-          } else if (filter.target === 'badge') {
-            return item.profile.badge.some(
-              (badge) => badge.id.includes(filter.keyword) === (filter.filter === 'include'),
-            );
-          }
-        });
+        const included = collectorFilters
+          .filter((filter) => filter.type === 'include')
+          .some((filter) => {
+            if (filter.target === 'userId') {
+              return item.profile.id === filter.keyword;
+            } else if (filter.target === 'nickname') {
+              return item.profile.name.includes(filter.keyword);
+            } else if (filter.target === 'message') {
+              return item.content.join('').includes(filter.keyword);
+            } else if (filter.target === 'badge') {
+              return item.profile.badge.some((badge) => badge.id.includes(filter.keyword));
+            }
+          });
+        const excluded = collectorFilters
+          .filter((filter) => filter.type === 'exclude')
+          .some((filter) => {
+            if (filter.target === 'userId') {
+              return item.profile.id === filter.keyword;
+            } else if (filter.target === 'nickname') {
+              return item.profile.name.includes(filter.keyword);
+            } else if (filter.target === 'message') {
+              return item.content.join('').includes(filter.keyword);
+            } else if (filter.target === 'badge') {
+              return item.profile.badge.some((badge) => badge.id.includes(filter.keyword));
+            }
+          });
+        return included && !excluded;
       });
       filteredCollectorItems.forEach((item) => {
         if (item.type === 'chat') {
           item.accentColor = 'yellow';
         }
       });
-      setCollectedChatList((prev) => [...prev, ...filteredCollectorItems].slice(-option.maxDisplayCount));
+      setCollectedChatList((prev) =>
+        [...prev, ...filteredCollectorItems].slice(-option.maxDisplayCount),
+      );
     }
     onAddChatHandlers.current.forEach((handler) => handler(filteredItems));
   };
@@ -134,22 +168,28 @@ export function LiveChatProvider(props: Props): JSX.Element {
       setChannelId,
       setConnected,
       setAuthorized,
-      setOpenedSetting,
+      setOpenedSettingState,
       setKeepOldChat,
       setEnabledSendChat,
       updateOption,
       addChatItem,
+      updateCollectorOption,
+      addChatFilter,
+      removeChatFilter,
+      exportChatFilter,
+      importChatFilter,
     }),
     [
       setChannelId,
       setConnected,
-      setOpenedSetting,
+      setOpenedSettingState,
       isKeepOldChat,
       setKeepOldChat,
       updateOption,
       setOption,
       setDisplayedChatList,
       setCollectedChatList,
+      addChatFilter,
     ],
   );
 
@@ -160,12 +200,14 @@ export function LiveChatProvider(props: Props): JSX.Element {
           channelId,
           isConnected,
           isAuthorized,
-          isOpenedSetting,
+          openedSettingState,
           isKeepOldChat,
           isEnabledSendChat,
           option,
           displayedChatList,
           collectedChatList,
+          collectorOption,
+          collectorFilters,
         }}
       >
         {props.children}

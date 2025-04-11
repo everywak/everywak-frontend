@@ -7,10 +7,26 @@
   top: 0;
   left: 0;
   width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
   z-index: 1000;
   background-color: var(--color-background-white);
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--color-border);
+  &::-webkit-scrollbar {
+    width: 12px;
+    padding: 4px 0;
+  }
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-scrollbar);
+    background-clip: padding-box;
+    border: 3.5px solid transparent;
+    border-radius: 7px;
+    transition: background-color ease 0.2s;
+  }
 
   .header {
     @include font16_16_500;
@@ -21,6 +37,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.5625rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 
     .left {
       display: flex;

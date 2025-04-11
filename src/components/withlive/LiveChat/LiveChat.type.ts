@@ -1,9 +1,3 @@
-export type ChatFilter = {
-  target: 'user' | 'message' | 'badge';
-  keyword: string;
-  filter: 'include' | 'exclude';
-};
-
 export type ChatOption = {
   maxDisplayCount: number;
   maxStoreCount: number;
@@ -15,8 +9,35 @@ export type ChatOption = {
   isShowOnlyFan: boolean;
   isShowAllMultiView: boolean;
   isShowCollectorChat: boolean;
-  chatCollectorFilters: ChatFilter[];
 };
+
+export type ChatCollectorOption = {
+  byRole: ChatRole[]; // 왁타버스 멤버
+  byGroup: ChatGroup[]; // 매니저/구독자/팬
+  customFilters: ChatFilter[];
+};
+
+export type ChatFilter = {
+  type: ChatFilterType;
+  target: ChatFilterTarget;
+  keyword: string;
+};
+
+export type ChatRole = 'master' | 'isedol' | 'gomem' | 'academy' | 'hardcore'; // TODO: api 타입으로 이동하기
+export type ChatGroup = 'manager' | 'sub' | 'fan';
+
+export type ChatFilterType = 'include' | 'exclude';
+export const ChatFilterTypeName: Record<ChatFilterType, string> = {
+  include: '포함',
+  exclude: '제외',
+} as const;
+export type ChatFilterTarget = 'userId' | 'nickname' | 'message' | 'badge';
+export const ChatFilterTargetName: Record<ChatFilterTarget, string> = {
+  userId: '아이디',
+  nickname: '닉네임',
+  message: '채팅',
+  badge: '뱃지',
+} as const;
 
 export type AccentColor = '' | 'yellow' | 'red';
 
@@ -70,3 +91,5 @@ export type ChatItemChannelMessage = {
   content: string[];
   timestamp: number;
 };
+
+export type ChatSettingState = 'off' | 'general' | 'collector';

@@ -2,7 +2,13 @@ import clsx from 'clsx';
 import { LiveChatProvider } from './LiveChat.context';
 
 import { LiveChatAdapter } from './LiveChatAdapter';
-import { Header, CommonChatList, CollectorChatList, ChatSetting } from './components';
+import {
+  Header,
+  CommonChatList,
+  CollectorChatList,
+  ChatSetting,
+  CollectorSetting,
+} from './components';
 
 import styles from './LiveChat.module.scss';
 
@@ -21,6 +27,7 @@ export function LiveChat(props: Props) {
         <CollectorChatList className={styles.collectorChatList} />
         <CommonChatList className={styles.commonChatList} />
         <ChatSetting />
+        <CollectorSetting />
       </div>
     </LiveChatProvider>
   );

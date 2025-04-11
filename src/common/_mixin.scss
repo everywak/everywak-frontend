@@ -1,4 +1,4 @@
-@import "./variables";
+@import './variables';
 
 @mixin mobile-s {
   @media (max-width: #{$mob-s-width - 1px}) {
@@ -62,5 +62,11 @@
 @mixin font14_14_500 {
   font-size: 0.875rem;
   line-height: 0.875rem;
+  font-weight: 500;
+}
+
+@mixin font12_12_500 {
+  font-size: 0.75rem;
+  line-height: 0.75rem;
   font-weight: 500;
 }
