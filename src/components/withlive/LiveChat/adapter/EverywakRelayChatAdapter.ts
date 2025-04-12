@@ -283,6 +283,16 @@ export class EverywakRelayChatAdapter extends LiveChatAdapterClass {
           groupName: msg.name,
           isMoving: false,
         });
+      } else if (msg.type === 'sticker') {
+        result.push({
+          name: msg.name,
+          id: msg.name,
+          imgPc: msg.imgUrl,
+          imgMobile: msg.imgUrl,
+          groupId: msg.name,
+          groupName: msg.name,
+          isMoving: false,
+        });
       }
     });
     return result;
