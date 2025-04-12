@@ -52,6 +52,8 @@ export function ChatList(props: Props) {
         isHideUserId={props.options.isHideUserId}
         isHideProfile={props.options.isHideProfile}
         isShowTimestamp={props.options.isShowTimestamp}
+        isHideFanBadge={props.options.isHideFanBadge}
+        isHideAllBadge={props.options.isHideAllBadge}
         isDarkMode={props.isDarkMode}
       />
     ),

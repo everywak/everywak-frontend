@@ -51,6 +51,20 @@ export const ChatSetting = () => {
       label: '타임스탬프 보기',
     },
     {
+      type: 'checkbox',
+      name: 'isHideFanBadge',
+      value: form.isHideFanBadge,
+      onChange: onChange,
+      label: '팬 뱃지 숨기기',
+    },
+    {
+      type: 'checkbox',
+      name: 'isHideAllBadge',
+      value: form.isHideAllBadge,
+      onChange: onChange,
+      label: '모든 뱃지 숨기기',
+    },
+    {
       type: 'select',
       name: 'theme',
       value: theme,

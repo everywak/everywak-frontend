@@ -61,6 +61,8 @@ export function LiveChatProvider(props: Props): JSX.Element {
     maxStoreCount: 500,
     isHideUserId: true,
     isHideProfile: false,
+    isHideAllBadge: false,
+    isHideFanBadge: false,
     isShowTimestamp: false,
     isShowOnlyManager: false,
     isShowOnlySubscriber: false,

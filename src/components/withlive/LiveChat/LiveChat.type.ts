@@ -3,6 +3,8 @@ export type ChatOption = {
   maxStoreCount: number;
   isHideUserId: boolean;
   isHideProfile: boolean;
+  isHideAllBadge: boolean;
+  isHideFanBadge: boolean;
   isShowTimestamp: boolean;
   isShowOnlyManager: boolean;
   isShowOnlySubscriber: boolean;

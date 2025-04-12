@@ -11,6 +11,8 @@ export interface Props {
   isHideProfile: boolean;
   isShowTimestamp: boolean;
   isDarkMode?: boolean;
+  isHideFanBadge: boolean;
+  isHideAllBadge: boolean;
 }
 
 const accentColor: Record<AccentColor, string> = {
@@ -56,6 +58,8 @@ export const Chat = React.memo((props: Props) => {
             profile={props.item.profile}
             isHideUserId={props.isHideUserId}
             isDarkMode={props.isDarkMode}
+            isHideFanBadge={props.isHideFanBadge}
+            isHideAllBadge={props.isHideAllBadge}
           />
         )}
         <span className={styles.content}>{content}</span>
