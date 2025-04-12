@@ -10,8 +10,6 @@ import {
 import { useChatCollector } from './hooks';
 import { useStorage } from 'hooks';
 
-// TODO: 옵션 localStorage 연동
-
 export type Values = {
   readonly channelId: string[];
   readonly isConnected: boolean;
