@@ -78,7 +78,7 @@ class Footer extends Component {
       <footer className={styles.footer}>
         <div className={styles.btns}>{btnList}</div>
         <div className={styles.links}>
-          <Link to="/contact">개발자 연락처</Link> |{' '}
+          <a href="mailto:contact@everywak.kr">개발자 연락처</a> |{' '}
           <Link to="/siteinfo">개인정보 처리방침 및 운영방침</Link>
         </div>
         <div className={styles.desc}>
