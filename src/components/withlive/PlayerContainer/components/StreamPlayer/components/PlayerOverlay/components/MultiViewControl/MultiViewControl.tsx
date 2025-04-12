@@ -16,7 +16,7 @@ import {
 import { Button } from 'common/components';
 import { Tooltip } from '../../../../..';
 import { ChannelStateType } from 'utils/types/withlive.type';
-import { useWithliveActions, useWithliveValues } from 'contexts/WithliveContext';
+import { useWithliveActions, useWithliveValues } from 'contexts/withlive';
 import styles from './MultiViewControl.module.scss';
 import { layoutIcons, layoutLabels } from './constants';
 

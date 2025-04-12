@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { useWithliveActions } from 'contexts/WithliveContext';
+import { useWithliveActions } from 'contexts/withlive';
 import styles from './ChannelItem.module.scss';
 
 export interface Props {

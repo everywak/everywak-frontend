@@ -2,7 +2,7 @@ import { CSSProperties } from 'react';
 import clsx from 'clsx';
 import { AnimatePresence } from 'framer-motion';
 import { ChannelStateType, ChannelType } from 'utils/types/withlive.type';
-import { useWithliveValues } from 'contexts/WithliveContext';
+import { useWithliveValues } from 'contexts/withlive';
 import { StreamPlayer } from './components';
 import styles from './PlayerContainer.module.scss';
 

@@ -1,12 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import {
   ChannelStateType,
-  ChannelStreamInfoType,
   ChannelType,
   DraggingPlayerStateType,
   LayoutType,
 } from 'utils/types/withlive.type';
-import { useMember, useQueryLive, useStorage, useWindowEvent } from 'hooks';
+import { useStorage, useWindowEvent } from 'hooks';
+import { useChannels } from './hooks/useChannels';
 
 export type Values = {
   channels: ChannelType[];
@@ -21,8 +21,6 @@ export type Values = {
 };
 
 export type Actions = {
-  setChannels: (channels: ChannelType[]) => void;
-
   setIsEnabledMultiView: (isEnabledMultiView: boolean) => void;
 
   setWatchingChannels: (channels: ChannelStateType[]) => void;
@@ -47,8 +45,8 @@ interface Props {
   readonly children: React.ReactNode;
 }
 
-export function WithliveProvider(props: Props): React.ReactNode {
-  const [channels, setChannels] = useState<ChannelType[]>([]);
+export const WithliveProvider = (props: Props): React.ReactNode => {
+  const { channels } = useChannels();
   const [isEnabledMultiView, setIsEnabledMultiView] = useStorage<boolean>(
     'everywak.withlive.multiview.enable',
     false,
@@ -71,11 +69,6 @@ export function WithliveProvider(props: Props): React.ReactNode {
     targetMemberId: '',
     prevOrder: -1,
     order: -1,
-  });
-
-  const members = useMember();
-  const { isLoading, data: lives } = useQueryLive({
-    refreshInterval: 10000,
   });
 
   const addWatchingChannel = (memberId: string) => {
@@ -184,37 +177,6 @@ export function WithliveProvider(props: Props): React.ReactNode {
   );
 
   useEffect(() => {
-    const channels = members.map<ChannelType>((member) => ({
-      memberId: member.id,
-      nickname: member.name,
-      profileImage: member.profile.profileImage,
-      offlineImage: member.profile.offlineImage,
-      streamInfo: null,
-    }));
-    if (!isLoading && lives) {
-      channels.forEach((channel) => {
-        const live = lives.find((live) => live.id.split(':')[0] === channel.memberId);
-        if (!live) {
-          return;
-        }
-        const stream: ChannelStreamInfoType = {
-          title: live.title,
-          isLive: live.isLive,
-          viewerCount: live.viewerCount,
-          startedTime: new Date(live.startedTimestamp).getTime(),
-          thumbnail: live.thumbnail,
-          platform: live.livePlatform.type,
-          channelId: live.livePlatform.channelId,
-          videoId: live.videoId,
-          chatId: live.chatId,
-        };
-        channel.streamInfo = stream;
-      });
-    }
-    setChannels(channels);
-  }, [isLoading, JSON.stringify(lives?.filter((live) => live.isLive)), members]);
-
-  useEffect(() => {
     const onlineChannels = channels.filter((channel) => channel.streamInfo?.isLive);
     if (onlineChannels.length > 0 && watchingChannels.length === 0) {
       addWatchingChannel(onlineChannels[0].memberId);
@@ -237,7 +199,6 @@ export function WithliveProvider(props: Props): React.ReactNode {
     >
       <WithliveActionsContext.Provider
         value={{
-          setChannels,
           setIsEnabledMultiView,
           setWatchingChannels,
           addWatchingChannel,
@@ -256,7 +217,7 @@ export function WithliveProvider(props: Props): React.ReactNode {
       </WithliveActionsContext.Provider>
     </WithliveValuesContext.Provider>
   );
-}
+};
 
 export function useWithliveValues(): Values {
   const context = useContext(WithliveValuesContext);

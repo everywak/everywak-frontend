@@ -1,5 +1,11 @@
-import { WithliveProvider } from 'contexts/WithliveContext';
-import { WithliveHeader, PlayerContainer, LiveChatContainer, Redirect, ParseUrlQuery } from 'components/withlive';
+import { WithliveProvider } from 'contexts/withlive';
+import {
+  WithliveHeader,
+  PlayerContainer,
+  LiveChatContainer,
+  Redirect,
+  ParseUrlQuery,
+} from 'components/withlive';
 import styles from './Page.module.scss';
 
 export const Page = () => {

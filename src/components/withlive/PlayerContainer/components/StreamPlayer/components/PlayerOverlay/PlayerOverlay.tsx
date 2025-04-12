@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useWithliveActions, useWithliveValues } from 'contexts/WithliveContext';
+import { useWithliveActions, useWithliveValues } from 'contexts/withlive';
 import { ChannelStateType } from 'utils/types/withlive.type';
 import { MultiViewControl } from './components';
 import styles from './PlayerOverlay.module.scss';

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useWithliveActions, useWithliveValues } from 'contexts/WithliveContext';
+import { useWithliveActions, useWithliveValues } from 'contexts/withlive';
 
 export const ParseUrlQuery = () => {
   const { addWatchingChannel } = useWithliveActions();

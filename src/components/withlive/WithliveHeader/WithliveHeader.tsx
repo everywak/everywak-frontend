@@ -1,6 +1,6 @@
-import { CSSProperties, useMemo, useState } from 'react';
+import { CSSProperties, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useWithliveValues } from 'contexts/WithliveContext';
+import { useWithliveValues } from 'contexts/withlive';
 import { VideocamRounded } from '@mui/icons-material';
 import { ChannelItem } from './components';
 import styles from './WithliveHeader.module.scss';
