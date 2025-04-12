@@ -15,8 +15,7 @@ export const MobileFrontPage = () => {
           <div className={styles.highlight}>
             <LivePreview
               className={styles.livePreview}
-              channelId="woowakgood"
-              size="big"
+              memberId="01HTYWPTRQPMBBN03797C60NZQ"
               hideProfile
             />
           </div>

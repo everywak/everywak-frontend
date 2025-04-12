@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { EventNoteRounded, FlagRounded, NotificationsRounded } from '@mui/icons-material';
 import { CommonHeader, Section, SectionHeader, SubSection } from 'common/components';
-import LivePreview from 'modules/isedol/LivePreview';
+import { LivePreview } from 'modules/isedol/LivePreview';
 import VideoContentList from 'modules/isedol/VideoContentList';
 import NewWakMusicList from 'modules/music/NewWakMusicList';
 import WakMusicChartList from 'modules/music/WakMusicChartList';
@@ -13,13 +13,20 @@ import { AsidePanel, BestwakkiList } from './components';
 import styles from './DesktopFrontPage.module.scss';
 
 export const DesktopFrontPage = () => {
-  const isedol = ['vo_ine', 'jingburger', 'lilpaaaaaa', 'cotton__123', 'gosegugosegu', 'viichan6'];
+  const isedol = [
+    '01HTYXH5RAR4NPW1Y1QD96FF6M',
+    '01HTYXYSS3YFAAPBR648J2DPHD',
+    '01HTYY59CYV8A58633V2BYWGGD',
+    '01HTYYB6AKM8QS519FD9WMKNPG',
+    '01HTYYFXH1GSSQD584HDTVMN2V',
+    '01HTYYN8ZGT1X22F9DM5BVB1RG',
+  ];
   const leftLiveList = isedol
     .slice(0, 3)
-    .map((id) => <LivePreview key={`livepanel_${id}`} channelId={id} />);
+    .map((id) => <LivePreview key={`livepanel_${id}`} memberId={id} />);
   const rightLiveList = isedol
     .slice(3, 6)
-    .map((id) => <LivePreview key={`livepanel_${id}`} channelId={id} />);
+    .map((id) => <LivePreview key={`livepanel_${id}`} memberId={id} />);
 
   return (
     <main className={clsx('FrontPage', styles.container)}>
@@ -40,7 +47,7 @@ export const DesktopFrontPage = () => {
         <div className={styles.lives}>
           <div className={styles.side}>{leftLiveList}</div>
           <div className={styles.center}>
-            <LivePreview channelId="woowakgood" size="big" />
+            <LivePreview memberId="01HTYWPTRQPMBBN03797C60NZQ" />
           </div>
           <div className={styles.side}>{rightLiveList}</div>
         </div>

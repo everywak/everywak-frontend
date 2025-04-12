@@ -17,7 +17,7 @@ const Image = styled.img`
 /**
  * 원 모양 이미지
  *
- * @param {{src: string, alt?: string, objectFit: 'cover'|'contain', padding: number}} props
+ * @param {{className?: string, src: string, alt?: string, objectFit: 'cover'|'contain', padding: number}} props
  */
 function CircleImg(props) {
   const { className, src, alt, objectFit = 'cover', padding = 0, ...rest } = props;
