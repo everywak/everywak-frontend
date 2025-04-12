@@ -21,6 +21,8 @@ export const Profile = React.memo(
       }
       return true;
     };
+
+    const filteredBadges = profile.badge.filter(filterBadge);
     return (
       <span
         className={styles.Profile}
@@ -30,9 +32,9 @@ export const Profile = React.memo(
           } as React.CSSProperties
         }
       >
-        {profile.badge.length > 0 && (
+        {filteredBadges.length > 0 && (
           <span className={styles.badges}>
-            {profile.badge.filter(filterBadge).map((badge) => (
+            {filteredBadges.map((badge) => (
               <Badge key={badge.id} badge={badge} />
             ))}
           </span>
