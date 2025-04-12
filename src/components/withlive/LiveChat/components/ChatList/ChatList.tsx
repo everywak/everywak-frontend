@@ -57,12 +57,7 @@ export function ChatList(props: Props) {
         isDarkMode={props.isDarkMode}
       />
     ),
-    [
-      props.options.isHideUserId,
-      props.options.isHideProfile,
-      props.options.isShowTimestamp,
-      props.isDarkMode,
-    ],
+    [JSON.stringify(props.options), props.isDarkMode],
   );
 
   const list = props.items.map(renderChat);
