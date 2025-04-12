@@ -49,11 +49,7 @@ export function ChatList(props: Props) {
       <Chat
         key={chatItem.id}
         item={chatItem}
-        isHideUserId={props.options.isHideUserId}
-        isHideProfile={props.options.isHideProfile}
-        isShowTimestamp={props.options.isShowTimestamp}
-        isHideFanBadge={props.options.isHideFanBadge}
-        isHideAllBadge={props.options.isHideAllBadge}
+        options={props.options}
         isDarkMode={props.isDarkMode}
       />
     ),

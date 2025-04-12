@@ -1,5 +1,5 @@
 import React from 'react';
-import { AccentColor, ChatItem } from '../../../../LiveChat.type';
+import { AccentColor, ChatItem, ChatOption } from '../../../../LiveChat.type';
 
 import styles from './Chat.module.scss';
 import { Emote } from './Emote';
@@ -7,12 +7,8 @@ import { Profile } from './Profile';
 
 export interface Props {
   item: ChatItem;
-  isHideUserId: boolean;
-  isHideProfile: boolean;
-  isShowTimestamp: boolean;
   isDarkMode?: boolean;
-  isHideFanBadge: boolean;
-  isHideAllBadge: boolean;
+  options: ChatOption;
 }
 
 const accentColor: Record<AccentColor, string> = {
@@ -43,7 +39,7 @@ export const Chat = React.memo((props: Props) => {
       }
     >
       <span className={styles.contentContainer}>
-        {props.isShowTimestamp && (
+        {props.options.isShowTimestamp && (
           <span className={styles.timestamp}>
             {new Date(props.item.timestamp).toLocaleTimeString('en-US', {
               hour: '2-digit',
@@ -53,13 +49,13 @@ export const Chat = React.memo((props: Props) => {
             })}
           </span>
         )}
-        {!props.isHideProfile && (
+        {!props.options.isHideProfile && (
           <Profile
             profile={props.item.profile}
-            isHideUserId={props.isHideUserId}
             isDarkMode={props.isDarkMode}
-            isHideFanBadge={props.isHideFanBadge}
-            isHideAllBadge={props.isHideAllBadge}
+            isHideUserId={props.options.isHideUserId}
+            isHideFanBadge={props.options.isHideFanBadge}
+            isHideAllBadge={props.options.isHideAllBadge}
           />
         )}
         <span className={styles.content}>{content}</span>
