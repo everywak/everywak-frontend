@@ -83,8 +83,8 @@ const StreamPlayer_ = (props: Props) => {
             src={
               streamInfo?.isLive
                 ? streamInfo?.thumbnail
-                : `/images/streamoffline/${props.player.memberId}.png`
-            } // TODO: props.channel.offlineImage 백엔드 사이드로
+                : props.channel.offlineImage ?? ''
+            }
             alt={`${props.channel.nickname} 오프라인`}
           />
         )}
