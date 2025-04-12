@@ -61,7 +61,7 @@ export const DesktopFrontPage = () => {
             <Section
               title="에브리뮤직"
               more={{
-                link: '/music/concert',
+                link: 'https://everywak.kr/music/concert/index.html',
                 label: '지난 이세돌 콘서트 바로가기',
               }}
               width="spaceBetween"
