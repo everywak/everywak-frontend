@@ -2,7 +2,7 @@ import { useTheme } from 'contexts/ThemeContext';
 import { useLiveChatActions, useLiveChatValue } from '../LiveChat.context';
 import { ChatList } from './ChatList/ChatList';
 
-export function CommonChatList({ className }: { className?: string }) {
+export const CommonChatList = ({ className }: { className?: string }) => {
   const { displayedChatList, isKeepOldChat, isConnected, isAuthorized, option } =
     useLiveChatValue();
   const { setKeepOldChat } = useLiveChatActions();
@@ -29,4 +29,4 @@ export function CommonChatList({ className }: { className?: string }) {
       isDarkMode={isDarkMode()}
     />
   );
-}
+};

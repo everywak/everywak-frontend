@@ -20,7 +20,7 @@ export interface Props {
   ) => void;
 }
 
-export function ChannelItem(props: Props) {
+export const ChannelItem = (props: Props) => {
   const { addWatchingChannel } = useWithliveActions();
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -59,4 +59,4 @@ export function ChannelItem(props: Props) {
       <div className={styles.watchingMarker}></div>
     </motion.div>
   );
-}
+};

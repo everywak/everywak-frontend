@@ -1,9 +1,6 @@
 import React from 'react';
 import { ChatBadge } from 'components/withlive/LiveChat/LiveChat.type';
-import { FanclubBadge } from './Badge/FanclubBadge';
-import { ManagerBadge } from './Badge/ManagerBadge';
-import { SubscriberBadge } from './Badge/SubscriberBadge';
-import { TopfanBadge } from './Badge/TopfanBadge';
+import { FanclubBadge, ManagerBadge, SubscriberBadge, TopfanBadge } from './vatirants';
 import styles from './Badge.module.scss';
 
 export type Props = {

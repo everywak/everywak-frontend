@@ -10,11 +10,11 @@ const diffChannel = (oldChannels: string[], newChannels: string[]) => {
   return { willLeaves, willJoins };
 };
 
-export type Props = {
+export interface Props {
   channelIds: string[];
-};
+}
 
-export function LiveChatAdapter(props: Props) {
+export const LiveChatAdapter = (props: Props) => {
   const { watchingChannels } = useWithliveValues();
   const { addChatItem, setChannelId, setConnected, setAuthorized } = useLiveChatActions();
   const { channelId, option } = useLiveChatValue();
@@ -87,4 +87,4 @@ export function LiveChatAdapter(props: Props) {
   }, [JSON.stringify(props.channelIds), watchingChannels, option.isShowAllMultiView]);
 
   return <></>;
-}
+};

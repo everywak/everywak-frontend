@@ -1,4 +1,4 @@
-export function TopfanBadge() {
+export const TopfanBadge = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" fill="none">
       <rect width="14" height="14" y=".5" fill="#D65B8F" rx="3" />
@@ -8,4 +8,4 @@ export function TopfanBadge() {
       />
     </svg>
   );
-}
+};

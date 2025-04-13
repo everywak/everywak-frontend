@@ -24,7 +24,7 @@ export function ChannelDetail(props: Props) {
   const noticeTitle = isLoading ? '로딩 중...' : (data?.[0]?.subject ?? '공지사항이 없습니다.');
   return (
     <section className={clsx(styles.container, props.className)}>
-      <StreamInfo channelId={props.memberId} />
+      <StreamInfo memberId={props.memberId} />
       <section className={styles.channelPage}>
         <a
           href={data?.[0] && `https://cafe.naver.com/steamindiegame/${data?.[0].articleId}`}

@@ -5,7 +5,7 @@ import { Stretchable } from 'common/components';
 
 import styles from './CollectorChatList.module.scss';
 
-export function CollectorChatList({ className }: { className?: string }) {
+export const CollectorChatList = ({ className }: { className?: string }) => {
   const { collectedChatList, option } = useLiveChatValue();
 
   const [autoScroll, setAutoScroll] = useState(true);
@@ -26,4 +26,4 @@ export function CollectorChatList({ className }: { className?: string }) {
       />
     </Stretchable>
   );
-}
+};

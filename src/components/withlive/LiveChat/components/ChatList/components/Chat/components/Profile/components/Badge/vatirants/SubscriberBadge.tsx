@@ -4,6 +4,6 @@ export type Props = {
   month: number;
 };
 
-export function SubscriberBadge(props: Props) {
+export const SubscriberBadge = (props: Props) => {
   return <div className={styles.SubscriberBadge}>{props.month}</div>;
-}
+};

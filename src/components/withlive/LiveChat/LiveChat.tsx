@@ -12,13 +12,13 @@ import {
 
 import styles from './LiveChat.module.scss';
 
-export type Props = {
+export interface Props {
   className?: string;
   channelIds: string[];
   onClickHide?: () => void;
-};
+}
 
-export function LiveChat(props: Props) {
+export const LiveChat = (props: Props) => {
   return (
     <LiveChatProvider>
       <div className={clsx('LiveChat', styles.container, props.className)}>
@@ -31,4 +31,4 @@ export function LiveChat(props: Props) {
       </div>
     </LiveChatProvider>
   );
-}
+};

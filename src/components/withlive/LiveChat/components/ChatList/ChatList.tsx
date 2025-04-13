@@ -4,7 +4,7 @@ import { Chat, OverlayOnChat } from './components';
 import { ChatItem, ChatOption } from '../../LiveChat.type';
 import styles from './ChatList.module.scss';
 
-export type Props = {
+export interface Props {
   className?: string;
   items: ChatItem[];
   snackBarMessage: string;
@@ -12,9 +12,9 @@ export type Props = {
   onTouchToBottom?: (touched: boolean) => void;
   options: ChatOption;
   isDarkMode?: boolean;
-};
+}
 
-export function ChatList(props: Props) {
+export const ChatList = (props: Props) => {
   const thisRef = useRef<HTMLDivElement>(null);
   const touched = useRef(false);
 
@@ -78,4 +78,4 @@ export function ChatList(props: Props) {
       />
     </div>
   );
-}
+};

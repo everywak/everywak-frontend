@@ -3,7 +3,7 @@ import { useWithliveActions, useWithliveValues } from 'contexts/withlive';
 import { LiveChat } from './LiveChat';
 import styles from './LiveChatContainer.module.scss';
 
-export function LiveChatContainer() {
+export const LiveChatContainer = () => {
   const { watchingChannels, isEnabledMultiView, isChatVisible, multiViewLayout } =
     useWithliveValues();
   const { setIsChatVisible } = useWithliveActions();
@@ -27,4 +27,4 @@ export function LiveChatContainer() {
       </Stretchable>
     )
   );
-}
+};

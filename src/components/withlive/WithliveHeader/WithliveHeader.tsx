@@ -5,7 +5,7 @@ import { VideocamRounded } from '@mui/icons-material';
 import { ChannelItem } from './components';
 import styles from './WithliveHeader.module.scss';
 
-export function WithliveHeader() {
+export const WithliveHeader = () => {
   const { channels, watchingChannels, isExpanded, isEnabledMultiView } = useWithliveValues();
   const [hoverChannel, setHoverChannel] = useState<{
     thumbnailUrl: string;
@@ -75,4 +75,4 @@ export function WithliveHeader() {
       )}
     </>
   );
-}
+};

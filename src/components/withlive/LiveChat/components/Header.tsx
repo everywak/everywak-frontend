@@ -8,7 +8,7 @@ export interface Props {
   onClickHide?: () => void;
 }
 
-export function Header({ onClickHide }: Props) {
+export const Header = ({ onClickHide }: Props) => {
   const { setOpenedSettingState } = useLiveChatActions();
 
   return (
@@ -22,4 +22,4 @@ export function Header({ onClickHide }: Props) {
       </Button>
     </div>
   );
-}
+};

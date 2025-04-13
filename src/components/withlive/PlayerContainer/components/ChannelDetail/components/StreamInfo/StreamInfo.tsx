@@ -4,10 +4,10 @@ import { useWithliveValues } from 'contexts/withlive';
 import { StreamTimer, ViewerCounter } from './components';
 import styles from './StreamInfo.module.scss';
 
-export function StreamInfo(props: { channelId: string }) {
+export const StreamInfo = (props: { memberId: string }) => {
   const { channels } = useWithliveValues();
 
-  const channel = channels.find((channel) => channel.memberId === props.channelId);
+  const channel = channels.find((channel) => channel.memberId === props.memberId);
 
   return (
     <section className={styles.streamInfo}>
@@ -20,7 +20,7 @@ export function StreamInfo(props: { channelId: string }) {
           <div className={styles.profileWrapper}>
             <img
               src={channel?.profileImage ?? ''}
-              alt={props.channelId}
+              alt={props.memberId}
               className={styles.profileImage}
             />
           </div>
@@ -49,4 +49,4 @@ export function StreamInfo(props: { channelId: string }) {
       </div>
     </section>
   );
-}
+};

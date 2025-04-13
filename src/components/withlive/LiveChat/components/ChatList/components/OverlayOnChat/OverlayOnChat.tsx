@@ -41,7 +41,7 @@ export const OverlayOnChat = React.memo((props: Props) => {
   );
 });
 
-export function RisingUp({
+export const RisingUp = ({
   className,
   isVisible,
   height,
@@ -53,7 +53,7 @@ export function RisingUp({
   height: number;
   transition: any;
   children?: React.ReactNode;
-}) {
+}) => {
   return (
     <AnimatePresence>
       {isVisible && (
@@ -75,7 +75,7 @@ export function RisingUp({
       )}
     </AnimatePresence>
   );
-}
+};
 
 export function ClickToScrollButton({ onClick }: { className?: string; onClick: () => void }) {
   return (

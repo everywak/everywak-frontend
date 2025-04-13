@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChatBadge, ChatProfile } from 'components/withlive/LiveChat/LiveChat.type';
-import { Badge } from './Badge';
+import { Badge } from './components';
 
 import styles from './Profile.module.scss';
 

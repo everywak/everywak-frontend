@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useMemo, useRef, useState } from 'react';
+import React, { createContext, ReactNode, useContext, useMemo, useRef, useState } from 'react';
 
 import {
   ChatCollectorOption,
@@ -47,7 +47,7 @@ type Props = {
   readonly children: ReactNode;
 };
 
-export function LiveChatProvider(props: Props): JSX.Element {
+export const LiveChatProvider = (props: Props): React.ReactNode => {
   const [channelId, setChannelId] = useState<string[]>([]);
   const [isConnected, setConnected] = useState(false);
   const [isAuthorized, setAuthorized] = useState(false);
@@ -214,20 +214,20 @@ export function LiveChatProvider(props: Props): JSX.Element {
       </LiveChatValueContext.Provider>
     </LiveChatActionsContext.Provider>
   );
-}
+};
 
-export function useLiveChatValue() {
+export const useLiveChatValue = () => {
   const value = useContext(LiveChatValueContext);
   if (!value) {
     throw new Error('useLiveChatValue should be used within LiveChatProvider');
   }
   return value;
-}
+};
 
-export function useLiveChatActions() {
+export const useLiveChatActions = () => {
   const value = useContext(LiveChatActionsContext);
   if (!value) {
     throw new Error('useLiveChatActions should be used within LiveChatProvider');
   }
   return value;
-}
+};
