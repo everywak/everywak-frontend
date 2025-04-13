@@ -1,4 +1,5 @@
 import React from 'react';
+import { InputChangeHandler } from 'hooks/useInputs';
 
 export type ComponentProps = CheckBoxProps | GroupProps | SelectProps | CollectorCustomInputProps;
 
@@ -7,7 +8,7 @@ export type CheckBoxProps = {
   name: string;
   value: boolean;
   label: React.ReactNode;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange: InputChangeHandler<boolean>;
   onClick?: () => void;
 };
 
@@ -25,7 +26,7 @@ export type SelectProps = {
     name: string;
     value: string;
   }[];
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange: InputChangeHandler<string>;
 };
 
 export type CollectorCustomInputProps = {

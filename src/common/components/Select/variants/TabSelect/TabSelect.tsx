@@ -4,13 +4,14 @@ import { Button } from 'common/components';
 
 import styles from '../../Select.module.scss';
 import stylesVariant from './TabSelect.module.scss';
+import { InputChangeHandler } from 'hooks/useInputs';
 
 export interface Props {
   className: string;
   options: { name: string; value: string }[];
   name: string;
   value: string;
-  onChange: ({ target }: { target: { name: string; value: string } }) => void;
+  onChange: InputChangeHandler<string>;
 }
 
 export function TabSelect({ className, options, name, value, onChange = () => {} }: Props) {
@@ -44,7 +45,7 @@ const Option = React.memo(
     name: string;
     value: string;
     isSelected: boolean;
-    onClick?: ({ target }: { target: { name: string; value: string } }) => void;
+    onClick?: InputChangeHandler<string>;
   }) => {
     const _onClick = () =>
       onClick({

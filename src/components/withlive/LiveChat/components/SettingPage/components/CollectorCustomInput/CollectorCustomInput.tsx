@@ -1,4 +1,3 @@
-import { ChangeEvent } from 'react';
 import clsx from 'clsx';
 import { CloseRounded, DownloadRounded, UploadRounded } from '@mui/icons-material';
 import { Button, Dropdown } from 'common/components';
@@ -43,7 +42,7 @@ export const CollectorCustomInput = (props: Props) => {
         name: 'keyword',
         value: '',
       },
-    } as ChangeEvent<HTMLInputElement>);
+    });
   };
 
   const filterList = collectorOption.customFilters.map((filter, i) => {

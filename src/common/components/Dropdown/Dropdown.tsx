@@ -1,16 +1,17 @@
-import React, { useCallback, useState, useRef, CSSProperties, ChangeEventHandler } from 'react';
+import React, { useCallback, useState, useRef, CSSProperties } from 'react';
 import clsx from 'clsx';
 import { ExpandMoreRounded } from '@mui/icons-material';
 import { useWindowEvent } from 'hooks/useWindowEvent';
 
 import styles from './Dropdown.module.scss';
+import { InputChangeHandler } from 'hooks/useInputs';
 
 export interface Props {
   className?: string;
   options: { name: string; value: string }[];
   name: string;
   value: string;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
+  onChange?: InputChangeHandler<string>;
 }
 
 export const Dropdown = ({ options = [], name, value, onChange = () => {} }: Props) => {
@@ -29,7 +30,7 @@ export const Dropdown = ({ options = [], name, value, onChange = () => {} }: Pro
           value: val,
           name,
         },
-      } as React.ChangeEvent<HTMLInputElement>);
+      });
     },
     [name],
   );

@@ -5,6 +5,7 @@ import { TabSelect } from 'common/components/Select/variants';
 import { BasicImage, Section } from 'common/components';
 import VideoContentList from 'modules/isedol/VideoContentList';
 import { useQueryMember } from 'hooks/useQueryMember';
+import { InputChangeHandler } from 'hooks/useInputs';
 import { Member } from 'services/api-v2/module/member.type';
 import { socialHref, socialLogoImgSrc } from './constants';
 import { StreamInfo } from './components';
@@ -76,7 +77,7 @@ const TabContent = ({ member }: { member: Member }) => {
 
   const [tab, setTab] = useState(options[0].value);
 
-  const onChangeTab = (e: { target: { value: SetStateAction<string> } }) => {
+  const onChangeTab: InputChangeHandler<SetStateAction<string>> = (e) => {
     setTab(e.target.value);
   };
 

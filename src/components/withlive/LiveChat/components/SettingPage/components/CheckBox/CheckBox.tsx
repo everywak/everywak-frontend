@@ -1,5 +1,5 @@
-import { ChangeEventHandler } from 'react';
 import clsx from 'clsx';
+import { InputChangeHandler } from 'hooks/useInputs';
 
 import styles from './CheckBox.module.scss';
 
@@ -8,7 +8,7 @@ export interface Props {
   className?: string;
   name: string;
   value?: boolean;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
+  onChange?: InputChangeHandler<boolean>;
   onClick?: () => void;
 }
 
