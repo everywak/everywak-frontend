@@ -1,7 +1,7 @@
-import { useBestwakkiActions, useBestwakkiValue } from '../context';
-import SortList from './SortArticleList/SortList';
+import { useBestwakkiActions, useBestwakkiValue } from 'contexts/bestwakki';
+import SortList from './SortList';
 
-export default function SortArticleList() {
+export const SortArticleList = () => {
   const { updateSearchFilter } = useBestwakkiActions();
   const { searchFilter } = useBestwakkiValue();
 
@@ -12,4 +12,4 @@ export default function SortArticleList() {
   };
 
   return <SortList name="orderBy" value={searchFilter.orderBy} onChange={onChangeOrderByHandler} />;
-}
+};

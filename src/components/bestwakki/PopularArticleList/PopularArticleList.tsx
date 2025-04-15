@@ -1,8 +1,8 @@
-import ArticleList from 'modules/board/ArticleList/ArticleList';
+import ArticleList from 'components/legacy/board/ArticleList/ArticleList';
 
-import { useBestwakkiActions, useBestwakkiValue } from '../context';
+import { useBestwakkiActions, useBestwakkiValue } from 'contexts/bestwakki';
 
-export default function PopularArticleList() {
+export const PopularArticleList = () => {
   const { fetchNextPage } = useBestwakkiActions();
   const { articles, hasNextPage, isLoading, isFetchingNextPage } = useBestwakkiValue();
 
@@ -16,4 +16,4 @@ export default function PopularArticleList() {
       responsiveMode="auto"
     />
   );
-}
+};

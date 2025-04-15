@@ -1,7 +1,7 @@
-import { useBestwakkiActions, useBestwakkiValue } from '../context';
-import DateRange from './ArticleDateRange/DateRange';
+import { useBestwakkiActions, useBestwakkiValue } from 'contexts/bestwakki';
+import DateRange from './DateRange';
 
-export default function ArticleDateRange() {
+export const ArticleDateRange = () => {
   const { updateSearchFilter } = useBestwakkiActions();
   const { searchFilter } = useBestwakkiValue();
 
@@ -28,4 +28,4 @@ export default function ArticleDateRange() {
       onChange={onChangeDateRangeHandler}
     />
   );
-}
+};

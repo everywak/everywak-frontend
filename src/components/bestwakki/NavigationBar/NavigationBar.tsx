@@ -8,13 +8,13 @@ import { NotDesktop } from 'common/MediaQuery';
 import { useWindowEvent } from 'hooks/useWindowEvent';
 
 import Button from 'common/components/legacy/Button';
-import BestwakkiSearchPanel from './NavigationBar/BestwakkiSearchPanel';
-import ScrollToTopButton from './NavigationBar/ScrollToTopButton';
+import BestwakkiSearchPanel from './BestwakkiSearchPanel';
+import ScrollToTopButton from './ScrollToTopButton';
 
 import './NavigationBar.scss';
 import cx from 'classnames';
 
-export default function NavigationBar() {
+export const NavigationBar = () => {
   const [isShowing, setShowing] = useState(true);
   const [showTop, setShowTop] = useState(false);
   const prevScrollY = useRef(-1);
@@ -75,4 +75,4 @@ export default function NavigationBar() {
       </div>
     </nav>
   );
-}
+};

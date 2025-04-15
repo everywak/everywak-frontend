@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { PopularArticle } from 'services/everywak-api/modules/bestwakki';
 
 import useQueryBestwakki from 'hooks/useQueryBeskwakki';
-import { ListOrder, SearchFilter, SearchTarget } from './types';
+import { ListOrder, SearchFilter, SearchTarget } from 'types/bestwakki';
 
 export type Values = {
   readonly articles: PopularArticle[];
@@ -46,7 +46,7 @@ type Props = {
   readonly children: ReactNode;
 };
 
-export function BestwakkiProvider(props: Props): JSX.Element {
+export const BestwakkiProvider = (props: Props): React.ReactNode => {
   const [articles, setArticles] = useState<PopularArticle[]>([]);
 
   // searchParams filter 전달
@@ -152,7 +152,7 @@ export function BestwakkiProvider(props: Props): JSX.Element {
       </BestwakkiValueContext.Provider>
     </BestwakkiActionsContext.Provider>
   );
-}
+};
 
 export function useBestwakkiValue() {
   const value = useContext(BestwakkiValueContext);

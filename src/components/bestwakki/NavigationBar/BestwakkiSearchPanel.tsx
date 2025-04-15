@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
 import Button from 'common/components/legacy/Button';
+import { SearchBar } from 'common/components';
 
-import { useBestwakkiActions, useBestwakkiValue } from '../../context';
-import ArticleDateRange from '../ArticleDateRange';
-import SearchBar from '../ArticleSearchBar/SearchBar';
+import { useBestwakkiActions, useBestwakkiValue } from 'contexts/bestwakki';
 
 import './BestwakkiSearchPanel.scss';
 import cx from 'classnames';
+import { ArticleDateRange } from '../ArticleDateRange/ArticleDateRange';
+import { SearchBarValue } from 'common/components/SearchBar/SearchBar';
 
 function BestwakkiSearchPanel() {
   const [opened, setOpened] = useState(false);
@@ -40,9 +41,10 @@ function BestwakkiSearchPanel() {
         <div className="dialogComp">
           <div className="label">검색어</div>
           <SearchBar
-            defaultValue={searchFilter}
-            onSearch={(e: Record<string, string>) => {
-              updateSearchFilter(e);
+            name="search"
+            value={searchFilter}
+            onChange={(e) => {
+              updateSearchFilter(e.target.value as SearchBarValue);
               close();
             }}
           />

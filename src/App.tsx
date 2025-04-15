@@ -15,7 +15,7 @@ const NotFoundPage = lazy(() => import('./pages/notfoundpage/Page'));
 
 const Frontpage = lazy(() => import('./pages/frontpage/Page'));
 
-const Bestwakki = lazy(() => import('./modules/bestwakki/page'));
+const Bestwakki = lazy(() => import('./pages/bestwakki/Page'));
 
 const Weather = lazy(() => import('./modules/weather/Weather'));
 

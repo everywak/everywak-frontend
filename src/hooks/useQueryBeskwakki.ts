@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { SearchFilter } from 'modules/bestwakki/types';
+import { SearchFilter } from 'components/legacy/bestwakki/types';
 
 import * as everywakApi from 'services/everywak-api/index';
 
