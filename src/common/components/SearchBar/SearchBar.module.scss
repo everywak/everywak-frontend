@@ -1,27 +1,25 @@
 @use '@common/mixin' as *;
 
-.SearchBar {
+.container {
+  display: flex;
   align-items: center;
   border: solid 1px var(--color-border);
-  border-radius: 8px;
-  box-sizing: border-box;
-  display: flex;
+  border-radius: 0.5rem;
   overflow: hidden;
   width: 250px;
-  height: 32px;
 
   .inputForm {
-    border: 0;
+    border: none;
     background: transparent;
     color: var(--color-text-primary);
-    flex-grow: 1;
     font-family: inherit;
     font-size: 12px;
     font-weight: 500;
     line-height: 32px;
-    padding: 0px 4px 0px 12px;
+    padding: 0 4px 0 12px;
+    flex: 1;
     vertical-align: middle;
-    width: 84px;
+    width: 0;
 
     &:placeholder {
       color: var(--color-text-secondary);
@@ -40,7 +38,7 @@
     }
   }
 
-  .Dropdown {
+  .searchTarget {
     .dispArea {
       .currName {
         color: var(--color-primary);
@@ -55,33 +53,6 @@
   }
 
   .btnSearch {
-    align-items: center;
-    background: var(--color-primary);
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    height: 32px;
-    width: 52px;
-    transition: background-color ease 0.3s;
-
-    &:hover {
-      background: var(--primary-light-color);
-
-      svg {
-        width: 20px;
-        height: 20px;
-      }
-    }
-    &:active {
-      background: var(--primary-dark-color);
-    }
-
-    svg {
-      width: 18px;
-      height: 18px;
-      transition:
-        width ease 0.3s,
-        height ease 0.3s;
-    }
+    border-radius: 0;
   }
 }
