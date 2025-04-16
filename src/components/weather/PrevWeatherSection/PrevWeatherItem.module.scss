@@ -27,13 +27,13 @@
       height: var(--width);
     }
   }
+}
 
-  :global(&.skeleton) {
-    .iconWrapper {
-      .weatherImg {
-        img {
-          opacity: 0;
-        }
+.container:global(.skeleton) {
+  .iconWrapper {
+    .weatherImg {
+      img {
+        opacity: 0;
       }
     }
   }

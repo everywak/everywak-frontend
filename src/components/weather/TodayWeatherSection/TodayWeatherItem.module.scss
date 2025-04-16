@@ -110,25 +110,25 @@
       }
     }
   }
+}
 
-  &.skeleton {
-    .nameWrapper {
-      .name {
-        color: transparent;
+.container:global(.skeleton) {
+  .nameWrapper {
+    .name {
+      color: transparent;
+    }
+  }
+  .iconWrapper {
+    .weatherImg {
+      img {
+        opacity: 0;
       }
     }
-    .iconWrapper {
-      .weatherImg {
-        img {
-          opacity: 0;
-        }
-      }
-    }
-    .descWrapper {
-      .state,
-      .description {
-        color: transparent;
-      }
+  }
+  .descWrapper {
+    .state,
+    .description {
+      color: transparent;
     }
   }
 }

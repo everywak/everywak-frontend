@@ -33,22 +33,22 @@
       line-height: 1em;
     }
   }
+}
 
-  &.skeleton {
-    .iconWrapper {
-      .weatherImg {
-        img {
-          opacity: 0;
-        }
+.container:global(.skeleton) {
+  .iconWrapper {
+    .weatherImg {
+      img {
+        opacity: 0;
       }
     }
-    .infoWrapper {
-      .name {
-        color: transparent;
-      }
-      .state {
-        color: transparent;
-      }
+  }
+  .infoWrapper {
+    .name {
+      color: transparent;
+    }
+    .state {
+      color: transparent;
     }
   }
 }
