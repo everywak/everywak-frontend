@@ -10,3 +10,6 @@ export { CommonHeader } from './CommonHeader/CommonHeader';
 export { Dropdown } from './Dropdown/Dropdown';
 export { SearchBar } from './SearchBar/SearchBar';
 export { CommonLink } from './CommonLink/CommonLink';
+export { EverywakLogo } from './EverywakLogo/EverywakLogo';
+export { Header } from './Header/Header';
+export { Footer } from './Footer/Footer';

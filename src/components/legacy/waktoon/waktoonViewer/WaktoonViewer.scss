@@ -342,7 +342,7 @@
   &:active .icon {
     background: rgba(0, 0, 0, 0.2);
   }
-  html.dark & {
+  :global(html.dark) & {
     .icon {
       background: rgba(255, 255, 255, 0.05);
       color: var(--color-text-secondary);

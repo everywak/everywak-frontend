@@ -102,4 +102,5 @@ export const disableFullscreen = () => {
   }
 };
 
-export const isExternalUrl = (url: string) => url.startsWith('https:') || url.startsWith('http:');
+export const isExternalUrl = (url: string) =>
+  url.startsWith('https:') || url.startsWith('http:') || url.startsWith('mailto:');

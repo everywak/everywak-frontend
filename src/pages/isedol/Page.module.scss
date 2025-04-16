@@ -2,7 +2,7 @@
 
 .container {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 337px, transparent 338px);
-  html.dark & {
+  :global(html.dark) & {
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 337px, transparent 338px);
   }
   box-sizing: border-box;
@@ -10,7 +10,7 @@
   width: 100%;
   @include mobile {
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 377px, transparent 378px);
-    html.dark & {
+    :global(html.dark) & {
       background: linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 377px, transparent 378px);
     }
     padding-top: 30px;
@@ -44,7 +44,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: .75rem;
+        gap: 0.75rem;
         width: fit-content;
         height: fit-content;
         @include mobile {
@@ -64,7 +64,7 @@
           flex-direction: row;
           justify-content: center;
           align-items: center;
-          gap: .5rem;
+          gap: 0.5rem;
           @include mobile {
             flex-direction: column;
             margin: 0 0 0 12px;
@@ -90,7 +90,6 @@
     }
 
     .ContentPanel {
-
       .VideoList {
         width: 100%;
       }

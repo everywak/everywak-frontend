@@ -1,0 +1,7 @@
+.container {
+  &.text {
+    img {
+      filter: invert(1);
+    }
+  }
+}

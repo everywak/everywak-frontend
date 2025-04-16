@@ -19,7 +19,7 @@
     "axios": "^0.21.4",
     "classnames": "^2.2.6",
     "clsx": "^2.1.1",
-    "crypto-js": "^4.1.1",
+    "crypto-js": "^4.2.0",
     "framer-motion": "^11.1.9",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/crypto-js": "^4.2.2",
     "@types/node": "^20.12.4",
     "@types/react": "^18.2.74",
     "@types/react-dom": "^18.2.24",

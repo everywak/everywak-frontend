@@ -1,6 +1,6 @@
 @use '@common/mixin' as *;
 
-footer.footer {
+.container {
   background-color: var(--color-background-footer);
   box-sizing: border-box;
   font-size: 12px;

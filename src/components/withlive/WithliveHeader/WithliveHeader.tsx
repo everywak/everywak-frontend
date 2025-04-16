@@ -4,6 +4,7 @@ import { useWithliveValues } from 'contexts/withlive';
 import { VideocamRounded } from '@mui/icons-material';
 import { ChannelItem } from './components';
 import styles from './WithliveHeader.module.scss';
+import { EverywakLogo } from 'common/components';
 
 export const WithliveHeader = () => {
   const { channels, watchingChannels, isExpanded, isEnabledMultiView } = useWithliveValues();
@@ -51,9 +52,7 @@ export const WithliveHeader = () => {
       {!isExpanded && (
         <header className={styles.container}>
           <div className={styles.content} onMouseLeave={() => setHoverChannel(null)}>
-            <Link to="/" className={styles.logo}>
-              <img src="/logo/logo.svg" alt="logo" />
-            </Link>
+            <EverywakLogo type="logo" className={styles.logo} />
             <ul className={styles.channels}>
               <VideocamRounded className={styles.videoLogo} />
               {channelList}

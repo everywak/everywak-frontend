@@ -7,7 +7,7 @@ import * as func from 'common/functions';
 import { Waktaverse } from 'common/constants';
 import { Desktop, NotDesktop } from 'common/MediaQuery';
 
-import Header from 'common/Header/Header';
+import { Header } from 'common/components';
 import CircleImg from 'common/components/legacy/CircleImg';
 import { Section } from 'common/components';
 

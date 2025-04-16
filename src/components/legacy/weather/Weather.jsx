@@ -4,10 +4,8 @@ import { Link } from 'react-router-dom';
 import KeyboardArrowLeftRoundedIcon from '@mui/icons-material/KeyboardArrowLeftRounded';
 
 import * as func from 'common/functions';
-import Header from 'common/Header/Header';
-import Footer from 'common/Footer/Footer';
 import BasicImage from 'common/components/legacy/Image/BasicImage';
-import { SectionHeader } from 'common/components';
+import { Header, Footer, SectionHeader } from 'common/components';
 
 import TodayWeatherSection from './TodayWeatherSection';
 import PrevWeatherSection from './PrevWeatherSection';
@@ -41,6 +39,7 @@ function Weather(props) {
           <BasicImage className="credit" src="/images/weather/credit/credit.png" />
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

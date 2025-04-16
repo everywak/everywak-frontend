@@ -1,8 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import Header from 'common/Header/Header';
-import { Section } from 'common/components';
+import { Footer, Header, Section } from 'common/components';
 import CircleImgButton from 'common/components/legacy/Button/CircleImgButton';
 
 import * as func from 'common/functions';
@@ -101,6 +100,7 @@ export const Page = () => {
           </section>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

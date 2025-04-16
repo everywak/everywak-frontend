@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import Header from 'common/Header/Header';
-
 import BasicSearchBar from 'common/components/legacy/SearchBar/BasicSearchBar';
-import { Select } from 'common/components';
+import { Header, Footer, Select } from 'common/components';
 import PageSelect from 'common/components/legacy/Select/PageSelect';
 
 import { Desktop, NotDesktop } from 'common/MediaQuery';
@@ -127,6 +125,7 @@ export default function AllWaktoons() {
           </div>
         </section>
       </div>
+      <Footer />
     </>
   );
 }

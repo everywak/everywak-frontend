@@ -4,14 +4,13 @@ import { Link } from 'react-router-dom';
 import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 
-import Header, { EverywakLogo } from 'common/Header/Header';
 import CircleImg from 'common/components/legacy/CircleImg';
 import LinkButton from 'common/components/legacy/Button/LinkButton';
 import HorizontalScrollableList from 'common/components/legacy/HorizontalScrollableList/HorizontalScrollableList';
 
 import { Desktop } from 'common/MediaQuery';
 
-import { Section } from 'common/components';
+import { Header, Footer, Section, EverywakLogo } from 'common/components';
 import BasicSearchBar from 'common/components/legacy/SearchBar/BasicSearchBar';
 import WaktoonBottomNavigationBar from './WaktoonBottomNavigationBar';
 
@@ -41,7 +40,7 @@ export default function Waktoon(props) {
           <div className="headerContainer">
             <header>
               <h1 className="title">
-                <EverywakLogo />
+                <EverywakLogo className="title" type="text" />
                 <div className="line"></div>
                 <a href="/waktoon" className="waktoonLogo">
                   왁굳 코믹스<span className="beta">βeta</span>
@@ -99,13 +98,18 @@ export default function Waktoon(props) {
           <section className="side">
             {/* <WaktoonSearchBar value="" searchTarget="title" onSearch={(e) => console.log(e)} /> */}
 
-            <Section className="main" title="인기급상승 왁툰" moreLink="/waktoon/chart">
+            <Section
+              className="main"
+              title="인기급상승 왁툰"
+              more={{ link: '/waktoon/chart', label: '더 보기' }}
+            >
               <WaktoonChartList />
             </Section>
           </section>
         </div>
         <WaktoonBottomNavigationBar />
       </div>
+      <Footer />
     </>
   );
 }

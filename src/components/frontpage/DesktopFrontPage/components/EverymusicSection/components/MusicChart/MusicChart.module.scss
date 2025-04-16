@@ -27,7 +27,7 @@
         background: rgba(0, 0, 0, 0.05);
       }
     }
-    html.dark & {
+    :global(html.dark) & {
       &:nth-child(odd) {
         .WakMusicChartItem:nth-child(odd) {
           background: rgba(255, 255, 255, 0.05);

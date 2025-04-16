@@ -85,14 +85,14 @@ export const Apps = ({ columns }: Props) => {
     },
   ];
 
-  const list = apps.map((app) => <AppListItem {...app} />);
+  const list = apps.map((app) => <AppListItem className={styles.item} {...app} />);
 
   return (
     <div
       className={clsx('Apps', styles.container, { [styles.singleColumn]: columns === 1 })}
       style={{ '--column': columns } as CSSProperties}
     >
-      <ul className="appList">{list}</ul>
+      <ul className={styles.appList}>{list}</ul>
     </div>
   );
 };

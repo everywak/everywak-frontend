@@ -8,7 +8,6 @@ import ScrollToTop from './common/ScrollToTop';
 
 import './common/common.scss';
 
-import Footer from './common/Footer/Footer';
 import { ThemeProvider } from 'contexts/ThemeContext';
 
 const NotFoundPage = lazy(() => import('./pages/notfoundpage/Page'));
@@ -67,7 +66,6 @@ export default function App() {
             <Route path="/live" element={<Withlive />} /> {/* 레거시 리다이렉트용 */}
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
-          <Footer />
         </div>
       </ThemeProvider>
     </QueryClientProvider>

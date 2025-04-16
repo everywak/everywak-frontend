@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
 
-import * as service from '../../../services/Waktoon';
+import * as service from 'services/Waktoon';
 
 import WaktoonList from '../WaktoonList';
 import { WaktoonItem, WaktoonEpisodeItem } from '../WaktoonItem';

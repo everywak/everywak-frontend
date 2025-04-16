@@ -238,7 +238,7 @@
 
               img {
                 height: inherit;
-                html.dark & {
+                :global(html.dark) & {
                   filter: invert(1);
                 }
               }

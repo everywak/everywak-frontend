@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { LivePreview } from 'components/live';
 import FrontWeatherPanel from 'components/legacy/weather/FrontWeatherPanel';
+import { EverywakLogo } from 'common/components';
 import { AppList } from './components';
 import styles from './MobileFrontPage.module.scss';
 
@@ -20,9 +21,7 @@ export const MobileFrontPage = () => {
             />
           </div>
           <div className={styles.title}>
-            <Link to="/" className={styles.logo}>
-              <img src="/images/everywak_logo.png" alt="Everywak 로고" />
-            </Link>
+            <EverywakLogo className={styles.logo} type="text" />
           </div>
         </div>
       </header>

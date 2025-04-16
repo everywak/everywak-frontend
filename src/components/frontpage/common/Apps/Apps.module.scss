@@ -10,20 +10,20 @@
     flex-direction: row;
     flex-wrap: wrap;
 
-    .AppListItem {
+    .item {
       width: calc(100% / var(--column) - 16px);
     }
   }
 
   &.singleColumn {
-    .appList .AppListItem {
+    .appList .item {
       width: 100%;
     }
   }
 
   @include not-desktop {
     .appList {
-      .AppListItem {
+      .item {
         width: 100%;
       }
     }

@@ -14,7 +14,7 @@ import FileUploadRoundedIcon from '@mui/icons-material/CloudUploadRounded';
 import PhotoLibraryRoundedIcon from '@mui/icons-material/PhotoLibraryRounded';
 import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
 
-import * as service from '../../../services/Waktoon';
+import * as service from 'services/Waktoon';
 
 import BackButton from '../BackButton';
 import WaktoonEpisodeList from './WaktoonEpisodeList';

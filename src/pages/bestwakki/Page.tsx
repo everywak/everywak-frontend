@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import Header from 'common/Header/Header';
-
+import { Footer, Header } from 'common/components';
 import * as func from 'common/functions';
 import { Desktop } from 'common/MediaQuery';
 
@@ -43,6 +42,7 @@ export const Page = () => {
         <NavigationBar />
         <PopularArticleList />
       </div>
+      <Footer />
     </BestwakkiProvider>
   );
 };

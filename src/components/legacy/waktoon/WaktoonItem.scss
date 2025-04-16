@@ -39,7 +39,7 @@
 
   .previewWrapper {
     background-color: rgba(0, 0, 0, 0.1);
-    html.dark & {
+    :global(html.dark) & {
       background-color: rgba(255, 255, 255, 0.1);
       box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.15);
     }
@@ -59,7 +59,7 @@
 
     &:hover {
       box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.35);
-      html.dark & {
+      :global(html.dark) & {
         box-shadow: 0px 2px 16px rgba(255, 255, 255, 0.15);
       }
     }

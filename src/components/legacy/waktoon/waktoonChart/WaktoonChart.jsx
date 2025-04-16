@@ -1,9 +1,7 @@
 import React from 'react';
 
-import Header from 'common/Header/Header';
-
 import BasicSearchBar from 'common/components/legacy/SearchBar/BasicSearchBar';
-import { Select } from 'common/components';
+import { Header, Footer, Select } from 'common/components';
 
 import { useInputs } from 'hooks/useInputs';
 
@@ -83,6 +81,7 @@ export default function WaktoonChart() {
           </div>
         </section>
       </div>
+      <Footer />
     </>
   );
 }
