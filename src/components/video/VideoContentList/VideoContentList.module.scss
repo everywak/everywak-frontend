@@ -1,0 +1,21 @@
+@use '@common/mixin' as *;
+
+.container {
+  width: 100%;
+
+  &.hideProfileCircle {
+    :global(.VideoItem) {
+      .infoArea {
+        box-sizing: border-box;
+        padding: 10px 8px 12px;
+
+        .profileCircle {
+          display: none;
+        }
+        .descArea {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

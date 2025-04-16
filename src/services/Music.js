@@ -12,15 +12,15 @@ import axios from 'axios';
  * @property {string} jogyo
  *
  * @typedef WakMusicSearchQuery
- * @property {string} queryTxt
- * @property {'all'|'title'|'singer'|'jogyo'} queryTarget
+ * @property {string | undefined} queryTxt
+ * @property {'all'|'title'|'singer'|'jogyo'| undefined} queryTarget
  * @property {'view'|'time'|'time_oldest'} orderBy
  * @property {'all'|'hourly'|'daily'|'weekly'|'monthly'|'yearly'} viewerRange
- * @property {number} beginAt
- * @property {number} endAt
- * @property {number} page
- * @property {number} perPage
- * @property {number} pos
+ * @property {number| undefined} beginAt
+ * @property {number| undefined} endAt
+ * @property {number| undefined} page
+ * @property {number| undefined} perPage
+ * @property {number| undefined} pos
  *
  * @typedef WakMusicItem
  * @property {string} uuid

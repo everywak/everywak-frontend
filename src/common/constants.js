@@ -8,6 +8,8 @@ export const EXPANDED = 2;
 export const DARK = 10;
 export const LIGHT = 11;
 
+export const SECONDS_OF_DAY = 24 * 60 * 60;
+
 export const desktopLargeWidth = 1440;
 export const desktopSmallWidth = 1024;
 export const tabletSmallWidth = 960;

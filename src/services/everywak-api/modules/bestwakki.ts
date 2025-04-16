@@ -1,4 +1,4 @@
-import { ListOrder, SearchFilter, SearchTarget } from 'modules/bestwakki/types';
+import { ListOrder, SearchFilter, SearchTarget } from 'components/legacy/bestwakki/types';
 
 import { request } from '../common';
 

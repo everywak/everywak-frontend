@@ -12,7 +12,7 @@ import cx from 'classnames';
  * src: string,
  * alt?: string,
  * objectFit?: 'cover'|'contain',
- * padding?: number,
+ * padding?: number|string,
  * to?: string,
  * href?: string,
  * target?: string,

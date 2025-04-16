@@ -25,6 +25,7 @@ export interface Props {
  */
 function HorizontalScrollableList({
   children,
+  className,
   backgroundColor = '#ffffff',
   scrollAmount = 300,
   controlWidth = 64,
@@ -74,7 +75,7 @@ function HorizontalScrollableList({
   } as CSSProperties;
 
   return (
-    <div className={cx('HorizontalScrollableList')} style={listStyle}>
+    <div className={cx('HorizontalScrollableList', className)} style={listStyle}>
       <div className="listWrapper" ref={refContent}>
         {children}
       </div>

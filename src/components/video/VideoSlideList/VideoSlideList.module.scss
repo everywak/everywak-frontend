@@ -1,0 +1,18 @@
+@use '@common/mixin' as *;
+
+.container {
+  ul.list {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap: 8px;
+    margin: 0;
+    padding: 8px;
+    width: max-content;
+  }
+
+  .spinner {
+    width: 790px;
+    height: 168px;
+  }
+}

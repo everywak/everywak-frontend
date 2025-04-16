@@ -5,9 +5,8 @@ import { Desktop, NotDesktop } from 'common/MediaQuery';
 
 import { DesktopFrontPage, MobileFrontPage } from 'components/frontpage';
 
-function Frontpage() {
+const Frontpage = () => {
   func.setBrowserTitle('메인');
-
   return (
     <>
       <Desktop>
@@ -18,6 +17,5 @@ function Frontpage() {
       </NotDesktop>
     </>
   );
-}
-
+};
 export default Frontpage;

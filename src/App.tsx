@@ -17,23 +17,23 @@ const Frontpage = lazy(() => import('./pages/frontpage/Page'));
 
 const Bestwakki = lazy(() => import('./pages/bestwakki/Page'));
 
-const Weather = lazy(() => import('./modules/weather/Weather'));
+const Weather = lazy(() => import('./components/legacy/weather/Weather'));
 
-const VideoWatch = lazy(() => import('./modules/video/VideoWatch'));
+const VideoWatch = lazy(() => import('./components/legacy/video/VideoWatch'));
 
 const Withlive = lazy(() => import('./pages/withlive/Page'));
 
-const Waktoon = lazy(() => import('./modules/waktoon/Waktoon'));
+const Waktoon = lazy(() => import('./components/legacy/waktoon/Waktoon'));
 const WaktoonEpisodeViewer = lazy(
-  () => import('./modules/waktoon/waktoonEpisodeViewer/WaktoonEpisodeViewer'),
+  () => import('./components/legacy/waktoon/waktoonEpisodeViewer/WaktoonEpisodeViewer'),
 );
-const WaktoonViewer = lazy(() => import('./modules/waktoon/waktoonViewer/WaktoonViewer'));
-const WaktoonEditor = lazy(() => import('./modules/waktoon/waktoonEditor/WaktoonEditor'));
-const WaktoonChart = lazy(() => import('./modules/waktoon/waktoonChart/WaktoonChart'));
-const AllWaktoons = lazy(() => import('./modules/waktoon/allWaktoons/AllWaktoons'));
-const BestWaktoons = lazy(() => import('./modules/waktoon/bestWaktoons/BestWaktoons'));
+const WaktoonViewer = lazy(() => import('./components/legacy/waktoon/waktoonViewer/WaktoonViewer'));
+const WaktoonEditor = lazy(() => import('./components/legacy/waktoon/waktoonEditor/WaktoonEditor'));
+const WaktoonChart = lazy(() => import('./components/legacy/waktoon/waktoonChart/WaktoonChart'));
+const AllWaktoons = lazy(() => import('./components/legacy/waktoon/allWaktoons/AllWaktoons'));
+const BestWaktoons = lazy(() => import('./components/legacy/waktoon/bestWaktoons/BestWaktoons'));
 
-const Isedol = lazy(() => import('./modules/isedol/Isedol'));
+const Isedol = lazy(() => import('./pages/isedol/Page'));
 
 const queryClient = new QueryClient();
 

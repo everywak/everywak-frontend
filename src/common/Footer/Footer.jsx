@@ -13,10 +13,10 @@ class Footer extends Component {
       {
         id: 0,
         type: 'btn',
-        color: 'rgb(83, 109, 188)',
-        href: 'https://bj.afreecatv.com/ecvhao',
-        img: '/images/afreecatv_logo.svg',
-        label: '우왁굳 트위치',
+        color: 'black',
+        href: 'https://ch.sooplive.co.kr/ecvhao',
+        img: '/images/soop_logo.svg',
+        label: '우왁굳 SOOP',
         showLabel: false,
       },
       {

@@ -1,0 +1,76 @@
+@use '@common/mixin' as *;
+
+.container {
+  width: fit-content;
+  height: fit-content;
+
+  .profileCircle {
+    border-radius: 50%;
+    width: 128px;
+    height: 128px;
+
+    .image {
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  ul.social {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 16px;
+    width: 100%;
+
+    li.socialItem {
+      width: 38px;
+      height: 38px;
+
+      &.afreecatv a.link {
+        background: var(--color-black);
+      }
+      &.twitch a.link {
+        background: var(--color-twitch);
+      }
+      &.youtube a.link {
+        background: var(--color-youtube);
+      }
+      &.instagram a.link {
+        background: $instagram-color;
+      }
+
+      a.link {
+        background: #f003;
+        border-radius: 50%;
+        display: block;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+
+        & > div {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+  @media (max-width: 1269px) {
+    .profileCircle {
+      width: 112px;
+      height: 112px;
+    }
+    ul.social {
+      margin-top: 12px;
+
+      li.socialItem {
+        width: 30px;
+        height: 30px;
+
+        img {
+          padding: 6px;
+        }
+      }
+    }
+  }
+}

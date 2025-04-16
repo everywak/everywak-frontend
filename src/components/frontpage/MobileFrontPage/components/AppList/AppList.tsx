@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react';
 import clsx from 'clsx';
 import { StarRounded, MenuBookRounded, ViewCarouselRounded } from '@mui/icons-material';
-import { AppListItem } from 'modules/apps/AppListItem';
+import { AppListItem } from 'components/frontpage/common/Apps/AppListItem';
 
 import styles from './AppList.module.scss';
 
@@ -39,7 +39,9 @@ export const AppList = () => {
       href: '/waktoon',
     },
   ];
-  const list = appItems.map((app) => <AppListItem className={styles.item} {...app} size="tiny" hideShadow />);
+  const list = appItems.map((app) => (
+    <AppListItem className={styles.item} {...app} size="tiny" hideShadow />
+  ));
 
   return (
     <div

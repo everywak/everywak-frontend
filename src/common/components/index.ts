@@ -9,3 +9,4 @@ export { Stretchable } from './Stretchable/Stretchable';
 export { CommonHeader } from './CommonHeader/CommonHeader';
 export { Dropdown } from './Dropdown/Dropdown';
 export { SearchBar } from './SearchBar/SearchBar';
+export { CommonLink } from './CommonLink/CommonLink';

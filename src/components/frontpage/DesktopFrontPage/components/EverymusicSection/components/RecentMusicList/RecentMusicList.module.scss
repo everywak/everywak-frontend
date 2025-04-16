@@ -1,0 +1,28 @@
+@use '@common/mixin' as *;
+
+.container {
+  width: 100%;
+
+  ul.list {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap: 8px;
+    margin: 0;
+    padding: 8px;
+    width: max-content;
+  }
+
+  .spinner {
+    width: 790px;
+    height: 128px;
+  }
+
+  .empty {
+    @include font14_14_500;
+    color: var(--color-text-secondary);
+    text-align: center;
+    width: 100%;
+    padding: 4rem;
+  }
+}

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-import LivePreview from 'modules/isedol/LivePreview';
-import FrontWeatherPanel from 'modules/weather/FrontWeatherPanel';
+import { LivePreview } from 'components/live';
+import FrontWeatherPanel from 'components/legacy/weather/FrontWeatherPanel';
 import { AppList } from './components';
 import styles from './MobileFrontPage.module.scss';
 

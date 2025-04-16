@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { useQueryNotice } from 'hooks/useQueryNotice';
 import { TabSelect } from 'common/components/Select/variants';
 import { BasicImage, Section } from 'common/components';
-import VideoContentList from 'modules/isedol/VideoContentList';
+import { VideoContentList } from 'components/video';
 import { useQueryMember } from 'hooks/useQueryMember';
 import { InputChangeHandler } from 'hooks/useInputs';
 import { Member } from 'services/api-v2/module/member.type';
@@ -111,6 +111,7 @@ const VideoContentTab = ({ member }: { member: Member }) => {
             twitchId: member.livePlatform.find((platform) => platform.type === 'twitch')?.name,
           }}
           backgroundColor={'var(--color-background-white)'}
+          type="slide"
           hideProfileCircle
         />
       </Section>
@@ -121,7 +122,7 @@ const VideoContentTab = ({ member }: { member: Member }) => {
             twitchId: member.livePlatform.find((platform) => platform.type === 'twitch')?.name,
           }}
           backgroundColor={'var(--color-background-white)'}
-          type="horizontal"
+          type="slide"
           hideProfileCircle
         />
       </Section>

@@ -1,15 +1,13 @@
 import React from 'react';
 import clsx from 'clsx';
 import { EventNoteRounded, FlagRounded, NotificationsRounded } from '@mui/icons-material';
-import { CommonHeader, Section, SectionHeader, SubSection } from 'common/components';
-import { LivePreview } from 'modules/isedol/LivePreview';
-import VideoContentList from 'modules/isedol/VideoContentList';
-import NewWakMusicList from 'modules/music/NewWakMusicList';
-import WakMusicChartList from 'modules/music/WakMusicChartList';
-import FrontWeatherPanel from 'modules/weather/FrontWeatherPanel';
-import Apps from 'modules/apps/Apps';
-import { AppListItem } from 'modules/apps/AppListItem';
-import { AsidePanel, BestwakkiList } from './components';
+import { CommonHeader, Section, SectionHeader } from 'common/components';
+import { LivePreview } from 'components/live';
+import FrontWeatherPanel from 'components/legacy/weather/FrontWeatherPanel';
+import { VideoContentList } from 'components/video';
+import { AppListItem } from 'components/frontpage/common/Apps/AppListItem';
+import { Apps } from '../common';
+import { AsidePanel, BestwakkiList, EverymusicSection } from './components';
 import styles from './DesktopFrontPage.module.scss';
 
 export const DesktopFrontPage = () => {
@@ -56,23 +54,9 @@ export const DesktopFrontPage = () => {
         <section className={styles.twoColumns}>
           <section className={styles.videoAndMusic}>
             <Section title="왁타버스 유튜브" width="spaceBetween">
-              <VideoContentList size="small" options={{ type: 'youtubeVideo' }} />
+              <VideoContentList size="small" options={{ type: 'youtubeVideo' }} type="slide" />
             </Section>
-            <Section
-              title="에브리뮤직"
-              more={{
-                link: 'https://everywak.kr/music/concert/index.html',
-                label: '지난 이세돌 콘서트 바로가기',
-              }}
-              width="spaceBetween"
-            >
-              <SubSection title="이 주의 신곡">
-                <NewWakMusicList />
-              </SubSection>
-              <SubSection title="일간 인기차트">
-                <WakMusicChartList />
-              </SubSection>
-            </Section>
+            <EverymusicSection />
           </section>
           <aside>
             <FrontWeatherPanel />

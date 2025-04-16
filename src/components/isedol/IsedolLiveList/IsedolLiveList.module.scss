@@ -1,0 +1,29 @@
+@use '@common/mixin' as *;
+
+.container {
+  display: grid;
+  @include desktop {
+    grid-template-columns: repeat(3, 200px);
+    grid-template-rows: repeat(2, 112.5px);
+    gap: 16px;
+    width: 632px;
+    height: 241px;
+    margin: 0 0 0 95px;
+  }
+  @include tablet {
+    grid-template-columns: repeat(2, 120px);
+    grid-template-rows: repeat(3, 67.5px);
+    gap: 16px;
+    width: 256px;
+    height: 234.5px;
+    margin: 0 0 0 95px;
+  }
+  @include mobile {
+    grid-template-columns: repeat(3, 113px);
+    grid-template-rows: repeat(2, 63.56px);
+    gap: 12px;
+    width: 363px;
+    height: 139.13px;
+    margin: 24px 0 0;
+  }
+}

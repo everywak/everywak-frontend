@@ -1,0 +1,56 @@
+@use '@common/mixin' as *;
+
+.container {
+  ul.itemList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0;
+    --gap: 12px;
+    gap: var(--gap);
+    --column-count: 3;
+
+    .item {
+      @media (min-width: #{$mob-l-width}) and (max-width: 1280px) {
+        --width: calc((100% - var(--gap) * (var(--column-count) - 1)) / var(--column-count));
+      }
+      @media (min-width: 900px) and (max-width: 1280px) {
+        --column-count: 3;
+      }
+      @media (min-width: #{$mob-l-width}) and (max-width: 899px) {
+        --column-count: 2;
+      }
+    }
+  }
+  &.listStyleList {
+    ul.itemList {
+      .item {
+        margin: 0;
+        padding: 8px;
+        width: 100%;
+        transition: background ease 0.15s;
+      }
+    }
+  }
+  .more {
+    text-align: center;
+    .moreLoad {
+      border-radius: 8px;
+      display: block;
+      padding: 0;
+      width: 100%;
+      height: 48px;
+      transition: background-color ease 0.3s;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+        html.dark & {
+          background: rgba(255, 255, 255, 0.05);
+        }
+        @include not-desktop {
+          background: transparent;
+        }
+      }
+    }
+  }
+}

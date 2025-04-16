@@ -1,0 +1,28 @@
+@use '@common/mixin' as *;
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0;
+
+  @media (max-width: 1269px) {
+    display: grid;
+    margin: 0 auto;
+  }
+  @media (min-width: #{$mob-l-width}) and (max-width: 1269px) {
+    grid-template-columns: repeat(3, 112px);
+    grid-template-rows: repeat(2, 154px);
+    gap: 16px 64px;
+    width: 464px;
+    height: 324px;
+  }
+  @include mobile {
+    box-sizing: border-box;
+    grid-template-columns: repeat(2, 112px);
+    grid-template-rows: repeat(3, 154px);
+    gap: 16px calc(70% - 112px * 2);
+    width: 70%;
+    height: 494px;
+  }
+}

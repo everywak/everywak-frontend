@@ -1,28 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-import { isExternalUrl } from 'common/functions';
-
+import { CommonLink } from '../CommonLink/CommonLink';
 import styles from './Button.module.scss';
 
-export type ButtonProps = {
+export type ButtonSize = 'small' | 'medium' | 'large';
+export type ButtonColor =
+  | 'primary'
+  | 'secondary'
+  | 'black'
+  | 'gray'
+  | 'white'
+  | 'red'
+  | 'green'
+  | 'primary-transparent'
+  | 'secondary-transparent'
+  | 'black-transparent'
+  | 'gray-transparent'
+  | 'white-transparent'
+  | 'red-transparent'
+  | 'green-transparent';
+
+export type Props = {
   className?: string;
-  color?:
-    | 'primary'
-    | 'secondary'
-    | 'black'
-    | 'gray'
-    | 'white'
-    | 'red'
-    | 'green'
-    | 'primary-transparent'
-    | 'secondary-transparent'
-    | 'black-transparent'
-    | 'gray-transparent'
-    | 'white-transparent'
-    | 'red-transparent'
-    | 'green-transparent';
-  size?: 'small' | 'medium' | 'large';
+  color?: ButtonColor;
+  size?: ButtonSize;
   href?: string;
   target?: string;
   hideLabel?: boolean;
@@ -33,7 +34,7 @@ export type ButtonProps = {
   [key: string]: any;
 };
 
-export function Button({
+export const Button = ({
   className = '',
   color = 'primary',
   size = 'medium',
@@ -45,7 +46,7 @@ export function Button({
   onClick = () => {},
   children,
   ...rest
-}: ButtonProps): React.ReactElement {
+}: Props): React.ReactNode => {
   const props = {
     className: clsx(
       'Button',
@@ -59,21 +60,12 @@ export function Button({
     ...rest,
   };
   if (href) {
-    if (isExternalUrl(href)) {
-      // 외부 링크
-      return (
-        <a {...props} href={href} target={target ?? '_blank'} rel="noopener noreferrer">
-          {children}
-        </a>
-      );
-    } else {
-      // 내부 링크
-      return (
-        <Link {...props} to={href} target={target ?? '_self'}>
-          {children}
-        </Link>
-      );
-    }
+    // 링크
+    return (
+      <CommonLink href={href} target={target ?? '_self'} {...props}>
+        {children}
+      </CommonLink>
+    );
   }
   return <button {...props}>{children}</button>;
-}
+};
