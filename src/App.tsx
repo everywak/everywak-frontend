@@ -4,7 +4,7 @@ import { clarity } from 'react-microsoft-clarity';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import useGAPageTracking from './common/GAPageTracking';
-import ScrollToTop from './common/ScrollToTop';
+import { useScrollToTop } from 'hooks';
 
 import './common/common.scss';
 
@@ -38,6 +38,7 @@ const queryClient = new QueryClient();
 
 export default function App() {
   useGAPageTracking();
+  useScrollToTop();
   useEffect(() => {
     import.meta.env.VITE_CLARITY_ID && clarity.init(import.meta.env.VITE_CLARITY_ID);
   });
@@ -46,7 +47,6 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <div className="App">
-          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Frontpage />} />
             <Route path="/bestwakki" element={<Bestwakki />} />
