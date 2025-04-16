@@ -4,7 +4,7 @@ import { Waktaverse } from 'common/constants';
 import * as func from 'common/functions';
 import * as service from 'services/Isedol';
 
-import VideoList from '../../video/VideoGridList/VideoGridList';
+import { VideoGridList } from 'components/video/VideoGridList/VideoGridList';
 
 import './RecommendClipList.scss';
 import cx from 'classnames';
@@ -54,7 +54,7 @@ function RecommendClipList({ clipInfo }) {
   }, [clipInfo.twitchId, clipInfo.videoId]);
   console.log(clipList);
 
-  return <VideoList list={clipList} defaultShowCount={15} listStyle="list" />;
+  return <VideoGridList list={clipList} defaultShowCount={15} listStyle="list" />;
 }
 
 export default RecommendClipList;

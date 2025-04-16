@@ -22,7 +22,7 @@ import MenuBookRoundedIcon from '@mui/icons-material/MenuBookRounded';
 
 import * as func from 'common/functions';
 import * as service from 'services/Waktoon';
-import * as userService from '../../../services/Users';
+import * as userService from 'services/Users';
 
 import { useInputs } from 'hooks/useInputs';
 
