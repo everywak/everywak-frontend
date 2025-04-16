@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { EverywakLogo } from 'common/components';
 import { LivePreview } from 'components/live';
