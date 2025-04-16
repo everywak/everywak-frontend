@@ -23,7 +23,7 @@ import * as func from 'common/functions';
 import * as service from 'services/Waktoon';
 import * as userService from 'services/Users';
 
-import { aesEncrypt } from 'common/crypto';
+import { aesEncrypt } from 'utils/crypto';
 
 import './Waktoon.scss';
 import cx from 'classnames';
