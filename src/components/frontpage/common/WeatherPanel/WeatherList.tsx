@@ -42,6 +42,7 @@ export const WeatherList = ({ items, isLoading }: { items: any[]; isLoading: boo
       )
       .map((item) => (
         <WeatherItem
+          key={item.nickname}
           className={styles.item}
           name={item.nickname}
           state={item.rawInfo}

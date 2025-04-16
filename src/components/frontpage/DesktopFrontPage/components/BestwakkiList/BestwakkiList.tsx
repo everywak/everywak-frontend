@@ -10,6 +10,7 @@ export const BestwakkiList = () => {
   }
   return data.pages[0]?.popularArticleList.map((item) => (
     <BestwakkiItem
+      key={item.articleId}
       subject={item.subject}
       board={item.menuName}
       articleId={item.articleId}
