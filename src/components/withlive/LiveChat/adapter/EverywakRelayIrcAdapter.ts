@@ -1,8 +1,6 @@
 import { ChatEmote, ChatItemCommonChat } from '../LiveChat.type';
 import { LiveChatAdapterClass } from './LiveChatAdapterClass';
 
-import * as Everywak from 'services/api-v2/index';
-
 // TODO: 접속 에러 발생시 재시도 구현
 // TODO: CAP cmd 제대로 구현
 // TODO: 최초 로딩시 구독 뱃지, 이모티콘 리스트 표시되게
@@ -198,6 +196,7 @@ export class EverywakRelayIrcAdapter extends LiveChatAdapterClass {
       id: tags.id || '' + Date.now() + Math.random(),
       profile: {
         color: color,
+        colorDarkmode: color,
         name: displayName,
         id: userID,
         badge,
@@ -263,43 +262,43 @@ export class EverywakRelayIrcAdapter extends LiveChatAdapterClass {
   sendChat(channelId: string, message: string): void {}
 
   private async fetchSubscriptionList(channelId: string) {
-    const [platform, channelName] = channelId.split('/');
-    try {
-      const streamInfo = await Everywak.afreeca.getStream(channelName);
-      if (streamInfo.CHANNEL.RESULT === 1) {
-        const subList =
-          streamInfo.CHANNEL.PCON_OBJECT?.tier1.map((sub) => ({
-            month: sub.MONTH,
-            src: sub.FILENAME,
-          })) || [];
-        this.subscriptionList[channelName] = subList;
-      }
-    } catch (e) {
-      console.error(e);
-    }
+    // const [platform, channelName] = channelId.split('/');
+    // try {
+    //   const streamInfo = await EverywakApi.v2.afreeca.getStream(channelName);
+    //   if (streamInfo.CHANNEL.RESULT === 1) {
+    //     const subList =
+    //       streamInfo.CHANNEL.PCON_OBJECT?.tier1.map((sub) => ({
+    //         month: sub.MONTH,
+    //         src: sub.FILENAME,
+    //       })) || [];
+    //     this.subscriptionList[channelName] = subList;
+    //   }
+    // } catch (e) {
+    //   console.error(e);
+    // }
   }
 
   private async fetchEmoteList(channelId: string) {
-    const [platform, channelName] = channelId.split('/');
-    try {
-      const emoteList = await Everywak.afreeca.getEmote(channelName);
-      if (emoteList.result === 1) {
-        const emote = emoteList.data.map((emote) => ({
-          name: emote.title,
-          id: emote.title,
-          imgPc: `https://static.file.afreecatv.com/signature_emoticon/${channelName}/${emote.pc_img}`,
-          imgMobile: `https://static.file.afreecatv.com/signature_emoticon/${channelName}/${emote.mobile_img}`,
-          groupId: channelId,
-          groupName: channelId,
-          isMoving: emote.move_img === 'Y',
-        }));
-        this.emoteList[channelName] = {
-          emote,
-          regex: new RegExp(`(${emote.map((emote) => `\\/${emote.name}\\/`).join('|')})`, 'g'),
-        };
-      }
-    } catch (e) {
-      console.error(e);
-    }
+    // const [platform, channelName] = channelId.split('/');
+    // try {
+    //   const emoteList = await EverywakApi.v2.afreeca.getEmote(channelName);
+    //   if (emoteList.result === 1) {
+    //     const emote = emoteList.data.map((emote) => ({
+    //       name: emote.title,
+    //       id: emote.title,
+    //       imgPc: `https://static.file.afreecatv.com/signature_emoticon/${channelName}/${emote.pc_img}`,
+    //       imgMobile: `https://static.file.afreecatv.com/signature_emoticon/${channelName}/${emote.mobile_img}`,
+    //       groupId: channelId,
+    //       groupName: channelId,
+    //       isMoving: emote.move_img === 'Y',
+    //     }));
+    //     this.emoteList[channelName] = {
+    //       emote,
+    //       regex: new RegExp(`(${emote.map((emote) => `\\/${emote.name}\\/`).join('|')})`, 'g'),
+    //     };
+    //   }
+    // } catch (e) {
+    //   console.error(e);
+    // }
   }
 }
