@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import { MILLISECONDS_OF_DAY } from 'common/constants';
 import TransparentButton from './Button/TransparentButton';
 
 import NavigateBeforeRoundedIcon from '@mui/icons-material/NavigateBeforeRounded';
@@ -141,19 +142,18 @@ class DatePicker extends Component {
   setPreset = (data) => {
     const { min, max } = this.props;
     const { preset, targetStart, targetEnd } = data;
-    const day = 24 * 60 * 60 * 1000;
     var start = min,
       end = max;
     if (preset === 'today') {
       start = max;
     } else if (preset === '7days') {
-      start = max - 6 * day;
+      start = max - 6 * MILLISECONDS_OF_DAY;
     } else if (preset === '30days') {
-      start = max - 29 * day;
+      start = max - 29 * MILLISECONDS_OF_DAY;
     } else if (preset === 'thisweek') {
-      start = max - ((new Date(max).getDay() + 6) % 7) * day;
+      start = max - ((new Date(max).getDay() + 6) % 7) * MILLISECONDS_OF_DAY;
     } else if (preset === 'thismonth') {
-      start = max - (new Date(max).getDate() - 1) * day;
+      start = max - (new Date(max).getDate() - 1) * MILLISECONDS_OF_DAY;
     } else if (preset === 'thisyear') {
       start = new Date(new Date(max).getFullYear(), 0, 1).getTime();
     }
@@ -165,7 +165,6 @@ class DatePicker extends Component {
   };
 
   handlerStartEndChanged = () => {
-    const day = 24 * 60 * 60 * 1000;
     const { min, max } = this.props;
     const { start, end } = this.state;
     const startDate = new Date(start);
@@ -176,13 +175,13 @@ class DatePicker extends Component {
         preset = 'all';
       } else if (start === end) {
         preset = 'today';
-      } else if (end - start === 6 * day) {
+      } else if (end - start === 6 * MILLISECONDS_OF_DAY) {
         preset = '7days';
-      } else if (end - start === 29 * day) {
+      } else if (end - start === 29 * MILLISECONDS_OF_DAY) {
         preset = '30days';
-      } else if (end - start === ((endDate.getDay() + 6) % 7) * day) {
+      } else if (end - start === ((endDate.getDay() + 6) % 7) * MILLISECONDS_OF_DAY) {
         preset = 'thisweek';
-      } else if (end - start === (endDate.getDate() - 1) * day) {
+      } else if (end - start === (endDate.getDate() - 1) * MILLISECONDS_OF_DAY) {
         preset = 'thismonth';
       } else if (
         startDate.getFullYear() === endDate.getFullYear() &&

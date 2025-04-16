@@ -7,7 +7,7 @@ import * as DeviceWidth from './constants';
  * 데스크탑 환경에서만 표시됩니다.
  *
  * @param {{children: ReactNode}} props
- * @returns {JSX.Element}
+ * @returns {ReactNode}
  */
 export function Desktop({ children }) {
   const isDesktop = useMediaQuery({ minWidth: DeviceWidth.tabletSmallWidth });
@@ -17,8 +17,8 @@ export function Desktop({ children }) {
 /**
  * 데스크탑이 아닌 환경에서만 표시됩니다.
  *
- * @param {{children: JSX.Element|String}} props
- * @returns {JSX.Element}
+ * @param {{children: ReactNode}} props
+ * @returns {ReactNode}
  */
 export function NotDesktop({ children }) {
   const isNotDesktop = useMediaQuery({ maxWidth: DeviceWidth.tabletSmallWidth - 1 });
