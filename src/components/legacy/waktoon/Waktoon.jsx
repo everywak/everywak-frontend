@@ -11,7 +11,6 @@ import HorizontalScrollableList from 'common/components/legacy/HorizontalScrolla
 import { Desktop } from 'common/MediaQuery';
 
 import { Header, Footer, Section, EverywakLogo } from 'common/components';
-import BasicSearchBar from 'common/components/legacy/SearchBar/BasicSearchBar';
 import WaktoonBottomNavigationBar from './WaktoonBottomNavigationBar';
 
 import WaktoonBestList from './WaktoonBestList';
@@ -19,7 +18,6 @@ import WaktoonGeneralList from './WaktoonGeneralList';
 import WaktoonChartList from './WaktoonChartList';
 
 import * as func from 'common/functions';
-import * as service from 'services/Waktoon';
 import * as userService from 'services/Users';
 
 import { aesEncrypt } from 'utils/crypto';
@@ -114,86 +112,6 @@ export default function Waktoon(props) {
   );
 }
 
-const searchOptions = [
-  {
-    name: '제목',
-    value: 'title',
-  },
-  {
-    name: '작가',
-    value: 'author',
-  },
-];
-
-async function getPopularWaktoonEpisodes() {
-  try {
-    const res = await service.getWaktoonEpisodeChart({ orderBy: 'up', perPage: 100 });
-
-    if (res.status !== 200) {
-      throw res;
-    }
-
-    const todayChart = res.result.waktoonEpisodeChartList;
-
-    return todayChart;
-  } catch (err) {
-    console.error(err);
-    return [];
-  }
-}
-
-function WaktoonSearchBar(props) {
-  const [placeholder, setPlaceholder] = useState('');
-  const [popularKeywords, setPopularKeywords] = useState(['']);
-
-  // 인기 왁툰 로드
-  useEffect(() => {
-    updatePopularWaktoonEpisodes();
-  }, []);
-  const updatePopularWaktoonEpisodes = useCallback(async () => {
-    const todayChart = await getPopularWaktoonEpisodes();
-
-    const list = todayChart.map((item) => item.title);
-    setPopularKeywords((prevValue) => list);
-
-    // 초기값
-    const selectedId = parseInt(list.length * Math.random());
-    setPlaceholder(list[selectedId]);
-  }, []);
-
-  // placeholder 순환 루프
-  useEffect(() => {
-    const loopPlaceholder = setInterval(updatePlaceholder, 10000);
-    return () => clearInterval(loopPlaceholder);
-  }, [popularKeywords]);
-
-  const updatePlaceholder = useCallback(() => {
-    const selectedId = parseInt(popularKeywords.length * Math.random());
-
-    setPlaceholder(popularKeywords[selectedId]);
-  }, [popularKeywords]);
-
-  const _onSearch = useCallback(
-    (e) => {
-      props.onSearch({
-        value: !e.value ? placeholder : e.value,
-        searchTarget: e.searchTarget,
-      });
-    },
-    [placeholder],
-  );
-
-  const { onSearch, ...rest } = props;
-
-  return (
-    <BasicSearchBar
-      {...rest}
-      placeholder={placeholder}
-      searchTargetOptions={searchOptions}
-      onSearch={_onSearch}
-    />
-  );
-}
 
 /**
  * @type {{logined: Boolean, userInfo: userService.EverywakUser}}

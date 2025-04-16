@@ -17,7 +17,7 @@ import cx from 'classnames';
  * searchTarget: String,
  * value: String,
  * placeholder: String,
- * onSearch: function,
+ * onSearch?: function,
  * }} props
  */
 function BasicSearchBar({

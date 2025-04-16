@@ -209,7 +209,7 @@ export async function getWaktoonEpisodes(params) {
  * 왁툰 에피소드 인기도 증가량 차트를 불러옵니다.
  *
  * @param {WaktoonEpisodeChartSearchQuery} query
- * @returns {ApiMessage}
+ * @returns {ApiMessage<{waktoonEpisodeChartList: any[], chartInfo:{orderBy: string, listLength: number, beforeTimsStamp: number, afterTimsStamp: number}, pagination: {allLength: number, pos: number, perPage: number}}>}
  */
 export async function getWaktoonEpisodeChart(query) {
   try {
