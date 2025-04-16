@@ -1,3 +1,5 @@
+import { MILLISECONDS_OF_DAY } from 'common/constants';
+
 /**
  * 날씨 아이템 정렬용
  */
@@ -9,8 +11,6 @@ const orderNickname = {
   고세구: 5,
   비챤: 6,
 };
-
-const MILLISECONDS_OF_DAY = 24 * 60 * 60 * 1000;
 
 /**
  * 퍼스널 컬러
@@ -28,7 +28,7 @@ const personalColor = {
  * @param {Date} date
  * @returns {string}
  */
-const getRelativeDateString = (date) => {
+const getRelativeDateString = (date: Date): string => {
   const today = new Date(
     new Date().getFullYear(),
     new Date().getMonth(),
@@ -45,4 +45,32 @@ const getRelativeDateString = (date) => {
   }
 };
 
-export { orderNickname, MILLISECONDS_OF_DAY, personalColor, getRelativeDateString };
+/**
+ * 시간대 문자열을 출력합니다.
+ */
+const getHourString = (hours: number): string => {
+  if (hours == 0 || hours >= 22) {
+    // 22~0
+    return '밤';
+  } else if (hours <= 5) {
+    // 1~5
+    return '새벽';
+  } else if (hours <= 9) {
+    // 6~9
+    return '아침';
+  } else if (hours <= 11) {
+    // 10~11
+    return '오전';
+  } else if (hours == 12) {
+    // 12
+    return '낮';
+  } else if (hours <= 17) {
+    // 13~17
+    return '오후';
+  } else {
+    // 18~21
+    return '저녁';
+  }
+};
+
+export { orderNickname, personalColor, getRelativeDateString, getHourString };

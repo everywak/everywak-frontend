@@ -6,7 +6,7 @@ import { api, requestApi, apiErrorHandler } from './everywak.common';
 
 /**
  * @typedef {Object} OBIInfoItem
- * @property {string} name 닉네임
+ * @property {string} nickname 닉네임
  * @property {string} weather 날씨 정보
  * @property {string} rawInfo 원본 문자열
  * @property {string} description 언급 내용

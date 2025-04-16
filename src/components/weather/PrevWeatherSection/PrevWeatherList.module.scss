@@ -1,6 +1,6 @@
 @use '@common/mixin' as *;
 
-.PrevWeatherList {
+.container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -22,7 +22,7 @@
     }
   }
 
-  .SkeletonLoader {
+  :global(.SkeletonLoader) {
     display: flex;
     flex-direction: row;
     align-items: center;

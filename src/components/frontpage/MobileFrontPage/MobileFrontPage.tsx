@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-import { LivePreview } from 'components/live';
-import FrontWeatherPanel from 'components/legacy/weather/FrontWeatherPanel';
 import { EverywakLogo } from 'common/components';
+import { LivePreview } from 'components/live';
+import { WeatherPanel } from '../common';
 import { AppList } from './components';
 import styles from './MobileFrontPage.module.scss';
 
@@ -31,7 +31,7 @@ export const MobileFrontPage = () => {
         </div>
       </div>
       <div className={styles.footer}>
-        <FrontWeatherPanel />
+        <WeatherPanel />
       </div>
     </main>
   );

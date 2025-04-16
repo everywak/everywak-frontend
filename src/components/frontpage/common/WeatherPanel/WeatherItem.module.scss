@@ -1,7 +1,6 @@
 @use '@common/mixin' as *;
 
-.FrontWeatherItem {
-  box-sizing: border-box;
+.container {
   display: flex;
   flex-direction: row;
   align-items: center;

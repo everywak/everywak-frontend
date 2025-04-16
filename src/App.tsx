@@ -16,7 +16,7 @@ const Frontpage = lazy(() => import('./pages/frontpage/Page'));
 
 const Bestwakki = lazy(() => import('./pages/bestwakki/Page'));
 
-const Weather = lazy(() => import('./components/legacy/weather/Weather'));
+const Weather = lazy(() => import('./pages/weather/Page'));
 
 const VideoWatch = lazy(() => import('./components/legacy/video/VideoWatch'));
 

@@ -1,6 +1,6 @@
 @use '@common/mixin' as *;
 
-.TodayWeatherList {
+.container {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -10,7 +10,7 @@
     width: 100%;
   }
 
-  .SkeletonLoader {
+  :global(.SkeletonLoader) {
     display: flex;
     flex-direction: row;
     align-items: flex-start;

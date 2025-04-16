@@ -1,7 +1,6 @@
 @use '@common/mixin' as *;
 
-.PrevWeatherItem {
-  box-sizing: border-box;
+.container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,7 +28,7 @@
     }
   }
 
-  &.skeleton {
+  :global(&.skeleton) {
     .iconWrapper {
       .weatherImg {
         img {

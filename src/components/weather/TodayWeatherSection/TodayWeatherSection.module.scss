@@ -1,6 +1,6 @@
 @use '@common/mixin' as *;
 
-.TodayWeatherSection {
+.container {
   background: var(--color-component-white);
   box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.05);
   border-radius: 16px;

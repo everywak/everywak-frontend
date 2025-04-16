@@ -3,10 +3,9 @@ import clsx from 'clsx';
 import { EventNoteRounded, FlagRounded, NotificationsRounded } from '@mui/icons-material';
 import { CommonHeader, Footer, Section, SectionHeader } from 'common/components';
 import { LivePreview } from 'components/live';
-import FrontWeatherPanel from 'components/legacy/weather/FrontWeatherPanel';
 import { VideoContentList } from 'components/video';
 import { AppListItem } from 'components/frontpage/common/Apps/AppListItem';
-import { Apps } from '../common';
+import { Apps, WeatherPanel } from '../common';
 import { AsidePanel, BestwakkiList, EverymusicSection } from './components';
 import styles from './DesktopFrontPage.module.scss';
 
@@ -60,7 +59,7 @@ export const DesktopFrontPage = () => {
               <EverymusicSection />
             </section>
             <aside>
-              <FrontWeatherPanel />
+              <WeatherPanel />
               <AsidePanel title="왁물원 인기글" more={{ link: '/bestwakki', label: '더 보기' }}>
                 <BestwakkiList />
               </AsidePanel>

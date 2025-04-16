@@ -1,6 +1,6 @@
 @use '@common/mixin' as *;
 
-.FrontWeatherList {
+.container {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -13,7 +13,7 @@
     margin: 0;
     width: 100%;
 
-    .SkeletonLoader {
+    :global(.SkeletonLoader) {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
@@ -24,7 +24,7 @@
       justify-content: center;
     }
 
-    .FrontWeatherItem {
+    .item {
       width: 50%;
       @include not-desktop {
         display: none;
