@@ -42,16 +42,11 @@ export const PrevWeatherList = ({ date = '000000', items, isLoading }: Props) =>
             length={1}
           />
           <SkeletonLoader skeleton={skeleton} length={6} />
-          <SkeletonLoader
-            skeleton={<div className={clsx(styles.date, styles.dummy)}>{dateString}</div>}
-            length={1}
-          />
         </>
       ) : (
         <>
           <div className={styles.date}>{dateString}</div>
           {list}
-          <div className={clsx(styles.date, styles.dummy)}>{dateString}</div>
         </>
       )}
     </ul>
