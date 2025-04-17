@@ -19,24 +19,12 @@
 
     &:nth-child(odd) {
       .item:nth-child(odd) {
-        background: rgba(0, 0, 0, 0.05);
+        background: var(--color-hover);
       }
     }
     &:nth-child(even) {
       .item:nth-child(even) {
-        background: rgba(0, 0, 0, 0.05);
-      }
-    }
-    :global(html.dark) & {
-      &:nth-child(odd) {
-        .WakMusicChartItem:nth-child(odd) {
-          background: rgba(255, 255, 255, 0.05);
-        }
-      }
-      &:nth-child(even) {
-        .WakMusicChartItem:nth-child(even) {
-          background: rgba(255, 255, 255, 0.05);
-        }
+        background: var(--color-hover);
       }
     }
   }
