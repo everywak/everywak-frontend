@@ -14,5 +14,3 @@ export type MemberNotice = {
   readonly representImageType: string;
   readonly imageCount: number;
 };
-
-export type MemberNoticesResponse = MemberNotice[];

@@ -1,14 +1,15 @@
 import { request } from '../common';
-import { MemberNoticesResponse } from '../types/notice';
+import { MemberNotice } from '../types/notice';
 
 const base = '/notice';
 
 // TODO: zod 적용
 export const getNotices = async (memberId: string, page = 1, perPage = 30) =>
-  await request<MemberNoticesResponse>({
-    url: `${base}/list?${new URLSearchParams({
+  await request<MemberNotice[]>({
+    url: `${base}/list`,
+    params: {
       memberId,
-      page: String(page),
-      perPage: String(perPage),
-    }).toString()}`,
+      page,
+      perPage,
+    },
   });
