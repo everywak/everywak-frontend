@@ -1,4 +1,4 @@
-import { Member } from './member.type';
+import { Member } from './member';
 
 export type MemberNotice = {
   readonly articleId: number;

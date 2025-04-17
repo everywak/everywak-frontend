@@ -36,4 +36,3 @@ export type Social = {
   userId: string;
 };
 
-export type MembersResponse = Member[];

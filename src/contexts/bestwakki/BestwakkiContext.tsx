@@ -1,17 +1,20 @@
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { PopularArticle } from 'services/everywak-api/modules/bestwakki';
-
-import useQueryBestwakki from 'hooks/useQueryBeskwakki';
-import { ListOrder, SearchFilter, SearchTarget } from 'types/bestwakki';
+import { useBestwakkiQuery } from 'hooks/queries/bestwakki';
+import {
+  PopularArticlesSelectParams,
+  PopularArticle,
+  PopularArticlesSelectUrlParams,
+} from 'services/everywak/v2/types/bestwakki';
+import { PopularArticlesSelectUrlQuerySchema } from 'services/everywak/v2/schemas/bestwakki';
 
 export type Values = {
   readonly articles: PopularArticle[];
   readonly isLoading: boolean;
   readonly isFetchingNextPage: boolean;
   readonly hasNextPage: boolean | undefined;
-  readonly searchFilter: SearchFilter;
+  readonly searchFilter: PopularArticlesSelectParams;
 };
 
 export type Actions = {
@@ -27,10 +30,7 @@ const BestwakkiValueContext = createContext<Values>({
   hasNextPage: true,
   searchFilter: {
     orderBy: 'time',
-    beginAt: -1,
-    endAt: -1,
     searchTarget: 'title',
-    keyword: '',
     perPage: 30,
     page: 1,
   },
@@ -51,37 +51,17 @@ export const BestwakkiProvider = (props: Props): React.ReactNode => {
 
   // searchParams filter 전달
   const [searchParams, setSearchParams] = useSearchParams();
-  const parseSearchFilter = (searchParams: URLSearchParams): SearchFilter => {
-    const _orderBy = searchParams.get('orderBy') || 'time';
-    const _beginAt = parseInt(searchParams.get('beginAt') || '-1');
-    const _endAt = parseInt(searchParams.get('endAt') || '-1');
-    const _queryTxt = searchParams.get('queryTxt') || '';
-    const _queryTarget = searchParams.get('queryTarget') || 'title';
-
-    const searchFilter: SearchFilter = {
-      beginAt: !isNaN(_beginAt) && _beginAt !== -1 ? _beginAt * 1000 : -1,
-      endAt: !isNaN(_endAt) && _endAt !== -1 ? _endAt * 1000 : -1,
-      orderBy: 'time',
-      perPage: 30,
-      page: 1,
+  const parseSearchFilter = (searchParams: URLSearchParams) => {
+    const params = Object.fromEntries(searchParams.entries());
+    const parsed: PopularArticlesSelectUrlParams = {
       searchTarget: 'title',
-      keyword: '',
+      orderBy: 'time',
+      ...PopularArticlesSelectUrlQuerySchema.safeParse(params).data,
     };
-
-    if (_orderBy && ['time', 'time_oldest', 'up', 'comment', 'read'].includes(_orderBy)) {
-      searchFilter.orderBy = _orderBy as ListOrder;
-    }
-    if (_queryTxt) {
-      searchFilter.keyword = _queryTxt;
-    }
-    if (_queryTarget && ['title', 'author', 'board'].includes(_queryTarget)) {
-      searchFilter.searchTarget = _queryTarget as SearchTarget;
-    }
-
-    return searchFilter;
+    return parsed;
   };
 
-  const searchFilter: SearchFilter = parseSearchFilter(searchParams);
+  const searchFilter: PopularArticlesSelectUrlParams = parseSearchFilter(searchParams);
 
   /**
    * 검색 필터 변경시 URLParams 반영
@@ -96,24 +76,22 @@ export const BestwakkiProvider = (props: Props): React.ReactNode => {
     if (orderBy && orderBy !== 'time') {
       params.orderBy = orderBy;
     }
-    if (searchTarget && keyword && keyword !== '') {
-      params.queryTarget = searchTarget;
-      params.queryTxt = keyword;
+    if (searchTarget && keyword) {
+      params.searchTarget = searchTarget;
+      params.keyword = keyword;
     }
-    if (beginAt !== -1 && beginAt !== 1424876400000) {
-      params.beginAt = '' + Math.floor((beginAt as number) / 1000);
+    if (beginAt && beginAt > 1424876400000) {
+      params.beginAt = '' + Math.floor(beginAt);
     }
-    const endDate = new Date(endAt);
-    const todayDate = new Date();
-    if (endAt !== -1 && endDate.toDateString() !== todayDate.toDateString()) {
-      params.endAt = '' + Math.floor((endAt as number) / 1000);
+    if (endAt && new Date(endAt).toDateString() !== new Date().toDateString()) {
+      params.endAt = '' + Math.floor(endAt);
     }
     setSearchParams(params);
   };
 
   const { isLoading, data, refetch, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useQueryBestwakki({
-      searchFilter,
+    useBestwakkiQuery({
+      params: searchFilter,
     });
 
   const refresh = () => {
@@ -124,7 +102,7 @@ export const BestwakkiProvider = (props: Props): React.ReactNode => {
 
   useEffect(() => {
     if (data) {
-      setArticles(data.pages.flatMap((page) => page.popularArticleList));
+      setArticles(data.pages.flat());
     }
   }, [data]);
 

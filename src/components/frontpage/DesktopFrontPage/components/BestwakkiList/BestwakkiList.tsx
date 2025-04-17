@@ -1,14 +1,16 @@
 import React from 'react';
-import useQueryBestwakki from 'hooks/useQueryBeskwakki';
+import { useBestwakkiQuery } from 'hooks/queries/bestwakki/useBestwakkiQuery';
 import { BestwakkiItem } from './BestwakkiItem';
 
 export const BestwakkiList = () => {
-  const { data } = useQueryBestwakki({ searchFilter: { perPage: 5 } });
+  const { data } = useBestwakkiQuery({ params: {
+    perPage: 5,
+  } });
 
   if (!data) {
     return <></>;
   }
-  return data.pages[0]?.popularArticleList.map((item) => (
+  return data.pages[0]?.map((item) => (
     <BestwakkiItem
       key={item.articleId}
       subject={item.subject}

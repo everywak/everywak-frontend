@@ -6,7 +6,7 @@ import { BasicImage, Section } from 'common/components';
 import { VideoContentList } from 'components/video';
 import { useQueryMember } from 'hooks/useQueryMember';
 import { InputChangeHandler } from 'hooks/useInputs';
-import { Member } from 'services/api-v2/module/member.type';
+import { Member } from 'services/everywak/v2/types/member';
 import { socialHref, socialLogoImgSrc } from './constants';
 import { StreamInfo } from './components';
 import styles from './ChannelDetail.module.scss';

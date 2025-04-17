@@ -126,7 +126,7 @@ function MoreArticleButton({ hide, onClick }) {
  *  menuName: string,
  *  subject: string,
  *  nickname: string,
- *  aheadOfWriteDate: string,
+ *  publishedTimestamp: string,
  *  readCount: string,
  *  upCount: string,
  *  commentCount: string,
@@ -138,7 +138,7 @@ function Article({
   menuName = '게시판',
   subject = '제목',
   nickname = '작성자',
-  aheadOfWriteDate = '작성일',
+  publishedTimestamp = '작성일',
   readCount = '조회',
   upCount = '좋아요',
   commentCount = '',
@@ -160,6 +160,30 @@ function Article({
       </div>
     </a>
   );
+  const today = new Date().toLocaleString('ko-KR', {
+    year: '2-digit',
+    month: '2-digit',
+    day: '2-digit',
+    hour12: false,
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  });
+
+  const published = new Date(publishedTimestamp).toLocaleString('ko-KR', {
+    year: '2-digit',
+    month: '2-digit',
+    day: '2-digit',
+    hour12: false,
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  });
+
+  const aheadOfWriteDate =
+    published.slice(0, 11) === today.slice(0, 11)
+      ? published.substring(12, 17)
+      : published.substring(0, 11).replaceAll(' ', '');
   return (
     <li className={cx('Article', { listHeader: header })}>
       <a href={href} className="txt_area" target="_blank" rel="noreferrer">
@@ -172,7 +196,7 @@ function Article({
             <i className="blind">작성자</i>
             {nickname}
           </span>
-          <span className="datetime">{aheadOfWriteDate}</span>
+          <span className="datetime">{header ? '작성일' : aheadOfWriteDate}</span>
           <span className="view">
             <i className="blind">조회수</i>
             <VisibilityRoundedIcon className="icon" fontSize="small" />

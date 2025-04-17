@@ -68,8 +68,8 @@ class DateRange extends PureComponent {
   onChange = (e) => {
     const { min, max } = this.props;
     const val = {
-      start: e.start !== min ? e.start : -1,
-      end: e.end !== max ? e.end : -1,
+      start: e.start !== min ? e.start : min,
+      end: e.end !== max ? e.end : max,
     };
     this.props.onChange(val);
   };
@@ -83,7 +83,7 @@ class DateRange extends PureComponent {
     const { min, max } = this.props;
     const val = new Date(e.target.value).getTime();
     const newState = {
-      start: val !== min ? val : -1,
+      start: val !== min ? val : min,
       end: this.state.end,
     };
     this.props.onChange(newState);

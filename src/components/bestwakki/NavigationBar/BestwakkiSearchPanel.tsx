@@ -42,7 +42,10 @@ function BestwakkiSearchPanel() {
           <div className="label">검색어</div>
           <SearchBar
             name="search"
-            value={searchFilter}
+            value={{
+              keyword: searchFilter.keyword ??'',
+              searchTarget: searchFilter.searchTarget ?? 'title',
+            }}
             onChange={(e) => {
               updateSearchFilter(e.target.value as SearchBarValue);
               close();

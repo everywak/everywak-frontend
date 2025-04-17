@@ -1,4 +1,4 @@
-import { LivePlatform } from './member.type';
+import { LivePlatform } from './member';
 
 export type Live = {
   id: string;
@@ -12,5 +12,3 @@ export type Live = {
   viewerCount: number;
   livePlatform: LivePlatform;
 };
-
-export type LivesResponse = Live[];
