@@ -32,7 +32,8 @@
     "react-router-dom": "^6.21.2",
     "react-transition-group": "^4.4.1",
     "react-twitch-embed": "^3.0.1",
-    "react-youtube": "^10.1.0"
+    "react-youtube": "^10.1.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
