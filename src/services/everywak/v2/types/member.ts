@@ -8,6 +8,12 @@ export type Member = {
   social: Social[];
 };
 
+export type MemberSimple = {
+  id: string;
+  name: string;
+  role: string;
+};
+
 export type Profile = {
   id: string;
   profileImage: string;
@@ -35,4 +41,3 @@ export type Social = {
   name: string;
   userId: string;
 };
-
