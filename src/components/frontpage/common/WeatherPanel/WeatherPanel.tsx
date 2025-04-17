@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-import * as service from 'services/Isedol';
+import { useWeather } from 'hooks/useWeather';
 import { Desktop, NotDesktop } from 'common/MediaQuery';
 import { SectionHeader } from 'common/components';
 
@@ -11,28 +11,11 @@ import { WeatherList } from './WeatherList';
 import styles from './WeatherPanel.module.scss';
 
 export const WeatherPanel = () => {
-  const [isLoading, setLoading] = useState(true);
-  const [weatherInfo, setWeatherInfo] = useState({
-    OBIData: [] as service.OBIInfoItem[],
-    updatedTime: new Date(),
-  });
+  const { isLoading, weatherInfo } = useWeather();
 
-  useEffect(() => {
-    const fetchIsedolWeather = async () => {
-      const { OBIData, updatedTimeStamp } = (await service.getOBI()).result;
-      if (OBIData) {
-        setWeatherInfo({
-          OBIData,
-          updatedTime: new Date(updatedTimeStamp),
-        });
-        setLoading(false);
-      }
-    };
-    fetchIsedolWeather();
-  }, []);
-
-  const dateStr = getRelativeDateString(weatherInfo.updatedTime);
-  const timeHours = weatherInfo.updatedTime.getHours();
+  const updatedTime = new Date(weatherInfo.updatedTime);
+  const dateStr = getRelativeDateString(updatedTime);
+  const timeHours = updatedTime.getHours();
   const hourString = getHourString(timeHours);
   const updatedDateString = isLoading
     ? '불러오는 중...'
@@ -46,12 +29,12 @@ export const WeatherPanel = () => {
           description={updatedDateString}
           more={{ link: '/weather', label: '더 보기' }}
         >
-          <WeatherList isLoading={isLoading} items={weatherInfo.OBIData} />
+          <WeatherList isLoading={isLoading} items={weatherInfo.latest} />
         </AsidePanel>
       </Desktop>
       <NotDesktop>
         <div className={styles.container}>
-          <WeatherList isLoading={isLoading} items={weatherInfo.OBIData} />
+          <WeatherList isLoading={isLoading} items={weatherInfo.latest} />
           <div className={styles.headerWrapper}>
             <SectionHeader
               description={updatedDateString}

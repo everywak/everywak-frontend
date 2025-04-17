@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 
-import { MILLISECONDS_OF_DAY } from 'common/constants';
 import { PrevWeatherList } from './PrevWeatherList';
-
-import * as service from 'services/Isedol';
+import { useWeather } from 'hooks/useWeather';
 
 import styles from './PrevWeatherSection.module.scss';
 
@@ -13,45 +11,29 @@ export interface Props {
 }
 
 export const PrevWeatherSection = ({ length = 4 }: Props) => {
-  const [weatherInfo, setWeatherInfo] = useState<{ date: string; data: service.OBIInfoItem[] }[]>(
-    Array(length).fill(null),
-  );
+  const { isLoading, weatherInfo } = useWeather();
 
-  useEffect(() => {
-    const updateIsedolWeather = async (dateOffset: number) => {
-      const targetDate = new Date(Date.now() - dateOffset * MILLISECONDS_OF_DAY);
-      const date = `${('0' + targetDate.getFullYear()).slice(-2)}${('0' + (targetDate.getMonth() + 1)).slice(-2)}${('0' + targetDate.getDate()).slice(-2)}`;
-
-      const apiResponse = await service.getOBI(date);
-      const { OBIData } = apiResponse.result;
-      if (OBIData) {
-        setWeatherInfo((prevList) => {
-          prevList[dateOffset - 1] = {
-            data: OBIData,
-            date,
-          };
-          return [...prevList];
-        });
-      }
-    };
-    Array(length)
-      .fill(0)
-      .forEach((_, i) => updateIsedolWeather(i + 1));
-  }, []);
-
-  const weatherList = weatherInfo.map((item, i) =>
-    item ? (
-      <>
-        <PrevWeatherList key={`${i}_false`} items={item.data} date={item.date} />
+  if (isLoading) {
+    return (
+      <section className={clsx('PrevWeatherSection', styles.container)}>
+        <PrevWeatherList isLoading />
         <div className={styles.weatherBorder} />
-      </>
-    ) : (
-      <>
-        <PrevWeatherList key={i} isLoading />
+        <PrevWeatherList isLoading />
         <div className={styles.weatherBorder} />
-      </>
-    ),
-  );
+        <PrevWeatherList isLoading />
+        <div className={styles.weatherBorder} />
+        <PrevWeatherList isLoading />
+        <div className={styles.weatherBorder} />
+      </section>
+    );
+  }
+
+  const weatherList = weatherInfo.recent.slice(0, length).map((item, i) => (
+    <>
+      <PrevWeatherList key={`${i}_false`} items={item} date={item[0].date} />
+      <div className={styles.weatherBorder} />
+    </>
+  ));
 
   return (
     <section className={clsx('PrevWeatherSection', styles.container)}>{weatherList.flat()}</section>

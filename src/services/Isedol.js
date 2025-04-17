@@ -2,32 +2,7 @@ import axios from 'axios';
 
 import { Waktaverse } from 'common/constants';
 
-import { api, requestApi, apiErrorHandler } from './everywak.common';
-
-/**
- * @typedef {Object} OBIInfoItem
- * @property {string} nickname 닉네임
- * @property {string} weather 날씨 정보
- * @property {string} rawInfo 원본 문자열
- * @property {string} description 언급 내용
- */
-
-/**
- * 이세돌 뱅온정보를 불러옵니다.
- *
- * @param {string} data
- * @returns {import('./everywak.common').ApiMessage<{OBIData: OBIInfoItem[], dateString: string, updatedTimeStamp: number}>}
- */
-export async function getOBI(date = '') {
-  try {
-    // api 요청
-    const output = await requestApi('/isedol/OBI' + (date ? `/${date}` : ''));
-
-    return output;
-  } catch (output) {
-    return apiErrorHandler(output);
-  }
-}
+import { api } from './everywak.common';
 
 export async function getYoutubeVideos() {
   try {

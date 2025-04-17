@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import SkeletonLoader from 'common/components/legacy/SkeletonLoader';
 import { Desktop, NotDesktop } from 'common/MediaQuery';
 
-import { orderNickname } from '../../../weather/weather.common';
+import { OBI } from 'services/everywak/v2/types/obi';
 import { WeatherItem } from './WeatherItem';
 
 import styles from './WeatherList.module.scss';
@@ -16,7 +16,7 @@ const skeleton = (
 /**
  * Frontpage에 표시되는 날씨 아이템 리스트
  */
-export const WeatherList = ({ items, isLoading }: { items: any[]; isLoading: boolean }) => {
+export const WeatherList = ({ items, isLoading }: { items: OBI[]; isLoading: boolean }) => {
   const [page, setPage] = useState(0);
   const prevPage = () => {
     setPage((page) => (--page + 3) % 3);
@@ -32,23 +32,15 @@ export const WeatherList = ({ items, isLoading }: { items: any[]; isLoading: boo
     };
   }, [page]);
 
-  const list =
-    items &&
-    items
-      .sort(
-        (a, b) =>
-          orderNickname[a.nickname as keyof typeof orderNickname] -
-          orderNickname[b.nickname as keyof typeof orderNickname],
-      )
-      .map((item) => (
-        <WeatherItem
-          key={item.nickname}
-          className={styles.item}
-          name={item.nickname}
-          state={item.rawInfo}
-          weather={item.weather}
-        />
-      ));
+  const list = items?.map((item) => (
+    <WeatherItem
+      key={item.member.name}
+      className={styles.item}
+      name={item.member.name}
+      state={item.rawInfo}
+      weather={item.weather}
+    />
+  ));
 
   return (
     <div className={styles.container}>

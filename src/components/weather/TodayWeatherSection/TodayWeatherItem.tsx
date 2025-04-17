@@ -47,7 +47,7 @@ export const TodayWeatherItem = ({
             <div className={clsx(styles.description, { skeletonItem: isSkeleton })}>
               {description
                 .split('\n')
-                .map((line) => `"${line}"`)
+                .map((line) => line)
                 .join('\n')}
             </div>
           )}
