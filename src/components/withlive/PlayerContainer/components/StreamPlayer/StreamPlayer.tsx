@@ -9,6 +9,7 @@ import {
   LayoutType,
 } from 'utils/types/withlive.type';
 import { AutoRefreshImage } from 'common/components/Image/variants';
+import { BasicImage } from 'common/components';
 import { useWithliveValues } from 'contexts/withlive';
 import { ChannelDetail } from '../ChannelDetail/ChannelDetail';
 import { PlayerOverlay } from './components';
@@ -77,10 +78,16 @@ const StreamPlayer_ = (props: Props) => {
       <div className={styles.playerWrapper}>
         {streamInfo?.isLive && props.player.isActive ? (
           <Iframe streamInfo={streamInfo} />
-        ) : (
+        ) : streamInfo?.isLive ? (
           <AutoRefreshImage
             className={styles.offlineImage}
-            src={streamInfo?.isLive ? streamInfo?.thumbnail : (props.channel.offlineImage ?? '')}
+            src={streamInfo?.thumbnail}
+            alt={`${props.channel.nickname} 썸네일`}
+          />
+        ) : (
+          <BasicImage
+            className={styles.offlineImage}
+            src={props.channel.offlineImage ?? ''}
             alt={`${props.channel.nickname} 오프라인`}
           />
         )}
