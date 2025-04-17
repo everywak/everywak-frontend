@@ -5,7 +5,7 @@ export class DummyAdapter extends LiveChatAdapterClass {
     super();
     setInterval(() => {
       if (this.isConnected) {
-        this.performEvent('chat', [
+        this.emit('chat', [
           {
             type: 'chat',
             channelId: 'asdf',
@@ -21,6 +21,7 @@ export class DummyAdapter extends LiveChatAdapterClass {
                 },
               ],
               color: ['#1915bf', '#eb500d', '#0c80d3', '#0b6d82'][Math.floor(Math.random() * 4)],
+              colorDarkmode: ['#1915bf', '#eb500d', '#0c80d3', '#0b6d82'][Math.floor(Math.random() * 4)],
             },
             content: [
               'content content content content content content'.slice(
@@ -58,7 +59,7 @@ export class DummyAdapter extends LiveChatAdapterClass {
   }
 
   sendChat(channelId: string, message: string): void {
-    this.performEvent('chat', [
+    this.emit('chat', [
       {
         type: 'chat',
         channelId,
@@ -74,6 +75,7 @@ export class DummyAdapter extends LiveChatAdapterClass {
             },
           ],
           color: '#1915bf',
+          colorDarkmode: '#1915bf',
         },
         content: [message],
         timestamp: Date.now(),
