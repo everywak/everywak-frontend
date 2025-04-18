@@ -71,7 +71,7 @@ export const DesktopFrontPage = () => {
                     description: '모두에게 보여줘버렷',
                     icon: <NotificationsRounded />,
                     themeColor: '#DF6D34',
-                    href: '/board/notice',
+                    href: 'https://cafe.naver.com/ArticleSearchList.nhn?search.clubid=27842958&search.searchdate=all&search.searchBy=1&search.query=%BF%A1%BA%EA%B8%AE%BF%CE%B1%BB&search.defaultValue=1&search.includeAll=&search.exclude=&search.include=&search.exact=&search.sortBy=date&userDisplay=15&search.media=0&search.option=0&search.menuid=659',
                   },
                   {
                     key: 'apps_devlog',
@@ -89,7 +89,7 @@ export const DesktopFrontPage = () => {
                     themeColor: '#DAD21B',
                     href: 'https://everywak.kr/yourinfo',
                   },
-                ].map<React.ReactNode>((app) => (
+                ].map((app) => (
                   <AppListItem size="small" {...app} />
                 ))}
               </AsidePanel>
