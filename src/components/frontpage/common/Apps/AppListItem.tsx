@@ -49,7 +49,6 @@ export const AppListItem = ({
   return (
     <CommonLink
       href={href}
-      target="_self"
       className={clsx('AppListItem', styles.container, className, styles[size])}
     >
       {content}
