@@ -1,4 +1,4 @@
-import { LayoutType } from 'utils/types/withlive.type';
+import { LayoutType } from '@/utils/types/withlive.type';
 
 import {
   GridIcon,
@@ -6,7 +6,7 @@ import {
   OneSideLeftIcon,
   OneSideRightIcon,
   OneSideTopIcon,
-} from 'assets/withlive-layout';
+} from '@/assets/withlive-layout';
 
 export const layoutIcons: Record<LayoutType, React.ReactNode> = {
   grid: <GridIcon />,

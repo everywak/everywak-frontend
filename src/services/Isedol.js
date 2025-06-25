@@ -1,6 +1,4 @@
-import axios from 'axios';
-
-import { Waktaverse } from 'common/constants';
+import { Waktaverse } from '@/common/constants';
 
 import { api } from './everywak.common';
 

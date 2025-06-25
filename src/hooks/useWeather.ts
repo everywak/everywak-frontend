@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useStorage } from '.';
-import { OBI } from 'services/everywak/v2/types/obi';
+import { OBI } from '@/services/everywak/v2/types/obi';
 import { useObiQuery } from './queries/obi';
-import { orderNickname } from 'components/weather/weather.common';
+import { orderNickname } from '@/components/weather/weather.common';
 
 export const useWeather = () => {
   const [weatherInfo, setWeatherInfo] = useStorage<{

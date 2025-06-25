@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { InputChangeHandler } from 'hooks/useInputs';
+import { InputChangeHandler } from '@/hooks/useInputs';
 
 import styles from './CheckBox.module.scss';
 

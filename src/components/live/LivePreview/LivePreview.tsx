@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
 import { useQueryLive, useQueryMember } from 'hooks';
-import Spinner from 'common/components/legacy/Spinner';
-import CircleImg from 'common/components/legacy/CircleImg';
-import { BasicImage } from 'common/components';
+import Spinner from '@/common/components/legacy/Spinner';
+import CircleImg from '@/common/components/legacy/CircleImg';
+import { BasicImage } from '@/common/components';
 
 import styles from './LivePreview.module.scss';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChatBadge } from 'components/withlive/LiveChat/LiveChat.type';
+import { ChatBadge } from '@/components/withlive/LiveChat/LiveChat.type';
 import { FanclubBadge, ManagerBadge, SubscriberBadge, TopfanBadge } from './vatirants';
 import styles from './Badge.module.scss';
 

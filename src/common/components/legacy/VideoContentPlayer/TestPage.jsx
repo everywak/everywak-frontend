@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 
-import { useInputs } from 'hooks/useInputs';
+import { useInputs } from '@/hooks/useInputs';
 
 import VideoContentPlayer from './VideoContentPlayer';
 

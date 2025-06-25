@@ -1,8 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import { BasicImage, CommonLink } from 'common/components';
-import { formatDateTimeString, formatNumberShort } from 'common/functions';
+import { BasicImage, CommonLink } from '@/common/components';
+import { formatDateTimeString, formatNumberShort } from '@/common/functions';
 
 import styles from './VideoItem.module.scss';
 

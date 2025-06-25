@@ -1,26 +1,26 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 
-import CircleImg from 'common/components/legacy/CircleImg';
-import LinkButton from 'common/components/legacy/Button/LinkButton';
-import HorizontalScrollableList from 'common/components/legacy/HorizontalScrollableList/HorizontalScrollableList';
+import CircleImg from '@/common/components/legacy/CircleImg';
+import LinkButton from '@/common/components/legacy/Button/LinkButton';
+import HorizontalScrollableList from '@/common/components/legacy/HorizontalScrollableList/HorizontalScrollableList';
 
-import { Desktop } from 'common/MediaQuery';
+import { Desktop } from '@/common/MediaQuery';
 
-import { Header, Footer, Section, EverywakLogo } from 'common/components';
+import { Header, Footer, Section, EverywakLogo } from '@/common/components';
 import WaktoonBottomNavigationBar from './WaktoonBottomNavigationBar';
 
 import WaktoonBestList from './WaktoonBestList';
 import WaktoonGeneralList from './WaktoonGeneralList';
 import WaktoonChartList from './WaktoonChartList';
 
-import * as func from 'common/functions';
-import * as userService from 'services/Users';
+import * as func from '@/common/functions';
+import * as userService from '@/services/Users';
 
-import { aesEncrypt } from 'utils/crypto';
+import { aesEncrypt } from '@/utils/crypto';
 
 import './Waktoon.scss';
 import cx from 'classnames';
@@ -111,7 +111,6 @@ export default function Waktoon(props) {
     </>
   );
 }
-
 
 /**
  * @type {{logined: Boolean, userInfo: userService.EverywakUser}}

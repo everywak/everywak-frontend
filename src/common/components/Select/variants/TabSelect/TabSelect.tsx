@@ -1,10 +1,10 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Button } from 'common/components';
+import { Button } from '@/common/components';
 
 import styles from '../../Select.module.scss';
 import stylesVariant from './TabSelect.module.scss';
-import { InputChangeHandler } from 'hooks/useInputs';
+import { InputChangeHandler } from '@/hooks/useInputs';
 
 export interface Props {
   className: string;

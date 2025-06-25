@@ -4,7 +4,7 @@ import {
   ChannelType,
   DraggingPlayerStateType,
   LayoutType,
-} from 'utils/types/withlive.type';
+} from '@/utils/types/withlive.type';
 import { useStorage, useWindowEvent } from 'hooks';
 import { useChannels } from './hooks/useChannels';
 

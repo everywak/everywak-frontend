@@ -1,17 +1,14 @@
 import React from 'react';
-import MediaQuery from 'react-responsive';
 
 import SearchRounded from '@mui/icons-material/SearchRounded';
 import ThumbUpRounded from '@mui/icons-material/ThumbUpRounded';
 import ListAltRoundedIcon from '@mui/icons-material/ListAltRounded';
-import SmartDisplayRoundedIcon from '@mui/icons-material/SmartDisplayRounded';
-import BottomNavigationBar from 'common/components/legacy/BottomNavigationBar/BottomNavigationBar';
-import BottomNavigationLinkList from 'common/components/legacy/BottomNavigationBar/BottomNavigationLinkList';
+import BottomNavigationBar from '@/common/components/legacy/BottomNavigationBar/BottomNavigationBar';
+import BottomNavigationLinkList from '@/common/components/legacy/BottomNavigationBar/BottomNavigationLinkList';
 
-import { NotDesktop } from 'common/MediaQuery';
+import { NotDesktop } from '@/common/MediaQuery';
 
 import './WaktoonBottomNavigationBar.scss';
-import cx from 'classnames';
 
 const bottomNavigationList = [
   {

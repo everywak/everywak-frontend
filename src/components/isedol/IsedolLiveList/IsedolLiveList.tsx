@@ -1,4 +1,4 @@
-import { LivePreview } from 'components/live';
+import { LivePreview } from '@/components/live';
 
 import styles from './IsedolLiveList.module.scss';
 

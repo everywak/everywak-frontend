@@ -1,4 +1,4 @@
-import { MILLISECONDS_OF_DAY } from 'common/constants';
+import { MILLISECONDS_OF_DAY } from '@/common/constants';
 
 /**
  * 날씨 아이템 정렬용

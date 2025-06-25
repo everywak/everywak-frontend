@@ -1,5 +1,5 @@
-import HorizontalScrollableList from 'common/components/legacy/HorizontalScrollableList/HorizontalScrollableList';
-import Spinner from 'common/components/legacy/Spinner';
+import HorizontalScrollableList from '@/common/components/legacy/HorizontalScrollableList/HorizontalScrollableList';
+import Spinner from '@/common/components/legacy/Spinner';
 import { VideoItem, Props as VideoItemProps, VideoItemSize } from '../VideoItem/VideoItem';
 
 import styles from './VideoSlideList.module.scss';

@@ -8,7 +8,7 @@ import { useScrollToTop } from 'hooks';
 
 import './common/common.scss';
 
-import { ThemeProvider } from 'contexts/ThemeContext';
+import { ThemeProvider } from '@/contexts/ThemeContext';
 
 const NotFoundPage = lazy(() => import('./pages/notfoundpage/Page'));
 

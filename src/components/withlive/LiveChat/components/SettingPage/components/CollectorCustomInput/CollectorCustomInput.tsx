@@ -1,16 +1,16 @@
 import clsx from 'clsx';
 import { CloseRounded, DownloadRounded, UploadRounded } from '@mui/icons-material';
-import { Button, Dropdown } from 'common/components';
-import { useInputs } from 'hooks/useInputs';
+import { Button, Dropdown } from '@/common/components';
+import { useInputs } from '@/hooks/useInputs';
 import {
   ChatFilter,
   ChatFilterTarget,
   ChatFilterTargetName,
-} from 'components/withlive/LiveChat/LiveChat.type';
+} from '@/components/withlive/LiveChat/LiveChat.type';
 import {
   useLiveChatActions,
   useLiveChatValue,
-} from 'components/withlive/LiveChat/LiveChat.context';
+} from '@/components/withlive/LiveChat/LiveChat.context';
 
 import styles from './CollectorCustomInput.module.scss';
 

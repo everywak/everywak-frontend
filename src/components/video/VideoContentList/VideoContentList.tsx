@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
-import { Waktaverse } from 'common/constants';
-import * as func from 'common/functions';
-import * as videoApi from 'services/everywak.video';
+import { Waktaverse } from '@/common/constants';
+import * as func from '@/common/functions';
+import * as videoApi from '@/services/everywak.video';
 
 import { Props as VideoItemProps, VideoItemSize } from '../VideoItem/VideoItem';
 

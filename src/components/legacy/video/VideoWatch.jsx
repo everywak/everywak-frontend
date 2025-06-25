@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
-import * as clipApi from 'services/Clip';
-import * as everywakApi from 'services/everywak-api/index';
-import * as func from 'common/functions';
-import { Waktaverse } from 'common/constants';
-import { Desktop, NotDesktop } from 'common/MediaQuery';
+import * as clipApi from '@/services/Clip';
+import * as everywakApi from '@/services/everywak-api/index';
+import * as func from '@/common/functions';
+import { Waktaverse } from '@/common/constants';
+import { Desktop, NotDesktop } from '@/common/MediaQuery';
 
-import { Header } from 'common/components';
-import CircleImg from 'common/components/legacy/CircleImg';
-import { Section } from 'common/components';
+import { Header } from '@/common/components';
+import CircleImg from '@/common/components/legacy/CircleImg';
+import { Section } from '@/common/components';
 
 import RecommendClipList from './RecommendClipList';
 

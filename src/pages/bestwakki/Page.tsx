@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Footer, Header } from 'common/components';
-import * as func from 'common/functions';
-import { Desktop } from 'common/MediaQuery';
+import { Footer, Header } from '@/common/components';
+import * as func from '@/common/functions';
+import { Desktop } from '@/common/MediaQuery';
 
 import {
   PopularArticleList,
@@ -11,8 +11,8 @@ import {
   ArticleDateRange,
   ArticleSearchBar,
   NavigationBar,
-} from 'components/bestwakki';
-import { BestwakkiProvider } from 'contexts/bestwakki';
+} from '@/components/bestwakki';
+import { BestwakkiProvider } from '@/contexts/bestwakki';
 
 import styles from './Page.module.scss';
 

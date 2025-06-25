@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 import clsx from 'clsx';
-import { BasicImage } from 'common/components';
+import { BasicImage } from '@/common/components';
 import { personalColor } from '../weather.common';
 import styles from './TodayWeatherItem.module.scss';
 

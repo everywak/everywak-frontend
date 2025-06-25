@@ -1,4 +1,4 @@
-import { useBestwakkiActions, useBestwakkiValue } from 'contexts/bestwakki';
+import { useBestwakkiActions, useBestwakkiValue } from '@/contexts/bestwakki';
 import SortList from './SortList';
 
 export const SortArticleList = () => {

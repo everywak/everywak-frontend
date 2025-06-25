@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { InputChangeHandler } from 'hooks/useInputs';
+import { InputChangeHandler } from '@/hooks/useInputs';
 import { Button } from '..';
 import styles from './Select.module.scss';
 

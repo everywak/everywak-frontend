@@ -1,15 +1,11 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import * as func from 'common/functions';
-import * as service from 'services/Waktoon';
+import * as service from '@/services/Waktoon';
 
 import WaktoonList from './WaktoonList';
 import { WaktoonBigItem } from './WaktoonItem';
 
-import GAEvents from 'common/GAEvents';
-
 import './WaktoonBestList.scss';
-import cx from 'classnames';
 
 const dummyList = [
   {

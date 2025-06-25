@@ -1,10 +1,10 @@
 import React from 'react';
 import clsx from 'clsx';
 import { EventNoteRounded, FlagRounded, NotificationsRounded } from '@mui/icons-material';
-import { CommonHeader, Footer, Section, SectionHeader } from 'common/components';
-import { LivePreview } from 'components/live';
-import { VideoContentList } from 'components/video';
-import { AppListItem } from 'components/frontpage/common/Apps/AppListItem';
+import { CommonHeader, Footer, Section, SectionHeader } from '@/common/components';
+import { LivePreview } from '@/components/live';
+import { VideoContentList } from '@/components/video';
+import { AppListItem } from '@/components/frontpage/common/Apps/AppListItem';
 import { Apps, WeatherPanel } from '../common';
 import { AsidePanel, BestwakkiList, EverymusicSection } from './components';
 import styles from './DesktopFrontPage.module.scss';

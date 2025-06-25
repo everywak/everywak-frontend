@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-import { Waktaverse } from 'common/constants';
-import * as func from 'common/functions';
-import * as service from 'services/Isedol';
+import { Waktaverse } from '@/common/constants';
+import * as func from '@/common/functions';
+import * as service from '@/services/Isedol';
 
-import { VideoGridList } from 'components/video/VideoGridList/VideoGridList';
+import { VideoGridList } from '@/components/video/VideoGridList/VideoGridList';
 
 import './RecommendClipList.scss';
-import cx from 'classnames';
 
 function RecommendClipList({ clipInfo }) {
   const [clipList, setClipList] = useState([]);

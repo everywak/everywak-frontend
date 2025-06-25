@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useInputs } from 'hooks/useInputs';
+import { useInputs } from '@/hooks/useInputs';
 
-import BasicButton from 'common/components/legacy/Button/BasicButton';
-import TransparentButton from 'common/components/legacy/Button/TransparentButton';
-import InputForm from 'common/components/legacy/InputForm/InputForm';
-import TextInput from 'common/components/legacy/TextInput/TextInput';
-import BasicSelect from 'common/components/legacy/Select/BasicSelect';
-import BasicImage from 'common/components/legacy/Image/BasicImage';
+import BasicButton from '@/common/components/legacy/Button/BasicButton';
+import TransparentButton from '@/common/components/legacy/Button/TransparentButton';
+import InputForm from '@/common/components/legacy/InputForm/InputForm';
+import TextInput from '@/common/components/legacy/TextInput/TextInput';
+import BasicSelect from '@/common/components/legacy/Select/BasicSelect';
+import BasicImage from '@/common/components/legacy/Image/BasicImage';
 
 import FileUploadRoundedIcon from '@mui/icons-material/CloudUploadRounded';
 import PhotoLibraryRoundedIcon from '@mui/icons-material/PhotoLibraryRounded';
 import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
 
-import * as service from 'services/Waktoon';
+import * as service from '@/services/Waktoon';
 
 import BackButton from '../BackButton';
 import WaktoonEpisodeList from './WaktoonEpisodeList';

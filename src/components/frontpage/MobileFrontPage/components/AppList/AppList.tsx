@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react';
 import clsx from 'clsx';
 import { StarRounded, MenuBookRounded, ViewCarouselRounded } from '@mui/icons-material';
-import { AppListItem } from 'components/frontpage/common/Apps/AppListItem';
+import { AppListItem } from '@/components/frontpage/common/Apps/AppListItem';
 
 import styles from './AppList.module.scss';
 

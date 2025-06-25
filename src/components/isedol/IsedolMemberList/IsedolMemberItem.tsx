@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
-import CircleImgButton from 'common/components/legacy/Button/CircleImgButton';
-import { BasicImage } from 'common/components';
+import CircleImgButton from '@/common/components/legacy/Button/CircleImgButton';
+import { BasicImage } from '@/common/components';
 
 import styles from './IsedolMemberItem.module.scss';
 

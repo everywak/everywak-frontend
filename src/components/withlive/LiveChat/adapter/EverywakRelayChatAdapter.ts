@@ -11,7 +11,7 @@ import {
   ChatType,
   ChatUserMessage,
 } from './EverywakRelayChatAdapter/types.chat';
-import { getCookie, setCookie } from 'utils/cookie';
+import { getCookie, setCookie } from '@/utils/cookie';
 
 export class EverywakRelayChatAdapter extends LiveChatAdapterClass {
   private socket: WebSocket | null;

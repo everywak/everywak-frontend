@@ -1,20 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import BasicImage from 'common/components/legacy/Image/BasicImage';
+import BasicImage from '@/common/components/legacy/Image/BasicImage';
 
 import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import CommentRoundedIcon from '@mui/icons-material/CommentRounded';
-import ArrowUpwardRoundedIcon from '@mui/icons-material/ArrowUpwardRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 
 import './WaktoonChartLargeItem.scss';
 import cx from 'classnames';
-
-const SECONDS_OF_DAY = 24 * 60 * 60;
 
 function WaktoonChartLargeItem(props) {
   const {
@@ -24,10 +21,6 @@ function WaktoonChartLargeItem(props) {
     author,
     rank,
     rankAmount,
-    createdDatetime,
-    upCount,
-    viewCount,
-    commentCount,
     upCountChanged,
     viewCountChanged,
     commentCountChanged,

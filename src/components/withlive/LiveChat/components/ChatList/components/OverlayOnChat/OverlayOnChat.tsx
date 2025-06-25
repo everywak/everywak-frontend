@@ -1,7 +1,7 @@
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import clsx from 'clsx';
-import { Button } from 'common/components';
+import { Button } from '@/common/components';
 import styles from './OverlayOnChat.module.scss';
 
 export interface Props {

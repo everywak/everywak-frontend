@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
-import SkeletonLoader from 'common/components/legacy/SkeletonLoader';
-import { OBI } from 'services/everywak/v2/types/obi';
+import SkeletonLoader from '@/common/components/legacy/SkeletonLoader';
+import { OBI } from '@/services/everywak/v2/types/obi';
 import { PrevWeatherItem } from './PrevWeatherItem';
 import styles from './PrevWeatherList.module.scss';
 

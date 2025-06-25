@@ -2,9 +2,9 @@ import React from 'react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { KeyboardArrowLeftRounded } from '@mui/icons-material';
-import * as func from 'common/functions';
-import { Header, Footer, SectionHeader, BasicImage } from 'common/components';
-import { PrevWeatherSection, TodayWeatherSection } from 'components/weather';
+import * as func from '@/common/functions';
+import { Header, Footer, SectionHeader, BasicImage } from '@/common/components';
+import { PrevWeatherSection, TodayWeatherSection } from '@/components/weather';
 import styles from './Page.module.scss';
 
 export const Weather = () => {

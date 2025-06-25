@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
-import Button from 'common/components/legacy/Button';
-import { SearchBar } from 'common/components';
+import Button from '@/common/components/legacy/Button';
+import { SearchBar } from '@/common/components';
 
-import { useBestwakkiActions, useBestwakkiValue } from 'contexts/bestwakki';
+import { useBestwakkiActions, useBestwakkiValue } from '@/contexts/bestwakki';
 
 import './BestwakkiSearchPanel.scss';
 import cx from 'classnames';
 import { ArticleDateRange } from '../ArticleDateRange/ArticleDateRange';
-import { SearchBarValue } from 'common/components/SearchBar/SearchBar';
+import { SearchBarValue } from '@/common/components/SearchBar/SearchBar';
 
 function BestwakkiSearchPanel() {
   const [opened, setOpened] = useState(false);
@@ -43,7 +43,7 @@ function BestwakkiSearchPanel() {
           <SearchBar
             name="search"
             value={{
-              keyword: searchFilter.keyword ??'',
+              keyword: searchFilter.keyword ?? '',
               searchTarget: searchFilter.searchTarget ?? 'title',
             }}
             onChange={(e) => {

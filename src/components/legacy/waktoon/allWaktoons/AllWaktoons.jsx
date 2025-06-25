@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import BasicSearchBar from 'common/components/legacy/SearchBar/BasicSearchBar';
-import { Header, Footer, Select } from 'common/components';
-import PageSelect from 'common/components/legacy/Select/PageSelect';
+import BasicSearchBar from '@/common/components/legacy/SearchBar/BasicSearchBar';
+import { Header, Footer, Select } from '@/common/components';
+import PageSelect from '@/common/components/legacy/Select/PageSelect';
 
-import { Desktop, NotDesktop } from 'common/MediaQuery';
+import { Desktop, NotDesktop } from '@/common/MediaQuery';
 
-import { useInputs } from 'hooks/useInputs';
+import { useInputs } from '@/hooks/useInputs';
 
 import BackButton from '../BackButton';
 import AllWaktoonList from './AllWaktoonList';
@@ -18,7 +18,7 @@ export default function AllWaktoons() {
   const defaultShowCount = 24;
   const [maxPage, setMaxPage] = useState(1);
 
-  const [searchTarget, onChange, reset] = useInputs({
+  const [searchTarget, onChange] = useInputs({
     page: 1,
     perPage: 24,
     orderBy: 'time',

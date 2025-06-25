@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { useWeather } from 'hooks/useWeather';
-import { Desktop, NotDesktop } from 'common/MediaQuery';
-import { SectionHeader } from 'common/components';
+import { useWeather } from '@/hooks/useWeather';
+import { Desktop, NotDesktop } from '@/common/MediaQuery';
+import { SectionHeader } from '@/common/components';
 
-import { AsidePanel } from 'components/frontpage/DesktopFrontPage/components';
-import { getHourString, getRelativeDateString } from 'components/weather/weather.common';
+import { AsidePanel } from '@/components/frontpage/DesktopFrontPage/components';
+import { getHourString, getRelativeDateString } from '@/components/weather/weather.common';
 import { WeatherList } from './WeatherList';
 
 import styles from './WeatherPanel.module.scss';

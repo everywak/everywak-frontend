@@ -1,16 +1,16 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import { Footer, Header, Section } from 'common/components';
-import CircleImgButton from 'common/components/legacy/Button/CircleImgButton';
+import { Footer, Header, Section } from '@/common/components';
+import CircleImgButton from '@/common/components/legacy/Button/CircleImgButton';
 
-import * as func from 'common/functions';
+import * as func from '@/common/functions';
 
-import { IsedolLiveList, IsedolMemberList } from 'components/isedol';
+import { IsedolLiveList, IsedolMemberList } from '@/components/isedol';
 
 import styles from './Page.module.scss';
-import { VideoContentList } from 'components/video';
-import { SECONDS_OF_DAY } from 'common/constants';
+import { VideoContentList } from '@/components/video';
+import { SECONDS_OF_DAY } from '@/common/constants';
 
 export const Page = () => {
   func.setBrowserTitle('이세계아이돌');

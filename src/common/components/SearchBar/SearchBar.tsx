@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { SearchRounded } from '@mui/icons-material';
-import { Button, Dropdown } from 'common/components';
-import { InputChangeHandler, useInputs } from 'hooks/useInputs';
+import { Button, Dropdown } from '@/common/components';
+import { InputChangeHandler, useInputs } from '@/hooks/useInputs';
 
 import styles from './SearchBar.module.scss';
 

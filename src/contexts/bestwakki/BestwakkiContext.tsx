@@ -1,13 +1,13 @@
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { useBestwakkiQuery } from 'hooks/queries/bestwakki';
+import { useBestwakkiQuery } from '@/hooks/queries/bestwakki';
 import {
   PopularArticlesSelectParams,
   PopularArticle,
   PopularArticlesSelectUrlParams,
-} from 'services/everywak/v2/types/bestwakki';
-import { PopularArticlesSelectUrlQuerySchema } from 'services/everywak/v2/schemas/bestwakki';
+} from '@/services/everywak/v2/types/bestwakki';
+import { PopularArticlesSelectUrlQuerySchema } from '@/services/everywak/v2/schemas/bestwakki';
 
 export type Values = {
   readonly articles: PopularArticle[];

@@ -1,6 +1,6 @@
-import BasicSearchBar from 'common/components/legacy/SearchBar/BasicSearchBar';
+import BasicSearchBar from '@/common/components/legacy/SearchBar/BasicSearchBar';
 import { useCallback, useEffect, useState } from 'react';
-import * as service from 'services/Waktoon';
+import * as service from '@/services/Waktoon';
 
 export interface Props {
   onSearch: (e: { value: string; searchTarget: string }) => void;

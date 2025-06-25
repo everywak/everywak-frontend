@@ -1,4 +1,4 @@
-import { Waktaverse } from 'common/constants';
+import { Waktaverse } from '@/common/constants';
 
 import { requestApi, apiErrorHandler } from './everywak.common';
 

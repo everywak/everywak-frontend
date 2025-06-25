@@ -1,4 +1,4 @@
-import { useBestwakkiActions, useBestwakkiValue } from 'contexts/bestwakki';
+import { useBestwakkiActions, useBestwakkiValue } from '@/contexts/bestwakki';
 import DateRange from './DateRange';
 
 export const ArticleDateRange = () => {

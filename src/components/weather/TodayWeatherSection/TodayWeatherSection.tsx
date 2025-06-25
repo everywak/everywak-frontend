@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { useWeather } from 'hooks/useWeather';
+import { useWeather } from '@/hooks/useWeather';
 import { TodayWeatherList } from './TodayWeatherList';
 import styles from './TodayWeatherSection.module.scss';
 

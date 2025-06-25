@@ -1,9 +1,9 @@
 import React from 'react';
 
-import BasicSearchBar from 'common/components/legacy/SearchBar/BasicSearchBar';
-import { Header, Footer, Select } from 'common/components';
+import BasicSearchBar from '@/common/components/legacy/SearchBar/BasicSearchBar';
+import { Header, Footer, Select } from '@/common/components';
 
-import { useInputs } from 'hooks/useInputs';
+import { useInputs } from '@/hooks/useInputs';
 
 import BackButton from '../BackButton';
 import WaktoonChartList from '../WaktoonChartList';
@@ -12,7 +12,7 @@ import './WaktoonChart.scss';
 import cx from 'classnames';
 
 export default function WaktoonChart() {
-  const [searchTarget, onChange, reset] = useInputs({
+  const [searchTarget, onChange] = useInputs({
     orderBy: 'up',
     duration: 'daily',
     keyword: '',

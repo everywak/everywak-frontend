@@ -1,14 +1,13 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import * as service from 'services/Waktoon';
+import * as service from '@/services/Waktoon';
 
 import WaktoonList from '../WaktoonList';
 import BestWaktoonItem from './BestWaktoonItem';
 
-//import GAEvents from 'common/GAEvents';
+//import GAEvents from '@/common/GAEvents';
 
 import './BestWaktoonList.scss';
-import cx from 'classnames';
 
 function formatWaktoonData(waktoonList) {
   return waktoonList.map((item) => ({

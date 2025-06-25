@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import BasicImage from 'common/components/legacy/Image/BasicImage';
-import BasicButton from 'common/components/legacy/Button/BasicButton';
-import LinkButton from 'common/components/legacy/Button/LinkButton';
-import CircleImg from 'common/components/legacy/CircleImg';
+import BasicImage from '@/common/components/legacy/Image/BasicImage';
+import BasicButton from '@/common/components/legacy/Button/BasicButton';
+import LinkButton from '@/common/components/legacy/Button/LinkButton';
+import CircleImg from '@/common/components/legacy/CircleImg';
 
-import BasicSearchBar from 'common/components/legacy/SearchBar/BasicSearchBar';
-import { Header, Footer, Select } from 'common/components';
-import SkeletonLoader from 'common/components/legacy/SkeletonLoader';
+import BasicSearchBar from '@/common/components/legacy/SearchBar/BasicSearchBar';
+import { Header, Footer, Select } from '@/common/components';
+import SkeletonLoader from '@/common/components/legacy/SkeletonLoader';
 
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
@@ -20,11 +20,11 @@ import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneR
 import NotificationsActiveRoundedIcon from '@mui/icons-material/NotificationsActiveRounded';
 import MenuBookRoundedIcon from '@mui/icons-material/MenuBookRounded';
 
-import * as func from 'common/functions';
-import * as service from 'services/Waktoon';
-import * as userService from 'services/Users';
+import * as func from '@/common/functions';
+import * as service from '@/services/Waktoon';
+import * as userService from '@/services/Users';
 
-import { useInputs } from 'hooks/useInputs';
+import { useInputs } from '@/hooks/useInputs';
 
 import BackButton from '../BackButton';
 import WaktoonEpisodeList from './WaktoonEpisodeList';

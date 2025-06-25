@@ -1,6 +1,6 @@
 import { useMember, useQueryLive } from 'hooks';
 import { useEffect, useState } from 'react';
-import { ChannelStreamInfoType, ChannelType } from 'utils/types/withlive.type';
+import { ChannelStreamInfoType, ChannelType } from '@/utils/types/withlive.type';
 
 export const useChannels = () => {
   const [channels, setChannels] = useState<ChannelType[]>([]);

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import * as Everywak from 'services/everywak/v2/index';
+import * as Everywak from '@/services/everywak/v2/index';
 
 export function useQueryMember(rest?: any) {
   const fetch = async () => {

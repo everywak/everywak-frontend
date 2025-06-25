@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Member } from 'services/everywak/v2/types/member';
+import { Member } from '@/services/everywak/v2/types/member';
 import { useStorage, useQueryMember } from '.';
 
 export function useMember() {

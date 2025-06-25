@@ -1,11 +1,11 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import * as service from 'services/Waktoon';
+import * as service from '@/services/Waktoon';
 
 import WaktoonList from '../WaktoonList';
 import { WaktoonItem, WaktoonEpisodeItem } from '../WaktoonItem';
 
-//import GAEvents from 'common/GAEvents';
+//import GAEvents from '@/common/GAEvents';
 
 import './WaktoonEpisodeList.scss';
 import cx from 'classnames';

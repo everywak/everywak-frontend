@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputChangeHandler } from 'hooks/useInputs';
+import { InputChangeHandler } from '@/hooks/useInputs';
 
 export type ComponentProps = CheckBoxProps | GroupProps | SelectProps | CollectorCustomInputProps;
 

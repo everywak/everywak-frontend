@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ChatCollectorOption, ChatFilter, ChatFilterTarget } from '../LiveChat.type';
 import { useQueryMember, useStorage } from 'hooks';
-import { Member } from 'services/everywak/v2/types/member';
+import { Member } from '@/services/everywak/v2/types/member';
 
 export const useChatCollector = () => {
   const [collectorOption, setCollectorOption] = useStorage<ChatCollectorOption>(

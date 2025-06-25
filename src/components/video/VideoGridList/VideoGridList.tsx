@@ -1,7 +1,7 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { ExpandMoreRounded } from '@mui/icons-material';
-import { Button } from 'common/components';
+import { Button } from '@/common/components';
 import { VideoItem, Props as VideoItemProps, VideoItemSize } from '../VideoItem/VideoItem';
 import styles from './VideoGridList.module.scss';
 
@@ -45,7 +45,9 @@ export const VideoGridList = (props: Props) => {
 
   const list = items
     .slice(0, showCount)
-    .map((item) => <VideoItem key={item.href} className={styles.item} size={size} {...item} shorts={shorts} />);
+    .map((item) => (
+      <VideoItem key={item.href} className={styles.item} size={size} {...item} shorts={shorts} />
+    ));
 
   return (
     <div

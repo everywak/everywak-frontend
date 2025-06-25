@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 
 import { PrevWeatherList } from './PrevWeatherList';
-import { useWeather } from 'hooks/useWeather';
+import { useWeather } from '@/hooks/useWeather';
 
 import styles from './PrevWeatherSection.module.scss';
 

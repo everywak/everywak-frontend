@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { isExternalUrl } from 'common/functions';
+import { isExternalUrl } from '@/common/functions';
 
 export type Props = React.DetailedHTMLProps<
   React.AnchorHTMLAttributes<HTMLAnchorElement>,

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-import { useWindowEvent } from 'hooks/useWindowEvent';
+import { useWindowEvent } from '@/hooks/useWindowEvent';
 
 import './BottomNavigationBar.scss';
 import cx from 'classnames';

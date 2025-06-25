@@ -4,10 +4,10 @@ import _ from 'lodash';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 
-import { NotDesktop } from 'common/MediaQuery';
-import { useWindowEvent } from 'hooks/useWindowEvent';
+import { NotDesktop } from '@/common/MediaQuery';
+import { useWindowEvent } from '@/hooks/useWindowEvent';
 
-import Button from 'common/components/legacy/Button';
+import Button from '@/common/components/legacy/Button';
 import BestwakkiSearchPanel from './BestwakkiSearchPanel';
 import ScrollToTopButton from './ScrollToTopButton';
 

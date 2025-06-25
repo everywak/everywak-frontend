@@ -1,6 +1,6 @@
-import ArticleList from 'components/legacy/board/ArticleList/ArticleList';
+import ArticleList from '@/components/legacy/board/ArticleList/ArticleList';
 
-import { useBestwakkiActions, useBestwakkiValue } from 'contexts/bestwakki';
+import { useBestwakkiActions, useBestwakkiValue } from '@/contexts/bestwakki';
 
 export const PopularArticleList = () => {
   const { fetchNextPage } = useBestwakkiActions();

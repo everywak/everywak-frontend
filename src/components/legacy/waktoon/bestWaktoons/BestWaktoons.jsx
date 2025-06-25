@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-import BasicSearchBar from 'common/components/legacy/SearchBar/BasicSearchBar';
-import PageSelect from 'common/components/legacy/Select/PageSelect';
-import { Header, Footer, Select } from 'common/components';
+import BasicSearchBar from '@/common/components/legacy/SearchBar/BasicSearchBar';
+import PageSelect from '@/common/components/legacy/Select/PageSelect';
+import { Header, Footer, Select } from '@/common/components';
 
-import { useInputs } from 'hooks/useInputs';
+import { useInputs } from '@/hooks/useInputs';
 
 import BackButton from '../BackButton';
 import BestWaktoonList from './BestWaktoonList';
@@ -20,7 +20,7 @@ export default function BestWaktoons() {
   };
   const [maxPage, setMaxPage] = useState(1);
 
-  const [searchTarget, onChange, reset] = useInputs({
+  const [searchTarget, onChange] = useInputs({
     type: 'best',
     page: 1,
     perPage: 12,

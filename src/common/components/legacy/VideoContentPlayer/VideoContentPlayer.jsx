@@ -17,13 +17,12 @@ import FullscreenExitRoundedIcon from '@mui/icons-material/FullscreenExitRounded
 
 import { enableFullscreen, disableFullscreen } from '../../../functions';
 
-import { useInputs } from 'hooks/useInputs';
+import { useInputs } from '@/hooks/useInputs';
 import useKeyboardHotkeys from '../../../../hooks/useKeyboardHotkeys';
 
 import { domain } from '../../../constants';
 
 import ProgressBar from '../ProgressBar/ProgressBar';
-import BasicImage from '../Image/BasicImage';
 import BasicButton from '../Button/BasicButton';
 import ToggleButton from '../Button/ToggleButton';
 import ContextMenu from '../ContextMenu/ContextMenu';

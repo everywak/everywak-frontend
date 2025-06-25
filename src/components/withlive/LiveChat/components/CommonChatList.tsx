@@ -1,4 +1,4 @@
-import { useTheme } from 'contexts/ThemeContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { useLiveChatActions, useLiveChatValue } from '../LiveChat.context';
 import { ChatList } from './ChatList/ChatList';
 

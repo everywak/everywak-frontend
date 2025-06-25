@@ -1,5 +1,5 @@
-import { Stretchable } from 'common/components';
-import { useWithliveActions, useWithliveValues } from 'contexts/withlive';
+import { Stretchable } from '@/common/components';
+import { useWithliveActions, useWithliveValues } from '@/contexts/withlive';
 import { LiveChat } from './LiveChat';
 import styles from './LiveChatContainer.module.scss';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 
 import styles from './BestwakkiItem.module.scss';
-import { BasicImage } from 'common/components';
+import { BasicImage } from '@/common/components';
 
 export interface Props {
   subject: string;

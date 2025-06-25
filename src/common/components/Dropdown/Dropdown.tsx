@@ -1,10 +1,10 @@
 import React, { useCallback, useState, useRef, CSSProperties } from 'react';
 import clsx from 'clsx';
 import { ExpandMoreRounded } from '@mui/icons-material';
-import { useWindowEvent } from 'hooks/useWindowEvent';
+import { useWindowEvent } from '@/hooks/useWindowEvent';
 
 import styles from './Dropdown.module.scss';
-import { InputChangeHandler } from 'hooks/useInputs';
+import { InputChangeHandler } from '@/hooks/useInputs';
 
 export interface Props {
   className?: string;

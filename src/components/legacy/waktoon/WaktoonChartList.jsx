@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import SkeletonLoader from 'common/components/legacy/SkeletonLoader';
+import SkeletonLoader from '@/common/components/legacy/SkeletonLoader';
 
-import * as service from 'services/Waktoon';
+import * as service from '@/services/Waktoon';
 
 import WaktoonList from './WaktoonList';
 import WaktoonChartItem from './WaktoonChartItem';

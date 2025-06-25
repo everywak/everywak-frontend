@@ -2,9 +2,9 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 
-import * as func from 'common/functions';
-import { Button } from 'common/components';
-import Spinner from 'common/components/legacy/Spinner';
+import * as func from '@/common/functions';
+import { Button } from '@/common/components';
+import Spinner from '@/common/components/legacy/Spinner';
 
 import styles from './Page.module.scss';
 

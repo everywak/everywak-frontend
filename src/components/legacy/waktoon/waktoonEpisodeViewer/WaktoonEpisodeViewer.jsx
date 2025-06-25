@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import Spinner from 'common/components/legacy/Spinner';
+import Spinner from '@/common/components/legacy/Spinner';
 
-import * as func from 'common/functions';
+import * as func from '@/common/functions';
 
 import './WaktoonEpisodeViewer.scss';
 import cx from 'classnames';

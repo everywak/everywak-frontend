@@ -1,7 +1,10 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { EverywakApi } from 'services/everywak';
+import { EverywakApi } from '@/services/everywak';
 
-import { PopularArticlesSelectParams, PopularArticle } from 'services/everywak/v2/types/bestwakki';
+import {
+  PopularArticlesSelectParams,
+  PopularArticle,
+} from '@/services/everywak/v2/types/bestwakki';
 
 export const useBestwakkiQuery = ({ params, ...rest }: { params: PopularArticlesSelectParams }) => {
   const fetch = async (params: PopularArticlesSelectParams) => {

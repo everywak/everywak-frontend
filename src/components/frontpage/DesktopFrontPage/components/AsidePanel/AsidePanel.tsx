@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { SectionHeader } from 'common/components';
+import { SectionHeader } from '@/common/components';
 
 import styles from './AsidePanel.module.scss';
 

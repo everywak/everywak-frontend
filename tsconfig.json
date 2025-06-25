@@ -17,10 +17,7 @@
     "skipLibCheck": true,
 
     "paths": {
-      "@common/*": ["src/common/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@services/*": ["src/services/*"],
-      "@/*": ["./src/*"]
+      "@/*": ["./*"]
     }
   },
   "include": ["src", "vite-env.d.ts", "vite.config.ts"]

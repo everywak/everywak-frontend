@@ -1,6 +1,6 @@
-import { SearchBar } from 'common/components';
-import { SearchBarValue } from 'common/components/SearchBar/SearchBar';
-import { useBestwakkiActions, useBestwakkiValue } from 'contexts/bestwakki';
+import { SearchBar } from '@/common/components';
+import { SearchBarValue } from '@/common/components/SearchBar/SearchBar';
+import { useBestwakkiActions, useBestwakkiValue } from '@/contexts/bestwakki';
 
 export const ArticleSearchBar = () => {
   const { updateSearchFilter } = useBestwakkiActions();

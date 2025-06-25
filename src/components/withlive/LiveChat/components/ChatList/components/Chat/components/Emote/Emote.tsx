@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChatEmote } from 'components/withlive/LiveChat/LiveChat.type';
+import { ChatEmote } from '@/components/withlive/LiveChat/LiveChat.type';
 
 import styles from './Emote.module.scss';
 

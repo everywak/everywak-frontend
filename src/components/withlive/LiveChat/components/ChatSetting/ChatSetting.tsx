@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { useInputs } from 'hooks/useInputs';
+import { useInputs } from '@/hooks/useInputs';
 import { useLiveChatActions, useLiveChatValue } from '../../LiveChat.context';
 import { SettingPage } from '..';
-import { Button } from 'common/components';
+import { Button } from '@/common/components';
 import { CloseRounded } from '@mui/icons-material';
 import { ComponentProps } from '../SettingPage/types';
-import { Theme, useTheme } from 'contexts/ThemeContext';
+import { Theme, useTheme } from '@/contexts/ThemeContext';
 
 export const ChatSetting = () => {
   const { theme, setTheme } = useTheme();

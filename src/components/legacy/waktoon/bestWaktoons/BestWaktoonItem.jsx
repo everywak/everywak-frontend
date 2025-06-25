@@ -1,16 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import BasicImage from 'common/components/legacy/Image/BasicImage';
-import CircleImg from 'common/components/legacy/CircleImg';
-import HorizontalScrollableList from 'common/components/legacy/HorizontalScrollableList/HorizontalScrollableList';
+import BasicImage from '@/common/components/legacy/Image/BasicImage';
+import CircleImg from '@/common/components/legacy/CircleImg';
+import HorizontalScrollableList from '@/common/components/legacy/HorizontalScrollableList/HorizontalScrollableList';
 
 import WaktoonEpisodeList from '../waktoonViewer/WaktoonEpisodeList';
 
 import './BestWaktoonItem.scss';
 import cx from 'classnames';
-
-const SECONDS_OF_DAY = 24 * 60 * 60;
 
 function BestWaktoonItem(props) {
   const { toonId, thumbnail, serialStatus, title, author, description, onClick } = props;

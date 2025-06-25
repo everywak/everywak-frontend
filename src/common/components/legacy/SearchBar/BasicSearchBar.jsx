@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
-import { Dropdown } from 'common/components';
+import { Dropdown } from '@/common/components';
 import TransparentButton from '../Button/TransparentButton';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
-import { useInputs } from 'hooks/useInputs';
+import { useInputs } from '@/hooks/useInputs';
 
 import './BasicSearchBar.scss';
 import cx from 'classnames';

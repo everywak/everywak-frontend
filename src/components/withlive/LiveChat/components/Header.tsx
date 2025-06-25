@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'common/components';
+import { Button } from '@/common/components';
 import { useLiveChatActions } from '../LiveChat.context';
 import { KeyboardTabRounded, SettingsRounded } from '@mui/icons-material';
 import styles from './Header.module.scss';

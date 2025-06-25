@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { BasicImage } from 'common/components';
+import { BasicImage } from '@/common/components';
 import styles from './WeatherItem.module.scss';
 
 export interface Props {

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
-import SkeletonLoader from 'common/components/legacy/SkeletonLoader';
-import { Desktop, NotDesktop } from 'common/MediaQuery';
+import SkeletonLoader from '@/common/components/legacy/SkeletonLoader';
+import { Desktop, NotDesktop } from '@/common/MediaQuery';
 
-import { OBI } from 'services/everywak/v2/types/obi';
+import { OBI } from '@/services/everywak/v2/types/obi';
 import { WeatherItem } from './WeatherItem';
 
 import styles from './WeatherList.module.scss';

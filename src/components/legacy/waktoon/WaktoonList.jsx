@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 
-import Button from 'common/components/legacy/Button';
+import Button from '@/common/components/legacy/Button';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 
 import { WaktoonItem } from './WaktoonItem';

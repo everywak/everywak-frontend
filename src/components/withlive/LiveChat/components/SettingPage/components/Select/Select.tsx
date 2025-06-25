@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
-import { Select as BasicSelect } from 'common/components';
-import { InputChangeHandler } from 'hooks/useInputs';
+import { Select as BasicSelect } from '@/common/components';
+import { InputChangeHandler } from '@/hooks/useInputs';
 import styles from './Select.module.scss';
 
 export interface Props {

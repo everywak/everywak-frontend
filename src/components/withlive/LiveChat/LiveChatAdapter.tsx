@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { EverywakRelayChatAdapter } from './adapter/EverywakRelayChatAdapter';
 import { LiveChatAdapterClass } from './adapter/LiveChatAdapterClass';
 import { useLiveChatActions, useLiveChatValue } from './LiveChat.context';
-import { useWithliveValues } from 'contexts/withlive';
+import { useWithliveValues } from '@/contexts/withlive';
 
 const diffChannel = (oldChannels: string[], newChannels: string[]) => {
   const willLeaves = oldChannels.filter((channel) => !newChannels.includes(channel));

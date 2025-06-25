@@ -1,5 +1,5 @@
 import { request } from '../common';
-import { Member } from 'services/everywak/v2/types/member';
+import { Member } from '@/services/everywak/v2/types/member';
 
 const base = '/member';
 

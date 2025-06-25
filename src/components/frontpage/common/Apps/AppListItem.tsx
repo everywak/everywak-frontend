@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { AppListItemIcon } from './AppListItemIcon';
-import { CommonLink } from 'common/components';
+import { CommonLink } from '@/common/components';
 import styles from './AppListItem.module.scss';
 
 export interface Props {

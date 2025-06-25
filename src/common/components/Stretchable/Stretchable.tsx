@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import clsx from 'clsx';
-import { useWindowEvent } from 'hooks/useWindowEvent';
+import { useWindowEvent } from '@/hooks/useWindowEvent';
 import styles from './Stretchable.module.scss';
 
 export interface Props {

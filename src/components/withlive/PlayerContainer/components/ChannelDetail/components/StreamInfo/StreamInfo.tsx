@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { useWithliveValues } from 'contexts/withlive';
+import { useWithliveValues } from '@/contexts/withlive';
 import { StreamTimer, ViewerCounter } from './components';
 import styles from './StreamInfo.module.scss';
 

@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import * as predictionApi from 'services/everywak.prediction';
+import * as predictionApi from '@/services/everywak.prediction';
 
 import PredictionItem from './PredictionItem';
 
 import './PredictionList.scss';
-import cx from 'classnames';
 
 function PredictionList({ channelId }) {
   const [predictionList, setPredictionList] = useState([]);

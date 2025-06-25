@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import Button from 'common/components/legacy/Button';
+import Button from '@/common/components/legacy/Button';
 import { CommonLink } from '..';
 import styles from './Footer.module.scss';
 

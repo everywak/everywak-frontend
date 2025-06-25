@@ -1,7 +1,7 @@
-import { useInputs } from 'hooks/useInputs';
+import { useInputs } from '@/hooks/useInputs';
 import { useLiveChatActions, useLiveChatValue } from '../../LiveChat.context';
 import { SettingPage } from '..';
-import { Button } from 'common/components';
+import { Button } from '@/common/components';
 import { ArrowBackRounded, CloseRounded } from '@mui/icons-material';
 import { ComponentProps } from '../SettingPage/types';
 import { useEffect } from 'react';

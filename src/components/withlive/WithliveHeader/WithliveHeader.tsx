@@ -1,10 +1,10 @@
 import { CSSProperties, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useWithliveValues } from 'contexts/withlive';
+import { useWithliveValues } from '@/contexts/withlive';
 import { VideocamRounded } from '@mui/icons-material';
 import { ChannelItem } from './components';
 import styles from './WithliveHeader.module.scss';
-import { EverywakLogo } from 'common/components';
+import { EverywakLogo } from '@/common/components';
 
 export const WithliveHeader = () => {
   const { channels, watchingChannels, isExpanded, isEnabledMultiView } = useWithliveValues();

@@ -7,10 +7,10 @@ import {
   ChannelStreamInfoType,
   ChannelType,
   LayoutType,
-} from 'utils/types/withlive.type';
-import { AutoRefreshImage } from 'common/components/Image/variants';
-import { BasicImage } from 'common/components';
-import { useWithliveValues } from 'contexts/withlive';
+} from '@/utils/types/withlive.type';
+import { AutoRefreshImage } from '@/common/components/Image/variants';
+import { BasicImage } from '@/common/components';
+import { useWithliveValues } from '@/contexts/withlive';
 import { ChannelDetail } from '../ChannelDetail/ChannelDetail';
 import { PlayerOverlay } from './components';
 import styles from './StreamPlayer.module.scss';

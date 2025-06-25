@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import BrokenImageRoundedIcon from '@mui/icons-material/BrokenImageRounded';
 
-import SkeletonLoader from 'common/components/legacy/SkeletonLoader';
+import SkeletonLoader from '@/common/components/legacy/SkeletonLoader';
 import styles from './BasicImage.module.scss';
 
 export interface Props {

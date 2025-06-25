@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLiveChatValue } from '../LiveChat.context';
 import { ChatList } from './ChatList/ChatList';
-import { Stretchable } from 'common/components';
+import { Stretchable } from '@/common/components';
 
 import styles from './CollectorChatList.module.scss';
 

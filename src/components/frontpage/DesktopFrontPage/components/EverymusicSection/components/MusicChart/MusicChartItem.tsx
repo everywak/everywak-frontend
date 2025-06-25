@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { KeyboardArrowRightRounded } from '@mui/icons-material';
-import { BasicImage, CommonLink } from 'common/components';
+import { BasicImage, CommonLink } from '@/common/components';
 import styles from './MusicChartItem.module.scss';
 
 export interface Props {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import * as service from 'services/Music';
+import * as service from '@/services/Music';
 import { MusicChartItem, Props as MusicChartItemProps } from './MusicChartItem';
 import styles from './MusicChart.module.scss';
 
@@ -40,7 +40,9 @@ export const MusicChart = (props: Props) => {
     fetchChart();
   }, []);
 
-  const list = musicList.map((item, i) => <MusicChartItem key={i} className={styles.item} {...item} />);
+  const list = musicList.map((item, i) => (
+    <MusicChartItem key={i} className={styles.item} {...item} />
+  ));
 
   return (
     <div className={clsx('MusicChart', styles.container)}>

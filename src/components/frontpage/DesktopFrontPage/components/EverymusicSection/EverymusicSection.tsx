@@ -1,4 +1,4 @@
-import { Section, SubSection } from 'common/components';
+import { Section, SubSection } from '@/common/components';
 import { MusicChart, RecentMusicList } from './components';
 
 export const EverymusicSection = () => {

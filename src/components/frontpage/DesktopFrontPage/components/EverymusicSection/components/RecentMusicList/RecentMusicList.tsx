@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
-import HorizontalScrollableList from 'common/components/legacy/HorizontalScrollableList/HorizontalScrollableList';
-import { VideoItem, Props as VideoItemProps } from 'components/video/VideoItem/VideoItem';
-import Spinner from 'common/components/legacy/Spinner';
+import HorizontalScrollableList from '@/common/components/legacy/HorizontalScrollableList/HorizontalScrollableList';
+import { VideoItem, Props as VideoItemProps } from '@/components/video/VideoItem/VideoItem';
+import Spinner from '@/common/components/legacy/Spinner';
 
-import * as service from 'services/Music';
+import * as service from '@/services/Music';
 
 import styles from './RecentMusicList.module.scss';
 

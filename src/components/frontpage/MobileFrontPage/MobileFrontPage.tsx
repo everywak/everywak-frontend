@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { EverywakLogo } from 'common/components';
-import { LivePreview } from 'components/live';
+import { EverywakLogo } from '@/common/components';
+import { LivePreview } from '@/components/live';
 import { WeatherPanel } from '../common';
 import { AppList } from './components';
 import styles from './MobileFrontPage.module.scss';

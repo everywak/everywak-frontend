@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { MILLISECONDS_OF_DAY } from 'common/constants';
+import { MILLISECONDS_OF_DAY } from '@/common/constants';
 import TransparentButton from './Button/TransparentButton';
 
 import NavigateBeforeRoundedIcon from '@mui/icons-material/NavigateBeforeRounded';

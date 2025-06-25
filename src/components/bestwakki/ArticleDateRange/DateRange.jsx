@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 
 import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
 
-import { Desktop, NotDesktop } from 'common/MediaQuery';
-import DatePicker from 'common/components/legacy/DatePicker';
+import { Desktop, NotDesktop } from '@/common/MediaQuery';
+import DatePicker from '@/common/components/legacy/DatePicker';
 
 import './DateRange.scss';
 import cx from 'classnames';

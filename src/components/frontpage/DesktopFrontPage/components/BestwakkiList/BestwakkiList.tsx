@@ -1,11 +1,13 @@
 import React from 'react';
-import { useBestwakkiQuery } from 'hooks/queries/bestwakki/useBestwakkiQuery';
+import { useBestwakkiQuery } from '@/hooks/queries/bestwakki/useBestwakkiQuery';
 import { BestwakkiItem } from './BestwakkiItem';
 
 export const BestwakkiList = () => {
-  const { data } = useBestwakkiQuery({ params: {
-    perPage: 5,
-  } });
+  const { data } = useBestwakkiQuery({
+    params: {
+      perPage: 5,
+    },
+  });
 
   if (!data) {
     return <></>;
