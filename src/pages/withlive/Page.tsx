@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import * as func from '@/common/functions';
 import { WithliveProvider } from '@/contexts/withlive';
 import {
   WithliveHeader,
@@ -9,6 +11,10 @@ import {
 import styles from './Page.module.scss';
 
 export const Page = () => {
+  useEffect(() => {
+    func.setBrowserTitle('같이보기');
+  }, []);
+
   return (
     <WithliveProvider>
       <Redirect />
