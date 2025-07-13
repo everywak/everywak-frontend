@@ -1,5 +1,9 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
+Disallow: /
+Allow: /$
+
+User-agent: *
 Disallow: /video/
 
 User-agent: *
