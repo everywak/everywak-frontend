@@ -1,6 +1,5 @@
-import React, { lazy, useEffect } from 'react';
+import React, { lazy } from 'react';
 import { Route, Routes } from 'react-router';
-import { clarity } from 'react-microsoft-clarity';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import useGAPageTracking from './common/GAPageTracking';
@@ -15,6 +14,8 @@ const NotFoundPage = lazy(() => import('./pages/notfoundpage/Page'));
 const Frontpage = lazy(() => import('./pages/frontpage/Page'));
 
 const Bestwakki = lazy(() => import('./pages/bestwakki/Page'));
+
+const Yourinfo = lazy(() => import('./pages/yourinfo/Page'));
 
 const Weather = lazy(() => import('./pages/weather/Page'));
 
@@ -39,9 +40,6 @@ const queryClient = new QueryClient();
 export default function App() {
   useGAPageTracking();
   useScrollToTop();
-  useEffect(() => {
-    import.meta.env.VITE_CLARITY_ID && clarity.init(import.meta.env.VITE_CLARITY_ID);
-  });
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -49,6 +47,7 @@ export default function App() {
         <div className="App">
           <Routes>
             <Route path="/" element={<Frontpage />} />
+            <Route path="/policy" element={<Yourinfo />} />
             <Route path="/bestwakki" element={<Bestwakki />} />
             <Route path="/isedol" element={<Isedol />} />
             <Route path="/weather" element={<Weather />} />

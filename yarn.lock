@@ -1580,11 +1580,6 @@ react-is@^18.2.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
-react-microsoft-clarity@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/react-microsoft-clarity/-/react-microsoft-clarity-1.2.0.tgz#949f953cec4d4f9d7b4eaab01c240dfa48fb44c8"
-  integrity sha512-a1bsJR1uN1daWq3cBc7NheEGPXrotMRE0oFeRio7kXvHawzQfqu5iX9BoYFF9zRUL0dn+Mz57h1fNlcv3pqXEg==
-
 react-refresh@^0.14.0:
   version "0.14.2"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.14.2.tgz#3833da01ce32da470f1f936b9d477da5c7028bf9"
