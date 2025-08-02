@@ -4,7 +4,6 @@ interface ImportMetaEnv {
   readonly VITE_TWITCH_CLIENT_ID: string;
   readonly VITE_TWITCH_CHANNEL_NAME: string;
   readonly VITE_DOMAIN: string;
-  readonly VITE_CLARITY_ID: string;
   readonly VITE_API_V2_URL: string;
   readonly VITE_CHAT_URL: string;
   readonly GENERATE_SOURCEMAP: string;

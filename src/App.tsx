@@ -1,6 +1,5 @@
-import React, { lazy, useEffect } from 'react';
+import React, { lazy } from 'react';
 import { Route, Routes } from 'react-router';
-import { clarity } from 'react-microsoft-clarity';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import useGAPageTracking from './common/GAPageTracking';
@@ -39,9 +38,6 @@ const queryClient = new QueryClient();
 export default function App() {
   useGAPageTracking();
   useScrollToTop();
-  useEffect(() => {
-    import.meta.env.VITE_CLARITY_ID && clarity.init(import.meta.env.VITE_CLARITY_ID);
-  });
 
   return (
     <QueryClientProvider client={queryClient}>
