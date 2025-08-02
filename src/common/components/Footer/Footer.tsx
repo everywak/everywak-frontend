@@ -76,7 +76,7 @@ export const Footer = (props: Props) => {
       <div className={styles.btns}>{btnList}</div>
       <div className={styles.links}>
         <CommonLink href="mailto:contact@everywak.kr">개발자 연락처</CommonLink> |{' '}
-        <CommonLink href="/siteinfo">개인정보 처리방침 및 운영방침</CommonLink>
+        <CommonLink href="/policy">개인정보 처리방침 및 운영방침</CommonLink>
       </div>
       <div className={styles.desc}>
         에브리왁굳은 스트리머 우왁굳의 팬사이트이며

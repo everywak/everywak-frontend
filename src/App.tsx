@@ -15,6 +15,8 @@ const Frontpage = lazy(() => import('./pages/frontpage/Page'));
 
 const Bestwakki = lazy(() => import('./pages/bestwakki/Page'));
 
+const Yourinfo = lazy(() => import('./pages/yourinfo/Page'));
+
 const Weather = lazy(() => import('./pages/weather/Page'));
 
 const VideoWatch = lazy(() => import('./components/legacy/video/VideoWatch'));
@@ -45,6 +47,7 @@ export default function App() {
         <div className="App">
           <Routes>
             <Route path="/" element={<Frontpage />} />
+            <Route path="/policy" element={<Yourinfo />} />
             <Route path="/bestwakki" element={<Bestwakki />} />
             <Route path="/isedol" element={<Isedol />} />
             <Route path="/weather" element={<Weather />} />

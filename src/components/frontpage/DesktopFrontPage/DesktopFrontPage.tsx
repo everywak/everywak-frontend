@@ -87,7 +87,7 @@ export const DesktopFrontPage = () => {
                     description: '선량한 사이트입니다^^7',
                     icon: <FlagRounded />,
                     themeColor: '#DAD21B',
-                    href: 'https://everywak.kr/yourinfo',
+                    href: 'https://everywak.kr/policy',
                   },
                 ].map((app) => (
                   <AppListItem size="small" {...app} />
