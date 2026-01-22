@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import { AppListItem } from './AppListItem';
 
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
-import MenuBookRoundedIcon from '@mui/icons-material/MenuBookRounded';
 import ViewCarouselRoundedIcon from '@mui/icons-material/ViewCarouselRounded';
 import EmojiEventsRoundedIcon from '@mui/icons-material/EmojiEventsRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
@@ -27,29 +26,12 @@ export const Apps = ({ columns }: Props) => {
       href: '/withlive',
     },
     {
-      key: 'apps_bestwakki',
-      title: '왁물원 인기글',
-      description: '스팀인디게임에서 왁물원까지',
-      icon: '/images/wakki_logo_2x.png',
-      iconPadding: '1px',
-      themeColor: '#25CB36',
-      href: '/bestwakki',
-    },
-    {
       key: 'apps_isedol',
       title: '이세계아이돌 in 에브리왁',
       description: '이세돌의 생방송, 핫클립, 유튜브 영상들을 한 눈에',
       icon: <StarRoundedIcon />,
       themeColor: '#F2499A',
       href: '/isedol',
-    },
-    {
-      key: 'apps_waktoon',
-      title: '왁타버스 웹툰',
-      description: '이세돌, 고정멤버 웹툰 모아보기',
-      icon: <MenuBookRoundedIcon />,
-      themeColor: '#10CBa1',
-      href: '/waktoon',
     },
     {
       key: 'apps_wakcontest',

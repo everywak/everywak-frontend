@@ -1,12 +1,12 @@
 import React from 'react';
 import clsx from 'clsx';
-import { EventNoteRounded, FlagRounded, NotificationsRounded } from '@mui/icons-material';
+import { FlagRounded } from '@mui/icons-material';
 import { CommonHeader, Footer, Section, SectionHeader } from '@/common/components';
 import { LivePreview } from '@/components/live';
 import { VideoContentList } from '@/components/video';
 import { AppListItem } from '@/components/frontpage/common/Apps/AppListItem';
 import { Apps, WeatherPanel } from '../common';
-import { AsidePanel, BestwakkiList, EverymusicSection } from './components';
+import { AsidePanel, EverymusicSection } from './components';
 import styles from './DesktopFrontPage.module.scss';
 
 export const DesktopFrontPage = () => {
@@ -33,8 +33,6 @@ export const DesktopFrontPage = () => {
           title="에브리왁굳"
           links={[
             { key: 'withlive', name: '왁타버스 같이보기', href: '/withlive' },
-            { key: 'bestwakki', name: '왁물원 인기글', href: '/bestwakki' },
-            { key: 'waktoon', name: '왁굳코믹스', href: '/waktoon' },
           ]}
           subtitle="언제 어디서나 왁타버스와 함께!"
           description={
@@ -60,27 +58,24 @@ export const DesktopFrontPage = () => {
             </section>
             <aside>
               <WeatherPanel />
-              <AsidePanel title="왁물원 인기글" more={{ link: '/bestwakki', label: '더 보기' }}>
-                <BestwakkiList />
-              </AsidePanel>
               <AsidePanel title="게시판">
                 {[
-                  {
-                    key: 'apps_notice',
-                    title: '공지사항',
-                    description: '모두에게 보여줘버렷',
-                    icon: <NotificationsRounded />,
-                    themeColor: '#DF6D34',
-                    href: 'https://cafe.naver.com/ArticleSearchList.nhn?search.clubid=27842958&search.searchdate=all&search.searchBy=1&search.query=%BF%A1%BA%EA%B8%AE%BF%CE%B1%BB&search.defaultValue=1&search.includeAll=&search.exclude=&search.include=&search.exact=&search.sortBy=date&userDisplay=15&search.media=0&search.option=0&search.menuid=659',
-                  },
-                  {
-                    key: 'apps_devlog',
-                    title: '개발 일지',
-                    description: '한걸음 한걸음',
-                    icon: <EventNoteRounded />,
-                    themeColor: '#83D630',
-                    href: '/board/devlog',
-                  },
+                  // {
+                  //   key: 'apps_notice',
+                  //   title: '공지사항',
+                  //   description: '모두에게 보여줘버렷',
+                  //   icon: <NotificationsRounded />,
+                  //   themeColor: '#DF6D34',
+                  //   href: 'https://cafe.naver.com/ArticleSearchList.nhn?search.clubid=27842958&search.searchdate=all&search.searchBy=1&search.query=%BF%A1%BA%EA%B8%AE%BF%CE%B1%BB&search.defaultValue=1&search.includeAll=&search.exclude=&search.include=&search.exact=&search.sortBy=date&userDisplay=15&search.media=0&search.option=0&search.menuid=659',
+                  // },
+                  // {
+                  //   key: 'apps_devlog',
+                  //   title: '개발 일지',
+                  //   description: '한걸음 한걸음',
+                  //   icon: <EventNoteRounded />,
+                  //   themeColor: '#83D630',
+                  //   href: '/board/devlog',
+                  // },
                   {
                     key: 'apps_site',
                     title: '사이트 운영방침',

@@ -30,12 +30,6 @@
       "url": "/weather"
     },
     {
-      "name": "왁물원 인기글",
-      "short_name": "인기글",
-      "description": "",
-      "url": "/bestwakki"
-    },
-    {
       "name": "왁타버스 같이보기",
       "short_name": "같이보기",
       "description": "",

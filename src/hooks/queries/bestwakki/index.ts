@@ -1,1 +1,0 @@
-export { useBestwakkiQuery } from './useBestwakkiQuery';
