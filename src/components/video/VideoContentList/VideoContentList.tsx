@@ -3,24 +3,19 @@ import clsx from 'clsx';
 
 import { Waktaverse } from '@/common/constants';
 import * as func from '@/common/functions';
-import * as videoApi from '@/services/everywak.video';
+import * as Everywak from '@/services/everywak/v2/index';
 
 import { Props as VideoItemProps, VideoItemSize } from '../VideoItem/VideoItem';
 
 import styles from './VideoContentList.module.scss';
 import { VideoSlideList } from '../VideoSlideList/VideoSlideList';
 import { VideoGridList } from '../VideoGridList/VideoGridList';
+import { useQueryMember } from '@/hooks';
+import { SearchVideoParams } from '@/services/everywak/v2/types/video';
 
 export interface Props {
   className?: string;
-  options: {
-    type: 'all' | 'youtubeVideo' | 'youtubeClip' | 'youtubeVOD';
-    orderBy?: 'time' | 'time_oldest' | 'view';
-    twitchId?: string;
-    queryTxt?: string;
-    beginAt?: number;
-    endAt?: number;
-  };
+  options: SearchVideoParams;
   type?: 'slide' | 'grid' | 'list';
   size?: VideoItemSize;
   shorts?: boolean;
@@ -48,43 +43,40 @@ export const VideoContentList = (props: Props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [videoList, setVideoList] = useState<VideoItemProps[]>([]);
 
+  const { isLoading: isMemberLoading, data: members } = useQueryMember();
+
   useEffect(() => {
     const fetchVideoContent = async () => {
       if (shorts) {
-        options.queryTxt = 'horts';
+        options.isShorts = true;
       }
 
-      const response = await videoApi.getVideos(options as any);
-      const { videoList } = response.result;
+      const videoList = await Everywak.video.getVideos(options);
 
       const urlPrefix = shorts ? 'https://www.youtube.com/shorts/' : 'https://youtu.be/';
 
-      if (videoList) {
+      if (videoList && !isMemberLoading && members) {
         setVideoList(
-          videoList.map((item: any) => {
-            const target = Waktaverse.find((mb) => mb.login_name === item.twitchId)!;
-            const thumbnails = JSON.parse(item.thumbnails);
-            const thumbnail = thumbnails.high ||
-              thumbnails.medium ||
-              thumbnails.default || { url: '' };
-            return {
+          videoList.map((item) => {
+            const member = members.find((member) => member.id === item.member.id);
+            const date = new Date(item.publishedTimestamp);
+            const itemProps: VideoItemProps = {
               href: `${urlPrefix}${item.videoId}`,
-              thumbnail: thumbnail.url,
+              thumbnail: item.thumbnails,
               title: item.title,
-              datetime: item.publishedAt * 1000,
-              formattedDateTime: func.formatDateTimeString(new Date(item.publishedAt * 1000)),
-              author: item.nickname,
+              datetime: date,
               duration: item.duration,
               viewCount: item.viewCount,
-              authorProfileImg: target.profileImg?.replace('{size}', '240'),
+              authorProfileImg: member?.profile.profileImage ?? '',
             };
+            return itemProps;
           }),
         );
       }
       setIsLoading(false);
     };
     fetchVideoContent();
-  }, [options, shorts]);
+  }, [options, shorts, isMemberLoading, members]);
 
   return (
     <div

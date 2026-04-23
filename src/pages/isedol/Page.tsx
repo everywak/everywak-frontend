@@ -64,7 +64,7 @@ export const Page = () => {
           >
             <VideoContentList
               className={styles.IsedolShortsList}
-              options={{ type: 'youtubeVideo', twitchId: 'isedol' }}
+              options={{ channelType: 'main', isedol: 'Y', isShorts: false }}
             />
           </Section>
           <Section
@@ -74,8 +74,9 @@ export const Page = () => {
             <VideoContentList
               className={styles.IsedolShortsList}
               options={{
-                type: 'youtubeClip',
-                twitchId: 'isedol',
+                channelType: 'clip',
+                isedol: 'Y',
+                isShorts: false,
                 orderBy: 'view',
                 beginAt: Math.floor(Date.now() / 1000) - 7 * SECONDS_OF_DAY,
                 endAt: Math.floor(Date.now() / 1000),
@@ -88,7 +89,7 @@ export const Page = () => {
           >
             <VideoContentList
               className={styles.IsedolShortsList}
-              options={{ type: 'youtubeVideo', twitchId: 'isedol' }}
+              options={{ isedol: 'Y', isShorts: true }}
               shorts
               hideProfileCircle
               type="slide"

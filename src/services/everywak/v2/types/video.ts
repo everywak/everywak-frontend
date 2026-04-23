@@ -8,7 +8,7 @@ export type VideoListMember = {
 
 export type VideoListChannel = {
   id: string;
-  type: string;
+  type: YoutubeChannelType;
   name: string;
   channelId: string;
   uploads: string;

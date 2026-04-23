@@ -52,7 +52,7 @@ export const DesktopFrontPage = () => {
           <section className={styles.twoColumns}>
             <section className={styles.videoAndMusic}>
               <Section title="왁타버스 유튜브" width="spaceBetween">
-                <VideoContentList size="small" options={{ type: 'youtubeVideo' }} type="slide" />
+                <VideoContentList size="small" options={{ channelType: 'main' }} type="slide" />
               </Section>
               <EverymusicSection />
             </section>

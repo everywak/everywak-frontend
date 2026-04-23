@@ -107,8 +107,8 @@ const VideoContentTab = ({ member }: { member: Member }) => {
       <Section className="main clip" title="클립" width="spaceBetween">
         <VideoContentList
           options={{
-            type: 'youtubeClip',
-            twitchId: member.livePlatform.find((platform) => platform.type === 'twitch')?.name,
+            channelType: 'clip',
+            memberId: member.id,
           }}
           backgroundColor={'var(--color-background-white)'}
           type="slide"
@@ -118,8 +118,8 @@ const VideoContentTab = ({ member }: { member: Member }) => {
       <Section className="main replay" title="다시보기" width="spaceBetween">
         <VideoContentList
           options={{
-            type: 'youtubeVOD',
-            twitchId: member.livePlatform.find((platform) => platform.type === 'twitch')?.name,
+            channelType: 'replay',
+            memberId: member.id,
           }}
           backgroundColor={'var(--color-background-white)'}
           type="slide"
@@ -138,9 +138,8 @@ const SocialTab = ({ member }: { member: Member }) => {
   const panel = member.social.map((item) => (
     <a
       key={item.type}
-      href={`${socialHref[item.type as keyof typeof socialHref]}${
-        item.type === 'cafe' ? item.userId : item.name
-      }`}
+      href={`${socialHref[item.type as keyof typeof socialHref]}${item.type === 'cafe' ? item.userId : item.name
+        }`}
       className={styles.social}
       target="_blank"
     >

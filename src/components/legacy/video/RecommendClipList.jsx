@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import { Waktaverse } from '@/common/constants';
 import * as func from '@/common/functions';
-import * as service from '@/services/Isedol';
 
 import { VideoGridList } from '@/components/video/VideoGridList/VideoGridList';
 
@@ -14,11 +13,7 @@ function RecommendClipList({ clipInfo }) {
   const fetchTwitchClips = async () => {
     const targetRange = parseInt(Math.random() * 30 - 15);
 
-    const { videoList, videoCount } = await service.getTwitchClips({
-      twitchId: clipInfo.twitchId,
-      beginAt: clipInfo.publishedAt + (targetRange - 7) * 24 * 60 * 60,
-      endAt: clipInfo.publishedAt + (targetRange + 7) * 24 * 60 * 60,
-    });
+    const videoList = [];
 
     if (videoList) {
       setClipList(
