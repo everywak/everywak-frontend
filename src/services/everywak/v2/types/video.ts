@@ -1,14 +1,32 @@
 import { YoutubeChannelType } from "../type";
 
-export type Video = {
+export type VideoListMember = {
+  id: string;
+  name: string;
+  role: string;
+};
+
+export type VideoListChannel = {
+  id: string;
+  type: string;
+  name: string;
+  channelId: string;
+  uploads: string;
+};
+
+export type VideoListItem = {
+  isShorts: boolean;
   videoId: string;
-  updatedTimestamp: string;
   publishedTimestamp: string;
   title: string;
-  memberId: string;
-  channelId: string;
-  channelType: YoutubeChannelType;
+  thumbnails: string;
+  viewCount: number;
+  duration: number;
+  member: VideoListMember;
+  channel: VideoListChannel;
 };
+
+export type VideoListResponse = VideoListItem[];
 
 export type SearchVideoParams = {
   isedol?: 'Y';
