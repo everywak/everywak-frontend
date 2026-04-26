@@ -62,7 +62,7 @@ export const VideoContentList = (props: Props) => {
             const date = new Date(item.publishedTimestamp);
             const itemProps: VideoItemProps = {
               href: `${urlPrefix}${item.videoId}`,
-              thumbnail: item.thumbnails,
+              thumbnail: item.thumbnails.includes('default.jpg') ? item.thumbnails.replace('default.jpg', 'hqdefault.jpg') : item.thumbnails,
               title: item.title,
               datetime: date,
               duration: item.duration,
