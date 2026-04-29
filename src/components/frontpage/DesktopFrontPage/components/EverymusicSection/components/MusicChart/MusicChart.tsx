@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import * as service from '@/services/Music';
+import * as Everywak from '@/services/everywak/v2/index';
 import { MusicChartItem, Props as MusicChartItemProps } from './MusicChartItem';
 import styles from './MusicChart.module.scss';
 
@@ -19,19 +19,26 @@ export const MusicChart = (props: Props) => {
 
   useEffect(() => {
     const fetchChart = async () => {
-      const { musicList } = (
-        await service.getWakMusics({ viewerRange: 'daily', orderBy: 'view', perPage: 10 } as any)
-      ).result;
+      const musicList =
+        await Everywak.music.getMusicChart({
+          duration: 'daily',
+          orderBy: 'view',
+          perPage: 10
+        } as any)
+        ;
 
       if (musicList) {
         setMusicList(
           musicList.map((item, i) => {
+            const thumbnail = item.music.video.thumbnails.includes('default.jpg')
+              ? item.music.video.thumbnails.replace('default.jpg', 'maxresdefault.jpg')
+              : item.music.video.thumbnails;
             return {
               rank: i + 1,
-              href: `https://youtu.be/${item.videoId}`,
-              thumbnail: item.thumbnail,
-              title: item.title,
-              author: item.singer,
+              href: `https://youtu.be/${item.music.video.videoId}`,
+              thumbnail: thumbnail,
+              title: item.music.title,
+              author: item.music.singerName,
             };
           }),
         );

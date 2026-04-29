@@ -5,7 +5,7 @@ import HorizontalScrollableList from '@/common/components/legacy/HorizontalScrol
 import { VideoItem, Props as VideoItemProps } from '@/components/video/VideoItem/VideoItem';
 import Spinner from '@/common/components/legacy/Spinner';
 
-import * as service from '@/services/Music';
+import * as Everywak from '@/services/everywak/v2/index';
 
 import styles from './RecentMusicList.module.scss';
 
@@ -13,7 +13,7 @@ const now = new Date();
 const lastWeek = new Date(
   now.getFullYear(),
   now.getMonth(),
-  now.getDate() - ((now.getDay() + 1) % 7) - 7,
+  now.getDate() - 14,
 );
 
 export const RecentMusicList = () => {
@@ -22,26 +22,26 @@ export const RecentMusicList = () => {
 
   useEffect(() => {
     const fetchRecentMusic = async (reset = true) => {
-      const { musicList } = (
-        await service.getWakMusics({
-          viewerRange: 'all',
+      const musicList =
+        await Everywak.music.getMusics({
           orderBy: 'time',
           perPage: 30,
-          beginAt: Math.floor(lastWeek.getTime() / 1000),
-        } as any)
-      ).result;
+        });
+
 
       if (musicList) {
         setMusicList(
-          musicList.map((item) => {
+          musicList.filter((item) => new Date(item.video.publishedTimestamp) >= lastWeek)
+          .map((item) => {
+            const thumbnail = item.video.thumbnails.includes('default.jpg') ? item.video.thumbnails.replace('default.jpg', 'hqdefault.jpg') : item.video.thumbnails;
             return {
-              href: `https://youtu.be/${item.videoId}`,
-              thumbnail: item.thumbnail,
+              href: `https://youtu.be/${item.video.videoId}`,
+              thumbnail: thumbnail,
               title: item.title,
-              datetime: new Date(item.publishedTimeStamp),
+              datetime: new Date(item.video.publishedTimestamp),
               authorProfileImg: '',
-              duration: item.duration,
-              viewCount: item.viewCountChanged,
+              duration: item.video.duration,
+              viewCount: item.video.viewCount,
             };
           }),
         );

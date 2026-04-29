@@ -11,7 +11,7 @@ export const EverymusicSection = () => {
       }}
       width="spaceBetween"
     >
-      <SubSection title="이 주의 신곡">
+      <SubSection title="최신곡">
         <RecentMusicList />
       </SubSection>
       <SubSection title="일간 인기차트">
